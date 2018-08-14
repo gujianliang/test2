@@ -1,0 +1,6 @@
+framework module VeChainWallet {
+  umbrella header "VeChainWallet.h"
+
+  export *
+  module * { export * }
+}
