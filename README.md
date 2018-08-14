@@ -2,8 +2,9 @@
  	 输入：生成keystore的密码
  	 输出：Account类，这个类的属性有mnemonicPhrase，address.checksumAddress,privateKey,keystore
  */
- [WalletUtils  creatWalletWithPassword:@"password"
-                                 callBack:^(Account *account)];
+ 
+ +(void) creatWalletWithPassword:(NSString*)password
+                                 callBack:^(Account *account);
 
 
 /* 验证助记词有效 
