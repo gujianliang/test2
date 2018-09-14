@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:/Users/cengxin/Desktop/wallet/walletSDK.xcodeproj">
+      location = "self:/Users/cengxin/Documents/VeChain/iOS/ios-wallet-sdk/wallet/walletSDKDemo.xcodeproj">
    </FileRef>
 </Workspace>

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9736C130214B8D11003DE935 /* walletSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9736C12F214B8D11003DE935 /* walletSDK.framework */; };
 		9747227720EDE9F800F9EAB3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9747227620EDE9F800F9EAB3 /* AppDelegate.m */; };
 		9747227A20EDE9F800F9EAB3 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9747227920EDE9F800F9EAB3 /* ViewController.m */; };
 		9747227D20EDE9F800F9EAB3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9747227B20EDE9F800F9EAB3 /* Main.storyboard */; };
@@ -15,7 +16,6 @@
 		9747228520EDE9FA00F9EAB3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9747228420EDE9FA00F9EAB3 /* main.m */; };
 		9747228F20EDE9FA00F9EAB3 /* walletTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9747228E20EDE9FA00F9EAB3 /* walletTests.m */; };
 		9747229A20EDE9FA00F9EAB3 /* walletUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9747229920EDE9FA00F9EAB3 /* walletUITests.m */; };
-		975DAE3A21216D630094D6F8 /* VeChainWallet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 975DAE3921216D620094D6F8 /* VeChainWallet.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,7 +36,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		9747227220EDE9F800F9EAB3 /* walletSDK.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = walletSDK.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		9736C12F214B8D11003DE935 /* walletSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = walletSDK.framework; sourceTree = "<group>"; };
+		9747227220EDE9F800F9EAB3 /* walletSDKDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = walletSDKDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9747227520EDE9F800F9EAB3 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		9747227620EDE9F800F9EAB3 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		9747227820EDE9F800F9EAB3 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
@@ -46,13 +47,12 @@
 		9747228120EDE9FA00F9EAB3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9747228320EDE9FA00F9EAB3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9747228420EDE9FA00F9EAB3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		9747228A20EDE9FA00F9EAB3 /* walletSDKTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = walletSDKTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		9747228A20EDE9FA00F9EAB3 /* walletSDKDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = walletSDKDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9747228E20EDE9FA00F9EAB3 /* walletTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = walletTests.m; sourceTree = "<group>"; };
 		9747229020EDE9FA00F9EAB3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		9747229520EDE9FA00F9EAB3 /* walletSDKUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = walletSDKUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		9747229520EDE9FA00F9EAB3 /* walletSDKDemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = walletSDKDemoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9747229920EDE9FA00F9EAB3 /* walletUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = walletUITests.m; sourceTree = "<group>"; };
 		9747229B20EDE9FA00F9EAB3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		975DAE3921216D620094D6F8 /* VeChainWallet.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = VeChainWallet.framework; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,7 +60,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				975DAE3A21216D630094D6F8 /* VeChainWallet.framework in Frameworks */,
+				9736C130214B8D11003DE935 /* walletSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -95,9 +95,9 @@
 		9747227320EDE9F800F9EAB3 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				9747227220EDE9F800F9EAB3 /* walletSDK.app */,
-				9747228A20EDE9FA00F9EAB3 /* walletSDKTests.xctest */,
-				9747229520EDE9FA00F9EAB3 /* walletSDKUITests.xctest */,
+				9747227220EDE9F800F9EAB3 /* walletSDKDemo.app */,
+				9747228A20EDE9FA00F9EAB3 /* walletSDKDemoTests.xctest */,
+				9747229520EDE9FA00F9EAB3 /* walletSDKDemoUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -105,7 +105,7 @@
 		9747227420EDE9F800F9EAB3 /* wallet */ = {
 			isa = PBXGroup;
 			children = (
-				975DAE3921216D620094D6F8 /* VeChainWallet.framework */,
+				9736C12F214B8D11003DE935 /* walletSDK.framework */,
 				9747227520EDE9F800F9EAB3 /* AppDelegate.h */,
 				9747227620EDE9F800F9EAB3 /* AppDelegate.m */,
 				9747227820EDE9F800F9EAB3 /* ViewController.h */,
@@ -147,9 +147,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		9747227120EDE9F800F9EAB3 /* walletSDK */ = {
+		9747227120EDE9F800F9EAB3 /* walletSDKDemo */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 9747229E20EDE9FA00F9EAB3 /* Build configuration list for PBXNativeTarget "walletSDK" */;
+			buildConfigurationList = 9747229E20EDE9FA00F9EAB3 /* Build configuration list for PBXNativeTarget "walletSDKDemo" */;
 			buildPhases = (
 				9747226E20EDE9F800F9EAB3 /* Sources */,
 				9747226F20EDE9F800F9EAB3 /* Frameworks */,
@@ -159,14 +159,14 @@
 			);
 			dependencies = (
 			);
-			name = walletSDK;
+			name = walletSDKDemo;
 			productName = wallet;
-			productReference = 9747227220EDE9F800F9EAB3 /* walletSDK.app */;
+			productReference = 9747227220EDE9F800F9EAB3 /* walletSDKDemo.app */;
 			productType = "com.apple.product-type.application";
 		};
-		9747228920EDE9FA00F9EAB3 /* walletSDKTests */ = {
+		9747228920EDE9FA00F9EAB3 /* walletSDKDemoTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 974722A120EDE9FA00F9EAB3 /* Build configuration list for PBXNativeTarget "walletSDKTests" */;
+			buildConfigurationList = 974722A120EDE9FA00F9EAB3 /* Build configuration list for PBXNativeTarget "walletSDKDemoTests" */;
 			buildPhases = (
 				9747228620EDE9FA00F9EAB3 /* Sources */,
 				9747228720EDE9FA00F9EAB3 /* Frameworks */,
@@ -177,14 +177,14 @@
 			dependencies = (
 				9747228C20EDE9FA00F9EAB3 /* PBXTargetDependency */,
 			);
-			name = walletSDKTests;
+			name = walletSDKDemoTests;
 			productName = walletTests;
-			productReference = 9747228A20EDE9FA00F9EAB3 /* walletSDKTests.xctest */;
+			productReference = 9747228A20EDE9FA00F9EAB3 /* walletSDKDemoTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		9747229420EDE9FA00F9EAB3 /* walletSDKUITests */ = {
+		9747229420EDE9FA00F9EAB3 /* walletSDKDemoUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 974722A420EDE9FA00F9EAB3 /* Build configuration list for PBXNativeTarget "walletSDKUITests" */;
+			buildConfigurationList = 974722A420EDE9FA00F9EAB3 /* Build configuration list for PBXNativeTarget "walletSDKDemoUITests" */;
 			buildPhases = (
 				9747229120EDE9FA00F9EAB3 /* Sources */,
 				9747229220EDE9FA00F9EAB3 /* Frameworks */,
@@ -195,9 +195,9 @@
 			dependencies = (
 				9747229720EDE9FA00F9EAB3 /* PBXTargetDependency */,
 			);
-			name = walletSDKUITests;
+			name = walletSDKDemoUITests;
 			productName = walletUITests;
-			productReference = 9747229520EDE9FA00F9EAB3 /* walletSDKUITests.xctest */;
+			productReference = 9747229520EDE9FA00F9EAB3 /* walletSDKDemoUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -222,7 +222,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 9747226D20EDE9F800F9EAB3 /* Build configuration list for PBXProject "walletSDK" */;
+			buildConfigurationList = 9747226D20EDE9F800F9EAB3 /* Build configuration list for PBXProject "walletSDKDemo" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -235,9 +235,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				9747227120EDE9F800F9EAB3 /* walletSDK */,
-				9747228920EDE9FA00F9EAB3 /* walletSDKTests */,
-				9747229420EDE9FA00F9EAB3 /* walletSDKUITests */,
+				9747227120EDE9F800F9EAB3 /* walletSDKDemo */,
+				9747228920EDE9FA00F9EAB3 /* walletSDKDemoTests */,
+				9747229420EDE9FA00F9EAB3 /* walletSDKDemoUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -301,12 +301,12 @@
 /* Begin PBXTargetDependency section */
 		9747228C20EDE9FA00F9EAB3 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 9747227120EDE9F800F9EAB3 /* walletSDK */;
+			target = 9747227120EDE9F800F9EAB3 /* walletSDKDemo */;
 			targetProxy = 9747228B20EDE9FA00F9EAB3 /* PBXContainerItemProxy */;
 		};
 		9747229720EDE9FA00F9EAB3 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 9747227120EDE9F800F9EAB3 /* walletSDK */;
+			target = 9747227120EDE9F800F9EAB3 /* walletSDKDemo */;
 			targetProxy = 9747229620EDE9FA00F9EAB3 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -505,7 +505,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = vechain.walletTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/walletSDK.app/walletSDK";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/walletSDKDemo.app/walletSDKDemo";
 			};
 			name = Debug;
 		};
@@ -524,7 +524,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = vechain.walletTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/walletSDK.app/walletSDK";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/walletSDKDemo.app/walletSDKDemo";
 			};
 			name = Release;
 		};
@@ -567,7 +567,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		9747226D20EDE9F800F9EAB3 /* Build configuration list for PBXProject "walletSDK" */ = {
+		9747226D20EDE9F800F9EAB3 /* Build configuration list for PBXProject "walletSDKDemo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				9747229C20EDE9FA00F9EAB3 /* Debug */,
@@ -576,7 +576,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		9747229E20EDE9FA00F9EAB3 /* Build configuration list for PBXNativeTarget "walletSDK" */ = {
+		9747229E20EDE9FA00F9EAB3 /* Build configuration list for PBXNativeTarget "walletSDKDemo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				9747229F20EDE9FA00F9EAB3 /* Debug */,
@@ -585,7 +585,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		974722A120EDE9FA00F9EAB3 /* Build configuration list for PBXNativeTarget "walletSDKTests" */ = {
+		974722A120EDE9FA00F9EAB3 /* Build configuration list for PBXNativeTarget "walletSDKDemoTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				974722A220EDE9FA00F9EAB3 /* Debug */,
@@ -594,7 +594,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		974722A420EDE9FA00F9EAB3 /* Build configuration list for PBXNativeTarget "walletSDKUITests" */ = {
+		974722A420EDE9FA00F9EAB3 /* Build configuration list for PBXNativeTarget "walletSDKDemoUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				974722A520EDE9FA00F9EAB3 /* Debug */,

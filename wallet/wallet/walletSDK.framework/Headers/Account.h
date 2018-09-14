@@ -99,7 +99,7 @@
 @property (nonatomic, readonly) NSString *seedStr;
 
 @property (nonatomic, readonly) NSData *mnemonicData;
-
+@property (nonatomic, strong) NSString *keystore;
 
 - (Signature*)signDigest: (NSData*)digestData;
 - (void)sign: (Transaction*)transaction;
@@ -113,4 +113,5 @@
 + (BOOL)isValidMnemonicWord: (NSString*)word;
 
 + (NSArray *)getTotalWordList;
+
 @end

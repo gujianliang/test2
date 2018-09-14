@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "9747227120EDE9F800F9EAB3"
-               BuildableName = "walletSDK.app"
-               BlueprintName = "walletSDK"
-               ReferencedContainer = "container:walletSDK.xcodeproj">
+               BuildableName = "walletSDKDemo.app"
+               BlueprintName = "walletSDKDemo"
+               ReferencedContainer = "container:walletSDKDemo.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "9747227120EDE9F800F9EAB3"
-            BuildableName = "walletSDK.app"
-            BlueprintName = "walletSDK"
-            ReferencedContainer = "container:walletSDK.xcodeproj">
+            BuildableName = "walletSDKDemo.app"
+            BlueprintName = "walletSDKDemo"
+            ReferencedContainer = "container:walletSDKDemo.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -56,9 +56,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "9747227120EDE9F800F9EAB3"
-            BuildableName = "walletSDK.app"
-            BlueprintName = "walletSDK"
-            ReferencedContainer = "container:walletSDK.xcodeproj">
+            BuildableName = "walletSDKDemo.app"
+            BlueprintName = "walletSDKDemo"
+            ReferencedContainer = "container:walletSDKDemo.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -75,9 +75,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "9747227120EDE9F800F9EAB3"
-            BuildableName = "walletSDK.app"
-            BlueprintName = "walletSDK"
-            ReferencedContainer = "container:walletSDK.xcodeproj">
+            BuildableName = "walletSDKDemo.app"
+            BlueprintName = "walletSDKDemo"
+            ReferencedContainer = "container:walletSDKDemo.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

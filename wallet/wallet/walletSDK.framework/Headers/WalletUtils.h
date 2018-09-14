@@ -7,7 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <ethers/ethers.h>
+#import "Address.h"
+#import "Signature.h"
+#import "Transaction.h"
+#import "Account.h"
+#import "SecureData.h"
 
 @interface WalletUtils : NSObject
 
@@ -24,8 +28,9 @@
 + (Address*)verifyMessage: (NSData*)message
                 signature: (Signature*)signature;
 
-- (void)sign: (Transaction*)transaction
++ (void)sign: (NSData*)message
     keystore: (NSString*)json
-    password: (NSString*)password;
+    password: (NSString*)password
+       block:(void (^)(Signature *signature))block;
 
 @end
