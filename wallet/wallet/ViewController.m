@@ -9,8 +9,8 @@
 #import "ViewController.h"
 
 #import <walletSDK/WalletUtils.h>
-
-
+#import "CreatVC.h"
+#import "RecoverMainVC.h"
 
 @interface ViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *rawLabel;
@@ -30,6 +30,11 @@
     switch (sender.tag) {
         case 10:
         {
+            
+            CreatVC *creat = [[CreatVC alloc]init];
+            [self.navigationController pushViewController:creat animated:YES];
+            return;
+            
             // 生成钱包
             [WalletUtils  creatWalletWithPassword:@"123456"
                                          callBack:^(Account *account)
@@ -45,6 +50,10 @@
             break;
         case 11:
         {
+            
+            RecoverMainVC *recoverVC = [[RecoverMainVC alloc]init];
+            [self.navigationController pushViewController:recoverVC animated:YES];
+            return;
             //验证助记词
             BOOL result = [WalletUtils isValidMnemonicPhrase:@"lava boost century jaguar detail notice chunk carpet loud secret allow endorse"];
 

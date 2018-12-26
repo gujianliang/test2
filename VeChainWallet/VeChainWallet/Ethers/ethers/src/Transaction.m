@@ -253,7 +253,6 @@ static NSData *NullData = nil;
 }
 
 
-
 - (void)verifySignatureData: (NSData*)signatureData v: (unsigned char)v {
     _signature = [Signature signatureWithData:signatureData v:v];
 
@@ -277,8 +276,6 @@ static NSData *NullData = nil;
     if (_chainId) {
         v -= (_chainId * 2 + 8);
     }
-#warning to do -27
-
     int failed = ecdsa_verify_digest_recover(&secp256k1, publicKey.mutableBytes, signatureData.bytes, digest.bytes, v);
     if (!failed) {
         _fromAddress = [Address addressWithData:[[[publicKey subdataFromIndex:1] KECCAK256] subdataFromIndex:12].data];
@@ -339,14 +336,6 @@ static NSData *NullData = nil;
     } else {
         [result addObject:NullData];
     }
-
-//    if (self.gasPrice) {
-//        NSData *gasPriceData = stripDataZeros([SecureData hexStringToData:[self.gasPrice hexString]]);
-//        if (gasPriceData.length > 32) { return nil; }
-//        [result addObject:gasPriceData];
-//    } else {
-//        [result addObject:NullData];
-//    }
 
     if (self.gasLimit) {
         NSData *gasLimitData = stripDataZeros([SecureData hexStringToData:[self.gasLimit hexString]]);

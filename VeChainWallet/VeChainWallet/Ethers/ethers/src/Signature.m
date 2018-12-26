@@ -54,7 +54,6 @@
 
 + (instancetype)signatureWithData:(NSData *)data {
     if (data.length != 65) { return nil; }
-#warning to do -27
     return [Signature signatureWithData:[data subdataWithRange:NSMakeRange(0, 64)] v:((uint8_t*)[data bytes])[64]];
 }
 

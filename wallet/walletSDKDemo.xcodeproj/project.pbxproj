@@ -16,6 +16,14 @@
 		9747228520EDE9FA00F9EAB3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9747228420EDE9FA00F9EAB3 /* main.m */; };
 		9747228F20EDE9FA00F9EAB3 /* walletTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9747228E20EDE9FA00F9EAB3 /* walletTests.m */; };
 		9747229A20EDE9FA00F9EAB3 /* walletUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9747229920EDE9FA00F9EAB3 /* walletUITests.m */; };
+		976079F021D3499400093786 /* CreatVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 976079EE21D3499400093786 /* CreatVC.m */; };
+		976079F121D3499400093786 /* CreatVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 976079EF21D3499400093786 /* CreatVC.xib */; };
+		976079F521D3514700093786 /* RecoverMainVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 976079F321D3514700093786 /* RecoverMainVC.m */; };
+		976079F621D3514700093786 /* RecoverMainVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 976079F421D3514700093786 /* RecoverMainVC.xib */; };
+		976079FA21D3522D00093786 /* keystoreImportVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 976079F821D3522D00093786 /* keystoreImportVC.m */; };
+		976079FB21D3522D00093786 /* keystoreImportVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 976079F921D3522D00093786 /* keystoreImportVC.xib */; };
+		976079FF21D3525400093786 /* MnemonicImportVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 976079FD21D3525400093786 /* MnemonicImportVC.m */; };
+		97607A0021D3525400093786 /* MnemonicImportVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 976079FE21D3525400093786 /* MnemonicImportVC.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +61,18 @@
 		9747229520EDE9FA00F9EAB3 /* walletSDKDemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = walletSDKDemoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9747229920EDE9FA00F9EAB3 /* walletUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = walletUITests.m; sourceTree = "<group>"; };
 		9747229B20EDE9FA00F9EAB3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		976079ED21D3499400093786 /* CreatVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CreatVC.h; sourceTree = "<group>"; };
+		976079EE21D3499400093786 /* CreatVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CreatVC.m; sourceTree = "<group>"; };
+		976079EF21D3499400093786 /* CreatVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreatVC.xib; sourceTree = "<group>"; };
+		976079F221D3514700093786 /* RecoverMainVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RecoverMainVC.h; sourceTree = "<group>"; };
+		976079F321D3514700093786 /* RecoverMainVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RecoverMainVC.m; sourceTree = "<group>"; };
+		976079F421D3514700093786 /* RecoverMainVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RecoverMainVC.xib; sourceTree = "<group>"; };
+		976079F721D3522D00093786 /* keystoreImportVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = keystoreImportVC.h; sourceTree = "<group>"; };
+		976079F821D3522D00093786 /* keystoreImportVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = keystoreImportVC.m; sourceTree = "<group>"; };
+		976079F921D3522D00093786 /* keystoreImportVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = keystoreImportVC.xib; sourceTree = "<group>"; };
+		976079FC21D3525400093786 /* MnemonicImportVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MnemonicImportVC.h; sourceTree = "<group>"; };
+		976079FD21D3525400093786 /* MnemonicImportVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MnemonicImportVC.m; sourceTree = "<group>"; };
+		976079FE21D3525400093786 /* MnemonicImportVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MnemonicImportVC.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +125,7 @@
 		9747227420EDE9F800F9EAB3 /* wallet */ = {
 			isa = PBXGroup;
 			children = (
+				976079E921D347C100093786 /* Modules */,
 				9736C12F214B8D11003DE935 /* walletSDK.framework */,
 				9747227520EDE9F800F9EAB3 /* AppDelegate.h */,
 				9747227620EDE9F800F9EAB3 /* AppDelegate.m */,
@@ -142,6 +163,57 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		976079E921D347C100093786 /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				97607A0221D3633D00093786 /* WalletDetail */,
+				976079EA21D348D600093786 /* Creat */,
+				976079EB21D348D600093786 /* Recover */,
+				976079EC21D348D600093786 /* Transfer */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		976079EA21D348D600093786 /* Creat */ = {
+			isa = PBXGroup;
+			children = (
+				976079ED21D3499400093786 /* CreatVC.h */,
+				976079EE21D3499400093786 /* CreatVC.m */,
+				976079EF21D3499400093786 /* CreatVC.xib */,
+			);
+			path = Creat;
+			sourceTree = "<group>";
+		};
+		976079EB21D348D600093786 /* Recover */ = {
+			isa = PBXGroup;
+			children = (
+				976079F221D3514700093786 /* RecoverMainVC.h */,
+				976079F321D3514700093786 /* RecoverMainVC.m */,
+				976079F421D3514700093786 /* RecoverMainVC.xib */,
+				976079F721D3522D00093786 /* keystoreImportVC.h */,
+				976079F821D3522D00093786 /* keystoreImportVC.m */,
+				976079F921D3522D00093786 /* keystoreImportVC.xib */,
+				976079FC21D3525400093786 /* MnemonicImportVC.h */,
+				976079FD21D3525400093786 /* MnemonicImportVC.m */,
+				976079FE21D3525400093786 /* MnemonicImportVC.xib */,
+			);
+			path = Recover;
+			sourceTree = "<group>";
+		};
+		976079EC21D348D600093786 /* Transfer */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Transfer;
+			sourceTree = "<group>";
+		};
+		97607A0221D3633D00093786 /* WalletDetail */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = WalletDetail;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -247,8 +319,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				976079F121D3499400093786 /* CreatVC.xib in Resources */,
+				976079FB21D3522D00093786 /* keystoreImportVC.xib in Resources */,
+				97607A0021D3525400093786 /* MnemonicImportVC.xib in Resources */,
 				9747228220EDE9FA00F9EAB3 /* LaunchScreen.storyboard in Resources */,
 				9747227F20EDE9FA00F9EAB3 /* Assets.xcassets in Resources */,
+				976079F621D3514700093786 /* RecoverMainVC.xib in Resources */,
 				9747227D20EDE9F800F9EAB3 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -274,9 +350,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				976079F021D3499400093786 /* CreatVC.m in Sources */,
+				976079FF21D3525400093786 /* MnemonicImportVC.m in Sources */,
+				976079FA21D3522D00093786 /* keystoreImportVC.m in Sources */,
 				9747227A20EDE9F800F9EAB3 /* ViewController.m in Sources */,
 				9747228520EDE9FA00F9EAB3 /* main.m in Sources */,
 				9747227720EDE9F800F9EAB3 /* AppDelegate.m in Sources */,
+				976079F521D3514700093786 /* RecoverMainVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

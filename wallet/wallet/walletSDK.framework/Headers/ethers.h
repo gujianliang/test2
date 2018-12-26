@@ -35,7 +35,7 @@ FOUNDATION_EXPORT const unsigned char ethersVersionString[];
 #import <ethers/RoundRobinProvider.h>
 
 #import <ethers/BigNumber.h>
-#import <ethers/Promise.h>
+//#import <ethers/Promise.h>
 #import <ethers/RLPSerialization.h>
 #import <ethers/SecureData.h>
 #import <ethers/WalletUtils.h>

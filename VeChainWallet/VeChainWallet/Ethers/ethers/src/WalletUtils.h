@@ -18,6 +18,10 @@
 + (void)creatWalletWithPassword:(NSString *)password
                       callBack:(void(^)(Account *account)) block;
 
++(void)creatWalletWithMnemonic:(NSString *)Mnemonic
+                      password:(NSString *)password
+                      callBack:(void(^)(Account *account)) block;
+    
 + (BOOL)isValidMnemonicPhrase: (NSString*)phrase;
 
 

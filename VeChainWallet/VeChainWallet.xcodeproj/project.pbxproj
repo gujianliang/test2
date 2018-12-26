@@ -15,6 +15,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		974B24F621B6809300D1673E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 974B24F121B6809300D1673E /* walletSDK.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = E2317E631E3191AC00DBE3E4;
+			remoteInfo = walletSDK;
+		};
+		974B24F821B6809300D1673E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 974B24F121B6809300D1673E /* walletSDK.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = E2317E6C1E3191AC00DBE3E4;
+			remoteInfo = walletSDKTests;
+		};
 		975DAE01212158150094D6F8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 975DADED212158140094D6F8 /* Project object */;
@@ -22,30 +36,16 @@
 			remoteGlobalIDString = 975DADF5212158150094D6F8;
 			remoteInfo = VeChainWallet;
 		};
-		975DAE152121582D0094D6F8 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 975DAE102121582D0094D6F8 /* ethers.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = E2317E631E3191AC00DBE3E4;
-			remoteInfo = ethers;
-		};
-		975DAE172121582D0094D6F8 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 975DAE102121582D0094D6F8 /* ethers.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = E2317E6C1E3191AC00DBE3E4;
-			remoteInfo = ethersTests;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		974B24F121B6809300D1673E /* walletSDK.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = walletSDK.xcodeproj; path = Ethers/walletSDK.xcodeproj; sourceTree = "<group>"; };
 		975DADF6212158150094D6F8 /* VeChainWallet.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = VeChainWallet.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		975DADF9212158150094D6F8 /* VeChainWallet.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VeChainWallet.h; sourceTree = "<group>"; };
 		975DADFA212158150094D6F8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		975DADFF212158150094D6F8 /* VeChainWalletTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VeChainWalletTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		975DAE04212158150094D6F8 /* VeChainWalletTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VeChainWalletTests.m; sourceTree = "<group>"; };
 		975DAE06212158150094D6F8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		975DAE102121582D0094D6F8 /* ethers.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ethers.xcodeproj; path = Ethers/ethers.xcodeproj; sourceTree = "<group>"; };
 		975DAE19212158460094D6F8 /* WalletUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WalletUtils.h; sourceTree = "<group>"; };
 		975DAE1A212158460094D6F8 /* WalletUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WalletUtils.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -69,6 +69,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		974B24F221B6809300D1673E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				974B24F721B6809300D1673E /* walletSDK.framework */,
+				974B24F921B6809300D1673E /* walletSDKTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		975DADEC212158140094D6F8 = {
 			isa = PBXGroup;
 			children = (
@@ -90,9 +99,9 @@
 		975DADF8212158150094D6F8 /* VeChainWallet */ = {
 			isa = PBXGroup;
 			children = (
+				974B24F121B6809300D1673E /* walletSDK.xcodeproj */,
 				975DAE19212158460094D6F8 /* WalletUtils.h */,
 				975DAE1A212158460094D6F8 /* WalletUtils.m */,
-				975DAE102121582D0094D6F8 /* ethers.xcodeproj */,
 				975DADF9212158150094D6F8 /* VeChainWallet.h */,
 				975DADFA212158150094D6F8 /* Info.plist */,
 			);
@@ -106,15 +115,6 @@
 				975DAE06212158150094D6F8 /* Info.plist */,
 			);
 			path = VeChainWalletTests;
-			sourceTree = "<group>";
-		};
-		975DAE112121582D0094D6F8 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				975DAE162121582D0094D6F8 /* ethers.framework */,
-				975DAE182121582D0094D6F8 /* ethersTests.xctest */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -197,8 +197,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 975DAE112121582D0094D6F8 /* Products */;
-					ProjectRef = 975DAE102121582D0094D6F8 /* ethers.xcodeproj */;
+					ProductGroup = 974B24F221B6809300D1673E /* Products */;
+					ProjectRef = 974B24F121B6809300D1673E /* walletSDK.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -210,18 +210,18 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		975DAE162121582D0094D6F8 /* ethers.framework */ = {
+		974B24F721B6809300D1673E /* walletSDK.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
-			path = ethers.framework;
-			remoteRef = 975DAE152121582D0094D6F8 /* PBXContainerItemProxy */;
+			path = walletSDK.framework;
+			remoteRef = 974B24F621B6809300D1673E /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		975DAE182121582D0094D6F8 /* ethersTests.xctest */ = {
+		974B24F921B6809300D1673E /* walletSDKTests.xctest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
-			path = ethersTests.xctest;
-			remoteRef = 975DAE172121582D0094D6F8 /* PBXContainerItemProxy */;
+			path = walletSDKTests.xctest;
+			remoteRef = 974B24F821B6809300D1673E /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */

@@ -12,57 +12,21 @@
 		<data>
 		uMrMM6YQ1BSq7XJcDJenJW067QQ=
 		</data>
-		<key>Headers/ApiProvider.h</key>
-		<data>
-		lXFxkYh/c0En2yxQGbaX2rLux+s=
-		</data>
 		<key>Headers/BigNumber.h</key>
 		<data>
 		iABGbOdrhvm0inqlh7+83w/LMAM=
-		</data>
-		<key>Headers/BlockInfo.h</key>
-		<data>
-		8IPl2yV5cDOt/reCeourHtZF/a8=
-		</data>
-		<key>Headers/EtherscanProvider.h</key>
-		<data>
-		R4+bLBdENI1cBCqV4XMVYLLa/zI=
-		</data>
-		<key>Headers/FallbackProvider.h</key>
-		<data>
-		le2HdLzxIITImEjUD/4Es+fMLBE=
 		</data>
 		<key>Headers/Hash.h</key>
 		<data>
 		iNlRyKIu34UBvmQptcjmQwWOUh0=
 		</data>
-		<key>Headers/InfuraProvider.h</key>
-		<data>
-		NVoQxDWF/wp0kR418J1hZKVdbcs=
-		</data>
-		<key>Headers/JsonRpcProvider.h</key>
-		<data>
-		gXJPYVGP5p1cYqfd/O9IApDsUFQ=
-		</data>
 		<key>Headers/Payment.h</key>
 		<data>
 		jxh55nUYTGHLJBFQ4Q6nXNGsbJM=
 		</data>
-		<key>Headers/Promise.h</key>
-		<data>
-		H5rWXYzWcaxE74Iwgqx8/F4iHqA=
-		</data>
-		<key>Headers/Provider.h</key>
-		<data>
-		H+OJdlHWKuPK/PB7MJzoJvn3zbo=
-		</data>
 		<key>Headers/RLPSerialization.h</key>
 		<data>
 		r0WGIU0q3s0QYfosGjuKxRm/68k=
-		</data>
-		<key>Headers/RoundRobinProvider.h</key>
-		<data>
-		mSbif9l0RiVd61tyHxPhbpdV2JU=
 		</data>
 		<key>Headers/SecureData.h</key>
 		<data>
@@ -76,21 +40,17 @@
 		<data>
 		jtat0/bdGIH0/gRBXKEDfM/+XyE=
 		</data>
-		<key>Headers/TransactionInfo.h</key>
-		<data>
-		Oq2ijxqiZ/AWnNwJHD1DtAWmDEQ=
-		</data>
 		<key>Headers/WalletUtils.h</key>
 		<data>
-		lAZwq84s6Q03jCQYvY63mL7rlDo=
+		PzjlOQ+QUIRP0Z5iiX/Znnbmn/k=
 		</data>
 		<key>Headers/ethers.h</key>
 		<data>
-		0sKuGfmwp51yx+cmVknHK2j3Qd0=
+		RWMxt2RkPsUxQBZAE7tgTHmWH8o=
 		</data>
 		<key>Info.plist</key>
 		<data>
-		KoUlBtgnV7zKfyZDNY/sXYC7K8o=
+		pQ9N7nplsaTvadODbf5suZTNKHc=
 		</data>
 	</dict>
 	<key>files2</key>
@@ -117,17 +77,6 @@
 			qt1eKmmSTiqz2/yX/NuWG8GzTKKw8pAyb1QS9ErLWjs=
 			</data>
 		</dict>
-		<key>Headers/ApiProvider.h</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			lXFxkYh/c0En2yxQGbaX2rLux+s=
-			</data>
-			<key>hash2</key>
-			<data>
-			aL2gO0jv4cVGfml136bWmyTykyD2wVZDpC5Iyr6CCic=
-			</data>
-		</dict>
 		<key>Headers/BigNumber.h</key>
 		<dict>
 			<key>hash</key>
@@ -137,39 +86,6 @@
 			<key>hash2</key>
 			<data>
 			mQHq8qsqk+ilWtFYX6FPVBow5JNtnfdYghJ654n/FhE=
-			</data>
-		</dict>
-		<key>Headers/BlockInfo.h</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			8IPl2yV5cDOt/reCeourHtZF/a8=
-			</data>
-			<key>hash2</key>
-			<data>
-			OELO0ZCItXoOASHvtDvoyOa20FxPY4EZ576qIT4nzT0=
-			</data>
-		</dict>
-		<key>Headers/EtherscanProvider.h</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			R4+bLBdENI1cBCqV4XMVYLLa/zI=
-			</data>
-			<key>hash2</key>
-			<data>
-			U2dNOrOhpcIl1m01GCsoKP2QTixNrP/1aO0K+4WLq9Q=
-			</data>
-		</dict>
-		<key>Headers/FallbackProvider.h</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			le2HdLzxIITImEjUD/4Es+fMLBE=
-			</data>
-			<key>hash2</key>
-			<data>
-			DFsxcFLdENd26EVwUKKA7kg2RWtPAyxOn/4GzTMxCWg=
 			</data>
 		</dict>
 		<key>Headers/Hash.h</key>
@@ -183,28 +99,6 @@
 			/AJhSK+UvSSZdIER9dCgk6O17DKc5a/fth3cjdeeDjs=
 			</data>
 		</dict>
-		<key>Headers/InfuraProvider.h</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			NVoQxDWF/wp0kR418J1hZKVdbcs=
-			</data>
-			<key>hash2</key>
-			<data>
-			SQ1Be5RWCPEXZYp4AlENDxVMSumFJeTmpWtEPZSDiwo=
-			</data>
-		</dict>
-		<key>Headers/JsonRpcProvider.h</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			gXJPYVGP5p1cYqfd/O9IApDsUFQ=
-			</data>
-			<key>hash2</key>
-			<data>
-			3T6PaM+5zTQWRLexsSgieF1IA8e1zKDfsp7eDnLJ+EA=
-			</data>
-		</dict>
 		<key>Headers/Payment.h</key>
 		<dict>
 			<key>hash</key>
@@ -216,28 +110,6 @@
 			Wg5M3iM8IsmSM0upgMoj2Qn2Vn4XlkbkGqPMaxrKhuY=
 			</data>
 		</dict>
-		<key>Headers/Promise.h</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			H5rWXYzWcaxE74Iwgqx8/F4iHqA=
-			</data>
-			<key>hash2</key>
-			<data>
-			FWhB+XanWhjxaamBlm0JdQMC41heJKqlXJb4dnykYOk=
-			</data>
-		</dict>
-		<key>Headers/Provider.h</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			H+OJdlHWKuPK/PB7MJzoJvn3zbo=
-			</data>
-			<key>hash2</key>
-			<data>
-			KzbMMDJX/u+8tw2nurzILYK8OivpqCUrU11dmfw7/V0=
-			</data>
-		</dict>
 		<key>Headers/RLPSerialization.h</key>
 		<dict>
 			<key>hash</key>
@@ -247,17 +119,6 @@
 			<key>hash2</key>
 			<data>
 			vi6fjvrgXZcSsD2e41U+CkriqpFRNUeSKfJZsRMdV7Q=
-			</data>
-		</dict>
-		<key>Headers/RoundRobinProvider.h</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			mSbif9l0RiVd61tyHxPhbpdV2JU=
-			</data>
-			<key>hash2</key>
-			<data>
-			0Ora71LP+Ai7SJYJq3iVmIB06HYL0AfUhft9t3IkY54=
 			</data>
 		</dict>
 		<key>Headers/SecureData.h</key>
@@ -293,37 +154,26 @@
 			QXIDGMHkkOnSIMrGUfFM969iKdWw20VhDxjsoQ8ThLg=
 			</data>
 		</dict>
-		<key>Headers/TransactionInfo.h</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			Oq2ijxqiZ/AWnNwJHD1DtAWmDEQ=
-			</data>
-			<key>hash2</key>
-			<data>
-			S3+vKoMa1ALv9LWr0ZABugBAiWywuyB1PWy8Y0OH8W8=
-			</data>
-		</dict>
 		<key>Headers/WalletUtils.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			lAZwq84s6Q03jCQYvY63mL7rlDo=
+			PzjlOQ+QUIRP0Z5iiX/Znnbmn/k=
 			</data>
 			<key>hash2</key>
 			<data>
-			QmQfnigMsFueZplo7B2DyWjLlf+7GO6ApOZJwH2HpIg=
+			725X7i0z8jyN46nptxpsKKB/uTQQBMoVkUUPbvQal0o=
 			</data>
 		</dict>
 		<key>Headers/ethers.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			0sKuGfmwp51yx+cmVknHK2j3Qd0=
+			RWMxt2RkPsUxQBZAE7tgTHmWH8o=
 			</data>
 			<key>hash2</key>
 			<data>
-			vj5t0MLXtlljuDDKEUU3hfSEphYVoaEdLpbb8uTbmxw=
+			QHZX1dzsfkQObizzJ52qKF2RSIGvo/vRoblRnWpif5U=
 			</data>
 		</dict>
 	</dict>

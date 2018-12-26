@@ -23,6 +23,21 @@
     }];
 }
 
++(void)creatWalletWithMnemonic:(NSString *)Mnemonic
+                      password:(NSString *)password
+                      callBack:(void(^)(Account *account)) block
+{
+    __block Account *account = [Account accountWithMnemonicPhrase:Mnemonic];
+    
+    [account encryptSecretStorageJSON:password callback:^(NSString *json) {
+        
+        account.keystore = json;
+        if (block) {
+            block(account);
+        }
+    }];
+}
+
 + (BOOL)isValidMnemonicPhrase: (NSString*)phrase
 {
     return [Account isValidMnemonicPhrase:phrase];
