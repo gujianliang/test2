@@ -33,7 +33,7 @@
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view
                                                   animated:YES];
         hud.mode = MBProgressHUDModeText;
-        hud.labelText =  @"填写信息不完整";
+        hud.labelText =  @"Invalid";
         [hud hide:YES afterDelay:1];
         return;
     }
@@ -42,7 +42,7 @@
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view
                                                   animated:YES];
         hud.mode = MBProgressHUDModeText;
-        hud.labelText =  @"填写信息不完整";
+        hud.labelText =  @"Invalid";
         [hud hide:YES afterDelay:1];
         return;
     }

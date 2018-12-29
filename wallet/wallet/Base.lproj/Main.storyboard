@@ -34,41 +34,42 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" tag="10" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DnR-3T-OXi">
+                            <button opaque="NO" tag="10" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DnR-3T-OXi">
                                 <rect key="frame" x="38" y="170" width="298" height="58"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <state key="normal" title="创建钱包">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="58" id="8md-Xf-fcv"/>
+                                </constraints>
+                                <state key="normal" title="Create a wallet">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
                                     <action selector="touchMe:" destination="kcW-B4-2FB" eventType="touchUpInside" id="zro-l4-pgQ"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" tag="11" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rkv-V9-uFZ">
-                                <rect key="frame" x="38" y="241" width="298" height="58"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" tag="11" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rkv-V9-uFZ">
+                                <rect key="frame" x="38" y="255" width="298" height="58"/>
                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <state key="normal" title="导入钱包">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="58" id="3Wa-Ub-IoZ"/>
+                                </constraints>
+                                <state key="normal" title="Import a wallet">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
                                     <action selector="touchMe:" destination="kcW-B4-2FB" eventType="touchUpInside" id="YJQ-Xj-UWG"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" tag="12" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fHQ-uH-JdM">
-                                <rect key="frame" x="38" y="310" width="298" height="58"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <state key="normal" title="转账">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <connections>
-                                    <action selector="touchMe:" destination="kcW-B4-2FB" eventType="touchUpInside" id="VXC-zR-p23"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="DnR-3T-OXi" firstAttribute="leading" secondItem="060-5c-ZZV" secondAttribute="leading" constant="38" id="K7Y-9M-iY0"/>
+                            <constraint firstItem="060-5c-ZZV" firstAttribute="trailing" secondItem="Rkv-V9-uFZ" secondAttribute="trailing" constant="39" id="T40-6J-NT1"/>
+                            <constraint firstItem="060-5c-ZZV" firstAttribute="trailing" secondItem="DnR-3T-OXi" secondAttribute="trailing" constant="39" id="WKR-RM-Lqz"/>
+                            <constraint firstItem="Rkv-V9-uFZ" firstAttribute="leading" secondItem="060-5c-ZZV" secondAttribute="leading" constant="38" id="cWZ-IU-S9Y"/>
+                            <constraint firstItem="DnR-3T-OXi" firstAttribute="top" secondItem="060-5c-ZZV" secondAttribute="top" constant="106" id="lly-Vd-yli"/>
+                            <constraint firstItem="Rkv-V9-uFZ" firstAttribute="top" secondItem="DnR-3T-OXi" secondAttribute="bottom" constant="27" id="uF7-G7-nSN"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="060-5c-ZZV"/>
                     </view>
                     <navigationItem key="navigationItem" id="zXd-ng-JrH"/>

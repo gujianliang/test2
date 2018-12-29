@@ -19,13 +19,6 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
-    
-//    CreatVC *creatVC = [[CreatVC alloc] init];
-//    UINavigationController *creatNav = [[UINavigationController alloc]initWithRootViewController:creatVC];
-//    
-//    self.window.rootViewController = creatNav;
-//    [self.window makeKeyAndVisible];
-    
     return YES;
 }
 

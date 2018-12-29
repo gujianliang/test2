@@ -58,20 +58,9 @@
          [currentDict setObject:account.keystore forKey:@"keystore"];
          [currentDict setObject:account.address.checksumAddress forKey:@"address"];
 
-//         [[NSUserDefaults standardUserDefaults]setObject:currentDict forKey:@"currentWallet"];
+         [[NSUserDefaults standardUserDefaults]setObject:currentDict forKey:@"currentWallet"];
          
      }];
 }
-
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

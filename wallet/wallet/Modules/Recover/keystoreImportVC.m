@@ -30,15 +30,21 @@
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view
                                                   animated:YES];
         hud.mode = MBProgressHUDModeText;
-        hud.labelText =  @"填写信息不完整";
+        hud.labelText =  @"Invalid";
         [hud hide:YES afterDelay:1];
         return;
     }
+    
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view
+                                              animated:YES];
+    hud.mode = MBProgressHUDModeText;
+    hud.labelText =  @"waiting ...";
     
     [WalletUtils decryptSecretStorageJSON:self.keystoreTextView.text
                                  password:self.password.text
                                  callback:^(Account *account, NSError *NSError)
      {
+         [hud hide:YES];
          if (NSError == nil) {
              NSString *address = account.address.checksumAddress;
              NSLog(@"address == %@;----\nprivateKey = %@ ",address, [SecureData dataToHexString:account.privateKey]);

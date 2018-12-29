@@ -75,7 +75,7 @@
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view
                                                   animated:YES];
         hud.mode = MBProgressHUDModeText;
-        hud.labelText =  @"填写信息不完整";
+        hud.labelText =  @"Invalid";
         [hud hide:YES afterDelay:1];
         return;
     }
@@ -90,7 +90,7 @@
         [self doTransfer];
     }];
     //初始化
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"请输入密码"
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Please input your password"
                                                                    message:@""
                                                             preferredStyle:UIAlertControllerStyleAlert];
     //添加操作

@@ -30,13 +30,20 @@
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view
                                                   animated:YES];
         hud.mode = MBProgressHUDModeText;
-        hud.labelText =  @"填写信息不完整";
+        hud.labelText =  @"Invalid";
         [hud hide:YES afterDelay:1];
         return;
     }
     
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view
+                                              animated:YES];
+    hud.mode = MBProgressHUDModeText;
+    hud.labelText =  @"waiting...";
+    
     [WalletUtils creatWalletWithMnemonic:self.improtKeys.text password:self.password.text callBack:^(Account *account)
     {
+        [hud hide:YES];
+        
         WalletDetailVC *detailVC = [[WalletDetailVC alloc]init];
         [self.navigationController pushViewController:detailVC animated:YES];
         
@@ -46,9 +53,6 @@
 
         [[NSUserDefaults standardUserDefaults]setObject:walletDict forKey:@"currentWallet"];
     }];
-
-    
 }
-
 
 @end
