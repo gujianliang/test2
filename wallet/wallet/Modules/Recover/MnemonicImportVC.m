@@ -8,7 +8,8 @@
 
 #import "MnemonicImportVC.h"
 #import <walletSDK/WalletUtils.h>
-#import <walletSDK/WalletUtils.h>
+#import "WalletDetailVC.h"
+#import "MBProgressHUD.h"
 
 @interface MnemonicImportVC ()
 
@@ -24,34 +25,30 @@
 - (IBAction)recover:(id)sender
 {
 
-    if (self.password.text.length == 0) {
-         return;
+    if (self.password.text.length == 0 || self.improtKeys.text.length == 0)
+    {
+        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view
+                                                  animated:YES];
+        hud.mode = MBProgressHUDModeText;
+        hud.labelText =  @"填写信息不完整";
+        [hud hide:YES afterDelay:1];
+        return;
     }
-//    self.pa
-//    [walletUtils cr];
-//    [w];
     
-//    [WalletUtils  creatWalletWithPassword:self.passwordLabel.text
-//                                 callBack:^(Account *account)
-//     {
-//         self.mnemonicTextView.text = account.mnemonicPhrase;
-//         self.addressLabel.text = account.address.checksumAddress;
-//         NSString *privateKey = [SecureData dataToHexString:account.privateKey];
-//         self.keystoreTextVeiw.text = account.keystore;
-//
-//         NSLog(@"words = %@;\n address = %@;\n privateKey = %@;\n keystore = %@",self.mnemonicTextView.text,self.addressLabel.text,privateKey,self.keystoreTextVeiw.text);
-//     }];
+    [WalletUtils creatWalletWithMnemonic:self.improtKeys.text password:self.password.text callBack:^(Account *account)
+    {
+        WalletDetailVC *detailVC = [[WalletDetailVC alloc]init];
+        [self.navigationController pushViewController:detailVC animated:YES];
+        
+        NSMutableDictionary *walletDict = [[NSMutableDictionary alloc]init];
+        [walletDict setObject:account.address.checksumAddress forKey:@"address"];
+        [walletDict setObject:account.keystore forKey:@"keystore"];
+
+        [[NSUserDefaults standardUserDefaults]setObject:walletDict forKey:@"currentWallet"];
+    }];
+
     
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

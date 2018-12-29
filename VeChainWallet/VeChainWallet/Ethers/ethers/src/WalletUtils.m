@@ -78,6 +78,20 @@
      }];
 }
 
++ (void)encryptSecretStorageJSON: (NSString*)password
+                         account:(Account *)account
+                        callback:(void (^)(NSString *))callback
+{
+    [account encryptSecretStorageJSON:password
+                             callback:^(NSString *json)
+    {
+         if (json.length > 0) {
+             if (callback) {
+                 callback(json);
+             }
+         }
+    }];
+}
 
 
 @end

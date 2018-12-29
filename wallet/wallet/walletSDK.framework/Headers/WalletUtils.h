@@ -12,6 +12,7 @@
 #import "Transaction.h"
 #import "Account.h"
 #import "SecureData.h"
+#import "Payment.h"
 
 @interface WalletUtils : NSObject
 
@@ -37,4 +38,7 @@
     password: (NSString*)password
        block:(void (^)(Signature *signature))block;
 
++ (void)encryptSecretStorageJSON: (NSString*)password
+                         account:(Account *)account
+                        callback:(void (^)(NSString *))callback;
 @end

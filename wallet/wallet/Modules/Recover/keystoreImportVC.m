@@ -8,6 +8,8 @@
 
 #import "keystoreImportVC.h"
 #import <walletSDK/WalletUtils.h>
+#import "WalletDetailVC.h"
+#import "MBProgressHUD.h"
 
 @interface keystoreImportVC ()
 @property (weak, nonatomic) IBOutlet UITextView *keystoreTextView;
@@ -25,9 +27,13 @@
 - (IBAction)importWallet:(id)sender
 {
     if (self.password.text.length == 0 || self.keystoreTextView.text.length == 0) {
+        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view
+                                                  animated:YES];
+        hud.mode = MBProgressHUDModeText;
+        hud.labelText =  @"填写信息不完整";
+        [hud hide:YES afterDelay:1];
         return;
     }
-    
     
     [WalletUtils decryptSecretStorageJSON:self.keystoreTextView.text
                                  password:self.password.text
@@ -36,19 +42,17 @@
          if (NSError == nil) {
              NSString *address = account.address.checksumAddress;
              NSLog(@"address == %@;----\nprivateKey = %@ ",address, [SecureData dataToHexString:account.privateKey]);
+             
+             NSMutableDictionary *walletDict = [[NSMutableDictionary alloc]init];
+             [walletDict setObject:account.address.checksumAddress forKey:@"address"];
+             [walletDict setObject:account.keystore forKey:@"keystore"];
+             
+             [[NSUserDefaults standardUserDefaults]setObject:walletDict forKey:@"currentWallet"];
+             
+             WalletDetailVC *detailVC = [[WalletDetailVC alloc]init];
+             [self.navigationController pushViewController:detailVC animated:YES];
          }
      }];
-    
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
