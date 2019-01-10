@@ -11,7 +11,7 @@
 #import "AFNetworking.h"
 #import "MBProgressHUD.h"
 
-@interface TransferVC ()
+@interface TransferVC ()<UITextFieldDelegate>
 {
     NSString *_toAddress;
     NSString *_tokenContractAddress;
@@ -285,5 +285,16 @@
 {
     [self calcThorNeeded:sender.value];
 }
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return YES;
+}
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    [self.view endEditing:YES];
+}
+
 
 @end

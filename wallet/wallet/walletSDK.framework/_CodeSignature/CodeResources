@@ -6,11 +6,11 @@
 	<dict>
 		<key>Headers/Account.h</key>
 		<data>
-		NZB0gXJlPO1mae9+pBWzVwXdTWI=
+		GHZSgvWfDQxKsU4A9rIVeWt4RsU=
 		</data>
 		<key>Headers/Address.h</key>
 		<data>
-		uMrMM6YQ1BSq7XJcDJenJW067QQ=
+		Xe0/Vj17s5JFBarqO29XeCVrlsk=
 		</data>
 		<key>Headers/BigNumber.h</key>
 		<data>
@@ -18,15 +18,15 @@
 		</data>
 		<key>Headers/Hash.h</key>
 		<data>
-		iNlRyKIu34UBvmQptcjmQwWOUh0=
+		dvuzKiFPTtcQtA8vuNbFNZ/9xTo=
 		</data>
 		<key>Headers/Payment.h</key>
 		<data>
-		jxh55nUYTGHLJBFQ4Q6nXNGsbJM=
+		AZ/lVJifK3eZDPKF7NI8WZYipV0=
 		</data>
 		<key>Headers/RLPSerialization.h</key>
 		<data>
-		r0WGIU0q3s0QYfosGjuKxRm/68k=
+		sbye++dDuznEOuoSRzrEBzRAwFc=
 		</data>
 		<key>Headers/SecureData.h</key>
 		<data>
@@ -34,23 +34,23 @@
 		</data>
 		<key>Headers/Signature.h</key>
 		<data>
-		RKNPmiWJqwE6kJrDMmdgpGiuL2Y=
+		13S6bE2pUc/dMIql8x/3EYw4b6U=
 		</data>
 		<key>Headers/Transaction.h</key>
 		<data>
-		jtat0/bdGIH0/gRBXKEDfM/+XyE=
+		bDMei0uP9WZm848SRs0QvVNrcxs=
+		</data>
+		<key>Headers/Wallet.h</key>
+		<data>
+		DoULzEiUKaNEmp3rkCvPDiR5CaM=
 		</data>
 		<key>Headers/WalletUtils.h</key>
 		<data>
-		ERhO/0JkmA6jQGM7ioGHIkK9I5I=
-		</data>
-		<key>Headers/ethers.h</key>
-		<data>
-		RWMxt2RkPsUxQBZAE7tgTHmWH8o=
+		kNzT1NaR65bkAAWBIFKAaVuVfjQ=
 		</data>
 		<key>Info.plist</key>
 		<data>
-		pQ9N7nplsaTvadODbf5suZTNKHc=
+		Uo3bfYxQuV4M2twMWHUz6MECLm0=
 		</data>
 	</dict>
 	<key>files2</key>
@@ -59,22 +59,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			NZB0gXJlPO1mae9+pBWzVwXdTWI=
+			GHZSgvWfDQxKsU4A9rIVeWt4RsU=
 			</data>
 			<key>hash2</key>
 			<data>
-			x+sZInMdR2E2C3KjReVjWwj4wd2apoMT6Ni2ZNeJ5fo=
+			pqNMUcsNti0X4QJCsLPBwuvfdeUi2exZDoTmUBuKZhc=
 			</data>
 		</dict>
 		<key>Headers/Address.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			uMrMM6YQ1BSq7XJcDJenJW067QQ=
+			Xe0/Vj17s5JFBarqO29XeCVrlsk=
 			</data>
 			<key>hash2</key>
 			<data>
-			qt1eKmmSTiqz2/yX/NuWG8GzTKKw8pAyb1QS9ErLWjs=
+			+qwgtLBZoTqTims+4IpBNhkO/57GKt/igclBCNJz02Y=
 			</data>
 		</dict>
 		<key>Headers/BigNumber.h</key>
@@ -92,33 +92,33 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			iNlRyKIu34UBvmQptcjmQwWOUh0=
+			dvuzKiFPTtcQtA8vuNbFNZ/9xTo=
 			</data>
 			<key>hash2</key>
 			<data>
-			/AJhSK+UvSSZdIER9dCgk6O17DKc5a/fth3cjdeeDjs=
+			tF+u6PJJ74P2CeN/N9P9MIGAVuRJM6xn4pVNlIfcFqw=
 			</data>
 		</dict>
 		<key>Headers/Payment.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			jxh55nUYTGHLJBFQ4Q6nXNGsbJM=
+			AZ/lVJifK3eZDPKF7NI8WZYipV0=
 			</data>
 			<key>hash2</key>
 			<data>
-			Wg5M3iM8IsmSM0upgMoj2Qn2Vn4XlkbkGqPMaxrKhuY=
+			HMC6H8S5CXMIbhuMN13syhyJWGou4Y8QWD8Sz6Ob9Hg=
 			</data>
 		</dict>
 		<key>Headers/RLPSerialization.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			r0WGIU0q3s0QYfosGjuKxRm/68k=
+			sbye++dDuznEOuoSRzrEBzRAwFc=
 			</data>
 			<key>hash2</key>
 			<data>
-			vi6fjvrgXZcSsD2e41U+CkriqpFRNUeSKfJZsRMdV7Q=
+			P2XAfLib6oTO9E85vGhZihgkSZlx9RL11hC9SFQo7TU=
 			</data>
 		</dict>
 		<key>Headers/SecureData.h</key>
@@ -136,44 +136,44 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			RKNPmiWJqwE6kJrDMmdgpGiuL2Y=
+			13S6bE2pUc/dMIql8x/3EYw4b6U=
 			</data>
 			<key>hash2</key>
 			<data>
-			rjH0csWS1/I8pi81/HAWreov+eH10oBG97UQhOa40vo=
+			LCK+J34FdS7Ovm+5qp+DRMEiQwYFqa66BhsXNgifgJI=
 			</data>
 		</dict>
 		<key>Headers/Transaction.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			jtat0/bdGIH0/gRBXKEDfM/+XyE=
+			bDMei0uP9WZm848SRs0QvVNrcxs=
 			</data>
 			<key>hash2</key>
 			<data>
-			QXIDGMHkkOnSIMrGUfFM969iKdWw20VhDxjsoQ8ThLg=
+			FifGEZ2NszS17XUiKf/r66BRIkdrxP8yAwZ8cs4ovjg=
+			</data>
+		</dict>
+		<key>Headers/Wallet.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			DoULzEiUKaNEmp3rkCvPDiR5CaM=
+			</data>
+			<key>hash2</key>
+			<data>
+			5h6YplsKgdaW3midNK3rAM3oBdLO5AMHo4A6CFXskCQ=
 			</data>
 		</dict>
 		<key>Headers/WalletUtils.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			ERhO/0JkmA6jQGM7ioGHIkK9I5I=
+			kNzT1NaR65bkAAWBIFKAaVuVfjQ=
 			</data>
 			<key>hash2</key>
 			<data>
-			sWDzzxhna1qozdA1YJOrxd9lrTtu4E0B3bMAKs2r3WU=
-			</data>
-		</dict>
-		<key>Headers/ethers.h</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			RWMxt2RkPsUxQBZAE7tgTHmWH8o=
-			</data>
-			<key>hash2</key>
-			<data>
-			QHZX1dzsfkQObizzJ52qKF2RSIGvo/vRoblRnWpif5U=
+			DwZjh0tKLZboEhUj0dBAcynXBB68/PytwLlg/qUMgwg=
 			</data>
 		</dict>
 	</dict>

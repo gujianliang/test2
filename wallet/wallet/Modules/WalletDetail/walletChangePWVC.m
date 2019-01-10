@@ -7,7 +7,8 @@
 //
 
 #import "walletChangePWVC.h"
-#import <walletSDK/WalletUtils.h>
+//#import <walletSDK/WalletUtils.h>
+#import <walletSDK/Wallet.h>
 #import "MBProgressHUD.h"
 
 @interface walletChangePWVC ()

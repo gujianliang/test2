@@ -7,7 +7,8 @@
 //
 
 #import "CreatVC.h"
-#import <walletSDK/WalletUtils.h>
+//#import <walletSDK/WalletUtils.h>
+#import <walletSDK/Wallet.h>
 #import "MBProgressHUD.h"
 
 @interface CreatVC ()

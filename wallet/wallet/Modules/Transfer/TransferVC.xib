@@ -171,6 +171,9 @@
                             <nil key="textColor"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits"/>
+                            <connections>
+                                <outlet property="delegate" destination="-1" id="dlx-6V-zeT"/>
+                            </connections>
                         </textField>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="VET" translatesAutoresizingMaskIntoConstraints="NO" id="aX1-fR-mib">
                             <rect key="frame" x="254" y="43" width="39" height="41"/>

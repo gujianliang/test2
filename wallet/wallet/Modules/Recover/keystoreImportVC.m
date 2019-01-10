@@ -7,7 +7,8 @@
 //
 
 #import "keystoreImportVC.h"
-#import <walletSDK/WalletUtils.h>
+//#import <walletSDK/WalletUtils.h>
+#import <walletSDK/Wallet.h>
 #import "WalletDetailVC.h"
 #import "MBProgressHUD.h"
 
