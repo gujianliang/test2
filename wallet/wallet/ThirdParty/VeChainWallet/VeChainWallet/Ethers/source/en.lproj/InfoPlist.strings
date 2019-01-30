@@ -1,0 +1,13 @@
+/* 
+  infoPlist.strings
+  VeWallet
+
+  Created by 曾新 on 2018/6/19.
+  Copyright © 2018年 VeChain. All rights reserved.
+*/
+
+CFBundleDisplayName = "VeChainThor";
+NSCameraUsageDescription = "If you choose 'Don't allow', you will not be able to scan QR code.";
+NSFaceIDUsageDescription = "If you choose 'Don't allow', you will not be able to login via Face ID or Touch ID";
+NSPhotoLibraryAddUsageDescription = "If you choose 'Don't allow', you will not be able to scan QR code.";
+NSPhotoLibraryUsageDescription = "If you choose 'Don't allow', you will not be able to scan QR code.";

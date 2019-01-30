@@ -1,0 +1,13 @@
+/* 
+  infoPlist.strings
+  VeWallet
+
+  Created by 曾新 on 2018/6/19.
+  Copyright © 2018年 VeChain. All rights reserved.
+*/
+
+CFBundleDisplayName = "唯链雷神钱包";
+NSCameraUsageDescription = "如果不允许，您将无法使用扫码功能.";
+NSFaceIDUsageDescription = "如果不允许，您将无法使用Face ID或Touch ID进行登录.";
+NSPhotoLibraryAddUsageDescription = "如果不允许，您将无法使用扫码功能.";
+NSPhotoLibraryUsageDescription = "如果不允许，您将无法使用扫码功能.";
