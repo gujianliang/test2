@@ -1302,6 +1302,9 @@
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
 			mainGroup = E2317E591E3191AC00DBE3E4;
 			productRefGroup = E2317E641E3191AC00DBE3E4 /* Products */;
 			projectDirPath = "";
@@ -1598,7 +1601,7 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_BITCODE = NO;
-				GCC_PREFIX_HEADER = "/Users/cengxin/Documents/VeChain/iOS/ios-wallet-sdk/VeChainWallet/VeChainWallet/Ethers/PrefixHeader.pch";
+				GCC_PREFIX_HEADER = "$(PROJECT_DIR)/PrefixHeader.pch";
 				INFOPLIST_FILE = wallet/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -1623,7 +1626,7 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_BITCODE = NO;
-				GCC_PREFIX_HEADER = "/Users/cengxin/Documents/VeChain/iOS/ios-wallet-sdk/VeChainWallet/VeChainWallet/Ethers/PrefixHeader.pch";
+				GCC_PREFIX_HEADER = "$(PROJECT_DIR)/PrefixHeader.pch";
 				INFOPLIST_FILE = wallet/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
