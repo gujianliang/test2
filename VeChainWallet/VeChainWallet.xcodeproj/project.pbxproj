@@ -10,8 +10,6 @@
 		975DAE00212158150094D6F8 /* VeChainWallet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 975DADF6212158150094D6F8 /* VeChainWallet.framework */; };
 		975DAE05212158150094D6F8 /* VeChainWalletTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 975DAE04212158150094D6F8 /* VeChainWalletTests.m */; };
 		975DAE07212158150094D6F8 /* VeChainWallet.h in Headers */ = {isa = PBXBuildFile; fileRef = 975DADF9212158150094D6F8 /* VeChainWallet.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		975DAE1B212158460094D6F8 /* WalletUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 975DAE19212158460094D6F8 /* WalletUtils.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		975DAE1C212158460094D6F8 /* WalletUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 975DAE1A212158460094D6F8 /* WalletUtils.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,8 +44,6 @@
 		975DADFF212158150094D6F8 /* VeChainWalletTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VeChainWalletTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		975DAE04212158150094D6F8 /* VeChainWalletTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VeChainWalletTests.m; sourceTree = "<group>"; };
 		975DAE06212158150094D6F8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		975DAE19212158460094D6F8 /* WalletUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WalletUtils.h; sourceTree = "<group>"; };
-		975DAE1A212158460094D6F8 /* WalletUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WalletUtils.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,8 +96,6 @@
 			isa = PBXGroup;
 			children = (
 				974B24F121B6809300D1673E /* walletSDK.xcodeproj */,
-				975DAE19212158460094D6F8 /* WalletUtils.h */,
-				975DAE1A212158460094D6F8 /* WalletUtils.m */,
 				975DADF9212158150094D6F8 /* VeChainWallet.h */,
 				975DADFA212158150094D6F8 /* Info.plist */,
 			);
@@ -125,7 +119,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				975DAE07212158150094D6F8 /* VeChainWallet.h in Headers */,
-				975DAE1B212158460094D6F8 /* WalletUtils.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -248,7 +241,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				975DAE1C212158460094D6F8 /* WalletUtils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -398,6 +390,7 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_BITCODE = NO;
+				GCC_PREFIX_HEADER = "";
 				INFOPLIST_FILE = VeChainWallet/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -425,6 +418,7 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_BITCODE = NO;
+				GCC_PREFIX_HEADER = "";
 				INFOPLIST_FILE = VeChainWallet/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;

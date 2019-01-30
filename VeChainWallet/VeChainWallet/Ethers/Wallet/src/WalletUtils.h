@@ -79,7 +79,7 @@
  *  sign message
  *
  *  @param message : message for sign
- *  @param json :json for keystore
+ *  @param json :json string for keystore
  *  @param password :password for wallet
  *  @param block :finish sign block
  *
