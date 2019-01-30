@@ -14,9 +14,9 @@
 - (instancetype)init{
     self = [super init];
     if (self) {
-        _titleList = [NSArray arrayWithObjects:NSLocalizedString(@"strength_node", nil),
-                                               NSLocalizedString(@"thunder_node", nil),
-                                               NSLocalizedString(@"mjolnir_node", nil), nil];
+        _titleList = [NSArray arrayWithObjects:VCNSLocalizedBundleString(@"strength_node", nil),
+                                               VCNSLocalizedBundleString(@"thunder_node", nil),
+                                               VCNSLocalizedBundleString(@"mjolnir_node", nil), nil];
         
         _twoBonusNodeList = [NSArray arrayWithObjects:@"1.0", @"1.5", @"2.0", nil];
         _twoGetNodeList = [NSArray arrayWithObjects:@"1,000,000 VET", @"5,000,000 VET", @"15,000,000 VET", nil];
@@ -34,10 +34,10 @@
 - (instancetype)init{
     self = [super init];
     if (self) {
-        _titleListX = [NSArray arrayWithObjects:NSLocalizedString(@"vethor_x_node", nil),
-                                                NSLocalizedString(@"strength_x_node", nil),
-                                                NSLocalizedString(@"thunder_x_node", nil),
-                                                NSLocalizedString(@"mjolnir_x_node", nil), nil];
+        _titleListX = [NSArray arrayWithObjects:VCNSLocalizedBundleString(@"vethor_x_node", nil),
+                                                VCNSLocalizedBundleString(@"strength_x_node", nil),
+                                                VCNSLocalizedBundleString(@"thunder_x_node", nil),
+                                                VCNSLocalizedBundleString(@"mjolnir_x_node", nil), nil];
         
         _threeBonusNodeList = [NSArray arrayWithObjects:@"0.0", @"1.0", @"1.5", @"2.0", nil];
         _threeGetNodeList = [NSArray arrayWithObjects:@"600,000 VET", @"1,600,000 VET", @"5,600,000 VET", @"15,600,000 VET", nil];

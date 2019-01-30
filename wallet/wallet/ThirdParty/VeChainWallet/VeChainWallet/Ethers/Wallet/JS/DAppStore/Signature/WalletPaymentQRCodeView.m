@@ -158,8 +158,8 @@
     case HotWalletQrCodeType:
         {
             // 使用冷钱包扫码
-            _titleLabel.text = NSLocalizedString(@"observer_transfer_dialog_title", nil);
-            [_confirmBtn setTitle:NSLocalizedString(@"transfer_coin_next_page", nil)
+            _titleLabel.text = VCNSLocalizedBundleString(@"observer_transfer_dialog_title", nil);
+            [_confirmBtn setTitle:VCNSLocalizedBundleString(@"transfer_coin_next_page", nil)
                          forState:UIControlStateNormal];
             [_confirmBtn setGrayGradientLayerType:highYellowType];
             
@@ -180,14 +180,14 @@
             subTitle.textAlignment = NSTextAlignmentCenter;
             subTitle.font = titleFont;
             
-            NSString *str = NSLocalizedString(@"observer_transfer_dialog_des1_1", nil);
+            NSString *str = VCNSLocalizedBundleString(@"observer_transfer_dialog_des1_1", nil);
             NSMutableAttributedString *ats = [[NSMutableAttributedString alloc] initWithString:str];
             
             NSRange range1 = [str rangeOfString: @"ffffe901"];
             [ats addAttributes:@{NSForegroundColorAttributeName : [UIColor colorWithHexString:@"#FFAE03"],
                                  NSFontAttributeName : [UIFont fontWithName:@"icomoon" size:Scale(12.0)]}
                          range:range1];
-            NSRange range2 = [str rangeOfString: NSLocalizedString(@"f9_HOT_wallet", nil)];
+            NSRange range2 = [str rangeOfString: VCNSLocalizedBundleString(@"f9_HOT_wallet", nil)];
             [ats addAttributes:@{NSForegroundColorAttributeName : [UIColor colorWithHexString:@"#FFAE03"],
                                  NSFontAttributeName : [UIFont systemFontOfSize:Scale(12.0)]}
                          range:range2];
@@ -202,7 +202,7 @@
             
             // 请用冷钱包扫描二维码，待签名完成后进入下一步
             UILabel *subTitle1 = [[UILabel alloc]init];
-            subTitle1.text = NSLocalizedString(@"observer_transfer_dialog_des2", nil);
+            subTitle1.text = VCNSLocalizedBundleString(@"observer_transfer_dialog_des2", nil);
             subTitle1.textColor = HEX_RGB(0x898CD3);
             subTitle1.numberOfLines = 0;
             subTitle1.textAlignment = NSTextAlignmentCenter;
@@ -221,9 +221,9 @@
     case HotWalletScanType:
         {
             // 读入签名数据
-            _titleLabel.text = NSLocalizedString(@"observer_transfer_dialog2_title", nil);
+            _titleLabel.text = VCNSLocalizedBundleString(@"observer_transfer_dialog2_title", nil);
             // 发送交易
-            [_confirmBtn setTitle:NSLocalizedString(@"observer_transfer_dialog2_button", nil)
+            [_confirmBtn setTitle:VCNSLocalizedBundleString(@"observer_transfer_dialog2_button", nil)
                          forState:UIControlStateNormal];
             [_confirmBtn setGrayGradientLayerType:lowYellowType];
             _confirmBtn.userInteractionEnabled = NO;
@@ -264,14 +264,14 @@
             subTitle.font = titleFont;
             
             // 当前为观察钱包
-            NSString *str = NSLocalizedString(@"observer_transfer_dialog_des1_1", nil);
+            NSString *str = VCNSLocalizedBundleString(@"observer_transfer_dialog_des1_1", nil);
             NSMutableAttributedString *ats = [[NSMutableAttributedString alloc] initWithString:str];
             
             NSRange range1 = [str rangeOfString: @"ffffe901"];
             [ats addAttributes:@{NSForegroundColorAttributeName : [UIColor colorWithHexString:@"#FFAE03"],
                                  NSFontAttributeName : [UIFont fontWithName:@"icomoon" size:Scale(12.0)]}
                          range:range1];
-            NSRange range2 = [str rangeOfString: NSLocalizedString(@"f9_HOT_wallet", nil)];
+            NSRange range2 = [str rangeOfString: VCNSLocalizedBundleString(@"f9_HOT_wallet", nil)];
             [ats addAttributes:@{NSForegroundColorAttributeName : [UIColor colorWithHexString:@"#FFAE03"],
                                  NSFontAttributeName : [UIFont systemFontOfSize:Scale(12.0)]}
                          range:range2];
@@ -286,7 +286,7 @@
             
             // 扫描冷钱包签名数据二维码
             UILabel *subTitle1 = [[UILabel alloc]init];
-            subTitle1.text = NSLocalizedString(@"observer_transfer_dialog2_des2", nil);
+            subTitle1.text = VCNSLocalizedBundleString(@"observer_transfer_dialog2_des2", nil);
             subTitle1.textColor = HEX_RGB(0x898CD3);
             subTitle1.textAlignment = NSTextAlignmentCenter;
             subTitle1.font = titleFont;
@@ -309,7 +309,7 @@
             [_textView.layer setBorderWidth:1];
             _textView.userInteractionEnabled = NO;
             // 待扫码导入签名数据
-            _textView.text = NSLocalizedString(@"observer_transfer_dialog2_sign_hint", nil);
+            _textView.text = VCNSLocalizedBundleString(@"observer_transfer_dialog2_sign_hint", nil);
             [_textView mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.left.mas_equalTo(Scale(20));
                 make.right.mas_equalTo(-Scale(20));
@@ -322,8 +322,8 @@
     case ColdShowQrCodeType:
         {
             // 签名成功
-            _titleLabel.text = NSLocalizedString(@"transaction_cold_sign_success", nil);
-            [_confirmBtn setTitle:NSLocalizedString(@"完成", nil) forState:UIControlStateNormal];
+            _titleLabel.text = VCNSLocalizedBundleString(@"transaction_cold_sign_success", nil);
+            [_confirmBtn setTitle:VCNSLocalizedBundleString(@"完成", nil) forState:UIControlStateNormal];
             [_confirmBtn setGrayGradientLayerType:cyanType];
             
             UIImage *qrCodeImage = [FFBMSTools creatQRcodeImage:_jsonStr];
@@ -344,14 +344,14 @@
             subTitle.textAlignment = NSTextAlignmentCenter;
             subTitle.font = titleFont;
             
-            NSString *str = NSLocalizedString(@"transaction_cold_dialog_des1_1", nil);
+            NSString *str = VCNSLocalizedBundleString(@"transaction_cold_dialog_des1_1", nil);
             NSMutableAttributedString *ats = [[NSMutableAttributedString alloc] initWithString:str];
             
             NSRange range1 = [str rangeOfString: @"ffffe902"];
             [ats addAttributes:@{NSForegroundColorAttributeName : [UIColor colorWithHexString:@"#6DD8EF"],
                                  NSFontAttributeName : [UIFont fontWithName:@"icomoon" size:Scale(12.0)]}
                          range:range1];
-            NSRange range2 = [str rangeOfString: NSLocalizedString(@"f9_COLD_wallet", nil)];
+            NSRange range2 = [str rangeOfString: VCNSLocalizedBundleString(@"f9_COLD_wallet", nil)];
             [ats addAttributes:@{NSForegroundColorAttributeName : [UIColor colorWithHexString:@"#6DD8EF"],
                                  NSFontAttributeName : [UIFont systemFontOfSize:Scale(12.0)]}
                          range:range2];
@@ -365,7 +365,7 @@
             
             // 请用对应的观察钱包扫码二维码发出交易
             UILabel *subTitle1 = [[UILabel alloc]init];
-            subTitle1.text = NSLocalizedString(@"transaction_cold_dialog_des2_1", nil);
+            subTitle1.text = VCNSLocalizedBundleString(@"transaction_cold_dialog_des2_1", nil);
             subTitle1.textColor = HEX_RGB(0x898CD3);
             subTitle1.textAlignment = NSTextAlignmentCenter;
             subTitle1.font = titleFont;
@@ -404,7 +404,7 @@
 //            }
 //            else{
 //                [FFBMSMBProgressShower showTextIn:self
-//                                             Text:NSLocalizedString(@"transaction_signature_scheme_error",nil)
+//                                             Text:VCNSLocalizedBundleString(@"transaction_signature_scheme_error",nil)
 //                                           During:1.5];
 //            }
         }
@@ -418,7 +418,7 @@
 //                _textView.textColor = HEX_RGB(0x202C56);
 //            }else{
 //                [FFBMSMBProgressShower showTextIn:self
-//                                             Text:NSLocalizedString(@"authorized_signature_scheme_error",nil)
+//                                             Text:VCNSLocalizedBundleString(@"authorized_signature_scheme_error",nil)
 //                                           During:1.5];
 //            }
         }

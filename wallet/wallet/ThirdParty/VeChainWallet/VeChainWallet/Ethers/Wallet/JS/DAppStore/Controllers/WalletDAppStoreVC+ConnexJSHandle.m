@@ -562,9 +562,9 @@
         }
         if (!isok) {
             [FFBMSAlertShower showAlert:nil
-                                    msg:NSLocalizedString(@"非法参数", nil)
+                                    msg:VCNSLocalizedBundleString(@"非法参数", nil)
                                   inCtl:[UIApplication sharedApplication].keyWindow.rootViewController
-                                  items:@[NSLocalizedString(@"dialog_yes", nil)]
+                                  items:@[VCNSLocalizedBundleString(@"dialog_yes", nil)]
                              clickBlock:^(NSInteger index) {
                              }];
             return NO;
@@ -577,9 +577,9 @@
     BOOL allAreValidChar = [predicate evaluateWithObject:toAddress];
     if (!allAreValidChar) {
         [FFBMSAlertShower showAlert:nil
-                                msg:NSLocalizedString(@"非法参数", nil)
+                                msg:VCNSLocalizedBundleString(@"非法参数", nil)
                               inCtl:[UIApplication sharedApplication].keyWindow.rootViewController
-                              items:@[NSLocalizedString(@"dialog_yes", nil)]
+                              items:@[VCNSLocalizedBundleString(@"dialog_yes", nil)]
                          clickBlock:^(NSInteger index) {
                          }];
         return NO;
@@ -614,9 +614,9 @@
     }
     if (!bAmount) {
         [FFBMSAlertShower showAlert:nil
-                                msg:NSLocalizedString(@"非法参数", nil)
+                                msg:VCNSLocalizedBundleString(@"非法参数", nil)
                               inCtl:[UIApplication sharedApplication].keyWindow.rootViewController
-                              items:@[NSLocalizedString(@"dialog_yes", nil)]
+                              items:@[VCNSLocalizedBundleString(@"dialog_yes", nil)]
                          clickBlock:^(NSInteger index) {
                          }];
         return NO;
@@ -632,9 +632,9 @@
     }
     if (isSame) {
         [FFBMSAlertShower showAlert:nil
-                                msg:NSLocalizedString(@"非法参数", nil)
+                                msg:VCNSLocalizedBundleString(@"非法参数", nil)
                               inCtl:[UIApplication sharedApplication].keyWindow.rootViewController
-                              items:@[NSLocalizedString(@"dialog_yes", nil)]
+                              items:@[VCNSLocalizedBundleString(@"dialog_yes", nil)]
                          clickBlock:^(NSInteger index) {
                          }];
         return NO;

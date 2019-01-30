@@ -75,7 +75,7 @@ const NSInteger kFFBMSHudTag = 12345;
                                               animated:YES];
     hud.tag = kFFBMSHudTag;
     hud.mode = MBProgressHUDModeText;
-    hud.detailsLabelText =  NSLocalizedString(text, nil);
+    hud.detailsLabelText =  VCNSLocalizedBundleString(text, nil);
     hud.xOffset = 0.f;
     hud.yOffset = 0.f;
     [hud hide:YES afterDelay:time];

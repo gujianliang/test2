@@ -23,8 +23,8 @@
 
 //#import "RACEXTScope.h"
 
-#define VCNSLocalizedString(key, comment) \
-[FFBMSTools localeStringWithKey:(key)]
+#define VCNSLocalizedString(key, comment) [FFBMSTools localeStringWithKey:(key)]
+#define VCNSLocalizedBundleString(key, comment) [FFBMSTools localStringBundlekey:(key)]
 
 #define SCREEN_WIDTH          ([UIScreen mainScreen].bounds.size.width)
 #define SCREEN_HEIGHT         ([UIScreen mainScreen].bounds.size.height)

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4143EE1D2201B5100056C08A /* WalletSDKBundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 4143EE1C2201B5100056C08A /* WalletSDKBundle.bundle */; };
 		9736C126214B8671003DE935 /* WalletUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 9736C124214B8671003DE935 /* WalletUtils.m */; };
 		9736C127214B8671003DE935 /* WalletUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 9736C125214B8671003DE935 /* WalletUtils.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9743A51021FEB39E0079C582 /* WalletDAppPeerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9743A4F421FEB39D0079C582 /* WalletDAppPeerModel.m */; };
@@ -298,6 +299,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4143ED9E22019AC50056C08A /* WalletSDKBundle.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WalletSDKBundle.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		4143EDA022019AC60056C08A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4143EE1C2201B5100056C08A /* WalletSDKBundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = WalletSDKBundle.bundle; path = "../../../../../../../../../../Library/Developer/Xcode/DerivedData/walletSDKDemo-gqlvqwbqixqnzperofsenwztajti/Build/Products/Debug-iphonesimulator/WalletSDKBundle.bundle"; sourceTree = "<group>"; };
 		9736C124214B8671003DE935 /* WalletUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WalletUtils.m; path = src/WalletUtils.m; sourceTree = "<group>"; };
 		9736C125214B8671003DE935 /* WalletUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WalletUtils.h; path = src/WalletUtils.h; sourceTree = "<group>"; };
 		9743A4F421FEB39D0079C582 /* WalletDAppPeerModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WalletDAppPeerModel.m; sourceTree = "<group>"; };
@@ -584,6 +588,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		4143ED9B22019AC50056C08A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E2317E5F1E3191AC00DBE3E4 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -602,6 +613,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4143ED9F22019AC60056C08A /* WalletSDKBundle */ = {
+			isa = PBXGroup;
+			children = (
+				4143EDA022019AC60056C08A /* Info.plist */,
+			);
+			path = WalletSDKBundle;
+			sourceTree = "<group>";
+		};
 		9743A4F121FEB36F0079C582 /* JS */ = {
 			isa = PBXGroup;
 			children = (
@@ -924,6 +943,7 @@
 				9743A62221FEE67C0079C582 /* PrefixHeader.pch */,
 				E2317E651E3191AC00DBE3E4 /* Wallet */,
 				E2317E701E3191AC00DBE3E4 /* WalletTests */,
+				4143ED9F22019AC60056C08A /* WalletSDKBundle */,
 				E2317E641E3191AC00DBE3E4 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -933,6 +953,7 @@
 			children = (
 				E2317E631E3191AC00DBE3E4 /* walletSDK.framework */,
 				E2317E6C1E3191AC00DBE3E4 /* walletSDKTests.xctest */,
+				4143ED9E22019AC50056C08A /* WalletSDKBundle.bundle */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -945,6 +966,7 @@
 				E2317EE01E3198D100DBE3E4 /* ThirdParty */,
 				E2317E661E3191AC00DBE3E4 /* Wallet.h */,
 				E2317E671E3191AC00DBE3E4 /* Info.plist */,
+				4143EE1C2201B5100056C08A /* WalletSDKBundle.bundle */,
 			);
 			path = Wallet;
 			sourceTree = "<group>";
@@ -1241,6 +1263,23 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		4143ED9D22019AC50056C08A /* WalletSDKBundle */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4143EDA122019AC60056C08A /* Build configuration list for PBXNativeTarget "WalletSDKBundle" */;
+			buildPhases = (
+				4143ED9A22019AC50056C08A /* Sources */,
+				4143ED9B22019AC50056C08A /* Frameworks */,
+				4143ED9C22019AC50056C08A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = WalletSDKBundle;
+			productName = WalletSDKBundle;
+			productReference = 4143ED9E22019AC50056C08A /* WalletSDKBundle.bundle */;
+			productType = "com.apple.product-type.bundle";
+		};
 		E2317E621E3191AC00DBE3E4 /* walletSDK */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = E2317E771E3191AC00DBE3E4 /* Build configuration list for PBXNativeTarget "walletSDK" */;
@@ -1286,6 +1325,10 @@
 				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = Ethers;
 				TargetAttributes = {
+					4143ED9D22019AC50056C08A = {
+						CreatedOnToolsVersion = 10.1;
+						ProvisioningStyle = Automatic;
+					};
 					E2317E621E3191AC00DBE3E4 = {
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = 7GS2C8FTGM;
@@ -1304,6 +1347,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				"zh-Hans",
 			);
 			mainGroup = E2317E591E3191AC00DBE3E4;
 			productRefGroup = E2317E641E3191AC00DBE3E4 /* Products */;
@@ -1312,16 +1356,25 @@
 			targets = (
 				E2317E621E3191AC00DBE3E4 /* walletSDK */,
 				E2317E6B1E3191AC00DBE3E4 /* walletSDKTests */,
+				4143ED9D22019AC50056C08A /* WalletSDKBundle */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		4143ED9C22019AC50056C08A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E2317E611E3191AC00DBE3E4 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				9743A56F21FED2D50079C582 /* README.md in Resources */,
+				4143EE1D2201B5100056C08A /* WalletSDKBundle.bundle in Resources */,
 				9743A5B521FED8970079C582 /* PaymentPasswordView.xib in Resources */,
 				9743A5BE21FED8970079C582 /* PaymentDetailView.xib in Resources */,
 				9743A56E21FED2D50079C582 /* LICENSE in Resources */,
@@ -1338,6 +1391,13 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		4143ED9A22019AC50056C08A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E2317E5E1E3191AC00DBE3E4 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1492,6 +1552,73 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		4143EDA222019AC60056C08A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				ENABLE_BITCODE = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = WalletSDKBundle/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.wallet.vechain.WalletSDKBundle;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Debug;
+		};
+		4143EDA322019AC60056C08A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				ENABLE_BITCODE = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = WalletSDKBundle/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.wallet.vechain.WalletSDKBundle;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Release;
+		};
 		E2317E751E3191AC00DBE3E4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1665,6 +1792,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		4143EDA122019AC60056C08A /* Build configuration list for PBXNativeTarget "WalletSDKBundle" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4143EDA222019AC60056C08A /* Debug */,
+				4143EDA322019AC60056C08A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		E2317E5D1E3191AC00DBE3E4 /* Build configuration list for PBXProject "WalletSDK" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

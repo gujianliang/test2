@@ -192,6 +192,44 @@
     return translatedString;
 }
 
++ (NSString *)localStringBundlekey:(NSString *)key{
+    NSString *pathString1 = [[NSBundle mainBundle] pathForResource:@"WalletSDKBundle" ofType:@"bundle"];
+    if(!pathString1){
+        return key;
+    }
+        
+    NSBundle *resourceBundle = [NSBundle bundleWithPath:pathString1];
+    
+    // 获取当前设备语言
+    NSArray *appLanguages = [[NSUserDefaults standardUserDefaults] objectForKey:@"AppleLanguages"];
+    NSString *languageName = [appLanguages objectAtIndex:0];
+    
+    NSString *languageCode = @"en"; // 英文
+    if([languageName containsString:@"zh"]){
+        languageCode = @"zh-Hans"; // 中文
+    }
+    NSString *bundlePath = [resourceBundle pathForResource:languageCode ofType:@"lproj"];
+    NSBundle *languageBundle = [NSBundle bundleWithPath:bundlePath];
+    NSString *translatedString = NSLocalizedStringWithDefaultValue(key, nil, languageBundle, key, key);
+    
+    return translatedString;
+}
+
++ (UIImage *)localImageWithName:(NSString *)name{
+    NSString *pathString1 = [[NSBundle mainBundle] pathForResource:@"WalletSDKBundle" ofType:@"bundle"];
+    if(!pathString1){
+        return nil;
+    }
+    
+    NSBundle *resourceBundle = [NSBundle bundleWithPath:pathString1];
+    NSString *bundlePath = [resourceBundle pathForResource:name ofType:@"png"];
+    // 获取当前设备语言
+    UIImage *image = [UIImage imageWithContentsOfFile:bundlePath];
+    
+    return image;
+}
+
+
 // 判断是否包含中文
 + (BOOL) containChiness:(NSString *)text{
     
@@ -339,28 +377,28 @@
     NSString *result;
     if (timeInterval/60 < 1)
     {
-        result = NSLocalizedString(@"刚刚", nil);
+        result = VCNSLocalizedBundleString(@"刚刚", nil);
     }
     else if((temp = timeInterval/60) <60){
         result = [NSString stringWithFormat:@"%ld %@",temp,
-                  temp == 1 ? NSLocalizedString(@"minAgo_single", nil) : NSLocalizedString(@"minAgo_plural", nil)];
+                  temp == 1 ? VCNSLocalizedBundleString(@"minAgo_single", nil) : VCNSLocalizedBundleString(@"minAgo_plural", nil)];
     }
     else if((temp = temp/60) <24){
         result = [NSString stringWithFormat:@"%ld %@",temp,
-                  temp == 1 ? NSLocalizedString(@"hrAgo_single", nil) : NSLocalizedString(@"hrAgo_plural", nil)];
+                  temp == 1 ? VCNSLocalizedBundleString(@"hrAgo_single", nil) : VCNSLocalizedBundleString(@"hrAgo_plural", nil)];
     }
     else if((temp = temp/24) <30){
         result = [NSString stringWithFormat:@"%ld %@",temp,
-                  temp == 1 ? NSLocalizedString(@"dayAgo_single", nil) : NSLocalizedString(@"dayAgo_plural", nil)];
+                  temp == 1 ? VCNSLocalizedBundleString(@"dayAgo_single", nil) : VCNSLocalizedBundleString(@"dayAgo_plural", nil)];
     }
     else if((temp = temp/30) <12){
         result = [NSString stringWithFormat:@"%ld %@",temp,
-                  temp == 1 ? NSLocalizedString(@"monthAgo_single", nil) : NSLocalizedString(@"monthAgo_plural", nil)];
+                  temp == 1 ? VCNSLocalizedBundleString(@"monthAgo_single", nil) : NSLocalizedString(@"monthAgo_plural", nil)];
     }
     else{
         temp = temp/12;
         result = [NSString stringWithFormat:@"%ld %@",temp,
-                  temp == 1 ? NSLocalizedString(@"yearAgo_single", nil) : NSLocalizedString(@"yearAgo_plural", nil)];
+                  temp == 1 ? VCNSLocalizedBundleString(@"yearAgo_single", nil) : VCNSLocalizedBundleString(@"yearAgo_plural", nil)];
     }
     return  result;
 }
@@ -377,15 +415,15 @@
     long temp = 0;
     NSString *result;
     if (timeInterval/60 < 1){
-        result = NSLocalizedString(@"刚刚", nil);
+        result = VCNSLocalizedBundleString(@"刚刚", nil);
         
     }else if((temp = timeInterval/60) <60){
         result = [NSString stringWithFormat:@"%ld %@", temp,
-                  temp == 1 ? NSLocalizedString(@"minAgo_single", nil) : NSLocalizedString(@"minAgo_plural", nil)];
+                  temp == 1 ? VCNSLocalizedBundleString(@"minAgo_single", nil) : VCNSLocalizedBundleString(@"minAgo_plural", nil)];
         
     } else if((temp = temp/60) <24){
         result = [NSString stringWithFormat:@"%ld %@", temp,
-                  temp == 1 ? NSLocalizedString(@"hrAgo_single", nil) : NSLocalizedString(@"hrAgo_plural", nil)];
+                  temp == 1 ? VCNSLocalizedBundleString(@"hrAgo_single", nil) : VCNSLocalizedBundleString(@"hrAgo_plural", nil)];
     
     }else { // 具体 月/日/年 时:分
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
@@ -526,7 +564,7 @@
             cententView = vc.navigationController.view;
         }
         [FFBMSMBProgressShower showTextIn:cententView
-                                     Text:NSLocalizedString(@"no_network_hint", nil)
+                                     Text:VCNSLocalizedBundleString(@"no_network_hint", nil)
                                    During:1.5];
         result = NO;
     }
@@ -983,10 +1021,10 @@
         
         isAuthor = NO;
         
-        [FFBMSAlertShower showAlert:NSLocalizedString(@"dialog_tip_title", nil)
-                                msg:NSLocalizedString(@"permission_camera_content", nil)
+        [FFBMSAlertShower showAlert:VCNSLocalizedBundleString(@"dialog_tip_title", nil)
+                                msg:VCNSLocalizedBundleString(@"permission_camera_content", nil)
                               inCtl:[FFBMSTools getCurrentVC]
-                              items:@[NSLocalizedString(@"dialog_no", nil), NSLocalizedString(@"usercenter_setting", nil)]
+                              items:@[VCNSLocalizedBundleString(@"dialog_no", nil), VCNSLocalizedBundleString(@"usercenter_setting", nil)]
                          clickBlock:^(NSInteger index)
         {
              if(index == 1){
@@ -1032,7 +1070,7 @@
             gasLimit = @"200";
             methodID = APPLY_UPGRADE;
             contractClauseData = [FFBMSTools contractMethodId:methodID params:params];
-            additionalMsg = NSLocalizedString(@"contract_payment_info_row4_content_node_upgrde", nil);
+            additionalMsg = VCNSLocalizedBundleString(@"contract_payment_info_row4_content_node_upgrde", nil);
         }
             break;
         case Contract_cancelNode:       // 奖励取消升级
@@ -1040,7 +1078,7 @@
             gasLimit = @"100";
             methodID = CANCEL_UPGRADE;
             contractClauseData = [FFBMSTools contractMethodId:methodID params:params];
-            additionalMsg = NSLocalizedString(@"contract_payment_info_row4_content_cancel_upgrade", nil);
+            additionalMsg = VCNSLocalizedBundleString(@"contract_payment_info_row4_content_cancel_upgrade", nil);
         }
             break;
         case Contract_PubicSale:        // 公开拍卖
@@ -1048,7 +1086,7 @@
             gasLimit = @"350";
             methodID = CREATE_SALE_AUCTION;
             contractClauseData = [FFBMSTools contractMethodId:methodID params:params];
-            additionalMsg = NSLocalizedString(@"contract_payment_info_row4_content_public", nil);
+            additionalMsg = VCNSLocalizedBundleString(@"contract_payment_info_row4_content_public", nil);
         }
             break;
         case Contract_OrientSale:
@@ -1056,7 +1094,7 @@
             gasLimit = @"350";          // 定向拍卖
             methodID = CREATE_DIRECTION_SALE_AUCTION;
             contractClauseData = [FFBMSTools contractMethodId:methodID params:params];
-            additionalMsg = NSLocalizedString(@"contract_payment_info_row4_content_auction", nil);
+            additionalMsg = VCNSLocalizedBundleString(@"contract_payment_info_row4_content_auction", nil);
         }
             break;
         case Contract_buyNode:          // 购买节点
@@ -1064,7 +1102,7 @@
             gasLimit = @"350";
             methodID = BID;
             contractClauseData = [FFBMSTools contractMethodId:methodID params:params];
-            additionalMsg = NSLocalizedString(@"contract_payment_info_row4_content_buy", nil);
+            additionalMsg = VCNSLocalizedBundleString(@"contract_payment_info_row4_content_buy", nil);
         }
             break;
         case Contract_acceptNode:       // 接收节点
@@ -1072,7 +1110,7 @@
             gasLimit = @"350";
             methodID = BID;
             contractClauseData = [FFBMSTools contractMethodId:methodID params:params];
-            additionalMsg = NSLocalizedString(@"contract_payment_info_row4_content_receive", nil);
+            additionalMsg = VCNSLocalizedBundleString(@"contract_payment_info_row4_content_receive", nil);
         }
             break;
         case Contract_cancelSaleNode:     // 去掉挂单
@@ -1080,7 +1118,7 @@
             gasLimit = @"350";
             methodID = CANCEL_AUCTION;
             contractClauseData = [FFBMSTools contractMethodId:methodID params:params];
-            additionalMsg = NSLocalizedString(@"contract_payment_info_row4_content_cancel_onsale", nil);
+            additionalMsg = VCNSLocalizedBundleString(@"contract_payment_info_row4_content_cancel_onsale", nil);
         }
             break;
         case Contract_transfer:     // 转移到另外钱包
@@ -1088,7 +1126,7 @@
             gasLimit = @"200";
             methodID = NODE_TRANSFER;
             contractClauseData = [FFBMSTools contractMethodId:methodID params:params];
-            additionalMsg = NSLocalizedString(@"transfer_thor_node_title", nil);
+            additionalMsg = VCNSLocalizedBundleString(@"transfer_thor_node_title", nil);
         }
             break;
         
@@ -1098,7 +1136,7 @@
 //            gasLimit = @"300";
 //            methodID = NODE_TRANSFER;
 //            contractClauseData = [FFBMSTools contractMethodId:methodID params:params];
-//            additionalMsg = NSLocalizedString(@"transfer_thor_node_title", nil);
+//            additionalMsg = VCNSLocalizedBundleString(@"transfer_thor_node_title", nil);
 //        }
 //            break;
 //        default:
@@ -1274,10 +1312,9 @@
     [FFBMSAlertShower showAlert:nil
                             msg:message
                           inCtl:[UIApplication sharedApplication].keyWindow.rootViewController
-                          items:@[NSLocalizedString(@"dialog_yes", nil)]
+                          items:@[VCNSLocalizedBundleString(@"dialog_yes", nil)]
                      clickBlock:^(NSInteger index) {
                      }];
 }
-
 
 @end

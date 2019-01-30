@@ -23,8 +23,8 @@
 #define FFBMS_APP_UPDATE                      42600
 //#define FFBMS_APP_UPDATE                      42601
 
-#define FFBMS_MSG_DEFAULT                     NSLocalizedString(@"Unknown error", nil)
-#define FFBMS_MSG_INVALID_DATA_FORMAT         NSLocalizedString(@"数据格式错误", nil)
-#define FFBMS_MSG_ASIHTTP                     NSLocalizedString(@"no_network_hint", nil)
+#define FFBMS_MSG_DEFAULT                     VCNSLocalizedBundleString(@"Unknown error", nil)
+#define FFBMS_MSG_INVALID_DATA_FORMAT         VCNSLocalizedBundleString(@"数据格式错误", nil)
+#define FFBMS_MSG_ASIHTTP                     VCNSLocalizedBundleString(@"no_network_hint", nil)
 
 #endif /* FFBMSError_h */
