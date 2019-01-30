@@ -223,7 +223,6 @@
     
     NSBundle *resourceBundle = [NSBundle bundleWithPath:pathString1];
     NSString *bundlePath = [resourceBundle pathForResource:name ofType:@"png"];
-    // 获取当前设备语言
     UIImage *image = [UIImage imageWithContentsOfFile:bundlePath];
     
     return image;
