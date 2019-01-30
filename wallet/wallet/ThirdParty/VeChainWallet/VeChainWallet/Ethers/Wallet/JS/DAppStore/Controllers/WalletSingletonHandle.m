@@ -8,6 +8,7 @@
 
 #import "WalletSingletonHandle.h"
 #import "WalletManageModel.h"
+#import "WalletVETBalanceApi.h"
 
 @implementation WalletSingletonHandle
 {
@@ -35,6 +36,8 @@
         walletModel.keyStore = dict[@"keystore"];
         [_walletList addObject:walletModel];
     }
+    
+    [self getVetBalance];
 }
 
 - (NSString *)getWalletKeystore:(NSString *)address
@@ -64,6 +67,22 @@
             _currentModel = model;
             return;
         }
+    }
+}
+
+- (void)getVetBalance
+{
+    for (WalletManageModel *model in _walletList) {
+        WalletVETBalanceApi *vetBalanceApi = [[WalletVETBalanceApi alloc]initWith:model.address];
+        [vetBalanceApi loadDataAsyncWithSuccess:^(VCBaseApi *finishApi) {
+            WalletBalanceModel *balanceModel = finishApi.resultModel;
+            model.VETCount = balanceModel.balance;
+            
+            
+        } failure:^(VCBaseApi *finishApi, NSString *errMsg) {
+            
+        }];
+        
     }
 }
 

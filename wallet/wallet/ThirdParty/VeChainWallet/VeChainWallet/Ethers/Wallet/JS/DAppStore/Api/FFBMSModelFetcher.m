@@ -27,12 +27,12 @@
     NSString *urlString = [NSString stringWithString:aUrl];
     AFHTTPSessionManager *httpManager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:urlString]];
     
-    if (needEncrypt) {
-        dict = [FFBMSModelFetcher encryptParaDict:dict method:@"GET"];
-    }
+//    if (needEncrypt) {
+//        dict = [FFBMSModelFetcher encryptParaDict:dict method:@"GET"];
+//    }
     
     httpManager.requestSerializer.cachePolicy = NSURLRequestReturnCacheDataElseLoad;
-//    [FFBMSModelFetcher setHeaderInfo:httpManager useSession:useSession];
+    [FFBMSModelFetcher setHeaderInfo:httpManager useSession:useSession];
     [httpManager GET:urlString parameters:dict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         [FFBMSModelFetcher debugLog:responseObject andUrl:urlString];
@@ -64,9 +64,9 @@
     AFHTTPSessionManager *httpManager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:urlString]];
     httpManager.requestSerializer.cachePolicy = NSURLRequestReturnCacheDataElseLoad;
     
-    if (![aUrl containsString:@"/transactions"]) {
+//    if (![aUrl containsString:@"/transactions"]) {
         [FFBMSModelFetcher setHeaderInfo:httpManager useSession:useSession];
-    }
+//    }
 //
     
 //    if (needEncrypt) {

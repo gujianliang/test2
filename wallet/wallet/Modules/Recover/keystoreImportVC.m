@@ -52,7 +52,7 @@
              
              NSMutableDictionary *walletDict = [[NSMutableDictionary alloc]init];
              [walletDict setObject:account.address.checksumAddress forKey:@"address"];
-             [walletDict setObject:account.keystore forKey:@"keystore"];
+             [walletDict setObject:self.keystoreTextView.text forKey:@"keystore"];
              
              [[NSUserDefaults standardUserDefaults]setObject:walletDict forKey:@"currentWallet"];
              

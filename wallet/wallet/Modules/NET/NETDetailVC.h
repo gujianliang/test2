@@ -1,18 +1,19 @@
 //
-//  WebViewVC.h
+//  NETDetailVC.h
 //  walletSDKDemo
 //
-//  Created by 曾新 on 2019/1/29.
+//  Created by 曾新 on 2019/1/30.
 //  Copyright © 2019年 demo. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
+#import "CoverView.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface WebViewVC : UIViewController
+@interface NETDetailVC : UIViewController
 
-- (instancetype)initWithURL:(NSString *)url;
+- (void)netType:(NetType)netType;
 
 @end
 

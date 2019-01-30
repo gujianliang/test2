@@ -34,6 +34,11 @@
 		97574750220054D90046C8A0 /* walletSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9757474F220054D90046C8A0 /* walletSDK.framework */; };
 		975747582200573E0046C8A0 /* WebViewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 975747562200573E0046C8A0 /* WebViewVC.m */; };
 		975747592200573E0046C8A0 /* WebViewVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 975747572200573E0046C8A0 /* WebViewVC.xib */; };
+		97EC5CA92201A601001E6B68 /* CoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = 97EC5CA82201A601001E6B68 /* CoverView.m */; };
+		97EC5CAD2201AC3F001E6B68 /* NETDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 97EC5CAB2201AC3F001E6B68 /* NETDetailVC.m */; };
+		97EC5CAE2201AC3F001E6B68 /* NETDetailVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97EC5CAC2201AC3F001E6B68 /* NETDetailVC.xib */; };
+		97EC5CB22201AC54001E6B68 /* AddNetVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 97EC5CB02201AC54001E6B68 /* AddNetVC.m */; };
+		97EC5CB32201AC54001E6B68 /* AddNetVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97EC5CB12201AC54001E6B68 /* AddNetVC.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -113,6 +118,14 @@
 		975747562200573E0046C8A0 /* WebViewVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WebViewVC.m; sourceTree = "<group>"; };
 		975747572200573E0046C8A0 /* WebViewVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WebViewVC.xib; sourceTree = "<group>"; };
 		97EC5C752200A782001E6B68 /* WalletSDK.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = WalletSDK.xcodeproj; path = VeChainWallet/VeChainWallet/Ethers/WalletSDK.xcodeproj; sourceTree = "<group>"; };
+		97EC5CA72201A601001E6B68 /* CoverView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoverView.h; sourceTree = "<group>"; };
+		97EC5CA82201A601001E6B68 /* CoverView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CoverView.m; sourceTree = "<group>"; };
+		97EC5CAA2201AC3F001E6B68 /* NETDetailVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NETDetailVC.h; sourceTree = "<group>"; };
+		97EC5CAB2201AC3F001E6B68 /* NETDetailVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NETDetailVC.m; sourceTree = "<group>"; };
+		97EC5CAC2201AC3F001E6B68 /* NETDetailVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NETDetailVC.xib; sourceTree = "<group>"; };
+		97EC5CAF2201AC54001E6B68 /* AddNetVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddNetVC.h; sourceTree = "<group>"; };
+		97EC5CB02201AC54001E6B68 /* AddNetVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddNetVC.m; sourceTree = "<group>"; };
+		97EC5CB12201AC54001E6B68 /* AddNetVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddNetVC.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,6 +157,7 @@
 		971B3E1921E6000B007845F0 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				97EC5CA42201A3DD001E6B68 /* NET */,
 				97574754220056FB0046C8A0 /* JS */,
 				971B3E1A21E6000B007845F0 /* WalletDetail */,
 				971B3E2421E6000B007845F0 /* Creat */,
@@ -297,6 +311,21 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		97EC5CA42201A3DD001E6B68 /* NET */ = {
+			isa = PBXGroup;
+			children = (
+				97EC5CA72201A601001E6B68 /* CoverView.h */,
+				97EC5CA82201A601001E6B68 /* CoverView.m */,
+				97EC5CAA2201AC3F001E6B68 /* NETDetailVC.h */,
+				97EC5CAB2201AC3F001E6B68 /* NETDetailVC.m */,
+				97EC5CAC2201AC3F001E6B68 /* NETDetailVC.xib */,
+				97EC5CAF2201AC54001E6B68 /* AddNetVC.h */,
+				97EC5CB02201AC54001E6B68 /* AddNetVC.m */,
+				97EC5CB12201AC54001E6B68 /* AddNetVC.xib */,
+			);
+			path = NET;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -431,7 +460,9 @@
 				971B3E4221E6000B007845F0 /* MnemonicImportVC.xib in Resources */,
 				9747227F20EDE9FA00F9EAB3 /* Assets.xcassets in Resources */,
 				971B3E3E21E6000B007845F0 /* TransferVC.xib in Resources */,
+				97EC5CB32201AC54001E6B68 /* AddNetVC.xib in Resources */,
 				971B3E3921E6000B007845F0 /* WalletMoreInfoVC.xib in Resources */,
+				97EC5CAE2201AC3F001E6B68 /* NETDetailVC.xib in Resources */,
 				9747227D20EDE9F800F9EAB3 /* Main.storyboard in Resources */,
 				975747592200573E0046C8A0 /* WebViewVC.xib in Resources */,
 				971B3E4121E6000B007845F0 /* keystoreImportVC.xib in Resources */,
@@ -462,10 +493,13 @@
 				971B3E4321E6000B007845F0 /* RecoverMainVC.m in Sources */,
 				971B3E4421E6000B007845F0 /* keystoreImportVC.m in Sources */,
 				971B3E3821E6000B007845F0 /* WalletMoreInfoVC.m in Sources */,
+				97EC5CAD2201AC3F001E6B68 /* NETDetailVC.m in Sources */,
 				971B3E3621E6000B007845F0 /* walletChangePWVC.m in Sources */,
+				97EC5CA92201A601001E6B68 /* CoverView.m in Sources */,
 				971B3E4521E6000B007845F0 /* MnemonicImportVC.m in Sources */,
 				9747227A20EDE9F800F9EAB3 /* ViewController.m in Sources */,
 				9747228520EDE9FA00F9EAB3 /* main.m in Sources */,
+				97EC5CB22201AC54001E6B68 /* AddNetVC.m in Sources */,
 				975747582200573E0046C8A0 /* WebViewVC.m in Sources */,
 				9747227720EDE9F800F9EAB3 /* AppDelegate.m in Sources */,
 				971B3E3F21E6000B007845F0 /* TransferVC.m in Sources */,

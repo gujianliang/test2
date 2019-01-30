@@ -12,8 +12,13 @@
 //#import <walletSDK/WalletUtils.h>
 #import <walletSDK/Payment.h>
 #import "WalletMoreInfoVC.h"
+#import "WebViewVC.h"
+#import "CoverView.h"
 
-@interface WalletDetailVC ()
+#import "NETDetailVC.h"
+#import "AddNetVC.h"
+
+@interface WalletDetailVC ()<UISearchBarDelegate>
 {
     NSString *_blockHost;
     NSString *_vetAmount;
@@ -22,6 +27,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *addressLabel;
 @property (weak, nonatomic) IBOutlet UILabel *vetAmountLabel;
 @property (weak, nonatomic) IBOutlet UILabel *vthoAmountLabel;
+@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 
 @end
 
@@ -29,6 +35,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.title =  @"（测试）";
+    
+    self.searchBar.delegate = self;
     
     _blockHost = @"https://vethor-node-test.vechaindev.com";
     
@@ -43,6 +53,64 @@
     [self getVETBalance];
     
     [self getVTHOBalance];
+    
+    [self initView];
+}
+
+- (void)initView
+{
+    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc]initWithTitle:@"选择网络"
+                                                                 style:UIBarButtonItemStyleDone
+                                                                target:self
+                                                                action:@selector(selectNET)];
+    self.navigationItem.rightBarButtonItem = rightItem;
+    
+    self.searchBar.text = @"https://appwallet.oss-cn-shanghai.aliyuncs.com/testJS/yijianfabi/dist/index.html";
+    
+    
+   
+    
+}
+
+- (void)selectNET
+{
+    
+    CoverView *coverView = [self.view viewWithTag:90];
+    if (!coverView) {
+        coverView = [[CoverView alloc]initWithFrame:self.view.frame];
+        coverView.tag = 90;
+        [self.view addSubview:coverView];
+        
+        coverView.block = ^(NetType netType) {
+            if (netType == ProductServer) {
+                self.title = @"（正式）";
+                
+                NETDetailVC *detailVC = [[NETDetailVC alloc]init];
+                [detailVC netType:ProductServer];
+                [self.navigationController pushViewController:detailVC animated:YES];
+            }else if (netType == TestServer)
+            {
+                self.title =  @"（测试）";
+                NETDetailVC *detailVC = [[NETDetailVC alloc]init];
+                [detailVC netType:TestServer];
+                [self.navigationController pushViewController:detailVC animated:YES];
+            }else if (netType == CustomServer){
+                self.title =  @"（自定义）";
+                
+                AddNetVC *detailVC = [[AddNetVC alloc]init];
+                [self.navigationController pushViewController:detailVC animated:YES];
+            }
+        };
+    }
+   
+}
+
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
+{
+    
+    NSString *url = searchBar.text;
+    WebViewVC *webVC = [[WebViewVC alloc]initWithURL:url];
+    [self.navigationController pushViewController:webVC animated:YES];
 }
 
 - (void)getVETBalance

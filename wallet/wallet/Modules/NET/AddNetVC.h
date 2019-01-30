@@ -1,8 +1,8 @@
 //
-//  WebViewVC.h
+//  AddNetVC.h
 //  walletSDKDemo
 //
-//  Created by 曾新 on 2019/1/29.
+//  Created by 曾新 on 2019/1/30.
 //  Copyright © 2019年 demo. All rights reserved.
 //
 
@@ -10,9 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface WebViewVC : UIViewController
-
-- (instancetype)initWithURL:(NSString *)url;
+@interface AddNetVC : UIViewController
 
 @end
 
