@@ -25,6 +25,11 @@
 		971B3E4321E6000B007845F0 /* RecoverMainVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 971B3E3321E6000B007845F0 /* RecoverMainVC.m */; };
 		971B3E4421E6000B007845F0 /* keystoreImportVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 971B3E3421E6000B007845F0 /* keystoreImportVC.m */; };
 		971B3E4521E6000B007845F0 /* MnemonicImportVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 971B3E3521E6000B007845F0 /* MnemonicImportVC.m */; };
+		97468F362201CBE30092DF07 /* AddNetVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 97468F2B2201CBE30092DF07 /* AddNetVC.m */; };
+		97468F372201CBE30092DF07 /* AddNetVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97468F2C2201CBE30092DF07 /* AddNetVC.xib */; };
+		97468F382201CBE30092DF07 /* CoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = 97468F2F2201CBE30092DF07 /* CoverView.m */; };
+		97468F392201CBE30092DF07 /* NETDetailVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97468F312201CBE30092DF07 /* NETDetailVC.xib */; };
+		97468F3A2201CBE30092DF07 /* NETDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 97468F322201CBE30092DF07 /* NETDetailVC.m */; };
 		9747227720EDE9F800F9EAB3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9747227620EDE9F800F9EAB3 /* AppDelegate.m */; };
 		9747227A20EDE9F800F9EAB3 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9747227920EDE9F800F9EAB3 /* ViewController.m */; };
 		9747227D20EDE9F800F9EAB3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9747227B20EDE9F800F9EAB3 /* Main.storyboard */; };
@@ -101,6 +106,14 @@
 		971B3E3321E6000B007845F0 /* RecoverMainVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecoverMainVC.m; sourceTree = "<group>"; };
 		971B3E3421E6000B007845F0 /* keystoreImportVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = keystoreImportVC.m; sourceTree = "<group>"; };
 		971B3E3521E6000B007845F0 /* MnemonicImportVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MnemonicImportVC.m; sourceTree = "<group>"; };
+		97468F2B2201CBE30092DF07 /* AddNetVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddNetVC.m; sourceTree = "<group>"; };
+		97468F2C2201CBE30092DF07 /* AddNetVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddNetVC.xib; sourceTree = "<group>"; };
+		97468F2D2201CBE30092DF07 /* CoverView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoverView.h; sourceTree = "<group>"; };
+		97468F2E2201CBE30092DF07 /* NETDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NETDetailVC.h; sourceTree = "<group>"; };
+		97468F2F2201CBE30092DF07 /* CoverView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoverView.m; sourceTree = "<group>"; };
+		97468F302201CBE30092DF07 /* AddNetVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddNetVC.h; sourceTree = "<group>"; };
+		97468F312201CBE30092DF07 /* NETDetailVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NETDetailVC.xib; sourceTree = "<group>"; };
+		97468F322201CBE30092DF07 /* NETDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NETDetailVC.m; sourceTree = "<group>"; };
 		9747227220EDE9F800F9EAB3 /* walletSDKDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = walletSDKDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9747227520EDE9F800F9EAB3 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		9747227620EDE9F800F9EAB3 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -153,6 +166,7 @@
 		971B3E1921E6000B007845F0 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				97468F2A2201CBE30092DF07 /* NET */,
 				97574754220056FB0046C8A0 /* JS */,
 				971B3E1A21E6000B007845F0 /* WalletDetail */,
 				971B3E2421E6000B007845F0 /* Creat */,
@@ -220,6 +234,21 @@
 				97EC5C752200A782001E6B68 /* WalletSDK.xcodeproj */,
 			);
 			path = ThirdParty;
+			sourceTree = "<group>";
+		};
+		97468F2A2201CBE30092DF07 /* NET */ = {
+			isa = PBXGroup;
+			children = (
+				97468F302201CBE30092DF07 /* AddNetVC.h */,
+				97468F2B2201CBE30092DF07 /* AddNetVC.m */,
+				97468F2C2201CBE30092DF07 /* AddNetVC.xib */,
+				97468F2D2201CBE30092DF07 /* CoverView.h */,
+				97468F2F2201CBE30092DF07 /* CoverView.m */,
+				97468F2E2201CBE30092DF07 /* NETDetailVC.h */,
+				97468F322201CBE30092DF07 /* NETDetailVC.m */,
+				97468F312201CBE30092DF07 /* NETDetailVC.xib */,
+			);
+			path = NET;
 			sourceTree = "<group>";
 		};
 		9747226920EDE9F800F9EAB3 = {
@@ -449,6 +478,8 @@
 				971B3E4221E6000B007845F0 /* MnemonicImportVC.xib in Resources */,
 				9747227F20EDE9FA00F9EAB3 /* Assets.xcassets in Resources */,
 				971B3E3E21E6000B007845F0 /* TransferVC.xib in Resources */,
+				97468F372201CBE30092DF07 /* AddNetVC.xib in Resources */,
+				97468F392201CBE30092DF07 /* NETDetailVC.xib in Resources */,
 				971B3E3921E6000B007845F0 /* WalletMoreInfoVC.xib in Resources */,
 				4143EE1F2201B53C0056C08A /* WalletSDKBundle.bundle in Resources */,
 				9747227D20EDE9F800F9EAB3 /* Main.storyboard in Resources */,
@@ -484,12 +515,15 @@
 				971B3E3621E6000B007845F0 /* walletChangePWVC.m in Sources */,
 				971B3E4521E6000B007845F0 /* MnemonicImportVC.m in Sources */,
 				9747227A20EDE9F800F9EAB3 /* ViewController.m in Sources */,
+				97468F382201CBE30092DF07 /* CoverView.m in Sources */,
 				9747228520EDE9FA00F9EAB3 /* main.m in Sources */,
+				97468F362201CBE30092DF07 /* AddNetVC.m in Sources */,
 				975747582200573E0046C8A0 /* WebViewVC.m in Sources */,
 				9747227720EDE9F800F9EAB3 /* AppDelegate.m in Sources */,
 				971B3E3F21E6000B007845F0 /* TransferVC.m in Sources */,
 				971B3E3C21E6000B007845F0 /* CreatVC.m in Sources */,
 				971B3E3721E6000B007845F0 /* WalletDetailVC.m in Sources */,
+				97468F3A2201CBE30092DF07 /* NETDetailVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -12,8 +12,13 @@
 //#import <walletSDK/WalletUtils.h>
 #import <walletSDK/Payment.h>
 #import "WalletMoreInfoVC.h"
+#import "WebViewVC.h"
+#import "CoverView.h"
 
-@interface WalletDetailVC ()
+#import "NETDetailVC.h"
+#import "AddNetVC.h"
+
+@interface WalletDetailVC ()<UISearchBarDelegate>
 {
     NSString *_blockHost;
     NSString *_vetAmount;
@@ -22,6 +27,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *addressLabel;
 @property (weak, nonatomic) IBOutlet UILabel *vetAmountLabel;
 @property (weak, nonatomic) IBOutlet UILabel *vthoAmountLabel;
+@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 
 @end
 
@@ -29,10 +35,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
+    self.searchBar.delegate = self;
     
-    _blockHost = @"https://vethor-node-test.vechaindev.com";
-    
-    //_blockHost = @"https://vethor-node.vechain.com" //product
+    [self setHost];
+
     
     NSDictionary *currentWallet = [[NSUserDefaults standardUserDefaults]objectForKey:@"currentWallet"];
     self.addressLabel.text = currentWallet[@"address"];
@@ -40,9 +47,84 @@
     [self.vetImageView setImage:[UIImage imageNamed:@"VET"]];
     [self.vthoImageView setImage:[UIImage imageNamed:@"VTHO"]];
     
+   
+    
+    [self initView];
+}
+
+- (void)initView
+{
+    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc]initWithTitle:@"选择网络"
+                                                                 style:UIBarButtonItemStyleDone
+                                                                target:self
+                                                                action:@selector(selectNET)];
+    self.navigationItem.rightBarButtonItem = rightItem;
+    
+    self.searchBar.text = @"https://appwallet.oss-cn-shanghai.aliyuncs.com/testJS/yijianfabi/dist/index.html";
+    
+    
+   
+    
+}
+
+- (void)selectNET
+{
+    
+    CoverView *coverView = [self.view viewWithTag:90];
+    if (!coverView) {
+        coverView = [[CoverView alloc]initWithFrame:self.view.frame];
+        coverView.tag = 90;
+        [self.view addSubview:coverView];
+        
+        coverView.block = ^(NSString *netName,NSString *netUrl) {
+            
+            self.title = netName;
+            if ([netName containsString:@"自定义"]) {
+                AddNetVC *detailVC = [[AddNetVC alloc]init];
+                [self.navigationController pushViewController:detailVC animated:YES];
+            }else{
+                NETDetailVC *detailVC = [[NETDetailVC alloc]init];
+                [detailVC netName:netName netUrl:netUrl];
+                [self.navigationController pushViewController:detailVC animated:YES];
+            }
+        };
+    }
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [self setHost];
+}
+
+- (void)setHost
+{
+    NSDictionary *dictCurrentNet = [[NSUserDefaults standardUserDefaults]objectForKey:@"CurrentNet"];
+    
+    if (dictCurrentNet) {
+        _blockHost = dictCurrentNet[@"netUrl"];
+        self.title = dictCurrentNet[@"netName"];
+        
+    }else{
+        _blockHost = @"https://vethor-node-test.vechaindev.com";
+        self.title =  @"（测试）";
+    }
+    
+    self.vthoAmountLabel.text = @"";
+    self.vetAmountLabel.text = @"";
+    
     [self getVETBalance];
     
     [self getVTHOBalance];
+}
+
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
+{
+    
+    NSString *url = searchBar.text;
+    WebViewVC *webVC = [[WebViewVC alloc]initWithURL:url];
+    [self.navigationController pushViewController:webVC animated:YES];
 }
 
 - (void)getVETBalance
