@@ -9,7 +9,8 @@
 #import "MnemonicImportVC.h"
 #import <walletSDK/WalletUtils.h>
 #import "WalletDetailVC.h"
-#import "MBProgressHUD.h"
+#import <walletSDK/MBProgressHUD.h>
+//#import "MBProgressHUD.h"
 
 @interface MnemonicImportVC ()
 
@@ -40,8 +41,7 @@
     hud.mode = MBProgressHUDModeText;
     hud.labelText =  @"waiting...";
     
-    [WalletUtils creatWalletWithMnemonic:self.improtKeys.text password:self.password.text callBack:^(Account *account)
-    {
+    [WalletUtils creatWalletWithMnemonic:self.improtKeys.text password:self.password.text callback:^(Account *account) {
         [hud hide:YES];
         
         WalletDetailVC *detailVC = [[WalletDetailVC alloc]init];
@@ -50,7 +50,7 @@
         NSMutableDictionary *walletDict = [[NSMutableDictionary alloc]init];
         [walletDict setObject:account.address.checksumAddress forKey:@"address"];
         [walletDict setObject:account.keystore forKey:@"keystore"];
-
+        
         [[NSUserDefaults standardUserDefaults]setObject:walletDict forKey:@"currentWallet"];
     }];
 }

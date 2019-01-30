@@ -4,12 +4,13 @@
 //
 //  Created by 曾新 on 2018/12/26.
 //  Copyright © 2018年 demo. All rights reserved.
-//
+// 
 
 #import "WalletDetailVC.h"
-#import "AFNetworking.h"
+#import <walletSDK/AFNetworking.h>
 #import "TransferVC.h"
-#import <walletSDK/WalletUtils.h>
+//#import <walletSDK/WalletUtils.h>
+#import <walletSDK/Payment.h>
 #import "WalletMoreInfoVC.h"
 
 @interface WalletDetailVC ()

@@ -7,10 +7,10 @@
 //
 
 #import "keystoreImportVC.h"
-//#import <walletSDK/WalletUtils.h>
-#import <walletSDK/Wallet.h>
+#import <walletSDK/WalletUtils.h>
 #import "WalletDetailVC.h"
-#import "MBProgressHUD.h"
+//#import "MBProgressHUD.h"
+#import <walletSDK/MBProgressHUD.h>
 
 @interface keystoreImportVC ()
 @property (weak, nonatomic) IBOutlet UITextView *keystoreTextView;

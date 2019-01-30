@@ -8,8 +8,9 @@
 
 #import "WalletMoreInfoVC.h"
 #import "walletChangePWVC.h"
-//#import <walletSDK/WalletUtils.h>
-#import <walletSDK/Wallet.h>
+#import <walletSDK/WalletUtils.h>
+
+//#import <walletSDK/Wallet.h>
 
 @interface WalletMoreInfoVC ()
 @property (weak, nonatomic) IBOutlet UILabel *addressLabel;

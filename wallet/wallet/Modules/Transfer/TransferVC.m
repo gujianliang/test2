@@ -8,8 +8,11 @@
 
 #import "TransferVC.h"
 #import <walletSDK/WalletUtils.h>
-#import "AFNetworking.h"
-#import "MBProgressHUD.h"
+//#import "AFNetworking.h"
+//#import "MBProgressHUD.h"
+#import <walletSDK/Payment.h>
+#import <walletSDK/MBProgressHUD.h>
+#import <walletSDK/AFHTTPSessionManager.h>
 
 @interface TransferVC ()<UITextFieldDelegate>
 {
