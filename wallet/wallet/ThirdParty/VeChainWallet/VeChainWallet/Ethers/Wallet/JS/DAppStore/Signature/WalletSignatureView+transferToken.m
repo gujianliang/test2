@@ -29,9 +29,9 @@
     int result = SecRandomCopyBytes(kSecRandomDefault, randomData.length, randomData.mutableBytes);
     if (result != 0) {
         [FFBMSAlertShower showAlert:nil
-                                msg:NSLocalizedString(@"transfer_wallet_send_fail", nil)
+                                msg:VCNSLocalizedBundleString(@"transfer_wallet_send_fail", nil)
                               inCtl:[FFBMSTools getCurrentVC]
-                              items:@[NSLocalizedString(@"dialog_yes", nil)]
+                              items:@[VCNSLocalizedBundleString(@"dialog_yes", nil)]
                          clickBlock:^(NSInteger index) {
                          }];
     }
@@ -117,9 +117,9 @@
                 if (!account) {
                     [FFBMSMBProgressShower hide:self];
                     [FFBMSAlertShower showAlert:nil
-                                            msg:NSLocalizedString(@"transfer_wallet_password_error", nil)
+                                            msg:VCNSLocalizedBundleString(@"transfer_wallet_password_error", nil)
                                           inCtl:[FFBMSTools getCurrentVC]
-                                          items:@[NSLocalizedString(@"重试", nil)]
+                                          items:@[VCNSLocalizedBundleString(@"重试", nil)]
                                      clickBlock:^(NSInteger index) {
                                      }];
                     return;
@@ -145,9 +145,9 @@
                 } failure:^(VCBaseApi *finishApi, NSString *errMsg) {
                     [FFBMSMBProgressShower hide:self];
                     [FFBMSAlertShower showAlert:nil
-                                            msg:NSLocalizedString(@"transfer_wallet_send_fail", nil)
+                                            msg:VCNSLocalizedBundleString(@"transfer_wallet_send_fail", nil)
                                           inCtl:[FFBMSTools getCurrentVC]
-                                          items:@[NSLocalizedString(@"dialog_yes", nil)]
+                                          items:@[VCNSLocalizedBundleString(@"dialog_yes", nil)]
                                      clickBlock:^(NSInteger index) {
                                      }];
                     
@@ -176,9 +176,9 @@
 //
     [FFBMSMBProgressShower hide:self];
     [FFBMSAlertShower showAlert:nil
-                            msg:NSLocalizedString(@"transfer_wallet_send_fail", nil)
+                            msg:VCNSLocalizedBundleString(@"transfer_wallet_send_fail", nil)
                           inCtl:[FFBMSTools getCurrentVC]
-                          items:@[NSLocalizedString(@"dialog_yes", nil)]
+                          items:@[VCNSLocalizedBundleString(@"dialog_yes", nil)]
                      clickBlock:^(NSInteger index) {
                      }];
 }

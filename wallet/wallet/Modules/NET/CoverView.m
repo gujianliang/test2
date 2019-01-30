@@ -67,7 +67,14 @@
     [coverView addSubview:btnCustom];
     [btnCustom setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
 
+    UITableView *tableView = [[UITableView alloc]initWithFrame:coverView.bounds];
+    tableView.delegate = self;
+    tableView.dataSource = self;
+    [self addSubview:tableView];
+    
 }
+
+
 
 - (void)selectNode:(UIButton *)sender
 {

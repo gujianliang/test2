@@ -162,10 +162,10 @@
     UILabel *titleLabel = [[UILabel alloc]init];
     
     if (_contractType == NoContract_transferToken) {
-        titleLabel.text = NSLocalizedString(@"dialog_coin_transfer_description", nil);
+        titleLabel.text = VCNSLocalizedBundleString(@"dialog_coin_transfer_description", nil);
 
     }else{
-        titleLabel.text = NSLocalizedString(@"contract_payment_info_title", nil);
+        titleLabel.text = VCNSLocalizedBundleString(@"contract_payment_info_title", nil);
     }
     
     titleLabel.textAlignment = NSTextAlignmentCenter;
@@ -287,12 +287,12 @@
     CGFloat jsOffset = 0;
     
     NSString *test = [FFBMSTools localeStringWithKey:@"contract_ayment_info_row1_title"];
-    //VCNSLocalizedString(@"contract_ayment_info_row1_title", nil);
+    //VCVCNSLocalizedBundleString(@"contract_ayment_info_row1_title", nil);
     
 //   NSString *rr = [NSBundle XDX_localizableBundleWithBundleName:@"contract_ayment_info_row1_title"];
     NSString *rr = [NSBundle XDX_localizedStringForKey:@"contract_ayment_info_row1_title"];
 
-    [self creatCell:NSLocalizedString(@"contract_ayment_info_row1_title", nil)
+    [self creatCell:VCNSLocalizedBundleString(@"contract_ayment_info_row1_title", nil)
               value:gasFormat
                   Y:52 + 20
           adjustBtn: _jsUse ? YES : NO];
@@ -302,18 +302,18 @@
         jsOffset = 52;
     }
     
-    [self creatCell:NSLocalizedString(@"contract_payment_info_row2_title", nil)
+    [self creatCell:VCNSLocalizedBundleString(@"contract_payment_info_row2_title", nil)
               value:[FFBMSTools checksumAddress:_fromAddress]
                   Y:52 * 2 + 20 + jsOffset
           adjustBtn:NO];
     
-    [self creatCell:NSLocalizedString(@"contract_payment_info_row3_title", nil)
+    [self creatCell:VCNSLocalizedBundleString(@"contract_payment_info_row3_title", nil)
               value:[FFBMSTools checksumAddress:_toAddress]
                   Y:52 * 3 + 20 + jsOffset
           adjustBtn:NO];
     
     if (!_jsUse) { // js调用没有描述
-        [self creatCell:NSLocalizedString(@"contract_payment_info_row4_title", nil)
+        [self creatCell:VCNSLocalizedBundleString(@"contract_payment_info_row4_title", nil)
                   value:_additionalMsg
                       Y:52 * 4 + 20
               adjustBtn:NO];
@@ -321,7 +321,7 @@
     
     WalletGradientLayerButton *nextBtn = [[WalletGradientLayerButton alloc]init];
     [nextBtn setDisableGradientLayer:YES];
-    [nextBtn setTitle:NSLocalizedString(@"transfer_coin_next_page", nil) forState:UIControlStateNormal];
+    [nextBtn setTitle:VCNSLocalizedBundleString(@"transfer_coin_next_page", nil) forState:UIControlStateNormal];
     [nextBtn.layer setCornerRadius:4];
     [nextBtn setClipsToBounds:YES];
     [_leftView addSubview:nextBtn];
@@ -545,7 +545,7 @@
         }];
         
         UIButton *btn = [[UIButton alloc]init];
-        [btn setTitle:NSLocalizedString(@"transfer_coin_adjust_cost", nil) forState:UIControlStateNormal];
+        [btn setTitle:VCNSLocalizedBundleString(@"transfer_coin_adjust_cost", nil) forState:UIControlStateNormal];
         [btn setTitleColor:HEX_RGB(0x898CD3) forState:UIControlStateNormal];
         [contentView addSubview:btn];
         [btn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -587,7 +587,7 @@
     UIView *contentView = [[UIView alloc]initWithFrame:CGRectMake(0, Y, SCREEN_WIDTH, 50)];
     [_leftView addSubview:contentView];
     UILabel *slow = [[UILabel alloc]init];
-    slow.text = NSLocalizedString(@"transfer_coin_slow", nil);
+    slow.text = VCNSLocalizedBundleString(@"transfer_coin_slow", nil);
     slow.font = [UIFont systemFontOfSize:14];
     [contentView addSubview:slow];
     [slow mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -614,7 +614,7 @@
      forControlEvents:UIControlEventValueChanged];
     
     UILabel *fast = [[UILabel alloc]init];
-    fast.text = NSLocalizedString(@"transfer_coin_quick", nil);
+    fast.text = VCNSLocalizedBundleString(@"transfer_coin_quick", nil);
     fast.font = [UIFont systemFontOfSize:14];
 
     [contentView addSubview:fast];
@@ -650,7 +650,7 @@
     
     // 密码输入框
     _pwTextField = [[UITextField alloc]init];
-    _pwTextField.placeholder = NSLocalizedString(@"wallet_detail_modify_password_dialog_title", nil);
+    _pwTextField.placeholder = VCNSLocalizedBundleString(@"wallet_detail_modify_password_dialog_title", nil);
     _pwTextField.secureTextEntry = YES;
     _pwTextField.delegate = self;
     _pwTextField.text = @"";
@@ -675,7 +675,7 @@
     // 底部下一步按钮
     _middleBtn = [[WalletGradientLayerButton alloc]init];
     [_middleBtn setDisableGradientLayer:YES];
-    [_middleBtn setTitle:NSLocalizedString(@"dialog_yes", nil)
+    [_middleBtn setTitle:VCNSLocalizedBundleString(@"dialog_yes", nil)
              forState:UIControlStateNormal];
     [_rightView addSubview:_middleBtn];
     [_middleBtn.layer setCornerRadius:4];
@@ -692,9 +692,9 @@
         @strongify(self);
         if (_pwTextField.text.length == 0) {
             [FFBMSAlertShower showAlert:nil
-                                    msg:NSLocalizedString(@"wallet_detail_modify_password_dialog_title", nil)
+                                    msg:VCNSLocalizedBundleString(@"wallet_detail_modify_password_dialog_title", nil)
                                   inCtl:[self getVC]
-                                  items:@[NSLocalizedString(@"dialog_yes", nil)]
+                                  items:@[VCNSLocalizedBundleString(@"dialog_yes", nil)]
                              clickBlock:^(NSInteger index) {
                              }];
         }else{
@@ -738,7 +738,7 @@
     titleLabel.tag = 10;
     titleLabel.textAlignment = NSTextAlignmentCenter;
     titleLabel.numberOfLines = 0;
-    titleLabel.text = NSLocalizedString(@"contract_payment_confirm_wait_name", nil);
+    titleLabel.text = VCNSLocalizedBundleString(@"contract_payment_confirm_wait_name", nil);
     titleLabel.textColor = CommonBlack;
     titleLabel.font = MediumFont(Scale(14));
     titleLabel.adjustsFontSizeToFitWidth = YES;
@@ -754,7 +754,7 @@
     UILabel *subTitleLabel = [[UILabel alloc]init];
     subTitleLabel.tag = 11;
     subTitleLabel.textAlignment = NSTextAlignmentCenter;
-    subTitleLabel.text = NSLocalizedString(@"contract_payment_confirm_explain", nil);
+    subTitleLabel.text = VCNSLocalizedBundleString(@"contract_payment_confirm_explain", nil);
     subTitleLabel.textColor = HEX_RGB(0xBDBDBD);
     subTitleLabel.numberOfLines = 0;
     subTitleLabel.font = MediumFont(Scale(12));
@@ -770,7 +770,7 @@
     // "contract_payment_confirm_wait_button" = "不等了，先看看";
     _lastBtn = [[WalletGradientLayerButton alloc]init];
     [_lastBtn setDisableGradientLayer:YES];
-    [_lastBtn setTitle:NSLocalizedString(@"contract_payment_confirm_wait_button", nil)
+    [_lastBtn setTitle:VCNSLocalizedBundleString(@"contract_payment_confirm_wait_button", nil)
               forState:UIControlStateNormal];
     [_LastView addSubview:_lastBtn];
     [_lastBtn.layer setCornerRadius:4];
@@ -834,16 +834,16 @@
         return;
     }
     
-//    [FFBMSMBProgressShower showLoadData:self Text:NSLocalizedString(@"list_load_ing", nil)];
+//    [FFBMSMBProgressShower showLoadData:self Text:VCNSLocalizedBundleString(@"list_load_ing", nil)];
     Transaction *transaction = [[Transaction alloc] init];
     // 生成随机 nonce
     SecureData* randomData = [SecureData secureDataWithLength:8];
     int result = SecRandomCopyBytes(kSecRandomDefault, randomData.length, randomData.mutableBytes);
     if (result != 0) {
         [FFBMSAlertShower showAlert:nil
-                                msg:NSLocalizedString(@"transfer_wallet_send_fail", nil)
+                                msg:VCNSLocalizedBundleString(@"transfer_wallet_send_fail", nil)
                               inCtl:[self getVC]
-                              items:@[NSLocalizedString(@"dialog_yes", nil)]
+                              items:@[VCNSLocalizedBundleString(@"dialog_yes", nil)]
                          clickBlock:^(NSInteger index) {
                          }];
     }
@@ -886,9 +886,9 @@
             if (!account) {
 //                [FFBMSMBProgressShower hide:self];
                 [FFBMSAlertShower showAlert:nil
-                                        msg:NSLocalizedString(@"transfer_wallet_password_error", nil)
+                                        msg:VCNSLocalizedBundleString(@"transfer_wallet_password_error", nil)
                                       inCtl:[self getVC]
-                                      items:@[NSLocalizedString(@"重试", nil)]
+                                      items:@[VCNSLocalizedBundleString(@"重试", nil)]
                                  clickBlock:^(NSInteger index) {
                                  }];
                 
@@ -915,9 +915,9 @@
             } failure:^(VCBaseApi *finishApi, NSString *errMsg) {
 //                [FFBMSMBProgressShower hide:self];
                 [FFBMSAlertShower showAlert:nil
-                                        msg:NSLocalizedString(@"transfer_wallet_send_fail", nil)
+                                        msg:VCNSLocalizedBundleString(@"transfer_wallet_send_fail", nil)
                                       inCtl:[self getVC]
-                                      items:@[NSLocalizedString(@"dialog_yes", nil)]
+                                      items:@[VCNSLocalizedBundleString(@"dialog_yes", nil)]
                                  clickBlock:^(NSInteger index) {
                                  }];
             }];
@@ -959,14 +959,14 @@
 - (void)uploadSuccess
 {
     [_timeBtn setTitle:@"" forState:UIControlStateNormal];
-    [_lastBtn setTitle:NSLocalizedString(@"dialog_confirm", nil) forState:UIControlStateNormal];
+    [_lastBtn setTitle:VCNSLocalizedBundleString(@"dialog_confirm", nil) forState:UIControlStateNormal];
     [_timeBtn setImage:[UIImage imageNamed:@"Group 3"] forState:UIControlStateNormal];
     
     UILabel *titleLabel = [_LastView viewWithTag:10];
-    titleLabel.text = NSLocalizedString(@"contract_payment_confirm_success", nil);
+    titleLabel.text = VCNSLocalizedBundleString(@"contract_payment_confirm_success", nil);
     
     UILabel *subTitleLabel = [_LastView viewWithTag:11];
-    subTitleLabel.text = NSLocalizedString(@"contract_payment_confirm_actual_explian", nil);
+    subTitleLabel.text = VCNSLocalizedBundleString(@"contract_payment_confirm_actual_explian", nil);
     [_timer invalidate];
     _timer = nil;
     
@@ -1032,11 +1032,11 @@
 -(void)uploadFail
 {
     [_timeBtn setTitle:@"" forState:UIControlStateNormal];
-    [_lastBtn setTitle:NSLocalizedString(@"dialog_confirm", nil) forState:UIControlStateNormal];
+    [_lastBtn setTitle:VCNSLocalizedBundleString(@"dialog_confirm", nil) forState:UIControlStateNormal];
     [_timeBtn setImage:[UIImage imageNamed:@"icon_shibai"] forState:UIControlStateNormal];
     
     UILabel *titleLabel = [_LastView viewWithTag:10];
-    titleLabel.text = NSLocalizedString(@"contract_payment_result_fail", nil);
+    titleLabel.text = VCNSLocalizedBundleString(@"contract_payment_result_fail", nil);
     
     UILabel *subTitleLabel = [_LastView viewWithTag:11];
     subTitleLabel.text = @"";

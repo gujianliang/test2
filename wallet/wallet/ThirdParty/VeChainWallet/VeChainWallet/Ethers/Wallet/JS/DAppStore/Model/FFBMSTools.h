@@ -110,7 +110,8 @@ typedef NS_ENUM(NSInteger , BusinessType)
 
 + (BOOL)checkQRcode:(NSString *)code;
 
-+ (NSString*)localeStringWithKey:(NSString*)key;
++ (NSString*)localeStringWithKey:(NSString*)key; // 去本地包key
++ (NSString *)localStringBundlekey:(NSString *)key; // 取bundle key
 
 // 判断是否包含中文
 + (BOOL) containChiness:(NSString *)text;

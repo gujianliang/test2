@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4143EDC422019FDF0056C08A /* walletSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97EC5C7B2200A783001E6B68 /* walletSDK.framework */; };
+		4143EE1F2201B53C0056C08A /* WalletSDKBundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 4143EE1E2201B53C0056C08A /* WalletSDKBundle.bundle */; };
 		971B3E3621E6000B007845F0 /* walletChangePWVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 971B3E1B21E6000B007845F0 /* walletChangePWVC.m */; };
 		971B3E3721E6000B007845F0 /* WalletDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 971B3E1C21E6000B007845F0 /* WalletDetailVC.m */; };
 		971B3E3821E6000B007845F0 /* WalletMoreInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 971B3E1D21E6000B007845F0 /* WalletMoreInfoVC.m */; };
@@ -31,7 +33,6 @@
 		9747228520EDE9FA00F9EAB3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9747228420EDE9FA00F9EAB3 /* main.m */; };
 		9747228F20EDE9FA00F9EAB3 /* walletTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9747228E20EDE9FA00F9EAB3 /* walletTests.m */; };
 		9747229A20EDE9FA00F9EAB3 /* walletUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9747229920EDE9FA00F9EAB3 /* walletUITests.m */; };
-		97574750220054D90046C8A0 /* walletSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9757474F220054D90046C8A0 /* walletSDK.framework */; };
 		975747582200573E0046C8A0 /* WebViewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 975747562200573E0046C8A0 /* WebViewVC.m */; };
 		975747592200573E0046C8A0 /* WebViewVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 975747572200573E0046C8A0 /* WebViewVC.xib */; };
 		97EC5CA92201A601001E6B68 /* CoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = 97EC5CA82201A601001E6B68 /* CoverView.m */; };
@@ -42,6 +43,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		4143EDBF22019D090056C08A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 97EC5C752200A782001E6B68 /* WalletSDK.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 4143ED9E22019AC50056C08A;
+			remoteInfo = WalletSDKBundle;
+		};
 		9747228B20EDE9FA00F9EAB3 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 9747226A20EDE9F800F9EAB3 /* Project object */;
@@ -73,6 +81,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4143EE1E2201B53C0056C08A /* WalletSDKBundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = WalletSDKBundle.bundle; sourceTree = "<group>"; };
 		971B3E1B21E6000B007845F0 /* walletChangePWVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = walletChangePWVC.m; sourceTree = "<group>"; };
 		971B3E1C21E6000B007845F0 /* WalletDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WalletDetailVC.m; sourceTree = "<group>"; };
 		971B3E1D21E6000B007845F0 /* WalletMoreInfoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WalletMoreInfoVC.m; sourceTree = "<group>"; };
@@ -133,7 +142,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				97574750220054D90046C8A0 /* walletSDK.framework in Frameworks */,
+				4143EDC422019FDF0056C08A /* walletSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -258,6 +267,7 @@
 				9747227820EDE9F800F9EAB3 /* ViewController.h */,
 				9747227920EDE9F800F9EAB3 /* ViewController.m */,
 				9747227B20EDE9F800F9EAB3 /* Main.storyboard */,
+				4143EE1E2201B53C0056C08A /* WalletSDKBundle.bundle */,
 				9747227E20EDE9FA00F9EAB3 /* Assets.xcassets */,
 				9747228020EDE9FA00F9EAB3 /* LaunchScreen.storyboard */,
 				9747228320EDE9FA00F9EAB3 /* Info.plist */,
@@ -307,6 +317,7 @@
 			children = (
 				97EC5C7B2200A783001E6B68 /* walletSDK.framework */,
 				97EC5C7D2200A783001E6B68 /* walletSDKTests.xctest */,
+				4143EDC022019D090056C08A /* WalletSDKBundle.bundle */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -431,6 +442,13 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		4143EDC022019D090056C08A /* WalletSDKBundle.bundle */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = WalletSDKBundle.bundle;
+			remoteRef = 4143EDBF22019D090056C08A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		97EC5C7B2200A783001E6B68 /* walletSDK.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -463,6 +481,7 @@
 				97EC5CB32201AC54001E6B68 /* AddNetVC.xib in Resources */,
 				971B3E3921E6000B007845F0 /* WalletMoreInfoVC.xib in Resources */,
 				97EC5CAE2201AC3F001E6B68 /* NETDetailVC.xib in Resources */,
+				4143EE1F2201B53C0056C08A /* WalletSDKBundle.bundle in Resources */,
 				9747227D20EDE9F800F9EAB3 /* Main.storyboard in Resources */,
 				975747592200573E0046C8A0 /* WebViewVC.xib in Resources */,
 				971B3E4121E6000B007845F0 /* keystoreImportVC.xib in Resources */,

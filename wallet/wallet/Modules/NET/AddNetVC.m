@@ -33,11 +33,20 @@
     // Pass the selected object to the new view controller.
 }
 */
+
 - (IBAction)addNet:(id)sender
 {
     if (self.netName.text.length > 0 && self.netUrl.text.length > 0 )
     {
+        NSArray *oldList = [[NSUserDefaults standardUserDefaults]objectForKey:@"netList"];
+        NSMutableArray *newList = [NSMutableArray arrayWithArray:oldList];
+        NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+        [dict setObject:self.netName.text forKey:@"netName"];
+        [dict setObject:self.netUrl.text forKey:@"netUrl"];
         
+        [newList addObject:dict];
+        
+        [[NSUserDefaults standardUserDefaults] setObject:newList forKey:@"netList"];
     }
 }
 

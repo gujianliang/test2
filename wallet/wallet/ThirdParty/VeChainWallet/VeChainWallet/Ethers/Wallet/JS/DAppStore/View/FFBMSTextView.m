@@ -58,7 +58,7 @@ const NSInteger placeLabelTag = 77777;
     keyBoardTopView.backgroundColor =  RGBCOLOR(244, 244, 246);
     
     UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 60 - 12, 4, 60, 36)];
-    [btn setTitle:NSLocalizedString(@"完成", nil) forState:UIControlStateNormal];
+    [btn setTitle:VCNSLocalizedBundleString(@"完成", nil) forState:UIControlStateNormal];
     [btn setTitleColor:MAIN_BLUE_COLOR forState:UIControlStateNormal];
     [btn addTarget:self action:@selector(onKeyBoardDown:) forControlEvents:UIControlEventTouchUpInside];
     [keyBoardTopView addSubview:btn];

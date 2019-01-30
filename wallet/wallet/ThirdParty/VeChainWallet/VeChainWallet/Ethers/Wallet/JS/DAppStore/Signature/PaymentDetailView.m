@@ -67,15 +67,15 @@
     self.confirmButton.layer.cornerRadius = 5;
     self.confirmButton.clipsToBounds = YES;
     
-    self.titleTopLabel.text = NSLocalizedString(@"dialog_coin_transfer_description", nil);
-    self.infoLabel.text = NSLocalizedString(@"transfer_coin_title", nil);
-    self.orderInfoTitleLabel.text = NSLocalizedString(@"订单类型", nil);
-    self.toAddressTitleLabel.text = NSLocalizedString(@"收款地址", nil);
-    self.fromAddressTitleLabel.text = NSLocalizedString(@"dialog_coin_transfer_pay_from", nil);
-    self.feeTitleLabel.text = NSLocalizedString(@"交易费用", nil);
-    self.amountTitleLabel.text = NSLocalizedString(@"cold_transfer_amount", nil);
-    self.coinTypeTitleLabel.text = NSLocalizedString(@"dialog_coin_transfer_token_type", nil);
-    [self.confirmButton setTitle:NSLocalizedString(@"dialog_yes", nil) forState:UIControlStateNormal];
+    self.titleTopLabel.text = VCNSLocalizedBundleString(@"dialog_coin_transfer_description", nil);
+    self.infoLabel.text = VCNSLocalizedBundleString(@"transfer_coin_title", nil);
+    self.orderInfoTitleLabel.text = VCNSLocalizedBundleString(@"订单类型", nil);
+    self.toAddressTitleLabel.text = VCNSLocalizedBundleString(@"收款地址", nil);
+    self.fromAddressTitleLabel.text = VCNSLocalizedBundleString(@"dialog_coin_transfer_pay_from", nil);
+    self.feeTitleLabel.text = VCNSLocalizedBundleString(@"交易费用", nil);
+    self.amountTitleLabel.text = VCNSLocalizedBundleString(@"cold_transfer_amount", nil);
+    self.coinTypeTitleLabel.text = VCNSLocalizedBundleString(@"dialog_coin_transfer_token_type", nil);
+    [self.confirmButton setTitle:VCNSLocalizedBundleString(@"dialog_yes", nil) forState:UIControlStateNormal];
     [self.confirmButton setDisableGradientLayer:YES];
 }
 

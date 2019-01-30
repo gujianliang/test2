@@ -362,66 +362,66 @@
         
         switch (errCode.integerValue) {
             case 20001:
-                errMsg = NSLocalizedString(@"token_swap_thor_format_error",nil);
+                errMsg = VCNSLocalizedBundleString(@"token_swap_thor_format_error",nil);
                 break;
             case 20002:
-                errMsg = NSLocalizedString(@"ETH地址不合法",nil);
+                errMsg = VCNSLocalizedBundleString(@"ETH地址不合法",nil);
                 break;
             case 20003:
-                errMsg = NSLocalizedString(@"关联地址不合法",nil);
+                errMsg = VCNSLocalizedBundleString(@"关联地址不合法",nil);
                 break;
             case 20004:
-                errMsg = NSLocalizedString(@"token_swap_thor_binded_error",nil);
+                errMsg = VCNSLocalizedBundleString(@"token_swap_thor_binded_error",nil);
                 break;
             case 20005:
-                errMsg = NSLocalizedString(@"ETH地址已被其他地址绑定",nil);
+                errMsg = VCNSLocalizedBundleString(@"ETH地址已被其他地址绑定",nil);
                 break;
             case 20007:
-                errMsg = NSLocalizedString(@"VeChainThor地址还未进行过绑定",nil);
+                errMsg = VCNSLocalizedBundleString(@"VeChainThor地址还未进行过绑定",nil);
                 break;
             case 20010:
             {
                 
-                errMsg = NSLocalizedString(@"token_swap_function_closed",nil);
+                errMsg = VCNSLocalizedBundleString(@"token_swap_function_closed",nil);
 
             }
                 break;
 
             case 30000:
-                errMsg = NSLocalizedString(@"企业鉴权信息无效",nil);
+                errMsg = VCNSLocalizedBundleString(@"企业鉴权信息无效",nil);
                 break;
             case 30001:
-                errMsg = NSLocalizedString(@"授权回调地址无效",nil);
+                errMsg = VCNSLocalizedBundleString(@"授权回调地址无效",nil);
                 break;
             case 30002:
-                errMsg = NSLocalizedString(@"授权等级参数无效",nil);
+                errMsg = VCNSLocalizedBundleString(@"授权等级参数无效",nil);
                 break;
             case 30003:
-                errMsg = NSLocalizedString(@"authorized_error_qr_invalid",nil);
+                errMsg = VCNSLocalizedBundleString(@"authorized_error_qr_invalid",nil);
                 break;
             case 30004:
-                errMsg = NSLocalizedString(@"authorized_address_invalid",nil);
+                errMsg = VCNSLocalizedBundleString(@"authorized_address_invalid",nil);
                 break;
             case 30005:
-                errMsg = NSLocalizedString(@"authorized_signature_invalid",nil);
+                errMsg = VCNSLocalizedBundleString(@"authorized_signature_invalid",nil);
                 break;
             case 30006:
-                errMsg = NSLocalizedString(@"authorized_error_qr_invalid",nil);
+                errMsg = VCNSLocalizedBundleString(@"authorized_error_qr_invalid",nil);
                 break;
             case 30007:
-                errMsg = NSLocalizedString(@"白盒加密失败",nil);
+                errMsg = VCNSLocalizedBundleString(@"白盒加密失败",nil);
                 break;
             case 90000:
-                errMsg = NSLocalizedString(@"sessiontoken已存在",nil);
+                errMsg = VCNSLocalizedBundleString(@"sessiontoken已存在",nil);
                 break;
             case 90001:
-                errMsg = NSLocalizedString(@"qrcode超时",nil);
+                errMsg = VCNSLocalizedBundleString(@"qrcode超时",nil);
                 break;
             case 90002:
-                errMsg = NSLocalizedString(@"签名校验超时",nil);
+                errMsg = VCNSLocalizedBundleString(@"签名校验超时",nil);
                 break;
             case 90003:
-                errMsg = NSLocalizedString(@"签名校验时间戳不合法",nil);
+                errMsg = VCNSLocalizedBundleString(@"签名校验时间戳不合法",nil);
                 break;
                 
             default:
@@ -436,9 +436,9 @@
     else if (nil == errCode || [errCode intValue] != FFBMS_ERROR_OK) {
         
         if ([errMsg isEqual:[NSNull null]]) {
-            errMsg = NSLocalizedString(@"Unknown error", nil);
+            errMsg = VCNSLocalizedBundleString(@"Unknown error", nil);
         }else{
-            errMsg = [errMsg length] ? errMsg : NSLocalizedString(@"Unknown error", nil);
+            errMsg = [errMsg length] ? errMsg : VCNSLocalizedBundleString(@"Unknown error", nil);
         }
         
         self.lastError = [NSError errorWithDomain:kFFBMSErrorDomain

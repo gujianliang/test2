@@ -528,8 +528,8 @@
     [self addSubview:contentView];
     
     NSMutableArray *resultList = [NSMutableArray arrayWithArray:items];
-    if ([items containsObject:NSLocalizedString(@"dialog_no", nil)]) {
-        [resultList removeObject:NSLocalizedString(@"dialog_no", nil)];
+    if ([items containsObject:VCNSLocalizedBundleString(@"dialog_no", nil)]) {
+        [resultList removeObject:VCNSLocalizedBundleString(@"dialog_no", nil)];
         items = [NSArray arrayWithArray:resultList];
     }
     for (int i = 0; i < items.count ; i ++) {
@@ -555,7 +555,7 @@
     [btnCancel addTarget:self action:@selector(action:) forControlEvents:UIControlEventTouchUpInside];
     btnCancel.tag = 10;
     [btnCancel.titleLabel setFont:[UIFont boldSystemFontOfSize:18]];
-    [btnCancel setTitle:NSLocalizedString(@"dialog_no", nil) forState:UIControlStateNormal];
+    [btnCancel setTitle:VCNSLocalizedBundleString(@"dialog_no", nil) forState:UIControlStateNormal];
     [btnCancel.titleLabel setTextColor:[UIColor whiteColor]];
     [btnCancel setBackgroundColor:[UIColor whiteColor]];
     [btnCancel setTitleColor:MAIN_BLUE_COLOR forState:UIControlStateNormal];
@@ -659,9 +659,9 @@
     
     UILabel *msgLable = [[UILabel alloc]initWithFrame:CGRectMake(20, 20,  contentView.frame.size.width - 40 ,30)];
     if (title.length == 0) {
-        [msgLable setText:NSLocalizedString(@"dialog_tip_title", nil)];
+        [msgLable setText:VCNSLocalizedBundleString(@"dialog_tip_title", nil)];
     }else{
-        [msgLable setText:NSLocalizedString(title, nil)];
+        [msgLable setText:VCNSLocalizedBundleString(title, nil)];
     }
     msgLable.textAlignment = NSTextAlignmentCenter;
     [msgLable setTextColor:HEX_RGB(0x202C56)];
@@ -979,7 +979,7 @@
         
         __block NSInteger num = result.integerValue;
         
-        [msgLable setText:[NSString stringWithFormat:@"%@ (%lds)", NSLocalizedString(title, nil), num]];
+        [msgLable setText:[NSString stringWithFormat:@"%@ (%lds)", VCNSLocalizedBundleString(title, nil), num]];
         
         [btn setUserInteractionEnabled:NO];
         [NSTimer scheduledTimerWithTimeInterval:1 repeats:YES block:^(NSTimer * _Nonnull timer) {
@@ -989,11 +989,11 @@
                 [timer invalidate];
                 timer = nil;
                 [btn setUserInteractionEnabled:YES];
-                [msgLable setText:NSLocalizedString(title, nil)];
+                [msgLable setText:VCNSLocalizedBundleString(title, nil)];
                 msgLable.textColor = HEX_RGB(0x898CD3);
 
             }else{
-                [msgLable setText:[NSString stringWithFormat:@"%@ (%lds)", NSLocalizedString(title, nil), num]];
+                [msgLable setText:[NSString stringWithFormat:@"%@ (%lds)", VCNSLocalizedBundleString(title, nil), num]];
             }
         }];
         

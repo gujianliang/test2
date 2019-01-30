@@ -51,7 +51,7 @@ static NSString *cellIndef = @"addressIndef";
     
     self.view.backgroundColor = [UIColor whiteColor];
     
-    self.title = NSLocalizedString(@"contract_payment_info_title", nil);
+    self.title = VCNSLocalizedBundleString(@"contract_payment_info_title", nil);
 //    [self updateNavigationBarStyle:TintAndTitleNoneCloseWhiteOne];
     
     [self initView];
@@ -130,15 +130,15 @@ static NSString *cellIndef = @"addressIndef";
         gas = @"0.00 VTHO";
     }
     
-    [self creatCell:NSLocalizedString(@"contract_ayment_info_row1_title", nil)
+    [self creatCell:VCNSLocalizedBundleString(@"contract_ayment_info_row1_title", nil)
               value:gas
                   Y:80 + kNavigationBarHeight];
     
-    [self creatCell:NSLocalizedString(@"contract_payment_info_row2_title", nil)
+    [self creatCell:VCNSLocalizedBundleString(@"contract_payment_info_row2_title", nil)
               value:[FFBMSTools checksumAddress:self.transactionModel.from]
                   Y:80 + 50 + kNavigationBarHeight];
     
-    [self creatCell:NSLocalizedString(@"contract_payment_info_row3_title", nil)
+    [self creatCell:VCNSLocalizedBundleString(@"contract_payment_info_row3_title", nil)
               value:[FFBMSTools checksumAddress:self.transactionModel.to]
                   Y:80 + 50 * 2 + kNavigationBarHeight];
     
@@ -147,7 +147,7 @@ static NSString *cellIndef = @"addressIndef";
     signBtn.layer.cornerRadius = 4.0;
     signBtn.clipsToBounds = YES;
     signBtn.backgroundColor = [UIColor colorWithHexString:@"#6DD8EF"];
-    [signBtn setTitle:NSLocalizedString(@"contract_payment_info_title", nil) forState:UIControlStateNormal];
+    [signBtn setTitle:VCNSLocalizedBundleString(@"contract_payment_info_title", nil) forState:UIControlStateNormal];
     [signBtn addTarget:self action:@selector(clickSign) forControlEvents:UIControlEventTouchUpInside];
     CGFloat signBtnY = SCREEN_HEIGHT - Scale(44.0) - Scale(20);
     signBtn.frame = CGRectMake(Scale(20), signBtnY, SCREEN_WIDTH - Scale(40.0), Scale(44.0));
@@ -165,10 +165,10 @@ static NSString *cellIndef = @"addressIndef";
 //    WalletManageModel *walletModel = [[WalletSqlDataEngine sharedInstance] getSingleWallet:[FFBMSTools checksumAddress:from]];
 //    if (walletModel.address.length > 0) {
 //        if (walletModel.observer.intValue) {
-//            [FFBMSAlertShower showAlert:NSLocalizedString(@"dialog_tip_title", nil)
-//                                    msg:NSLocalizedString(@"transaction_cold_wallet_observer", nil)
+//            [FFBMSAlertShower showAlert:VCNSLocalizedBundleString(@"dialog_tip_title", nil)
+//                                    msg:VCNSLocalizedBundleString(@"transaction_cold_wallet_observer", nil)
 //                                  inCtl:self
-//                                  items:@[NSLocalizedString(@"improt_wallet_warning_dialog_butn", nil)]
+//                                  items:@[VCNSLocalizedBundleString(@"improt_wallet_warning_dialog_butn", nil)]
 //                             clickBlock:^(NSInteger index) {
 //                                 [FFBMSTools restoreTabNavToRoot];
 //                             }];
@@ -176,10 +176,10 @@ static NSString *cellIndef = @"addressIndef";
 //        }
 //
 //    }else {
-//        [FFBMSAlertShower showAlert:NSLocalizedString(@"dialog_tip_title", nil)
-//                                msg:NSLocalizedString(@"transaction_cold_wallet_not_exist", nil)
+//        [FFBMSAlertShower showAlert:VCNSLocalizedBundleString(@"dialog_tip_title", nil)
+//                                msg:VCNSLocalizedBundleString(@"transaction_cold_wallet_not_exist", nil)
 //                              inCtl:self
-//                              items:@[NSLocalizedString(@"improt_wallet_warning_dialog_butn", nil)]
+//                              items:@[VCNSLocalizedBundleString(@"improt_wallet_warning_dialog_butn", nil)]
 //                         clickBlock:^(NSInteger index) {
 //                             [FFBMSTools restoreTabNavToRoot];
 //                         }];
@@ -306,8 +306,8 @@ static NSString *cellIndef = @"addressIndef";
         NSString *to = [FFBMSTools checksumAddress:self.transactionModel.to];
         to = to.length > 0 ? to : @" ";
         dataArr = @[
-                    @{DataKey : NSLocalizedString(@"cold_transfer_to_address", nil), DataValue :to},
-                    @{DataKey : NSLocalizedString(@"cold_transfer_amount", nil), DataValue : amount}
+                    @{DataKey : VCNSLocalizedBundleString(@"cold_transfer_to_address", nil), DataValue :to},
+                    @{DataKey : VCNSLocalizedBundleString(@"cold_transfer_amount", nil), DataValue : amount}
                     ];
         
         return [self loadCellWithData:dataArr];

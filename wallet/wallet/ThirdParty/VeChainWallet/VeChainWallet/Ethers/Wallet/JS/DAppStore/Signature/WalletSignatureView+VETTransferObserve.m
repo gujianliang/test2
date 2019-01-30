@@ -30,9 +30,9 @@
     int result = SecRandomCopyBytes(kSecRandomDefault, randomData.length, randomData.mutableBytes);
     if (result != 0) {
         [FFBMSAlertShower showAlert:nil
-                                msg:NSLocalizedString(@"transfer_wallet_send_fail", nil)
+                                msg:VCNSLocalizedBundleString(@"transfer_wallet_send_fail", nil)
                               inCtl:[FFBMSTools getCurrentVC]
-                              items:@[NSLocalizedString(@"dialog_yes", nil)]
+                              items:@[VCNSLocalizedBundleString(@"dialog_yes", nil)]
                          clickBlock:^(NSInteger index)
          {
          }];
@@ -97,7 +97,7 @@
 
 - (void)successAlert
 {
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"转账发起成功", nil) message:@"" preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:VCNSLocalizedBundleString(@"转账发起成功", nil) message:@"" preferredStyle:UIAlertControllerStyleActionSheet];
     [[UIApplication sharedApplication].keyWindow.rootViewController showViewController:alertController sender:self];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [alertController dismissViewControllerAnimated:YES completion:nil];
@@ -107,9 +107,9 @@
 - (void)reSignture
 {
     [FFBMSAlertShower showAlert:nil
-                            msg:NSLocalizedString(@"transaction_signature_v_error", nil)
+                            msg:VCNSLocalizedBundleString(@"transaction_signature_v_error", nil)
                           inCtl:[FFBMSTools getCurrentVC]
-                          items:@[NSLocalizedString(@"transaction_signature_v_error_button", nil)]
+                          items:@[VCNSLocalizedBundleString(@"transaction_signature_v_error_button", nil)]
                      clickBlock:^(NSInteger index)
      {
          switch (index) {
@@ -278,9 +278,9 @@
 - (void)showTransactionFail {
 //    [FFBMSMBProgressShower hide:self];
     [FFBMSAlertShower showAlert:nil
-                            msg:NSLocalizedString(@"transfer_wallet_send_fail", nil)
+                            msg:VCNSLocalizedBundleString(@"transfer_wallet_send_fail", nil)
                           inCtl:[FFBMSTools getCurrentVC]
-                          items:@[NSLocalizedString(@"dialog_yes", nil)]
+                          items:@[VCNSLocalizedBundleString(@"dialog_yes", nil)]
                      clickBlock:^(NSInteger index) {
                      }];
 }
@@ -360,9 +360,9 @@
     BOOL net = [reachManager isReachable];
     if (!net) {
         [FFBMSAlertShower showAlert:nil
-                                msg:NSLocalizedString(@"no_network_hint", nil)
+                                msg:VCNSLocalizedBundleString(@"no_network_hint", nil)
                               inCtl:[FFBMSTools getCurrentVC]
-                              items:@[NSLocalizedString(@"dialog_yes", nil)]
+                              items:@[VCNSLocalizedBundleString(@"dialog_yes", nil)]
                          clickBlock:^(NSInteger index) {
                          }];
         return NO;

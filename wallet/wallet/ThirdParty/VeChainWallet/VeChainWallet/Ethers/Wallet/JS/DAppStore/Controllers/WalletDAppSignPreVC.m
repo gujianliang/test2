@@ -46,7 +46,7 @@
 - (void)viewDidLoad{
     [super viewDidLoad];
     
-    self.navigationItem.title = NSLocalizedString(@"h5_contract_params_confirm_title", nil);
+    self.navigationItem.title = VCNSLocalizedBundleString(@"h5_contract_params_confirm_title", nil);
 //    [self updateNavigationBarStyle:TintAndTitleNoneCloseWhiteOne];
     
     // 添加子视图
@@ -71,7 +71,7 @@
     
     // 备注标签信息
     UILabel *lab = [[UILabel alloc] init];
-    lab.text = NSLocalizedString(@"h5_contract_params_confirm_msg", nil);
+    lab.text = VCNSLocalizedBundleString(@"h5_contract_params_confirm_msg", nil);
     lab.textColor = HEX_COLOR(0xEF6F6F);
     lab.font = [UIFont systemFontOfSize:Scale(14.0)];
     lab.numberOfLines = 0;
@@ -90,7 +90,7 @@
     [confirmBtn setClipsToBounds:YES];
     confirmBtn.titleLabel.font = [UIFont systemFontOfSize:Scale(15.0)];
     [confirmBtn setGrayGradientLayerType:highBlueType];
-    [confirmBtn setTitle:NSLocalizedString(@"h5_contract_params_confirm_button", nil) forState:UIControlStateNormal];
+    [confirmBtn setTitle:VCNSLocalizedBundleString(@"h5_contract_params_confirm_button", nil) forState:UIControlStateNormal];
     [confirmBtn addTarget:self action:@selector(continueSign) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:confirmBtn];
     [confirmBtn mas_makeConstraints:^(MASConstraintMaker *make) {

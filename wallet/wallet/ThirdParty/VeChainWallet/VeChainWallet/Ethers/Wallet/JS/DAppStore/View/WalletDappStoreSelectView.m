@@ -61,7 +61,7 @@
     
     // 主标题标签
     UILabel *titleLabel = [[UILabel alloc]init];
-    titleLabel.text = NSLocalizedString(@"选择钱包", nil);
+    titleLabel.text = VCNSLocalizedBundleString(@"选择钱包", nil);
     
     titleLabel.textAlignment = NSTextAlignmentCenter;
     [titleView addSubview:titleLabel];
