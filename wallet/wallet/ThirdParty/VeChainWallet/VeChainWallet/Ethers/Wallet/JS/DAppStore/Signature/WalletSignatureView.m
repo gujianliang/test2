@@ -177,7 +177,10 @@
     
     // 返回箭头按钮
     _backBtn = [[UIButton alloc]init];
-    [_backBtn setImage:[UIImage imageNamed:@"icon_close_white-1"] forState:UIControlStateNormal];
+    
+    UIImage *iamge = [FFBMSTools localImageWithName:@"icon_close_black"];
+    
+    [_backBtn setImage:iamge forState:UIControlStateNormal];
     [titleView addSubview:_backBtn];
     [_backBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.top.mas_equalTo(0);
@@ -286,11 +289,11 @@
     
     CGFloat jsOffset = 0;
     
-    NSString *test = [FFBMSTools localeStringWithKey:@"contract_ayment_info_row1_title"];
-    //VCVCNSLocalizedBundleString(@"contract_ayment_info_row1_title", nil);
-    
-//   NSString *rr = [NSBundle XDX_localizableBundleWithBundleName:@"contract_ayment_info_row1_title"];
-    NSString *rr = [NSBundle XDX_localizedStringForKey:@"contract_ayment_info_row1_title"];
+//    NSString *test = [FFBMSTools localeStringWithKey:@"contract_ayment_info_row1_title"];
+//    //VCVCNSLocalizedBundleString(@"contract_ayment_info_row1_title", nil);
+//
+////   NSString *rr = [NSBundle XDX_localizableBundleWithBundleName:@"contract_ayment_info_row1_title"];
+//    NSString *rr = [NSBundle XDX_localizedStringForKey:@"contract_ayment_info_row1_title"];
 
     [self creatCell:VCNSLocalizedBundleString(@"contract_ayment_info_row1_title", nil)
               value:gasFormat
@@ -387,14 +390,14 @@
                             
                             NSString *msg = [NSString stringWithFormat:@"您当前地址余额%.2fVET，不够支付%.2fVET",vetBalance.floatValue,tempAmount.floatValue];
                             
-                            [FFBMSAlertShower showAlert:@"余额不足提示"
-                                                    msg:msg
-                                                  inCtl:[FFBMSTools getCurrentVC]
-                                                  items:@[@"确定"]
-                                             clickBlock:^(NSInteger index)
-                             {
-                                 
-                             }];
+//                            [FFBMSAlertShower showAlert:@"余额不足提示"
+//                                                    msg:msg
+//                                                  inCtl:[FFBMSTools getCurrentVC]
+//                                                  items:@[@"确定"]
+//                                             clickBlock:^(NSInteger index)
+//                             {
+//
+//                             }];
 //                            return ;
                         }
                         
@@ -417,14 +420,14 @@
                                 
                                 NSString *msg = [NSString stringWithFormat:@"您当前地址余额%.2fVTHO，不够支付%.2fVTHO",vthoBalanceNum.floatValue,_gasLimit.floatValue];
                                 
-                                [FFBMSAlertShower showAlert:@"余额不足提示"
-                                                        msg:msg
-                                                      inCtl:[FFBMSTools getCurrentVC]
-                                                      items:@[@"确定"]
-                                                 clickBlock:^(NSInteger index)
-                                 {
-                                     
-                                 }];
+//                                [FFBMSAlertShower showAlert:@"余额不足提示"
+//                                                        msg:msg
+//                                                      inCtl:[FFBMSTools getCurrentVC]
+//                                                      items:@[@"确定"]
+//                                                 clickBlock:^(NSInteger index)
+//                                 {
+//
+//                                 }];
 //                                return;
                             }
                            
@@ -813,13 +816,13 @@
 {
     NSLog(@"dd");
     if (_scrollView.contentOffset.x == SCREEN_WIDTH) {
-        [_backBtn setImage:[UIImage imageNamed:@"icon_back_black"] forState:UIControlStateNormal];
+        [_backBtn setImage:[FFBMSTools localImageWithName:@"icon_back_black"] forState:UIControlStateNormal];
         
     }else if (_scrollView.contentOffset.x == SCREEN_WIDTH * 2){
-        [_backBtn setImage:[UIImage imageNamed:@"icon_close_white-1"] forState:UIControlStateNormal];
+        [_backBtn setImage:[FFBMSTools localImageWithName:@"icon_close_black"] forState:UIControlStateNormal];
     }
     else{
-        [_backBtn setImage:[UIImage imageNamed:@"icon_close_white-1"] forState:UIControlStateNormal];
+        [_backBtn setImage:[FFBMSTools localImageWithName:@"icon_close_black"] forState:UIControlStateNormal];
     }
 }
 
@@ -960,7 +963,7 @@
 {
     [_timeBtn setTitle:@"" forState:UIControlStateNormal];
     [_lastBtn setTitle:VCNSLocalizedBundleString(@"dialog_confirm", nil) forState:UIControlStateNormal];
-    [_timeBtn setImage:[UIImage imageNamed:@"Group 3"] forState:UIControlStateNormal];
+    [_timeBtn setImage:[FFBMSTools localImageWithName:@"Group 3"] forState:UIControlStateNormal];
     
     UILabel *titleLabel = [_LastView viewWithTag:10];
     titleLabel.text = VCNSLocalizedBundleString(@"contract_payment_confirm_success", nil);

@@ -230,6 +230,7 @@ typedef NS_ENUM(NSInteger , BusinessType)
 
 + (void)jsErrorAlert:(NSString *)message;
 
++ (UIImage *)localImageWithName:(NSString *)name;
 
 @end
 

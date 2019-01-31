@@ -222,7 +222,8 @@
     }
     
     NSBundle *resourceBundle = [NSBundle bundleWithPath:pathString1];
-    NSString *bundlePath = [resourceBundle pathForResource:name ofType:@"png"];
+//    name = [name stringByAppendingString:@".tiff"];
+    NSString *bundlePath = [resourceBundle pathForResource:name ofType:@"tiff"];
     UIImage *image = [UIImage imageWithContentsOfFile:bundlePath];
     
     return image;

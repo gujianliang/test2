@@ -60,7 +60,7 @@
                                                                 action:@selector(selectNET)];
     self.navigationItem.rightBarButtonItem = rightItem;
     
-    self.searchBar.text = @"https://appwallet.oss-cn-shanghai.aliyuncs.com/testJS/yijianfabi/dist/index.html";
+    self.searchBar.text = @"https://appwallet.oss-cn-shanghai.aliyuncs.com/testJS/test.html";
     
     
    
