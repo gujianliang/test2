@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4143EDC422019FDF0056C08A /* walletSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97EC5C7B2200A783001E6B68 /* walletSDK.framework */; };
-		4143EE1F2201B53C0056C08A /* WalletSDKBundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 4143EE1E2201B53C0056C08A /* WalletSDKBundle.bundle */; };
+		4143EEA82202FDF80056C08A /* WalletSDKBundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 4143EEA72202FDF80056C08A /* WalletSDKBundle.bundle */; };
 		971B3E3621E6000B007845F0 /* walletChangePWVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 971B3E1B21E6000B007845F0 /* walletChangePWVC.m */; };
 		971B3E3721E6000B007845F0 /* WalletDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 971B3E1C21E6000B007845F0 /* WalletDetailVC.m */; };
 		971B3E3821E6000B007845F0 /* WalletMoreInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 971B3E1D21E6000B007845F0 /* WalletMoreInfoVC.m */; };
@@ -81,7 +81,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		4143EE1E2201B53C0056C08A /* WalletSDKBundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = WalletSDKBundle.bundle; sourceTree = "<group>"; };
+		4143EEA72202FDF80056C08A /* WalletSDKBundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = WalletSDKBundle.bundle; path = "../../../../../Library/Developer/Xcode/DerivedData/walletSDKDemo-dofcmlbqbvqulygsfacfpsgkawwp/Build/Products/Debug-iphoneos/WalletSDKBundle.bundle"; sourceTree = "<group>"; };
 		971B3E1B21E6000B007845F0 /* walletChangePWVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = walletChangePWVC.m; sourceTree = "<group>"; };
 		971B3E1C21E6000B007845F0 /* WalletDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WalletDetailVC.m; sourceTree = "<group>"; };
 		971B3E1D21E6000B007845F0 /* WalletMoreInfoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WalletMoreInfoVC.m; sourceTree = "<group>"; };
@@ -282,7 +282,7 @@
 				9747227820EDE9F800F9EAB3 /* ViewController.h */,
 				9747227920EDE9F800F9EAB3 /* ViewController.m */,
 				9747227B20EDE9F800F9EAB3 /* Main.storyboard */,
-				4143EE1E2201B53C0056C08A /* WalletSDKBundle.bundle */,
+				4143EEA72202FDF80056C08A /* WalletSDKBundle.bundle */,
 				9747227E20EDE9FA00F9EAB3 /* Assets.xcassets */,
 				9747228020EDE9FA00F9EAB3 /* LaunchScreen.storyboard */,
 				9747228320EDE9FA00F9EAB3 /* Info.plist */,
@@ -481,7 +481,7 @@
 				97468F372201CBE30092DF07 /* AddNetVC.xib in Resources */,
 				97468F392201CBE30092DF07 /* NETDetailVC.xib in Resources */,
 				971B3E3921E6000B007845F0 /* WalletMoreInfoVC.xib in Resources */,
-				4143EE1F2201B53C0056C08A /* WalletSDKBundle.bundle in Resources */,
+				4143EEA82202FDF80056C08A /* WalletSDKBundle.bundle in Resources */,
 				9747227D20EDE9F800F9EAB3 /* Main.storyboard in Resources */,
 				975747592200573E0046C8A0 /* WebViewVC.xib in Resources */,
 				971B3E4121E6000B007845F0 /* keystoreImportVC.xib in Resources */,
@@ -692,6 +692,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 77V6USKBYW;
 				ENABLE_BITCODE = NO;
@@ -710,6 +711,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.vechain.walletDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = "armv7s armv7 arm64e arm64";
 			};
@@ -719,6 +721,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 77V6USKBYW;
 				ENABLE_BITCODE = NO;
@@ -737,6 +740,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.vechain.walletDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = "armv7s armv7 arm64e arm64";
 			};

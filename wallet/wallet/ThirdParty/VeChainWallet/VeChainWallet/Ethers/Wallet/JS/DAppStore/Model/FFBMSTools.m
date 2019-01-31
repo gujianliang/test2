@@ -216,15 +216,24 @@
 }
 
 + (UIImage *)localImageWithName:(NSString *)name{
-    NSString *pathString1 = [[NSBundle mainBundle] pathForResource:@"WalletSDKBundle" ofType:@"bundle"];
-    if(!pathString1){
+    NSString *bundlePath = [[NSBundle mainBundle] pathForResource:@"WalletSDKBundle" ofType:@"bundle"];
+    if(!bundlePath){
         return nil;
     }
     
-    NSBundle *resourceBundle = [NSBundle bundleWithPath:pathString1];
-//    name = [name stringByAppendingString:@".tiff"];
-    NSString *bundlePath = [resourceBundle pathForResource:name ofType:@"tiff"];
-    UIImage *image = [UIImage imageWithContentsOfFile:bundlePath];
+//    NSBundle *resourceBundle = [NSBundle bundleWithPath:pathString1];
+////    name = [name stringByAppendingString:@".tiff"];
+//    NSString *bundlePath = [resourceBundle pathForResource:name ofType:@"png"];
+//    if (!bundlePath) {
+//        bundlePath = [resourceBundle pathForResource:name ofType:@"tiff"];
+//    }
+    
+    NSString *imageName = [NSString stringWithFormat:@"%@/%@.png", bundlePath, name];
+    UIImage *image = [UIImage imageWithContentsOfFile:imageName];
+    if (!image) {
+        imageName = [NSString stringWithFormat:@"%@/%@.tiff", bundlePath, name];
+        image = [UIImage imageWithContentsOfFile:imageName];
+    }
     
     return image;
 }
