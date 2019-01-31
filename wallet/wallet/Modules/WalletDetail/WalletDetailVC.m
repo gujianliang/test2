@@ -40,16 +40,20 @@
     
     [self setHost];
 
-    
     NSDictionary *currentWallet = [[NSUserDefaults standardUserDefaults]objectForKey:@"currentWallet"];
     self.addressLabel.text = currentWallet[@"address"];
     
     [self.vetImageView setImage:[UIImage imageNamed:@"VET"]];
     [self.vthoImageView setImage:[UIImage imageNamed:@"VTHO"]];
     
-   
-    
     [self initView];
+    
+    NSString *version = [[[NSBundle mainBundle] infoDictionary] valueForKey:@"CFBundleVersion"];
+    version = [NSString stringWithFormat:@"版本号：(%@)",version];
+    
+    UILabel *versionLabel = [[UILabel alloc]initWithFrame:CGRectMake(20, 450, 150, 30)];
+    versionLabel.text = version;
+    [self.view addSubview:versionLabel];
 }
 
 - (void)initView

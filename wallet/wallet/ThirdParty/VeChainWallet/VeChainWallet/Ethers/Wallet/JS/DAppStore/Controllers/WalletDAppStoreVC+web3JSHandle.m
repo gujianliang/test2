@@ -402,7 +402,7 @@
     if (!isok) {
         [FFBMSAlertShower showAlert:nil
                                 msg:VCNSLocalizedBundleString(@"非法参数", nil)
-                              inCtl:[UIApplication sharedApplication].keyWindow.rootViewController
+                              inCtl:[FFBMSTools getCurrentVC]
                               items:@[VCNSLocalizedBundleString(@"dialog_yes", nil)]
                          clickBlock:^(NSInteger index) {
                          }];
@@ -439,7 +439,7 @@
     if (!bAmount) {
         [FFBMSAlertShower showAlert:nil
                                 msg:VCNSLocalizedBundleString(@"非法参数", nil)
-                              inCtl:[UIApplication sharedApplication].keyWindow.rootViewController
+                              inCtl:[FFBMSTools getCurrentVC]
                               items:@[VCNSLocalizedBundleString(@"dialog_yes", nil)]
                          clickBlock:^(NSInteger index) {
                          }];
@@ -457,7 +457,7 @@
     if (isSame) {
         [FFBMSAlertShower showAlert:nil
                                 msg:VCNSLocalizedBundleString(@"非法参数", nil)
-                              inCtl:[UIApplication sharedApplication].keyWindow.rootViewController
+                              inCtl:[FFBMSTools getCurrentVC]
                               items:@[VCNSLocalizedBundleString(@"dialog_yes", nil)]
                          clickBlock:^(NSInteger index) {
                          }];

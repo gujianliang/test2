@@ -52,21 +52,31 @@
     [self.view addSubview:_webView];
     
     
+//    NSMutableDictionary *currentDict = [NSMutableDictionary dictionary];
+//    [currentDict setObject:account.keystore forKey:@"keystore"];
+//    [currentDict setObject:account.address.checksumAddress forKey:@"address"];
+//
+//    [[NSUserDefaults standardUserDefaults]setObject:currentDict forKey:@"currentWallet"];
+    
+    NSDictionary *currentWallet = [[NSUserDefaults standardUserDefaults]objectForKey:@"currentWallet"];
+    
     
 // 设置 钱包
     
     NSMutableArray *walletList = [NSMutableArray array];
     
-    NSMutableDictionary *walletDict = [NSMutableDictionary dictionary];
-    [walletDict setObject:@"0x4FCE07115eC3Cc0e2428f5a8c4EEA2412650220e" forKey:@"address"];
-    [walletDict setObject:@"{\"version\":3,\"id\":\"7F050F89-C4C5-47A0-B420-BC7BF7ABFD61\",\"crypto\":{\"ciphertext\":\"95ba6fc5cfc0c9f52b6f021ca36e4893761e8bfbbb28ae67f511fa532eaec4a6\",\"cipherparams\":{\"iv\":\"b51a16666d522d453f40e6d258a9cefc\"},\"kdf\":\"scrypt\",\"kdfparams\":{\"r\":8,\"p\":1,\"n\":262144,\"dklen\":32,\"salt\":\"e437ab3006d75f969ff4dd2ce82b2397100ff3a7370cd5e68730cabfe5ae4d4f\"},\"mac\":\"3cd363094eb04f627871e2e5d2c3a7add65393deac61896fe23ec0ed4675db73\",\"cipher\":\"aes-128-ctr\"},\"address\":\"4fce07115ec3cc0e2428f5a8c4eea2412650220e\"}" forKey:@"keystore"];
-    [walletList addObject:walletDict];
-
+    [walletList addObject:currentWallet];
     
-    NSMutableDictionary *walletDict2 = [NSMutableDictionary dictionary];
-    [walletDict2 setObject:@"0xCc2b456b2C9399b4B68EF632CF6A1AEABE67b417" forKey:@"address"];
-    [walletDict2 setObject:@"{\"version\":3,\"id\":\"1150C15C-2E20-462B-8A88-EDF8A0E4DB71\",\"crypto\":{\"ciphertext\":\"1cf8d74d31b1ec2568f903fc2c84d215c0401cbb710b7b3de081af1449ae2a89\",\"cipherparams\":{\"iv\":\"03ccae46eff93b3d9bdf2b21739d7205\"},\"kdf\":\"scrypt\",\"kdfparams\":{\"r\":8,\"p\":1,\"n\":262144,\"dklen\":32,\"salt\":\"a71ecee9a1c33f0311e46f7da7da8d218a8c5b3d1067716a9bcdb767785d8e83\"},\"mac\":\"82b20c61854621f35b4d60ffb795655258356f310cdffa587f7db68a1789de75\",\"cipher\":\"aes-128-ctr\"},\"address\":\"cc2b456b2c9399b4b68ef632cf6a1aeabe67b417\"}" forKey:@"keystore"];
-    [walletList addObject:walletDict2];
+//    NSMutableDictionary *walletDict = [NSMutableDictionary dictionary];
+//    [walletDict setObject:@"0x4FCE07115eC3Cc0e2428f5a8c4EEA2412650220e" forKey:@"address"];
+//    [walletDict setObject:@"{\"version\":3,\"id\":\"7F050F89-C4C5-47A0-B420-BC7BF7ABFD61\",\"crypto\":{\"ciphertext\":\"95ba6fc5cfc0c9f52b6f021ca36e4893761e8bfbbb28ae67f511fa532eaec4a6\",\"cipherparams\":{\"iv\":\"b51a16666d522d453f40e6d258a9cefc\"},\"kdf\":\"scrypt\",\"kdfparams\":{\"r\":8,\"p\":1,\"n\":262144,\"dklen\":32,\"salt\":\"e437ab3006d75f969ff4dd2ce82b2397100ff3a7370cd5e68730cabfe5ae4d4f\"},\"mac\":\"3cd363094eb04f627871e2e5d2c3a7add65393deac61896fe23ec0ed4675db73\",\"cipher\":\"aes-128-ctr\"},\"address\":\"4fce07115ec3cc0e2428f5a8c4eea2412650220e\"}" forKey:@"keystore"];
+//    [walletList addObject:walletDict];
+//
+//    
+//    NSMutableDictionary *walletDict2 = [NSMutableDictionary dictionary];
+//    [walletDict2 setObject:@"0xCc2b456b2C9399b4B68EF632CF6A1AEABE67b417" forKey:@"address"];
+//    [walletDict2 setObject:@"{\"version\":3,\"id\":\"1150C15C-2E20-462B-8A88-EDF8A0E4DB71\",\"crypto\":{\"ciphertext\":\"1cf8d74d31b1ec2568f903fc2c84d215c0401cbb710b7b3de081af1449ae2a89\",\"cipherparams\":{\"iv\":\"03ccae46eff93b3d9bdf2b21739d7205\"},\"kdf\":\"scrypt\",\"kdfparams\":{\"r\":8,\"p\":1,\"n\":262144,\"dklen\":32,\"salt\":\"a71ecee9a1c33f0311e46f7da7da8d218a8c5b3d1067716a9bcdb767785d8e83\"},\"mac\":\"82b20c61854621f35b4d60ffb795655258356f310cdffa587f7db68a1789de75\",\"cipher\":\"aes-128-ctr\"},\"address\":\"cc2b456b2c9399b4b68ef632cf6a1aeabe67b417\"}" forKey:@"keystore"];
+//    [walletList addObject:walletDict2];
     
     
     

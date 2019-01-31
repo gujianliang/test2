@@ -41,11 +41,16 @@
     hud.mode = MBProgressHUDModeText;
     hud.labelText =  @"waiting...";
     
-    [WalletUtils creatWalletWithMnemonic:self.improtKeys.text password:self.password.text callback:^(Account *account) {
+    [WalletUtils creatWalletWithMnemonic:self.improtKeys.text.lowercaseString password:self.password.text callback:^(Account *account) {
         [hud hide:YES];
         
+        [self.navigationController popToRootViewControllerAnimated:NO];
+
+        
         WalletDetailVC *detailVC = [[WalletDetailVC alloc]init];
-        [self.navigationController pushViewController:detailVC animated:YES];
+          [self.navigationController pushViewController:detailVC animated:YES];
+//        UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:detailVC];
+//        [self presentViewController:nav animated:YES completion:NULL];
         
         NSMutableDictionary *walletDict = [[NSMutableDictionary alloc]init];
         [walletDict setObject:account.address.checksumAddress forKey:@"address"];

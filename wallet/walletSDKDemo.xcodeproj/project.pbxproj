@@ -218,11 +218,11 @@
 				971B3E2D21E6000B007845F0 /* keystoreImportVC.h */,
 				971B3E2E21E6000B007845F0 /* RecoverMainVC.h */,
 				971B3E2F21E6000B007845F0 /* RecoverMainVC.xib */,
-				971B3E3021E6000B007845F0 /* MnemonicImportVC.h */,
 				971B3E3121E6000B007845F0 /* keystoreImportVC.xib */,
 				971B3E3221E6000B007845F0 /* MnemonicImportVC.xib */,
 				971B3E3321E6000B007845F0 /* RecoverMainVC.m */,
 				971B3E3421E6000B007845F0 /* keystoreImportVC.m */,
+				971B3E3021E6000B007845F0 /* MnemonicImportVC.h */,
 				971B3E3521E6000B007845F0 /* MnemonicImportVC.m */,
 			);
 			path = Recover;

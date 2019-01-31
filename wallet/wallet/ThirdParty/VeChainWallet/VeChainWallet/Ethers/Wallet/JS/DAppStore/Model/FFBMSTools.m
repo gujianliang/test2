@@ -1311,7 +1311,7 @@
 {
     [FFBMSAlertShower showAlert:nil
                             msg:message
-                          inCtl:[UIApplication sharedApplication].keyWindow.rootViewController
+                          inCtl:[FFBMSTools getCurrentVC]
                           items:@[VCNSLocalizedBundleString(@"dialog_yes", nil)]
                      clickBlock:^(NSInteger index) {
                      }];

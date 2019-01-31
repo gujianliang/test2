@@ -44,7 +44,9 @@
 - (IBAction)delWallet:(id)sender
 {
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"currentWallet"];
-    [self.navigationController dismissViewControllerAnimated:YES completion:NULL];
+    [self.navigationController dismissViewControllerAnimated:YES completion:^{
+        NSLog(@"ddd");
+    }];
 }
 
 
