@@ -4,13 +4,21 @@
 <dict>
 	<key>files</key>
 	<dict>
-		<key>Group 3.tiff</key>
+		<key>Group 3.png</key>
 		<data>
-		i23xa6Tmcyv6K3DZJPRmLWcxolo=
+		uBeC2U6l1NA8waF8AO++N7XAhsU=
+		</data>
+		<key>Group 3@2x.png</key>
+		<data>
+		gw/3qBN2UBEmT+373IDYXsDCVtE=
+		</data>
+		<key>Group 3@3x.png</key>
+		<data>
+		tHiz8DcajxCiN7MXHt9YRVT6gCs=
 		</data>
 		<key>Info.plist</key>
 		<data>
-		Ol96vBcI7L/XXVzg94ANnDsv7Mw=
+		epMvEwwOXQa0lor2wY7pH/hd9kQ=
 		</data>
 		<key>en.lproj/Localizable.strings</key>
 		<dict>
@@ -21,17 +29,29 @@
 			<key>optional</key>
 			<true/>
 		</dict>
-		<key>icon_back_black.tiff</key>
+		<key>icon_back_black@2x.png</key>
 		<data>
-		c3ZK60vX2MrZKBbPIlWsDwsyJ2Y=
+		ZxJ/yGRsnFeFKPbeLTyxnYXK80g=
 		</data>
-		<key>icon_close_black.tiff</key>
+		<key>icon_back_black@3x.png</key>
 		<data>
-		MPtDBp3rHyPmtN1wLEEzOp44ba4=
+		6RJYPbRzr6KjF+5QrhkWei6kC40=
 		</data>
-		<key>icon_shibai.tiff</key>
+		<key>icon_close_black@2x.png</key>
 		<data>
-		Hm5gv+zpPCJQyBubW4bTjQjLJ0w=
+		aKfnN9ZsZWimOKIQXZOy1j8+CjE=
+		</data>
+		<key>icon_close_black@3x.png</key>
+		<data>
+		hEgG1jwOeDj4ryLIV1hgyhh7y88=
+		</data>
+		<key>icon_shibai@2x.png</key>
+		<data>
+		svxRTUz+JNPu/G0wdERwZLqxnqU=
+		</data>
+		<key>icon_shibai@3x.png</key>
+		<data>
+		Vzj7kZhHtHGJhOTf0PpXpvpJibM=
 		</data>
 		<key>zh-Hans.lproj/Localizable.strings</key>
 		<dict>
@@ -45,15 +65,37 @@
 	</dict>
 	<key>files2</key>
 	<dict>
-		<key>Group 3.tiff</key>
+		<key>Group 3.png</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			i23xa6Tmcyv6K3DZJPRmLWcxolo=
+			uBeC2U6l1NA8waF8AO++N7XAhsU=
 			</data>
 			<key>hash2</key>
 			<data>
-			M/0eOUS1s77CshUntT/tIBinrwp7pAnuA18vxFOnO3g=
+			EKjMWYUXWwD2eZAabR19OwNRABOBQzqW1KBLyUudZyw=
+			</data>
+		</dict>
+		<key>Group 3@2x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			gw/3qBN2UBEmT+373IDYXsDCVtE=
+			</data>
+			<key>hash2</key>
+			<data>
+			hjMOa3PU+GX4BzetutFhbUfD23DVeJY9VMuB0QzcKKI=
+			</data>
+		</dict>
+		<key>Group 3@3x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			tHiz8DcajxCiN7MXHt9YRVT6gCs=
+			</data>
+			<key>hash2</key>
+			<data>
+			isZqzsNl6NK04iu/ag1V0CreWW/B/IIe0bENj8lyNkI=
 			</data>
 		</dict>
 		<key>en.lproj/Localizable.strings</key>
@@ -69,37 +111,70 @@
 			<key>optional</key>
 			<true/>
 		</dict>
-		<key>icon_back_black.tiff</key>
+		<key>icon_back_black@2x.png</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			c3ZK60vX2MrZKBbPIlWsDwsyJ2Y=
+			ZxJ/yGRsnFeFKPbeLTyxnYXK80g=
 			</data>
 			<key>hash2</key>
 			<data>
-			HQQ+LlpmmvslN+Y+8ccqf6rVLj+41ZwP7T3NWQGM3Yw=
+			N/UHLIx7jL5FlhTe43ToRhrB1AbIn9a2lR+YqU1LfsE=
 			</data>
 		</dict>
-		<key>icon_close_black.tiff</key>
+		<key>icon_back_black@3x.png</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			MPtDBp3rHyPmtN1wLEEzOp44ba4=
+			6RJYPbRzr6KjF+5QrhkWei6kC40=
 			</data>
 			<key>hash2</key>
 			<data>
-			31AScGKpzXlhnrPnzpNh7I6wKPgToXoTuk12LBx5u88=
+			xm7k3NZ7JWluBYIFs7TiLd6h2d+NIcqKpoJHYGS6XEs=
 			</data>
 		</dict>
-		<key>icon_shibai.tiff</key>
+		<key>icon_close_black@2x.png</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			Hm5gv+zpPCJQyBubW4bTjQjLJ0w=
+			aKfnN9ZsZWimOKIQXZOy1j8+CjE=
 			</data>
 			<key>hash2</key>
 			<data>
-			dnrfGwqq7+2mW5GB9uOs4T6G00L47CrLZuitnJEHFUw=
+			9NHC6Ol6zFtmlzmklg6idCJgRDX33CAT5wjnF8QCZfM=
+			</data>
+		</dict>
+		<key>icon_close_black@3x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			hEgG1jwOeDj4ryLIV1hgyhh7y88=
+			</data>
+			<key>hash2</key>
+			<data>
+			5taXh4r0Amg3wG17OvdxebICum4YHhY+8K611rYoWFc=
+			</data>
+		</dict>
+		<key>icon_shibai@2x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			svxRTUz+JNPu/G0wdERwZLqxnqU=
+			</data>
+			<key>hash2</key>
+			<data>
+			zWxIIDBe4Lz2QVs9F52vd08ocu9j7VeUsYLUGGxfT9g=
+			</data>
+		</dict>
+		<key>icon_shibai@3x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			Vzj7kZhHtHGJhOTf0PpXpvpJibM=
+			</data>
+			<key>hash2</key>
+			<data>
+			klnHLedFKRXukfPRffotl/mOzDPackgcr9ZphGyMPxc=
 			</data>
 		</dict>
 		<key>zh-Hans.lproj/Localizable.strings</key>

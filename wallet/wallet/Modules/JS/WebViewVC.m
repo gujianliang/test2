@@ -64,8 +64,10 @@
 // 设置 钱包
     
     NSMutableArray *walletList = [NSMutableArray array];
+    if (currentWallet) {
+        [walletList addObject:currentWallet];
+    }
     
-    [walletList addObject:currentWallet];
     
 //    NSMutableDictionary *walletDict = [NSMutableDictionary dictionary];
 //    [walletDict setObject:@"0x4FCE07115eC3Cc0e2428f5a8c4EEA2412650220e" forKey:@"address"];
