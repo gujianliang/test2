@@ -2,8 +2,8 @@
 //  WalletTopSinglePixelLineView.m
 //  Wallet
 //
-//  Created by 曾新 on 16/4/18.
-//  Copyright © 2016年 Eagle. All rights reserved.
+//  Created by 曾新 on 18/4/18.
+//  Copyright © VECHAIN. All rights reserved.
 //
 
 #import "WalletTopSinglePixelLineView.h"

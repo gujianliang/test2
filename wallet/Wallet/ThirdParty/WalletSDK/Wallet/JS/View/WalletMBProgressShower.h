@@ -2,7 +2,7 @@
 //  WalletMBProgressShower.h
 //  Stonebang
 //
-//  Created by 曾新 on 16/4/7.
+//  Created by 曾新 on 18/4/7.
 //  Copyright © 2016年 stonebang. All rights reserved.
 //
 

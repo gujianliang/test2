@@ -1,5 +1,5 @@
 //
-//  WalletDAppStoreVC.h
+//  WalletDAppHandle.h
 //  VeWallet
 //
 //  Created by 曾新 on 2019/1/11.
@@ -12,7 +12,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface WalletDAppStoreVC : NSObject
+@interface WalletDAppHandle : NSObject
 
 -(instancetype)initWithWalletDict:(NSMutableArray *)walletList;
 

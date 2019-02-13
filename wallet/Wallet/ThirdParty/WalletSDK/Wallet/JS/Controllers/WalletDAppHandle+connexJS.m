@@ -1,12 +1,12 @@
 //
-//  WalletDAppStoreVC+connexJSHandle.m
+//  WalletDAppHandle+connexJS.m
 //  VeWallet
 //
 //  Created by 曾新 on 2019/1/23.
 //  Copyright © 2019年 VeChain. All rights reserved.
 //
 
-#import "WalletDAppStoreVC+connexJSHandle.h"
+#import "WalletDAppHandle+connexJS.h"
 #import "WalletGenesisBlockInfoApi.h"
 #import "WalletVETBalanceApi.h"
 #import <WebKit/WebKit.h>
@@ -23,7 +23,7 @@
 #import "WalletDAppTransferDetailApi.h"
 #import "WalletSingletonHandle.h"
 
-@implementation WalletDAppStoreVC (ConnexJSHandle)
+@implementation WalletDAppHandle (connexJS)
 
 -(void)getGenesisBlockWithRequestId:(NSString *)requestId
                   completionHandler:(void (^)(NSString * __nullable result))completionHandler
@@ -300,9 +300,9 @@
         
         return;
     }
-    WalletSignatureView *signaVC = [[WalletSignatureView alloc] initWithFrame:[WalletTools getCurrentVC].view.bounds];
-    signaVC.tag = SignViewTag;
-    signaVC.transferType = JSVETTransferType;
+    WalletSignatureView *signatureView = [[WalletSignatureView alloc] initWithFrame:[WalletTools getCurrentVC].view.bounds];
+    signatureView.tag = SignViewTag;
+    signatureView.transferType = JSVETTransferType;
     
     WalletCoinModel *coinModel = [[WalletCoinModel alloc]init];
     coinModel.coinName = @"VET";
@@ -310,15 +310,15 @@
     coinModel.decimals = 18;
     [dictParam setValueIfNotNil:coinModel forKey:@"coinModel"];
     
-    signaVC.jsUse = YES;
-    [signaVC updateView:from
+    signatureView.jsUse = YES;
+    [signatureView updateView:from
               toAddress:to
            contractType:NoContract_transferToken
                  amount:[NSString stringWithFormat:@"%.2f",amountTnteger]
                  params:@[dictParam]];
-    [[WalletTools getCurrentVC].navigationController.view addSubview:signaVC];
+    [[WalletTools getCurrentVC].navigationController.view addSubview:signatureView];
     
-    signaVC.transferBlock = ^(NSString * _Nonnull txid) {
+    signatureView.transferBlock = ^(NSString * _Nonnull txid) {
         NSLog(@"txid = %@",txid);
         if (txid.length == 0) {
             
@@ -351,9 +351,9 @@
 {
     
     
-    WalletSignatureView *signaVC = [[WalletSignatureView alloc] initWithFrame:[WalletTools getCurrentVC].view.bounds];
-    signaVC.tag = SignViewTag;
-    signaVC.transferType = JSVTHOTransferType;
+    WalletSignatureView *signatureView = [[WalletSignatureView alloc] initWithFrame:[WalletTools getCurrentVC].view.bounds];
+    signatureView.tag = SignViewTag;
+    signatureView.transferType = JSVTHOTransferType;
     __block NSString *name = @"";
     
     WalletGetSymbolApi *getSymbolApi = [[WalletGetSymbolApi alloc]initWithTokenAddress:to];
@@ -416,15 +416,15 @@
                 return;
             }
             
-            signaVC.jsUse = YES;
-            [signaVC updateView:from
+            signatureView.jsUse = YES;
+            [signatureView updateView:from
                       toAddress:to
                    contractType:NoContract_transferToken
                          amount:[NSString stringWithFormat:@"%.2f",amountTnteger]
                          params:@[dictParam]];
-            [[WalletTools getCurrentVC].navigationController.view addSubview:signaVC];
+            [[WalletTools getCurrentVC].navigationController.view addSubview:signatureView];
             
-            signaVC.transferBlock = ^(NSString * _Nonnull txid) {
+            signatureView.transferBlock = ^(NSString * _Nonnull txid) {
                 NSLog(@"txid = %@",txid);
                 if (txid.length == 0) {
                     
@@ -480,19 +480,19 @@
         
         return;
     }
-    WalletSignatureView *signaVC = [[WalletSignatureView alloc] initWithFrame:[WalletTools getCurrentVC].view.bounds];
-    signaVC.tag = SignViewTag;
-    signaVC.jsUse = YES;
+    WalletSignatureView *signatureView = [[WalletSignatureView alloc] initWithFrame:[WalletTools getCurrentVC].view.bounds];
+    signatureView.tag = SignViewTag;
+    signatureView.jsUse = YES;
     [dictParam setValueIfNotNil:to forKey:@"tokenAddress"];
-    signaVC.transferType = JSContranctTransferType;
-    [signaVC updateView:from
+    signatureView.transferType = JSContranctTransferType;
+    [signatureView updateView:from
               toAddress:to
            contractType:NoContract_transferToken
                  amount:[NSString stringWithFormat:@"%.2f",amountTnteger]
                  params:@[dictParam]];
-    [[WalletTools getCurrentVC].navigationController.view addSubview:signaVC];
+    [[WalletTools getCurrentVC].navigationController.view addSubview:signatureView];
     
-    signaVC.transferBlock = ^(NSString * _Nonnull txid) {
+    signatureView.transferBlock = ^(NSString * _Nonnull txid) {
         NSLog(@"txid = %@",txid);
         if (txid.length == 0) {
             

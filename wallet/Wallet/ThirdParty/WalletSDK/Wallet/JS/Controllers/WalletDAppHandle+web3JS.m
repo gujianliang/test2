@@ -1,12 +1,12 @@
 //
-//  WalletDAppStoreVC+web3JSHardle.m
+//  WalletDAppHandle+web3JSHardle.m
 //  VeWallet
 //
 //  Created by 曾新 on 2019/1/23.
 //  Copyright © 2019年 VeChain. All rights reserved.
 //
 
-#import "WalletDAppStoreVC+web3JSHandle.h"
+#import "WalletDAppHandle+web3JS.h"
 #import "WalletVETBalanceApi.h"
 #import "WalletGenesisBlockInfoApi.h"
 #import "WalletVETBalanceApi.h"
@@ -19,7 +19,8 @@
 #import "WalletGetSymbolApi.h"
 #import "WalletGetDecimalsApi.h"
 #import "WalletSingletonHandle.h"
-@implementation WalletDAppStoreVC (web3JSHandle)
+
+@implementation WalletDAppHandle (web3JS)
 
 - (void)getBalance:(NSString *)callbackId
                  webView:(WKWebView *)webView
@@ -100,39 +101,38 @@
     [dictParam setValueIfNotNil:[BigNumber bigNumberWithHexString:gasPrice] forKey:@"gasPriceCoef"];
     [dictParam setValueIfNotNil:[NSNumber numberWithLong:gas.integerValue] forKey:@"gas"];
     
-    WalletSignatureView *signaVC = [[WalletSignatureView alloc] initWithFrame:[WalletTools getCurrentVC].view.bounds];
-    signaVC.jsUse = YES;
-    signaVC.transferType = JSVETTransferType;
-    [signaVC updateView:from
+    WalletSignatureView *signatureView = [[WalletSignatureView alloc] initWithFrame:[WalletTools getCurrentVC].view.bounds];
+    signatureView.jsUse = YES;
+    signatureView.transferType = JSVETTransferType;
+    [signatureView updateView:from
               toAddress:to
            contractType:NoContract_transferToken
                  amount:[NSString stringWithFormat:@"%lf",amountTnteger]
                  params:@[dictParam]];
-    [[WalletTools getCurrentVC].navigationController.view addSubview:signaVC];
+    [[WalletTools getCurrentVC].navigationController.view addSubview:signatureView];
     
-    signaVC.transferBlock = ^(NSString * _Nonnull txid) {
+    signatureView.transferBlock = ^(NSString * _Nonnull txid) {
         NSLog(@"txid = %@",txid);
         
         if (txid.length == 0) {
             
             [WalletTools callbackWithrequestId:requestId
-                                  webView:webView 
+                                       webView:webView
                                          data:@""
                                    callbackId:callbackId
                                          code:ERROR_CANCEL];
         }else{
             
             [WalletTools callbackWithrequestId:requestId
-                                  webView:webView 
+                                       webView:webView
                                          data:txid
                                    callbackId:callbackId
                                          code:OK];
         }
-        
     };
 }
 
-- (void)WEB3VTHOTransfer:(WalletSignatureView *)signaVC
+- (void)WEB3VTHOTransfer:(WalletSignatureView *)signatureView
                     from:(NSString *)from
                   to:(NSString *)to
               amount:(NSString *)amount
@@ -155,7 +155,7 @@
         NSString *symobl = dictResult[@"data"];
         if (symobl.length < 3) {
             [WalletTools callbackWithrequestId:requestId
-                                  webView:webView 
+                                       webView:webView
                                          data:@""
                                    callbackId:callbackId
                                          code:ERROR_REQUEST_PARAMS];
@@ -172,7 +172,7 @@
             
             if (symoblHex.length < 3) {
                 [WalletTools callbackWithrequestId:requestId
-                                  webView:webView 
+                                           webView:webView
                                              data:@""
                                        callbackId:callbackId
                                   code:ERROR_REQUEST_PARAMS];
@@ -195,7 +195,7 @@
                 cluseData.length == 0) {
                 
                 [WalletTools callbackWithrequestId:requestId
-                                  webView:webView 
+                                           webView:webView
                                              data:@""
                                        callbackId:callbackId
                                              code:ERROR_REQUEST_PARAMS];
@@ -221,29 +221,29 @@
             BigNumber *dataH = [BigNumber bigNumberWithHexString:cluseData];
             [dictParam setValueIfNotNil:dataH.data forKey:@"clouseData"];
             
-            WalletSignatureView *signaVC = [[WalletSignatureView alloc] initWithFrame:[WalletTools getCurrentVC].view.bounds];
-            signaVC.jsUse = YES;
-            signaVC.transferType = JSVTHOTransferType;
-            [signaVC updateView:from
+            WalletSignatureView *signatureView = [[WalletSignatureView alloc] initWithFrame:[WalletTools getCurrentVC].view.bounds];
+            signatureView.jsUse = YES;
+            signatureView.transferType = JSVTHOTransferType;
+            [signatureView updateView:from
                       toAddress:to
                    contractType:NoContract_transferToken
                          amount:[NSString stringWithFormat:@"%.0f",amountTnteger]
                          params:@[dictParam]];
-            [[WalletTools getCurrentVC].navigationController.view addSubview:signaVC];
+            [[WalletTools getCurrentVC].navigationController.view addSubview:signatureView];
             
-            signaVC.transferBlock = ^(NSString * _Nonnull txid) {
+            signatureView.transferBlock = ^(NSString * _Nonnull txid) {
                 NSLog(@"txid = %@",txid);
                 if (txid.length == 0) {
                     
                     [WalletTools callbackWithrequestId:requestId
-                                  webView:webView 
+                                               webView:webView
                                                  data:@""
                                            callbackId:callbackId
                                                  code:ERROR_CANCEL];
                 }else{
                     
                     [WalletTools callbackWithrequestId:requestId
-                                  webView:webView 
+                                               webView:webView
                                                  data:txid
                                            callbackId:callbackId
                                                  code:OK];
@@ -251,7 +251,7 @@
             };
         } failure:^(VCBaseApi *finishApi, NSString *errMsg) {
             [WalletTools callbackWithrequestId:requestId
-                                  webView:webView 
+                                       webView:webView
                                          data:@""
                                    callbackId:callbackId
                                          code:ERROR_SERVER_DATA];
@@ -266,7 +266,7 @@
     }];
 }
 
-- (void)WEB3contractSign:(WalletSignatureView *)signaVC
+- (void)WEB3contractSign:(WalletSignatureView *)signatureView
                       to:(NSString *)to
                    from:(NSString *)from
                   amount:(NSString * )amount
@@ -309,27 +309,27 @@
     
     CGFloat amountTnteger = [BigNumber bigNumberWithHexString:[NSString stringWithFormat:@"%@",amount]].decimalString.floatValue/pow(10, 18);
 
-    signaVC.jsUse = YES;
-    signaVC.transferType = JSContranctTransferType;
-    [signaVC updateView:from
+    signatureView.jsUse = YES;
+    signatureView.transferType = JSContranctTransferType;
+    [signatureView updateView:from
               toAddress:@""
            contractType:NoContract_transferToken
                  amount:[NSString stringWithFormat:@"%.2f",amountTnteger]
                  params:@[dictParam]];
-    [[WalletTools getCurrentVC].navigationController.view addSubview:signaVC];
-    signaVC.transferBlock = ^(NSString * _Nonnull txid) {
+    [[WalletTools getCurrentVC].navigationController.view addSubview:signatureView];
+    signatureView.transferBlock = ^(NSString * _Nonnull txid) {
         NSLog(@"txid = %@",txid);
         if (txid.length == 0) {
             
             [WalletTools callbackWithrequestId:requestId
-                                  webView:webView 
+                                       webView:webView
                                          data:@""
                                    callbackId:callbackId
                                          code:ERROR_CANCEL];
         }else{
             
             [WalletTools callbackWithrequestId:requestId
-                                  webView:webView 
+                                       webView:webView
                                          data:txid
                                    callbackId:callbackId
                                          code:OK];

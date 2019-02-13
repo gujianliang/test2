@@ -8,12 +8,12 @@
 
 #import "WebViewVC.h"
 #import <WebKit/WebKit.h>
-#import <WalletSDK/WalletDAppStoreVC.h>
+#import <WalletSDK/WalletDAppHandle.h>
 
 @interface WebViewVC ()<WKNavigationDelegate,WKUIDelegate>
 {
     WKWebView *_webView;
-    WalletDAppStoreVC *_dsVC;
+    WalletDAppHandle *_dsVC;
     NSString *_url;
 }
 @end
@@ -71,7 +71,7 @@
     
     
     
-    _dsVC = [[WalletDAppStoreVC alloc]initWithWalletDict:walletList];
+    _dsVC = [[WalletDAppHandle alloc]initWithWalletDict:walletList];
 }
 
 //  页面加载完成之后调用

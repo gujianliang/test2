@@ -1,19 +1,19 @@
 //
-//  WalletDAppStoreVC+connexJSHandle.h
+//  WalletDAppHandle+connexJS.h
 //  VeWallet
 //
 //  Created by 曾新 on 2019/1/23.
 //  Copyright © 2019年 VeChain. All rights reserved.
 //
 
-#import "WalletDAppStoreVC.h"
+#import "WalletDAppHandle.h"
 #import <WebKit/WebKit.h>
 #import "WalletSignatureView.h"
 #import "WalletDAppHead.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface WalletDAppStoreVC (ConnexJSHandle)
+@interface WalletDAppHandle (connexJS)
 
 -(void)getGenesisBlockWithRequestId:(NSString *)requestId
                   completionHandler:(void (^)(NSString * __nullable result))completionHandler;

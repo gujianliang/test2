@@ -2,8 +2,8 @@
 //  VCBaseModel.h
 //  Wallet
 //
-//  Created by 曾新 on 16/4/7.
-//  Copyright © 2016年 Eagle. All rights reserved.
+//  Created by 曾新 on 18/4/7.
+//  Copyright © VECHAIN. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

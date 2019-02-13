@@ -1,19 +1,19 @@
 //
-//  WalletDAppStoreVC+web3JSHardle.h
+//  WalletDAppHandle+web3JSHardle.h
 //  VeWallet
 //
 //  Created by 曾新 on 2019/1/23.
 //  Copyright © 2019年 VeChain. All rights reserved.
 //
 
-#import "WalletDAppStoreVC.h"
+#import "WalletDAppHandle.h"
 #import <WebKit/WebKit.h>
 #import "WalletSignatureView.h"
 #import "WalletDAppHead.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface WalletDAppStoreVC (web3JSHandle)
+@interface WalletDAppHandle (web3JS)
 
 - (void)getBalance:(NSString *)callbackId
                  webView:(WKWebView *)webView

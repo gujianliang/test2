@@ -3,7 +3,7 @@
 //  Wallet
 //
 //  Created by 曾新 on 16/5/9.
-//  Copyright © 2016年 Eagle. All rights reserved.
+//  Copyright © VECHAIN. All rights reserved.
 //
 
 #import "WalletVerticalSingleLineView.h"

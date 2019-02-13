@@ -2,12 +2,11 @@
 //  VCBaseApi.m
 //  Wallet
 //
-//  Created by 曾新 on 16/4/7.
-//  Copyright © 2016年 Eagle. All rights reserved.
+//  Created by 曾新 on 18/4/7.
+//  Copyright © VECHAIN. All rights reserved.
 //
 
 #import "NSJSONSerialization+NilDataParameter.h"
-#import "WalletError.h"
 #import "VCBaseApi.h"
 #import "WalletModelFetcher.h"
 #import "NSStringAdditions.h"
@@ -276,7 +275,7 @@
             return;
         }
         
-        if ((errCode != nil && [errCode integerValue] == Wallet_ERROR_OK) || (errCode.integerValue == 0)) {
+        if ((errCode != nil && [errCode integerValue] == 1) || (errCode.integerValue == 0)) {
             
             id objDict = nil;
             NSDictionary *dictEntity = [dict objectForKey:@"data"];
@@ -295,12 +294,12 @@
                 if ([objDict objectForKey:@"pageNo"] != [NSNull null]
                     && [objDict objectForKey:@"pageNo"] !=  nil) {
                     
-                    self.pageNo = [NSString stringWithFormat:@"%ld",([[objDict objectForKey:@"pageNo"] integerValue] + 1)];
+                    self.pageNo = [NSString stringWithFormat:@"%d",([[objDict objectForKey:@"pageNo"] integerValue] + 1)];
                     
                 }else if ([objDict objectForKey:@"page"] != [NSNull null]
                           && [objDict objectForKey:@"page"] != nil) {
                     
-                    self.pageNo = [NSString stringWithFormat:@"%ld",([[objDict objectForKey:@"page"] integerValue] + 1)];
+                    self.pageNo = [NSString stringWithFormat:@"%d",([[objDict objectForKey:@"page"] integerValue] + 1)];
                     
                 }
                 self.status = RequestSuccess;
@@ -423,12 +422,12 @@
                 break;
         }
         
-        self.lastError = [NSError errorWithDomain:kWalletErrorDomain
+        self.lastError = [NSError errorWithDomain:@"Wallet"
                                              code:errCode.integerValue
-                                         userInfo:@{NSLocalizedFailureReasonErrorKey: errMsg.length > 0 ? errMsg : Wallet_MSG_ASIHTTP}];
+                                         userInfo:@{NSLocalizedFailureReasonErrorKey: errMsg.length > 0 ? errMsg : VCNSLocalizedBundleString(@"no_network_hint", nil)}];
         
     }
-    else if (nil == errCode || [errCode intValue] != Wallet_ERROR_OK) {
+    else if (nil == errCode || [errCode intValue] != 1) {
         
         if ([errMsg isEqual:[NSNull null]]) {
             errMsg = VCNSLocalizedBundleString(@"Unknown error", nil);
@@ -436,7 +435,7 @@
             errMsg = [errMsg length] ? errMsg : VCNSLocalizedBundleString(@"Unknown error", nil);
         }
         
-        self.lastError = [NSError errorWithDomain:kWalletErrorDomain
+        self.lastError = [NSError errorWithDomain:@"Wallet"
                                              code:[errCode integerValue]
                                          userInfo:@{NSLocalizedFailureReasonErrorKey:errMsg}];
     } else {
