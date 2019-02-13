@@ -22,7 +22,7 @@
 #import "WalletDappStoreSelectView.h"
 #import "WalletDAppHead.h"
 #import "WalletDAppStoreVC+web3JSHandle.h"
-#import "WalletDAppStoreVC+ConnexJSHandle.h"
+#import "WalletDAppStoreVC+connexJSHandle.h"
 #import "NSJSONSerialization+NilDataParameter.h"
 #import "WalletDAppPeersApi.h"
 #import "WalletDAppTransferDetailApi.h"

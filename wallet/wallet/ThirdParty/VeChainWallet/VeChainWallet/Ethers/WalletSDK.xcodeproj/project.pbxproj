@@ -38,10 +38,10 @@
 		9743A51F21FEB39E0079C582 /* WalletAccountCodeApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 9743A50521FEB39D0079C582 /* WalletAccountCodeApi.m */; };
 		9743A52021FEB39E0079C582 /* WalletDAppStoreVC.h in Headers */ = {isa = PBXBuildFile; fileRef = 9743A50721FEB39D0079C582 /* WalletDAppStoreVC.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9743A52121FEB39E0079C582 /* WalletDAppHead.h in Headers */ = {isa = PBXBuildFile; fileRef = 9743A50821FEB39D0079C582 /* WalletDAppHead.h */; };
-		9743A52221FEB39E0079C582 /* WalletDAppStoreVC+ConnexJSHandle.m in Sources */ = {isa = PBXBuildFile; fileRef = 9743A50921FEB39D0079C582 /* WalletDAppStoreVC+ConnexJSHandle.m */; };
+		9743A52221FEB39E0079C582 /* WalletDAppStoreVC+connexJSHandle.m in Sources */ = {isa = PBXBuildFile; fileRef = 9743A50921FEB39D0079C582 /* WalletDAppStoreVC+connexJSHandle.m */; };
 		9743A52421FEB39E0079C582 /* WalletDAppStoreVC+web3JSHandle.m in Sources */ = {isa = PBXBuildFile; fileRef = 9743A50B21FEB39D0079C582 /* WalletDAppStoreVC+web3JSHandle.m */; };
 		9743A52521FEB39E0079C582 /* WalletDAppStoreVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9743A50C21FEB39D0079C582 /* WalletDAppStoreVC.m */; };
-		9743A52621FEB39E0079C582 /* WalletDAppStoreVC+ConnexJSHandle.h in Headers */ = {isa = PBXBuildFile; fileRef = 9743A50D21FEB39D0079C582 /* WalletDAppStoreVC+ConnexJSHandle.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9743A52621FEB39E0079C582 /* WalletDAppStoreVC+connexJSHandle.h in Headers */ = {isa = PBXBuildFile; fileRef = 9743A50D21FEB39D0079C582 /* WalletDAppStoreVC+connexJSHandle.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9743A52721FEB39E0079C582 /* WalletDAppStoreVC+web3JSHandle.h in Headers */ = {isa = PBXBuildFile; fileRef = 9743A50E21FEB39D0079C582 /* WalletDAppStoreVC+web3JSHandle.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9743A52B21FED0AB0079C582 /* VCBaseApi.h in Headers */ = {isa = PBXBuildFile; fileRef = 9743A52921FED0AB0079C582 /* VCBaseApi.h */; };
 		9743A52C21FED0AB0079C582 /* VCBaseApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 9743A52A21FED0AB0079C582 /* VCBaseApi.m */; };
@@ -340,10 +340,10 @@
 		9743A50521FEB39D0079C582 /* WalletAccountCodeApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WalletAccountCodeApi.m; sourceTree = "<group>"; };
 		9743A50721FEB39D0079C582 /* WalletDAppStoreVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WalletDAppStoreVC.h; sourceTree = "<group>"; };
 		9743A50821FEB39D0079C582 /* WalletDAppHead.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WalletDAppHead.h; sourceTree = "<group>"; };
-		9743A50921FEB39D0079C582 /* WalletDAppStoreVC+ConnexJSHandle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WalletDAppStoreVC+ConnexJSHandle.m"; sourceTree = "<group>"; };
+		9743A50921FEB39D0079C582 /* WalletDAppStoreVC+connexJSHandle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WalletDAppStoreVC+connexJSHandle.m"; sourceTree = "<group>"; };
 		9743A50B21FEB39D0079C582 /* WalletDAppStoreVC+web3JSHandle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WalletDAppStoreVC+web3JSHandle.m"; sourceTree = "<group>"; };
 		9743A50C21FEB39D0079C582 /* WalletDAppStoreVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WalletDAppStoreVC.m; sourceTree = "<group>"; };
-		9743A50D21FEB39D0079C582 /* WalletDAppStoreVC+ConnexJSHandle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WalletDAppStoreVC+ConnexJSHandle.h"; sourceTree = "<group>"; };
+		9743A50D21FEB39D0079C582 /* WalletDAppStoreVC+connexJSHandle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WalletDAppStoreVC+connexJSHandle.h"; sourceTree = "<group>"; };
 		9743A50E21FEB39D0079C582 /* WalletDAppStoreVC+web3JSHandle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WalletDAppStoreVC+web3JSHandle.h"; sourceTree = "<group>"; };
 		9743A52921FED0AB0079C582 /* VCBaseApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VCBaseApi.h; sourceTree = "<group>"; };
 		9743A52A21FED0AB0079C582 /* VCBaseApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VCBaseApi.m; sourceTree = "<group>"; };
@@ -800,8 +800,8 @@
 				9757452221FFF1B10046C8A0 /* WalletDAppSignPreVC.m */,
 				9743A50721FEB39D0079C582 /* WalletDAppStoreVC.h */,
 				9743A50C21FEB39D0079C582 /* WalletDAppStoreVC.m */,
-				9743A50D21FEB39D0079C582 /* WalletDAppStoreVC+ConnexJSHandle.h */,
-				9743A50921FEB39D0079C582 /* WalletDAppStoreVC+ConnexJSHandle.m */,
+				9743A50D21FEB39D0079C582 /* WalletDAppStoreVC+connexJSHandle.h */,
+				9743A50921FEB39D0079C582 /* WalletDAppStoreVC+connexJSHandle.m */,
 				9743A50E21FEB39D0079C582 /* WalletDAppStoreVC+web3JSHandle.h */,
 				9743A50B21FEB39D0079C582 /* WalletDAppStoreVC+web3JSHandle.m */,
 				9757475A22005BA10046C8A0 /* WalletDAppStoreHandle.h */,
@@ -1173,7 +1173,7 @@
 				97EC5C90220150E8001E6B68 /* MBProgressHUD.h in Headers */,
 				9743A52F21FED0DD0079C582 /* VCBaseModel.h in Headers */,
 				9743A52021FEB39E0079C582 /* WalletDAppStoreVC.h in Headers */,
-				9743A52621FEB39E0079C582 /* WalletDAppStoreVC+ConnexJSHandle.h in Headers */,
+				9743A52621FEB39E0079C582 /* WalletDAppStoreVC+connexJSHandle.h in Headers */,
 				9743A52721FEB39E0079C582 /* WalletDAppStoreVC+web3JSHandle.h in Headers */,
 				9736C127214B8671003DE935 /* WalletUtils.h in Headers */,
 				E2FA04861E42A5660013E5A7 /* SecureData.h in Headers */,
@@ -1539,7 +1539,7 @@
 				9743A58E21FED2D50079C582 /* AFNetworkReachabilityManager.m in Sources */,
 				9743A61721FEE2A50079C582 /* MASCompositeConstraint.m in Sources */,
 				97DB21862091B2450040A9D9 /* blake2bp-ref.c in Sources */,
-				9743A52221FEB39E0079C582 /* WalletDAppStoreVC+ConnexJSHandle.m in Sources */,
+				9743A52221FEB39E0079C582 /* WalletDAppStoreVC+connexJSHandle.m in Sources */,
 				9743A5C421FED8970079C582 /* WalletObserverSignPreviewVC.m in Sources */,
 				9743A58821FED2D50079C582 /* AFURLResponseSerialization.m in Sources */,
 				97DB21832091B2450040A9D9 /* blake2sp-ref.c in Sources */,

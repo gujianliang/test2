@@ -1,5 +1,5 @@
 //
-//  walletChangePWVC.h
+//  WalletChangePWVC.h
 //  walletSDKDemo
 //
 //  Created by 曾新 on 2018/12/29.
@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface walletChangePWVC : UIViewController
+@interface WalletChangePWVC : UIViewController
 
 @end
 

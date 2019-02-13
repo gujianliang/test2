@@ -1,25 +1,25 @@
 //
-//  keystoreImportVC.m
+//  KeystoreImportVC.m
 //  walletSDKDemo
 //
 //  Created by 曾新 on 2018/12/26.
 //  Copyright © 2018年 demo. All rights reserved.
 //
 
-#import "keystoreImportVC.h"
+#import "KeystoreImportVC.h"
 #import <walletSDK/WalletUtils.h>
 #import "WalletDetailVC.h"
 //#import "MBProgressHUD.h"
 #import <walletSDK/MBProgressHUD.h>
 #import "AppDelegate.h"
 
-@interface keystoreImportVC ()
+@interface KeystoreImportVC ()
 @property (weak, nonatomic) IBOutlet UITextView *keystoreTextView;
 @property (weak, nonatomic) IBOutlet UITextField *password;
 
 @end
 
-@implementation keystoreImportVC
+@implementation KeystoreImportVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -59,36 +59,12 @@
              
              [self.navigationController popToRootViewControllerAnimated:NO];
              
-             
              WalletDetailVC *detailVC = [[WalletDetailVC alloc]init];
              [self.navigationController pushViewController:detailVC animated:YES];
-//             UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:detailVC];
-//             [self presentViewController:nav animated:YES completion:NULL];
-             
          }
      }];
 }
 
 
-//- (UINavigationController *) getActiveTabController
-//{
-//    AppDelegate * delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
-//    UITabBarController *tabBarController = (UITabBarController*)delegate.rootTab;
-//    UIViewController *nav = [tabBarController.viewControllers objectAtIndex:tabBarController.selectedIndex];
-//    return (UINavigationController *)nav;
-//}
-//
-//- (void) restoreTabNavToRoot
-//{
-//    AppDelegate * delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
-//    [delegate.rootTab dismissViewControllerAnimated:NO completion:NULL];
-//
-//    for (int i = 0; i < delegate.rootTab.viewControllers.count; i++) {
-//        [[self getTabControllerByIndex:i] popToRootViewControllerAnimated:NO];
-//    }
-//
-//    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:NO];
-//    [delegate.rootTab setSelectedIndex:0];
-//}
 
 @end

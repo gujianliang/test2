@@ -1,5 +1,5 @@
 //
-//  WalletDAppStoreVC+ConnexJSHandle.h
+//  WalletDAppStoreVC+connexJSHandle.h
 //  VeWallet
 //
 //  Created by 曾新 on 2019/1/23.

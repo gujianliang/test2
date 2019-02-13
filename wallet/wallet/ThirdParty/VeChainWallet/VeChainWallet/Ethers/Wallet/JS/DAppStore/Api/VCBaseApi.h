@@ -181,16 +181,6 @@ typedef void (^requestBlock)(NSDictionary *requestDict,NSError *error);
                       error:(NSError *)error;
 
 
-/**
- API convenience constructor
- @param path request path
- @param method method
- @param parms parms
- @return model
- */
-+(instancetype)modelWithRequestPath:(NSString *)path
-                             method:(RequestMethod)method
-                              parms:(NSDictionary *)parms;
 
 +(instancetype)modelWithRequestAbsoluteURLString:(NSString *)absoluteString
                                           method:(RequestMethod)method

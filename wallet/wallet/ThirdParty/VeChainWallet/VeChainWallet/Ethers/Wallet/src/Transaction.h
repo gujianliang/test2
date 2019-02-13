@@ -80,6 +80,6 @@ extern NSString * _Nullable chainName(ChainId chainId);
 // 观察钱包获得 txid
 - (NSString *_Nullable)obersverTxID:(NSString *_Nullable)address;
 
-- (NSData *)getSigntureMessage;
+- (NSData *_Nullable)getSigntureMessage;
 
 @end

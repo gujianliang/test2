@@ -1,12 +1,12 @@
 //
-//  WalletDAppStoreVC+ConnexJSHandle.m
+//  WalletDAppStoreVC+connexJSHandle.m
 //  VeWallet
 //
 //  Created by 曾新 on 2019/1/23.
 //  Copyright © 2019年 VeChain. All rights reserved.
 //
 
-#import "WalletDAppStoreVC+ConnexJSHandle.h"
+#import "WalletDAppStoreVC+connexJSHandle.h"
 #import "WalletGenesisBlockInfoApi.h"
 #import "WalletVETBalanceApi.h"
 #import <WebKit/WebKit.h>

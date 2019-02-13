@@ -13,13 +13,6 @@
 {
     NSMutableArray *_newList;
 }
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
-}
-*/
 
 - (instancetype)initWithFrame:(CGRect)frame
 {
@@ -113,13 +106,9 @@
     if (_block) {
         _block(dict[@"netName"],dict[@"netUrl"]);
     }
-    
     [[NSUserDefaults standardUserDefaults]setObject:dict forKey:@"CurrentNet"];
-    
     [self removeFromSuperview];
 }
-
-
 
 - (void)selectNode:(UIButton *)sender
 {

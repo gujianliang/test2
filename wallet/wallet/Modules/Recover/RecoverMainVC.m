@@ -7,7 +7,7 @@
 //
 
 #import "RecoverMainVC.h"
-#import "keystoreImportVC.h"
+#import "KeystoreImportVC.h"
 #import "MnemonicImportVC.h"
 
 @interface RecoverMainVC ()
@@ -29,7 +29,7 @@
 
 - (IBAction)keystoreImport:(id)sender
 {
-    keystoreImportVC *vc = [[keystoreImportVC alloc]init];
+    KeystoreImportVC *vc = [[KeystoreImportVC alloc]init];
     [self.navigationController pushViewController:vc animated:YES];
 }
 

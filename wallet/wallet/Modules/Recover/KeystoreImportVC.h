@@ -1,5 +1,5 @@
 //
-//  keystoreImportVC.h
+//  KeystoreImportVC.h
 //  walletSDKDemo
 //
 //  Created by 曾新 on 2018/12/26.
@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface keystoreImportVC : UIViewController
+@interface KeystoreImportVC : UIViewController
 
 @end
 

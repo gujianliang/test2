@@ -20,19 +20,7 @@
 {
     [super viewDidLoad];
     self.title = @"添加网络";
-    // Do any additional setup after loading the view from its nib.
-    
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 - (IBAction)addNet:(id)sender
 {
@@ -47,7 +35,6 @@
         [newList addObject:dict];
         
         [[NSUserDefaults standardUserDefaults] setObject:newList forKey:@"netList"];
-        
         [[NSUserDefaults standardUserDefaults]setObject:dict forKey:@"CurrentNet"];
     }
     [self.navigationController popViewControllerAnimated:YES];

@@ -10,7 +10,7 @@
 #import <WebKit/WebKit.h>
 #import <walletSDK/WalletDAppStoreVC.h>
 
-@interface WebViewVC ()<WKNavigationDelegate,WKUIDelegate,WKScriptMessageHandler>
+@interface WebViewVC ()<WKNavigationDelegate,WKUIDelegate>
 {
     WKWebView *_webView;
     WalletDAppStoreVC *_dsVC;
@@ -28,20 +28,17 @@
     }
     return self;
 }
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     _webView = [[WKWebView alloc]initWithFrame:CGRectMake(0, 0,self.view.frame.size.width  , self.view.frame.size.height)];
     _webView.UIDelegate = self;
     _webView.navigationDelegate = self;
+    
     NSURL *webURL = [NSURL URLWithString:@"https://cdn.vechain.com/vechainthorwallet/h5/test.html"];
     webURL = [NSURL URLWithString:@"https://appwallet.oss-cn-shanghai.aliyuncs.com/testJS/test.html"];
-    
-        webURL = [NSURL URLWithString:@"https://appwallet.oss-cn-shanghai.aliyuncs.com/testJS/dist/index.html#test"];
-//    webURL = [NSURL URLWithString:@"https://wallet-dapps-test.vechaindev.com/#/dapps"];
-        webURL = [NSURL URLWithString:@"https://appwallet.oss-cn-shanghai.aliyuncs.com/testJS/yijianfabi/dist/index.html"];
-    //    webURL = [NSURL URLWithString:@"http://192.168.43.114:8080/#/test"];
+    webURL = [NSURL URLWithString:@"https://appwallet.oss-cn-shanghai.aliyuncs.com/testJS/dist/index.html#test"];
+    webURL = [NSURL URLWithString:@"https://appwallet.oss-cn-shanghai.aliyuncs.com/testJS/yijianfabi/dist/index.html"];
     
     if (_url.length == 0) {
         [_webView loadRequest:[NSURLRequest requestWithURL:webURL]];
@@ -51,15 +48,7 @@
     
     [self.view addSubview:_webView];
     
-    
-//    NSMutableDictionary *currentDict = [NSMutableDictionary dictionary];
-//    [currentDict setObject:account.keystore forKey:@"keystore"];
-//    [currentDict setObject:account.address.checksumAddress forKey:@"address"];
-//
-//    [[NSUserDefaults standardUserDefaults]setObject:currentDict forKey:@"currentWallet"];
-    
     NSDictionary *currentWallet = [[NSUserDefaults standardUserDefaults]objectForKey:@"currentWallet"];
-    
     
 // 设置 钱包
     

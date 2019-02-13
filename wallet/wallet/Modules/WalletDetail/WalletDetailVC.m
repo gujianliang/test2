@@ -13,20 +13,20 @@
 #import "WalletMoreInfoVC.h"
 #import "WebViewVC.h"
 #import "CoverView.h"
-
 #import "NETDetailVC.h"
 #import "AddNetVC.h"
 
 @interface WalletDetailVC ()<UISearchBarDelegate>
 {
     NSString *_blockHost;
-    NSString *_vetAmount;
-    NSString *_vthoAmount;
 }
 @property (weak, nonatomic) IBOutlet UILabel *addressLabel;
 @property (weak, nonatomic) IBOutlet UILabel *vetAmountLabel;
 @property (weak, nonatomic) IBOutlet UILabel *vthoAmountLabel;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
+
+@property (nonatomic, copy)NSString *vetAmount;
+@property (nonatomic, copy)NSString *vthoAmount;
 
 @end
 
@@ -67,7 +67,6 @@
 
 - (void)selectNET
 {
-    
     CoverView *coverView = [self.view viewWithTag:90];
     if (!coverView) {
         coverView = [[CoverView alloc]initWithFrame:self.view.frame];
@@ -145,7 +144,7 @@
                                        options:2];
          }
          self.vetAmountLabel.text = coinAmount;
-         _vetAmount = amount;
+         self.vetAmount = amount;
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error)
      {
         
@@ -178,7 +177,7 @@
                                       options:2];
         }
         self.vthoAmountLabel.text = coinAmount;
-        _vthoAmount= amount;
+        self.vthoAmount= amount;
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"dd");

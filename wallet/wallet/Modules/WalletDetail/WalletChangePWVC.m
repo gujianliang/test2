@@ -1,25 +1,23 @@
 //
-//  walletChangePWVC.m
+//  WalletChangePWVC.m
 //  walletSDKDemo
 //
 //  Created by 曾新 on 2018/12/29.
 //  Copyright © 2018年 demo. All rights reserved.
 //
 
-#import "walletChangePWVC.h"
-//#import <walletSDK/WalletUtils.h>
+#import "WalletChangePWVC.h"
 #import <walletSDK/Wallet.h>
-//#import "MBProgressHUD.h"
 #import <walletSDK/MBProgressHUD.h>
 
-@interface walletChangePWVC ()
+@interface WalletChangePWVC ()
 @property (weak, nonatomic) IBOutlet UITextField *oldPWTextField;
 @property (weak, nonatomic) IBOutlet UITextField *nextPWTextField;
 @property (weak, nonatomic) IBOutlet UITextField *makeSureTextField;
 
 @end
 
-@implementation walletChangePWVC
+@implementation WalletChangePWVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];

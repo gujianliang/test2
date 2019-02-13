@@ -20,7 +20,7 @@
     NSString *_tokenContractAddress;
     NSString *_blockHost;
     
-    MBProgressHUD *_hud;
+   
 }
 
 @property (weak, nonatomic) IBOutlet UITextView *receiveAddressTextView;
@@ -33,6 +33,8 @@
 @property (weak, nonatomic) IBOutlet UIImageView *coinIcon;
 @property (weak, nonatomic) IBOutlet UISlider *minerFeeSlider;
 @property (nonatomic, strong)UITextField *pwTextField;
+@property (nonatomic, strong)MBProgressHUD *hud;
+
 @end
 
 @implementation TransferVC
@@ -152,6 +154,7 @@
 }
 - (void)getBestBlockInfo:(Transaction *)transaction
 {
+//    @weakify
     NSString *urlString = [_blockHost stringByAppendingString:@"/blocks/best"];
     AFHTTPSessionManager *httpManagerGenesisBlock = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:urlString]];
     [httpManagerGenesisBlock GET:urlString
@@ -166,7 +169,7 @@
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
                             
-        [_hud hide:YES];
+        [self.hud hide:YES];
 
     }];
 }
@@ -204,7 +207,7 @@
                              callback:^(Account *account, NSError *NSError)
     {
         if (account == nil) {
-            [_hud hide:YES];
+            [self.hud hide:YES];
             NSLog(@"pw error");
             return ;
         }

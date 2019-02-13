@@ -7,7 +7,7 @@
 //
 
 #import "WalletMoreInfoVC.h"
-#import "walletChangePWVC.h"
+#import "WalletChangePWVC.h"
 #import <walletSDK/WalletUtils.h>
 
 @interface WalletMoreInfoVC ()
@@ -28,7 +28,7 @@
 
 - (IBAction)changePW:(id)sender
 {
-    walletChangePWVC *changeVC = [[walletChangePWVC alloc]init];
+    WalletChangePWVC *changeVC = [[WalletChangePWVC alloc]init];
     [self.navigationController pushViewController:changeVC animated:YES];
 }
 
