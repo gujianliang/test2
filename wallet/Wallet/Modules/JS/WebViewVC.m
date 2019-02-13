@@ -8,7 +8,7 @@
 
 #import "WebViewVC.h"
 #import <WebKit/WebKit.h>
-#import <walletSDK/WalletDAppStoreVC.h>
+#import <WalletSDK/WalletDAppStoreVC.h>
 
 @interface WebViewVC ()<WKNavigationDelegate,WKUIDelegate>
 {

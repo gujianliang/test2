@@ -121,8 +121,8 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "wallet/Modules/WalletDetail/WalletDetailVC.m"
-            timestampString = "570607512.011687"
+            filePath = "Wallet/Modules/WalletDetail/WalletDetailVC.m"
+            timestampString = "571740120.669989"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "66"
@@ -137,8 +137,8 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "wallet/Modules/WalletDetail/WalletDetailVC.m"
-            timestampString = "570607512.011757"
+            filePath = "Wallet/Modules/WalletDetail/WalletDetailVC.m"
+            timestampString = "571740120.670091"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "61"
@@ -177,38 +177,6 @@
             endingLineNumber = "230"
             landmarkName = "-sendRaw:"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[TransferVC sendRaw:]"
-                  moduleName = "walletSDKDemo"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/cengxin/Documents/VeChain/iOS/ios-wallet-sdk/wallet/wallet/Modules/Transfer/TransferVC.m"
-                  timestampString = "570607438.443614"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "230"
-                  endingLineNumber = "230"
-                  offsetFromSymbolStart = "506">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__22-[TransferVC sendRaw:]_block_invoke"
-                  moduleName = "walletSDKDemo"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/cengxin/Documents/VeChain/iOS/ios-wallet-sdk/wallet/wallet/Modules/Transfer/TransferVC.m"
-                  timestampString = "570607438.447057"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "230"
-                  endingLineNumber = "230"
-                  offsetFromSymbolStart = "52">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1097,8 +1065,8 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "wallet/Modules/WalletDetail/WalletDetailVC.m"
-            timestampString = "570607512.0146331"
+            filePath = "Wallet/Modules/WalletDetail/WalletDetailVC.m"
+            timestampString = "571740120.671398"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "86"

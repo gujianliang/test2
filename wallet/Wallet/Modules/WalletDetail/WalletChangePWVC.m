@@ -7,8 +7,8 @@
 //
 
 #import "WalletChangePWVC.h"
-#import <walletSDK/Wallet.h>
-#import <walletSDK/MBProgressHUD.h>
+#import <WalletSDK/Wallet.h>
+#import <WalletSDK/MBProgressHUD.h>
 
 @interface WalletChangePWVC ()
 @property (weak, nonatomic) IBOutlet UITextField *oldPWTextField;

@@ -7,18 +7,16 @@
 //
 
 #import "WalletTransferVC.h"
-#import <walletSDK/WalletUtils.h>
-#import <walletSDK/Payment.h>
-#import <walletSDK/MBProgressHUD.h>
-#import <walletSDK/AFHTTPSessionManager.h>
+#import <WalletSDK/WalletUtils.h>
+#import <WalletSDK/Payment.h>
+#import <WalletSDK/MBProgressHUD.h>
+#import <WalletSDK/AFHTTPSessionManager.h>
 
 @interface WalletTransferVC ()<UITextFieldDelegate>
 {
     NSString *_toAddress;
     NSString *_tokenContractAddress;
-    NSString *_blockHost;
-    
-   
+    NSString *_blockHost;   
 }
 
 @property (weak, nonatomic) IBOutlet UITextView *receiveAddressTextView;
@@ -230,7 +228,7 @@
                         progress:^(NSProgress * _Nonnull uploadProgress) {
                         } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject)
      {
-        [_hud hide:YES];
+        [self.hud hide:YES];
 
         NSDictionary *result = (NSDictionary *)responseObject;
         NSString *txid = result[@"id"];
@@ -250,9 +248,7 @@
          
      } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error)
      {
-         
-         [_hud hide:YES];
-
+         [self.hud hide:YES];
      }];
 }
 

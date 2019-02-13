@@ -7,9 +7,9 @@
 // 
 
 #import "WalletDetailVC.h"
-#import <walletSDK/AFNetworking.h>
+#import <WalletSDK/AFNetworking.h>
 #import "WalletTransferVC.h"
-#import <walletSDK/Payment.h>
+#import <WalletSDK/Payment.h>
 #import "WalletMoreInfoVC.h"
 #import "WebViewVC.h"
 #import "WalletCoverView.h"
