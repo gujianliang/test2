@@ -1,16 +1,16 @@
 //
-//  FFBMSTextView.h
-//  FFBMS
+//  WalletTextView.h
+//  Wallet
 //
 //  Created by 曾新 on 16/4/19.
 //  Copyright © 2016年 Eagle. All rights reserved.
 //
 
-#import "FFBMSTextView.h"
+#import "WalletTextView.h"
 
 const NSInteger placeLabelTag = 77777;
 
-@implementation FFBMSTextView
+@implementation WalletTextView
 
 - (void)setText:(NSString *)text
 {

@@ -1,14 +1,14 @@
 //
-//  FFBMSVerticalSingleLineView.h
-//  FFBMS
+//  WalletTopSinglePixelLineView.h
+//  Wallet
 //
-//  Created by 曾新 on 16/5/9.
+//  Created by 曾新 on 16/4/18.
 //  Copyright © 2016年 Eagle. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 
-@interface FFBMSVerticalSingleLineView : UIView
+@interface WalletTopSinglePixelLineView : UIView
 
 @property (nonatomic, strong) UIColor *lineColor;
 

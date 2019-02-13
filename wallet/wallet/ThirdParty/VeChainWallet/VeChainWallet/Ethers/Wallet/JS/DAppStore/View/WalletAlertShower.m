@@ -1,32 +1,32 @@
 //
-//  FFBMSAlertShower.m
+//  WalletAlertShower.m
 //  Stonebang
 //
 //  Created by 曾新 on 16/4/7.
 //  Copyright © 2016年 stonebang. All rights reserved.
 //
 
-#import "FFBMSAlertShower.h"
-#import "FFBMSVerticalSingleLineView.h"
-#import "FFBMSTopSinglePixelLineView.h"
-#import "FFBMSTextView.h"
+#import "WalletAlertShower.h"
+#import "WalletVerticalSingleLineView.h"
+#import "WalletTopSinglePixelLineView.h"
+#import "WalletTextView.h"
 //#import "SelectableLabel.h"
 
 #define  CellHeight 60
-@interface FFBMSAlertShower ()<UITextViewDelegate>
+@interface WalletAlertShower ()<UITextViewDelegate>
 
-@property (nonatomic, strong) __block FFBMSTextView *inputView;
+@property (nonatomic, strong) __block WalletTextView *inputView;
 @property (nonatomic, assign) BOOL nonSecureInput;
 @property (nonatomic, assign) BOOL isPlaceHolder;
 
 @end
 
-@implementation FFBMSAlertShower
+@implementation WalletAlertShower
 {
     NSDate *_clickDate;
     NSMutableString *_originalText;
 }
-//SIGLEIMP(FFBMSAlertShower)
+//SIGLEIMP(WalletAlertShower)
 
 
 +(void)removeAlertShowerinCtl:(UIViewController*)ctl {
@@ -86,7 +86,7 @@
         }
     }
 
-    FFBMSAlertShower* shower = [[FFBMSAlertShower alloc]init];
+    WalletAlertShower* shower = [[WalletAlertShower alloc]init];
     shower.alertClickBack = clickCallBack;
     [shower setAlpha:1];
     [shower setTag:8080000];
@@ -120,7 +120,7 @@
         }
     }
     
-    FFBMSAlertShower* shower = [[FFBMSAlertShower alloc]init];
+    WalletAlertShower* shower = [[WalletAlertShower alloc]init];
     shower.alertClickBack = clickCallBack;
     [shower setAlpha:1];
     [shower setTag:8080000];
@@ -206,11 +206,11 @@
             [btn setTitleColor:HEX_RGB(0x898CD3) forState:UIControlStateNormal];
         }
         
-        FFBMSVerticalSingleLineView *verticalLineVeiw = [[FFBMSVerticalSingleLineView alloc]initWithFrame:CGRectMake(btnW*i, btnY + 20, 1, 40)];
+        WalletVerticalSingleLineView *verticalLineVeiw = [[WalletVerticalSingleLineView alloc]initWithFrame:CGRectMake(btnW*i, btnY + 20, 1, 40)];
         [contentView addSubview:verticalLineVeiw];
     }
     
-    FFBMSTopSinglePixelLineView *bottomLine = [[FFBMSTopSinglePixelLineView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(contentView.frame) - 40, contentView.frame.size.width, 1)];
+    WalletTopSinglePixelLineView *bottomLine = [[WalletTopSinglePixelLineView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(contentView.frame) - 40, contentView.frame.size.width, 1)];
     [contentView addSubview:bottomLine];
     
     [self setFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
@@ -254,7 +254,7 @@
         }
     }
     
-    FFBMSAlertShower* shower = [[FFBMSAlertShower alloc]init];
+    WalletAlertShower* shower = [[WalletAlertShower alloc]init];
     shower.alertClickBack = clickCallBack;
     [shower setAlpha:1];
     [shower setTag:8080000];
@@ -285,14 +285,14 @@
             [view removeFromSuperview];        }
     }
     
-    FFBMSAlertShower* shower = [[FFBMSAlertShower alloc]init];
+    WalletAlertShower* shower = [[WalletAlertShower alloc]init];
     shower.alertClickBack = clickCallBack;
     [shower setAlpha:1];
     [shower setTag:8080000];
     [shower initAlertViewWithTitle:title msg:msg magAlignment:(NSTextAlignment)textAlignment inView:superView items:items];
 }
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex NS_DEPRECATED_IOS(2_0, 9_0){
-    FFBMSAlertShower* shower = [[FFBMSAlertShower alloc]init];
+    WalletAlertShower* shower = [[WalletAlertShower alloc]init];
     if(shower.alertClickBack){
         shower.alertClickBack(buttonIndex);
     }
@@ -415,7 +415,7 @@
             make.top.mas_equalTo(msgLable.mas_bottom).offset(35);
         }];
         
-        FFBMSVerticalSingleLineView *verticalLineVeiw = [[FFBMSVerticalSingleLineView alloc]init];
+        WalletVerticalSingleLineView *verticalLineVeiw = [[WalletVerticalSingleLineView alloc]init];
         [contentView addSubview:verticalLineVeiw];
         
         [verticalLineVeiw mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -426,7 +426,7 @@
         }];
     }
     if (items.count == 1) {
-        FFBMSTopSinglePixelLineView *verticalLineVeiw = [[FFBMSTopSinglePixelLineView alloc]init];
+        WalletTopSinglePixelLineView *verticalLineVeiw = [[WalletTopSinglePixelLineView alloc]init];
         [contentView addSubview:verticalLineVeiw];
         
         [verticalLineVeiw mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -439,7 +439,7 @@
     
     viewY = viewY + 80;
     
-    FFBMSTopSinglePixelLineView *bottomLine = [[FFBMSTopSinglePixelLineView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(contentView.frame) - 40, contentView.frame.size.width, 1)];
+    WalletTopSinglePixelLineView *bottomLine = [[WalletTopSinglePixelLineView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(contentView.frame) - 40, contentView.frame.size.width, 1)];
     [contentView addSubview:bottomLine];
     
     [self setFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
@@ -490,7 +490,7 @@
         superView = ctl.view;
     }
     
-    FFBMSAlertShower* shower = [[FFBMSAlertShower alloc]init];
+    WalletAlertShower* shower = [[WalletAlertShower alloc]init];
     if(clickCallBack){
         shower.alertClickBack = clickCallBack;
     }
@@ -523,7 +523,7 @@
         UIView *cell = [self creatCell:items[i] index:i];
         [contentView addSubview:cell];
     }
-    FFBMSTopSinglePixelLineView *bottomLine = [[FFBMSTopSinglePixelLineView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(contentView.frame) - CellHeight, SCREEN_WIDTH - 40, 1)];
+    WalletTopSinglePixelLineView *bottomLine = [[WalletTopSinglePixelLineView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(contentView.frame) - CellHeight, SCREEN_WIDTH - 40, 1)];
     [contentView addSubview:bottomLine];
     
     [self setFrame:CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, SCREEN_HEIGHT)];
@@ -560,7 +560,7 @@
 {
     UIView *cell = [[UIView alloc]initWithFrame:CGRectMake(0, index * CellHeight, SCREEN_WIDTH - 40, CellHeight)];
     
-    FFBMSTopSinglePixelLineView *bottomLine = [[FFBMSTopSinglePixelLineView alloc]initWithFrame:CGRectMake(0, CellHeight - 1, SCREEN_WIDTH - 40, 1)];
+    WalletTopSinglePixelLineView *bottomLine = [[WalletTopSinglePixelLineView alloc]initWithFrame:CGRectMake(0, CellHeight - 1, SCREEN_WIDTH - 40, 1)];
     [cell addSubview:bottomLine];
     
     UIButton *btnCancel = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH - 40, CellHeight)];
@@ -580,7 +580,7 @@
            items:(NSArray<NSString*>*)items
       clickBlock:(void(^)(NSInteger tag,NSString *msg))clickCallBack
 {
-    [FFBMSAlertShower showInputView:@"" inputText:inputText isPlaceholder:YES secureInput:YES inCtl:ctl items:items clickBlock:clickCallBack];
+    [WalletAlertShower showInputView:@"" inputText:inputText isPlaceholder:YES secureInput:YES inCtl:ctl items:items clickBlock:clickCallBack];
 }
 
 +(void)showInputView:(NSString*)title
@@ -602,7 +602,7 @@
         superView = ctl.view;
     }
     
-    FFBMSAlertShower* shower = [[FFBMSAlertShower alloc]init];
+    WalletAlertShower* shower = [[WalletAlertShower alloc]init];
     if(clickCallBack){
         shower.alertClickBackF = clickCallBack;
     }
@@ -686,7 +686,7 @@
     self.inputView.returnKeyType = UIReturnKeyDone;
     [contentView addSubview:self.inputView];
     
-    FFBMSTopSinglePixelLineView *bottomLine = [[FFBMSTopSinglePixelLineView alloc]initWithFrame:CGRectMake(40, CGRectGetMaxY(self.inputView.frame) + 5, contentView.frame.size.width - 80, 1)];
+    WalletTopSinglePixelLineView *bottomLine = [[WalletTopSinglePixelLineView alloc]initWithFrame:CGRectMake(40, CGRectGetMaxY(self.inputView.frame) + 5, contentView.frame.size.width - 80, 1)];
     [contentView addSubview:bottomLine];
     
     UIButton *rightBtn = [[UIButton alloc]initWithFrame:CGRectMake(CGRectGetMaxX(_inputView.frame)- 8, 5, 30, 30)];
@@ -718,7 +718,7 @@
             [btn setTitleColor:HEX_RGB(0x898CD3) forState:UIControlStateNormal];
         }
         
-        FFBMSVerticalSingleLineView *verticalLineVeiw = [[FFBMSVerticalSingleLineView alloc]initWithFrame:CGRectMake(btnW*i, btnY + 30, 1, 20)];
+        WalletVerticalSingleLineView *verticalLineVeiw = [[WalletVerticalSingleLineView alloc]initWithFrame:CGRectMake(btnW*i, btnY + 30, 1, 20)];
         [contentView addSubview:verticalLineVeiw];
     }
     
@@ -752,7 +752,7 @@
                              superView.frame.size.height - Scale(30.0) - Scale(65),
                              superView.frame.size.width - Scale(40.0),
                              Scale(30.0));
-    FFBMSAlertShower *shower = [[FFBMSAlertShower alloc] initWithFrame:rect];
+    WalletAlertShower *shower = [[WalletAlertShower alloc] initWithFrame:rect];
     [shower setAlpha:1];
     [shower setTag:8080000];
     [superView addSubview:shower];
@@ -804,7 +804,7 @@
                              superView.frame.size.height - Scale(30.0) - Scale(65),
                              superView.frame.size.width - Scale(40.0),
                              Scale(30.0));
-    FFBMSAlertShower *shower = [[FFBMSAlertShower alloc] initWithFrame:rect];
+    WalletAlertShower *shower = [[WalletAlertShower alloc] initWithFrame:rect];
     [shower setAlpha:1];
     [shower setTag:8080000];
     [superView addSubview:shower];
@@ -863,7 +863,7 @@
         }
     }
     
-    FFBMSAlertShower* shower = [[FFBMSAlertShower alloc]init];
+    WalletAlertShower* shower = [[WalletAlertShower alloc]init];
     shower.alertClickBack = clickCallBack;
     [shower setAlpha:1];
     [shower setTag:8080000];
@@ -983,11 +983,11 @@
             }
         }];
         
-        FFBMSVerticalSingleLineView *verticalLineVeiw = [[FFBMSVerticalSingleLineView alloc]initWithFrame:CGRectMake(btnW*i, btnY + 20, 1, 40)];
+        WalletVerticalSingleLineView *verticalLineVeiw = [[WalletVerticalSingleLineView alloc]initWithFrame:CGRectMake(btnW*i, btnY + 20, 1, 40)];
         [contentView addSubview:verticalLineVeiw];
     }
     
-    FFBMSTopSinglePixelLineView *bottomLine = [[FFBMSTopSinglePixelLineView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(contentView.frame) - 40, contentView.frame.size.width, 1)];
+    WalletTopSinglePixelLineView *bottomLine = [[WalletTopSinglePixelLineView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(contentView.frame) - 40, contentView.frame.size.width, 1)];
     [contentView addSubview:bottomLine];
     
     [self setFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
@@ -1003,9 +1003,9 @@
     [contentView setClipsToBounds:YES];
 }
 
-- (FFBMSTextView *)inputView{
+- (WalletTextView *)inputView{
     if (!_inputView) {
-        FFBMSTextView *inputView = [[FFBMSTextView alloc] initWithFrame:CGRectMake(15, 5, 200, 35)];
+        WalletTextView *inputView = [[WalletTextView alloc] initWithFrame:CGRectMake(15, 5, 200, 35)];
         inputView.placeHolderYOffset = -1;
         inputView.delegate = self;
         inputView.backgroundColor = [UIColor clearColor];

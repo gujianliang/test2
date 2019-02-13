@@ -1,6 +1,6 @@
 //
-//  FFBMSTools.h
-//  FFBMS
+//  WalletTools.h
+//  Wallet
 //
 //  Created by 曾新 on 16/4/26.
 //  Copyright © 2016年 Eagle. All rights reserved.
@@ -84,7 +84,7 @@ typedef NS_ENUM(NSInteger , BusinessType)
     BusinessType_MARKET_PRICE_BUY = 9,      // 市场购买
 };
 
-@interface FFBMSTools : NSObject
+@interface WalletTools : NSObject
 
 
 + (NSString *)dateConvertString:(NSDate *)date format:(NSString *)format;
@@ -200,13 +200,11 @@ typedef NS_ENUM(NSInteger , BusinessType)
 // abi decode
 + (NSString *)abiDecodeString:(NSString *)input;
 
-+ (void)callback:(NSString *)requestId
-            data:(id)data
-      callbackID:(NSString *)callbackId
-         webview:(WKWebView *)webView
-            code:(NSInteger)code
-         message:(NSString *)message;
-
++ (void)callbackWithrequestId:(NSString *)requestId
+                      webView:(WKWebView *)webView
+                         data:(id)data
+                   callbackId:(NSString *)callbackId
+                         code:(NSInteger)code;
 
 + (void)jsErrorAlert:(NSString *)message;
 

@@ -1,14 +1,14 @@
 //
-//  FFBMSTools+NodeModel.m
+//  WalletTools+NodeModel.m
 //  VeWallet
 //
 //  Created by HuChao on 2018/12/28.
 //  Copyright © 2018年 VeChain. All rights reserved.
 //
 #import "FFBMConvertNodeModel.h"
-#import "FFBMSTools+NodeModel.h"
+#import "WalletTools+NodeModel.h"
 
-@implementation FFBMSTools (NodeModel)
+@implementation WalletTools (NodeModel)
 
 // type 转节点名称
 + (NSString *)convertXnodeName:(NSString *)nodeType {

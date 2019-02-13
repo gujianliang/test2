@@ -1,36 +1,36 @@
 //
-//  FFBMSMBProgressShower.m
+//  WalletMBProgressShower.m
 //  Stonebang
 //
 //  Created by 曾新 on 16/4/7.
 //  Copyright © 2016年 stonebang. All rights reserved.
 //
 
-#import "FFBMSMBProgressShower.h"
+#import "WalletMBProgressShower.h"
 
-const NSInteger kFFBMSHudTag = 12345;
+const NSInteger kWalletHudTag = 12345;
 
-@implementation FFBMSMBProgressShower
+@implementation WalletMBProgressShower
 
 +(MBProgressHUD*)showCircleIn:(UIView*)view{
-    MBProgressHUD *org_hud = [view viewWithTag:kFFBMSHudTag];
+    MBProgressHUD *org_hud = [view viewWithTag:kWalletHudTag];
     if(org_hud){
         [org_hud hide:YES];
     }
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:view
                                               animated:YES];
-    hud.tag = kFFBMSHudTag;
+    hud.tag = kWalletHudTag;
     return hud;
 }
 
 +(MBProgressHUD*)showTextIn:(UIView*)view Text:(NSString*)text{
-    MBProgressHUD *org_hud = [view viewWithTag:kFFBMSHudTag];
+    MBProgressHUD *org_hud = [view viewWithTag:kWalletHudTag];
     if(org_hud){
         [org_hud hide:YES];
     }
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:view
                                               animated:YES];
-    hud.tag = kFFBMSHudTag;
+    hud.tag = kWalletHudTag;
     hud.mode = MBProgressHUDModeText;
     hud.labelText =  text;
     //hud.label.text = text;
@@ -41,13 +41,13 @@ const NSInteger kFFBMSHudTag = 12345;
 }
 
 +(MBProgressHUD*)showMulLineTextIn:(UIView*)view Text:(NSString*)text{
-    MBProgressHUD *org_hud = [view viewWithTag:kFFBMSHudTag];
+    MBProgressHUD *org_hud = [view viewWithTag:kWalletHudTag];
     if(org_hud){
         [org_hud hide:YES];
     }
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:view
                                               animated:YES];
-    hud.tag = kFFBMSHudTag;
+    hud.tag = kWalletHudTag;
     hud.mode = MBProgressHUDModeText;
     hud.detailsLabelText =  text;
 
@@ -60,20 +60,20 @@ const NSInteger kFFBMSHudTag = 12345;
 +(void)showTextIn:(UIView*)view Text:(NSString*)text During:(NSTimeInterval)time{
     if (text.length == 0) {
         NSLog(@"网络请求失败，不做弹框");
-        MBProgressHUD *org_hud = [view viewWithTag:kFFBMSHudTag];
+        MBProgressHUD *org_hud = [view viewWithTag:kWalletHudTag];
         if(org_hud){
             [org_hud hide:YES];
         }
         return;
     }
     
-    MBProgressHUD *org_hud = [view viewWithTag:kFFBMSHudTag];
+    MBProgressHUD *org_hud = [view viewWithTag:kWalletHudTag];
     if(org_hud){
         [org_hud hide:YES];
     }
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:view
                                               animated:YES];
-    hud.tag = kFFBMSHudTag;
+    hud.tag = kWalletHudTag;
     hud.mode = MBProgressHUDModeText;
     hud.detailsLabelText =  VCNSLocalizedBundleString(text, nil);
     hud.xOffset = 0.f;
@@ -84,20 +84,20 @@ const NSInteger kFFBMSHudTag = 12345;
 +(void)showMulLineTextIn:(UIView*)view Text:(NSString*)text During:(NSTimeInterval)time{
     if (text.length == 0) {
         NSLog(@"网络请求失败，不做弹框");
-        MBProgressHUD *org_hud = [view viewWithTag:kFFBMSHudTag];
+        MBProgressHUD *org_hud = [view viewWithTag:kWalletHudTag];
         if(org_hud){
             [org_hud hide:YES];
         }
         return;
     }
     
-    MBProgressHUD *org_hud = [view viewWithTag:kFFBMSHudTag];
+    MBProgressHUD *org_hud = [view viewWithTag:kWalletHudTag];
     if(org_hud){
         [org_hud hide:YES];
     }
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:view
                                               animated:YES];
-    hud.tag = kFFBMSHudTag;
+    hud.tag = kWalletHudTag;
     hud.mode = MBProgressHUDModeText;
     hud.detailsLabelText =  text;
     //hud.label.text = text;
@@ -108,14 +108,14 @@ const NSInteger kFFBMSHudTag = 12345;
 
 + (MBProgressHUD*)showLoadData:(UIView*)view Text:(NSString*)text
 {
-    MBProgressHUD *org_hud = [view viewWithTag:kFFBMSHudTag];
+    MBProgressHUD *org_hud = [view viewWithTag:kWalletHudTag];
     if(org_hud){
         [org_hud hide:YES];
         [org_hud removeFromSuperview];
 //        return nil;
     }
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:view animated:YES];
-    hud.tag = kFFBMSHudTag;
+    hud.tag = kWalletHudTag;
     hud.labelText = text;
     // Set the details label text. Let's make it multiline this time
     return hud;
@@ -123,7 +123,7 @@ const NSInteger kFFBMSHudTag = 12345;
 
 
 +(void)hide:(UIView*)view{
-    MBProgressHUD* hud = [view viewWithTag:kFFBMSHudTag];
+    MBProgressHUD* hud = [view viewWithTag:kWalletHudTag];
     if(hud){
       [hud hide:YES];
     }

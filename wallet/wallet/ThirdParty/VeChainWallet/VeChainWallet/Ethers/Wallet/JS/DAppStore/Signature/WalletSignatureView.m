@@ -76,7 +76,7 @@
     _params = params;
     _amount = amount;
 
-    NSDictionary *dictContractData = [FFBMSTools getContractData:contractType params:params];
+    NSDictionary *dictContractData = [WalletTools getContractData:contractType params:params];
     _gasLimit = dictContractData[@"gasLimit"];
     _contractClauseData = dictContractData[@"contractClauseData"];
     _additionalMsg = dictContractData[@"additionalMsg"];
@@ -169,7 +169,7 @@
     // 返回箭头按钮
     _backBtn = [[UIButton alloc]init];
     
-    UIImage *iamge = [FFBMSTools localImageWithName:@"icon_close_black"];
+    UIImage *iamge = [WalletTools localImageWithName:@"icon_close_black"];
     
     [_backBtn setImage:iamge forState:UIControlStateNormal];
     [titleView addSubview:_backBtn];
@@ -189,7 +189,7 @@
             [self removeFromSuperview];
             BOOL hasListVC = NO;
             if (!hasListVC) {
-                [[FFBMSTools getCurrentVC].navigationController popViewControllerAnimated:YES];
+                [[WalletTools getCurrentVC].navigationController popViewControllerAnimated:YES];
             }
             
         }else{
@@ -243,12 +243,12 @@
         if ([_amount isEqualToString:@"0"]) {
             _valueLabel.text = @"0.00 VET";
         }else{
-            NSString *vet = [FFBMSTools thousandSeparator:_amount decimals:YES];
+            NSString *vet = [WalletTools thousandSeparator:_amount decimals:YES];
             _valueLabel.text = [NSString stringWithFormat:@"%@ VET",_amount.length == 0 ? @"0.00" : vet] ;
         }
     }else if(_contractType == NoContract_transferToken){
         
-        NSString *vet = [FFBMSTools thousandSeparator:_amount decimals:YES];
+        NSString *vet = [WalletTools thousandSeparator:_amount decimals:YES];
         
         _valueLabel.text = [NSString stringWithFormat:@"%@ %@",_amount.length == 0 ? @"0.00" : vet,_currentCoinModel.coinName.length > 0 ?_currentCoinModel.coinName :@"VET" ];
     }
@@ -265,7 +265,7 @@
         make.top.mas_equalTo(Scale(20.0));
     }];
 
-    NSString *gasFormat = [NSString stringWithFormat:@"%@ VTHO",_gasLimit.length == 0 ? @"0.00" : [FFBMSTools thousandSeparator:_gasLimit decimals:NO]];
+    NSString *gasFormat = [NSString stringWithFormat:@"%@ VTHO",_gasLimit.length == 0 ? @"0.00" : [WalletTools thousandSeparator:_gasLimit decimals:NO]];
     
     CGFloat jsOffset = 0;
     
@@ -280,12 +280,12 @@
     }
     
     [self creatCell:VCNSLocalizedBundleString(@"contract_payment_info_row2_title", nil)
-              value:[FFBMSTools checksumAddress:_fromAddress]
+              value:[WalletTools checksumAddress:_fromAddress]
                   Y:52 * 2 + 20 + jsOffset
           adjustBtn:NO];
     
     [self creatCell:VCNSLocalizedBundleString(@"contract_payment_info_row3_title", nil)
-              value:[FFBMSTools checksumAddress:_toAddress]
+              value:[WalletTools checksumAddress:_toAddress]
                   Y:52 * 3 + 20 + jsOffset
           adjustBtn:NO];
     
@@ -311,7 +311,7 @@
     @weakify(self)
     nextBtn.block = ^(UIButton *btn) {
         @strongify(self)
-        [FFBMSTools checkNetwork:^(BOOL t) {
+        [WalletTools checkNetwork:^(BOOL t) {
             if (t) {
                 
                 if (self.jsUse && _transferType == JSContranctTransferType) {
@@ -331,7 +331,7 @@
                         [self enterSignView];
                     };
                     UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:signProVC];
-                    [[FFBMSTools getCurrentVC] presentViewController:nav animated:YES completion:^{
+                    [[WalletTools getCurrentVC] presentViewController:nav animated:YES completion:^{
                         
                     }];
                 }else if (self.jsUse){
@@ -363,9 +363,9 @@
                             
                             NSString *msg = [NSString stringWithFormat:@"您当前地址余额%.2fVET，不够支付%.2fVET",vetBalance.floatValue,tempAmount.floatValue];
                             
-                            [FFBMSAlertShower showAlert:@"余额不足提示"
+                            [WalletAlertShower showAlert:@"余额不足提示"
                                                     msg:msg
-                                                  inCtl:[FFBMSTools getCurrentVC]
+                                                  inCtl:[WalletTools getCurrentVC]
                                                   items:@[@"确定"]
                                              clickBlock:^(NSInteger index)
                              {
@@ -393,9 +393,9 @@
                                 
                                 NSString *msg = [NSString stringWithFormat:@"您当前地址余额%.2fVTHO，不够支付%.2fVTHO",vthoBalanceNum.floatValue,_gasLimit.floatValue];
                                 
-                                [FFBMSAlertShower showAlert:@"余额不足提示"
+                                [WalletAlertShower showAlert:@"余额不足提示"
                                                         msg:msg
-                                                      inCtl:[FFBMSTools getCurrentVC]
+                                                      inCtl:[WalletTools getCurrentVC]
                                                       items:@[@"确定"]
                                                  clickBlock:^(NSInteger index)
                                  {
@@ -617,14 +617,14 @@
     _middleBtn.block = ^(UIButton *btn) {
         @strongify(self);
         if (_pwTextField.text.length == 0) {
-            [FFBMSAlertShower showAlert:nil
+            [WalletAlertShower showAlert:nil
                                     msg:VCNSLocalizedBundleString(@"wallet_detail_modify_password_dialog_title", nil)
                                   inCtl:[self getVC]
                                   items:@[VCNSLocalizedBundleString(@"dialog_yes", nil)]
                              clickBlock:^(NSInteger index) {
                              }];
         }else{
-            [FFBMSTools checkNetwork:^(BOOL t) {
+            [WalletTools checkNetwork:^(BOOL t) {
                 if (t) {
                     [self sign];
                 }
@@ -724,7 +724,7 @@
         BOOL hasListVC = NO;
        
         if (!hasListVC) {
-            [[FFBMSTools getCurrentVC].navigationController popViewControllerAnimated:YES];
+            [[WalletTools getCurrentVC].navigationController popViewControllerAnimated:YES];
         }
     };
 }
@@ -733,13 +733,13 @@
 {
     NSLog(@"dd");
     if (_scrollView.contentOffset.x == SCREEN_WIDTH) {
-        [_backBtn setImage:[FFBMSTools localImageWithName:@"icon_back_black"] forState:UIControlStateNormal];
+        [_backBtn setImage:[WalletTools localImageWithName:@"icon_back_black"] forState:UIControlStateNormal];
         
     }else if (_scrollView.contentOffset.x == SCREEN_WIDTH * 2){
-        [_backBtn setImage:[FFBMSTools localImageWithName:@"icon_close_black"] forState:UIControlStateNormal];
+        [_backBtn setImage:[WalletTools localImageWithName:@"icon_close_black"] forState:UIControlStateNormal];
     }
     else{
-        [_backBtn setImage:[FFBMSTools localImageWithName:@"icon_close_black"] forState:UIControlStateNormal];
+        [_backBtn setImage:[WalletTools localImageWithName:@"icon_close_black"] forState:UIControlStateNormal];
     }
 }
 
@@ -781,7 +781,7 @@
 {
     [_timeBtn setTitle:@"" forState:UIControlStateNormal];
     [_lastBtn setTitle:VCNSLocalizedBundleString(@"dialog_confirm", nil) forState:UIControlStateNormal];
-    [_timeBtn setImage:[FFBMSTools localImageWithName:@"Group 3"] forState:UIControlStateNormal];
+    [_timeBtn setImage:[WalletTools localImageWithName:@"Group 3"] forState:UIControlStateNormal];
     
     UILabel *titleLabel = [_LastView viewWithTag:10];
     titleLabel.text = VCNSLocalizedBundleString(@"contract_payment_confirm_success", nil);
@@ -877,7 +877,7 @@
             }
     }
     
-    return [FFBMSTools getCurrentVC];
+    return [WalletTools getCurrentVC];
 }
 
 @end

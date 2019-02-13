@@ -1,6 +1,6 @@
 //
 //  UIColor+SNFoundation.m
-//  FFBMS
+//  Wallet
 //
 //  Created by 曾新 on 16/4/11.
 //  Copyright © 2016年 Eagle. All rights reserved.

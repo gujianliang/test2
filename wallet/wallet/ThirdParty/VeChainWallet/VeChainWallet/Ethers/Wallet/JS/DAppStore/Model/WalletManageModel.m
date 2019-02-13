@@ -6,7 +6,7 @@
 //  Copyright © 2018年 VeChain. All rights reserved.
 //
 
-#import "FFBMSTools+NodeModel.h"
+#import "WalletTools+NodeModel.h"
 #import "WalletManageModel.h"
 
 @implementation WalletManageModel
@@ -23,7 +23,7 @@
     
     NSString *nodeType = addressNodeType.uppercaseString;
     
-    self.addressNodeTypeImageName = [FFBMSTools convertXnodeImageName:nodeType];
+    self.addressNodeTypeImageName = [WalletTools convertXnodeImageName:nodeType];
 }
 
 @end

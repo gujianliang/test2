@@ -1,6 +1,6 @@
 //
-//  FFBMSTextView.h
-//  FFBMS
+//  WalletTextView.h
+//  Wallet
 //
 //  Created by 曾新 on 16/4/19.
 //  Copyright © 2016年 Eagle. All rights reserved.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FFBMSTextView : UITextView
+@interface WalletTextView : UITextView
 
 @property (strong, nonatomic) UILabel *placeholderLab;
 

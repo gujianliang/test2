@@ -15,16 +15,16 @@
 #import "UIColor+SNFoundation.h"
 #import "Masonry.h"
 #import "WalletUserDefaultManager.h"
-#import "FFBMSTools.h"
+#import "WalletTools.h"
 #import "WalletApiManageMacro.h"
-#import "FFBMSAlertShower.h"
+#import "WalletAlertShower.h"
 #import "NSStringAdditions.h"
 #import "UIButton+block.h"
 
 //#import "RACEXTScope.h"
 
-#define VCNSLocalizedString(key, comment) [FFBMSTools localeStringWithKey:(key)]
-#define VCNSLocalizedBundleString(key, comment) [FFBMSTools localStringBundlekey:(key)]
+#define VCNSLocalizedString(key, comment) [WalletTools localeStringWithKey:(key)]
+#define VCNSLocalizedBundleString(key, comment) [WalletTools localStringBundlekey:(key)]
 
 #define SCREEN_WIDTH          ([UIScreen mainScreen].bounds.size.width)
 #define SCREEN_HEIGHT         ([UIScreen mainScreen].bounds.size.height)

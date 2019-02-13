@@ -1,12 +1,12 @@
 //
-//  FFBMSTools.m
-//  FFBMS
+//  WalletTools.m
+//  Wallet
 //
 //  Created by 曾新 on 16/4/26.
 //  Copyright © 2016年 Eagle. All rights reserved.
 //
 
-#import "FFBMSTools.h"
+#import "WalletTools.h"
 #include <arpa/inet.h>
 #include <netdb.h>
 #include <net/if.h>
@@ -17,9 +17,10 @@
 #import "WalletPaymentQRCodeView.h"
 #import "NSMutableDictionary+Helpers.h"
 #import "AFNetworkReachabilityManager.h"
-#import "FFBMSMBProgressShower.h"
+#import "WalletMBProgressShower.h"
+#import "WalletDAppHead.h"
 
-@implementation FFBMSTools
+@implementation WalletTools
 
 
 + (NSString *)dateConvertString:(NSDate *)date format:(NSString *)format
@@ -260,12 +261,12 @@
     AFNetworkReachabilityManager *reachManager = [AFNetworkReachabilityManager sharedManager];
     if (![reachManager isReachable]) {
 
-        UIViewController * vc= [FFBMSTools getCurrentVC];
+        UIViewController * vc= [WalletTools getCurrentVC];
         UIView *cententView = vc.view;
         if (vc.navigationController) {
             cententView = vc.navigationController.view;
         }
-        [FFBMSMBProgressShower showTextIn:cententView
+        [WalletMBProgressShower showTextIn:cententView
                                      Text:VCNSLocalizedBundleString(@"no_network_hint", nil)
                                    During:1.5];
         result = NO;
@@ -508,7 +509,7 @@
         {
             gasLimit = @"200";
             methodID = APPLY_UPGRADE;
-            contractClauseData = [FFBMSTools contractMethodId:methodID params:params];
+            contractClauseData = [WalletTools contractMethodId:methodID params:params];
             additionalMsg = VCNSLocalizedBundleString(@"contract_payment_info_row4_content_node_upgrde", nil);
         }
             break;
@@ -516,7 +517,7 @@
         {
             gasLimit = @"100";
             methodID = CANCEL_UPGRADE;
-            contractClauseData = [FFBMSTools contractMethodId:methodID params:params];
+            contractClauseData = [WalletTools contractMethodId:methodID params:params];
             additionalMsg = VCNSLocalizedBundleString(@"contract_payment_info_row4_content_cancel_upgrade", nil);
         }
             break;
@@ -524,7 +525,7 @@
         {
             gasLimit = @"350";
             methodID = CREATE_SALE_AUCTION;
-            contractClauseData = [FFBMSTools contractMethodId:methodID params:params];
+            contractClauseData = [WalletTools contractMethodId:methodID params:params];
             additionalMsg = VCNSLocalizedBundleString(@"contract_payment_info_row4_content_public", nil);
         }
             break;
@@ -532,7 +533,7 @@
         {
             gasLimit = @"350";          // 定向拍卖
             methodID = CREATE_DIRECTION_SALE_AUCTION;
-            contractClauseData = [FFBMSTools contractMethodId:methodID params:params];
+            contractClauseData = [WalletTools contractMethodId:methodID params:params];
             additionalMsg = VCNSLocalizedBundleString(@"contract_payment_info_row4_content_auction", nil);
         }
             break;
@@ -540,7 +541,7 @@
         {
             gasLimit = @"350";
             methodID = BID;
-            contractClauseData = [FFBMSTools contractMethodId:methodID params:params];
+            contractClauseData = [WalletTools contractMethodId:methodID params:params];
             additionalMsg = VCNSLocalizedBundleString(@"contract_payment_info_row4_content_buy", nil);
         }
             break;
@@ -548,7 +549,7 @@
         {
             gasLimit = @"350";
             methodID = BID;
-            contractClauseData = [FFBMSTools contractMethodId:methodID params:params];
+            contractClauseData = [WalletTools contractMethodId:methodID params:params];
             additionalMsg = VCNSLocalizedBundleString(@"contract_payment_info_row4_content_receive", nil);
         }
             break;
@@ -556,7 +557,7 @@
         {
             gasLimit = @"350";
             methodID = CANCEL_AUCTION;
-            contractClauseData = [FFBMSTools contractMethodId:methodID params:params];
+            contractClauseData = [WalletTools contractMethodId:methodID params:params];
             additionalMsg = VCNSLocalizedBundleString(@"contract_payment_info_row4_content_cancel_onsale", nil);
         }
             break;
@@ -564,7 +565,7 @@
         {
             gasLimit = @"200";
             methodID = NODE_TRANSFER;
-            contractClauseData = [FFBMSTools contractMethodId:methodID params:params];
+            contractClauseData = [WalletTools contractMethodId:methodID params:params];
             additionalMsg = VCNSLocalizedBundleString(@"transfer_thor_node_title", nil);
         }
             break;
@@ -574,7 +575,7 @@
 //        {
 //            gasLimit = @"300";
 //            methodID = NODE_TRANSFER;
-//            contractClauseData = [FFBMSTools contractMethodId:methodID params:params];
+//            contractClauseData = [WalletTools contractMethodId:methodID params:params];
 //            additionalMsg = VCNSLocalizedBundleString(@"transfer_thor_node_title", nil);
 //        }
 //            break;
@@ -591,7 +592,7 @@
     }
 }
 
-+(ContractType)methodIDConvertContractType:(NSString *)methodID
++ (ContractType)methodIDConvertContractType:(NSString *)methodID
 {
     if ([methodID isEqualToString:APPLY_UPGRADE]) { // 申请节点升级
         return Contract_appyNode;
@@ -654,7 +655,6 @@
     return @"";
 }
 
-
 + (NSString *)splitLongStr:(NSString *)inputStr
 {
     NSMutableArray *strList = [NSMutableArray array];
@@ -705,13 +705,12 @@
 
 + (NSString *)abiDecodeString:(NSString *)input
 {
-    NSString *test = input;
-    test = [test stringByReplacingOccurrencesOfString:@"0x" withString:@""];
-    NSString *first = [test substringWithRange:NSMakeRange(0, 64)];
+    input = [input stringByReplacingOccurrencesOfString:@"0x" withString:@""];
+    NSString *first = [input substringWithRange:NSMakeRange(0, 64)];
     first = [NSString stringWithFormat:@"0x%@",first];
     //16进制转10
     NSString *strLength = [BigNumber bigNumberWithHexString:first].decimalString;
-    NSString *last = [test substringWithRange:NSMakeRange(64, test.length - 64)];
+    NSString *last = [input substringWithRange:NSMakeRange(64, input.length - 64)];
     
     NSString *second = [last substringWithRange:NSMakeRange(0, strLength.integerValue * 2)];
     NSInteger secondLength = [BigNumber bigNumberWithHexString:[NSString stringWithFormat:@"0x%@",second]].decimalString.integerValue;
@@ -720,19 +719,18 @@
     
     NSString *realText = [result substringWithRange:NSMakeRange(0, secondLength * 2)];
     
-    NSString *rr = [FFBMSTools stringFromHexString:realText];
+    NSString *rr = [WalletTools stringFromHexString:realText];
     return rr;
 }
 
-+ (void)callback:(NSString *)requestId
-            data:(id)data
-      callbackID:(NSString *)callbackId
-         webview:(WKWebView *)webView
-            code:(NSInteger)code
-         message:(NSString *)message
++ (void)callbackWithrequestId:(NSString *)requestId
+                      webView:(WKWebView *)webView
+                         data:(id)data
+                   callbackId:(NSString *)callbackId
+                         code:(NSInteger)code
 {
-
-    NSDictionary *packageDict = [FFBMSTools packageWithRequestId:requestId
+    NSString *message = [self errorMessageWith:code];
+    NSDictionary *packageDict = [WalletTools packageWithRequestId:requestId
                                                             data:data
                                                             code:code
                                                          message:message];
@@ -751,16 +749,25 @@
 {
     switch (code) {
         case 200:
-           return @"";
+           return ERROR_REQUEST_PARAMS_MSG;
             break;
         case 201:
-           return @"";
+           return ERROR_REQUEST_METHOD_MSG;
             break;
         case 202:
-           return @"";
+           return ERROR_REQUEST_MULTI_CLAUSE_MSG;
             break;
         case 203:
-            return @"";
+            return ERROR_REQUEST_QR_TOO_LONG_MSG;
+            break;
+        case 300:
+            return ERROR_NETWORK_MSG;
+            break;
+        case 400:
+            return ERROR_SERVER_DATA_MSG;
+            break;
+        case 500:
+            return ERROR_CANCEL_MSG;
             break;
             
         default:
@@ -771,9 +778,9 @@
 
 + (void)jsErrorAlert:(NSString *)message
 {
-    [FFBMSAlertShower showAlert:nil
+    [WalletAlertShower showAlert:nil
                             msg:message
-                          inCtl:[FFBMSTools getCurrentVC]
+                          inCtl:[WalletTools getCurrentVC]
                           items:@[VCNSLocalizedBundleString(@"dialog_yes", nil)]
                      clickBlock:^(NSInteger index) {
                      }];
@@ -812,4 +819,5 @@
     }
     return valueFormated;
 }
+
 @end

@@ -25,32 +25,32 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)getAccountRequestId:(NSString *)requestId
                     webView:(WKWebView *)webView
                     address:(NSString *)address
-                 callbackID:(NSString *)callbackID;
+                 callbackId:(NSString *)callbackId;
 
-- (void)getAccountCode:(NSString *)callbackID
+- (void)getAccountCode:(NSString *)callbackId
                webView:(WKWebView *)webView
              requestId:(NSString *)requestId
                address:(NSString *)address;
 
 
-- (void)getBlock:(NSString *)callbackID
+- (void)getBlock:(NSString *)callbackId
          webView:(WKWebView *)webView
        requestId:(NSString *)requestId
         revision:(NSString *)revision;
 
-- (void)getTransaction:(NSString *)callbackID
+- (void)getTransaction:(NSString *)callbackId
                webView:(WKWebView *)webView
              requestId:(NSString *)requestId
                   txID:(NSString *)txID;
 
 
-- (void)getTransactionReceipt:(NSString *)callbackID
+- (void)getTransactionReceipt:(NSString *)callbackId
                       webView:(WKWebView *)webView
                     requestId:(NSString *)requestId
                          txid:(NSString *)txid;
 
 -(void)getAccountsWithRequestId:(NSString *)requestId
-                     callbackID:(NSString *)callbackID
+                     callbackId:(NSString *)callbackId
                         webView:(WKWebView *)webView;
 
 
@@ -61,7 +61,7 @@ NS_ASSUME_NONNULL_BEGIN
           requestId:(NSString *)requestId
                 gas:(NSNumber *)gas
             webView:(WKWebView *)webView
-         callbackID:(NSString *)callbackID;
+         callbackId:(NSString *)callbackId;
 
 
 - (void)VTHOTransferDictParam:(NSMutableDictionary *)dictParam
@@ -70,7 +70,7 @@ NS_ASSUME_NONNULL_BEGIN
            requestId:(NSString *)requestId
                  gas:(NSNumber *)gas
              webView:(WKWebView *)webView
-          callbackID:(NSString *)callbackID
+          callbackId:(NSString *)callbackId
            gasCanUse:(BigNumber *)gasCanUse
           clauseData:(NSString *)clauseData;
 
@@ -81,7 +81,7 @@ NS_ASSUME_NONNULL_BEGIN
            requestId:(NSString *)requestId
                  gas:(NSNumber *)gas
              webView:(WKWebView *)webView
-          callbackID:(NSString *)callbackID
+          callbackId:(NSString *)callbackId
           clauseData:(NSString *)clauseData;
 
 - (void)methodAsClauseWithDictP:(NSDictionary *)dictP

@@ -119,7 +119,7 @@ static NSString *cellIndef = @"addressIndef";
         make.height.mas_equalTo(40);
     }];
     
-    NSString *vthoValue = self.transactionModel.gas.length == 0 ? @"0.00": [FFBMSTools thousandSeparator:self.transactionModel.cost decimals:YES];
+    NSString *vthoValue = self.transactionModel.gas.length == 0 ? @"0.00": [WalletTools thousandSeparator:self.transactionModel.cost decimals:YES];
     NSString *gas = [NSString stringWithFormat:@"%@ VTHO",vthoValue];
     
     if ([self.transactionModel.cost isEqualToString:@"0"]) {
@@ -131,11 +131,11 @@ static NSString *cellIndef = @"addressIndef";
                   Y:80 + kNavigationBarHeight];
     
     [self creatCell:VCNSLocalizedBundleString(@"contract_payment_info_row2_title", nil)
-              value:[FFBMSTools checksumAddress:self.transactionModel.from]
+              value:[WalletTools checksumAddress:self.transactionModel.from]
                   Y:80 + 50 + kNavigationBarHeight];
     
     [self creatCell:VCNSLocalizedBundleString(@"contract_payment_info_row3_title", nil)
-              value:[FFBMSTools checksumAddress:self.transactionModel.to]
+              value:[WalletTools checksumAddress:self.transactionModel.to]
                   Y:80 + 50 * 2 + kNavigationBarHeight];
     
     UIButton *signBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -167,8 +167,8 @@ static NSString *cellIndef = @"addressIndef";
     transaction.ChainTag   = [BigNumber bigNumberWithHexString:self.transactionModel.chainTag];
     transaction.BlockRef   =  [BigNumber bigNumberWithHexString:self.transactionModel.blockRef];
     
-    ContractType contractType = [FFBMSTools methodIDConvertContractType:self.transactionModel.methodId];
-    NSDictionary *dictContractData = [FFBMSTools getContractData:contractType
+    ContractType contractType = [WalletTools methodIDConvertContractType:self.transactionModel.methodId];
+    NSDictionary *dictContractData = [WalletTools getContractData:contractType
                                                           params:self.transactionModel.contractParams];
     NSString *contractClauseData = dictContractData[@"contractClauseData"];
     
@@ -228,7 +228,7 @@ static NSString *cellIndef = @"addressIndef";
             amount = [NSString stringWithFormat:@"%@ %@", self.transactionModel.amount, self.transactionModel.symbol];
         }
         
-        NSString *to = [FFBMSTools checksumAddress:self.transactionModel.to];
+        NSString *to = [WalletTools checksumAddress:self.transactionModel.to];
         to = to.length > 0 ? to : @" ";
         dataArr = @[
                     @{DataKey : VCNSLocalizedBundleString(@"cold_transfer_to_address", nil), DataValue :to},

@@ -1,5 +1,5 @@
 //
-//  FFBMSMBProgressShower.h
+//  WalletMBProgressShower.h
 //  Stonebang
 //
 //  Created by 曾新 on 16/4/7.
@@ -11,7 +11,7 @@
 #import "MBProgressHUD.h"
 
 
-@interface FFBMSMBProgressShower : NSObject
+@interface WalletMBProgressShower : NSObject
 
 /**
  *  展示菊花轮

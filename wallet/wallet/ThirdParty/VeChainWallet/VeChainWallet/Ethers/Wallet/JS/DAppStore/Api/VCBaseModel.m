@@ -1,6 +1,6 @@
 //
 //  VCBaseModel.m
-//  FFBMS
+//  Wallet
 //
 //  Created by 曾新 on 16/4/7.
 //  Copyright © 2016年 Eagle. All rights reserved.
@@ -41,15 +41,6 @@
     return nil;
 }
 
-//+(LKDBHelper *)getUsingLKDBHelper {
-//    return [[LKDBHelper alloc] initWithDBName:@"bmwdatabase.db"];
-//}
 
-// columns layout changes :(notNull , unique , defaultValue, unionPremaryKey)
-+(void)runMigration {
-    
-//    [[self getUsingLKDBHelper] executeSQL:@"update" arguments:nil];
-    
-}
 
 @end

@@ -11,14 +11,14 @@
 #import "WalletBlockInfoApi.h"
 #import "WalletTransactionApi.h"
 #import "WalletSingletonHandle.h"
-#import "FFBMSMBProgressShower.h"
+#import "WalletMBProgressShower.h"
 
 @implementation WalletSignatureView (transferToken)
 
 - (void)signTransfer:(void(^)(NSString *txid))transferBlock;
 {
     // 显示Loading
-    [FFBMSMBProgressShower showCircleIn:self];
+    [WalletMBProgressShower showCircleIn:self];
     
     Transaction *transaction = [[Transaction alloc] init];
     
@@ -26,9 +26,9 @@
     SecureData* randomData = [SecureData secureDataWithLength:8];
     int result = SecRandomCopyBytes(kSecRandomDefault, randomData.length, randomData.mutableBytes);
     if (result != 0) {
-        [FFBMSAlertShower showAlert:nil
+        [WalletAlertShower showAlert:nil
                                 msg:VCNSLocalizedBundleString(@"transfer_wallet_send_fail", nil)
-                              inCtl:[FFBMSTools getCurrentVC]
+                              inCtl:[WalletTools getCurrentVC]
                               items:@[VCNSLocalizedBundleString(@"dialog_yes", nil)]
                          clickBlock:^(NSInteger index) {
                          }];
@@ -113,10 +113,10 @@
             [Account decryptSecretStorageJSON:keystore password:self.pwTextField.text callback:^(Account *account, NSError *NSError) {
                 @strongify(self)
                 if (!account) {
-                    [FFBMSMBProgressShower hide:self];
-                    [FFBMSAlertShower showAlert:nil
+                    [WalletMBProgressShower hide:self];
+                    [WalletAlertShower showAlert:nil
                                             msg:VCNSLocalizedBundleString(@"transfer_wallet_password_error", nil)
-                                          inCtl:[FFBMSTools getCurrentVC]
+                                          inCtl:[WalletTools getCurrentVC]
                                           items:@[VCNSLocalizedBundleString(@"重试", nil)]
                                      clickBlock:^(NSInteger index)
                     {
@@ -148,17 +148,17 @@
     WalletTransactionApi *transationApi1 = [[WalletTransactionApi alloc]initWithRaw:raw];
     [transationApi1 loadDataAsyncWithSuccess:^(VCBaseApi *finishApi) {
         @strongify(self);
-        [FFBMSMBProgressShower hide:self];
+        [WalletMBProgressShower hide:self];
         self.txid = finishApi.resultDict[@"id"];
         
         [self.scrollView setContentOffset:CGPointMake(SCREEN_WIDTH*2, 0) animated:YES];
         [self timerCountBlock];
         
     } failure:^(VCBaseApi *finishApi, NSString *errMsg) {
-        [FFBMSMBProgressShower hide:self];
-        [FFBMSAlertShower showAlert:nil
+        [WalletMBProgressShower hide:self];
+        [WalletAlertShower showAlert:nil
                                 msg:VCNSLocalizedBundleString(@"transfer_wallet_send_fail", nil)
-                              inCtl:[FFBMSTools getCurrentVC]
+                              inCtl:[WalletTools getCurrentVC]
                               items:@[VCNSLocalizedBundleString(@"dialog_yes", nil)]
                          clickBlock:^(NSInteger index) {
                          }];
@@ -169,10 +169,10 @@
 
 - (void)showTransactionFail {
     
-    [FFBMSMBProgressShower hide:self];
-    [FFBMSAlertShower showAlert:nil
+    [WalletMBProgressShower hide:self];
+    [WalletAlertShower showAlert:nil
                             msg:VCNSLocalizedBundleString(@"transfer_wallet_send_fail", nil)
-                          inCtl:[FFBMSTools getCurrentVC]
+                          inCtl:[WalletTools getCurrentVC]
                           items:@[VCNSLocalizedBundleString(@"dialog_yes", nil)]
                      clickBlock:^(NSInteger index) {
                      }];

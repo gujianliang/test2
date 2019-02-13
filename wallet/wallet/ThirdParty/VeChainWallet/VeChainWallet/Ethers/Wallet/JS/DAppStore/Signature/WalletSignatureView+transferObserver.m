@@ -14,6 +14,10 @@
 #import "WalletTransactionApi.h"
 #import "WalletRewardNodeApi.h"
 
+#define firstObserverView  701
+#define secondObserverView 702
+
+
 @implementation WalletSignatureView (transferObserver)
 
 -(void)transferAccountObserver:(NSString *)valueFormated
@@ -24,9 +28,9 @@
     SecureData* randomData = [SecureData secureDataWithLength:8];
     int result = SecRandomCopyBytes(kSecRandomDefault, randomData.length, randomData.mutableBytes);
     if (result != 0) {
-        [FFBMSAlertShower showAlert:nil
+        [WalletAlertShower showAlert:nil
                                 msg:VCNSLocalizedBundleString(@"transfer_wallet_send_fail", nil)
-                              inCtl:[FFBMSTools getCurrentVC]
+                              inCtl:[WalletTools getCurrentVC]
                               items:@[VCNSLocalizedBundleString(@"dialog_yes", nil)]
                          clickBlock:^(NSInteger index)
          {
@@ -79,8 +83,8 @@
 
 - (void)removrQRcodeView
 {
-    UIView *qrCodeView1 = [[FFBMSTools getCurrentVC].navigationController.view viewWithTag:701];
-    UIView *qrCodeView2 = [[FFBMSTools getCurrentVC].navigationController.view viewWithTag:702];
+    UIView *qrCodeView1 = [[WalletTools getCurrentVC].navigationController.view viewWithTag:firstObserverView];
+    UIView *qrCodeView2 = [[WalletTools getCurrentVC].navigationController.view viewWithTag:secondObserverView];
     if (qrCodeView1) {
         [qrCodeView1 removeFromSuperview];
     }
@@ -100,9 +104,9 @@
 
 - (void)reSignture
 {
-    [FFBMSAlertShower showAlert:nil
+    [WalletAlertShower showAlert:nil
                             msg:VCNSLocalizedBundleString(@"transaction_signature_v_error", nil)
-                          inCtl:[FFBMSTools getCurrentVC]
+                          inCtl:[WalletTools getCurrentVC]
                           items:@[VCNSLocalizedBundleString(@"transaction_signature_v_error_button", nil)]
                      clickBlock:^(NSInteger index)
      {
@@ -129,8 +133,8 @@
                                                                                        json:json
                                                                                    codeType:QRCodeVetType];
         QRCodeView.backgroundColor = UIColor.clearColor;
-        QRCodeView.tag = 701;
-        [[FFBMSTools getCurrentVC].navigationController.view addSubview:QRCodeView];
+        QRCodeView.tag = firstObserverView;
+        [[WalletTools getCurrentVC].navigationController.view addSubview:QRCodeView];
         [UIView animateWithDuration:0.3 animations:^{
             [QRCodeView setFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
         }];
@@ -152,9 +156,9 @@
                                                                                    json:@""
                                                                                codeType:QRCodeVetType];
     QRCodeView.backgroundColor = UIColor.clearColor;
-    QRCodeView.tag = 702;
+    QRCodeView.tag = secondObserverView;
     QRCodeView.businessType = BusinessType_TRANSFER;
-    [[FFBMSTools getCurrentVC].navigationController.view addSubview:QRCodeView];
+    [[WalletTools getCurrentVC].navigationController.view addSubview:QRCodeView];
     [UIView animateWithDuration:0.3 animations:^{
         [QRCodeView setFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
     }];
@@ -187,7 +191,7 @@
         } else {
             //token 转账 value 设置0，data 设置见文档
             subValue = [Payment parseToken:transaction.amount dicimals:transaction.decimals.integerValue];
-            NSString *data = [FFBMSTools signData:transaction.to value:subValue.hexString];
+            NSString *data = [WalletTools signData:transaction.to value:subValue.hexString];
             SecureData *tokenAddress = [SecureData secureDataWithHexString:transaction.tokenAddress];
             NSData *clauseData = [SecureData hexStringToData:data];
             transactionTransfer.Clauses = @[@[tokenAddress.data,[NSData data],clauseData]];
@@ -262,9 +266,9 @@
 
 - (void)showTransactionFail
 {
-    [FFBMSAlertShower showAlert:nil
+    [WalletAlertShower showAlert:nil
                             msg:VCNSLocalizedBundleString(@"transfer_wallet_send_fail", nil)
-                          inCtl:[FFBMSTools getCurrentVC]
+                          inCtl:[WalletTools getCurrentVC]
                           items:@[VCNSLocalizedBundleString(@"dialog_yes", nil)]
                      clickBlock:^(NSInteger index) {
                      }];
@@ -272,7 +276,7 @@
 
 - (void)startTransaction
 {
-    [FFBMSTools checkNetwork:^(BOOL t) {
+    [WalletTools checkNetwork:^(BOOL t) {
         if (t) {
            [self transaction];
         }
@@ -283,7 +287,7 @@
 {
     // 格式化用户不正确输入
     Address *address = [Address addressWithString:self.toAddress];
-    NSString *valueFormated = [FFBMSTools removeExtraZeroAtBegin:self.amount];
+    NSString *valueFormated = [WalletTools removeExtraZeroAtBegin:self.amount];
     NSArray *valueComponents = [valueFormated componentsSeparatedByString:@"."];
     // 如果用户输入的位数超过币的decimals，删掉多余的
     valueFormated = (valueComponents.count == 2 && ((NSString *)valueComponents.lastObject).length > self.currentCoinModel.decimals) ? [NSString stringWithFormat:@"%@%@%@", valueComponents[0], @".", [((NSString *)valueComponents[1]) substringToIndex:self.currentCoinModel.decimals]] : valueFormated;
@@ -304,7 +308,7 @@
                  params:@[dictParam]];
    
     signaVC.block = ^(BOOL result) {
-        [[FFBMSTools getCurrentVC].navigationController popViewControllerAnimated:NO];
+        [[WalletTools getCurrentVC].navigationController popViewControllerAnimated:NO];
     };
  
     //观察钱包走授权逻辑

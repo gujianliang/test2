@@ -1,6 +1,6 @@
 //
 //  VCBaseApi.h
-//  FFBMS
+//  Wallet
 //
 //  Created by 曾新 on 16/4/7.
 //  Copyright © 2016年 Eagle. All rights reserved.
@@ -12,10 +12,8 @@
 #import "YYModel.h"
 #import "NSJSONSerialization+NilDataParameter.h"
 #import "AFNetworking.h"
-//#import "WalletUserDefaultManager.h"
-//#import "VCBaseApiPath.h"
 
-typedef NS_ENUM(NSInteger, FFBMSRequestStatus){
+typedef NS_ENUM(NSInteger, WalletRequestStatus){
     NotAvailable = 1,           //不可用
     RequestSuccess = 2,         //请求成功
     RequestFailed = 4,          //请求失败
@@ -33,8 +31,8 @@ typedef NS_ENUM(NSInteger,RequestMethod)
 };
 
 @class VCBaseApi;
-typedef void(^FFBMSLoadSuccessBlock) (VCBaseApi *finishApi);
-typedef void(^FFBMSLoadFailBlock) (VCBaseApi *finishApi,NSString *errMsg);
+typedef void(^WalletLoadSuccessBlock) (VCBaseApi *finishApi);
+typedef void(^WalletLoadFailBlock) (VCBaseApi *finishApi,NSString *errMsg);
 
 typedef void (^requestBlock)(NSDictionary *requestDict,NSError *error);
 
@@ -46,13 +44,13 @@ typedef void (^requestBlock)(NSDictionary *requestDict,NSError *error);
 }
 @property (nonatomic, assign) BOOL needToken; // 是否需要带上token
 @property (nonatomic, assign) BOOL needEncrypt; // 是否需要加密
-@property (nonatomic, assign) FFBMSRequestStatus status;
+@property (nonatomic, assign) WalletRequestStatus status;
 @property (nonatomic, strong) NSError *lastError;
 @property (nonatomic, assign) BOOL isLoading;
 @property (nonatomic, copy)   NSString *pageNo; // 分页
 @property (nonatomic, assign) RequestMethod requestMethod;
-@property (nonatomic, copy)FFBMSLoadSuccessBlock successBlock;
-@property (nonatomic, copy)FFBMSLoadFailBlock failBlock;
+@property (nonatomic, copy)WalletLoadSuccessBlock successBlock;
+@property (nonatomic, copy)WalletLoadFailBlock failBlock;
 @property (nonatomic, assign) BOOL specialRequest;// 特殊请求返回处理
 @property (nonatomic, copy, readonly) NSString *stubUrlString;      // http stub
 
@@ -160,16 +158,16 @@ typedef void (^requestBlock)(NSDictionary *requestDict,NSError *error);
  *  @param success 成功block
  *  @param failure 失败block
  */
-- (void)loadDataAsyncWithSuccess:(FFBMSLoadSuccessBlock)success
-                         failure:(FFBMSLoadFailBlock)failure;
+- (void)loadDataAsyncWithSuccess:(WalletLoadSuccessBlock)success
+                         failure:(WalletLoadFailBlock)failure;
 /**
  *  发起本地存储数据请求
  *
  *  @param success 成功block
  *  @param failure 失败block
  */
-- (void)loadLocalDataAsyncWithSuccess:(FFBMSLoadSuccessBlock)success
-                              failure:(FFBMSLoadFailBlock)failure;
+- (void)loadLocalDataAsyncWithSuccess:(WalletLoadSuccessBlock)success
+                              failure:(WalletLoadFailBlock)failure;
 /**
  *  分析错误信息
  *

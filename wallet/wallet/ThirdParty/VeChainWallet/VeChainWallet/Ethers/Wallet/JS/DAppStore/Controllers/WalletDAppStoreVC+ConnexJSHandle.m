@@ -31,14 +31,14 @@
     WalletGenesisBlockInfoApi *genesisBlock = [WalletGenesisBlockInfoApi new];
     [genesisBlock loadDataAsyncWithSuccess:^(VCBaseApi *finishApi) {
         
-        NSDictionary *resultDict = [FFBMSTools packageWithRequestId:requestId
+        NSDictionary *resultDict = [WalletTools packageWithRequestId:requestId
                                                                data:finishApi.resultDict
                                                                code:OK
                                                             message:@""];
         completionHandler([resultDict yy_modelToJSONString]);
         return;
     }failure:^(VCBaseApi *finishApi, NSString *errMsg) {
-        NSDictionary *resultDict = [FFBMSTools packageWithRequestId:requestId
+        NSDictionary *resultDict = [WalletTools packageWithRequestId:requestId
                                                                data:@""
                                                                code:ERROR_SERVER_DATA
                                                             message:@"Server response error"];
@@ -85,14 +85,14 @@
             
             [dictParam setValueIfNotNil:subDict forKey:@"head"];
             
-            NSDictionary *resultDict = [FFBMSTools packageWithRequestId:requestId
+            NSDictionary *resultDict = [WalletTools packageWithRequestId:requestId
                                                                    data:dictParam
                                                                    code:OK
                                                                 message:@""];
             completionHandler([resultDict yy_modelToJSONString]);
             
         } failure:^(VCBaseApi *finishApi, NSString *errMsg) {
-            NSDictionary *resultDict = [FFBMSTools packageWithRequestId:requestId
+            NSDictionary *resultDict = [WalletTools packageWithRequestId:requestId
                                                                    data:@""
                                                                    code:ERROR_SERVER_DATA
                                                                 message:@"Server response error"];
@@ -101,7 +101,7 @@
         }];
     } failure:^(VCBaseApi *finishApi, NSString *errMsg) {
         
-        NSDictionary *resultDict = [FFBMSTools packageWithRequestId:requestId
+        NSDictionary *resultDict = [WalletTools packageWithRequestId:requestId
                                                                data:@""
                                                                code:ERROR_SERVER_DATA
                                                             message:@"Server response error"];
@@ -137,7 +137,7 @@
     NSData *decodeData = [SecureData KECCAK256:incodeData];
     NSString *decodeStr = [SecureData dataToHexString:decodeData];
     if (decodeStr.length > 10) {
-        NSDictionary *resultDict = [FFBMSTools packageWithRequestId:requestId
+        NSDictionary *resultDict = [WalletTools packageWithRequestId:requestId
                                                                data:[decodeStr substringToIndex:10]
                                                                code:OK
                                                             message:@""];
@@ -149,29 +149,27 @@
 - (void)getAccountRequestId:(NSString *)requestId
                     webView:(WKWebView *)webView
                     address:(NSString *)address
-                 callbackID:(NSString *)callbackID
+                 callbackId:(NSString *)callbackId
 {
     WalletVETBalanceApi *vetBalanceApi = [[WalletVETBalanceApi alloc]initWith:address];
     [vetBalanceApi loadDataAsyncWithSuccess:^(VCBaseApi *finishApi) {
-        [FFBMSTools callback:requestId
-                        data:finishApi.resultDict
-                  callbackID:callbackID
-                     webview:webView
-                        code:OK
-                     message:@""];
+        [WalletTools callbackWithrequestId:requestId
+                                  webView:webView
+                                     data:finishApi.resultDict
+                               callbackId:callbackId
+                                     code:OK];
         
     } failure:^(VCBaseApi *finishApi, NSString *errMsg) {
         
-        [FFBMSTools callback:requestId
-                        data:@""
-                  callbackID:callbackID
-                     webview:webView
-                        code:ERROR_SERVER_DATA
-                     message:@"Server response error"];
+        [WalletTools callbackWithrequestId:requestId
+                                  webView:webView
+                                     data:@""
+                               callbackId:callbackId
+                                     code:ERROR_SERVER_DATA];
     }];
 }
 
-- (void)getAccountCode:(NSString *)callbackID
+- (void)getAccountCode:(NSString *)callbackId
                webView:(WKWebView *)webView
              requestId:(NSString *)requestId
                address:(NSString *)address
@@ -180,48 +178,44 @@
     [vetBalanceApi loadDataAsyncWithSuccess:^(VCBaseApi *finishApi) {
         NSDictionary *balanceModel = finishApi.resultDict;
         
-        [FFBMSTools callback:requestId
-                        data:balanceModel[@"code"]
-                  callbackID:callbackID
-                     webview:webView
-                        code:OK
-                     message:@""];
+        [WalletTools callbackWithrequestId:requestId
+                                  webView:webView
+                                     data:balanceModel[@"code"]
+                               callbackId:callbackId
+                                     code:OK];
         
     } failure:^(VCBaseApi *finishApi, NSString *errMsg) {
-        [FFBMSTools callback:requestId
-                        data:@""
-                  callbackID:callbackID
-                     webview:webView
-                        code:ERROR_SERVER_DATA
-                     message:@"Server response error"];
+        [WalletTools callbackWithrequestId:requestId
+                                  webView:webView
+                                     data:@""
+                               callbackId:callbackId
+                                     code:ERROR_SERVER_DATA];
     }];
 }
 
-- (void)getBlock:(NSString *)callbackID
+- (void)getBlock:(NSString *)callbackId
          webView:(WKWebView *)webView
        requestId:(NSString *)requestId
         revision:(NSString *)revision
 {
     WalletBlockApi *vetBalanceApi = [[WalletBlockApi alloc]initWithRevision:revision];
     [vetBalanceApi loadDataAsyncWithSuccess:^(VCBaseApi *finishApi) {
-        [FFBMSTools callback:requestId
-                        data:finishApi.resultDict
-                  callbackID:callbackID
-                     webview:webView
-                        code:OK
-                     message:@""];
+        [WalletTools callbackWithrequestId:requestId
+                                  webView:webView
+                                     data:finishApi.resultDict
+                               callbackId:callbackId
+                                     code:OK];
     } failure:^(VCBaseApi *finishApi, NSString *errMsg) {
-        [FFBMSTools callback:requestId
-                        data:@""
-                  callbackID:callbackID
-                     webview:webView
-                        code:ERROR_SERVER_DATA
-                     message:@"Server response error"];
+        [WalletTools callbackWithrequestId:requestId
+                                  webView:webView
+                                     data:@""
+                               callbackId:callbackId
+                                     code:ERROR_SERVER_DATA];
     }];
 }
 
 
-- (void)getTransaction:(NSString *)callbackID
+- (void)getTransaction:(NSString *)callbackId
                webView:(WKWebView *)webView
              requestId:(NSString *)requestId
                   txID:(NSString *)txID
@@ -230,48 +224,44 @@
     [vetBalanceApi loadDataAsyncWithSuccess:^(VCBaseApi *finishApi) {
         NSDictionary *balanceModel = finishApi.resultDict;
         
-        [FFBMSTools callback:requestId
-                        data:balanceModel
-                  callbackID:callbackID
-                     webview:webView
-                        code:OK
-                     message:@""];
+        [WalletTools callbackWithrequestId:requestId
+                                  webView:webView
+                                     data:balanceModel
+                               callbackId:callbackId
+                                     code:OK];
     } failure:^(VCBaseApi *finishApi, NSString *errMsg) {
-        [FFBMSTools callback:requestId
-                        data:@""
-                  callbackID:callbackID
-                     webview:webView
-                        code:ERROR_SERVER_DATA
-                     message:@"Server response error"];
+        [WalletTools callbackWithrequestId:requestId
+                                  webView:webView
+                                     data:@""
+                               callbackId:callbackId
+                                     code:ERROR_SERVER_DATA];
     }];
 }
 
-- (void)getTransactionReceipt:(NSString *)callbackID
+- (void)getTransactionReceipt:(NSString *)callbackId
                       webView:(WKWebView *)webView
                     requestId:(NSString *)requestId
                          txid:(NSString *)txid
 {
     WalletTransantionsReceiptApi *vetBalanceApi = [[WalletTransantionsReceiptApi alloc]initWithTxid:txid];
     [vetBalanceApi loadDataAsyncWithSuccess:^(VCBaseApi *finishApi) {
-        [FFBMSTools callback:requestId
-                        data:finishApi.resultDict
-                  callbackID:callbackID
-                     webview:webView
-                        code:OK
-                     message:@""];
+        [WalletTools callbackWithrequestId:requestId
+                                  webView:webView
+                                     data:finishApi.resultDict
+                               callbackId:callbackId
+                                     code:OK];
         
     } failure:^(VCBaseApi *finishApi, NSString *errMsg) {
-        [FFBMSTools callback:requestId
-                        data:@""
-                  callbackID:callbackID
-                     webview:webView
-                        code:ERROR_SERVER_DATA
-                     message:@"Server response error"];
+        [WalletTools callbackWithrequestId:requestId
+                                  webView:webView
+                                     data:@""
+                               callbackId:callbackId
+                                     code:ERROR_SERVER_DATA];
     }];
 }
 
 -(void)getAccountsWithRequestId:(NSString *)requestId
-                     callbackID:(NSString *)callbackID
+                     callbackId:(NSString *)callbackId
                         webView:(WKWebView *)webView
 {
     NSMutableArray *addressList = [NSMutableArray array];
@@ -280,12 +270,11 @@
         for (WalletManageModel *model in [single getAllWallet]) {
             [addressList addObject:model.address];
         }
-        [FFBMSTools callback:requestId
-                        data:addressList
-                  callbackID:callbackID
-                     webview:webView
-                        code:OK
-                     message:@""];
+        [WalletTools callbackWithrequestId:requestId
+                                  webView:webView
+                                     data:addressList
+                               callbackId:callbackId
+                                     code:OK];
 }
 
 - (void)VETTransferDictParam:(NSMutableDictionary *)dictParam
@@ -295,7 +284,7 @@
                    requestId:(NSString *)requestId
                          gas:(NSNumber *)gas
                      webView:(WKWebView *)webView
-                  callbackID:(NSString *)callbackID
+                  callbackId:(NSString *)callbackId
 
 {
     if (![self errorAddressAlert:to] ||
@@ -303,16 +292,15 @@
         ![self fromISToAddress:from to:to]
         ||!(gas.integerValue > 0)) {
         
-        [FFBMSTools callback:requestId
-                        data:@""
-                  callbackID:callbackID
-                     webview:webView
-                        code:ERROR_REQUEST_PARAMS
-                     message:ERROR_REQUEST_PARAMS_MSG];
+        [WalletTools callbackWithrequestId:requestId
+                                  webView:webView
+                                     data:@""
+                               callbackId:callbackId
+                                     code:ERROR_REQUEST_PARAMS];
         
         return;
     }
-    WalletSignatureView *signaVC = [[WalletSignatureView alloc] initWithFrame:[FFBMSTools getCurrentVC].view.bounds];
+    WalletSignatureView *signaVC = [[WalletSignatureView alloc] initWithFrame:[WalletTools getCurrentVC].view.bounds];
     signaVC.tag = SignViewTag;
     signaVC.transferType = JSVETTransferType;
     
@@ -328,26 +316,24 @@
            contractType:NoContract_transferToken
                  amount:[NSString stringWithFormat:@"%.2f",amountTnteger]
                  params:@[dictParam]];
-    [[FFBMSTools getCurrentVC].navigationController.view addSubview:signaVC];
+    [[WalletTools getCurrentVC].navigationController.view addSubview:signaVC];
     
     signaVC.transferBlock = ^(NSString * _Nonnull txid) {
         NSLog(@"txid = %@",txid);
         if (txid.length == 0) {
             
-            [FFBMSTools callback:requestId
-                            data:@""
-                      callbackID:callbackID
-                         webview:webView
-                            code:ERROR_CANCEL
-                         message:@"User cancelled"];
+            [WalletTools callbackWithrequestId:requestId
+                                  webView:webView
+                                         data:@""
+                                   callbackId:callbackId
+                                         code:ERROR_CANCEL];
         }else{
             
-            [FFBMSTools callback:requestId
-                            data:txid
-                      callbackID:callbackID
-                         webview:webView
-                            code:OK
-                         message:@""];
+            [WalletTools callbackWithrequestId:requestId
+                                  webView:webView
+                                         data:txid
+                                   callbackId:callbackId
+                                         code:OK];
         }
         
     };
@@ -359,13 +345,13 @@
                     requestId:(NSString *)requestId
                           gas:(NSNumber *)gas
                       webView:(WKWebView *)webView
-                   callbackID:(NSString *)callbackID
+                   callbackId:(NSString *)callbackId
                     gasCanUse:(BigNumber *)gasCanUse
                    clauseData:(NSString *)clauseData
 {
     
     
-    WalletSignatureView *signaVC = [[WalletSignatureView alloc] initWithFrame:[FFBMSTools getCurrentVC].view.bounds];
+    WalletSignatureView *signaVC = [[WalletSignatureView alloc] initWithFrame:[WalletTools getCurrentVC].view.bounds];
     signaVC.tag = SignViewTag;
     signaVC.transferType = JSVTHOTransferType;
     __block NSString *name = @"";
@@ -376,15 +362,14 @@
         NSDictionary *dictResult = finishApi.resultDict;
         NSString *symobl = dictResult[@"data"];
         if (symobl.length < 128) {
-            [FFBMSTools callback:requestId
-                            data:@""
-                      callbackID:callbackID
-                         webview:webView
-                            code:ERROR_REQUEST_PARAMS
-                         message:@"request params error"];
+            [WalletTools callbackWithrequestId:requestId
+                                  webView:webView
+                                         data:@""
+                                   callbackId:callbackId
+                                         code:ERROR_REQUEST_PARAMS];
             return ;
         }
-        name = [FFBMSTools abiDecodeString:symobl];
+        name = [WalletTools abiDecodeString:symobl];
         
         WalletGetDecimalsApi *getDecimalsApi = [[WalletGetDecimalsApi alloc]initWithTokenAddress:to];
         [getDecimalsApi loadDataAsyncWithSuccess:^(VCBaseApi *finishApi) {
@@ -422,12 +407,11 @@
                 !(gas.integerValue > 0)||
                 clauseData.length == 0) {
                 
-                [FFBMSTools callback:requestId
-                                data:@""
-                          callbackID:callbackID
-                             webview:webView
-                                code:ERROR_REQUEST_PARAMS
-                             message:@"request params error"];
+                [WalletTools callbackWithrequestId:requestId
+                                  webView:webView
+                                             data:@""
+                                       callbackId:callbackId
+                                             code:ERROR_REQUEST_PARAMS];
                 
                 return;
             }
@@ -438,44 +422,40 @@
                    contractType:NoContract_transferToken
                          amount:[NSString stringWithFormat:@"%.2f",amountTnteger]
                          params:@[dictParam]];
-            [[FFBMSTools getCurrentVC].navigationController.view addSubview:signaVC];
+            [[WalletTools getCurrentVC].navigationController.view addSubview:signaVC];
             
             signaVC.transferBlock = ^(NSString * _Nonnull txid) {
                 NSLog(@"txid = %@",txid);
                 if (txid.length == 0) {
                     
-                    [FFBMSTools callback:requestId
-                                    data:@""
-                              callbackID:callbackID
-                                 webview:webView
-                                    code:ERROR_CANCEL
-                                 message:@"User cancelled"];
+                    [WalletTools callbackWithrequestId:requestId
+                                  webView:webView
+                                                 data:@""
+                                           callbackId:callbackId
+                                                 code:ERROR_CANCEL];
                 }else{
                     
-                    [FFBMSTools callback:requestId
-                                    data:txid
-                              callbackID:callbackID
-                                 webview:webView
-                                    code:OK
-                                 message:@""];
+                    [WalletTools callbackWithrequestId:requestId
+                                  webView:webView
+                                                 data:txid
+                                           callbackId:callbackId
+                                                 code:OK];
                 }
             };
         } failure:^(VCBaseApi *finishApi, NSString *errMsg) {
-            [FFBMSTools callback:requestId
-                            data:@""
-                      callbackID:callbackID
-                         webview:webView
-                            code:ERROR_SERVER_DATA
-                         message:@"Server response error"];
+            [WalletTools callbackWithrequestId:requestId
+                                  webView:webView
+                                         data:@""
+                                   callbackId:callbackId
+                                         code:ERROR_SERVER_DATA];
         }];
         
     } failure:^(VCBaseApi *finishApi, NSString *errMsg) {
-        [FFBMSTools callback:requestId
-                        data:@"Server response error"
-                  callbackID:callbackID
-                     webview:webView
-                        code:ERROR_SERVER_DATA
-                     message:@"Server response error"];
+        [WalletTools callbackWithrequestId:requestId
+                                  webView:webView
+                                     data:@""
+                               callbackId:callbackId
+                                     code:ERROR_SERVER_DATA];
     }];
 }
 
@@ -486,22 +466,21 @@
                     requestId:(NSString *)requestId
                           gas:(NSNumber *)gas
                       webView:(WKWebView *)webView
-                   callbackID:(NSString *)callbackID
+                   callbackId:(NSString *)callbackId
                    clauseData:(NSString *)clauseData
 {
     if (clauseData.length == 0 ||
         !(gas.integerValue > 0)) {
         
-        [FFBMSTools callback:requestId
-                        data:@""
-                  callbackID:callbackID
-                     webview:webView
-                        code:ERROR_REQUEST_PARAMS
-                     message:@"request params error"];
+        [WalletTools callbackWithrequestId:requestId
+                                  webView:webView
+                                     data:@""
+                               callbackId:callbackId
+                                     code:ERROR_REQUEST_PARAMS];
         
         return;
     }
-    WalletSignatureView *signaVC = [[WalletSignatureView alloc] initWithFrame:[FFBMSTools getCurrentVC].view.bounds];
+    WalletSignatureView *signaVC = [[WalletSignatureView alloc] initWithFrame:[WalletTools getCurrentVC].view.bounds];
     signaVC.tag = SignViewTag;
     signaVC.jsUse = YES;
     [dictParam setValueIfNotNil:to forKey:@"tokenAddress"];
@@ -511,26 +490,24 @@
            contractType:NoContract_transferToken
                  amount:[NSString stringWithFormat:@"%.2f",amountTnteger]
                  params:@[dictParam]];
-    [[FFBMSTools getCurrentVC].navigationController.view addSubview:signaVC];
+    [[WalletTools getCurrentVC].navigationController.view addSubview:signaVC];
     
     signaVC.transferBlock = ^(NSString * _Nonnull txid) {
         NSLog(@"txid = %@",txid);
         if (txid.length == 0) {
             
-            [FFBMSTools callback:requestId
-                            data:@""
-                      callbackID:callbackID
-                         webview:webView
-                            code:ERROR_CANCEL
-                         message:@"User cancelled"];
+            [WalletTools callbackWithrequestId:requestId
+                                  webView:webView
+                                         data:@""
+                                   callbackId:callbackId
+                                         code:ERROR_CANCEL];
         }else{
             
-            [FFBMSTools callback:requestId
-                            data:txid
-                      callbackID:callbackID
-                         webview:webView
-                            code:OK
-                         message:@""];
+            [WalletTools callbackWithrequestId:requestId
+                                  webView:webView
+                                         data:txid
+                                   callbackId:callbackId
+                                         code:OK];
         }
     };
 }
@@ -560,9 +537,9 @@
             isok = NO;
         }
         if (!isok) {
-            [FFBMSAlertShower showAlert:nil
+            [WalletAlertShower showAlert:nil
                                     msg:VCNSLocalizedBundleString(@"非法参数", nil)
-                                  inCtl:[FFBMSTools getCurrentVC]
+                                  inCtl:[WalletTools getCurrentVC]
                                   items:@[VCNSLocalizedBundleString(@"dialog_yes", nil)]
                              clickBlock:^(NSInteger index) {
                              }];
@@ -575,9 +552,9 @@
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",regex];
     BOOL allAreValidChar = [predicate evaluateWithObject:toAddress];
     if (!allAreValidChar) {
-        [FFBMSAlertShower showAlert:nil
+        [WalletAlertShower showAlert:nil
                                 msg:VCNSLocalizedBundleString(@"非法参数", nil)
-                              inCtl:[FFBMSTools getCurrentVC]
+                              inCtl:[WalletTools getCurrentVC]
                               items:@[VCNSLocalizedBundleString(@"dialog_yes", nil)]
                          clickBlock:^(NSInteger index) {
                          }];
@@ -612,9 +589,9 @@
         bAmount = YES;
     }
     if (!bAmount) {
-        [FFBMSAlertShower showAlert:nil
+        [WalletAlertShower showAlert:nil
                                 msg:VCNSLocalizedBundleString(@"非法参数", nil)
-                              inCtl:[FFBMSTools getCurrentVC]
+                              inCtl:[WalletTools getCurrentVC]
                               items:@[VCNSLocalizedBundleString(@"dialog_yes", nil)]
                          clickBlock:^(NSInteger index) {
                          }];
@@ -630,9 +607,9 @@
         isSame = YES;
     }
     if (isSame) {
-        [FFBMSAlertShower showAlert:nil
+        [WalletAlertShower showAlert:nil
                                 msg:VCNSLocalizedBundleString(@"非法参数", nil)
-                              inCtl:[FFBMSTools getCurrentVC]
+                              inCtl:[WalletTools getCurrentVC]
                               items:@[VCNSLocalizedBundleString(@"dialog_yes", nil)]
                          clickBlock:^(NSInteger index) {
                          }];
@@ -642,15 +619,14 @@
 }
 
 - (void)failResult:(NSString *)requestId
-        callbackID:(NSString *)callbackID
+        callbackId:(NSString *)callbackId
            webView:(WKWebView *)webView
 {
-    [FFBMSTools callback:requestId
-                    data:@""
-              callbackID:callbackID
-                 webview:webView
-                    code:ERROR_SERVER_DATA
-                 message:@"Server response error"];
+    [WalletTools callbackWithrequestId:requestId
+                                  webView:webView
+                                 data:@""
+                           callbackId:callbackId
+                                 code:ERROR_SERVER_DATA];
 }
 
 @end

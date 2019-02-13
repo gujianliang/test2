@@ -67,7 +67,7 @@
     NSString *result = [defaultText stringByReplacingOccurrencesOfString:@"wallet://" withString:@""];
     NSDictionary *dict = [NSJSONSerialization dictionaryWithJsonString:result];
     
-    NSString *callbackID = dict[@"callbackId"];
+    NSString *callbackId = dict[@"callbackId"];
     NSString *requestId = dict[@"requestId"];
     NSString *method = dict[@"method"];
     NSDictionary *dictP = dict[@"params"];
@@ -79,38 +79,36 @@
 
     }else if ([method isEqualToString:@"getGenesisBlock"])
     {
-
         [self getGenesisBlockWithRequestId:requestId completionHandler:completionHandler];
-
         return;
     }else if ([method isEqualToString:@"getAccount"]){
 
-        [self getAccountRequestId:requestId webView:webView address:dictP[@"address"] callbackID:callbackID];
+        [self getAccountRequestId:requestId webView:webView address:dictP[@"address"] callbackId:callbackId];
 
     }else if([method isEqualToString:@"getAccountCode"])
     {
-        [self getAccountCode:callbackID
+        [self getAccountCode:callbackId
                      webView:webView
                    requestId:requestId
                      address:dictP[@"address"]];
 
     }else if([method isEqualToString:@"getBlock"])
     {
-        [self getBlock:callbackID
+        [self getBlock:callbackId
                webView:webView
              requestId:requestId
               revision:dictP[@"revision"]];
 
     }else if([method isEqualToString:@"getTransaction"])
     {
-        [self getTransaction:callbackID
+        [self getTransaction:callbackId
                      webView:webView
                    requestId:requestId
                         txID:dictP[@"id"]];
     }
     else if([method isEqualToString:@"getTransactionReceipt"])
     {
-        [self getTransactionReceipt:callbackID
+        [self getTransactionReceipt:callbackId
                             webView:webView
                           requestId:requestId
                                txid:dictP[@"id"]];
@@ -124,7 +122,7 @@
         
     }else if ([method isEqualToString:@"getAccounts"])
     {
-        [self getAccountsWithRequestId:requestId callbackID:callbackID webView:webView];
+        [self getAccountsWithRequestId:requestId callbackId:callbackId webView:webView];
         
     }
     else if([method isEqualToString:@"sign"])
@@ -160,34 +158,34 @@
         
         CGFloat amountTnteger = [BigNumber bigNumberWithHexString:[NSString stringWithFormat:@"%@",amount]].decimalString.floatValue/pow(10, 18);
         
-        WalletDappStoreSelectView *selcetView = [[WalletDappStoreSelectView alloc]initWithFrame:[FFBMSTools getCurrentVC].view.frame ];
+        WalletDappStoreSelectView *selcetView = [[WalletDappStoreSelectView alloc]initWithFrame:[WalletTools getCurrentVC].view.frame ];
         selcetView.tag = SelectWalletTag;
         selcetView.amount = [NSString stringWithFormat:@"%lf",amountTnteger];
-        [[FFBMSTools getCurrentVC].navigationController.view addSubview:selcetView];
+        [[WalletTools getCurrentVC].navigationController.view addSubview:selcetView];
         selcetView.block = ^(NSString *from,WalletDappStoreSelectView *viewSelf){
             
             [viewSelf removeFromSuperview];
             
             [dictParam setValueIfNotNil:from forKey:@"from"];
             
-            [self ConnexTransferWithClauseData:clauseData
+            [self connexTransferWithClauseData:clauseData
                                    dictParam:dictParam
                                         from:from
                                           to:to
                                    requestId:requestId
                                          gas:gas
                                      webView:webView
-                                  callbackID:callbackID
+                                  callbackId:callbackId
                                       amount:amount
                                    gasCanUse:gasCanUse];
         };
     }else if ([method isEqualToString:@"getAddress"] ) {
         
-        [self getAddress:webView callbackID:callbackID];
+        [self getAddress:webView callbackId:callbackId];
         
     }else if ([method isEqualToString:@"getBalance"]){
         
-        [self getBalance:callbackID
+        [self getBalance:callbackId
                  webView:webView
                requestId:requestId
                  address:dictP[@"address"]];
@@ -199,7 +197,7 @@
         
     }else if ([method isEqualToString:@"send"]){
         
-        if ([[FFBMSTools getCurrentVC].navigationController.view viewWithTag:SelectWalletTag]) {
+        if ([[WalletTools getCurrentVC].navigationController.view viewWithTag:SelectWalletTag]) {
             completionHandler(@"{}");
             return;
         }
@@ -216,15 +214,15 @@
         
         CGFloat amountTnteger = [BigNumber bigNumberWithHexString:[NSString stringWithFormat:@"%@",amount]].decimalString.floatValue/pow(10, 18);
         
-        WalletDappStoreSelectView *selcetView = [[WalletDappStoreSelectView alloc]initWithFrame:[FFBMSTools getCurrentVC].view.frame ];
+        WalletDappStoreSelectView *selcetView = [[WalletDappStoreSelectView alloc]initWithFrame:[WalletTools getCurrentVC].view.frame ];
         selcetView.tag = SelectWalletTag;
         selcetView.amount = [NSString stringWithFormat:@"%lf",amountTnteger];
-        [[FFBMSTools getCurrentVC].navigationController.view addSubview:selcetView];
+        [[WalletTools getCurrentVC].navigationController.view addSubview:selcetView];
         selcetView.block = ^(NSString *from,WalletDappStoreSelectView *viewSelf){
             
             [viewSelf removeFromSuperview];
             
-            WalletSignatureView *signaVC = [[WalletSignatureView alloc] initWithFrame:[FFBMSTools getCurrentVC].view.bounds];
+            WalletSignatureView *signaVC = [[WalletSignatureView alloc] initWithFrame:[WalletTools getCurrentVC].view.bounds];
             if (cluseData.length < 3) { // vet 转账clauseData == nil,
                 signaVC.transferType = JSVETTransferType;
             }else if ([cluseData hasPrefix:transferMethodId]) {// vtho 转账
@@ -248,7 +246,7 @@
                                      requestId:requestId
                                            gas:gas
                                        webView:webView
-                                    callbackID:callbackID
+                                    callbackId:callbackId
                                         amount:amount
                                      gasCanUse:gasCanUse
                                        signaVC:signaVC
@@ -302,18 +300,18 @@
                                                          style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
 //        completionHandler();
     }])];
-    [[FFBMSTools getCurrentVC] presentViewController:alertController animated:YES completion:nil];
+    [[WalletTools getCurrentVC] presentViewController:alertController animated:YES completion:nil];
      completionHandler();
 }
 
-- (void)ConnexTransferWithClauseData:(NSString *)clauseData
+- (void)connexTransferWithClauseData:(NSString *)clauseData
                          dictParam:(NSMutableDictionary *)dictParam
                               from:(NSString *)from
                                 to:(NSString *)to
                          requestId:(NSString *)requestId
                                gas:(NSNumber *)gas
                            webView:(WKWebView *)webView
-                        callbackID:(NSString *)callbackID
+                        callbackId:(NSString *)callbackId
                             amount:(NSString *)amount
                          gasCanUse:(BigNumber *)gasCanUse
 {
@@ -326,7 +324,7 @@
                          requestId:requestId
                                gas:gas
                            webView:webView
-                        callbackID:callbackID];
+                        callbackId:callbackId];
         
     }else{
         if ([clauseData hasPrefix:transferMethodId]) { // token 转账
@@ -337,7 +335,7 @@
                               requestId:requestId
                                     gas:gas
                                 webView:webView
-                             callbackID:callbackID
+                             callbackId:callbackId
                               gasCanUse:gasCanUse
                              clauseData:clauseData];
             
@@ -350,7 +348,7 @@
                               requestId:requestId
                                     gas:gas
                                 webView:webView
-                             callbackID:callbackID
+                             callbackId:callbackId
                              clauseData:clauseData];
         }
     }
@@ -362,20 +360,20 @@
                           requestId:(NSString *)requestId
                                 gas:(NSString *)gas
                             webView:(WKWebView *)webView
-                         callbackID:(NSString *)callbackID
+                         callbackId:(NSString *)callbackId
                              amount:(NSString *)amount
                           gasCanUse:(BigNumber *)gasCanUse
                             signaVC:(WalletSignatureView *)signaVC
                            gasPrice:(NSString *)gasPrice
                        tokenAddress:(NSString *)tokenAddress
 {
-    UIView *conventView = [[FFBMSTools getCurrentVC].navigationController.view viewWithTag:SignViewTag];
+    UIView *conventView = [[WalletTools getCurrentVC].navigationController.view viewWithTag:SignViewTag];
     if (conventView) {
         return;
     }
     signaVC.tag = SignViewTag;
     if (cluseData.length > 3) {
-        if (![cluseData hasPrefix:@"0xa9059cbb"]) { // 签合约
+        if (![cluseData hasPrefix:transferMethodId]) { // 签合约
             [self WEB3contractSign:signaVC
                                 to:to
                              from:from
@@ -385,7 +383,7 @@
                           gasPrice:gasPrice
                          gasCanUse:(BigNumber *)gasCanUse
                            webView:webView
-                        callbackID:callbackID
+                        callbackId:callbackId
                          cluseData:cluseData];
         }else{
             //vtho 转账
@@ -397,7 +395,7 @@
                                gas:gas
                           gasPrice:gasPrice
                            webView:webView
-                        callbackID:callbackID
+                        callbackId:callbackId
                          gasCanUse:gasCanUse
                          cluseData:cluseData
                       tokenAddress:tokenAddress];
@@ -410,7 +408,7 @@
                          requestId:requestId
                                gas:gas
                            webView:webView
-                        callbackID:callbackID
+                        callbackId:callbackId
                          gasCanUse:gasCanUse
                           gasPrice:gasPrice];
     }

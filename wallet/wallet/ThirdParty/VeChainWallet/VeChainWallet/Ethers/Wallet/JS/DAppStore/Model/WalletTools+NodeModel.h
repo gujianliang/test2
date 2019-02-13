@@ -1,16 +1,16 @@
 //
-//  FFBMSTools+NodeModel.h
+//  WalletTools+NodeModel.h
 //  VeWallet
 //
 //  Created by HuChao on 2018/12/28.
 //  Copyright © 2018年 VeChain. All rights reserved.
 //
 
-#import "FFBMSTools.h"
+#import "WalletTools.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface FFBMSTools (NodeModel)
+@interface WalletTools (NodeModel)
 
 // type 转节点名称
 + (NSString *)convertXnodeName:(NSString *)nodeType;

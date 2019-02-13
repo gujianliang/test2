@@ -15,12 +15,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface WalletDAppStoreVC (web3JSHandle)
 
-- (void)getBalance:(NSString *)callbackID
+- (void)getBalance:(NSString *)callbackId
                  webView:(WKWebView *)webView
                requestId:(NSString *)requestId
                  address:(NSString *)address;
 
-- (void)getAddress:(WKWebView *)webView callbackID:(NSString *)callbackID;
+- (void)getAddress:(WKWebView *)webView callbackId:(NSString *)callbackId;
 
 
 - (void)WEB3VETTransferFrom:(NSString *)from
@@ -29,7 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
                    requestId:(NSString *)requestId
                          gas:(NSString *)gas
                      webView:(WKWebView *)webView
-                  callbackID:(NSString *)callbackID
+                  callbackId:(NSString *)callbackId
                    gasCanUse:(BigNumber *)gasCanUse
                     gasPrice:(NSString *)gasPrice;
 
@@ -41,7 +41,7 @@ NS_ASSUME_NONNULL_BEGIN
                  gas:(NSString *)gas
             gasPrice:(NSString *)gasPrice
              webView:(WKWebView *)webView
-          callbackID:(NSString *)callbackID
+          callbackId:(NSString *)callbackId
            gasCanUse:(BigNumber *)gasCanUse
            cluseData:(NSString *)cluseData
         tokenAddress:(NSString *)tokenAddress;
@@ -56,7 +56,7 @@ NS_ASSUME_NONNULL_BEGIN
                 gasPrice:(NSString *)gasPrice
                gasCanUse:(BigNumber *)gasCanUse
              webView:(WKWebView *)webView
-          callbackID:(NSString *)callbackID
+          callbackId:(NSString *)callbackId
            cluseData:(NSString *)cluseData;
 
 

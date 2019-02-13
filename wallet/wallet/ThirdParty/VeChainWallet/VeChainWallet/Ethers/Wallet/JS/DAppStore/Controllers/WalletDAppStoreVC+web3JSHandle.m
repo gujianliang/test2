@@ -8,7 +8,6 @@
 
 #import "WalletDAppStoreVC+web3JSHandle.h"
 #import "WalletVETBalanceApi.h"
-//#import "WalletSqlDataEngine.h"
 #import "WalletGenesisBlockInfoApi.h"
 #import "WalletVETBalanceApi.h"
 #import <WebKit/WebKit.h>
@@ -16,14 +15,13 @@
 #import "WalletBlockApi.h"
 #import "WalletTransantionsReceiptApi.h"
 #import "WalletManageModel.h"
-//#import "WalletSqlDataEngine.h"
 #import "WalletSignatureView.h"
 #import "WalletGetSymbolApi.h"
 #import "WalletGetDecimalsApi.h"
 #import "WalletSingletonHandle.h"
 @implementation WalletDAppStoreVC (web3JSHandle)
 
-- (void)getBalance:(NSString *)callbackID
+- (void)getBalance:(NSString *)callbackId
                  webView:(WKWebView *)webView
                requestId:(NSString *)requestId
                  address:(NSString *)address
@@ -32,20 +30,18 @@
     [vetBalanceApi loadDataAsyncWithSuccess:^(VCBaseApi *finishApi) {
         WalletBalanceModel *balanceModel = finishApi.resultModel;
         
-        [FFBMSTools callback:requestId
-                        data:balanceModel.balance
-                  callbackID:callbackID
-                     webview:webView
-                        code:OK
-                     message:@""];
+        [WalletTools callbackWithrequestId:requestId
+                                  webView:webView 
+                                     data:balanceModel.balance
+                               callbackId:callbackId
+                                     code:OK];
         
     } failure:^(VCBaseApi *finishApi, NSString *errMsg) {
-        [FFBMSTools callback:requestId
-                        data:@""
-                  callbackID:callbackID
-                     webview:webView
-                        code:ERROR_SERVER_DATA
-                     message:@"Server response error"];
+        [WalletTools callbackWithrequestId:requestId
+                                  webView:webView 
+                                     data:@""
+                               callbackId:callbackId
+                                     code:ERROR_SERVER_DATA];
     }];
 }
 
@@ -54,9 +50,9 @@
     return [[WalletSingletonHandle shareWalletHandle] currentWalletModel].address;
 }
 
-- (void)getAddress:(WKWebView *)webView callbackID:(NSString *)callbackID
+- (void)getAddress:(WKWebView *)webView callbackId:(NSString *)callbackId
 {
-    NSString *injectJS = [NSString stringWithFormat:@"%@('%@')",callbackID,[self getAddress]];
+    NSString *injectJS = [NSString stringWithFormat:@"%@('%@')",callbackId,[self getAddress]];
     NSLog(@"inject func %@",injectJS);
     [webView evaluateJavaScript:injectJS completionHandler:^(id _Nullable item, NSError * _Nullable error) {
         NSLog(@"error == %@",error);
@@ -69,7 +65,7 @@
                    requestId:(NSString *)requestId
                         gas:(NSString *)gas
                      webView:(WKWebView *)webView
-                  callbackID:(NSString *)callbackID
+                  callbackId:(NSString *)callbackId
                    gasCanUse:(BigNumber *)gasCanUse
                     gasPrice:(NSString *)gasPrice
 {
@@ -80,12 +76,11 @@
         ![self fromISToAddress:from to:to] ||
         !(gas.integerValue > 0)) {
         
-        [FFBMSTools callback:requestId
-                        data:@""
-                  callbackID:callbackID
-                     webview:webView
-                        code:ERROR_REQUEST_PARAMS
-                     message:@"request params error"];
+        [WalletTools callbackWithrequestId:requestId
+                                  webView:webView 
+                                     data:@""
+                               callbackId:callbackId
+                                     code:ERROR_REQUEST_PARAMS];
         
         return;
     }
@@ -105,7 +100,7 @@
     [dictParam setValueIfNotNil:[BigNumber bigNumberWithHexString:gasPrice] forKey:@"gasPriceCoef"];
     [dictParam setValueIfNotNil:[NSNumber numberWithLong:gas.integerValue] forKey:@"gas"];
     
-    WalletSignatureView *signaVC = [[WalletSignatureView alloc] initWithFrame:[FFBMSTools getCurrentVC].view.bounds];
+    WalletSignatureView *signaVC = [[WalletSignatureView alloc] initWithFrame:[WalletTools getCurrentVC].view.bounds];
     signaVC.jsUse = YES;
     signaVC.transferType = JSVETTransferType;
     [signaVC updateView:from
@@ -113,27 +108,25 @@
            contractType:NoContract_transferToken
                  amount:[NSString stringWithFormat:@"%lf",amountTnteger]
                  params:@[dictParam]];
-    [[FFBMSTools getCurrentVC].navigationController.view addSubview:signaVC];
+    [[WalletTools getCurrentVC].navigationController.view addSubview:signaVC];
     
     signaVC.transferBlock = ^(NSString * _Nonnull txid) {
         NSLog(@"txid = %@",txid);
         
         if (txid.length == 0) {
             
-            [FFBMSTools callback:requestId
-                            data:@""
-                      callbackID:callbackID
-                         webview:webView
-                            code:ERROR_CANCEL
-                         message:@"User cancelled"];
+            [WalletTools callbackWithrequestId:requestId
+                                  webView:webView 
+                                         data:@""
+                                   callbackId:callbackId
+                                         code:ERROR_CANCEL];
         }else{
             
-            [FFBMSTools callback:requestId
-                            data:txid
-                      callbackID:callbackID
-                         webview:webView
-                            code:OK
-                         message:@""];
+            [WalletTools callbackWithrequestId:requestId
+                                  webView:webView 
+                                         data:txid
+                                   callbackId:callbackId
+                                         code:OK];
         }
         
     };
@@ -147,7 +140,7 @@
                  gas:(NSString *)gas
             gasPrice:(NSString *)gasPrice
              webView:(WKWebView *)webView
-          callbackID:(NSString *)callbackID
+          callbackId:(NSString *)callbackId
            gasCanUse:(BigNumber *)gasCanUse
           cluseData:(NSString *)cluseData
         tokenAddress:(NSString *)tokenAddress
@@ -161,16 +154,15 @@
         NSDictionary *dictResult = finishApi.resultDict;
         NSString *symobl = dictResult[@"data"];
         if (symobl.length < 3) {
-            [FFBMSTools callback:requestId
-                            data:@""
-                      callbackID:callbackID
-                         webview:webView
-                            code:ERROR_REQUEST_PARAMS
-                         message:@"request params error"];
+            [WalletTools callbackWithrequestId:requestId
+                                  webView:webView 
+                                         data:@""
+                                   callbackId:callbackId
+                                         code:ERROR_REQUEST_PARAMS];
             return ;
         }
         
-        name = [FFBMSTools abiDecodeString:symobl];
+        name = [WalletTools abiDecodeString:symobl];
         
         WalletGetDecimalsApi *getDecimalsApi = [[WalletGetDecimalsApi alloc]initWithTokenAddress:tokenAddress];
         [getDecimalsApi loadDataAsyncWithSuccess:^(VCBaseApi *finishApi) {
@@ -179,12 +171,11 @@
             NSString *symoblHex = dictResult[@"data"];
             
             if (symoblHex.length < 3) {
-                [FFBMSTools callback:requestId
-                                data:@""
-                          callbackID:callbackID
-                             webview:webView
-                                code:ERROR_REQUEST_PARAMS
-                             message:@"request params error"];
+                [WalletTools callbackWithrequestId:requestId
+                                  webView:webView 
+                                             data:@""
+                                       callbackId:callbackId
+                                  code:ERROR_REQUEST_PARAMS];
                 return ;
             }
             
@@ -203,12 +194,11 @@
                 !(gas.integerValue > 0)||
                 cluseData.length == 0) {
                 
-                [FFBMSTools callback:requestId
-                                data:@""
-                          callbackID:callbackID
-                             webview:webView
-                                code:ERROR_REQUEST_PARAMS
-                             message:@"request params error"];
+                [WalletTools callbackWithrequestId:requestId
+                                  webView:webView 
+                                             data:@""
+                                       callbackId:callbackId
+                                             code:ERROR_REQUEST_PARAMS];
                 return;
             }
             
@@ -231,7 +221,7 @@
             BigNumber *dataH = [BigNumber bigNumberWithHexString:cluseData];
             [dictParam setValueIfNotNil:dataH.data forKey:@"clouseData"];
             
-            WalletSignatureView *signaVC = [[WalletSignatureView alloc] initWithFrame:[FFBMSTools getCurrentVC].view.bounds];
+            WalletSignatureView *signaVC = [[WalletSignatureView alloc] initWithFrame:[WalletTools getCurrentVC].view.bounds];
             signaVC.jsUse = YES;
             signaVC.transferType = JSVTHOTransferType;
             [signaVC updateView:from
@@ -239,44 +229,40 @@
                    contractType:NoContract_transferToken
                          amount:[NSString stringWithFormat:@"%.0f",amountTnteger]
                          params:@[dictParam]];
-            [[FFBMSTools getCurrentVC].navigationController.view addSubview:signaVC];
+            [[WalletTools getCurrentVC].navigationController.view addSubview:signaVC];
             
             signaVC.transferBlock = ^(NSString * _Nonnull txid) {
                 NSLog(@"txid = %@",txid);
                 if (txid.length == 0) {
                     
-                    [FFBMSTools callback:requestId
-                                    data:@""
-                              callbackID:callbackID
-                                 webview:webView
-                                    code:ERROR_CANCEL
-                                 message:@"User cancelled"];
+                    [WalletTools callbackWithrequestId:requestId
+                                  webView:webView 
+                                                 data:@""
+                                           callbackId:callbackId
+                                                 code:ERROR_CANCEL];
                 }else{
                     
-                    [FFBMSTools callback:requestId
-                                    data:txid
-                              callbackID:callbackID
-                                 webview:webView
-                                    code:OK
-                                 message:@""];
+                    [WalletTools callbackWithrequestId:requestId
+                                  webView:webView 
+                                                 data:txid
+                                           callbackId:callbackId
+                                                 code:OK];
                 }
             };
         } failure:^(VCBaseApi *finishApi, NSString *errMsg) {
-            [FFBMSTools callback:requestId
-                            data:@""
-                      callbackID:callbackID
-                         webview:webView
-                            code:ERROR_SERVER_DATA
-                         message:@"Server response error"];
+            [WalletTools callbackWithrequestId:requestId
+                                  webView:webView 
+                                         data:@""
+                                   callbackId:callbackId
+                                         code:ERROR_SERVER_DATA];
         }];
         
     } failure:^(VCBaseApi *finishApi, NSString *errMsg) {
-        [FFBMSTools callback:requestId
-                        data:@""
-                  callbackID:callbackID
-                     webview:webView
-                        code:ERROR_SERVER_DATA
-                     message:@"Server response error"];
+        [WalletTools callbackWithrequestId:requestId
+                                  webView:webView 
+                                     data:@""
+                               callbackId:callbackId
+                                     code:ERROR_SERVER_DATA];
     }];
 }
 
@@ -289,33 +275,27 @@
                 gasPrice:(NSString *)gasPrice
                gasCanUse:(BigNumber *)gasCanUse
                  webView:(WKWebView *)webView
-              callbackID:(NSString *)callbackID
+              callbackId:(NSString *)callbackId
                cluseData:(NSString *)cluseData
 {
     if (cluseData.length == 0 ||
         !(gas.integerValue > 0)) {
         
-        [FFBMSTools callback:requestId
-                        data:@""
-                  callbackID:callbackID
-                     webview:webView
-                        code:ERROR_REQUEST_PARAMS
-                     message:@"request params error"];
+        [WalletTools callbackWithrequestId:requestId
+                                  webView:webView 
+                                     data:@""
+                               callbackId:callbackId
+                                     code:ERROR_REQUEST_PARAMS];
         
         return;
     }
-//    gas = [NSString stringWithFormat:@"%lf",gas.floatValue * 5];
     NSMutableDictionary *dictParam = [NSMutableDictionary dictionary];
     [dictParam setValueIfNotNil:@(0) forKey:@"isICO"];
     
     NSString *miner = [Payment formatEther:gasCanUse options:2];
-//    gasPrice = @"0";
-//    gas = @"350000";
     [dictParam setValueIfNotNil:miner forKey:@"miner"];
     [dictParam setValueIfNotNil:[BigNumber bigNumberWithHexString:gasPrice] forKey:@"gasPriceCoef"];
     [dictParam setValueIfNotNil:[NSNumber numberWithFloat:gas.floatValue] forKey:@"gas"];
-    
-//    cluseData = @"0xbae3e19e00000000000000000000000000000000000000000000000000000000000000680000000000000000000000000000000000000000000000000de0b6b3a76400000000000000000000000000000000000000000000000000000de0b6b3a7640000000000000000000000000000000000000000000000000000000000000003f480";
     
     BigNumber *dataH = [BigNumber bigNumberWithHexString:cluseData];
     [dictParam setValueIfNotNil:dataH.data forKey:@"clouseData"];
@@ -336,25 +316,23 @@
            contractType:NoContract_transferToken
                  amount:[NSString stringWithFormat:@"%.2f",amountTnteger]
                  params:@[dictParam]];
-    [[FFBMSTools getCurrentVC].navigationController.view addSubview:signaVC];
+    [[WalletTools getCurrentVC].navigationController.view addSubview:signaVC];
     signaVC.transferBlock = ^(NSString * _Nonnull txid) {
         NSLog(@"txid = %@",txid);
         if (txid.length == 0) {
             
-            [FFBMSTools callback:requestId
-                            data:@""
-                      callbackID:callbackID
-                         webview:webView
-                            code:ERROR_CANCEL
-                         message:@"User cancelled"];
+            [WalletTools callbackWithrequestId:requestId
+                                  webView:webView 
+                                         data:@""
+                                   callbackId:callbackId
+                                         code:ERROR_CANCEL];
         }else{
             
-            [FFBMSTools callback:requestId
-                            data:txid
-                      callbackID:callbackID
-                         webview:webView
-                            code:OK
-                         message:@""];
+            [WalletTools callbackWithrequestId:requestId
+                                  webView:webView 
+                                         data:txid
+                                   callbackId:callbackId
+                                         code:OK];
         }
     };
 }
@@ -362,7 +340,7 @@
 - (void)getChainTag:(NSString *)requestId
   completionHandler:(void (^)(NSString * __nullable result))completionHandler
 {
-    NSDictionary *dict1 = [FFBMSTools packageWithRequestId:requestId
+    NSDictionary *dict1 = [WalletTools packageWithRequestId:requestId
                                                       data:[WalletUserDefaultManager getBlockUrl]
                                                       code:OK
                                                    message:@""];
@@ -400,9 +378,9 @@
     BOOL allAreValidChar = [predicate evaluateWithObject:toAddress];
     isok = !allAreValidChar;
     if (!isok) {
-        [FFBMSAlertShower showAlert:nil
+        [WalletAlertShower showAlert:nil
                                 msg:VCNSLocalizedBundleString(@"非法参数", nil)
-                              inCtl:[FFBMSTools getCurrentVC]
+                              inCtl:[WalletTools getCurrentVC]
                               items:@[VCNSLocalizedBundleString(@"dialog_yes", nil)]
                          clickBlock:^(NSInteger index) {
                          }];
@@ -437,9 +415,9 @@
         bAmount = YES;
     }
     if (!bAmount) {
-        [FFBMSAlertShower showAlert:nil
+        [WalletAlertShower showAlert:nil
                                 msg:VCNSLocalizedBundleString(@"非法参数", nil)
-                              inCtl:[FFBMSTools getCurrentVC]
+                              inCtl:[WalletTools getCurrentVC]
                               items:@[VCNSLocalizedBundleString(@"dialog_yes", nil)]
                          clickBlock:^(NSInteger index) {
                          }];
@@ -455,9 +433,9 @@
         isSame = YES;
     }
     if (isSame) {
-        [FFBMSAlertShower showAlert:nil
+        [WalletAlertShower showAlert:nil
                                 msg:VCNSLocalizedBundleString(@"非法参数", nil)
-                              inCtl:[FFBMSTools getCurrentVC]
+                              inCtl:[WalletTools getCurrentVC]
                               items:@[VCNSLocalizedBundleString(@"dialog_yes", nil)]
                          clickBlock:^(NSInteger index) {
                          }];

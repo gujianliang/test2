@@ -11,7 +11,7 @@
 #import <UIKit/UIKit.h>
 #import "WalletManageModel.h"
 #import "WalletUtils.h"
-#import "FFBMSTools.h"
+#import "WalletTools.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

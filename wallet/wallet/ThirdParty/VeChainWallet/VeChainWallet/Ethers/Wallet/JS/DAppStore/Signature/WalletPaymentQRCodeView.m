@@ -8,8 +8,8 @@
 
 #import "WalletPaymentQRCodeView.h"
 #import "WalletGradientLayerButton.h"
-#import "FFBMSTextView.h"
-#import "FFBMSTools.h"
+#import "WalletTextView.h"
+#import "WalletTools.h"
 #import "UIView+Sizes.h"
 #import "Masonry.h"
 
@@ -58,7 +58,7 @@
     _contentView = [[UIView alloc]init];
     _contentView.backgroundColor = UIColor.whiteColor;
     [self addSubview:_contentView];
-    [FFBMSTools circualarView:_contentView Radius:4];
+    [WalletTools circualarView:_contentView Radius:4];
     [_contentView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.bottom.mas_equalTo(0);
         make.height.mas_equalTo(430);
@@ -92,7 +92,7 @@
     [_confirmBtn addTarget:self action:@selector(clickNext:) forControlEvents:UIControlEventTouchUpInside];
     [_contentView addSubview:_confirmBtn];
     
-    [FFBMSTools circualarView:_confirmBtn Radius:4];
+    [WalletTools circualarView:_confirmBtn Radius:4];
     CGFloat bottom = (iS_iPhoneX) ? -35 : -24;
     [_confirmBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(20);
@@ -129,7 +129,7 @@
        && _codeType
        != QRCodeObserverAuthType){ // 发送交易
         
-        [FFBMSTools checkNetwork:^(BOOL t)
+        [WalletTools checkNetwork:^(BOOL t)
         {
             if (t) {
                 if (_confirmBtn.userInteractionEnabled) {
@@ -160,7 +160,7 @@
                          forState:UIControlStateNormal];
             [_confirmBtn setGrayGradientLayerType:highYellowType];
             
-            UIImage *qrCodeImage = [FFBMSTools creatQRcodeImage:_jsonStr];
+            UIImage *qrCodeImage = [WalletTools creatQRcodeImage:_jsonStr];
             UIImageView *qrImageView = [[UIImageView alloc]init];
             [qrImageView setImage:qrCodeImage];
             [_contentView addSubview:qrImageView];
@@ -303,7 +303,7 @@
             [_confirmBtn setTitle:VCNSLocalizedBundleString(@"完成", nil) forState:UIControlStateNormal];
             [_confirmBtn setGrayGradientLayerType:cyanType];
             
-            UIImage *qrCodeImage = [FFBMSTools creatQRcodeImage:_jsonStr];
+            UIImage *qrCodeImage = [WalletTools creatQRcodeImage:_jsonStr];
             UIImageView *qrImageView = [[UIImageView alloc]init];
             [qrImageView setImage:qrCodeImage];
             [_contentView addSubview:qrImageView];

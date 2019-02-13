@@ -40,7 +40,7 @@
 //
 //    //    if (![self checkNetwork]) {
 //    //
-//    //        [FFBMSTools callback:requestId
+//    //        [WalletTools callback:requestId
 //    //                        data:@""
 //    //                  callbackID:callbackID
 //    //                     webview:webView

@@ -1,5 +1,5 @@
 //
-//  FFBMSAlertShower.h
+//  WalletAlertShower.h
 //  Stonebang
 //  Alert,Sheet等控件的IOS系统适配
 //  Created by 曾新 on 16/4/7.
@@ -13,14 +13,14 @@ NS_ASSUME_NONNULL_BEGIN
 typedef void(^clickBlock)(NSInteger index);
 typedef void(^clickBlockF)(NSInteger index,NSString *msg);
 
-@interface FFBMSAlertShower : UIView<UIAlertViewDelegate,UIActionSheetDelegate,UITextFieldDelegate>
+@interface WalletAlertShower : UIView<UIAlertViewDelegate,UIActionSheetDelegate,UITextFieldDelegate>
 
 @property(nonatomic,copy)clickBlock alertClickBack;
 @property(nonatomic,copy)clickBlockF alertClickBackF;
 
 //@property(nonatomic,copy)clickBlock sheetClickBack;
 
-//SIGLEDEF(FFBMSAlertShower);
+//SIGLEDEF(WalletAlertShower);
 
 /**
  *  适配IOS系统版本的AlertView展示

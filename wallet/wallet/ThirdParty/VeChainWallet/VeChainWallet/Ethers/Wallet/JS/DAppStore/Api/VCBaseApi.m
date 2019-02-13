@@ -1,19 +1,16 @@
 //
 //  VCBaseApi.m
-//  FFBMS
+//  Wallet
 //
 //  Created by 曾新 on 16/4/7.
 //  Copyright © 2016年 Eagle. All rights reserved.
 //
 
 #import "NSJSONSerialization+NilDataParameter.h"
-#import "FFBMSError.h"
+#import "WalletError.h"
 #import "VCBaseApi.h"
-#import "FFBMSModelFetcher.h"
+#import "WalletModelFetcher.h"
 #import "NSStringAdditions.h"
-//#import <JMEncryptBox/JMEncryptBox.h>
-//#import "WalletHandle.h"
-//#import "NSDate+InternetDateTime.h"
 
 @implementation VCBaseApi
 {
@@ -147,8 +144,8 @@
     }
 }
 
--(void)loadDataAsyncWithSuccess:(FFBMSLoadSuccessBlock)success
-                        failure:(FFBMSLoadFailBlock)failure
+-(void)loadDataAsyncWithSuccess:(WalletLoadSuccessBlock)success
+                        failure:(WalletLoadFailBlock)failure
 {
     _successBlock = success;
     _failBlock = failure;
@@ -171,7 +168,7 @@
     switch (_requestMethod) {
         case RequestGetMethod:
         {
-            [FFBMSModelFetcher requestGetWithUrl:httpAddress
+            [WalletModelFetcher requestGetWithUrl:httpAddress
                                           params:postDict
                                       useSession:_needToken
                                      needEncrypt:_needEncrypt
@@ -187,7 +184,7 @@
         
         case RequestPostMethod:
         {
-            [FFBMSModelFetcher requestPostWithUrl:httpAddress
+            [WalletModelFetcher requestPostWithUrl:httpAddress
                                            params:postDict
                                        useSession:_needToken
                                       needEncrypt:_needEncrypt
@@ -202,7 +199,7 @@
             break;
         case RequestPutMethod:
         {
-            [FFBMSModelFetcher requestPutWithUrl:httpAddress
+            [WalletModelFetcher requestPutWithUrl:httpAddress
                                            params:postDict
                                        useSession:_needToken
                                      needEncrypt:_needEncrypt
@@ -217,7 +214,7 @@
             break;
         case RequestDelMethod:
         {
-            [FFBMSModelFetcher requestDelWithUrl:httpAddress
+            [WalletModelFetcher requestDelWithUrl:httpAddress
                                           params:postDict
                                       useSession:_needToken
                                      needEncrypt:_needEncrypt
@@ -233,7 +230,7 @@
         
         case RequestRAWMethod:
         {
-            [FFBMSModelFetcher requestRAWWithUrl:httpAddress
+            [WalletModelFetcher requestRAWWithUrl:httpAddress
                                           params:postDict
                                       useSession:_needToken
                                            error:&error
@@ -262,7 +259,6 @@
                headerFileds:(NSDictionary *)headerFields
                       error:(NSError *)error {
     self.responseHeaderFields = headerFields;
-    [self saveResponseTime]; //核对服务器时间使用
     NSNumber *errCode = nil;
     NSString *errMsg = nil;
     self.resultModel = responseData; //先给，后面覆盖
@@ -280,7 +276,7 @@
             return;
         }
         
-        if ((errCode != nil && [errCode integerValue] == FFBMS_ERROR_OK) || (errCode.integerValue == 0)) {
+        if ((errCode != nil && [errCode integerValue] == Wallet_ERROR_OK) || (errCode.integerValue == 0)) {
             
             id objDict = nil;
             NSDictionary *dictEntity = [dict objectForKey:@"data"];
@@ -307,7 +303,6 @@
                     self.pageNo = [NSString stringWithFormat:@"%ld",([[objDict objectForKey:@"page"] integerValue] + 1)];
                     
                 }
-                
                 self.status = RequestSuccess;
                 [self convertJsonResultToModel:objDict];
                 if(self.resultModel){
@@ -428,12 +423,12 @@
                 break;
         }
         
-        self.lastError = [NSError errorWithDomain:kFFBMSErrorDomain
+        self.lastError = [NSError errorWithDomain:kWalletErrorDomain
                                              code:errCode.integerValue
-                                         userInfo:@{NSLocalizedFailureReasonErrorKey: errMsg.length > 0 ? errMsg : FFBMS_MSG_ASIHTTP}];
+                                         userInfo:@{NSLocalizedFailureReasonErrorKey: errMsg.length > 0 ? errMsg : Wallet_MSG_ASIHTTP}];
         
     }
-    else if (nil == errCode || [errCode intValue] != FFBMS_ERROR_OK) {
+    else if (nil == errCode || [errCode intValue] != Wallet_ERROR_OK) {
         
         if ([errMsg isEqual:[NSNull null]]) {
             errMsg = VCNSLocalizedBundleString(@"Unknown error", nil);
@@ -441,7 +436,7 @@
             errMsg = [errMsg length] ? errMsg : VCNSLocalizedBundleString(@"Unknown error", nil);
         }
         
-        self.lastError = [NSError errorWithDomain:kFFBMSErrorDomain
+        self.lastError = [NSError errorWithDomain:kWalletErrorDomain
                                              code:[errCode integerValue]
                                          userInfo:@{NSLocalizedFailureReasonErrorKey:errMsg}];
     } else {
@@ -466,8 +461,8 @@
 }
 
 
-- (void)loadLocalDataAsyncWithSuccess:(FFBMSLoadSuccessBlock)success
-                              failure:(FFBMSLoadFailBlock)failure
+- (void)loadLocalDataAsyncWithSuccess:(WalletLoadSuccessBlock)success
+                              failure:(WalletLoadFailBlock)failure
 {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [self loadLocalDataAsync];
@@ -480,25 +475,6 @@
             }
         });
     });
-}
-
-- (void)saveResponseTime
-{
-//    NSString *serverTime = self.responseHeaderFields[@"Date"];
-//    if (serverTime.length == 0) {
-//        [WalletHandle shareWalletHandle].responseOffset = [NSString stringWithFormat:@"%d",0];
-//        return;
-//    }
-//
-//    // 转换方法
-//    NSDate *serverData = [NSDate dateFromInternetDateTimeString:serverTime formatHint:DateFormatHintRFC822];
-//    NSLog(@"dateString == %@ serverTime == %@ ",serverData,serverTime);
-//
-//    // 服务器时间 - 当前时间
-//    NSTimeInterval offset = [serverData timeIntervalSinceDate:[NSDate date]];
-//    NSLog(@"offset === %f",offset);
-//
-//    [WalletHandle shareWalletHandle].responseOffset = [NSString stringWithFormat:@"%f",offset];
 }
 
 @end

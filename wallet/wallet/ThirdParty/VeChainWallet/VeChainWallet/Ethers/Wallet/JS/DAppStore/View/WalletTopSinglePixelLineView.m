@@ -1,18 +1,18 @@
 //
-//  FFBMSTopSinglePixelLineView.m
-//  FFBMS
+//  WalletTopSinglePixelLineView.m
+//  Wallet
 //
 //  Created by 曾新 on 16/4/18.
 //  Copyright © 2016年 Eagle. All rights reserved.
 //
 
-#import "FFBMSTopSinglePixelLineView.h"
+#import "WalletTopSinglePixelLineView.h"
 #define POINT_MINUS_ONE_PIXEL (([UIScreen mainScreen].scale - 1.0f) / [UIScreen mainScreen].scale)
 #define CGDrawingOnePixelWidth      (1.0f)
 
 //(1.0f/[UIScreen mainScreen].scale)
 
-@implementation FFBMSTopSinglePixelLineView
+@implementation WalletTopSinglePixelLineView
 
 
 // Only override drawRect: if you perform custom drawing.

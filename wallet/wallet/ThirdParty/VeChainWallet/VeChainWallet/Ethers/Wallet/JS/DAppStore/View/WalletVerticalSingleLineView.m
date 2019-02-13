@@ -1,14 +1,14 @@
 //
-//  FFBMSVerticalSingleLineView.m
-//  FFBMS
+//  WalletVerticalSingleLineView.m
+//  Wallet
 //
 //  Created by 曾新 on 16/5/9.
 //  Copyright © 2016年 Eagle. All rights reserved.
 //
 
-#import "FFBMSVerticalSingleLineView.h"
+#import "WalletVerticalSingleLineView.h"
 
-@implementation FFBMSVerticalSingleLineView
+@implementation WalletVerticalSingleLineView
 
 /*
 // Only override drawRect: if you perform custom drawing.

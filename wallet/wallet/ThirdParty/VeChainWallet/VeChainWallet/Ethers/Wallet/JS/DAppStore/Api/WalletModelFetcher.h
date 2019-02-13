@@ -1,6 +1,6 @@
 //
-//  FFBMSModelFetcher.h
-//  FFBMS
+//  WalletModelFetcher.h
+//  Wallet
 //
 //  Created by 曾新 on 16/4/7.
 //  Copyright © 2016年 Eagle. All rights reserved.
@@ -10,7 +10,7 @@
 
 typedef void (^responseBlock)(NSDictionary *responseDict, NSDictionary *responseHeaderFields,NSError *error);
 
-@interface FFBMSModelFetcher : NSObject
+@interface WalletModelFetcher : NSObject
 
 + (void)requestGetWithUrl:(NSString*)aUrl
                    params:(NSMutableDictionary*)dict
