@@ -254,7 +254,7 @@
 		9747226920EDE9F800F9EAB3 = {
 			isa = PBXGroup;
 			children = (
-				9747227420EDE9F800F9EAB3 /* wallet */,
+				9747227420EDE9F800F9EAB3 /* Wallet */,
 				9747228D20EDE9FA00F9EAB3 /* walletTests */,
 				9747229820EDE9FA00F9EAB3 /* walletUITests */,
 				9747227320EDE9F800F9EAB3 /* Products */,
@@ -272,7 +272,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		9747227420EDE9F800F9EAB3 /* wallet */ = {
+		9747227420EDE9F800F9EAB3 /* Wallet */ = {
 			isa = PBXGroup;
 			children = (
 				9773F84D2213B22B00DF5972 /* WalletSDKBundle.bundle */,
@@ -288,7 +288,7 @@
 				9747228320EDE9FA00F9EAB3 /* Info.plist */,
 				9747228420EDE9FA00F9EAB3 /* main.m */,
 			);
-			path = wallet;
+			path = Wallet;
 			sourceTree = "<group>";
 		};
 		9747228D20EDE9FA00F9EAB3 /* walletTests */ = {
@@ -761,7 +761,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = vechain.walletTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/walletSDKDemo.app/walletSDKDemo";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/walletSDKDemo.temp_caseinsensitive_rename.temp_caseinsensitive_rename.app/walletSDKDemo.temp_caseinsensitive_rename.temp_caseinsensitive_rename";
 			};
 			name = Debug;
 		};
@@ -780,7 +780,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = vechain.walletTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/walletSDKDemo.app/walletSDKDemo";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/walletSDKDemo.temp_caseinsensitive_rename.temp_caseinsensitive_rename.app/walletSDKDemo.temp_caseinsensitive_rename.temp_caseinsensitive_rename";
 			};
 			name = Release;
 		};
