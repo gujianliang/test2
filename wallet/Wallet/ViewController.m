@@ -9,8 +9,8 @@
 #import "ViewController.h"
 #import <walletSDK/Wallet.h>
 #import "WebViewVC.h"
-#import "CreatVC.h"
-#import "RecoverMainVC.h"
+#import "WalletCreatVC.h"
+#import "WalletRecoverMainVC.h"
 #import "WalletDetailVC.h"
 
 
@@ -33,14 +33,14 @@
         case 10:
         {
 
-            CreatVC *creat = [[CreatVC alloc]init];
+            WalletCreatVC *creat = [[WalletCreatVC alloc]init];
             [self.navigationController pushViewController:creat animated:YES];
         }
             break;
         case 11:
         {
 
-            RecoverMainVC *recoverVC = [[RecoverMainVC alloc]init];
+            WalletRecoverMainVC *recoverVC = [[WalletRecoverMainVC alloc]init];
             [self.navigationController pushViewController:recoverVC animated:YES];
 
         }

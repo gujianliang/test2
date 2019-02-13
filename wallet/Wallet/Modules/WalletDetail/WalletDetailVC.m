@@ -8,13 +8,13 @@
 
 #import "WalletDetailVC.h"
 #import <walletSDK/AFNetworking.h>
-#import "TransferVC.h"
+#import "WalletTransferVC.h"
 #import <walletSDK/Payment.h>
 #import "WalletMoreInfoVC.h"
 #import "WebViewVC.h"
-#import "CoverView.h"
-#import "NETDetailVC.h"
-#import "AddNetVC.h"
+#import "WalletCoverView.h"
+#import "WalletServerDetailVC.h"
+#import "WalletAddServerVC.h"
 
 @interface WalletDetailVC ()<UISearchBarDelegate>
 {
@@ -67,9 +67,9 @@
 
 - (void)selectNET
 {
-    CoverView *coverView = [self.view viewWithTag:90];
+    WalletCoverView *coverView = [self.view viewWithTag:90];
     if (!coverView) {
-        coverView = [[CoverView alloc]initWithFrame:self.view.frame];
+        coverView = [[WalletCoverView alloc]initWithFrame:self.view.frame];
         coverView.tag = 90;
         [self.view addSubview:coverView];
         
@@ -77,10 +77,10 @@
             
             self.title = netName;
             if ([netName containsString:@"自定义"]) {
-                AddNetVC *detailVC = [[AddNetVC alloc]init];
+                WalletAddServerVC *detailVC = [[WalletAddServerVC alloc]init];
                 [self.navigationController pushViewController:detailVC animated:YES];
             }else{
-                NETDetailVC *detailVC = [[NETDetailVC alloc]init];
+                WalletServerDetailVC *detailVC = [[WalletServerDetailVC alloc]init];
                 [detailVC netName:netName netUrl:netUrl];
                 [self.navigationController pushViewController:detailVC animated:YES];
             }
@@ -208,7 +208,7 @@
 
 - (IBAction)enterTransfer:(id)sender
 {
-    TransferVC *transfer = [[TransferVC alloc]init];
+    WalletTransferVC *transfer = [[WalletTransferVC alloc]init];
     
     UIButton *btn = (UIButton *)sender;
     if (btn.tag == 10) { //vet transfer

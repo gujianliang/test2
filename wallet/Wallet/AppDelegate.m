@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-//#import "CreatVC.h"
+//#import "WalletCreatVC.h"
 
 @interface AppDelegate ()
 
