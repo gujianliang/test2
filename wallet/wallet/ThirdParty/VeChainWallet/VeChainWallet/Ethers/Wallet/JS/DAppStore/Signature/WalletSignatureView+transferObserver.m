@@ -1,28 +1,23 @@
 //
-//  WalletSignatureView+VETTransferObserve.m
+//  WalletSignatureView+transferObserver.m
 //  VeWallet
 //
 //  Created by 曾新 on 2019/1/22.
 //  Copyright © 2019年 VeChain. All rights reserved.
 //
 
-#import "WalletSignatureView+VETTransferObserve.h"
+#import "WalletSignatureView+transferObserver.h"
 #import "WalletObersverTransactionModel.h"
 #import "WalletBaseConfigModel.h"
 #import "WalletBlockInfoApi.h"
-//#import "WalletSqlDataEngine.h"
-//#import "WalletTradeDetailVC.h"
-//#import "WalletTradeDetailVC.h"
 #import "WalletPaymentQRCodeView.h"
 #import "WalletTransactionApi.h"
 #import "WalletRewardNodeApi.h"
 
-@implementation WalletSignatureView (VETTransferObserve)
+@implementation WalletSignatureView (transferObserver)
 
-
--(void)icoTransferAccount:(NSString *)valueFormated
+-(void)transferAccountObserver:(NSString *)valueFormated
 {
-//    [FFBMSMBProgressShower showCircleIn:self];
     WalletObersverTransactionModel *transaction = [[WalletObersverTransactionModel alloc] init];
     
     // 生成随机 nonce
@@ -59,7 +54,6 @@
     @weakify(self)
     [bestBlockApi loadDataAsyncWithSuccess:^(VCBaseApi *finishApi) {
         @strongify(self)
-//        [FFBMSMBProgressShower hide:self];
         
         WalletBlockInfoModel *blockModel = finishApi.resultModel;
         
@@ -129,8 +123,8 @@
 {
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        
-        WalletPaymentQRCodeView *QRCodeView = [[WalletPaymentQRCodeView alloc]initWithFrame:CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, SCREEN_HEIGHT)
+        CGRect viewFrame = CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, SCREEN_HEIGHT);
+        WalletPaymentQRCodeView *QRCodeView = [[WalletPaymentQRCodeView alloc]initWithFrame:viewFrame
                                                                                        type:HotWalletQrCodeType
                                                                                        json:json
                                                                                    codeType:QRCodeVetType];
@@ -147,19 +141,18 @@
             [self enterPayView:transaction];
         };
     });
-    
 }
 
 -(void)enterPayView:(WalletObersverTransactionModel *)transaction
 {
     
-    WalletPaymentQRCodeView *QRCodeView = [[WalletPaymentQRCodeView alloc]initWithFrame:CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, SCREEN_HEIGHT)
+    CGRect viewFrame = CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, SCREEN_HEIGHT);
+    WalletPaymentQRCodeView *QRCodeView = [[WalletPaymentQRCodeView alloc]initWithFrame:viewFrame
                                                                                    type:HotWalletScanType
                                                                                    json:@""
                                                                                codeType:QRCodeVetType];
     QRCodeView.backgroundColor = UIColor.clearColor;
     QRCodeView.tag = 702;
-    QRCodeView.enter_path = @"transferList";
     QRCodeView.businessType = BusinessType_TRANSFER;
     [[FFBMSTools getCurrentVC].navigationController.view addSubview:QRCodeView];
     [UIView animateWithDuration:0.3 animations:^{
@@ -172,11 +165,11 @@
         Transaction *transactionTransfer = [[Transaction alloc] init];
         transactionTransfer.nonce =  [[BigNumber bigNumberWithHexString:transaction.nonce] integerValue];
         
-        transactionTransfer.Expiration =  transaction.expiration.integerValue;
-        transactionTransfer.gasPrice   =  [BigNumber bigNumberWithDecimalString:transaction.gasPriceCoef];
-        transactionTransfer.gasLimit   =  [BigNumber bigNumberWithDecimalString:transaction.gas];
-        transactionTransfer.ChainTag   =  [BigNumber bigNumberWithHexString:transaction.chainTag];
-        transactionTransfer.BlockRef   =  [BigNumber bigNumberWithHexString:transaction.blockRef];
+        transactionTransfer.Expiration = transaction.expiration.integerValue;
+        transactionTransfer.gasPrice   = [BigNumber bigNumberWithDecimalString:transaction.gasPriceCoef];
+        transactionTransfer.gasLimit   = [BigNumber bigNumberWithDecimalString:transaction.gas];
+        transactionTransfer.ChainTag   = [BigNumber bigNumberWithHexString:transaction.chainTag];
+        transactionTransfer.BlockRef   = [BigNumber bigNumberWithHexString:transaction.blockRef];
         
         BigNumber *subValue;
         if ([transaction.symbol isEqualToString:@"VET"]) {
@@ -204,7 +197,7 @@
         transactionTransfer.signature = [Signature signatureWithData:data];
         NSString *raw = [SecureData dataToHexString: [transactionTransfer serialize]];
         
-        NSData *signtureMessage =  [transactionTransfer getSigntureMessage];
+        NSData *signtureMessage = [transactionTransfer getSigntureMessage];
         
         Address *from =  [Account verifyMessage:signtureMessage signature:transactionTransfer.signature];
         
@@ -239,10 +232,6 @@
     @weakify(self)
     [bestBlockApiNew loadDataAsyncWithSuccess:^(VCBaseApi *finishApi) {
         @strongify(self)
-        WalletBlockInfoModel *blockModelNew = finishApi.resultModel;
-        
-        
-//        [sql saveTransferModel:model];
         
         // 发送交易
         [self sendraw:raw];
@@ -259,12 +248,8 @@
     WalletTransactionApi *transationApi = [[WalletTransactionApi alloc]initWithRaw:raw];
     [transationApi loadDataAsyncWithSuccess:^(VCBaseApi *finishApi) {
         @strongify(self)
-//        [FFBMSMBProgressShower hide:self];
-//        NC_POST_NAME_NO_OBJECT(kTransactionSuccess);
         [self removrQRcodeView];
-        
         self.txid = finishApi.resultDict[@"id"];
-//        NSString*
         [self.scrollView setContentOffset:CGPointMake(SCREEN_WIDTH*2, 0) animated:YES];
         [self timerCountBlock];
         
@@ -275,8 +260,8 @@
     }];
 }
 
-- (void)showTransactionFail {
-//    [FFBMSMBProgressShower hide:self];
+- (void)showTransactionFail
+{
     [FFBMSAlertShower showAlert:nil
                             msg:VCNSLocalizedBundleString(@"transfer_wallet_send_fail", nil)
                           inCtl:[FFBMSTools getCurrentVC]
@@ -285,31 +270,23 @@
                      }];
 }
 
-
-- (void)startTransaction {
-    if (![self checkNetwork]) {
-        return;
-    }
-    
-    [self doTransaction];
-
-    
+- (void)startTransaction
+{
+    [FFBMSTools checkNetwork:^(BOOL t) {
+        if (t) {
+           [self transaction];
+        }
+    }];
 }
 
-
-- (void)doTransaction
+- (void)transaction
 {
-
-   
     // 格式化用户不正确输入
     Address *address = [Address addressWithString:self.toAddress];
-    NSString *valueFormated = [self removeExtraZeroAtBegin:self.amount];
+    NSString *valueFormated = [FFBMSTools removeExtraZeroAtBegin:self.amount];
     NSArray *valueComponents = [valueFormated componentsSeparatedByString:@"."];
     // 如果用户输入的位数超过币的decimals，删掉多余的
     valueFormated = (valueComponents.count == 2 && ((NSString *)valueComponents.lastObject).length > self.currentCoinModel.decimals) ? [NSString stringWithFormat:@"%@%@%@", valueComponents[0], @".", [((NSString *)valueComponents[1]) substringToIndex:self.currentCoinModel.decimals]] : valueFormated;
-    
-    
-    ////////////使用新控件
     
     BOOL ico =  NO;
     
@@ -325,88 +302,15 @@
            contractType:NoContract_transferToken
                  amount:valueFormated
                  params:@[dictParam]];
-    
-    
-    // 1,是vet 还是 token 转账
-    // 2,ico 还有其他的功能 签名
-    // 3,矿工费
-    // 4,gasPrice
-    @weakify(self);
+   
     signaVC.block = ^(BOOL result) {
-        @strongify(self);
         [[FFBMSTools getCurrentVC].navigationController popViewControllerAnimated:NO];
-        
-        if (result) {
-//            [self mark:@""];
-        }
     };
-    
-    //    [self.navigationController.view addSubview:signaVC];
-    //
-    //    /////////////
-    //
-    //    return;
+ 
     //观察钱包走授权逻辑
     { // ico 观察钱包 或 普通观察钱包
-        
-        [self icoTransferAccount:valueFormated];
-    
+        [self transferAccountObserver:valueFormated];
     }
-}
-
-- (BOOL)checkNetwork {
-    // 检查网络
-    AFNetworkReachabilityManager *reachManager = [AFNetworkReachabilityManager sharedManager];
-    BOOL net = [reachManager isReachable];
-    if (!net) {
-        [FFBMSAlertShower showAlert:nil
-                                msg:VCNSLocalizedBundleString(@"no_network_hint", nil)
-                              inCtl:[FFBMSTools getCurrentVC]
-                              items:@[VCNSLocalizedBundleString(@"dialog_yes", nil)]
-                         clickBlock:^(NSInteger index) {
-                         }];
-        return NO;
-    }
-    return YES;
-}
-
-
-
-- (NSString *)removeExtraZeroAtBegin:(NSString *)valueFormated {
-    while ([valueFormated hasPrefix:@"0"]
-           || [valueFormated hasPrefix:@"."]) {
-        if ([valueFormated isEqualToString:@"0."]) {
-            valueFormated = @"0";
-            break;
-        }
-        
-        if ([valueFormated hasPrefix:@"0."]) {
-            break;
-        }
-        
-        if ([valueFormated hasPrefix:@"."] ) {
-            valueFormated = [@"0" stringByAppendingString:valueFormated];
-            break;
-        }
-        
-        if ([valueFormated isEqualToString:@"0"]
-            || ![valueFormated hasPrefix:@"0"]) {
-            break;
-        }
-        
-        if ([valueFormated hasPrefix:@"00"]) {
-            valueFormated = [valueFormated substringFromIndex:1];
-        } else if ([valueFormated hasPrefix:@"0"] && ![valueFormated hasPrefix:@"0."]) {
-            valueFormated = [valueFormated substringFromIndex:1];
-            break;
-        }
-    }
-    return valueFormated;
-}
-
-- (void)mark:(NSString *)errorMsg
-{
-
 }
 
 @end

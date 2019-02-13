@@ -390,21 +390,7 @@
 
         CGFloat msgH = [anotherString boundingRectWithSize:CGSizeMake(contentView.frame.size.width - 40, NSIntegerMax) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:msgLable.font} context:nil].size.height;
         viewY = viewY + msgH + 20;
-        
     }
-//    else if( [msg isKindOfClass:[SelectableLabel class]]){
-////        msgLable = msg;
-////        [contentView addSubview:msgLable];
-////
-////        [msgLable mas_makeConstraints:^(MASConstraintMaker *make) {
-////            make.left.mas_equalTo(20);
-////            make.right.mas_equalTo(-20);
-////            make.top.mas_equalTo(titleLabel.mas_bottom).offset(20);
-////        }];
-////
-////        viewY = viewY + msgLable.bounds.size.height + 20;
-//    }
-    
     CGFloat btnW = CGRectGetWidth(contentView.frame)/items.count;
     
     for (int i = 0; i < items.count ; i ++) {

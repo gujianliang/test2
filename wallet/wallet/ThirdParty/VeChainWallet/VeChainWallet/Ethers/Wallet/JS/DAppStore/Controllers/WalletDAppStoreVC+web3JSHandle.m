@@ -63,7 +63,7 @@
     }];
 }
 
-- (void)WEB3VETTransferFrom1:(NSString *)from1
+- (void)WEB3VETTransferFrom:(NSString *)from
                           to:(NSString *)to
                       amount:(NSString *)amount
                    requestId:(NSString *)requestId
@@ -77,7 +77,7 @@
     CGFloat amountTnteger = amountStr.floatValue/pow(10,18);
     if (![self errorAddressAlert:to] ||
         ![self errorAmount:amountStr coinName:@"VET"] ||
-        ![self fromISToAddress:from1 to:to] ||
+        ![self fromISToAddress:from to:to] ||
         !(gas.integerValue > 0)) {
         
         [FFBMSTools callback:requestId
@@ -108,7 +108,7 @@
     WalletSignatureView *signaVC = [[WalletSignatureView alloc] initWithFrame:[FFBMSTools getCurrentVC].view.bounds];
     signaVC.jsUse = YES;
     signaVC.transferType = JSVETTransferType;
-    [signaVC updateView:from1
+    [signaVC updateView:from
               toAddress:to
            contractType:NoContract_transferToken
                  amount:[NSString stringWithFormat:@"%lf",amountTnteger]
@@ -282,7 +282,7 @@
 
 - (void)WEB3contractSign:(WalletSignatureView *)signaVC
                       to:(NSString *)to
-                   from1:(NSString *)from1
+                   from:(NSString *)from
                   amount:(NSString * )amount
                requestId:(NSString *)requestId
                      gas:(NSString *)gas
@@ -331,7 +331,7 @@
 
     signaVC.jsUse = YES;
     signaVC.transferType = JSContranctTransferType;
-    [signaVC updateView:from1
+    [signaVC updateView:from
               toAddress:@""
            contractType:NoContract_transferToken
                  amount:[NSString stringWithFormat:@"%.2f",amountTnteger]

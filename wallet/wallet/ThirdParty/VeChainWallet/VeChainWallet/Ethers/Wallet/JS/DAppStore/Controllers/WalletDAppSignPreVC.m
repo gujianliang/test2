@@ -47,8 +47,6 @@
     [super viewDidLoad];
     
     self.navigationItem.title = VCNSLocalizedBundleString(@"h5_contract_params_confirm_title", nil);
-//    [self updateNavigationBarStyle:TintAndTitleNoneCloseWhiteOne];
-    
     // 添加子视图
     [self addSubView];
 }
@@ -68,7 +66,6 @@
         make.height.mas_equalTo(Scale(100.0));
     }];
     
-    
     // 备注标签信息
     UILabel *lab = [[UILabel alloc] init];
     lab.text = VCNSLocalizedBundleString(@"h5_contract_params_confirm_msg", nil);
@@ -82,7 +79,6 @@
         make.right.mas_equalTo(-Scale(20));
         make.top.bottom.mas_equalTo(0);
     }];
-    
     
     // 添加继续按钮
     WalletGradientLayerButton *confirmBtn = [[WalletGradientLayerButton alloc] init];
@@ -120,7 +116,6 @@
 }
 
 - (void)continueSign{
-    NSLog(@"click 已知晓风险，继续签名");
     
     [self dismissViewControllerAnimated:YES completion:^{
         if (_block) {

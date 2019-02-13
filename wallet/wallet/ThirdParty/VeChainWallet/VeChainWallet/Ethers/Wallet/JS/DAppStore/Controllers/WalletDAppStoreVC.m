@@ -10,7 +10,6 @@
 #import <WebKit/WebKit.h>
 #import "NSJSONSerialization+NilDataParameter.h"
 #import "YYModel.h"
-//#import "WalletSqlDataEngine.h"
 #import "WalletBlockInfoApi.h"
 #import "WalletVETBalanceApi.h"
 #import "WalletSignatureView.h"
@@ -25,8 +24,6 @@
 #import "WalletDAppStoreVC+web3JSHandle.h"
 #import "WalletDAppStoreVC+ConnexJSHandle.h"
 #import "NSJSONSerialization+NilDataParameter.h"
-
-
 #import "WalletDAppPeersApi.h"
 #import "WalletDAppTransferDetailApi.h"
 #import "WalletSingletonHandle.h"
@@ -38,27 +35,17 @@
 }
 @end
 
-
 @implementation WalletDAppStoreVC
 
 - (void)viewDidLoad
 {
-//    [super viewDidLoad];
-//    self.view.backgroundColor = UIColor.whiteColor;
-    NSLog(@"ddd");
     _webView = [[WKWebView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH  , SCREEN_HEIGHT)];
     _webView.UIDelegate = self;
     _webView.navigationDelegate = self;
     NSURL *webURL = [NSURL URLWithString:@"https://cdn.vechain.com/vechainthorwallet/h5/test.html"];
     webURL = [NSURL URLWithString:@"https://appwallet.oss-cn-shanghai.aliyuncs.com/testJS/test.html"];
 
-//    webURL = [NSURL URLWithString:@"https://appwallet.oss-cn-shanghai.aliyuncs.com/testJS/dist/index.html#test"];
-//    webURL = [NSURL URLWithString:@"https://wallet-dapps-test.vechaindev.com/#/dapps"];
-//    webURL = [NSURL URLWithString:@"https://appwallet.oss-cn-shanghai.aliyuncs.com/testJS/yijianfabi/dist/index.html"];
-//    webURL = [NSURL URLWithString:@"http://192.168.43.114:8080/#/test"];
     [_webView loadRequest:[NSURLRequest requestWithURL:webURL]];
-//    [self.view addSubview:_webView];
-    
 }
 
 -(instancetype)initWithWalletDict:(NSMutableArray *)walletList
@@ -80,24 +67,10 @@
     NSString *result = [defaultText stringByReplacingOccurrencesOfString:@"wallet://" withString:@""];
     NSDictionary *dict = [NSJSONSerialization dictionaryWithJsonString:result];
     
-    
-    
     NSString *callbackID = dict[@"callbackId"];
     NSString *requestId = dict[@"requestId"];
     NSString *method = dict[@"method"];
     NSDictionary *dictP = dict[@"params"];
-    
-//    if (![self checkNetwork]) {
-//
-//        [FFBMSTools callback:requestId
-//                        data:@""
-//                  callbackID:callbackID
-//                     webview:webView
-//                        code:ERROR_NETWORK
-//                     message:@"network error"];
-//
-//        return;
-//    }
     
     if ([method isEqualToString:@"getStatus"]) {
 
@@ -156,10 +129,6 @@
     }
     else if([method isEqualToString:@"sign"])
     {
-//        if ([self.navigationController.view viewWithTag:SelectWalletTag]) {
-//            completionHandler(@"{}");
-//            return;
-//        }
         NSArray *clausesList = dictP[@"clauses"][0];
         if (clausesList.count == 0) {
             completionHandler(@"{}");
@@ -274,7 +243,7 @@
             BigNumber *gasCanUse = [[[[BigNumber bigNumberWithDecimalString:@"1000000000000000"] mul:[BigNumber bigNumberWithInteger:(1+gasPriceDecimal.integerValue/255.0)*1000000]] mul:gasBig] div:[BigNumber bigNumberWithDecimalString:@"1000000"]];
             
             [self WEB3TransferWithClauseData:cluseData
-                                         from1:from
+                                         from:from
                                             to:to
                                      requestId:requestId
                                            gas:gas
@@ -293,9 +262,7 @@
 //  页面加载完成之后调用
 - (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation
 {
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self injectJS:webView];
-    });
+    [self injectJS:webView];
 }
 
 - (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(null_unspecified WKNavigation *)navigation
@@ -350,11 +317,6 @@
                             amount:(NSString *)amount
                          gasCanUse:(BigNumber *)gasCanUse
 {
-//    UIView *conventView = [self.navigationController.view viewWithTag:SignViewTag];
-//    if (conventView) {
-//        return;
-//    }
-    
     if (clauseData.length < 3) { // vet 转账clauseData == nil,
         CGFloat amountTnteger = [BigNumber bigNumberWithDecimalString:amount].decimalString.floatValue/pow(10, 18);
         [self VETTransferDictParam:dictParam
@@ -395,7 +357,7 @@
 }
 
 -(void)WEB3TransferWithClauseData:(NSString *)cluseData
-                               from1:(NSString *)from1
+                               from:(NSString *)from
                                  to:(NSString *)to
                           requestId:(NSString *)requestId
                                 gas:(NSString *)gas
@@ -416,7 +378,7 @@
         if (![cluseData hasPrefix:@"0xa9059cbb"]) { // 签合约
             [self WEB3contractSign:signaVC
                                 to:to
-                             from1:from1
+                             from:from
                             amount:amount
                          requestId:requestId
                                gas:gas
@@ -428,7 +390,7 @@
         }else{
             //vtho 转账
             [self WEB3VTHOTransfer:signaVC
-                              from:from1
+                              from:from
                                 to:to
                             amount:amount
                          requestId:requestId
@@ -442,7 +404,7 @@
         }
     }else{
         // VET 转账
-        [self WEB3VETTransferFrom1:from1
+        [self WEB3VETTransferFrom:from
                                 to:to
                             amount:amount
                          requestId:requestId
@@ -453,12 +415,5 @@
                           gasPrice:gasPrice];
     }
 }
-
-- (void)wark
-{
-//    _webView 
-}
-
-
 
 @end

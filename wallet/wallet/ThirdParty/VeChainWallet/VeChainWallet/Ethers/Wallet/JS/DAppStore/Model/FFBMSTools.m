@@ -13,31 +13,14 @@
 #include <ifaddrs.h>
 #import <dlfcn.h>
 #import <SystemConfiguration/SystemConfiguration.h>
-//#import "VCBaseVC.h"
-//#import "AppDelegate.h"
-//#import <ethers/ethers.h>
 #import "WalletUtils.h"
-//#import "WalletSqlDataEngine.h"
 #import "WalletPaymentQRCodeView.h"
-//#import "WalletAuthSignApi.h"
-//#import "WalletAuthFirstVC.h"
-//#import "WalletAuthInputPWView.h"
-//#import "WalletHandle.h"
 #import "NSMutableDictionary+Helpers.h"
 #import "AFNetworkReachabilityManager.h"
-
 #import "FFBMSMBProgressShower.h"
 
 @implementation FFBMSTools
 
-
-+ (NSDate *)stringConvertDate:(NSString *)strDate format:(NSString *)format
-{
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init] ;
-    [formatter setDateFormat:format];
-    NSDate *date=[formatter dateFromString:strDate];
-    return date;
-}
 
 + (NSString *)dateConvertString:(NSDate *)date format:(NSString *)format
 {
@@ -73,36 +56,6 @@
     }
 }
 
-
-//+ (UINavigationController *) getTabControllerByIndex:(int)index
-//{
-//    AppDelegate * delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
-//    UITabBarController *tabBarController = (UITabBarController*)delegate.rootTab;
-//    UINavigationController *nav = [tabBarController.viewControllers objectAtIndex:index];
-//    return nav;
-//}
-
-//+ (UINavigationController *) getActiveTabController
-//{
-//    AppDelegate * delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
-//    UITabBarController *tabBarController = (UITabBarController*)delegate.rootTab;
-//    UIViewController *nav = [tabBarController.viewControllers objectAtIndex:tabBarController.selectedIndex];
-//    return (UINavigationController *)nav;
-//}
-
-+ (void) restoreTabNavToRoot
-{
-//    AppDelegate * delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
-//    [delegate.rootTab dismissViewControllerAnimated:NO completion:NULL];
-//
-//    for (int i = 0; i < delegate.rootTab.viewControllers.count; i++) {
-//        [[self getTabControllerByIndex:i] popToRootViewControllerAnimated:NO];
-//    }
-//
-//    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:NO];
-//    [delegate.rootTab setSelectedIndex:0];
-}
-
 + (BOOL)IsIdentityCard:(NSString *)IDCardNumber
 {
     if (IDCardNumber.length <= 0) {
@@ -129,42 +82,6 @@
     NSString* appversion = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
     appversion = [appversion stringByReplacingOccurrencesOfString:@"." withString:@""];
     return appversion;
-}
-
-+(CGFloat)heightByStrWithWidthAndFontSize:(NSString*)Str  WIDTH:(CGFloat)width UIFONTSIZE:(CGFloat)fontSize
-{
-    CGRect sizeValueStr = [Str boundingRectWithSize:CGSizeMake(width, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:fontSize]} context:nil];
-    return sizeValueStr.size.height;
-}
-
-//绘制虚线
-+ (void)drawDashLine:(UIView *)lineView lineLength:(int)lineLength lineSpacing:(int)lineSpacing lineColor:(UIColor *)lineColor
-{
-    CAShapeLayer *shapeLayer = [CAShapeLayer layer];
-    [shapeLayer setBounds:lineView.bounds];
-    [shapeLayer setPosition:CGPointMake(CGRectGetWidth(lineView.frame) / 2, CGRectGetHeight(lineView.frame))];
-    [shapeLayer setFillColor:[UIColor clearColor].CGColor];
-    
-    //  设置虚线颜色为
-    [shapeLayer setStrokeColor:lineColor.CGColor];
-    
-    //  设置虚线宽度
-    [shapeLayer setLineWidth:CGRectGetHeight(lineView.frame)];
-    [shapeLayer setLineJoin:kCALineJoinRound];
-    
-    //  设置线宽，线间距
-    [shapeLayer setLineDashPattern:[NSArray arrayWithObjects:[NSNumber numberWithInt:lineLength], [NSNumber numberWithInt:lineSpacing], nil]];
-    
-    //  设置路径
-    CGMutablePathRef path = CGPathCreateMutable();
-    CGPathMoveToPoint(path, NULL, 0, 0);
-    CGPathAddLineToPoint(path, NULL, CGRectGetWidth(lineView.frame), 0);
-    
-    [shapeLayer setPath:path];
-    CGPathRelease(path);
-    
-    //  把绘制好的虚线添加上来
-    [lineView.layer addSublayer:shapeLayer];
 }
 
 + (BOOL)checkQRcode:(NSString *)code
@@ -221,13 +138,6 @@
         return nil;
     }
     
-//    NSBundle *resourceBundle = [NSBundle bundleWithPath:pathString1];
-////    name = [name stringByAppendingString:@".tiff"];
-//    NSString *bundlePath = [resourceBundle pathForResource:name ofType:@"png"];
-//    if (!bundlePath) {
-//        bundlePath = [resourceBundle pathForResource:name ofType:@"tiff"];
-//    }
-    
     NSString *imageName = [NSString stringWithFormat:@"%@/%@.png", bundlePath, name];
     UIImage *image = [UIImage imageWithContentsOfFile:imageName];
     if (!image) {
@@ -238,113 +148,11 @@
     return image;
 }
 
-
-// 判断是否包含中文
-+ (BOOL) containChiness:(NSString *)text{
-    
-    NSUInteger length = [text length];
-    for (int i = 0; i < length; ++i){
-        NSRange range = NSMakeRange(i, 1);
-        NSString *subString = [text substringWithRange:range];
-        
-        if ([subString isEqualToString:@"€"] || [subString isEqualToString:@"•"]) {
-            return NO;
-        }
-        
-        const char  *cString = [subString UTF8String];
-        if (cString) {
-            if (strlen(cString) == 3){
-                NSLog(@"汉字:%s", cString);
-                return YES;
-            }
-        }else{
-                NSLog(@"表情:%@", text);
-            return YES;
-        }
-    }
-    return NO;
-}
-
-+ (BOOL )checkPW:(NSString *)password
-{
-    // 大写，小写，数字，字符
-    
-    NSString * number = @"^\\w*\\d+\\w*$";      //数字
-    NSString * lower = @"^\\w*[a-z]+\\w*$";      //小写字母
-    NSString * upper = @"^\\w*[A-Z]+\\w*$";     //大写字母
-    
-    // 判断数字
-    
-    BOOL hasNum = NO;
-    BOOL hasUpper = NO;
-    BOOL hasLower = NO;
-    BOOL hasSepcial = NO;
-   
-    NSString *sepcialList = @".,?!':… ~@;\"/()_-+=`^#*%&\\\[]<>{}|·¡¿$¥£€•";    // 常见英文键盘特殊字符
-    
-    for (int i = 0; i< password.length; i++) {
-        
-        NSString *temp = [password substringWithRange:NSMakeRange(i, 1)];
-        if ([self validateWithRegExp:number text:temp]) {   // 校验是否有数字
-            hasNum = YES;
-        }
-        if ([self validateWithRegExp:lower text:temp]) {    // 校验是否有小写
-            hasLower = YES;
-        }
-        if ([self validateWithRegExp:upper text:temp]) {    // 校验是否有大写
-            hasUpper = YES;
-        }
-        if ([sepcialList containsString:temp]) { // 校验是否有常用英文特殊字符
-            hasSepcial = YES;
-        }
-        
-    }
-    
-    NSInteger result = 0;
-    
-    if (hasNum)
-    {
-        result ++;
-    }
-    if (hasLower)
-    {
-        result ++;
-    }
-    if (hasUpper)
-    {
-        result ++;
-    }
-    if (hasSepcial)
-    {
-        result ++;
-    }
-    
-    return  result < 3 ? NO :YES;
-
-}
-
 + (BOOL)validateWithRegExp: (NSString *)regExp text:(NSString *)text
 {
     NSPredicate * predicate = [NSPredicate predicateWithFormat: @"SELF MATCHES %@", regExp];
     return [predicate evaluateWithObject:text];
 }
-
-//+ (UIImage *)walletAddreeConvertImage:(NSString *)address
-//{
-//    Address *addressNormalize = [Address addressWithString:address];
-//    if (addressNormalize.checksumAddress != nil) {
-//        address = addressNormalize.checksumAddress;
-//    }
-//    Blockies *getImage =  [[Blockies alloc]initWithSeed:address
-//                                                   size:8
-//                                                  scale:2
-//                                                  color:nil
-//                                                bgColor:nil
-//                                              spotColor:nil
-//                                               randSeed:nil];
-//    UIImage *image = [getImage createImageWithCustomScale:3];
-//    return image;
-//}
 
 //查询thor 余额
 + (NSString *)tokenBalanceData:(NSString *)toAddress
@@ -370,45 +178,6 @@
     }
     NSString *newValue = [NSString stringWithFormat:@"%@%@",zero,[value substringFromIndex:2]];
     NSString *result = [NSString stringWithFormat:@"%@%@%@",head,newAddrss,newValue];
-    return  result;
-}
-
-+ (NSString *) compareCurrentTime:(NSString *)str
-{
-    NSTimeInterval time = str.doubleValue;
-    NSDate *detailDate=[NSDate dateWithTimeIntervalSince1970:time];
-    
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-    NSDate *currentDate = [NSDate date];
-    NSTimeInterval timeInterval = [currentDate timeIntervalSinceDate:detailDate];
-    long temp = 0;
-    NSString *result;
-    if (timeInterval/60 < 1)
-    {
-        result = VCNSLocalizedBundleString(@"刚刚", nil);
-    }
-    else if((temp = timeInterval/60) <60){
-        result = [NSString stringWithFormat:@"%ld %@",temp,
-                  temp == 1 ? VCNSLocalizedBundleString(@"minAgo_single", nil) : VCNSLocalizedBundleString(@"minAgo_plural", nil)];
-    }
-    else if((temp = temp/60) <24){
-        result = [NSString stringWithFormat:@"%ld %@",temp,
-                  temp == 1 ? VCNSLocalizedBundleString(@"hrAgo_single", nil) : VCNSLocalizedBundleString(@"hrAgo_plural", nil)];
-    }
-    else if((temp = temp/24) <30){
-        result = [NSString stringWithFormat:@"%ld %@",temp,
-                  temp == 1 ? VCNSLocalizedBundleString(@"dayAgo_single", nil) : VCNSLocalizedBundleString(@"dayAgo_plural", nil)];
-    }
-    else if((temp = temp/30) <12){
-        result = [NSString stringWithFormat:@"%ld %@",temp,
-                  temp == 1 ? VCNSLocalizedBundleString(@"monthAgo_single", nil) : NSLocalizedString(@"monthAgo_plural", nil)];
-    }
-    else{
-        temp = temp/12;
-        result = [NSString stringWithFormat:@"%ld %@",temp,
-                  temp == 1 ? VCNSLocalizedBundleString(@"yearAgo_single", nil) : VCNSLocalizedBundleString(@"yearAgo_plural", nil)];
-    }
     return  result;
 }
 
@@ -443,70 +212,6 @@
     return  result;
 }
 
-
-//+ (NSTimeInterval) compareTimeSpace:(NSString *)str
-//{
-//    NSTimeInterval time = str.doubleValue;
-//
-//    NSString *serverOffset = [WalletHandle shareWalletHandle].responseOffset;
-//
-//    NSInteger mergeTime = time - serverOffset.integerValue;
-//    NSDate *detailDate=[NSDate dateWithTimeIntervalSince1970:mergeTime];
-//
-//    NSDate *currentDate = [NSDate date];
-//    // 以截止时间为基准，计算当前时间距离截止时间的距离
-//    NSTimeInterval timeInterval = [detailDate timeIntervalSinceDate:currentDate];
-//
-//    if(timeInterval < 0){ // 代表时间已经过期
-//        timeInterval = 0;
-//    }
-//
-//    return timeInterval;
-//}
-
-+ (NSString *) convertTimeTo:(NSTimeInterval)timeInterval
-{
-    if (timeInterval == 0) {
-        return @"";
-    }
-    
-    long temp = timeInterval / 3600;
-    NSString *result = @"";
-    
-    long hour = temp;
-    long min = (timeInterval - 3600 * hour ) / 60;
-    double secTemp = timeInterval - 3600 * hour - 60 * min;
-    long sec = ceil(secTemp);
-    
-    NSString *hourStr = @"";
-    if (hour < 10) {
-        hourStr = [NSString stringWithFormat:@"0%ld", hour];
-        
-    }else {
-        hourStr = [NSString stringWithFormat:@"%ld", hour];
-    }
-    
-    NSString *minStr = @"";
-    if (min < 10) {
-        minStr = [NSString stringWithFormat:@"0%ld", min];
-        
-    }else {
-        minStr = [NSString stringWithFormat:@"%ld", min];
-    }
-    
-    NSString *secStr = @"";
-    if (sec < 10) {
-        secStr = [NSString stringWithFormat:@"0%ld", sec];
-        
-    }else {
-        secStr = [NSString stringWithFormat:@"%ld", sec];
-    }
-    
-    result = [NSString stringWithFormat:@"%@:%@:%@", hourStr, minStr, secStr];
-    
-    return result;
-}
-
 + (NSString *)checksumAddress:(NSString *)inputAddress
 {
     Address *a = [Address addressWithString:inputAddress];
@@ -531,16 +236,6 @@
     return result;
 }
 
-//+(UIViewController *)getPresentedViewConreoller
-//{
-//    UIViewController *rootVC = AppRootVC;
-//    UIViewController *topVC = rootVC;
-//    if (topVC.presentedViewController) {
-//        topVC = topVC.presentedViewController;
-//    }
-//    return topVC;
-//}
-
 // 大小写
 + (BOOL)InputCapitalAndLowercaseLetter:(NSString*)string
 {
@@ -558,12 +253,10 @@
 
 + (void)checkNetwork:(void(^)(BOOL t))block
 {
-#warning test 
     BOOL result = YES;
     if (block) {
         block(result);
     }
-    return;
     AFNetworkReachabilityManager *reachManager = [AFNetworkReachabilityManager sharedManager];
     if (![reachManager isReachable]) {
 
@@ -642,36 +335,6 @@
     return theImage;
 }
 
-+ (BOOL)checkKeystore:(NSString *)keystore
-{
-    NSDictionary *dictKS = nil;
-    //[NSJSONSerialization dictionaryWithJsonString:[keystore lowercaseString]];
-    
-//    NSString *address = dictKS[@"address"];
-    NSDictionary *crypto = dictKS[@"crypto"];
-    NSString *_id = dictKS[@"id"];
-    NSString *version = dictKS[@"version"];
-    
-    BOOL isOK = NO;
-    if ( crypto && _id && version) {
-        if ([crypto isKindOfClass:[NSDictionary class]]) {
-            NSString *cipher = crypto[@"cipher"];
-            NSString *ciphertext = crypto[@"ciphertext"];
-            NSDictionary *cipherparams = crypto[@"cipherparams"];
-            NSString *kdf = crypto[@"kdf"];
-            NSDictionary *kdfparams = crypto[@"kdfparams"];
-            NSString *mac = crypto[@"mac"];
-            if (cipher && ciphertext && cipherparams && kdf && kdfparams && mac) {
-                if ([cipherparams isKindOfClass:[NSDictionary class]] && [kdfparams isKindOfClass:[NSDictionary class]]) {
-                    isOK = YES;
-                }
-            }
-        }else{
-        }
-    }
-    return isOK;
-}
-
 + (NSString *)serviceRuleHostWithContent:(NSString *)content
 {
     NSString *languageCode = [WalletUserDefaultManager getLanuage];
@@ -733,18 +396,6 @@
     return [predicate evaluateWithObject:address];
 }
 
-//+ (BOOL)checkHasToken:(NSString *)tokenSymbol {
-//    __block BOOL validTokenName = NO;
-//    [[[WalletSqlDataEngine sharedInstance] tokenList] enumerateObjectsUsingBlock:^(WalletTokenModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-//        if ([obj.symbol isEqualToString:tokenSymbol]
-//            || [tokenSymbol isEqualToString:@"VET"]) {
-//            validTokenName = YES;
-//            *stop = YES;
-//        }
-//    }];
-//    return validTokenName;
-//}
-
 +(BOOL)hasSpecialWord:(NSString *)words
 {
     if ([words containsString:@"'"]) {
@@ -789,179 +440,6 @@
     return image1;
 }
 
-//+(NSString *)addressAuthSign:(WalletAuthorizedDataModel *)dataModel account:(Account *)account
-//{
-//    if (dataModel.signTimeStamp.integerValue == 0) {
-//        NSString *tempNumber = [[[NSString stringWithFormat:@"%f",[[NSDate date] timeIntervalSince1970]] componentsSeparatedByString:@"."] firstObject];
-//
-//        dataModel.signTimeStamp = [NSNumber numberWithUnsignedInteger:tempNumber.integerValue];
-//
-//    }
-//    NSString *dataStr = [dataModel yy_modelToJSONString];
-//    NSDictionary *dictData = [NSJSONSerialization dictionaryWithJsonString:dataStr];
-//    NSMutableDictionary *dictOrigin = [NSMutableDictionary dictionaryWithDictionary:dictData];
-//
-//    NSArray *keys = [dictOrigin allKeys];
-//    NSArray *sortedArray = [keys sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2){
-//        return [obj1 compare:obj2 options:NSNumericSearch];
-//    }];
-//
-//    NSMutableArray *keyAndValueList = [NSMutableArray array];
-//    for (NSString *key in sortedArray) {
-//        NSString *value = dictOrigin[key];
-//        NSString *keyValue = nil;
-//        if ([value isKindOfClass:[NSNumber class]]) {
-//            NSNumber *num = (NSNumber *)value;
-//            value = ((NSNumber *)num).stringValue;
-//
-//            keyValue = [NSString stringWithFormat:@"\"%@\":%@",key,value];
-//        }else{
-//
-//            keyValue = [NSString stringWithFormat:@"\"%@\":\"%@\"",key,value];
-//        }
-//
-//        [keyAndValueList addObject:keyValue];
-//
-//    }
-//    NSString *packSign = [NSString stringWithFormat:@"{%@}",[keyAndValueList componentsJoinedByString:@","]];
-//
-//    NSData *totalData1 = [packSign dataUsingEncoding:NSUTF8StringEncoding];
-//    SecureData *encode = [SecureData BLAKE2B:totalData1 ];
-//    NSString *encodeHex = [encode.hexString substringFromIndex:2];
-//    NSString *pageCode = [kAuthAddressCode stringByAppendingString:encodeHex];
-//    NSData *totalData = [SecureData hexStringToData:pageCode];
-//    SecureData *hashData = [SecureData BLAKE2B:totalData ];
-//    Signature *signature = [account signDigest:hashData.data];
-//
-//    SecureData *vData = [[SecureData alloc]init];
-//    [vData appendByte:signature.v];
-//
-//    NSString *s = [SecureData dataToHexString:signature.s];
-//    NSString *r = [SecureData dataToHexString:signature.r];
-//
-//    NSString *hashStr = [NSString stringWithFormat:@"%@%@%@",
-//                         [r substringFromIndex:2],
-//                         [s substringFromIndex:2],
-//                         [vData.hexString substringFromIndex:2]];
-//    return hashStr;
-//}
-//
-//
-//+(void)observerAuthAddress:(UIViewController *)vc
-//                     model:(WalletAddressAuthModel *)model
-//              sessiontoken:(NSString *)sessiontoken
-//{
-//    NSString *tempNumber = [[[NSString stringWithFormat:@"%f",[[NSDate date] timeIntervalSince1970]] componentsSeparatedByString:@"."] firstObject];
-//    model.authorizedData.signTimeStamp = [NSNumber numberWithUnsignedInteger:tempNumber.integerValue];
-//    NSString *json = [@"auth://" stringByAppendingString:[model yy_modelToJSONString]];
-//
-//    if ([vc.view viewWithTag:200]) {
-//        return ;
-//    }
-//    WalletPaymentQRCodeView *QRCodeView = [[WalletPaymentQRCodeView alloc]initWithFrame:CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, SCREEN_HEIGHT)
-//                                                                                   type:HotWalletQrCodeType
-//
-//                                                                                   json:json
-//                                                                               codeType:QRCodeObserverAuthType];
-//    QRCodeView.backgroundColor = UIColor.clearColor;
-//    QRCodeView.tag = 200;
-//    [vc.view addSubview:QRCodeView];
-//    [UIView animateWithDuration:0.3 animations:^{
-//        [QRCodeView setFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
-//    }];
-//    QRCodeView.block = ^(NSString *result)
-//    {
-//        if ([vc.view viewWithTag:201]) {
-//            return ;
-//        }
-//        WalletPaymentQRCodeView *QRCodeView = [[WalletPaymentQRCodeView alloc]initWithFrame:CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, SCREEN_HEIGHT)
-//                                                                                       type:HotWalletScanType
-//
-//                                                                                       json:@""
-//                                                                                   codeType:QRCodeObserverAuthType];
-//        QRCodeView.tag = 201;
-//        QRCodeView.backgroundColor = UIColor.clearColor;
-//        [vc.view addSubview:QRCodeView];
-//        [UIView animateWithDuration:0.3 animations:^{
-//            [QRCodeView setFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
-//        }];
-//        QRCodeView.block = ^(NSString *result)
-//        {
-//            //组装 交易model
-//            model.sign = result;
-//
-//            WalletAuthSignApi *signApi = [[WalletAuthSignApi alloc]initWithModel:model
-//                                                                    sessiontoken:sessiontoken];
-//            [signApi loadDataAsyncWithSuccess:^(VCBaseApi *finishApi) {
-//
-//                NSDictionary *dict = finishApi.resultDict;
-//                if (((NSNumber *)dict[@"code"]).integerValue == 1) { //签名成功
-//
-//                    WalletAuthFirstVC *resutVC = [[WalletAuthFirstVC alloc]init];
-//                    resutVC.authType = ResultType;
-//
-//                    resutVC.model = model;
-//                    [vc.navigationController pushViewController:resutVC animated:YES];
-//                }
-//
-//            } failure:^(VCBaseApi *finishApi, NSString *errMsg) {
-//
-//                [FFBMSMBProgressShower showMulLineTextIn:vc.view Text:errMsg During:1.5];
-//            }];
-//        };
-//    };
-//}
-
-//+(void)normalAddressProgress:(NSString *)address
-//                          vc:(UIViewController *)vc
-//                   AuthModel:(WalletAddressAuthModel *)model
-//                sessiontoken:(NSString *)sessiontoken
-//{
-//    if ([vc.view viewWithTag:999]) {
-//        return ;
-//    }
-//    WalletAuthInputPWView *inputView = [[WalletAuthInputPWView alloc]initWithAddress:address
-//                                                                         authObserve:AuthAddressType
-//                                                                               block:^(BOOL result,Account *account)
-//
-//    {
-//        if (result) {
-//            // 执行生成授权页面
-//
-//            WalletAuthorizedDataModel *dataModel = model.authorizedData;
-//            NSString *hashStr = [FFBMSTools addressAuthSign:dataModel account:account];
-//            model.sign = hashStr;
-//            model.address = address;
-//
-//            WalletAuthSignApi *signApi = [[WalletAuthSignApi alloc]initWithModel:model
-//                                                                    sessiontoken:sessiontoken];
-//            [signApi loadDataAsyncWithSuccess:^(VCBaseApi *finishApi) {
-//                NSDictionary *dict = finishApi.resultDict;
-//                if (((NSNumber *)dict[@"code"]).integerValue == 1) { //签名成功
-//
-//                    WalletAuthFirstVC *resutVC = [[WalletAuthFirstVC alloc]init];
-//                    resutVC.authType = ResultType;
-//
-//                    resutVC.model = model;
-//                    [vc.navigationController pushViewController:resutVC animated:YES];
-//                }
-//            } failure:^(VCBaseApi *finishApi, NSString *errMsg) {
-//                [FFBMSMBProgressShower showMulLineTextIn:vc.view Text:errMsg During:1.5];
-//            }];
-//        }
-//    }];
-//
-//    [inputView setFrame:CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, SCREEN_HEIGHT)];
-//    inputView.tag = 999;
-//    [vc.view addSubview:inputView];
-//
-//    [UIView animateWithDuration:0.3 animations:^{
-//        [inputView setFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
-//    } completion:^(BOOL finished) {
-//
-//    }];
-//}
-
 + (void)drawDottedLine:(UIView *)view
 {
     CAShapeLayer *border = [CAShapeLayer layer];
@@ -1004,7 +482,6 @@
 //合约签名，data 数据准备
 + (NSString *)contractMethodId:(NSString *)methodId params:(NSArray *)params
 {
-    
     NSString *totalData = methodId;
     for (NSString *param in params) {
         NSInteger t = 64 - [param substringFromIndex:2].length;
@@ -1017,53 +494,6 @@
         totalData = [totalData stringByAppendingString:newValue];
     }
     return totalData;
-}
-
-+ (BOOL)isCanUsePhotos {
-    
-    BOOL isAuthor = NO;
-    
-    NSString *mediaType = AVMediaTypeVideo;// Or AVMediaTypeAudio
-    AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:mediaType];
-    
-    if(authStatus == AVAuthorizationStatusRestricted || authStatus == AVAuthorizationStatusDenied){
-        
-        isAuthor = NO;
-        
-        [FFBMSAlertShower showAlert:VCNSLocalizedBundleString(@"dialog_tip_title", nil)
-                                msg:VCNSLocalizedBundleString(@"permission_camera_content", nil)
-                              inCtl:[FFBMSTools getCurrentVC]
-                              items:@[VCNSLocalizedBundleString(@"dialog_no", nil), VCNSLocalizedBundleString(@"usercenter_setting", nil)]
-                         clickBlock:^(NSInteger index)
-        {
-             if(index == 1){
-                 NSURL *url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
-                 
-                 if ([[UIApplication sharedApplication] canOpenURL:url]) {
-                     [[UIApplication sharedApplication] openURL:url
-                                                        options:nil
-                                              completionHandler:^(BOOL success) {
-                                                  
-                                              }];
-                 }
-             }
-            
-        }];
-        
-    }else if (authStatus == AVAuthorizationStatusNotDetermined){
-        isAuthor = NO;
-        
-    }else{
-        isAuthor = YES;
-    }
-    
-    if (!isAuthor) {
-        [AVCaptureDevice requestAccessForMediaType:AVMediaTypeVideo completionHandler:^(BOOL isAllow) {
-            NSLog(@"%@",isAllow ? @"相机准许" : @"相机不准许");
-        }];
-    }
-    
-    return isAuthor;
 }
 
 + (NSDictionary *)getContractData:(ContractType)contractType params:(NSArray *)params
@@ -1296,16 +726,17 @@
 
 + (void)callback:(NSString *)requestId
             data:(id)data
-      callbackID:(NSString *)callbackID
+      callbackID:(NSString *)callbackId
          webview:(WKWebView *)webView
             code:(NSInteger)code
          message:(NSString *)message
 {
+
     NSDictionary *packageDict = [FFBMSTools packageWithRequestId:requestId
                                                             data:data
                                                             code:code
                                                          message:message];
-    NSString *injectJS = [NSString stringWithFormat:@"%@('%@')",callbackID,[packageDict yy_modelToJSONString]];
+    NSString *injectJS = [NSString stringWithFormat:@"%@('%@')",callbackId,[packageDict yy_modelToJSONString]];
     NSLog(@"inject == %@",injectJS);
     [webView evaluateJavaScript:injectJS completionHandler:^(id _Nullable item, NSError * _Nullable error) {
         NSLog(@"error == %@",error);
@@ -1314,6 +745,28 @@
     if (code != 1) {
         [self jsErrorAlert:message];
     }
+}
+
++ (NSString *)errorMessageWith:(NSInteger)code
+{
+    switch (code) {
+        case 200:
+           return @"";
+            break;
+        case 201:
+           return @"";
+            break;
+        case 202:
+           return @"";
+            break;
+        case 203:
+            return @"";
+            break;
+            
+        default:
+            break;
+    }
+   return @"";
 }
 
 + (void)jsErrorAlert:(NSString *)message
@@ -1326,4 +779,37 @@
                      }];
 }
 
+
++ (NSString *)removeExtraZeroAtBegin:(NSString *)valueFormated
+{
+    while ([valueFormated hasPrefix:@"0"]
+           || [valueFormated hasPrefix:@"."]) {
+        if ([valueFormated isEqualToString:@"0."]) {
+            valueFormated = @"0";
+            break;
+        }
+        
+        if ([valueFormated hasPrefix:@"0."]) {
+            break;
+        }
+        
+        if ([valueFormated hasPrefix:@"."] ) {
+            valueFormated = [@"0" stringByAppendingString:valueFormated];
+            break;
+        }
+        
+        if ([valueFormated isEqualToString:@"0"]
+            || ![valueFormated hasPrefix:@"0"]) {
+            break;
+        }
+        
+        if ([valueFormated hasPrefix:@"00"]) {
+            valueFormated = [valueFormated substringFromIndex:1];
+        } else if ([valueFormated hasPrefix:@"0"] && ![valueFormated hasPrefix:@"0."]) {
+            valueFormated = [valueFormated substringFromIndex:1];
+            break;
+        }
+    }
+    return valueFormated;
+}
 @end

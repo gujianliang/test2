@@ -23,7 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)getAddress:(WKWebView *)webView callbackID:(NSString *)callbackID;
 
 
-- (void)WEB3VETTransferFrom1:(NSString *)from1
+- (void)WEB3VETTransferFrom:(NSString *)from
                           to:(NSString *)to
                       amount:(NSString *)amount
                    requestId:(NSString *)requestId
@@ -49,7 +49,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)WEB3contractSign:(WalletSignatureView *)signaVC
                   to:(NSString *)to
-               from1:(NSString *)from1
+               from:(NSString *)from
               amount:(NSString * )amount
            requestId:(NSString *)requestId
                  gas:(NSString *)gas

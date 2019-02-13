@@ -8,27 +8,25 @@
 
 #import "WalletSignatureView.h"
 #import "WalletGradientLayerButton.h"
-//#import "WalletSqlDataEngine.h"
 #import "WalletBlockInfoApi.h"
 #import "WalletTransactionApi.h"
-//#import "WalletExchangeStatusListVC.h"
-//#import "WalletObserverHandle.h"
 #import "WalletTransantionsReceiptApi.h"
 #import "WalletGenesisBlockInfoApi.h"
 #import "WalletSignatureView+transferToken.h"
-#import "WalletSignatureView+VETTransferObserve.h"
+#import "WalletSignatureView+transferObserver.h"
 #import "WalletDAppSignPreVC.h"
 #import "UIButton+block.h"
 #import "WalletDAppSignPreVC.h"
-
 #import "WalletSingletonHandle.h"
-#define viewHeight 411
-
 #import "NSBundle+Localizable.h"
 
+#define viewHeight 411
 
 @interface WalletSignatureView ()<UIScrollViewDelegate,UITextFieldDelegate>
 {
+    BOOL _needAdjust;
+    UILabel *_minerLabel;
+    
     UIView *_leftView;
     UIView *_rightView;
     UIView *_LastView;
@@ -41,22 +39,15 @@
     NSString *_additionalMsg;
     
     UIButton *_timeBtn;
-    WalletGradientLayerButton *_lastBtn;
-    
     NSTimer *_timer;
-    
     NSString *_tokenID;
     NSString *_expiration;
-    WalletGradientLayerButton *_middleBtn;
-//    WalletObserverHandle *_observerHandler;
     
-    BOOL adj;
-    UILabel *_minerLabel;
+    WalletGradientLayerButton *_middleBtn;
+    WalletGradientLayerButton *_lastBtn;
 }
 
-
 @end
-
 
 @implementation WalletSignatureView
 
@@ -186,9 +177,9 @@
         make.left.top.mas_equalTo(0);
         make.size.mas_equalTo(CGSizeMake(40, 40));
     }];
-//    @weakify(self);
+    @weakify(self);
     _backBtn.block = ^(UIButton *btn) {
-//        @strongify(self);
+        @strongify(self);
         
         [self.pwTextField resignFirstResponder];
         
@@ -196,19 +187,10 @@
             [self.scrollView scrollRectToVisible:CGRectMake(0, 0, SCREEN_WIDTH, viewHeight - 40) animated:YES];
         }else if (self.scrollView.contentOffset.x == SCREEN_WIDTH * 2) {
             [self removeFromSuperview];
-            
             BOOL hasListVC = NO;
-            for (UIViewController *statusVC in [FFBMSTools getCurrentVC].navigationController.viewControllers) {
-//                if ([statusVC isKindOfClass:[WalletExchangeStatusListVC class]]) {
-//                    [[FFBMSTools getCurrentVC].navigationController popToViewController:statusVC animated:YES];
-//                    hasListVC = YES;
-//                    break;
-//                }
-            }
             if (!hasListVC) {
                 [[FFBMSTools getCurrentVC].navigationController popViewControllerAnimated:YES];
             }
-            
             
         }else{
             [UIView animateWithDuration:0.3 animations:^{
@@ -219,8 +201,6 @@
                     self.transferBlock(self.txid);
                 }
             }];
-            
-            
         }
     };
     
@@ -289,18 +269,12 @@
     
     CGFloat jsOffset = 0;
     
-//    NSString *test = [FFBMSTools localeStringWithKey:@"contract_ayment_info_row1_title"];
-//    //VCVCNSLocalizedBundleString(@"contract_ayment_info_row1_title", nil);
-//
-////   NSString *rr = [NSBundle XDX_localizableBundleWithBundleName:@"contract_ayment_info_row1_title"];
-//    NSString *rr = [NSBundle XDX_localizedStringForKey:@"contract_ayment_info_row1_title"];
-
     [self creatCell:VCNSLocalizedBundleString(@"contract_ayment_info_row1_title", nil)
               value:gasFormat
                   Y:52 + 20
           adjustBtn: _jsUse ? YES : NO];
     
-    if (adj) {
+    if (_needAdjust) {
         [self addAdj_Y:52 + 20 + 52];
         jsOffset = 52;
     }
@@ -334,9 +308,9 @@
         make.height.mas_equalTo(Scale(44));
         make.bottom.mas_equalTo(-Scale(30));
     }];
-//    @weakify(self)
+    @weakify(self)
     nextBtn.block = ^(UIButton *btn) {
-//        @strongify(self)
+        @strongify(self)
         [FFBMSTools checkNetwork:^(BOOL t) {
             if (t) {
                 
@@ -348,7 +322,6 @@
                     [proParamDict setValueIfNotNil:@(_gas.integerValue) forKey:@"gas"];
                     [proParamDict setValueIfNotNil:@(_gasPriceCoef.integerValue) forKey:@"gasPrice"];
                     [proParamDict setValueIfNotNil: [SecureData dataToHexString:_clouseData] forKey:@"data"];
-
                     
                     WalletDAppSignPreVC *signProVC = [[WalletDAppSignPreVC alloc]init];
                     signProVC.dictParam = proParamDict;
@@ -390,15 +363,15 @@
                             
                             NSString *msg = [NSString stringWithFormat:@"您当前地址余额%.2fVET，不够支付%.2fVET",vetBalance.floatValue,tempAmount.floatValue];
                             
-//                            [FFBMSAlertShower showAlert:@"余额不足提示"
-//                                                    msg:msg
-//                                                  inCtl:[FFBMSTools getCurrentVC]
-//                                                  items:@[@"确定"]
-//                                             clickBlock:^(NSInteger index)
-//                             {
-//
-//                             }];
-//                            return ;
+                            [FFBMSAlertShower showAlert:@"余额不足提示"
+                                                    msg:msg
+                                                  inCtl:[FFBMSTools getCurrentVC]
+                                                  items:@[@"确定"]
+                                             clickBlock:^(NSInteger index)
+                             {
+
+                             }];
+                            return ;
                         }
                         
                         //vtho 不足
@@ -420,15 +393,15 @@
                                 
                                 NSString *msg = [NSString stringWithFormat:@"您当前地址余额%.2fVTHO，不够支付%.2fVTHO",vthoBalanceNum.floatValue,_gasLimit.floatValue];
                                 
-//                                [FFBMSAlertShower showAlert:@"余额不足提示"
-//                                                        msg:msg
-//                                                      inCtl:[FFBMSTools getCurrentVC]
-//                                                      items:@[@"确定"]
-//                                                 clickBlock:^(NSInteger index)
-//                                 {
-//
-//                                 }];
-//                                return;
+                                [FFBMSAlertShower showAlert:@"余额不足提示"
+                                                        msg:msg
+                                                      inCtl:[FFBMSTools getCurrentVC]
+                                                      items:@[@"确定"]
+                                                 clickBlock:^(NSInteger index)
+                                 {
+
+                                 }];
+                                return;
                             }
                            
                         }
@@ -436,10 +409,8 @@
                         [self enterSignView];
                         
                     }else{
-                            [self enterSignView];
-                        
+                        [self enterSignView];
                     }
-                    
                 }
                 else{
                     [self enterSignView];
@@ -453,61 +424,13 @@
 {
     WalletManageModel *walletModel = [[WalletSingletonHandle shareWalletHandle] currentWalletModel];
     if (walletModel.observer.boolValue) {
-
         if (_transferType != JSContranctTransferType && self.jsUse) {
-            [self icoTransferAccount:_amount];
-        }else{
-            [self enterObserver];
+            [self transferAccountObserver:_amount];
         }
     }else
     {
         [self.scrollView setContentOffset:CGPointMake(SCREEN_WIDTH, 0) animated:YES];
     }
-}
-
-- (void)enterObserver
-{
-//    @weakify(self);
-//    _observerHandler = [[WalletObserverHandle alloc]init];
-//    _observerHandler.enter_path = self.enter_path;
-//    _observerHandler.businessType = _business_type;
-//    if (_contractType == NoContract_transferToken) {
-//        _observerHandler.clousData = [SecureData dataToHexString:_clouseData];
-//    }
-//     [self observerHanderAction];
-//    _observerHandler.repeatBlock = ^{
-//        @strongify(self);
-//        [self observerHanderAction];
-//    };
-//
-   
-
-}
-
-- (void)observerHanderAction
-{
-//     @weakify(self);
-//    [_observerHandler observerTransferWithAmount:_amount
-//                                        gasLimit:_gasLimit
-//                                             gas:_gas
-//                                        gasPrice:_gasPriceCoef
-//                              contractClauseData:_clouseData
-//                                     fromAddress:_fromAddress
-//                                       toAddress:_contractType == NoContract_transferToken ? self.tokenAddress : _toAddress
-//                                    contractType:_contractType
-//                                          params:_params
-//                                           block:^(NSString * _Nonnull txid)
-//     {
-//         @strongify(self);
-//         _txid = txid;
-//         
-//         [self.scrollView setContentOffset:CGPointMake(SCREEN_WIDTH*2, 0) animated:YES];
-//         [self timerCountBlock];
-//     }
-//                                       backBlcok:^
-//     {
-//         [self removeFromSuperview];
-//     }];
 }
 
 - (UIView *)creatCell:(NSString *)title value:(NSString *)value Y:(CGFloat)Y adjustBtn:(BOOL)adjustBtn
@@ -557,8 +480,8 @@
             make.height.mas_equalTo(50);
         }];
         btn.block = ^(UIButton *btn) {
-            if (!adj) {
-                adj = YES;
+            if (!_needAdjust) {
+                _needAdjust = YES;
                 [_leftView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
                 [self creatLeftView];
             }
@@ -799,13 +722,7 @@
             return ;
         }
         BOOL hasListVC = NO;
-        for (UIViewController *statusVC in [FFBMSTools getCurrentVC].navigationController.viewControllers) {
-//            if ([statusVC isKindOfClass:[WalletExchangeStatusListVC class]]) {
-//                [[FFBMSTools getCurrentVC].navigationController popToViewController:statusVC animated:YES];
-//                hasListVC = YES;
-//                break;
-//            }
-        }
+       
         if (!hasListVC) {
             [[FFBMSTools getCurrentVC].navigationController popViewControllerAnimated:YES];
         }
@@ -828,109 +745,10 @@
 
 - (void)sign
 {
-//    WalletManageModel *walletModel = [WalletSqlDataEngine getCurrentWallet];
-
-    
-    
     if (_contractType == NoContract_transferToken) {
         [self signTransfer:_transferBlock];
         return;
     }
-    
-//    [FFBMSMBProgressShower showLoadData:self Text:VCNSLocalizedBundleString(@"list_load_ing", nil)];
-    Transaction *transaction = [[Transaction alloc] init];
-    // 生成随机 nonce
-    SecureData* randomData = [SecureData secureDataWithLength:8];
-    int result = SecRandomCopyBytes(kSecRandomDefault, randomData.length, randomData.mutableBytes);
-    if (result != 0) {
-        [FFBMSAlertShower showAlert:nil
-                                msg:VCNSLocalizedBundleString(@"transfer_wallet_send_fail", nil)
-                              inCtl:[self getVC]
-                              items:@[VCNSLocalizedBundleString(@"dialog_yes", nil)]
-                         clickBlock:^(NSInteger index) {
-                         }];
-    }
-    transaction.nonce = [[[BigNumber bigNumberWithData:randomData.data] mod:[BigNumber bigNumberWithInteger:NSIntegerMax]] integerValue];
-    
-    transaction.Expiration = 720;
-    transaction.gasPrice = [BigNumber bigNumberWithInteger:0];
-    transaction.gasLimit = [BigNumber bigNumberWithInteger:_gasLimit.integerValue * 1000];
-    
-//    WalletBaseConfigModel *configModel = [[WalletSqlDataEngine sharedInstance] getConfig];
-//    transaction.ChainTag = [BigNumber bigNumberWithHexString:configModel.chain_tag];
-    
-    // 获取最新区块ID前8bytes作为blockRef
-    @weakify(self);
-    WalletBlockInfoApi *bestBlockApi = [[WalletBlockInfoApi alloc] init];
-    [bestBlockApi loadDataAsyncWithSuccess:^(VCBaseApi *finishApi) {
-        WalletBlockInfoModel *blockModel = finishApi.resultModel;
-        
-        NSString *blockRef = [[blockModel.id substringFromIndex:2] substringToIndex:16];
-        transaction.BlockRef = [BigNumber bigNumberWithHexString:[NSString stringWithFormat:@"0x%@",blockRef]];
-        
-        if (_contractType == Contract_buyNode || _contractType == Contract_acceptNode) {
-            
-            if ([_amount isEqualToString:@"0"]) {
-//                transaction.Clauses = @[@[[SecureData hexStringToData:contractAddressUrl],[NSData data], [SecureData hexStringToData:_contractClauseData]]];
-            } else {
-//                BigNumber *subValue = [Payment parseEther:_amount];
-//                transaction.Clauses = @[@[[SecureData hexStringToData:contractAddressUrl],subValue.data, [SecureData hexStringToData:_contractClauseData]]];
-            }
-
-        }else{
-//            transaction.Clauses = @[@[[SecureData hexStringToData:contractAddressUrl],[NSData data], [SecureData hexStringToData:_contractClauseData]]];
-        }
-        
-        // 尝试用户密码解密keystore
-        NSString *keystore = [[WalletSingletonHandle shareWalletHandle]currentWalletModel].keyStore;
-        //[[WalletSqlDataEngine sharedInstance] getKeystore:[FFBMSTools checksumAddress:_fromAddress]];
-        [Account decryptSecretStorageJSON:keystore password:_pwTextField.text callback:^(Account *account, NSError *NSError) {
-            @strongify(self);
-            if (!account) {
-//                [FFBMSMBProgressShower hide:self];
-                [FFBMSAlertShower showAlert:nil
-                                        msg:VCNSLocalizedBundleString(@"transfer_wallet_password_error", nil)
-                                      inCtl:[self getVC]
-                                      items:@[VCNSLocalizedBundleString(@"重试", nil)]
-                                 clickBlock:^(NSInteger index) {
-                                 }];
-                
-            
-
-                return;
-                
-            }else {
-               
-            }
-            
-            [account sign:transaction];
-            
-            NSString *raw = [SecureData dataToHexString: [transaction serialize]];
-            // 发送交易
-            WalletTransactionApi *transationApi = [[WalletTransactionApi alloc]initWithRaw:raw];
-            [transationApi loadDataAsyncWithSuccess:^(VCBaseApi *finishApi) {
-                @strongify(self);
-                _txid = finishApi.resultDict[@"id"];
-//                [FFBMSMBProgressShower hide:self];
-                [_scrollView setContentOffset:CGPointMake(SCREEN_WIDTH*2, 0) animated:YES];
-                [self timerCountBlock];
-                
-            } failure:^(VCBaseApi *finishApi, NSString *errMsg) {
-//                [FFBMSMBProgressShower hide:self];
-                [FFBMSAlertShower showAlert:nil
-                                        msg:VCNSLocalizedBundleString(@"transfer_wallet_send_fail", nil)
-                                      inCtl:[self getVC]
-                                      items:@[VCNSLocalizedBundleString(@"dialog_yes", nil)]
-                                 clickBlock:^(NSInteger index) {
-                                 }];
-            }];
-        }];
-                
-    }failure:^(VCBaseApi *finishApi, NSString *errMsg) {
-        @strongify(self);
-//        [FFBMSMBProgressShower hide:self];
-
-    }];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
@@ -990,26 +808,6 @@
          if (receiptModel != nil) {
              if (!receiptModel.reverted) {
                  [self uploadSuccess];
-                 //挂单成功，缓存本地数据
-                 if (_contractType == Contract_OrientSale || _contractType == Contract_PubicSale)
-                 {
-//                     WalletSqlDataEngine *sqlEngine = [WalletSqlDataEngine sharedInstance];
-                     
-                     NSDate* dat = [NSDate dateWithTimeIntervalSinceNow:0];
-                     NSTimeInterval time = [dat timeIntervalSince1970] + _expiration.integerValue;
-                     
-//                     [sqlEngine saveContractSign:_amount
-//                                            time:[NSString stringWithFormat:@"%f",time]
-//                                         address:_fromAddress
-//                                         tokenID:_tokenID];
-                 }
-                 
-                 if (_contractType == Contract_cancelSaleNode)
-                 {
-//                     WalletManageModel *walletModel = [WalletSqlDataEngine getCurrentWallet];
-//                     WalletSqlDataEngine *sqlEngine = [WalletSqlDataEngine sharedInstance];
-//                     [sqlEngine delTempContractSignWithAddress:walletModel.address tokenID:_tokenID];
-                 }
                  
                  //js 成功后跳转到js 页面
                  if (_contractType == NoContract_transferToken) {
@@ -1023,7 +821,6 @@
                  }
                  
              }else {
-                 // fail
                  [self uploadFail];
              }
          }

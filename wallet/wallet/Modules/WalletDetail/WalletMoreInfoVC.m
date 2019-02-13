@@ -10,8 +10,6 @@
 #import "walletChangePWVC.h"
 #import <walletSDK/WalletUtils.h>
 
-//#import <walletSDK/Wallet.h>
-
 @interface WalletMoreInfoVC ()
 @property (weak, nonatomic) IBOutlet UILabel *addressLabel;
 @property (weak, nonatomic) IBOutlet UITextView *keystoreTextView;

@@ -9,7 +9,6 @@
 #import "WalletDetailVC.h"
 #import <walletSDK/AFNetworking.h>
 #import "TransferVC.h"
-//#import <walletSDK/WalletUtils.h>
 #import <walletSDK/Payment.h>
 #import "WalletMoreInfoVC.h"
 #import "WebViewVC.h"
@@ -63,12 +62,7 @@
                                                                 target:self
                                                                 action:@selector(selectNET)];
     self.navigationItem.rightBarButtonItem = rightItem;
-    
     self.searchBar.text = @"https://appwallet.oss-cn-shanghai.aliyuncs.com/testJS/test.html";
-    
-    
-   
-    
 }
 
 - (void)selectNET
@@ -166,7 +160,6 @@
     NSMutableDictionary *dictParm = [NSMutableDictionary dictionary];
     [dictParm setObject:[self tokenBalanceData:_addressLabel.text] forKey:@"data"];
     [dictParm setObject:@"0x0" forKey:@"value"];
-    
     
     AFHTTPSessionManager *httpManager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:urlString]];
     httpManager.requestSerializer = [AFJSONRequestSerializer serializer];

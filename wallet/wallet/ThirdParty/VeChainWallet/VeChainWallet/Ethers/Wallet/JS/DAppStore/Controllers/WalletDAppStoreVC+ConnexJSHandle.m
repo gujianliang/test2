@@ -14,7 +14,6 @@
 #import "WalletBlockApi.h"
 #import "WalletTransantionsReceiptApi.h"
 #import "WalletManageModel.h"
-//#import "WalletSqlDataEngine.h"
 #import "WalletSignatureView.h"
 #import "WalletGetSymbolApi.h"
 #import "WalletGetDecimalsApi.h"
@@ -309,7 +308,7 @@
                   callbackID:callbackID
                      webview:webView
                         code:ERROR_REQUEST_PARAMS
-                     message:@"request params error"];
+                     message:ERROR_REQUEST_PARAMS_MSG];
         
         return;
     }

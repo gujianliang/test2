@@ -11,9 +11,6 @@
 #import "FFBMSTextView.h"
 #import "FFBMSTools.h"
 #import "UIView+Sizes.h"
-
-//#import "WalletScanQRCodeVC.h"
-
 #import "Masonry.h"
 
 #define  titleFont  [UIFont systemFontOfSize:12 weight:UIFontWeightMedium]
@@ -104,7 +101,6 @@
         make.height.mas_equalTo(44);
     }];
     
-    
     [self creatMiddleView:_viewType];
 }
 
@@ -130,7 +126,8 @@
     __weak typeof(self) weakSelf = self;
 
     if(_viewType == HotWalletScanType
-       && _codeType != QRCodeObserverAuthType){ // 发送交易
+       && _codeType
+       != QRCodeObserverAuthType){ // 发送交易
         
         [FFBMSTools checkNetwork:^(BOOL t)
         {
@@ -236,27 +233,7 @@
                 make.size.mas_equalTo(CGSizeMake(55, 55));
                 make.top.mas_equalTo(60 + 20);
             }];
-            scanBtn.block = ^(UIButton *btn) {
-                
-//#warning 观察钱包转账, 地址授权 ，合约签名 三个事件
-//
-//                WalletScanQRCodeVC *qrcodeVC = [[WalletScanQRCodeVC alloc]init];
-//                qrcodeVC.block = ^(NSString *scanStr)
-//                {
-//                    [self analyseSignture:scanStr];
-//                };
-//                [[FFBMSTools getCurrentVC] presentViewController:qrcodeVC animated:YES completion:nil];
-//
-//                if(self.enter_path.length > 0){
-//                    NSMutableDictionary *paramDict = [NSMutableDictionary dictionary];
-//                    [paramDict setValueIfNotNil:self.enter_path forKey:@"enter_path"];
-//                    [paramDict setValueIfNotNil:@(_businessType) forKey:@"business_type"];
-//                    [paramDict setValueIfNotNil:@"" forKey:@"error_message"];
-//
-//                    [[SensorsAnalyticsSDK sharedInstance] track:@"ScanQRCode"
-//                                                 withProperties:paramDict];
-//                }
-            };
+            
             UILabel *subTitle = [[UILabel alloc]init];
             
             subTitle.textColor = HEX_RGB(0x898CD3);
@@ -336,10 +313,8 @@
                 make.top.mas_equalTo(60);
             }];
             
-            
             // 当前为冷钱包
             UILabel *subTitle = [[UILabel alloc]init];
-            
             subTitle.textColor = HEX_RGB(0x898CD3);
             subTitle.textAlignment = NSTextAlignmentCenter;
             subTitle.font = titleFont;
@@ -384,54 +359,6 @@
     default:
         break;
     }
-}
-
-- (void)analyseSignture:(NSString *)scanStr
-{
-    switch (_codeType) {
-        case QRCodeVetType: //交易部分
-        {
-//            if ([scanStr hasPrefix:signTransction]) {
-//                _textView.text = [scanStr stringByReplacingOccurrencesOfString:signTransction withString:@""];
-//                [_confirmBtn setGrayGradientLayerType:highYellowType];
-//                _confirmBtn.userInteractionEnabled = YES;
-//                _textView.textColor = HEX_RGB(0x202C56);
-//            }else if ([scanStr hasPrefix:signObserver]){
-//                _textView.text = [scanStr stringByReplacingOccurrencesOfString:signObserver withString:@""];
-//                [_confirmBtn setGrayGradientLayerType:highYellowType];
-//                _confirmBtn.userInteractionEnabled = YES;
-//                _textView.textColor = HEX_RGB(0x202C56);
-//            }
-//            else{
-//                [FFBMSMBProgressShower showTextIn:self
-//                                             Text:VCNSLocalizedBundleString(@"transaction_signature_scheme_error",nil)
-//                                           During:1.5];
-//            }
-        }
-            break;
-        case QRCodeObserverAuthType: //授权部分
-        {
-//            if ([scanStr hasPrefix:signAuthorized]) {
-//                _textView.text = [scanStr stringByReplacingOccurrencesOfString:signAuthorized withString:@""];
-//                [_confirmBtn setGrayGradientLayerType:highYellowType];
-//                _confirmBtn.userInteractionEnabled = YES;
-//                _textView.textColor = HEX_RGB(0x202C56);
-//            }else{
-//                [FFBMSMBProgressShower showTextIn:self
-//                                             Text:VCNSLocalizedBundleString(@"authorized_signature_scheme_error",nil)
-//                                           During:1.5];
-//            }
-        }
-            break;
-            
-        default:
-            break;
-    }
-   
-}
-
-- (void) dealloc {
-    NSLog(@"被移除");
 }
 
 @end

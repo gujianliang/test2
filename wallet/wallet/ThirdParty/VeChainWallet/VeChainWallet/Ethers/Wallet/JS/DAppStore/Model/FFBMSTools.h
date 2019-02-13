@@ -86,7 +86,6 @@ typedef NS_ENUM(NSInteger , BusinessType)
 
 @interface FFBMSTools : NSObject
 
-+ (NSDate *)stringConvertDate:(NSString *)strDate format:(NSString *)format;
 
 + (NSString *)dateConvertString:(NSDate *)date format:(NSString *)format;
 
@@ -102,20 +101,10 @@ typedef NS_ENUM(NSInteger , BusinessType)
 
 +(NSString*)appVersion;
 
-//获取文字的高度
-+(CGFloat)heightByStrWithWidthAndFontSize:(NSString*)Str  WIDTH:(CGFloat)width UIFONTSIZE:(CGFloat)fontSize;
-
-//绘制虚线
-+ (void)drawDashLine:(UIView *)lineView lineLength:(int)lineLength lineSpacing:(int)lineSpacing lineColor:(UIColor *)lineColor;
-
 + (BOOL)checkQRcode:(NSString *)code;
 
 + (NSString*)localeStringWithKey:(NSString*)key; // 去本地包key
 + (NSString *)localStringBundlekey:(NSString *)key; // 取bundle key
-
-// 判断是否包含中文
-+ (BOOL) containChiness:(NSString *)text;
-+ (BOOL )checkPW:(NSString *)password;
 
 + (UIImage *)walletAddreeConvertImage:(NSString *)address;
 
@@ -124,15 +113,10 @@ typedef NS_ENUM(NSInteger , BusinessType)
 + (NSString *)signData:(NSString *)address
                  value:(NSString *)value;
 
-+ (NSString *) compareCurrentTime:(NSString *)str;
-
 // 1 天以内显示时分，1天以后显示具体年月日时分
 + (NSString *) compareDayTime:(NSString *)str;
 
 + (NSTimeInterval) compareTimeSpace:(NSString *)str;
-
-+ (NSString *) convertTimeTo:(NSTimeInterval)timeInterval;
-
 
 + (NSString *)checksumAddress:(NSString *)inputAddress;
 
@@ -157,8 +141,6 @@ typedef NS_ENUM(NSInteger , BusinessType)
 + (NSString *)conventInvalidTime:(NSString *)input; // MM/dd/yyyy HH:mm
 
 + (UIImage*) createImageWithColor: (UIColor*) color;
-
-+ (BOOL)checkKeystore:(NSString *)keystore;
 
 + (NSString *)serviceRuleHostWithContent:(NSString *)content;
 
@@ -197,8 +179,6 @@ typedef NS_ENUM(NSInteger , BusinessType)
 //合约签名，data 数据准备
 + (NSString *)contractMethodId:(NSString *)methodId params:(NSArray *)params;
 
-//验证手机，有没有开启摄像头权限
-+ (BOOL)isCanUsePhotos;
 
 //合约组合相关信息
 + (NSDictionary *)getContractData:(ContractType)contractType params:(NSArray *)params;
@@ -222,7 +202,7 @@ typedef NS_ENUM(NSInteger , BusinessType)
 
 + (void)callback:(NSString *)requestId
             data:(id)data
-      callbackID:(NSString *)callbackID
+      callbackID:(NSString *)callbackId
          webview:(WKWebView *)webView
             code:(NSInteger)code
          message:(NSString *)message;
@@ -231,6 +211,8 @@ typedef NS_ENUM(NSInteger , BusinessType)
 + (void)jsErrorAlert:(NSString *)message;
 
 + (UIImage *)localImageWithName:(NSString *)name;
+
++ (NSString *)removeExtraZeroAtBegin:(NSString *)valueFormated;
 
 @end
 

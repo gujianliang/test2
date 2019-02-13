@@ -102,7 +102,7 @@
 		9743A5B321FED8970079C582 /* PaymentDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9743A59F21FED8970079C582 /* PaymentDetailView.m */; };
 		9743A5B421FED8970079C582 /* WalletSignObserverModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 9743A5A021FED8970079C582 /* WalletSignObserverModel.h */; };
 		9743A5B521FED8970079C582 /* PaymentPasswordView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9743A5A121FED8970079C582 /* PaymentPasswordView.xib */; };
-		9743A5B621FED8970079C582 /* WalletSignatureView+VETTransferObserve.h in Headers */ = {isa = PBXBuildFile; fileRef = 9743A5A221FED8970079C582 /* WalletSignatureView+VETTransferObserve.h */; };
+		9743A5B621FED8970079C582 /* WalletSignatureView+transferObserver.h in Headers */ = {isa = PBXBuildFile; fileRef = 9743A5A221FED8970079C582 /* WalletSignatureView+transferObserver.h */; };
 		9743A5B721FED8970079C582 /* PaymentPasswordView.h in Headers */ = {isa = PBXBuildFile; fileRef = 9743A5A321FED8970079C582 /* PaymentPasswordView.h */; };
 		9743A5B821FED8970079C582 /* WalletSignatureView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9743A5A421FED8970079C582 /* WalletSignatureView.m */; };
 		9743A5BA21FED8970079C582 /* WalletSignatureView+transferToken.h in Headers */ = {isa = PBXBuildFile; fileRef = 9743A5A621FED8970079C582 /* WalletSignatureView+transferToken.h */; };
@@ -110,7 +110,7 @@
 		9743A5BC21FED8970079C582 /* WalletPaymentQRCodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9743A5A821FED8970079C582 /* WalletPaymentQRCodeView.m */; };
 		9743A5BD21FED8970079C582 /* PaymentDetailView.h in Headers */ = {isa = PBXBuildFile; fileRef = 9743A5A921FED8970079C582 /* PaymentDetailView.h */; };
 		9743A5BE21FED8970079C582 /* PaymentDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9743A5AA21FED8970079C582 /* PaymentDetailView.xib */; };
-		9743A5BF21FED8970079C582 /* WalletSignatureView+VETTransferObserve.m in Sources */ = {isa = PBXBuildFile; fileRef = 9743A5AB21FED8970079C582 /* WalletSignatureView+VETTransferObserve.m */; };
+		9743A5BF21FED8970079C582 /* WalletSignatureView+transferObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 9743A5AB21FED8970079C582 /* WalletSignatureView+transferObserver.m */; };
 		9743A5C021FED8970079C582 /* WalletSignObserverModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9743A5AC21FED8970079C582 /* WalletSignObserverModel.m */; };
 		9743A5C121FED8970079C582 /* WalletSignatureView.h in Headers */ = {isa = PBXBuildFile; fileRef = 9743A5AD21FED8970079C582 /* WalletSignatureView.h */; };
 		9743A5C221FED8970079C582 /* PaymentPasswordView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9743A5AE21FED8970079C582 /* PaymentPasswordView.m */; };
@@ -406,7 +406,7 @@
 		9743A59F21FED8970079C582 /* PaymentDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaymentDetailView.m; sourceTree = "<group>"; };
 		9743A5A021FED8970079C582 /* WalletSignObserverModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WalletSignObserverModel.h; sourceTree = "<group>"; };
 		9743A5A121FED8970079C582 /* PaymentPasswordView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PaymentPasswordView.xib; sourceTree = "<group>"; };
-		9743A5A221FED8970079C582 /* WalletSignatureView+VETTransferObserve.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WalletSignatureView+VETTransferObserve.h"; sourceTree = "<group>"; };
+		9743A5A221FED8970079C582 /* WalletSignatureView+transferObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WalletSignatureView+transferObserver.h"; sourceTree = "<group>"; };
 		9743A5A321FED8970079C582 /* PaymentPasswordView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentPasswordView.h; sourceTree = "<group>"; };
 		9743A5A421FED8970079C582 /* WalletSignatureView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WalletSignatureView.m; sourceTree = "<group>"; };
 		9743A5A621FED8970079C582 /* WalletSignatureView+transferToken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WalletSignatureView+transferToken.h"; sourceTree = "<group>"; };
@@ -414,7 +414,7 @@
 		9743A5A821FED8970079C582 /* WalletPaymentQRCodeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WalletPaymentQRCodeView.m; sourceTree = "<group>"; };
 		9743A5A921FED8970079C582 /* PaymentDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentDetailView.h; sourceTree = "<group>"; };
 		9743A5AA21FED8970079C582 /* PaymentDetailView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PaymentDetailView.xib; sourceTree = "<group>"; };
-		9743A5AB21FED8970079C582 /* WalletSignatureView+VETTransferObserve.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WalletSignatureView+VETTransferObserve.m"; sourceTree = "<group>"; };
+		9743A5AB21FED8970079C582 /* WalletSignatureView+transferObserver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WalletSignatureView+transferObserver.m"; sourceTree = "<group>"; };
 		9743A5AC21FED8970079C582 /* WalletSignObserverModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WalletSignObserverModel.m; sourceTree = "<group>"; };
 		9743A5AD21FED8970079C582 /* WalletSignatureView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WalletSignatureView.h; sourceTree = "<group>"; };
 		9743A5AE21FED8970079C582 /* PaymentPasswordView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaymentPasswordView.m; sourceTree = "<group>"; };
@@ -717,8 +717,8 @@
 				9743A5CB21FEDA250079C582 /* WalletManageModel.m */,
 				9743A5C721FED9E80079C582 /* WalletObersverTransactionModel.h */,
 				9743A5C821FED9E80079C582 /* WalletObersverTransactionModel.m */,
-				9743A4F421FEB39D0079C582 /* WalletDAppPeerModel.m */,
 				9743A4F521FEB39D0079C582 /* WalletDAppPeerModel.h */,
+				9743A4F421FEB39D0079C582 /* WalletDAppPeerModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -916,19 +916,19 @@
 				9743A5A121FED8970079C582 /* PaymentPasswordView.xib */,
 				9743A5AD21FED8970079C582 /* WalletSignatureView.h */,
 				9743A5A421FED8970079C582 /* WalletSignatureView.m */,
+				9743A5A221FED8970079C582 /* WalletSignatureView+transferObserver.h */,
+				9743A5AB21FED8970079C582 /* WalletSignatureView+transferObserver.m */,
+				9743A5A621FED8970079C582 /* WalletSignatureView+transferToken.h */,
+				9743A5B121FED8970079C582 /* WalletSignatureView+transferToken.m */,
 				9743A5A921FED8970079C582 /* PaymentDetailView.h */,
 				9743A59F21FED8970079C582 /* PaymentDetailView.m */,
 				9743A5AA21FED8970079C582 /* PaymentDetailView.xib */,
-				9743A5A221FED8970079C582 /* WalletSignatureView+VETTransferObserve.h */,
-				9743A5AB21FED8970079C582 /* WalletSignatureView+VETTransferObserve.m */,
 				9743A5A021FED8970079C582 /* WalletSignObserverModel.h */,
 				9743A5AC21FED8970079C582 /* WalletSignObserverModel.m */,
 				9743A5AF21FED8970079C582 /* WalletPaymentQRCodeView.h */,
 				9743A5A821FED8970079C582 /* WalletPaymentQRCodeView.m */,
 				9743A5A721FED8970079C582 /* WalletObserverSignPreviewVC.h */,
 				9743A5B021FED8970079C582 /* WalletObserverSignPreviewVC.m */,
-				9743A5A621FED8970079C582 /* WalletSignatureView+transferToken.h */,
-				9743A5B121FED8970079C582 /* WalletSignatureView+transferToken.m */,
 			);
 			path = Signature;
 			sourceTree = "<group>";
@@ -1232,7 +1232,7 @@
 				9757451B21FFF02A0046C8A0 /* WalletTransactionApi.h in Headers */,
 				E2317F131E31994500DBE3E4 /* secp256k1.h in Headers */,
 				9757452A21FFF9FA0046C8A0 /* WalletApiManageMacro.h in Headers */,
-				9743A5B621FED8970079C582 /* WalletSignatureView+VETTransferObserve.h in Headers */,
+				9743A5B621FED8970079C582 /* WalletSignatureView+transferObserver.h in Headers */,
 				97EC5C802200AC25001E6B68 /* NSMutableDictionary+Helpers.h in Headers */,
 				E2317F351E31999E00DBE3E4 /* tommath_private.h in Headers */,
 				975746B5220023370046C8A0 /* WalletTransantionsReceiptApi.h in Headers */,
@@ -1561,7 +1561,7 @@
 				9757452D21FFFBB20046C8A0 /* UIColor+SNFoundation.m in Sources */,
 				97EC5C8822014D49001E6B68 /* WalletExchangeWalletCell.m in Sources */,
 				9743A58C21FED2D50079C582 /* AFURLRequestSerialization.m in Sources */,
-				9743A5BF21FED8970079C582 /* WalletSignatureView+VETTransferObserve.m in Sources */,
+				9743A5BF21FED8970079C582 /* WalletSignatureView+transferObserver.m in Sources */,
 				9757450421FFECEC0046C8A0 /* WalletGenesisBlockInfoApi.m in Sources */,
 				E2317F0B1E31994500DBE3E4 /* base58.c in Sources */,
 				E2317F0F1E31994500DBE3E4 /* bip39.c in Sources */,

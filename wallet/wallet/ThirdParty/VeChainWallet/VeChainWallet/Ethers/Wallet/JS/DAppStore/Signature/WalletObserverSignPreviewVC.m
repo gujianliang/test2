@@ -8,8 +8,6 @@
 
 #import "WalletObserverSignPreviewVC.h"
 #import "WalletUtils.h"
-//#import "WalletSqlDataEngine.h"
-//#import "WalletAuthInputPWView.h"
 #import "WalletPaymentQRCodeView.h"
 #import "WalletSignObserverModel.h"
 
@@ -50,9 +48,7 @@ static NSString *cellIndef = @"addressIndef";
     // Do any additional setup after loading the view.
     
     self.view.backgroundColor = [UIColor whiteColor];
-    
     self.title = VCNSLocalizedBundleString(@"contract_payment_info_title", nil);
-//    [self updateNavigationBarStyle:TintAndTitleNoneCloseWhiteOne];
     
     [self initView];
 }
@@ -154,80 +150,9 @@ static NSString *cellIndef = @"addressIndef";
     [self.view addSubview:signBtn];
 }
 
-- (BOOL) checkAddressAvailable {
-    
-    return YES;
-}
-
 - (void)clickSign
 {
-//    NSString *from = self.transactionModel.from;
-//    WalletManageModel *walletModel = [[WalletSqlDataEngine sharedInstance] getSingleWallet:[FFBMSTools checksumAddress:from]];
-//    if (walletModel.address.length > 0) {
-//        if (walletModel.observer.intValue) {
-//            [FFBMSAlertShower showAlert:VCNSLocalizedBundleString(@"dialog_tip_title", nil)
-//                                    msg:VCNSLocalizedBundleString(@"transaction_cold_wallet_observer", nil)
-//                                  inCtl:self
-//                                  items:@[VCNSLocalizedBundleString(@"improt_wallet_warning_dialog_butn", nil)]
-//                             clickBlock:^(NSInteger index) {
-//                                 [FFBMSTools restoreTabNavToRoot];
-//                             }];
-//            return;
-//        }
-//
-//    }else {
-//        [FFBMSAlertShower showAlert:VCNSLocalizedBundleString(@"dialog_tip_title", nil)
-//                                msg:VCNSLocalizedBundleString(@"transaction_cold_wallet_not_exist", nil)
-//                              inCtl:self
-//                              items:@[VCNSLocalizedBundleString(@"improt_wallet_warning_dialog_butn", nil)]
-//                         clickBlock:^(NSInteger index) {
-//                             [FFBMSTools restoreTabNavToRoot];
-//                         }];
-//        return;
-//    }
-//
-//    WalletAuthInputPWView *inputV = [self.navigationController.view viewWithTag:9090];
-//    if (inputV) {
-//        return;
-//    }
-//
-//    //输入keystore 密码签名
-//    NSString *address = [FFBMSTools checksumAddress:self.transactionModel.from];
-//    WalletAuthInputPWView *inputView = [[WalletAuthInputPWView alloc]initWithAddress:address
-//                                                                         authObserve: ColdWalletType
-//                                                                               block:^(BOOL result,Account *account)
-//                                        {
-//                                            if (result) {
-//                                                // 执行生成授权页面
-//
-//                                                NSString *result = [self signMessage:account];
-//
-//                                                WalletPaymentQRCodeView *QRCodeView = [[WalletPaymentQRCodeView alloc]initWithFrame:CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, SCREEN_HEIGHT)
-//                                                                                                                               type:ColdShowQrCodeType
-//
-//                                                                                                                               json:result
-//                                                                                                                           codeType:QRCodeUnKnowType];
-//                                                QRCodeView.backgroundColor = UIColor.clearColor;
-//                                                [self.navigationController.view addSubview:QRCodeView];
-//                                                [UIView animateWithDuration:0.3 animations:^{
-//                                                    [QRCodeView setFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
-//                                                }];
-//                                                QRCodeView.block = ^(NSString *result)
-//                                                {
-//                                                    //回到首页
-//                                                    [FFBMSTools restoreTabNavToRoot];
-//                                                };
-//                                            }
-//                                        }];
-//    [inputView setFrame:CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, SCREEN_HEIGHT)];
-//    inputView.tag = 9090;
-//    [self.navigationController.view addSubview:inputView];
-//
-//    [UIView animateWithDuration:0.3 animations:^{
-//        [inputView setFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
-//    } completion:^(BOOL finished) {
-//
-//    }];
+
 }
 
 - (NSString *)signMessage:(Account *)account

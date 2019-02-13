@@ -378,28 +378,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "wallet/ThirdParty/VeChainWallet/VeChainWallet/Ethers/Wallet/JS/DAppStore/Controllers/WalletDAppStoreVC.m"
-            timestampString = "570522405.422793"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "322"
-            endingLineNumber = "322"
-            landmarkName = "-injectJS:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "wallet/ThirdParty/VeChainWallet/VeChainWallet/Ethers/Wallet/JS/DAppStore/Controllers/WalletDAppStoreVC.m"
             timestampString = "570522405.4228801"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "328"
             endingLineNumber = "328"
-            landmarkName = "-injectJS:"
+            landmarkName = "-ConnexTransferWithClauseData:dictParam:from:to:requestId:gas:webView:callbackID:amount:gasCanUse:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -490,28 +474,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "wallet/ThirdParty/VeChainWallet/VeChainWallet/Ethers/Wallet/JS/DAppStore/Model/FFBMSTools.m"
-            timestampString = "570607512.013127"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "251"
-            endingLineNumber = "251"
-            landmarkName = "+containChiness:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "wallet/ThirdParty/VeChainWallet/VeChainWallet/Ethers/Wallet/JS/DAppStore/Model/FFBMSTools.m"
-            timestampString = "570607512.013194"
+            timestampString = "570622711.133727"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "633"
             endingLineNumber = "633"
-            landmarkName = "+createImageWithColor:"
+            landmarkName = "+thousandSeparator:decimals:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -522,12 +490,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "wallet/ThirdParty/VeChainWallet/VeChainWallet/Ethers/Wallet/JS/DAppStore/Model/FFBMSTools.m"
-            timestampString = "570607512.013271"
+            timestampString = "570622711.13404"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "704"
             endingLineNumber = "704"
-            landmarkName = "+addressChecksum:"
+            landmarkName = "+stringFromHexString:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -719,7 +687,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "71"
             endingLineNumber = "71"
-            landmarkName = "-initWithWalletDict:"
+            landmarkName = "-webView:runJavaScriptTextInputPanelWithPrompt:defaultText:initiatedByFrame:completionHandler:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -768,38 +736,6 @@
             startingLineNumber = "341"
             endingLineNumber = "341"
             landmarkName = "-creatLeftView"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "wallet/ThirdParty/VeChainWallet/VeChainWallet/Ethers/Wallet/JS/DAppStore/Signature/WalletSignatureView.m"
-            timestampString = "570607512.0137939"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "445"
-            endingLineNumber = "445"
-            landmarkName = "-creatLeftView"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "wallet/ThirdParty/VeChainWallet/VeChainWallet/Ethers/Wallet/JS/DAppStore/Signature/WalletSignatureView.m"
-            timestampString = "570607512.013851"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "835"
-            endingLineNumber = "835"
-            landmarkName = "-sign"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -873,38 +809,6 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "wallet/ThirdParty/VeChainWallet/VeChainWallet/Ethers/Wallet/JS/DAppStore/Signature/WalletSignatureView+transferToken.m"
-            timestampString = "570522405.425765"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "143"
-            endingLineNumber = "143"
-            landmarkName = "-signTransfer:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "wallet/ThirdParty/VeChainWallet/VeChainWallet/Ethers/Wallet/JS/DAppStore/Signature/WalletSignatureView+transferToken.m"
-            timestampString = "570522405.425846"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "140"
-            endingLineNumber = "140"
-            landmarkName = "-signTransfer:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "wallet/ThirdParty/VeChainWallet/VeChainWallet/Ethers/Wallet/JS/DAppStore/Api/FFBMSModelFetcher.m"
             timestampString = "570522405.42591"
             startingColumnNumber = "9223372036854775807"
@@ -912,22 +816,6 @@
             startingLineNumber = "87"
             endingLineNumber = "87"
             landmarkName = "+requestPostWithUrl:params:useSession:needEncrypt:error:responseBlock:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "wallet/ThirdParty/VeChainWallet/VeChainWallet/Ethers/Wallet/JS/DAppStore/Signature/WalletSignatureView+transferToken.m"
-            timestampString = "570522405.425997"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "135"
-            endingLineNumber = "135"
-            landmarkName = "-signTransfer:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1130,12 +1018,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "wallet/ThirdParty/VeChainWallet/VeChainWallet/Ethers/Wallet/JS/DAppStore/Model/FFBMSTools.m"
-            timestampString = "570607512.014439"
+            timestampString = "570622711.135219"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "188"
             endingLineNumber = "188"
-            landmarkName = "+localeStringWithKey:"
+            landmarkName = "+compareDayTime:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1241,38 +1129,6 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "wallet/ThirdParty/VeChainWallet/VeChainWallet/Ethers/Wallet/JS/DAppStore/Model/FFBMSTools.m"
-            timestampString = "570607512.014762"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "229"
-            endingLineNumber = "229"
-            landmarkName = "+localImageWithName:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "wallet/ThirdParty/VeChainWallet/VeChainWallet/Ethers/Wallet/JS/DAppStore/Signature/WalletSignatureView.m"
-            timestampString = "570607512.014822"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "818"
-            endingLineNumber = "818"
-            landmarkName = "-scrollViewDidScroll:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "wallet/ThirdParty/VeChainWallet/VeChainWallet/Ethers/Wallet/JS/DAppStore/Api/FFBMSModelFetcher.m"
             timestampString = "570595759.738903"
             startingColumnNumber = "9223372036854775807"
@@ -1306,13 +1162,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "wallet/ThirdParty/VeChainWallet/VeChainWallet/Ethers/Wallet/JS/DAppStore/Model/FFBMSTools.m"
-            timestampString = "570607512.014964"
+            timestampString = "570622711.136541"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1300"
-            endingLineNumber = "1300"
-            landmarkName = "+callback:data:callbackID:webview:code:message:"
-            landmarkType = "7">
+            endingLineNumber = "1300">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1322,13 +1176,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "wallet/ThirdParty/VeChainWallet/VeChainWallet/Ethers/Wallet/JS/DAppStore/Model/FFBMSTools.m"
-            timestampString = "570607512.015016"
+            timestampString = "570622711.1369981"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1305"
-            endingLineNumber = "1305"
-            landmarkName = "+callback:data:callbackID:webview:code:message:"
-            landmarkType = "7">
+            endingLineNumber = "1305">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1408,6 +1260,86 @@
             startingLineNumber = "58"
             endingLineNumber = "58"
             landmarkName = "-changePW:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "wallet/ThirdParty/VeChainWallet/VeChainWallet/Ethers/Wallet/JS/DAppStore/Signature/WalletObserverSignPreviewVC.m"
+            timestampString = "571730721.77653"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "160"
+            endingLineNumber = "160"
+            landmarkName = "-signMessage:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "wallet/ThirdParty/VeChainWallet/VeChainWallet/Ethers/Wallet/JS/DAppStore/Signature/WalletSignatureView+VETTransferObserve.m"
+            timestampString = "571730942.2508709"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "21"
+            endingLineNumber = "21"
+            landmarkName = "-transferAccountObserver:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "wallet/ThirdParty/VeChainWallet/VeChainWallet/Ethers/Wallet/JS/DAppStore/Signature/WalletSignatureView.m"
+            timestampString = "571730955.5418251"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "429"
+            endingLineNumber = "429"
+            landmarkName = "-enterSignView"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "wallet/ThirdParty/VeChainWallet/VeChainWallet/Ethers/Wallet/JS/DAppStore/Signature/WalletSignatureView.m"
+            timestampString = "571730987.68147"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "750"
+            endingLineNumber = "750"
+            landmarkName = "-sign"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "wallet/ThirdParty/VeChainWallet/VeChainWallet/Ethers/Wallet/JS/DAppStore/Signature/WalletSignatureView.m"
+            timestampString = "571731046.778762"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "630"
+            endingLineNumber = "630"
+            landmarkName = "-creatRightView"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

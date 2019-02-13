@@ -131,7 +131,6 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-//    
     NSArray *walletList = [[WalletSingletonHandle shareWalletHandle] getAllWallet];
     WalletManageModel *model = walletList[indexPath.row];
     
@@ -144,7 +143,6 @@
             _block(model.address,self);
         }
     }
-    
 }
 
 @end

@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		4143EDC422019FDF0056C08A /* walletSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97EC5C7B2200A783001E6B68 /* walletSDK.framework */; };
-		4143EEA82202FDF80056C08A /* WalletSDKBundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 4143EEA72202FDF80056C08A /* WalletSDKBundle.bundle */; };
 		971B3E3621E6000B007845F0 /* walletChangePWVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 971B3E1B21E6000B007845F0 /* walletChangePWVC.m */; };
 		971B3E3721E6000B007845F0 /* WalletDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 971B3E1C21E6000B007845F0 /* WalletDetailVC.m */; };
 		971B3E3821E6000B007845F0 /* WalletMoreInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 971B3E1D21E6000B007845F0 /* WalletMoreInfoVC.m */; };
@@ -40,6 +39,7 @@
 		9747229A20EDE9FA00F9EAB3 /* walletUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9747229920EDE9FA00F9EAB3 /* walletUITests.m */; };
 		975747582200573E0046C8A0 /* WebViewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 975747562200573E0046C8A0 /* WebViewVC.m */; };
 		975747592200573E0046C8A0 /* WebViewVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 975747572200573E0046C8A0 /* WebViewVC.xib */; };
+		9773F8512213B22B00DF5972 /* WalletSDKBundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 9773F84D2213B22B00DF5972 /* WalletSDKBundle.bundle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,7 +81,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		4143EEA72202FDF80056C08A /* WalletSDKBundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = WalletSDKBundle.bundle; path = "../../../../../Library/Developer/Xcode/DerivedData/walletSDKDemo-dofcmlbqbvqulygsfacfpsgkawwp/Build/Products/Debug-iphoneos/WalletSDKBundle.bundle"; sourceTree = "<group>"; };
 		971B3E1B21E6000B007845F0 /* walletChangePWVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = walletChangePWVC.m; sourceTree = "<group>"; };
 		971B3E1C21E6000B007845F0 /* WalletDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WalletDetailVC.m; sourceTree = "<group>"; };
 		971B3E1D21E6000B007845F0 /* WalletMoreInfoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WalletMoreInfoVC.m; sourceTree = "<group>"; };
@@ -134,6 +133,7 @@
 		975747552200573E0046C8A0 /* WebViewVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WebViewVC.h; sourceTree = "<group>"; };
 		975747562200573E0046C8A0 /* WebViewVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WebViewVC.m; sourceTree = "<group>"; };
 		975747572200573E0046C8A0 /* WebViewVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WebViewVC.xib; sourceTree = "<group>"; };
+		9773F84D2213B22B00DF5972 /* WalletSDKBundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = WalletSDKBundle.bundle; sourceTree = "<group>"; };
 		97EC5C752200A782001E6B68 /* WalletSDK.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = WalletSDK.xcodeproj; path = VeChainWallet/VeChainWallet/Ethers/WalletSDK.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -216,14 +216,14 @@
 			isa = PBXGroup;
 			children = (
 				971B3E2D21E6000B007845F0 /* keystoreImportVC.h */,
+				971B3E3421E6000B007845F0 /* keystoreImportVC.m */,
 				971B3E2E21E6000B007845F0 /* RecoverMainVC.h */,
+				971B3E3321E6000B007845F0 /* RecoverMainVC.m */,
 				971B3E2F21E6000B007845F0 /* RecoverMainVC.xib */,
 				971B3E3121E6000B007845F0 /* keystoreImportVC.xib */,
-				971B3E3221E6000B007845F0 /* MnemonicImportVC.xib */,
-				971B3E3321E6000B007845F0 /* RecoverMainVC.m */,
-				971B3E3421E6000B007845F0 /* keystoreImportVC.m */,
 				971B3E3021E6000B007845F0 /* MnemonicImportVC.h */,
 				971B3E3521E6000B007845F0 /* MnemonicImportVC.m */,
+				971B3E3221E6000B007845F0 /* MnemonicImportVC.xib */,
 			);
 			path = Recover;
 			sourceTree = "<group>";
@@ -275,6 +275,7 @@
 		9747227420EDE9F800F9EAB3 /* wallet */ = {
 			isa = PBXGroup;
 			children = (
+				9773F84D2213B22B00DF5972 /* WalletSDKBundle.bundle */,
 				971B3E4621E60044007845F0 /* ThirdParty */,
 				971B3E1921E6000B007845F0 /* Modules */,
 				9747227520EDE9F800F9EAB3 /* AppDelegate.h */,
@@ -282,7 +283,6 @@
 				9747227820EDE9F800F9EAB3 /* ViewController.h */,
 				9747227920EDE9F800F9EAB3 /* ViewController.m */,
 				9747227B20EDE9F800F9EAB3 /* Main.storyboard */,
-				4143EEA72202FDF80056C08A /* WalletSDKBundle.bundle */,
 				9747227E20EDE9FA00F9EAB3 /* Assets.xcassets */,
 				9747228020EDE9FA00F9EAB3 /* LaunchScreen.storyboard */,
 				9747228320EDE9FA00F9EAB3 /* Info.plist */,
@@ -473,6 +473,7 @@
 				971B3E3A21E6000B007845F0 /* WalletDetailVC.xib in Resources */,
 				9747228220EDE9FA00F9EAB3 /* LaunchScreen.storyboard in Resources */,
 				971B3E3B21E6000B007845F0 /* walletChangePWVC.xib in Resources */,
+				9773F8512213B22B00DF5972 /* WalletSDKBundle.bundle in Resources */,
 				971B3E3D21E6000B007845F0 /* CreatVC.xib in Resources */,
 				971B3E4021E6000B007845F0 /* RecoverMainVC.xib in Resources */,
 				971B3E4221E6000B007845F0 /* MnemonicImportVC.xib in Resources */,
@@ -481,7 +482,6 @@
 				97468F372201CBE30092DF07 /* AddNetVC.xib in Resources */,
 				97468F392201CBE30092DF07 /* NETDetailVC.xib in Resources */,
 				971B3E3921E6000B007845F0 /* WalletMoreInfoVC.xib in Resources */,
-				4143EEA82202FDF80056C08A /* WalletSDKBundle.bundle in Resources */,
 				9747227D20EDE9F800F9EAB3 /* Main.storyboard in Resources */,
 				975747592200573E0046C8A0 /* WebViewVC.xib in Resources */,
 				971B3E4121E6000B007845F0 /* keystoreImportVC.xib in Resources */,

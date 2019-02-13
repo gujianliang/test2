@@ -9,9 +9,7 @@
 #import "WalletSignatureView+transferToken.h"
 #import "WalletGenesisBlockInfoApi.h"
 #import "WalletBlockInfoApi.h"
-//#import "WalletSqlDataEngine.h"
 #import "WalletTransactionApi.h"
-//#import "WalletTradeDetailVC.h"
 #import "WalletSingletonHandle.h"
 #import "FFBMSMBProgressShower.h"
 
@@ -120,39 +118,18 @@
                                             msg:VCNSLocalizedBundleString(@"transfer_wallet_password_error", nil)
                                           inCtl:[FFBMSTools getCurrentVC]
                                           items:@[VCNSLocalizedBundleString(@"重试", nil)]
-                                     clickBlock:^(NSInteger index) {
-                                     }];
+                                     clickBlock:^(NSInteger index)
+                    {
+                        
+                    }];
                     return;
-                    
-                }else {
-                    
                 }
                 
                 [account sign:transaction];
                 
-                NSString *raw1 = [SecureData dataToHexString: [transaction serialize]];
-                // 发送交易
-                WalletTransactionApi *transationApi1 = [[WalletTransactionApi alloc]initWithRaw:raw1];
-                [transationApi1 loadDataAsyncWithSuccess:^(VCBaseApi *finishApi) {
-                    @strongify(self);
-                    [FFBMSMBProgressShower hide:self];
-//                    NC_POST_NAME_NO_OBJECT(kTransactionSuccess);
-                    self.txid = finishApi.resultDict[@"id"];
-                    
-                    [self.scrollView setContentOffset:CGPointMake(SCREEN_WIDTH*2, 0) animated:YES];
-                    [self timerCountBlock];
-                    
-                } failure:^(VCBaseApi *finishApi, NSString *errMsg) {
-                    [FFBMSMBProgressShower hide:self];
-                    [FFBMSAlertShower showAlert:nil
-                                            msg:VCNSLocalizedBundleString(@"transfer_wallet_send_fail", nil)
-                                          inCtl:[FFBMSTools getCurrentVC]
-                                          items:@[VCNSLocalizedBundleString(@"dialog_yes", nil)]
-                                     clickBlock:^(NSInteger index) {
-                                     }];
-                    
-                    
-                }];
+                NSString *raw = [SecureData dataToHexString: [transaction serialize]];
+                [self sendRaw:raw];
+                
             }];
         } failure:^(VCBaseApi *finishApi, NSString *errMsg) {
             @strongify(self)
@@ -164,16 +141,34 @@
     }];
 }
 
+- (void)sendRaw:(NSString *)raw
+{
+    // 发送交易
+    @weakify(self)
+    WalletTransactionApi *transationApi1 = [[WalletTransactionApi alloc]initWithRaw:raw];
+    [transationApi1 loadDataAsyncWithSuccess:^(VCBaseApi *finishApi) {
+        @strongify(self);
+        [FFBMSMBProgressShower hide:self];
+        self.txid = finishApi.resultDict[@"id"];
+        
+        [self.scrollView setContentOffset:CGPointMake(SCREEN_WIDTH*2, 0) animated:YES];
+        [self timerCountBlock];
+        
+    } failure:^(VCBaseApi *finishApi, NSString *errMsg) {
+        [FFBMSMBProgressShower hide:self];
+        [FFBMSAlertShower showAlert:nil
+                                msg:VCNSLocalizedBundleString(@"transfer_wallet_send_fail", nil)
+                              inCtl:[FFBMSTools getCurrentVC]
+                              items:@[VCNSLocalizedBundleString(@"dialog_yes", nil)]
+                         clickBlock:^(NSInteger index) {
+                         }];
+        
+        
+    }];
+}
+
 - (void)showTransactionFail {
     
-//    NSMutableDictionary *paramDict = [NSMutableDictionary dictionary];
-//    [paramDict setValueIfNotNil:self.enter_path forKey:@"enter_path"];
-//    [paramDict setValueIfNotNil:@"" forKey:@"trx_id"];
-//    [paramDict setValueIfNotNil:@(self.business_type) forKey:@"business_type"];
-//
-//    [[SensorsAnalyticsSDK sharedInstance] track:@"SendWatchWalletSign"
-//                                 withProperties:paramDict];
-//
     [FFBMSMBProgressShower hide:self];
     [FFBMSAlertShower showAlert:nil
                             msg:VCNSLocalizedBundleString(@"transfer_wallet_send_fail", nil)

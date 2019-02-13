@@ -62,9 +62,6 @@
     
     self.titleTopLabel.text = VCNSLocalizedBundleString(@"dialog_coin_transfer_password", nil);
     self.pwdTextField.placeholder = VCNSLocalizedBundleString(@"wallet_detail_modify_password_dialog_title", nil);
-//    self.passwordTextField.disablePaste = YES;
-//    self.passwordTextField.disableSelectAll = YES;
-//    self.passwordTextField.disableSelect = YES;
     [self.confirmButton setTitle:VCNSLocalizedBundleString(@"dialog_yes", nil) forState:UIControlStateNormal];
     [self.confirmButton setDisableGradientLayer:YES];    
 }

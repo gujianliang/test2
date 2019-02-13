@@ -8,12 +8,6 @@
 
 #import "FFBMSTextView.h"
 
-//@interface FFBMSTextView()<KRKeyboardDelegate>
-//{
-//
-//}
-//@end
-
 const NSInteger placeLabelTag = 77777;
 
 @implementation FFBMSTextView

@@ -1,5 +1,5 @@
 //
-//  WalletSignatureView+VETTransferObserve.h
+//  WalletSignatureView+transferObserver.h
 //  VeWallet
 //
 //  Created by 曾新 on 2019/1/22.
@@ -10,8 +10,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface WalletSignatureView (VETTransferObserve)
--(void)icoTransferAccount:(NSString *)valueFormated;
+@interface WalletSignatureView (transferObserver)
+-(void)transferAccountObserver:(NSString *)valueFormated;
 
 @end
 

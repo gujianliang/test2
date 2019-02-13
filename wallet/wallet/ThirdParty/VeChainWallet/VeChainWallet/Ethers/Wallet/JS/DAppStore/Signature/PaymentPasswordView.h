@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-//#import "FFBMSTextFieldView.h"
 
 @interface PaymentPasswordView : UIView
 @property (nonatomic, strong) void (^didClickCloseButton)(void);
