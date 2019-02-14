@@ -556,9 +556,9 @@
 {
     UISlider *slider = (UISlider *)sender;
     _gasPriceCoef = [BigNumber bigNumberWithInteger:slider.value];
-    BigNumber *gasBig = [BigNumber bigNumberWithNumber:_gas];
     
-    BigNumber *gasCanUse = [[[[BigNumber bigNumberWithDecimalString:@"1000000000000000"] mul:[BigNumber bigNumberWithInteger:(1+slider.value/255.0)*1000000]] mul:gasBig] div:[BigNumber bigNumberWithDecimalString:@"1000000"]];
+     BigNumber *gasCanUse = [WalletTools calcThorNeeded:slider.value gas:_gas];
+    
     _gasLimit = [Payment formatEther:gasCanUse options:2];
     NSString *miner = [_gasLimit stringByAppendingString:@" VTHO"];
     _minerLabel.text = miner;

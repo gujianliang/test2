@@ -67,7 +67,7 @@
              [hud hide:YES afterDelay:1];
              return ;
          }
-         [WalletUtils encryptSecretStorageJSON:_nextPWTextField.text account:account callback:^(NSString *json) {
+         [WalletUtils encryptSecretStorageJSON:self.nextPWTextField.text account:account callback:^(NSString *json) {
              
              [hud hide:YES];
              if (json.length > 0) {

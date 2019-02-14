@@ -837,4 +837,17 @@
     }
     return YES;
 }
+
++ (BigNumber *)calcThorNeeded:(float)gasPriceCoef gas:(NSNumber *)gas
+{
+    BigNumber *gasBigNumber = [BigNumber bigNumberWithNumber:gas];
+    
+    BigNumber *baseGasPrice = [BigNumber bigNumberWithDecimalString:@"1000000000000000"];
+    BigNumber *currentGasPrice = [BigNumber bigNumberWithInteger:(1 + gasPriceCoef/255.0)*1000000];
+    BigNumber *removeOffset = [BigNumber bigNumberWithInteger:1000000];
+    
+    BigNumber *gasCanUse = [[[baseGasPrice mul:currentGasPrice] mul:gasBigNumber] div:removeOffset];
+    return gasCanUse;
+}
+
 @end

@@ -27,6 +27,7 @@
 #import "WalletDAppPeersApi.h"
 #import "WalletDAppTransferDetailApi.h"
 #import "WalletSingletonHandle.h"
+#import "WalletJSCallbackModel.h"
 
 @interface WalletDAppHandle ()<WKNavigationDelegate,WKUIDelegate>
 {
@@ -56,10 +57,12 @@
     NSString *result = [defaultText stringByReplacingOccurrencesOfString:@"wallet://" withString:@""];
     NSDictionary *dict = [NSJSONSerialization dictionaryWithJsonString:result];
     
-    NSString *callbackId = dict[@"callbackId"];
-    NSString *requestId  = dict[@"requestId"];
-    NSString *method     = dict[@"method"];
-    NSDictionary *callbackParams  = dict[@"params"];
+    WalletJSCallbackModel *callbackModel = [WalletJSCallbackModel yy_modelWithDictionary:dict];
+    
+    NSString *callbackId = callbackModel.callbackId;
+    NSString *requestId  = callbackModel.requestId;
+    NSString *method     = callbackModel.method;
+    NSDictionary *callbackParams  = callbackModel.params;
     
     if ([method isEqualToString:@"getStatus"]) {
 
@@ -163,7 +166,7 @@
     
     NSString *gasPrice = callbackParams[@"gasPrice"];
     if (gasPrice.length == 0) {
-        gasPrice = @"0x78";
+        gasPrice = @"0x78";  //默认120，如果js没有返回，就给默认的
     }
     
     CGFloat amountTnteger = [BigNumber bigNumberWithHexString:[NSString stringWithFormat:@"%@",amount]].decimalString.floatValue/pow(10, 18);
@@ -190,9 +193,10 @@
             signatureView.transferType = JSContranctTransferType;
         }
         
-        BigNumber *gasBig = [BigNumber bigNumberWithDecimalString:gas];
         NSString *gasPriceDecimal = [BigNumber bigNumberWithHexString:gasPrice].decimalString;
-        BigNumber *gasCanUse = [[[[BigNumber bigNumberWithDecimalString:@"1000000000000000"] mul:[BigNumber bigNumberWithInteger:(1+gasPriceDecimal.integerValue/255.0)*1000000]] mul:gasBig] div:[BigNumber bigNumberWithDecimalString:@"1000000"]];
+   
+        NSNumber *gasNumber = [NSNumber numberWithDouble:gas.doubleValue];
+        BigNumber *gasCanUse = [WalletTools calcThorNeeded:gasPriceDecimal.floatValue gas:gasNumber];
         
         [self web3TransferWithClauseData:cluseData
                                     from:from
@@ -215,23 +219,21 @@
           completionHandler:(void (^)(NSString * __nullable result))completionHandler
 
 {
-    NSArray *clausesList = callbackParams[@"clauses"][0];
-    if (clausesList.count == 0) {
+    NSDictionary *clausesDict = callbackParams[@"clauses"][0];
+    if (clausesDict == nil) {
         completionHandler(@"{}");
         return;
     }
     
-    NSString *to = callbackParams[@"clauses"][0][@"to"];
-    NSString *amount = callbackParams[@"clauses"][0][@"value"];
-    NSString *clauseData = callbackParams[@"clauses"][0][@"data"];
-    NSNumber *gas =  callbackParams[@"options"][@"gas"];
+    NSString *to         = clausesDict[@"to"];
+    NSString *amount     = clausesDict[@"value"];
+    NSString *clauseData = clausesDict[@"data"];
+    NSNumber *gas        = callbackParams[@"options"][@"gas"];
     
     NSMutableDictionary *dictParam = [NSMutableDictionary dictionary];
     [dictParam setValueIfNotNil:@(0) forKey:@"isICO"];
     
-    BigNumber *gasBig = [BigNumber bigNumberWithNumber:gas];
-    
-    BigNumber *gasCanUse = [[[[BigNumber bigNumberWithDecimalString:@"1000000000000000"] mul:[BigNumber bigNumberWithInteger:(1 + 120/255.0)*1000000]] mul:gasBig] div:[BigNumber bigNumberWithDecimalString:@"1000000"]];
+    BigNumber *gasCanUse = [WalletTools calcThorNeeded:120 gas:gas];
     
     NSString *miner = [[Payment formatEther:gasCanUse options:2] stringByAppendingString:@" VTHO"];
     
@@ -339,7 +341,7 @@
     signatureView.tag = SignViewTag;
     if (cluseData.length > 3) {
         if (![cluseData hasPrefix:transferMethodId]) { // 签合约
-            [self WEB3contractSign:signatureView
+            [self web3contractSign:signatureView
                                 to:to
                              from:from
                             amount:amount
@@ -352,7 +354,7 @@
                          cluseData:cluseData];
         }else{
             //vtho 转账
-            [self WEB3VTHOTransfer:signatureView
+            [self web3VTHOTransfer:signatureView
                               from:from
                                 to:to
                             amount:amount
@@ -367,7 +369,7 @@
         }
     }else{
         // VET 转账
-        [self WEB3VETTransferFrom:from
+        [self web3VETTransferFrom:from
                                 to:to
                             amount:amount
                          requestId:requestId

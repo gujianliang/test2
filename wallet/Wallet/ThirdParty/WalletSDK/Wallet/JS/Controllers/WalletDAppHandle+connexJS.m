@@ -47,7 +47,6 @@
 }
 
 -(void)getStatusWithRequestId:(NSString *)requestId
-
             completionHandler:(void (^)(NSString * __nullable result))completionHandler
 {
     WalletDAppPeersApi *peersApi = [[WalletDAppPeersApi alloc]init];
@@ -305,17 +304,19 @@
     signatureView.transferType = JSVETTransferType;
     
     WalletCoinModel *coinModel = [[WalletCoinModel alloc]init];
-    coinModel.coinName = @"VET";
-    coinModel.transferGas = [NSString stringWithFormat:@"%@",gas];
-    coinModel.decimals = 18;
+    coinModel.coinName         = @"VET";
+    coinModel.transferGas      = [NSString stringWithFormat:@"%@",gas];
+    coinModel.decimals         = 18;
+    
     [dictParam setValueIfNotNil:coinModel forKey:@"coinModel"];
     
     signatureView.jsUse = YES;
     [signatureView updateView:from
-              toAddress:to
-           contractType:NoContract_transferToken
-                 amount:[NSString stringWithFormat:@"%.2f",amountTnteger]
-                 params:@[dictParam]];
+                    toAddress:to
+                 contractType:NoContract_transferToken
+                       amount:[NSString stringWithFormat:@"%.2f",amountTnteger]
+                       params:@[dictParam]];
+    
     [[WalletTools getCurrentVC].navigationController.view addSubview:signatureView];
     
     signatureView.transferBlock = ^(NSString * _Nonnull txid) {
@@ -323,19 +324,18 @@
         if (txid.length == 0) {
             
             [WalletTools callbackWithrequestId:requestId
-                                  webView:webView
+                                       webView:webView
                                          data:@""
                                    callbackId:callbackId
                                          code:ERROR_CANCEL];
         }else{
             
             [WalletTools callbackWithrequestId:requestId
-                                  webView:webView
+                                       webView:webView
                                          data:txid
                                    callbackId:callbackId
                                          code:OK];
         }
-        
     };
 }
 
@@ -349,8 +349,6 @@
                     gasCanUse:(BigNumber *)gasCanUse
                    clauseData:(NSString *)clauseData
 {
-    
-    
     WalletSignatureView *signatureView = [[WalletSignatureView alloc] initWithFrame:[WalletTools getCurrentVC].view.bounds];
     signatureView.tag = SignViewTag;
     signatureView.transferType = JSVTHOTransferType;
@@ -375,18 +373,18 @@
         [getDecimalsApi loadDataAsyncWithSuccess:^(VCBaseApi *finishApi) {
             
             NSDictionary *dictResult = finishApi.resultDict;
-            NSString *symoblHex = dictResult[@"data"];
-            NSString *symobl = [BigNumber bigNumberWithHexString:symoblHex].decimalString;
+            NSString *decimalsHex = dictResult[@"data"];
+            NSString *decimals = [BigNumber bigNumberWithHexString:decimalsHex].decimalString;
             
             NSString *gasstr = [Payment formatEther:gasCanUse options:2];
             
             [dictParam setValueIfNotNil:@(0) forKey:@"isICO"];
             
             WalletCoinModel *coinModel = [[WalletCoinModel alloc]init];
-            coinModel.coinName = name;
-            coinModel.transferGas = [NSString stringWithFormat:@"%@",gas];
-            coinModel.decimals = symobl.integerValue;
-            coinModel.address = to;
+            coinModel.coinName         = name;
+            coinModel.transferGas      = [NSString stringWithFormat:@"%@",gas];
+            coinModel.decimals         = decimals.integerValue;
+            coinModel.address          = to;
             
             [dictParam setValueIfNotNil:coinModel forKey:@"coinModel"];
             [dictParam setValueIfNotNil:gasstr forKey:@"miner"];
@@ -408,7 +406,7 @@
                 clauseData.length == 0) {
                 
                 [WalletTools callbackWithrequestId:requestId
-                                  webView:webView
+                                           webView:webView
                                              data:@""
                                        callbackId:callbackId
                                              code:ERROR_REQUEST_PARAMS];
@@ -429,14 +427,14 @@
                 if (txid.length == 0) {
                     
                     [WalletTools callbackWithrequestId:requestId
-                                  webView:webView
+                                               webView:webView
                                                  data:@""
                                            callbackId:callbackId
                                                  code:ERROR_CANCEL];
                 }else{
                     
                     [WalletTools callbackWithrequestId:requestId
-                                  webView:webView
+                                               webView:webView
                                                  data:txid
                                            callbackId:callbackId
                                                  code:OK];
@@ -444,7 +442,7 @@
             };
         } failure:^(VCBaseApi *finishApi, NSString *errMsg) {
             [WalletTools callbackWithrequestId:requestId
-                                  webView:webView
+                                       webView:webView
                                          data:@""
                                    callbackId:callbackId
                                          code:ERROR_SERVER_DATA];
@@ -497,14 +495,14 @@
         if (txid.length == 0) {
             
             [WalletTools callbackWithrequestId:requestId
-                                  webView:webView
+                                       webView:webView
                                          data:@""
                                    callbackId:callbackId
                                          code:ERROR_CANCEL];
         }else{
             
             [WalletTools callbackWithrequestId:requestId
-                                  webView:webView
+                                       webView:webView
                                          data:txid
                                    callbackId:callbackId
                                          code:OK];
@@ -515,28 +513,27 @@
 - (BOOL)errorAddressAlert:(NSString *)toAddress
 {
     // 格式校验
-    bool isok = YES;
+    bool isOK = YES;
     if (!toAddress
         || ![toAddress.uppercaseString hasPrefix:@"0X"]
         || toAddress.length != 42
         || (![toAddress hasSuffix:[toAddress substringFromIndex:2]])) {
-        //            0x1113A  1113A
         // 是否有 checksum 校验
-        isok = NO;
+        isOK = NO;
         NSString *lowercaseAddress = [toAddress substringFromIndex:2].lowercaseString;
         if (toAddress
             && [toAddress hasSuffix:lowercaseAddress]
             && ![[toAddress substringFromIndex:2] hasSuffix:lowercaseAddress]) {
-            //                noChecksum = YES;
-            isok = NO;
+            
+            isOK = NO;
         } else if ([[toAddress substringFromIndex:2] hasSuffix:lowercaseAddress]) {
-            isok = YES;
+            isOK = YES;
         } else if (!toAddress
                    && [toAddress.uppercaseString hasPrefix:@"0X"]
                    && toAddress.length == 42) {
-            isok = NO;
+            isOK = NO;
         }
-        if (!isok) {
+        if (!isOK) {
             [WalletAlertShower showAlert:nil
                                     msg:VCNSLocalizedBundleString(@"非法参数", nil)
                                   inCtl:[WalletTools getCurrentVC]

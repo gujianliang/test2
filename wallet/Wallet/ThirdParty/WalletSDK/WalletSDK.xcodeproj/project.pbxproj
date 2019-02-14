@@ -206,6 +206,8 @@
 		9773F9E1221412D200DF5972 /* WalletDAppHandle+connexJS.h in Headers */ = {isa = PBXBuildFile; fileRef = 9773F96C221412D200DF5972 /* WalletDAppHandle+connexJS.h */; };
 		9773F9E2221412D200DF5972 /* WalletDAppHandle+web3JS.h in Headers */ = {isa = PBXBuildFile; fileRef = 9773F96D221412D200DF5972 /* WalletDAppHandle+web3JS.h */; };
 		9773F9E3221412D200DF5972 /* WalletDAppSignPreVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9773F96E221412D200DF5972 /* WalletDAppSignPreVC.m */; };
+		9773F9E922150C5F00DF5972 /* WalletJSCallbackModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 9773F9E722150C5F00DF5972 /* WalletJSCallbackModel.h */; };
+		9773F9EA22150C5F00DF5972 /* WalletJSCallbackModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9773F9E822150C5F00DF5972 /* WalletJSCallbackModel.m */; };
 		97DB21812091B2450040A9D9 /* blake2s-ref.c in Sources */ = {isa = PBXBuildFile; fileRef = 97DB21772091B2450040A9D9 /* blake2s-ref.c */; };
 		97DB21822091B2450040A9D9 /* blake2xb-ref.c in Sources */ = {isa = PBXBuildFile; fileRef = 97DB21782091B2450040A9D9 /* blake2xb-ref.c */; };
 		97DB21832091B2450040A9D9 /* blake2sp-ref.c in Sources */ = {isa = PBXBuildFile; fileRef = 97DB21792091B2450040A9D9 /* blake2sp-ref.c */; };
@@ -504,6 +506,8 @@
 		9773F96C221412D200DF5972 /* WalletDAppHandle+connexJS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WalletDAppHandle+connexJS.h"; sourceTree = "<group>"; };
 		9773F96D221412D200DF5972 /* WalletDAppHandle+web3JS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WalletDAppHandle+web3JS.h"; sourceTree = "<group>"; };
 		9773F96E221412D200DF5972 /* WalletDAppSignPreVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WalletDAppSignPreVC.m; sourceTree = "<group>"; };
+		9773F9E722150C5F00DF5972 /* WalletJSCallbackModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WalletJSCallbackModel.h; sourceTree = "<group>"; };
+		9773F9E822150C5F00DF5972 /* WalletJSCallbackModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WalletJSCallbackModel.m; sourceTree = "<group>"; };
 		97DB21772091B2450040A9D9 /* blake2s-ref.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.objc; fileEncoding = 4; path = "blake2s-ref.c"; sourceTree = "<group>"; };
 		97DB21782091B2450040A9D9 /* blake2xb-ref.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.objc; fileEncoding = 4; path = "blake2xb-ref.c"; sourceTree = "<group>"; };
 		97DB21792091B2450040A9D9 /* blake2sp-ref.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.objc; fileEncoding = 4; path = "blake2sp-ref.c"; sourceTree = "<group>"; };
@@ -841,6 +845,8 @@
 				9773F922221412D200DF5972 /* WalletTools+NodeModel.h */,
 				9773F923221412D200DF5972 /* WalletTools.h */,
 				9773F915221412D200DF5972 /* WalletTools.m */,
+				9773F9E722150C5F00DF5972 /* WalletJSCallbackModel.h */,
+				9773F9E822150C5F00DF5972 /* WalletJSCallbackModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1266,6 +1272,7 @@
 				E2317F161E31994500DBE3E4 /* aes.h in Headers */,
 				9773F9C5221412D200DF5972 /* WalletGenesisBlockInfoApi.h in Headers */,
 				9773F9CF221412D200DF5972 /* PaymentDetailView.h in Headers */,
+				9773F9E922150C5F00DF5972 /* WalletJSCallbackModel.h in Headers */,
 				E2317F281E31994500DBE3E4 /* pbkdf2.h in Headers */,
 				9773F9C4221412D200DF5972 /* VCBaseApi.h in Headers */,
 				E2317E741E3191AC00DBE3E4 /* Wallet.h in Headers */,
@@ -1479,6 +1486,7 @@
 				9773F8DA2214109300DF5972 /* UIImageView+AFNetworking.m in Sources */,
 				E2317EB91E31981D00DBE3E4 /* BigNumber.m in Sources */,
 				E2317F271E31994500DBE3E4 /* pbkdf2.c in Sources */,
+				9773F9EA22150C5F00DF5972 /* WalletJSCallbackModel.m in Sources */,
 				9773F9C1221412D200DF5972 /* WalletGetSymbolApi.m in Sources */,
 				9773F9B3221412D200DF5972 /* WalletDAppTransferDetailApi.m in Sources */,
 				9773F8B52214109300DF5972 /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,

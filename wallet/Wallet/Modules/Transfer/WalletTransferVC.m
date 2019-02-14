@@ -16,7 +16,7 @@
 {
     NSString *_toAddress;
     NSString *_tokenContractAddress;
-    NSString *_blockHost;   
+    NSString *_blockHost;
 }
 
 @property (weak, nonatomic) IBOutlet UITextView *receiveAddressTextView;
@@ -88,7 +88,7 @@
     {
         //具体操作内容
         NSLog(@"ddd== %@",self.pwTextField.text);
-        [self doTransfer];
+        [self startTransfer];
     }];
     //初始化
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Please input your password"
@@ -104,7 +104,7 @@
     [self presentViewController:alert animated:YES completion:nil];
 }
 
-- (void)doTransfer
+- (void)startTransfer
 {
     _hud = [MBProgressHUD showHUDAddedTo:self.view
                                               animated:YES];
@@ -166,7 +166,6 @@
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
                             
         [self.hud hide:YES];
-
     }];
 }
 
@@ -204,7 +203,6 @@
     {
         if (account == nil) {
             [self.hud hide:YES];
-            NSLog(@"pw error");
             return ;
         }
         [self packClausesInfo:transaction];
@@ -277,7 +275,9 @@
         transferGas = @"60000";
     }
     gas = [BigNumber bigNumberWithDecimalString:transferGas];
+    
     BigNumber *gasCanUse = [[[[BigNumber bigNumberWithDecimalString:@"1000000000000000"] mul:[BigNumber bigNumberWithInteger:(1+gasPriceCoef/255.0)*1000000]] mul:gas] div:[BigNumber bigNumberWithDecimalString:@"1000000"]];
+    
     self.feeLabel.text = [[Payment formatEther:gasCanUse options:2] stringByAppendingString:@" VTHO"];
 }
 

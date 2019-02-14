@@ -19,6 +19,7 @@
 #import "WalletGetSymbolApi.h"
 #import "WalletGetDecimalsApi.h"
 #import "WalletSingletonHandle.h"
+#import "WalletDAppHandle+connexJS.h"
 
 @implementation WalletDAppHandle (web3JS)
 
@@ -60,7 +61,7 @@
     }];
 }
 
-- (void)WEB3VETTransferFrom:(NSString *)from
+- (void)web3VETTransferFrom:(NSString *)from
                           to:(NSString *)to
                       amount:(NSString *)amount
                    requestId:(NSString *)requestId
@@ -90,9 +91,9 @@
     [dictParam setValueIfNotNil:@(0) forKey:@"isICO"];
     
     WalletCoinModel *coinModel = [[WalletCoinModel alloc]init];
-    coinModel.coinName = @"VET";
-    coinModel.transferGas = gas;
-    coinModel.decimals = 18;
+    coinModel.coinName         = @"VET";
+    coinModel.transferGas      = gas;
+    coinModel.decimals         = 18;
     
     [dictParam setValueIfNotNil:coinModel forKey:@"coinModel"];
     
@@ -132,7 +133,7 @@
     };
 }
 
-- (void)WEB3VTHOTransfer:(WalletSignatureView *)signatureView
+- (void)web3VTHOTransfer:(WalletSignatureView *)signatureView
                     from:(NSString *)from
                   to:(NSString *)to
               amount:(NSString *)amount
@@ -145,7 +146,7 @@
           cluseData:(NSString *)cluseData
         tokenAddress:(NSString *)tokenAddress
 {
-    __block NSString *name = @"";
+    __block NSString *coinName = @"";
     
     WalletGetSymbolApi *getSymbolApi = [[WalletGetSymbolApi alloc]initWithTokenAddress:tokenAddress];
     [getSymbolApi loadDataAsyncWithSuccess:^(VCBaseApi *finishApi) {
@@ -161,101 +162,9 @@
                                          code:ERROR_REQUEST_PARAMS];
             return ;
         }
-        
-        name = [WalletTools abiDecodeString:symobl];
-        
-        WalletGetDecimalsApi *getDecimalsApi = [[WalletGetDecimalsApi alloc]initWithTokenAddress:tokenAddress];
-        [getDecimalsApi loadDataAsyncWithSuccess:^(VCBaseApi *finishApi) {
+   
+        [self getTokenSymobl:tokenAddress requestId:requestId webView:webView callbackId:callbackId CluseData:cluseData symobl:symobl to:to from:from gas:gas coinName:coinName gasCanUse:gasCanUse gasPrice:gasPrice];
             
-            NSDictionary *dictResult = finishApi.resultDict;
-            NSString *symoblHex = dictResult[@"data"];
-            
-            if (symoblHex.length < 3) {
-                [WalletTools callbackWithrequestId:requestId
-                                           webView:webView
-                                             data:@""
-                                       callbackId:callbackId
-                                  code:ERROR_REQUEST_PARAMS];
-                return ;
-            }
-            
-            NSString *symobl = [BigNumber bigNumberWithHexString:symoblHex].decimalString;
-            
-            NSString *qq = [cluseData stringByReplacingOccurrencesOfString:transferMethodId withString:@""];
-            NSString *rrr = @"";
-            if (qq.length > 32) {
-                rrr = [qq substringWithRange:NSMakeRange(64, 64)];
-            }
-            CGFloat amountTnteger = [BigNumber bigNumberWithHexString:[NSString stringWithFormat:@"0x%@",rrr]].decimalString.floatValue/pow(10, symobl.integerValue);
-            
-            if (![self errorAddressAlert:to] ||
-                ![self errorAmount:[NSString stringWithFormat:@"%lf",amountTnteger] coinName:@"!VET"] || //不是vet
-                ![WalletTools fromISToAddress:from to:to]||
-                !(gas.integerValue > 0)||
-                cluseData.length == 0) {
-                
-                [WalletTools callbackWithrequestId:requestId
-                                           webView:webView
-                                             data:@""
-                                       callbackId:callbackId
-                                             code:ERROR_REQUEST_PARAMS];
-                return;
-            }
-            
-            NSString *miner = [Payment formatEther:gasCanUse options:2];
-            
-            NSMutableDictionary *dictParam = [NSMutableDictionary dictionary];
-            [dictParam setValueIfNotNil:@(0) forKey:@"isICO"];
-            
-            WalletCoinModel *coinModel = [[WalletCoinModel alloc]init];
-            coinModel.coinName = name;
-            coinModel.transferGas = gas;
-            coinModel.decimals = symobl.integerValue;
-            coinModel.address = tokenAddress;
-            
-            [dictParam setValueIfNotNil:coinModel forKey:@"coinModel"];
-            [dictParam setValueIfNotNil:miner forKey:@"miner"];
-            [dictParam setValueIfNotNil:[BigNumber bigNumberWithInteger:gasPrice.integerValue] forKey:@"gasPriceCoef"];
-            [dictParam setValueIfNotNil:[NSNumber numberWithFloat:gas.floatValue] forKey:@"gas"];
-            
-            BigNumber *dataH = [BigNumber bigNumberWithHexString:cluseData];
-            [dictParam setValueIfNotNil:dataH.data forKey:@"clouseData"];
-            
-            WalletSignatureView *signatureView = [[WalletSignatureView alloc] initWithFrame:[WalletTools getCurrentVC].view.bounds];
-            signatureView.jsUse = YES;
-            signatureView.transferType = JSVTHOTransferType;
-            [signatureView updateView:from
-                      toAddress:to
-                   contractType:NoContract_transferToken
-                         amount:[NSString stringWithFormat:@"%.0f",amountTnteger]
-                         params:@[dictParam]];
-            [[WalletTools getCurrentVC].navigationController.view addSubview:signatureView];
-            
-            signatureView.transferBlock = ^(NSString * _Nonnull txid) {
-                NSLog(@"txid = %@",txid);
-                if (txid.length == 0) {
-                    
-                    [WalletTools callbackWithrequestId:requestId
-                                               webView:webView
-                                                 data:@""
-                                           callbackId:callbackId
-                                                 code:ERROR_CANCEL];
-                }else{
-                    
-                    [WalletTools callbackWithrequestId:requestId
-                                               webView:webView
-                                                 data:txid
-                                           callbackId:callbackId
-                                                 code:OK];
-                }
-            };
-        } failure:^(VCBaseApi *finishApi, NSString *errMsg) {
-            [WalletTools callbackWithrequestId:requestId
-                                       webView:webView
-                                         data:@""
-                                   callbackId:callbackId
-                                         code:ERROR_SERVER_DATA];
-        }];
         
     } failure:^(VCBaseApi *finishApi, NSString *errMsg) {
         [WalletTools callbackWithrequestId:requestId
@@ -266,7 +175,134 @@
     }];
 }
 
-- (void)WEB3contractSign:(WalletSignatureView *)signatureView
+- (void)getTokenSymobl:(NSString *)tokenAddress
+             requestId:(NSString *)requestId
+               webView:(WKWebView *)webView
+            callbackId:(NSString *)callbackId
+             CluseData:(NSString *)cluseData
+                symobl:(NSString *)symobl
+                    to:(NSString *)to
+                  from:(NSString *)from
+                   gas:(NSString *)gas
+              coinName:(NSString *)coinName
+             gasCanUse:(BigNumber *)gasCanUse
+              gasPrice:(NSString *)gasPrice
+{
+    WalletGetDecimalsApi *getDecimalsApi = [[WalletGetDecimalsApi alloc]initWithTokenAddress:tokenAddress];
+    [getDecimalsApi loadDataAsyncWithSuccess:^(VCBaseApi *finishApi) {
+        
+        NSDictionary *dictResult = finishApi.resultDict;
+        NSString *decimalsHex = dictResult[@"data"];
+        
+        if (decimalsHex.length < 3) {
+            [WalletTools callbackWithrequestId:requestId
+                                       webView:webView
+                                          data:@""
+                                    callbackId:callbackId
+                                          code:ERROR_REQUEST_PARAMS];
+            return ;
+        }
+        
+        NSString *decimals = [BigNumber bigNumberWithHexString:decimalsHex].decimalString;
+        
+        [self enterVTHOTransferViewCluseData:cluseData
+                                      decimals:decimals
+                                          to:to
+                                        from:from
+                                         gas:gas
+                                   requestId:requestId
+                                     webView:webView
+                                  callbackId:callbackId
+                                    coinName:coinName
+                                tokenAddress:tokenAddress
+                                   gasCanUse:gasCanUse
+                                    gasPrice:gasPrice];
+        
+    }failure:^(VCBaseApi *finishApi, NSString *errMsg) {
+        
+        [WalletTools callbackWithrequestId:requestId
+                                   webView:webView
+                                      data:@""
+                                callbackId:callbackId
+                                      code:ERROR_SERVER_DATA];
+    }];
+}
+
+- (void)enterVTHOTransferViewCluseData:(NSString *)cluseData decimals:(NSString *)decimals to:(NSString *)to from:(NSString *)from gas:(NSString *)gas requestId:(NSString *)requestId webView:(WKWebView *)webView callbackId:(NSString *)callbackId coinName:(NSString *)coinName tokenAddress:(NSString *)tokenAddress
+                    gasCanUse:(BigNumber *)gasCanUse
+                              gasPrice:(NSString *)gasPrice
+{
+    NSString *cluseStr = [cluseData stringByReplacingOccurrencesOfString:transferMethodId withString:@""];
+    NSString *tokenAmount = @"";
+    if (cluseStr.length >= 128) {
+        tokenAmount = [cluseStr substringWithRange:NSMakeRange(64, 64)];
+    }
+    CGFloat amountTnteger = [BigNumber bigNumberWithHexString:[NSString stringWithFormat:@"0x%@",tokenAmount]].decimalString.floatValue/pow(10, decimals.integerValue);
+    
+    if (![self errorAddressAlert:to] ||
+        ![self errorAmount:[NSString stringWithFormat:@"%lf",amountTnteger] coinName:@"!VET"] || //不是vet
+        ![WalletTools fromISToAddress:from to:to]||
+        !(gas.integerValue > 0)||
+        cluseData.length == 0) {
+        
+        [WalletTools callbackWithrequestId:requestId
+                                   webView:webView
+                                      data:@""
+                                callbackId:callbackId
+                                      code:ERROR_REQUEST_PARAMS];
+        return;
+    }
+    
+    NSString *miner = [Payment formatEther:gasCanUse options:2];
+    
+    NSMutableDictionary *dictParam = [NSMutableDictionary dictionary];
+    [dictParam setValueIfNotNil:@(0) forKey:@"isICO"];
+    
+    WalletCoinModel *coinModel = [[WalletCoinModel alloc]init];
+    coinModel.coinName         = coinName;
+    coinModel.transferGas      = gas;
+    coinModel.decimals         = decimals.integerValue;
+    coinModel.address          = tokenAddress;
+    
+    [dictParam setValueIfNotNil:coinModel forKey:@"coinModel"];
+    [dictParam setValueIfNotNil:miner forKey:@"miner"];
+    [dictParam setValueIfNotNil:[BigNumber bigNumberWithInteger:gasPrice.integerValue] forKey:@"gasPriceCoef"];
+    [dictParam setValueIfNotNil:[NSNumber numberWithFloat:gas.floatValue] forKey:@"gas"];
+    
+    BigNumber *dataH = [BigNumber bigNumberWithHexString:cluseData];
+    [dictParam setValueIfNotNil:dataH.data forKey:@"clouseData"];
+    
+    WalletSignatureView *signatureView = [[WalletSignatureView alloc] initWithFrame:[WalletTools getCurrentVC].view.bounds];
+    signatureView.jsUse = YES;
+    signatureView.transferType = JSVTHOTransferType;
+    [signatureView updateView:from
+                    toAddress:to
+                 contractType:NoContract_transferToken
+                       amount:[NSString stringWithFormat:@"%.0f",amountTnteger]
+                       params:@[dictParam]];
+    [[WalletTools getCurrentVC].navigationController.view addSubview:signatureView];
+    
+    signatureView.transferBlock = ^(NSString * _Nonnull txid) {
+        NSLog(@"txid = %@",txid);
+        if (txid.length == 0) {
+            
+            [WalletTools callbackWithrequestId:requestId
+                                       webView:webView
+                                          data:@""
+                                    callbackId:callbackId
+                                          code:ERROR_CANCEL];
+        }else{
+            
+            [WalletTools callbackWithrequestId:requestId
+                                       webView:webView
+                                          data:txid
+                                    callbackId:callbackId
+                                          code:OK];
+        }
+    };
+}
+
+- (void)web3contractSign:(WalletSignatureView *)signatureView
                       to:(NSString *)to
                    from:(NSString *)from
                   amount:(NSString * )amount
@@ -346,87 +382,6 @@
                                                    message:@""];
     completionHandler([dict1 yy_modelToJSONString]);
 }
-
-- (BOOL)errorAddressAlert:(NSString *)toAddress
-{
-    // 格式校验
-    bool isok = YES;
-    if (!toAddress
-        || ![toAddress.uppercaseString hasPrefix:@"0X"]
-        || toAddress.length != 42
-        || (![toAddress hasSuffix:[toAddress substringFromIndex:2]])) {
-        //            0x1113A  1113A
-        // 是否有 checksum 校验
-        isok = NO;
-        NSString *lowercaseAddress = [toAddress substringFromIndex:2].lowercaseString;
-        if (toAddress
-            && [toAddress hasSuffix:lowercaseAddress]
-            && ![[toAddress substringFromIndex:2] hasSuffix:lowercaseAddress]) {
-            //                noChecksum = YES;
-            isok = NO;
-        } else if ([[toAddress substringFromIndex:2] hasSuffix:lowercaseAddress]) {
-            isok = YES;
-        } else if (!toAddress
-                   && [toAddress.uppercaseString hasPrefix:@"0X"]
-                   && toAddress.length == 42) {
-            isok = NO;
-        }
-    }
-    
-    NSString *regex = @"^(0x|0X){1}[0-9A-Fa-f]{40}$";
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",regex];
-    BOOL allAreValidChar = [predicate evaluateWithObject:toAddress];
-    isok = !allAreValidChar;
-    if (!isok) {
-        [WalletAlertShower showAlert:nil
-                                msg:VCNSLocalizedBundleString(@"非法参数", nil)
-                              inCtl:[WalletTools getCurrentVC]
-                              items:@[VCNSLocalizedBundleString(@"dialog_yes", nil)]
-                         clickBlock:^(NSInteger index) {
-                         }];
-        return NO;
-    }
-    return YES;
-}
-
-- (BOOL)errorAmount:(NSString *)amount coinName:(NSString *)coinName
-{
-    // 例外情况 - VET 转账0
-    BOOL bAmount = YES;
-    
-    // 金额逻辑校验
-    if ([amount floatValue] <= 0
-        || [Payment parseEther:amount] == nil
-        || amount.length == 0) {
-        bAmount = NO;
-    }
-    
-    if (amount.length == 0) {
-        bAmount = NO;
-    }
-    
-    if (amount.length > 20) {
-        bAmount = NO;
-    }
-    
-    if ([amount floatValue] == 0
-        && [[Payment parseEther:amount] lessThanEqualTo:[BigNumber constantZero]]
-        && [coinName isEqualToString:@"VET"]){
-        bAmount = YES;
-    }
-    if (!bAmount) {
-        [WalletAlertShower showAlert:nil
-                                msg:VCNSLocalizedBundleString(@"非法参数", nil)
-                              inCtl:[WalletTools getCurrentVC]
-                              items:@[VCNSLocalizedBundleString(@"dialog_yes", nil)]
-                         clickBlock:^(NSInteger index) {
-                         }];
-        return NO;
-    }
-    return YES;
-}
-
-
 
 
 @end

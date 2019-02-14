@@ -90,6 +90,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 
+- (BOOL)errorAmount:(NSString *)amount coinName:(NSString *)coinName;
+
+- (BOOL)errorAddressAlert:(NSString *)toAddress;
+
+
 @end
 
 NS_ASSUME_NONNULL_END
