@@ -40,7 +40,7 @@
     hud.mode = MBProgressHUDModeText;
     hud.labelText =  @"waiting...";
     
-    [WalletUtils creatWalletWithPassword:self.passwordLabel.text
+    [WalletUtils createWalletWithPassword:self.passwordLabel.text
                                 callback:^(Account *account)
     {
         [hud hide:YES];

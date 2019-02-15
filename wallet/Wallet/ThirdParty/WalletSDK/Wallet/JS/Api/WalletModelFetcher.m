@@ -67,7 +67,6 @@
     if (![aUrl containsString:@"/transactions"]) {
         [WalletModelFetcher setHeaderInfo:httpManager useSession:useSession];
     }
-//
     
 //    if (needEncrypt) {
 //        dict = [WalletModelFetcher encryptParaDict:dict  method:@"POST"];
@@ -219,6 +218,9 @@
     httpManager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", nil];
     
     httpManager.requestSerializer = [AFJSONRequestSerializer serializer];
+    
+//    httpManager.requestSerializer = [AFHTTPRequestSerializer serializer];
+//    httpManager.responseSerializer = [AFHTTPResponseSerializer serializer];
     
 //    [httpManager.requestSerializer setValue:[[NSBundle mainBundle] objectForInfoDictionaryKey: @"CFBundleShortVersionString"] forHTTPHeaderField:@"softwareVersion"];
 //    [httpManager.requestSerializer setValue:@"iOS" forHTTPHeaderField:@"platformType"];

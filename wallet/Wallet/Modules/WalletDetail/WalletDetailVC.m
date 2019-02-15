@@ -36,8 +36,6 @@
     [super viewDidLoad];
 
     self.searchBar.delegate = self;
-    
-    [self setHost];
 
     NSDictionary *currentWallet = [[NSUserDefaults standardUserDefaults]objectForKey:@"currentWallet"];
     self.addressLabel.text = currentWallet[@"address"];
@@ -46,6 +44,7 @@
     [self.vthoImageView setImage:[UIImage imageNamed:@"VTHO"]];
     
     [self initView];
+    [self setHost];
     
     NSString *version = [[[NSBundle mainBundle] infoDictionary] valueForKey:@"CFBundleVersion"];
     version = [NSString stringWithFormat:@"版本号：(%@)",version];
@@ -63,6 +62,7 @@
                                                                 action:@selector(selectNET)];
     self.navigationItem.rightBarButtonItem = rightItem;
     self.searchBar.text = @"https://appwallet.oss-cn-shanghai.aliyuncs.com/testJS/test.html";
+//    self.searchBar.text = @"https://appwallet.oss-cn-shanghai.aliyuncs.com/testJS/dist/index.html#/test";
 }
 
 - (void)selectNET
@@ -100,12 +100,16 @@
     NSDictionary *dictCurrentNet = [[NSUserDefaults standardUserDefaults]objectForKey:@"CurrentNet"];
     
     if (dictCurrentNet) {
-        _blockHost = dictCurrentNet[@"netUrl"];
-        self.title = dictCurrentNet[@"netName"];
+        _blockHost = dictCurrentNet[@"serverUrl"];
+        self.title = dictCurrentNet[@"serverName"];
         
     }else{
         _blockHost = @"https://vethor-node-test.vechaindev.com";
         self.title =  @"（测试）";
+        
+        NSMutableDictionary *serverDict = [NSMutableDictionary dictionary];
+        [serverDict setObject:_blockHost forKey:@"serverUrl"];
+        [serverDict setObject:self.title forKey:@"serverName"];
     }
     
     self.vthoAmountLabel.text = @"";
@@ -126,7 +130,7 @@
 
 - (void)getVETBalance
 {
-    NSString *urlString = [NSString stringWithFormat:@"%@/accounts/%@",_blockHost,_addressLabel.text];
+    NSString *urlString = [NSString stringWithFormat:@"%@/accounts/%@",_blockHost,self.addressLabel.text];
     AFHTTPSessionManager *httpManager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:urlString]];
     [httpManager GET:urlString
           parameters:nil
@@ -157,7 +161,7 @@
     NSString *urlString = [_blockHost stringByAppendingString:@"/accounts/0x0000000000000000000000000000456e65726779"] ;
 
     NSMutableDictionary *dictParm = [NSMutableDictionary dictionary];
-    [dictParm setObject:[self tokenBalanceData:_addressLabel.text] forKey:@"data"];
+    [dictParm setObject:[self tokenBalanceData:self.addressLabel.text] forKey:@"data"];
     [dictParm setObject:@"0x0" forKey:@"value"];
     
     AFHTTPSessionManager *httpManager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:urlString]];

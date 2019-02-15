@@ -255,9 +255,12 @@
 + (void)checkNetwork:(void(^)(BOOL t))block
 {
     BOOL result = YES;
+    
     if (block) {
         block(result);
     }
+    return;
+#warning test
     AFNetworkReachabilityManager *reachManager = [AFNetworkReachabilityManager sharedManager];
     if (![reachManager isReachable]) {
 

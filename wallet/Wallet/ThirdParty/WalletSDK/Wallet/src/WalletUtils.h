@@ -24,7 +24,7 @@
  *  @param block : finish creat wallet callback
  *
  */
-+ (void)creatWalletWithPassword:(NSString *)password
++ (void)createWalletWithPassword:(NSString *)password
                       callback:(void(^)(Account *account))block;
 
 /**
@@ -35,6 +35,7 @@
  *  @param password :password for wallet
  *  @param block : finish creat wallet callback
  */
+#warning  miss error
 + (void)creatWalletWithMnemonic:(NSString *)mnemonic
                       password:(NSString *)password
                       callback:(void(^)(Account *account))block;
@@ -43,7 +44,7 @@
  *  @abstract
  *  Verify the mnemonic word is legal
  *
- *  @param mnemonic :12 wordws
+ *  @param mnemonic :12 words
  *
  *  @return verification results
  */
@@ -72,7 +73,7 @@
  *
  *  @return object for address
  */
-+ (Address*)verifyMessage:(NSData*)message
++ (Address*)recoverAddressFromMessage:(NSData*)message
                 signature:(Signature*)signature;
 
 /**
@@ -88,7 +89,7 @@
 + (void)sign:(NSData*)message
     keystore:(NSString*)json
     password:(NSString*)password
-       block:(void (^)(Signature *signature))block;
+       block:(void (^)(  *signature))block;
 
 /**
  *  @abstract

@@ -29,8 +29,8 @@
         NSArray *oldList = [[NSUserDefaults standardUserDefaults]objectForKey:@"netList"];
         NSMutableArray *newList = [NSMutableArray arrayWithArray:oldList];
         NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-        [dict setObject:self.netName.text forKey:@"netName"];
-        [dict setObject:self.netUrl.text forKey:@"netUrl"];
+        [dict setObject:self.netName.text forKey:@"serverName"];
+        [dict setObject:self.netUrl.text forKey:@"serverUrl"];
         
         [newList addObject:dict];
         

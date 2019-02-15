@@ -9,7 +9,7 @@
 
 @implementation WalletUtils
 
-+ (void)creatWalletWithPassword:(NSString *)password
++ (void)createWalletWithPassword:(NSString *)password
                        callback:(void(^)(Account *account))block
 {
     __block Account *account = [Account randomMnemonicAccount];
@@ -50,7 +50,7 @@
     [Account decryptSecretStorageJSON:json password:password callback:callback];
 }
 
-+ (Address*)verifyMessage:(NSData*)message
++ (Address*)recoverAddressFromMessage:(NSData*)message
                 signature:(Signature*)signature
 {
    return [Account verifyMessage:message signature:signature];
@@ -65,6 +65,7 @@
                              password:password
                              callback:^(Account *account, NSError *NSError)
      {
+#warning 签出 1或者 0,fail alert
          // 签名交易
          if (NSError == nil) {
             SecureData *data = [SecureData BLAKE2B:message];

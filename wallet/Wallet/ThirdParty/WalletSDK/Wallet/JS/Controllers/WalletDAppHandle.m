@@ -244,7 +244,7 @@
     [dictParam setValueIfNotNil:amount forKey:@"amount"];
     
     NSData *secureData = [SecureData hexStringToData:clauseData];
-    [dictParam setValueIfNotNil:secureData forKey:@"clouseData"];
+    [dictParam setValueIfNotNil:secureData forKey:@"clauseData"];
     
     CGFloat amountTnteger = [BigNumber bigNumberWithHexString:[NSString stringWithFormat:@"%@",amount]].decimalString.floatValue/pow(10, 18);
     
@@ -295,10 +295,14 @@
         
     }else{
         if ([clauseData hasPrefix:transferMethodId]) { // token 转账
+            NSString *tokenAddress = to;
+            NSString *clauseTemp =  [clauseData stringByReplacingOccurrencesOfString:@"0xa9059cbb000000000000000000000000" withString:@""];
+            NSString *toAddress = [@"0x" stringByAppendingString:[clauseTemp substringToIndex:40]];
             
             [self VTHOTransferDictParam:dictParam
                                    from:from
-                                     to:to
+                           tokenAddress:tokenAddress
+                              toAddress:toAddress
                               requestId:requestId
                                     gas:gas
                                 webView:webView
@@ -382,7 +386,7 @@
 }
 
 
-- (void)injectJS:(WKWebView *)webview
+- (void)injectJS:(WKWebView *)webview 
 {
     [WalletUserDefaultManager setServerType:TEST_SERVER];
     

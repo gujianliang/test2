@@ -65,8 +65,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 - (void)VTHOTransferDictParam:(NSMutableDictionary *)dictParam
-                from:(NSString *)from
-                  to:(NSString *)to
+                         from:(NSString *)from
+                  tokenAddress:(NSString *)tokenAddress
+                    toAddress:(NSString *)toAddress
            requestId:(NSString *)requestId
                  gas:(NSNumber *)gas
              webView:(WKWebView *)webView

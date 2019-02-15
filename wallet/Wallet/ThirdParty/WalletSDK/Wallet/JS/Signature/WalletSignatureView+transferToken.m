@@ -12,6 +12,8 @@
 #import "WalletTransactionApi.h"
 #import "WalletSingletonHandle.h"
 #import "WalletMBProgressShower.h"
+#import "WalletDAppHead.h"
+#import "WalletSignatureViewSubView.h"
 
 @implementation WalletSignatureView (transferToken)
 
@@ -46,7 +48,7 @@
         if (self.currentCoinModel.transferGas.length > 0) {
             transaction.gasLimit = [BigNumber bigNumberWithDecimalString:self.currentCoinModel.transferGas];
         }else{
-            transaction.gasLimit = [BigNumber bigNumberWithDecimalString:@"21000"];
+            transaction.gasLimit = [BigNumber bigNumberWithDecimalString:VETGasLimit];
         }
     }
     
@@ -86,31 +88,31 @@
                 subValue = [Payment parseToken:self.amount dicimals:self.currentCoinModel.decimals];
 
                 SecureData *tokenAddress = [SecureData secureDataWithHexString:self.currentCoinModel.address];
-                transaction.Clauses = @[@[tokenAddress.data,[NSData data],self.clouseData]];
+                transaction.Clauses = @[@[tokenAddress.data,[NSData data],self.clauseData]];
             }else{ // 合约转账
                 CGFloat amountF = self.amount.floatValue;
                 if (amountF == 0) {
                     if (self.tokenAddress.length == 0) {
-                        transaction.Clauses = @[@[[NSData data],[NSData data], self.clouseData]];
+                        transaction.Clauses = @[@[[NSData data],[NSData data], self.clauseData]];
                     }else{
-                        transaction.Clauses = @[@[[SecureData hexStringToData:self.tokenAddress],[NSData data], self.clouseData]];
+                        transaction.Clauses = @[@[[SecureData hexStringToData:self.tokenAddress],[NSData data], self.clauseData]];
                     }
                     
                 } else {
                     
                      if (self.tokenAddress.length == 0) {
                          BigNumber *subValue = [Payment parseEther:self.amount];
-                         transaction.Clauses = @[@[[NSData data],subValue.data, self.clouseData]];
+                         transaction.Clauses = @[@[[NSData data],subValue.data, self.clauseData]];
                      }else{
                          BigNumber *subValue = [Payment parseEther:self.amount];
-                         transaction.Clauses = @[@[[SecureData hexStringToData:self.tokenAddress],subValue.data, self.clouseData]];
+                         transaction.Clauses = @[@[[SecureData hexStringToData:self.tokenAddress],subValue.data, self.clauseData]];
                      }
                 }
             }
             // 尝试用户密码解密keystore
             NSString *keystore = [[WalletSingletonHandle shareWalletHandle]currentWalletModel].keyStore;
             
-            [Account decryptSecretStorageJSON:keystore password:self.pwTextField.text callback:^(Account *account, NSError *NSError) {
+            [Account decryptSecretStorageJSON:keystore password:self.signatureSubView.pwTextField.text callback:^(Account *account, NSError *NSError) {
                 @strongify(self)
                 if (!account) {
                     [WalletMBProgressShower hide:self];
@@ -143,6 +145,7 @@
 
 - (void)sendRaw:(NSString *)raw
 {
+    NSLog(@"raw ==%@",raw);
     // 发送交易
     @weakify(self)
     WalletTransactionApi *transationApi1 = [[WalletTransactionApi alloc]initWithRaw:raw];

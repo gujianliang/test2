@@ -12,6 +12,8 @@
 #import <WalletSDK/MBProgressHUD.h>
 #import <WalletSDK/AFHTTPSessionManager.h>
 
+#define VETGasLimit  @"21000"
+
 @interface WalletTransferVC ()<UITextFieldDelegate>
 {
     NSString *_toAddress;
@@ -125,7 +127,7 @@
     transaction.Expiration = 720;
     if (_isVET) {
         transaction.gasPrice = [BigNumber bigNumberWithInteger:120];
-        transaction.gasLimit = [BigNumber bigNumberWithDecimalString:@"21000"];
+        transaction.gasLimit = [BigNumber bigNumberWithDecimalString:VETGasLimit];
     }else{
         transaction.gasPrice = [BigNumber bigNumberWithInteger:120];
         transaction.gasLimit = [BigNumber bigNumberWithDecimalString:@"60000"];
@@ -267,10 +269,10 @@
 }
 
 - (void)calcThorNeeded:(float)gasPriceCoef {
-    BigNumber *gas = [BigNumber bigNumberWithDecimalString:@"21000"];
+    BigNumber *gas = [BigNumber bigNumberWithDecimalString:VETGasLimit];
     NSString *transferGas = nil;
     if (_isVET) {
-        transferGas = @"21000";
+        transferGas = VETGasLimit;
     }else{
         transferGas = @"60000";
     }

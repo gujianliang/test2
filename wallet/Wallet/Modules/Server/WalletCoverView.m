@@ -45,13 +45,13 @@
     _newList = [NSMutableArray array];
     
     NSMutableDictionary *dict1 = [NSMutableDictionary dictionary];
-    [dict1 setObject:@"生产节点" forKey:@"netName"];
-    [dict1 setObject:@"https://vethor-node.vechain.com" forKey:@"netUrl"];
+    [dict1 setObject:@"生产节点" forKey:@"serverName"];
+    [dict1 setObject:@"https://vethor-node.vechain.com" forKey:@"serverUrl"];
     [_newList addObject:dict1];
     
     NSMutableDictionary *dict2 = [NSMutableDictionary dictionary];
-    [dict2 setObject:@"测试节点" forKey:@"netName"];
-    [dict2 setObject:@"https://vethor-node-test.vechaindev.com" forKey:@"netUrl"];
+    [dict2 setObject:@"测试节点" forKey:@"serverName"];
+    [dict2 setObject:@"https://vethor-node-test.vechaindev.com" forKey:@"serverUrl"];
     [_newList addObject:dict2];
 
     if (netList.count > 0) {
@@ -59,8 +59,8 @@
     }
     
     NSMutableDictionary *dict3 = [NSMutableDictionary dictionary];
-    [dict3 setObject:@"添加自定义节点" forKey:@"netName"];
-    [dict3 setObject:@"11" forKey:@"netUrl"];
+    [dict3 setObject:@"添加自定义节点" forKey:@"serverName"];
+    [dict3 setObject:@"11" forKey:@"serverUrl"];
     [_newList addObject:dict3];
     
     UITableView *tableView = [[UITableView alloc]initWithFrame:coverView.bounds];
@@ -80,7 +80,7 @@
     UITableViewCell *cell = [[UITableViewCell alloc]init];
     
     NSDictionary *dict = _newList[indexPath.row];
-    cell.textLabel.text = dict[@"netName"];
+    cell.textLabel.text = dict[@"serverName"];
     return cell;
 }
 
@@ -104,7 +104,7 @@
     }
     NSDictionary *dict = _newList[indexPath.row];
     if (_block) {
-        _block(dict[@"netName"],dict[@"netUrl"]);
+        _block(dict[@"serverName"],dict[@"serverUrl"]);
     }
     [[NSUserDefaults standardUserDefaults]setObject:dict forKey:@"CurrentNet"];
     [self removeFromSuperview];

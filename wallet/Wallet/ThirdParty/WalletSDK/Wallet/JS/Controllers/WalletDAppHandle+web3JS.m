@@ -270,7 +270,7 @@
     [dictParam setValueIfNotNil:[NSNumber numberWithFloat:gas.floatValue] forKey:@"gas"];
     
     BigNumber *dataH = [BigNumber bigNumberWithHexString:cluseData];
-    [dictParam setValueIfNotNil:dataH.data forKey:@"clouseData"];
+    [dictParam setValueIfNotNil:dataH.data forKey:@"clauseData"];
     
     WalletSignatureView *signatureView = [[WalletSignatureView alloc] initWithFrame:[WalletTools getCurrentVC].view.bounds];
     signatureView.jsUse = YES;
@@ -305,7 +305,7 @@
 - (void)web3contractSign:(WalletSignatureView *)signatureView
                       to:(NSString *)to
                    from:(NSString *)from
-                  amount:(NSString * )amount
+                  amount:(NSString *)amount
                requestId:(NSString *)requestId
                      gas:(NSString *)gas
                 gasPrice:(NSString *)gasPrice
@@ -334,7 +334,7 @@
     [dictParam setValueIfNotNil:[NSNumber numberWithFloat:gas.floatValue] forKey:@"gas"];
     
     BigNumber *dataH = [BigNumber bigNumberWithHexString:cluseData];
-    [dictParam setValueIfNotNil:dataH.data forKey:@"clouseData"];
+    [dictParam setValueIfNotNil:dataH.data forKey:@"clauseData"];
     
     if (to.length == 0) {
         [dictParam setValueIfNotNil:[NSData data] forKey:@"tokenAddress"];

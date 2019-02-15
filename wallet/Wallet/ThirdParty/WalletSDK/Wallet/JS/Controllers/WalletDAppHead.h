@@ -10,7 +10,7 @@
 #define WalletDAppHead_h
 
 #define transferMethodId @"0xa9059cbb"
-
+#define VETGasLimit      @"21000"
 #define SignViewTag      11001
 #define SelectWalletTag  11002
 

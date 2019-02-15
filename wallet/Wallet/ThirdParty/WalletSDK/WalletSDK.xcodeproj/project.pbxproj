@@ -182,14 +182,12 @@
 		9773F9C8221412D200DF5972 /* PaymentPasswordView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9773F952221412D200DF5972 /* PaymentPasswordView.xib */; };
 		9773F9C9221412D200DF5972 /* PaymentPasswordView.h in Headers */ = {isa = PBXBuildFile; fileRef = 9773F953221412D200DF5972 /* PaymentPasswordView.h */; };
 		9773F9CA221412D200DF5972 /* WalletSignatureView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9773F954221412D200DF5972 /* WalletSignatureView.m */; };
-		9773F9CB221412D200DF5972 /* WalletSignatureView+transferObserver.h in Headers */ = {isa = PBXBuildFile; fileRef = 9773F955221412D200DF5972 /* WalletSignatureView+transferObserver.h */; };
 		9773F9CC221412D200DF5972 /* WalletSignatureView+transferToken.h in Headers */ = {isa = PBXBuildFile; fileRef = 9773F956221412D200DF5972 /* WalletSignatureView+transferToken.h */; };
 		9773F9CD221412D200DF5972 /* WalletObserverSignPreviewVC.h in Headers */ = {isa = PBXBuildFile; fileRef = 9773F957221412D200DF5972 /* WalletObserverSignPreviewVC.h */; };
 		9773F9CE221412D200DF5972 /* WalletPaymentQRCodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9773F958221412D200DF5972 /* WalletPaymentQRCodeView.m */; };
 		9773F9CF221412D200DF5972 /* PaymentDetailView.h in Headers */ = {isa = PBXBuildFile; fileRef = 9773F959221412D200DF5972 /* PaymentDetailView.h */; };
 		9773F9D0221412D200DF5972 /* PaymentDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9773F95A221412D200DF5972 /* PaymentDetailView.xib */; };
 		9773F9D1221412D200DF5972 /* WalletSignObserverModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9773F95B221412D200DF5972 /* WalletSignObserverModel.m */; };
-		9773F9D2221412D200DF5972 /* WalletSignatureView+transferObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 9773F95C221412D200DF5972 /* WalletSignatureView+transferObserver.m */; };
 		9773F9D3221412D200DF5972 /* WalletSignatureView.h in Headers */ = {isa = PBXBuildFile; fileRef = 9773F95D221412D200DF5972 /* WalletSignatureView.h */; };
 		9773F9D4221412D200DF5972 /* PaymentPasswordView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9773F95E221412D200DF5972 /* PaymentPasswordView.m */; };
 		9773F9D5221412D200DF5972 /* WalletPaymentQRCodeView.h in Headers */ = {isa = PBXBuildFile; fileRef = 9773F95F221412D200DF5972 /* WalletPaymentQRCodeView.h */; };
@@ -208,6 +206,10 @@
 		9773F9E3221412D200DF5972 /* WalletDAppSignPreVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9773F96E221412D200DF5972 /* WalletDAppSignPreVC.m */; };
 		9773F9E922150C5F00DF5972 /* WalletJSCallbackModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 9773F9E722150C5F00DF5972 /* WalletJSCallbackModel.h */; };
 		9773F9EA22150C5F00DF5972 /* WalletJSCallbackModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9773F9E822150C5F00DF5972 /* WalletJSCallbackModel.m */; };
+		9773F9ED22157CAB00DF5972 /* WalletSignatureViewHandle.h in Headers */ = {isa = PBXBuildFile; fileRef = 9773F9EB22157CAB00DF5972 /* WalletSignatureViewHandle.h */; };
+		9773F9EE22157CAB00DF5972 /* WalletSignatureViewHandle.m in Sources */ = {isa = PBXBuildFile; fileRef = 9773F9EC22157CAB00DF5972 /* WalletSignatureViewHandle.m */; };
+		9773F9F122165ADA00DF5972 /* WalletSignatureViewSubView.h in Headers */ = {isa = PBXBuildFile; fileRef = 9773F9EF22165ADA00DF5972 /* WalletSignatureViewSubView.h */; };
+		9773F9F222165ADA00DF5972 /* WalletSignatureViewSubView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9773F9F022165ADA00DF5972 /* WalletSignatureViewSubView.m */; };
 		97DB21812091B2450040A9D9 /* blake2s-ref.c in Sources */ = {isa = PBXBuildFile; fileRef = 97DB21772091B2450040A9D9 /* blake2s-ref.c */; };
 		97DB21822091B2450040A9D9 /* blake2xb-ref.c in Sources */ = {isa = PBXBuildFile; fileRef = 97DB21782091B2450040A9D9 /* blake2xb-ref.c */; };
 		97DB21832091B2450040A9D9 /* blake2sp-ref.c in Sources */ = {isa = PBXBuildFile; fileRef = 97DB21792091B2450040A9D9 /* blake2sp-ref.c */; };
@@ -482,14 +484,12 @@
 		9773F952221412D200DF5972 /* PaymentPasswordView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PaymentPasswordView.xib; sourceTree = "<group>"; };
 		9773F953221412D200DF5972 /* PaymentPasswordView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentPasswordView.h; sourceTree = "<group>"; };
 		9773F954221412D200DF5972 /* WalletSignatureView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WalletSignatureView.m; sourceTree = "<group>"; };
-		9773F955221412D200DF5972 /* WalletSignatureView+transferObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WalletSignatureView+transferObserver.h"; sourceTree = "<group>"; };
 		9773F956221412D200DF5972 /* WalletSignatureView+transferToken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WalletSignatureView+transferToken.h"; sourceTree = "<group>"; };
 		9773F957221412D200DF5972 /* WalletObserverSignPreviewVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WalletObserverSignPreviewVC.h; sourceTree = "<group>"; };
 		9773F958221412D200DF5972 /* WalletPaymentQRCodeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WalletPaymentQRCodeView.m; sourceTree = "<group>"; };
 		9773F959221412D200DF5972 /* PaymentDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentDetailView.h; sourceTree = "<group>"; };
 		9773F95A221412D200DF5972 /* PaymentDetailView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PaymentDetailView.xib; sourceTree = "<group>"; };
 		9773F95B221412D200DF5972 /* WalletSignObserverModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WalletSignObserverModel.m; sourceTree = "<group>"; };
-		9773F95C221412D200DF5972 /* WalletSignatureView+transferObserver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WalletSignatureView+transferObserver.m"; sourceTree = "<group>"; };
 		9773F95D221412D200DF5972 /* WalletSignatureView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WalletSignatureView.h; sourceTree = "<group>"; };
 		9773F95E221412D200DF5972 /* PaymentPasswordView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaymentPasswordView.m; sourceTree = "<group>"; };
 		9773F95F221412D200DF5972 /* WalletPaymentQRCodeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WalletPaymentQRCodeView.h; sourceTree = "<group>"; };
@@ -508,6 +508,10 @@
 		9773F96E221412D200DF5972 /* WalletDAppSignPreVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WalletDAppSignPreVC.m; sourceTree = "<group>"; };
 		9773F9E722150C5F00DF5972 /* WalletJSCallbackModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WalletJSCallbackModel.h; sourceTree = "<group>"; };
 		9773F9E822150C5F00DF5972 /* WalletJSCallbackModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WalletJSCallbackModel.m; sourceTree = "<group>"; };
+		9773F9EB22157CAB00DF5972 /* WalletSignatureViewHandle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WalletSignatureViewHandle.h; sourceTree = "<group>"; };
+		9773F9EC22157CAB00DF5972 /* WalletSignatureViewHandle.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WalletSignatureViewHandle.m; sourceTree = "<group>"; };
+		9773F9EF22165ADA00DF5972 /* WalletSignatureViewSubView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WalletSignatureViewSubView.h; sourceTree = "<group>"; };
+		9773F9F022165ADA00DF5972 /* WalletSignatureViewSubView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WalletSignatureViewSubView.m; sourceTree = "<group>"; };
 		97DB21772091B2450040A9D9 /* blake2s-ref.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.objc; fileEncoding = 4; path = "blake2s-ref.c"; sourceTree = "<group>"; };
 		97DB21782091B2450040A9D9 /* blake2xb-ref.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.objc; fileEncoding = 4; path = "blake2xb-ref.c"; sourceTree = "<group>"; };
 		97DB21792091B2450040A9D9 /* blake2sp-ref.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.objc; fileEncoding = 4; path = "blake2sp-ref.c"; sourceTree = "<group>"; };
@@ -821,7 +825,6 @@
 			children = (
 				9773F917221412D200DF5972 /* WalletObersverTransactionModel.h */,
 				9773F90E221412D200DF5972 /* WalletObersverTransactionModel.m */,
-				9773F918221412D200DF5972 /* WalletCollectNodeModel.m */,
 				9773F90D221412D200DF5972 /* WalletTransantionsReceiptModel.h */,
 				9773F919221412D200DF5972 /* WalletTransantionsReceiptModel.m */,
 				9773F90C221412D200DF5972 /* WalletManageModel.h */,
@@ -837,6 +840,7 @@
 				9773F91F221412D200DF5972 /* WalletNodeListModel.h */,
 				9773F913221412D200DF5972 /* WalletNodeListModel.m */,
 				9773F90F221412D200DF5972 /* WalletCollectNodeModel.h */,
+				9773F918221412D200DF5972 /* WalletCollectNodeModel.m */,
 				9773F912221412D200DF5972 /* WalletConvertNodeModel.h */,
 				9773F920221412D200DF5972 /* WalletConvertNodeModel.m */,
 				9773F921221412D200DF5972 /* WalletDAppPeerModel.h */,
@@ -912,10 +916,12 @@
 				9773F95B221412D200DF5972 /* WalletSignObserverModel.m */,
 				9773F95D221412D200DF5972 /* WalletSignatureView.h */,
 				9773F954221412D200DF5972 /* WalletSignatureView.m */,
-				9773F955221412D200DF5972 /* WalletSignatureView+transferObserver.h */,
-				9773F95C221412D200DF5972 /* WalletSignatureView+transferObserver.m */,
 				9773F956221412D200DF5972 /* WalletSignatureView+transferToken.h */,
 				9773F961221412D200DF5972 /* WalletSignatureView+transferToken.m */,
+				9773F9EB22157CAB00DF5972 /* WalletSignatureViewHandle.h */,
+				9773F9EC22157CAB00DF5972 /* WalletSignatureViewHandle.m */,
+				9773F9EF22165ADA00DF5972 /* WalletSignatureViewSubView.h */,
+				9773F9F022165ADA00DF5972 /* WalletSignatureViewSubView.m */,
 				9773F95F221412D200DF5972 /* WalletPaymentQRCodeView.h */,
 				9773F958221412D200DF5972 /* WalletPaymentQRCodeView.m */,
 				9773F957221412D200DF5972 /* WalletObserverSignPreviewVC.h */,
@@ -1166,6 +1172,7 @@
 				9773F996221412D200DF5972 /* WalletBalanceModel.h in Headers */,
 				E2FA03D21E406FB30013E5A7 /* Signature.h in Headers */,
 				9773F8D52214109300DF5972 /* AFAutoPurgingImageCache.h in Headers */,
+				9773F9F122165ADA00DF5972 /* WalletSignatureViewSubView.h in Headers */,
 				E2317E931E31970900DBE3E4 /* Payment.h in Headers */,
 				E2317E9F1E31970900DBE3E4 /* Hash.h in Headers */,
 				E2317E9B1E31970900DBE3E4 /* Address.h in Headers */,
@@ -1259,9 +1266,9 @@
 				9773F9B5221412D200DF5972 /* WalletApiManageMacro.h in Headers */,
 				9773F9C9221412D200DF5972 /* PaymentPasswordView.h in Headers */,
 				9773F9C3221412D200DF5972 /* NSBundle+Localizable.h in Headers */,
-				9773F9CB221412D200DF5972 /* WalletSignatureView+transferObserver.h in Headers */,
 				E2317F4F1E3199BD00DBE3E4 /* crypto_scrypt.h in Headers */,
 				E2317F1D1E31994500DBE3E4 /* aestab.h in Headers */,
+				9773F9ED22157CAB00DF5972 /* WalletSignatureViewHandle.h in Headers */,
 				9773F9A3221412D200DF5972 /* WalletModelFetcher.h in Headers */,
 				9773F8C02214109300DF5972 /* MASConstraint.h in Headers */,
 				9773F8D02214109300DF5972 /* UIButton+AFNetworking.h in Headers */,
@@ -1437,6 +1444,7 @@
 				9773F8C22214109300DF5972 /* MASCompositeConstraint.m in Sources */,
 				9773F8EA2214109300DF5972 /* AFURLSessionManager.m in Sources */,
 				9773F8C62214109300DF5972 /* View+MASAdditions.m in Sources */,
+				9773F9EE22157CAB00DF5972 /* WalletSignatureViewHandle.m in Sources */,
 				9773F8ED2214109300DF5972 /* AFNetworkReachabilityManager.m in Sources */,
 				97EC5C812200AC25001E6B68 /* NSMutableDictionary+Helpers.m in Sources */,
 				97DB218A2091B2450040A9D9 /* blake2xs-ref.c in Sources */,
@@ -1477,6 +1485,7 @@
 				9773F8E22214109300DF5972 /* AFImageDownloader.m in Sources */,
 				9773F8CB2214109300DF5972 /* MASViewConstraint.m in Sources */,
 				E2317F181E31994500DBE3E4 /* aes_modes.c in Sources */,
+				9773F9F222165ADA00DF5972 /* WalletSignatureViewSubView.m in Sources */,
 				9773F9B4221412D200DF5972 /* VCBaseModel.m in Sources */,
 				9773F8DE2214109300DF5972 /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				9773F9DF221412D200DF5972 /* WalletDAppHandle.m in Sources */,
@@ -1506,7 +1515,6 @@
 				9773F9AA221412D200DF5972 /* WalletGenesisBlockInfoApi.m in Sources */,
 				9773F8C32214109300DF5972 /* MASConstraintMaker.m in Sources */,
 				9773F994221412D200DF5972 /* WalletRewardNodeModel.m in Sources */,
-				9773F9D2221412D200DF5972 /* WalletSignatureView+transferObserver.m in Sources */,
 				9773F990221412D200DF5972 /* WalletCollectNodeModel.m in Sources */,
 				9773F992221412D200DF5972 /* WalletManageModel.m in Sources */,
 				9773F9A2221412D200DF5972 /* WalletBlockApi.m in Sources */,

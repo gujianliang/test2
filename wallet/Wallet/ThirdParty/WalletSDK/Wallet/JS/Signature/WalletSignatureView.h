@@ -8,10 +8,13 @@
 
 //#import "VCBaseVC.h"
 
+
+
 #import <UIKit/UIKit.h>
 #import "WalletManageModel.h"
 #import "WalletUtils.h"
 #import "WalletTools.h"
+@class WalletSignatureViewSubView;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -21,6 +24,7 @@ typedef NS_ENUM(NSInteger,JSTransferType)
     JSVTHOTransferType,
     JSContranctTransferType
 };
+
 
 
 @interface WalletSignatureView : UIView
@@ -34,19 +38,20 @@ typedef NS_ENUM(NSInteger,JSTransferType)
 @property(nonatomic, strong) BigNumber *gasPriceCoef;
 @property(nonatomic, assign) BOOL isICO;
 @property(nonatomic, strong) WalletCoinModel *currentCoinModel;
-@property(nonatomic, strong) NSString *fromAddress;
-@property(nonatomic, strong) NSString *toAddress;
+@property(nonatomic, copy) NSString *fromAddress;
+@property(nonatomic, copy) NSString *toAddress;
 @property(nonatomic, assign) ContractType contractType;
-@property(nonatomic, strong) NSString *amount;
-@property(nonatomic, strong) UITextField *pwTextField;
+@property(nonatomic, copy) NSString *amount;
 @property(nonatomic, strong) NSNumber *gas;
-@property(nonatomic, strong) NSString *gasLimit;
-@property(nonatomic, strong) NSData *clouseData;
-@property(nonatomic, strong) NSString *tokenAddress;
-@property(nonatomic, strong) UIScrollView *scrollView;
+@property(nonatomic, copy) NSString *gasLimit;
+@property(nonatomic, strong) NSData *clauseData;
+@property(nonatomic, copy) NSString *tokenAddress;
 @property (nonatomic, assign) JSTransferType transferType;
 @property(nonatomic, assign) BOOL jsUse;
 @property(nonatomic, copy) NSString *txid;
+@property(nonatomic, strong) UIScrollView *scrollView;
+@property(nonatomic, strong) WalletSignatureViewSubView *signatureSubView;
+
 
 
 - (void)updateView:(NSString *)fromAddress
