@@ -38,16 +38,24 @@
 
 @implementation WalletDAppHandle
 
--(instancetype)initWithWalletDict:(NSMutableArray *)walletList
+
++ (instancetype)shareWalletHandle
 {
-    self = [super init];
-    if (self) {
-        _walletList = walletList;
+    static WalletDAppHandle *singleton = nil;
+    static dispatch_once_t predicate;
+    dispatch_once(&predicate, ^{
+        singleton = [[self alloc] init];
         
-        WalletSingletonHandle *walletSignlet = [WalletSingletonHandle shareWalletHandle];
-        [walletSignlet addWallet:_walletList];
-    }
-    return self;
+    });
+    return singleton;
+}
+
+-(void)initWithWalletDict:(NSMutableArray *)walletList
+{
+    _walletList = walletList;
+    
+    WalletSingletonHandle *walletSignlet = [WalletSingletonHandle shareWalletHandle];
+    [walletSignlet addWallet:_walletList];
 }
 
 - (void)webView:(WKWebView *)webView runJavaScriptTextInputPanelWithPrompt:(NSString *)prompt defaultText:(nullable NSString *)defaultText initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(NSString * __nullable result))completionHandler
@@ -160,14 +168,14 @@
     }
     __block NSString *to = callbackParams[@"to"];
     __block NSString *amount = callbackParams[@"value"];
-    NSString *cluseData = callbackParams[@"data"];
+    NSString *clauseData = callbackParams[@"data"];
     __block NSString *tokenAddress;
     NSString *gas = [BigNumber bigNumberWithHexString:callbackParams[@"gas"]].decimalString;
     
     NSString *gasPrice = callbackParams[@"gasPrice"];
     if (gasPrice.length == 0) {
         //默认120，如果js没有返回，就给默认的
-        gasPrice = [BigNumber bigNumberWithInteger:DefaultgasPriceCoef].hexString;
+        gasPrice = [BigNumber bigNumberWithInteger:DefaultGasPriceCoef].hexString;
     }
     
     CGFloat amountTnteger = [BigNumber bigNumberWithHexString:[NSString stringWithFormat:@"%@",amount]].decimalString.floatValue/pow(10, 18);
@@ -180,26 +188,7 @@
         
         [viewSelf removeFromSuperview];
         
-        WalletSignatureView *signatureView = [[WalletSignatureView alloc] initWithFrame:[WalletTools getCurrentVC].view.bounds];
-        if (cluseData.length < 3) { // vet 转账clauseData == nil,
-            signatureView.transferType = JSVETTransferType;
-        }else if ([cluseData hasPrefix:TransferMethodId]) {// vtho 转账
-            tokenAddress = callbackParams[@"to"];
-            NSString *cluseData1 = [cluseData stringByReplacingOccurrencesOfString:TransferMethodId withString:@""];
-            NSString *first = [cluseData1 substringToIndex:64];
-            to = [@"0x" stringByAppendingString: [first substringFromIndex:24]];
-            amount = [cluseData1 substringFromIndex:65];
-            signatureView.transferType = JSVTHOTransferType;
-        }else{
-            signatureView.transferType = JSContranctTransferType;
-        }
-        
-        NSString *gasPriceDecimal = [BigNumber bigNumberWithHexString:gasPrice].decimalString;
-   
-        NSNumber *gasNumber = [NSNumber numberWithDouble:gas.doubleValue];
-        BigNumber *gasCanUse = [WalletTools calcThorNeeded:gasPriceDecimal.floatValue gas:gasNumber];
-        
-        [self web3TransferWithClauseData:cluseData
+        [self web3TransferWithClauseData:clauseData
                                     from:from
                                       to:to
                                requestId:requestId
@@ -207,8 +196,6 @@
                                  webView:_webView
                               callbackId:callbackId
                                   amount:amount
-                               gasCanUse:gasCanUse
-                           signatureView:signatureView
                                 gasPrice:gasPrice
                             tokenAddress:tokenAddress];
     };
@@ -230,16 +217,16 @@
     NSString *amount     = clausesDict[@"value"];
     NSString *clauseData = clausesDict[@"data"];
     NSNumber *gas        = callbackParams[@"options"][@"gas"];
+
+    NSString *gasPrice = callbackParams[@"options"][@"gasPrice"];
+    if (gasPrice.length == 0) {
+        //默认120，如果js没有返回，就给默认的
+        gasPrice = [BigNumber bigNumberWithInteger:DefaultGasPriceCoef].hexString;
+    }
     
     NSMutableDictionary *dictParam = [NSMutableDictionary dictionary];
-    [dictParam setValueIfNotNil:@(0) forKey:@"isICO"];
     
-    BigNumber *gasCanUse = [WalletTools calcThorNeeded:DefaultgasPriceCoef gas:gas];
-    
-    NSString *miner = [[Payment formatEther:gasCanUse options:2] stringByAppendingString:@" VTHO"];
-    
-    [dictParam setValueIfNotNil:miner forKey:@"miner"];
-    [dictParam setValueIfNotNil:[BigNumber bigNumberWithInteger:DefaultgasPriceCoef] forKey:@"gasPriceCoef"];
+    [dictParam setValueIfNotNil:gasPrice forKey:@"gasPriceCoef"];
     [dictParam setValueIfNotNil:gas forKey:@"gas"];
     [dictParam setValueIfNotNil:to forKey:@"to"];
     [dictParam setValueIfNotNil:amount forKey:@"amount"];
@@ -268,7 +255,7 @@
                                    webView:_webView
                                 callbackId:callbackId
                                     amount:amount
-                                 gasCanUse:gasCanUse];
+                              gasPriceCoef:[NSString stringWithFormat:@"%d",DefaultGasPriceCoef]];
     };
 }
 
@@ -281,7 +268,7 @@
                            webView:(WKWebView *)webView
                         callbackId:(NSString *)callbackId
                             amount:(NSString *)amount
-                         gasCanUse:(BigNumber *)gasCanUse
+                         gasPriceCoef:(NSString *)gasPriceCoef
 {
     if (clauseData.length < 3) { // vet 转账clauseData == nil,
         CGFloat amountTnteger = [BigNumber bigNumberWithDecimalString:amount].decimalString.floatValue/pow(10, 18);
@@ -308,7 +295,7 @@
                                     gas:gas
                                 webView:webView
                              callbackId:callbackId
-                              gasCanUse:gasCanUse
+                              gasPriceCoef:gasPriceCoef
                              clauseData:clauseData];
             
         }else{ // 其他合约交易
@@ -326,7 +313,7 @@
     }
 }
 
--(void)web3TransferWithClauseData:(NSString *)cluseData
+-(void)web3TransferWithClauseData:(NSString *)clauseData
                                from:(NSString *)from
                                  to:(NSString *)to
                           requestId:(NSString *)requestId
@@ -334,8 +321,6 @@
                             webView:(WKWebView *)webView
                          callbackId:(NSString *)callbackId
                              amount:(NSString *)amount
-                          gasCanUse:(BigNumber *)gasCanUse
-                      signatureView:(WalletSignatureView *)signatureView
                            gasPrice:(NSString *)gasPrice
                        tokenAddress:(NSString *)tokenAddress
 {
@@ -343,24 +328,20 @@
     if (conventView) {
         return;
     }
-    signatureView.tag = SignViewTag;
-    if (cluseData.length > 3) {
-        if (![cluseData hasPrefix:TransferMethodId]) { // 签合约
-            [self web3contractSign:signatureView
+    if (clauseData.length > 3) {
+        if (![clauseData hasPrefix:TransferMethodId]) { // 签合约
+            [self web3contractSignFrom:from
                                 to:to
-                             from:from
                             amount:amount
                          requestId:requestId
                                gas:gas
                           gasPrice:gasPrice
-                         gasCanUse:(BigNumber *)gasCanUse
                            webView:webView
                         callbackId:callbackId
-                         cluseData:cluseData];
+                         clauseData:clauseData];
         }else{
             //vtho 转账
-            [self web3VTHOTransfer:signatureView
-                              from:from
+            [self web3VTHOTransferFrom:from
                                 to:to
                             amount:amount
                          requestId:requestId
@@ -368,8 +349,7 @@
                           gasPrice:gasPrice
                            webView:webView
                         callbackId:callbackId
-                         gasCanUse:gasCanUse
-                         cluseData:cluseData
+                         clauseData:clauseData
                       tokenAddress:tokenAddress];
         }
     }else{
@@ -381,7 +361,6 @@
                                gas:gas
                            webView:webView
                         callbackId:callbackId
-                         gasCanUse:gasCanUse
                           gasPrice:gasPrice];
     }
 }

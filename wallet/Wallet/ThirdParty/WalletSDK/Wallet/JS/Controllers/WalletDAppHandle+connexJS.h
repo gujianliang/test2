@@ -72,12 +72,12 @@ NS_ASSUME_NONNULL_BEGIN
                  gas:(NSNumber *)gas
              webView:(WKWebView *)webView
           callbackId:(NSString *)callbackId
-           gasCanUse:(BigNumber *)gasCanUse
+        gasPriceCoef:(NSString *)gasPriceCoef
           clauseData:(NSString *)clauseData;
 
 - (void)contractSignDictParam:(NSMutableDictionary *)dictParam
                   to:(NSString *)to
-                         from:(NSString *)from
+                from:(NSString *)from
        amountTnteger:(CGFloat )amountTnteger
            requestId:(NSString *)requestId
                  gas:(NSNumber *)gas

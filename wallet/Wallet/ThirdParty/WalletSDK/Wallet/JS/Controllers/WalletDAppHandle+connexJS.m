@@ -299,44 +299,30 @@
         
         return;
     }
-    WalletSignatureView *signatureView = [[WalletSignatureView alloc] initWithFrame:[WalletTools getCurrentVC].view.bounds];
-    signatureView.tag = SignViewTag;
-    signatureView.transferType = JSVETTransferType;
     
-    WalletCoinModel *coinModel = [[WalletCoinModel alloc]init];
-    coinModel.coinName         = @"VET";
-    coinModel.transferGas      = [NSString stringWithFormat:@"%@",gas];
-    coinModel.decimals         = 18;
-    
-    [dictParam setValueIfNotNil:coinModel forKey:@"coinModel"];
-    
-    signatureView.jsUse = YES;
-    [signatureView updateView:from
-                    toAddress:to
-                 contractType:NoContract_transferToken
+    [WalletUtils signViewFrom:from
+                           to:to
                        amount:[NSString stringWithFormat:@"%.2f",amountTnteger]
-                       params:@[dictParam]];
-    
-    [[WalletTools getCurrentVC].navigationController.view addSubview:signatureView];
-    
-    signatureView.transferBlock = ^(NSString * _Nonnull txid) {
-        NSLog(@"txid = %@",txid);
-        if (txid.length == 0) {
+                     coinName:@"VET"
+                        block:^(NSString *txId)
+    {
+        
+        if (txId.length == 0) {
             
             [WalletTools callbackWithrequestId:requestId
                                        webView:webView
-                                         data:@""
-                                   callbackId:callbackId
-                                         code:ERROR_CANCEL];
+                                          data:@""
+                                    callbackId:callbackId
+                                          code:ERROR_CANCEL];
         }else{
             
             [WalletTools callbackWithrequestId:requestId
                                        webView:webView
-                                         data:txid
-                                   callbackId:callbackId
-                                         code:OK];
+                                          data:txId
+                                    callbackId:callbackId
+                                          code:OK];
         }
-    };
+    }];
 }
 
 - (void)VTHOTransferDictParam:(NSMutableDictionary *)dictParam
@@ -347,10 +333,9 @@
                           gas:(NSNumber *)gas
                       webView:(WKWebView *)webView
                    callbackId:(NSString *)callbackId
-                    gasCanUse:(BigNumber *)gasCanUse
+                 gasPriceCoef:(NSString *)gasPriceCoef
                    clauseData:(NSString *)clauseData
 {
-    
     __block NSString *coinName = @"";
     
     WalletGetSymbolApi *getSymbolApi = [[WalletGetSymbolApi alloc]initWithTokenAddress:tokenAddress];
@@ -368,7 +353,7 @@
         }
         coinName = [WalletTools abiDecodeString:symobl];
         
-        [self getTokenDecimalsTokenAddress:tokenAddress dictParam:dictParam coinName:coinName gasCanUse:gasCanUse gas:gas clauseData:clauseData toAddress:toAddress from:from requestId:requestId webView:webView callbackId:callbackId];
+        [self getTokenDecimalsTokenAddress:tokenAddress dictParam:dictParam coinName:coinName gasPriceCoef:gasPriceCoef gas:gas clauseData:clauseData toAddress:toAddress from:from requestId:requestId webView:webView callbackId:callbackId];
         
     } failure:^(VCBaseApi *finishApi, NSString *errMsg) {
         [WalletTools callbackWithrequestId:requestId
@@ -379,7 +364,7 @@
     }];
 }
 
-- (void)getTokenDecimalsTokenAddress:(NSString *)tokenAddress dictParam:(NSMutableDictionary *)dictParam coinName:(NSString *)coinName gasCanUse:(BigNumber *)gasCanUse gas:(NSNumber *)gas
+- (void)getTokenDecimalsTokenAddress:(NSString *)tokenAddress dictParam:(NSMutableDictionary *)dictParam coinName:(NSString *)coinName gasPriceCoef:(NSString *)gasPriceCoef gas:(NSNumber *)gas
                           clauseData:(NSString *)clauseData toAddress:(NSString *)toAddress from:(NSString *)from requestId:(NSString *)requestId webView:(WKWebView *)webView callbackId:(NSString *)callbackId
 {
     WalletGetDecimalsApi *getDecimalsApi = [[WalletGetDecimalsApi alloc]initWithTokenAddress:tokenAddress];
@@ -389,9 +374,6 @@
         NSString *decimalsHex = dictResult[@"data"];
         NSString *decimals = [BigNumber bigNumberWithHexString:decimalsHex].decimalString;
         
-        NSString *gasstr = [Payment formatEther:gasCanUse options:2];
-        
-        [dictParam setValueIfNotNil:@(0) forKey:@"isICO"];
         
         WalletCoinModel *coinModel = [[WalletCoinModel alloc]init];
         coinModel.coinName         = coinName;
@@ -400,8 +382,7 @@
         coinModel.address          = tokenAddress;
         
         [dictParam setValueIfNotNil:coinModel forKey:@"coinModel"];
-        [dictParam setValueIfNotNil:gasstr forKey:@"miner"];
-        [dictParam setValueIfNotNil:[BigNumber bigNumberWithInteger:DefaultgasPriceCoef] forKey:@"gasPriceCoef"];
+        [dictParam setValueIfNotNil:[BigNumber bigNumberWithInteger:gasPriceCoef.integerValue] forKey:@"gasPriceCoef"];
         
         NSString *clauseDataTemp = [clauseData stringByReplacingOccurrencesOfString:TransferMethodId withString:@""];
         NSString *clauseValue = @"";
@@ -444,7 +425,6 @@
     signatureView.tag = SignViewTag;
     signatureView.transferType = JSVTHOTransferType;
     
-    signatureView.jsUse = YES;
     [signatureView updateView:from
                     toAddress:toAddress
                  contractType:NoContract_transferToken
@@ -495,7 +475,6 @@
     }
     WalletSignatureView *signatureView = [[WalletSignatureView alloc] initWithFrame:[WalletTools getCurrentVC].view.bounds];
     signatureView.tag = SignViewTag;
-    signatureView.jsUse = YES;
     [dictParam setValueIfNotNil:to forKey:@"tokenAddress"];
     signatureView.transferType = JSContranctTransferType;
     [signatureView updateView:from
@@ -617,7 +596,7 @@
            webView:(WKWebView *)webView
 {
     [WalletTools callbackWithrequestId:requestId
-                                  webView:webView
+                               webView:webView
                                  data:@""
                            callbackId:callbackId
                                  code:ERROR_SERVER_DATA];

@@ -14,7 +14,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface WalletDAppHandle : NSObject
 
-- (instancetype)initWithWalletDict:(NSMutableArray *)walletList;
++ (instancetype)shareWalletHandle;
+
+-(void)initWithWalletDict:(NSMutableArray *)walletList;
 
 - (void)webView:(WKWebView *)webView runJavaScriptTextInputPanelWithPrompt:(NSString *)prompt defaultText:(nullable NSString *)defaultText initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(NSString * __nullable result))completionHandler;
 

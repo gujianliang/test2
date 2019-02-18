@@ -28,7 +28,6 @@
     NSString *_amount;
     WalletCoinModel *_currentCoinModel;
     NSString *_gasLimit;
-    BOOL _jsUse;
     NSString *_fromAddress;
     NSString *_toAddress;
     UITextField *_pwTextField;
@@ -40,7 +39,7 @@
 }
 
 
-- (void)initSignature:(UIScrollView *)scrollView contractType:(ContractType)contractType amount:(NSString *)amount currentCoinModel:(WalletCoinModel *)currentCoinModel gasLimit:(NSString *)gasLimit jsUse:(BOOL)jsUse fromAddress:(NSString *)fromAddress toAddress:(NSString *)toAddress pwTextField:(UITextField *)pwTextField transferType:(JSTransferType)transferType
+- (void)initSignature:(UIScrollView *)scrollView contractType:(ContractType)contractType amount:(NSString *)amount currentCoinModel:(WalletCoinModel *)currentCoinModel gasLimit:(NSString *)gasLimit  fromAddress:(NSString *)fromAddress toAddress:(NSString *)toAddress pwTextField:(UITextField *)pwTextField transferType:(JSTransferType)transferType
                   gas:(NSNumber *)gas gasPriceCoef:(BigNumber *)gasPriceCoef clauseData:(NSData *)clauseData signatureHandle:(WalletSignatureViewHandle *)signatureHandle additionalMsg:(NSString *)additionalMsg
 {
     _scrollView = scrollView;
@@ -48,7 +47,6 @@
     _amount = amount;
     _currentCoinModel = currentCoinModel;
     _gasLimit = gasLimit;
-    _jsUse = jsUse;
     _fromAddress = fromAddress;
     _transferType = transferType;
     _gas = gas;
@@ -138,18 +136,13 @@
 
 - (void)leftViewClick:(void(^)(void))enterSignViewBlock
 {
-    if (_jsUse && _transferType == JSContranctTransferType) {
+    if (_transferType == JSContranctTransferType) {
         
         [self enterPreView:enterSignViewBlock];
         
-    }else if (_jsUse){
+    }else {
         
         [self checkBalance:enterSignViewBlock];
-        
-    }else{
-        if (enterSignViewBlock) {
-            enterSignViewBlock();
-        }
     }
 }
 
@@ -175,7 +168,7 @@
     [self creatCell:VCNSLocalizedBundleString(@"contract_ayment_info_row1_title", nil)
               value:gasFormat
                   Y:52 + 20
-          adjustBtn: _jsUse ? YES : NO
+          adjustBtn: YES
  enterSignViewBlock:enterSignViewBlock];
     
     if (_needAdjust) {
@@ -195,13 +188,13 @@
           adjustBtn:NO
  enterSignViewBlock:enterSignViewBlock];
     
-    if (!_jsUse) { // js调用没有描述
-        [self creatCell:VCNSLocalizedBundleString(@"contract_payment_info_row4_title", nil)
-                  value:_additionalMsg
-                      Y:52 * 4 + 20
-              adjustBtn:NO
-     enterSignViewBlock:enterSignViewBlock];
-    }
+//    if (!_jsUse) { // js调用没有描述
+//        [self creatCell:VCNSLocalizedBundleString(@"contract_payment_info_row4_title", nil)
+//                  value:_additionalMsg
+//                      Y:52 * 4 + 20
+//              adjustBtn:NO
+//     enterSignViewBlock:enterSignViewBlock];
+//    }
 }
 
 - (void)enterPreView:(void(^)(void))enterSignViewBlock

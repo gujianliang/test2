@@ -47,7 +47,6 @@ typedef NS_ENUM(NSInteger,JSTransferType)
 @property(nonatomic, strong) NSData *clauseData;
 @property(nonatomic, copy) NSString *tokenAddress;
 @property (nonatomic, assign) JSTransferType transferType;
-@property(nonatomic, assign) BOOL jsUse;
 @property(nonatomic, copy) NSString *txid;
 @property(nonatomic, strong) UIScrollView *scrollView;
 @property(nonatomic, strong) WalletSignatureViewSubView *signatureSubView;

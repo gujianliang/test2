@@ -13,7 +13,7 @@
 #define VETGasLimit      @"21000"
 #define SignViewTag      11001
 #define SelectWalletTag  11002
-#define DefaultgasPriceCoef 120
+#define DefaultGasPriceCoef 120
 #define DefaultExpiration 720
 
 static int OK = 1;

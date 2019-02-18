@@ -11,7 +11,6 @@
 #import "AFNetworking.h"
 #import "NSMutableDictionary+Helpers.h"
 
-
 @interface WalletModelFetcher()
 
 @end
@@ -32,17 +31,14 @@
     }
     
     httpManager.requestSerializer.cachePolicy = NSURLRequestReturnCacheDataElseLoad;
-//    [WalletModelFetcher setHeaderInfo:httpManager useSession:useSession];
     [httpManager GET:urlString parameters:dict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         [WalletModelFetcher debugLog:responseObject andUrl:urlString];
         
         NSDictionary *headerFields = [(NSHTTPURLResponse *)task.response allHeaderFields];
-//        if (error) {
-//            block(nil, headerFields,nil);
-//        } else {
-            block(responseObject,headerFields,nil);
-//        }
+
+        block(responseObject,headerFields,nil);
+
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         [WalletModelFetcher debugError:error andUrl:urlString];
         
@@ -68,21 +64,12 @@
         [WalletModelFetcher setHeaderInfo:httpManager useSession:useSession];
     }
     
-//    if (needEncrypt) {
-//        dict = [WalletModelFetcher encryptParaDict:dict  method:@"POST"];
-//    }
-    
     [httpManager POST:urlString parameters:dict progress:^(NSProgress * _Nonnull uploadProgress) {
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         [WalletModelFetcher debugLog:responseObject andUrl:urlString];
         
         NSDictionary *headerFields = [(NSHTTPURLResponse *)task.response allHeaderFields];
-//        if (error) {
-//            block(nil, headerFields,nil);
-//        } else {
-//            block(responseObject,headerFields,nil);
-//        }
         block(responseObject,headerFields,nil);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         [WalletModelFetcher debugError:error andUrl:urlString];
@@ -171,7 +158,7 @@
     
     AFHTTPSessionManager *httpManager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:urlString]];
     httpManager.requestSerializer.cachePolicy = NSURLRequestReturnCacheDataElseLoad;
-    //    httpManager.requestSerializer.HTTPMethodsEncodingParametersInURI = [NSSet setWithObjects:@"HEAD",@"GET",nil];
+
     [WalletModelFetcher setHeaderInfo:httpManager useSession:useSession];
     
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlString]];
@@ -189,7 +176,8 @@
     [request setHTTPBody:postBody];
     
     [[httpManager dataTaskWithRequest:request
-                    completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+                    completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error)
+    {
                         if (error) {
                             [WalletModelFetcher debugError:error andUrl:request.URL];
                             
@@ -206,30 +194,10 @@
 
 + (void)setHeaderInfo:(AFHTTPSessionManager *)httpManager useSession:(BOOL)useSession
 {
-    
-//    if ([httpManager.baseURL.absoluteString.lowercaseString hasPrefix:@"https"]) {
-//        AFSecurityPolicy *securityPolicy = [AFSecurityPolicy policyWithPinningMode:AFSSLPinningModeCertificate];
-//        [securityPolicy setAllowInvalidCertificates:NO];
-//        [securityPolicy setValidatesDomainName:YES];
-//        httpManager.securityPolicy = securityPolicy;
-//    }
-    
     [httpManager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     httpManager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", nil];
     
     httpManager.requestSerializer = [AFJSONRequestSerializer serializer];
-    
-//    httpManager.requestSerializer = [AFHTTPRequestSerializer serializer];
-//    httpManager.responseSerializer = [AFHTTPResponseSerializer serializer];
-    
-//    [httpManager.requestSerializer setValue:[[NSBundle mainBundle] objectForInfoDictionaryKey: @"CFBundleShortVersionString"] forHTTPHeaderField:@"softwareVersion"];
-//    [httpManager.requestSerializer setValue:@"iOS" forHTTPHeaderField:@"platformType"];
-//
-//    NSString* phoneVersion = [[UIDevice currentDevice] systemVersion];
-//    [httpManager.requestSerializer setValue:phoneVersion forHTTPHeaderField:@"osVersion"];
-//
-//    NSString *idvf = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
-//    [httpManager.requestSerializer setValue:idvf forHTTPHeaderField:@"deviceId"];
 }
 
 + (NSMutableDictionary *)encryptParaDict:(NSMutableDictionary *)dict method:(NSString *)method {
@@ -243,8 +211,6 @@
             NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dict options:0 error:&error];
             origString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
         }
-       
-
     }
     return nil;
 }

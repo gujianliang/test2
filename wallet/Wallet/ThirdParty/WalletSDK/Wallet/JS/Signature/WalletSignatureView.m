@@ -21,6 +21,7 @@
 #import "WalletSignatureViewHandle.h"
 #import "WalletSignatureViewSubView.h"
 #import "WalletSignatureViewSubView.h"
+#import "WalletTools.h"
 
 #define viewHeight 411
 
@@ -80,16 +81,16 @@
     
     if (contractType == NoContract_transferToken) {
         NSDictionary *dictParam = [params firstObject];
-        NSString *miner       = dictParam[@"miner"];
-        _gasLimit             = [miner stringByReplacingOccurrencesOfString:@"VTHO" withString:@""];
+        
         _currentCoinModel     = dictParam[@"coinModel"];
-        _gasPriceCoef         = dictParam[@"gasPriceCoef"];
-        NSNumber *numberIsICO = dictParam[@"isICO"];
-        _isICO                = numberIsICO.boolValue;
+        _gasPriceCoef         = (BigNumber *)(dictParam[@"gasPriceCoef"]);
         _clauseData           = dictParam[@"clauseData"];
         _tokenAddress         = dictParam[@"tokenAddress"];
         _gas                  = dictParam[@"gas"];
         
+        BigNumber *gasCanUse = [WalletTools calcThorNeeded:_gasPriceCoef.decimalString.floatValue gas:_gas];
+        _gasLimit = [Payment formatEther:gasCanUse options:2];
+
         if (_transferType == JSContranctTransferType) {
         
             [self resolverClouseData];
@@ -233,7 +234,6 @@
                               amount:_amount
                     currentCoinModel:_currentCoinModel
                             gasLimit:_gasLimit
-                               jsUse:_jsUse
                          fromAddress:_fromAddress
                            toAddress:_toAddress
                          pwTextField:self.signatureSubView.pwTextField

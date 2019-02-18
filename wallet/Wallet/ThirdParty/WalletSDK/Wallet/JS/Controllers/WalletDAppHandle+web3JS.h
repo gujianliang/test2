@@ -30,11 +30,9 @@ NS_ASSUME_NONNULL_BEGIN
                          gas:(NSString *)gas
                      webView:(WKWebView *)webView
                   callbackId:(NSString *)callbackId
-                   gasCanUse:(BigNumber *)gasCanUse
                     gasPrice:(NSString *)gasPrice;
 
-- (void)web3VTHOTransfer:(WalletSignatureView *)signaVC
-                    from:(NSString *)from
+- (void)web3VTHOTransferFrom:(NSString *)from
                   to:(NSString *)to
               amount:(NSString *)amount
            requestId:(NSString *)requestId
@@ -42,22 +40,19 @@ NS_ASSUME_NONNULL_BEGIN
             gasPrice:(NSString *)gasPrice
              webView:(WKWebView *)webView
           callbackId:(NSString *)callbackId
-           gasCanUse:(BigNumber *)gasCanUse
-           cluseData:(NSString *)cluseData
+           clauseData:(NSString *)clauseData
         tokenAddress:(NSString *)tokenAddress;
 
 
-- (void)web3contractSign:(WalletSignatureView *)signaVC
+- (void)web3contractSignFrom:(NSString *)from
                   to:(NSString *)to
-               from:(NSString *)from
               amount:(NSString * )amount
            requestId:(NSString *)requestId
                  gas:(NSString *)gas
                 gasPrice:(NSString *)gasPrice
-               gasCanUse:(BigNumber *)gasCanUse
              webView:(WKWebView *)webView
           callbackId:(NSString *)callbackId
-           cluseData:(NSString *)cluseData;
+           clauseData:(NSString *)clauseData;
 
 
 - (void)getChainTag:(NSString *)requestId

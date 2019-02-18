@@ -13,6 +13,8 @@
 #import "SecureData.h"
 #import "Payment.h"
 #import "BigNumber.h"
+#import <UIKit/UIKit.h>
+#import <WebKit/WebKit.h>
 
 @interface WalletUtils : NSObject
 
@@ -89,7 +91,7 @@
 + (void)sign:(NSData*)message
     keystore:(NSString*)json
     password:(NSString*)password
-       block:(void (^)(  *signature))block;
+       block:(void (^)(Signature *signature))block;
 
 /**
  *  @abstract
@@ -103,4 +105,15 @@
 + (void)encryptSecretStorageJSON:(NSString*)password
                          account:(Account *)account
                         callback:(void (^)(NSString *))callback;
+
++ (void)setCurrentWallet:(NSString *)address;
+
++ (void)initWithWalletDict:(NSMutableArray *)walletList;
+
++ (void)webView:(WKWebView *)webView runJavaScriptTextInputPanelWithPrompt:(NSString *)prompt defaultText:(nullable NSString *)defaultText initiatedByFrame:(WKFrameInfo *_Nullable)frame completionHandler:(void (^_Nullable)(NSString * __nullable result))completionHandler;
+
++ (void)injectJS:(WKWebView *_Nonnull)webview;
+
++ (void)signViewFrom:(NSString *_Nonnull)from to:(NSString *_Nonnull)to amount:(NSString *_Nonnull)amount coinName:(NSString *_Nonnull)coinName block:(void(^)(NSString *txId))block;
+
 @end

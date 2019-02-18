@@ -6,8 +6,15 @@
 //
 
 #import "WalletUtils.h"
+#import "WalletDAppHandle.h"
+#import "WalletSignatureView.h"
+#import "WalletTools.h"
+#import "WalletDAppHead.h"
+#import "WalletSingletonHandle.h"
 
 @implementation WalletUtils
+{
+}
 
 + (void)createWalletWithPassword:(NSString *)password
                        callback:(void(^)(Account *account))block
@@ -92,5 +99,75 @@
     }];
 }
 
++ (void)setCurrentWallet:(NSString *)address
+{
+    [[WalletSingletonHandle shareWalletHandle] setCurrentModel:address];
+}
+
++ (void)initWithWalletDict:(NSMutableArray *)walletList
+{
+    [[WalletDAppHandle shareWalletHandle]initWithWalletDict:walletList];
+}
+
++ (void)webView:(WKWebView *)webView runJavaScriptTextInputPanelWithPrompt:(NSString *)prompt defaultText:(nullable NSString *)defaultText initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(NSString * __nullable result))completionHandler
+{
+    NSLog(@"defaultText == %@",defaultText);
+    
+    WalletDAppHandle *dappHandle = [WalletDAppHandle shareWalletHandle];
+    [dappHandle webView:webView runJavaScriptTextInputPanelWithPrompt:prompt defaultText:defaultText initiatedByFrame:frame completionHandler:completionHandler];
+}
+
++ (void)injectJS:(WKWebView *)webview
+{
+    WalletDAppHandle *dappHandle = [WalletDAppHandle shareWalletHandle];
+    [dappHandle injectJS:webview];
+}
+
++ (void)signViewFrom:(NSString *_Nonnull)from to:(NSString *_Nonnull)to amount:(NSString *_Nonnull)amount coinName:(NSString *_Nonnull)coinName block:(void(^)(NSString *txId))block
+{
+    NSMutableDictionary *dictParam = [NSMutableDictionary dictionary];
+    
+    NSNumber *gas = @(60000);
+    if ([coinName isEqualToString:@"VET"]) {
+        gas = @(21000);
+    }
+    
+    BigNumber *gasCanUse = [WalletTools calcThorNeeded:DefaultGasPriceCoef gas:gas];
+    
+    NSString *miner = [[Payment formatEther:gasCanUse options:2] stringByAppendingString:@" VTHO"];
+    
+    [dictParam setValueIfNotNil:miner forKey:@"miner"];
+    [dictParam setValueIfNotNil:[BigNumber bigNumberWithInteger:DefaultGasPriceCoef] forKey:@"gasPriceCoef"];
+    [dictParam setValueIfNotNil:gas forKey:@"gas"];
+    [dictParam setValueIfNotNil:to forKey:@"to"];
+    [dictParam setValueIfNotNil:amount forKey:@"amount"];
+    
+    WalletCoinModel *coinModel = [[WalletCoinModel alloc]init];
+    coinModel.coinName         = coinName;
+    coinModel.transferGas      = gas.stringValue;
+    coinModel.decimals         = 18;
+    [dictParam setValueIfNotNil:coinModel forKey:@"coinModel"];
+    
+    WalletSignatureView *signatureView = [[WalletSignatureView alloc] initWithFrame:[WalletTools getCurrentVC].view.bounds];
+    signatureView.transferType = JSVTHOTransferType;
+
+    if ([coinName isEqualToString:@"VET"]) {
+        signatureView.transferType = JSVETTransferType;
+    }
+    [signatureView updateView:from
+                    toAddress:to
+                 contractType:NoContract_transferToken
+                       amount:amount
+                       params:@[dictParam]];
+    [[WalletTools getCurrentVC].navigationController.view addSubview:signatureView];
+    
+    signatureView.transferBlock = ^(NSString * _Nonnull txid) {
+        NSLog(@"txid = %@",txid);
+        
+        if (block) {
+            block(txid);
+        }
+    };
+}
 
 @end

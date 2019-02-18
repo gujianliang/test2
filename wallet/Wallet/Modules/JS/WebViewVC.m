@@ -8,13 +8,13 @@
 
 #import "WebViewVC.h"
 #import <WebKit/WebKit.h>
-#import <WalletSDK/WalletDAppHandle.h>
+#import <WalletSDK/WalletUtils.h>
 
 @interface WebViewVC ()<WKNavigationDelegate,WKUIDelegate>
 {
     NSString *_url;
     WKWebView *_webView;
-    WalletDAppHandle *_dAppHandle;
+//    WalletDAppHandle *_dAppHandle;
 }
 
 @end
@@ -49,13 +49,13 @@
     
 #warning  keystore 具体格式
     // intput wallet list detail
-    _dAppHandle = [[WalletDAppHandle alloc]initWithWalletDict:walletList];
+    [WalletUtils initWithWalletDict:walletList];
 }
 
 //  页面加载完成之后调用
 - (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation
 {
-    [_dAppHandle injectJS:webView];
+    [WalletUtils injectJS:webView];
 }
 
 -(void)webView:(WKWebView *)webView runJavaScriptAlertPanelWithMessage:(NSString *)message initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(void))completionHandler{
@@ -71,6 +71,6 @@
 - (void)webView:(WKWebView *)webView runJavaScriptTextInputPanelWithPrompt:(NSString *)prompt defaultText:(nullable NSString *)defaultText initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(NSString * __nullable result))completionHandler
 {
 
-    [_dAppHandle webView:webView runJavaScriptTextInputPanelWithPrompt:prompt defaultText:defaultText initiatedByFrame:frame completionHandler:completionHandler];
+    [WalletUtils webView:webView runJavaScriptTextInputPanelWithPrompt:prompt defaultText:defaultText initiatedByFrame:frame completionHandler:completionHandler];
 }
 @end
