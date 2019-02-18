@@ -14,7 +14,6 @@
 #import <dlfcn.h>
 #import <SystemConfiguration/SystemConfiguration.h>
 #import "WalletUtils.h"
-#import "WalletPaymentQRCodeView.h"
 #import "NSMutableDictionary+Helpers.h"
 #import "AFNetworkReachabilityManager.h"
 #import "WalletMBProgressShower.h"

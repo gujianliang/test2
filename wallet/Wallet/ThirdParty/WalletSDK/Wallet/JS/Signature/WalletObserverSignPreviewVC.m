@@ -8,8 +8,8 @@
 
 #import "WalletObserverSignPreviewVC.h"
 #import "WalletUtils.h"
-#import "WalletPaymentQRCodeView.h"
 #import "WalletSignObserverModel.h"
+#import "WalletDAppHead.h"
 
 #define   DataKey     @"dataKey"
 #define   DataValue   @"dataValue"
@@ -161,7 +161,7 @@ static NSString *cellIndef = @"addressIndef";
     Transaction *transaction = [[Transaction alloc] init];
     
     transaction.nonce       =   [[BigNumber bigNumberWithHexString:self.transactionModel.nonce] integerValue];;
-    transaction.Expiration  = 720;
+    transaction.Expiration  = DefaultExpiration;
     transaction.gasPrice   =  [BigNumber bigNumberWithDecimalString:self.transactionModel.gasPriceCoef];
     transaction.gasLimit   =  [BigNumber bigNumberWithDecimalString:self.transactionModel.gas];
     transaction.ChainTag   = [BigNumber bigNumberWithHexString:self.transactionModel.chainTag];

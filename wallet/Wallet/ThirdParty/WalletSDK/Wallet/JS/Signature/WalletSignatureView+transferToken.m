@@ -37,7 +37,7 @@
     }
     transaction.nonce = [[[BigNumber bigNumberWithData:randomData.data] mod:[BigNumber bigNumberWithInteger:NSIntegerMax]] integerValue];
     
-    transaction.Expiration = 720;
+    transaction.Expiration = DefaultExpiration;
     transaction.gasPrice = self.gasPriceCoef;
     
     if (self.transferType == JSContranctTransferType){ //合约签名
@@ -51,95 +51,119 @@
             transaction.gasLimit = [BigNumber bigNumberWithDecimalString:VETGasLimit];
         }
     }
-    
+    // 拉创世区块id做chainTag
+    [self getGenesisBlockInfo:transaction];
+}
+
+- (void)getGenesisBlockInfo:(Transaction *)transaction
+{
     // 拉创世区块id做chainTag
     @weakify(self)
     WalletGenesisBlockInfoApi *genesisBlock = [WalletGenesisBlockInfoApi new];
     [genesisBlock loadDataAsyncWithSuccess:^(VCBaseApi *finishApi) {
+        @strongify(self)
         WalletBlockInfoModel *genesisblockModel = finishApi.resultModel;
         NSString *blockID = genesisblockModel.id;
         NSString *chainTag = [NSString stringWithFormat:@"0x%@", [blockID substringFromIndex:blockID.length-2]];
         transaction.ChainTag = [BigNumber bigNumberWithHexString:chainTag];
         
-        // 获取最新区块ID前8bytes作为blockRef
-        WalletBlockInfoApi *bestBlockApi = [[WalletBlockInfoApi alloc] init];
-        @strongify(self)
-        [bestBlockApi loadDataAsyncWithSuccess:^(VCBaseApi *finishApi) {
-            @strongify(self)
-            WalletBlockInfoModel *blockModel = finishApi.resultModel;
-            
-            NSString *blockRef = [[blockModel.id substringFromIndex:2] substringToIndex:16];
-            transaction.BlockRef = [BigNumber bigNumberWithHexString:[NSString stringWithFormat:@"0x%@",blockRef]];
-            BigNumber *subValue;
-            if ([self.currentCoinModel.coinName isEqualToString:@"VET"]) {
-                //ven 转账  data 设置空
-                subValue = [Payment parseEther:self.amount];
-                if ([self.amount floatValue] == 0.0
-                    && [subValue lessThanEqualTo:[BigNumber constantZero]]) {
-                    NSData *toData = [SecureData hexStringToData:self.toAddress];
-                    transaction.Clauses = @[@[toData,[NSData data],[NSData data]]];
-                } else {
-                    NSData *toData = [SecureData hexStringToData:self.toAddress];
-                    transaction.Clauses = @[@[toData,subValue.data,[NSData data]]];
-                }
-                
-            } else if(self.currentCoinModel) {
-                //token 转账 value 设置0，data 设置见文档
-                subValue = [Payment parseToken:self.amount dicimals:self.currentCoinModel.decimals];
-
-                SecureData *tokenAddress = [SecureData secureDataWithHexString:self.currentCoinModel.address];
-                transaction.Clauses = @[@[tokenAddress.data,[NSData data],self.clauseData]];
-            }else{ // 合约转账
-                CGFloat amountF = self.amount.floatValue;
-                if (amountF == 0) {
-                    if (self.tokenAddress.length == 0) {
-                        transaction.Clauses = @[@[[NSData data],[NSData data], self.clauseData]];
-                    }else{
-                        transaction.Clauses = @[@[[SecureData hexStringToData:self.tokenAddress],[NSData data], self.clauseData]];
-                    }
-                    
-                } else {
-                    
-                     if (self.tokenAddress.length == 0) {
-                         BigNumber *subValue = [Payment parseEther:self.amount];
-                         transaction.Clauses = @[@[[NSData data],subValue.data, self.clauseData]];
-                     }else{
-                         BigNumber *subValue = [Payment parseEther:self.amount];
-                         transaction.Clauses = @[@[[SecureData hexStringToData:self.tokenAddress],subValue.data, self.clauseData]];
-                     }
-                }
-            }
-            // 尝试用户密码解密keystore
-            NSString *keystore = [[WalletSingletonHandle shareWalletHandle]currentWalletModel].keyStore;
-            
-            [Account decryptSecretStorageJSON:keystore password:self.signatureSubView.pwTextField.text callback:^(Account *account, NSError *NSError) {
-                @strongify(self)
-                if (!account) {
-                    [WalletMBProgressShower hide:self];
-                    [WalletAlertShower showAlert:nil
-                                            msg:VCNSLocalizedBundleString(@"transfer_wallet_password_error", nil)
-                                          inCtl:[WalletTools getCurrentVC]
-                                          items:@[VCNSLocalizedBundleString(@"重试", nil)]
-                                     clickBlock:^(NSInteger index)
-                    {
-                        
-                    }];
-                    return;
-                }
-                
-                [account sign:transaction];
-                
-                NSString *raw = [SecureData dataToHexString: [transaction serialize]];
-                [self sendRaw:raw];
-                
-            }];
-        } failure:^(VCBaseApi *finishApi, NSString *errMsg) {
-            @strongify(self)
-            [self showTransactionFail];
-        }];
+        [self getBestBlockInfo:transaction];
     } failure:^(VCBaseApi *finishApi, NSString *errMsg) {
         @strongify(self)
         [self showTransactionFail];
+    }];
+}
+
+- (void)getBestBlockInfo:(Transaction *)transaction
+{
+    // 获取最新区块ID前8bytes作为blockRef
+    WalletBlockInfoApi *bestBlockApi = [[WalletBlockInfoApi alloc] init];
+    @weakify(self)
+    [bestBlockApi loadDataAsyncWithSuccess:^(VCBaseApi *finishApi) {
+        @strongify(self)
+        WalletBlockInfoModel *blockModel = finishApi.resultModel;
+        
+        NSString *blockRef = [[blockModel.id substringFromIndex:2] substringToIndex:16];
+        transaction.BlockRef = [BigNumber bigNumberWithHexString:[NSString stringWithFormat:@"0x%@",blockRef]];
+        
+        [self packageClausesData:transaction];
+        // 尝试用户密码解密keystore
+        [self sign:transaction];
+    } failure:^(VCBaseApi *finishApi, NSString *errMsg) {
+        @strongify(self)
+        [self showTransactionFail];
+    }];
+}
+
+- (void)packageClausesData:(Transaction *)transaction
+{
+    BigNumber *subValue;
+    if ([self.currentCoinModel.coinName isEqualToString:@"VET"]) {
+        //ven 转账  data 设置空
+        subValue = [Payment parseEther:self.amount];
+        if ([self.amount floatValue] == 0.0
+            && [subValue lessThanEqualTo:[BigNumber constantZero]]) {
+            NSData *toData = [SecureData hexStringToData:self.toAddress];
+            transaction.Clauses = @[@[toData,[NSData data],[NSData data]]];
+        } else {
+            NSData *toData = [SecureData hexStringToData:self.toAddress];
+            transaction.Clauses = @[@[toData,subValue.data,[NSData data]]];
+        }
+        
+    } else if(self.currentCoinModel) {
+        //token 转账 value 设置0，data 设置见文档
+        subValue = [Payment parseToken:self.amount dicimals:self.currentCoinModel.decimals];
+        
+        SecureData *tokenAddress = [SecureData secureDataWithHexString:self.currentCoinModel.address];
+        transaction.Clauses = @[@[tokenAddress.data,[NSData data],self.clauseData]];
+    }else{ // 合约转账
+        CGFloat amountF = self.amount.floatValue;
+        if (amountF == 0) {
+            if (self.tokenAddress.length == 0) {
+                transaction.Clauses = @[@[[NSData data],[NSData data], self.clauseData]];
+            }else{
+                transaction.Clauses = @[@[[SecureData hexStringToData:self.tokenAddress],[NSData data], self.clauseData]];
+            }
+            
+        } else {
+            
+            if (self.tokenAddress.length == 0) {
+                BigNumber *subValue = [Payment parseEther:self.amount];
+                transaction.Clauses = @[@[[NSData data],subValue.data, self.clauseData]];
+            }else{
+                BigNumber *subValue = [Payment parseEther:self.amount];
+                transaction.Clauses = @[@[[SecureData hexStringToData:self.tokenAddress],subValue.data, self.clauseData]];
+            }
+        }
+    }
+}
+
+- (void)sign:(Transaction *)transaction
+{
+    // 尝试用户密码解密keystore
+    NSString *keystore = [[WalletSingletonHandle shareWalletHandle]currentWalletModel].keyStore;
+    @weakify(self)
+
+    [Account decryptSecretStorageJSON:keystore password:self.signatureSubView.pwTextField.text callback:^(Account *account, NSError *NSError) {
+        @strongify(self)
+        if (!account) {
+            [WalletMBProgressShower hide:self];
+            [WalletAlertShower showAlert:nil
+                                     msg:VCNSLocalizedBundleString(@"transfer_wallet_password_error", nil)
+                                   inCtl:[WalletTools getCurrentVC]
+                                   items:@[VCNSLocalizedBundleString(@"重试", nil)]
+                              clickBlock:^(NSInteger index)
+             {
+                 
+             }];
+            return;
+        }
+        
+        [account sign:transaction];
+        
+        NSString *raw = [SecureData dataToHexString: [transaction serialize]];
+        [self sendRaw:raw];
+        
     }];
 }
 

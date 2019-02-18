@@ -232,7 +232,7 @@
                     gasCanUse:(BigNumber *)gasCanUse
                               gasPrice:(NSString *)gasPrice
 {
-    NSString *cluseStr = [cluseData stringByReplacingOccurrencesOfString:transferMethodId withString:@""];
+    NSString *cluseStr = [cluseData stringByReplacingOccurrencesOfString:TransferMethodId withString:@""];
     NSString *tokenAmount = @"";
     if (cluseStr.length >= 128) {
         tokenAmount = [cluseStr substringWithRange:NSMakeRange(64, 64)];

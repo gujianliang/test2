@@ -166,7 +166,8 @@
     
     NSString *gasPrice = callbackParams[@"gasPrice"];
     if (gasPrice.length == 0) {
-        gasPrice = @"0x78";  //默认120，如果js没有返回，就给默认的
+        //默认120，如果js没有返回，就给默认的
+        gasPrice = [BigNumber bigNumberWithInteger:DefaultgasPriceCoef].hexString;
     }
     
     CGFloat amountTnteger = [BigNumber bigNumberWithHexString:[NSString stringWithFormat:@"%@",amount]].decimalString.floatValue/pow(10, 18);
@@ -182,9 +183,9 @@
         WalletSignatureView *signatureView = [[WalletSignatureView alloc] initWithFrame:[WalletTools getCurrentVC].view.bounds];
         if (cluseData.length < 3) { // vet 转账clauseData == nil,
             signatureView.transferType = JSVETTransferType;
-        }else if ([cluseData hasPrefix:transferMethodId]) {// vtho 转账
+        }else if ([cluseData hasPrefix:TransferMethodId]) {// vtho 转账
             tokenAddress = callbackParams[@"to"];
-            NSString *cluseData1 = [cluseData stringByReplacingOccurrencesOfString:transferMethodId withString:@""];
+            NSString *cluseData1 = [cluseData stringByReplacingOccurrencesOfString:TransferMethodId withString:@""];
             NSString *first = [cluseData1 substringToIndex:64];
             to = [@"0x" stringByAppendingString: [first substringFromIndex:24]];
             amount = [cluseData1 substringFromIndex:65];
@@ -233,12 +234,12 @@
     NSMutableDictionary *dictParam = [NSMutableDictionary dictionary];
     [dictParam setValueIfNotNil:@(0) forKey:@"isICO"];
     
-    BigNumber *gasCanUse = [WalletTools calcThorNeeded:120 gas:gas];
+    BigNumber *gasCanUse = [WalletTools calcThorNeeded:DefaultgasPriceCoef gas:gas];
     
     NSString *miner = [[Payment formatEther:gasCanUse options:2] stringByAppendingString:@" VTHO"];
     
     [dictParam setValueIfNotNil:miner forKey:@"miner"];
-    [dictParam setValueIfNotNil:[BigNumber bigNumberWithInteger:120] forKey:@"gasPriceCoef"];
+    [dictParam setValueIfNotNil:[BigNumber bigNumberWithInteger:DefaultgasPriceCoef] forKey:@"gasPriceCoef"];
     [dictParam setValueIfNotNil:gas forKey:@"gas"];
     [dictParam setValueIfNotNil:to forKey:@"to"];
     [dictParam setValueIfNotNil:amount forKey:@"amount"];
@@ -294,7 +295,7 @@
                         callbackId:callbackId];
         
     }else{
-        if ([clauseData hasPrefix:transferMethodId]) { // token 转账
+        if ([clauseData hasPrefix:TransferMethodId]) { // token 转账
             NSString *tokenAddress = to;
             NSString *clauseTemp =  [clauseData stringByReplacingOccurrencesOfString:@"0xa9059cbb000000000000000000000000" withString:@""];
             NSString *toAddress = [@"0x" stringByAppendingString:[clauseTemp substringToIndex:40]];
@@ -344,7 +345,7 @@
     }
     signatureView.tag = SignViewTag;
     if (cluseData.length > 3) {
-        if (![cluseData hasPrefix:transferMethodId]) { // 签合约
+        if (![cluseData hasPrefix:TransferMethodId]) { // 签合约
             [self web3contractSign:signatureView
                                 to:to
                              from:from

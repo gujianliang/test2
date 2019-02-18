@@ -9,10 +9,12 @@
 #ifndef WalletDAppHead_h
 #define WalletDAppHead_h
 
-#define transferMethodId @"0xa9059cbb"
+#define TransferMethodId @"0xa9059cbb"
 #define VETGasLimit      @"21000"
 #define SignViewTag      11001
 #define SelectWalletTag  11002
+#define DefaultgasPriceCoef 120
+#define DefaultExpiration 720
 
 static int OK = 1;
 static int ERROR_REQUEST_PARAMS = 200;

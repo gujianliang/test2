@@ -135,7 +135,7 @@
     NSData *incodeData =[incodeStr dataUsingEncoding:NSUTF8StringEncoding];
     NSData *decodeData = [SecureData KECCAK256:incodeData];
     NSString *decodeStr = [SecureData dataToHexString:decodeData];
-    if (decodeStr.length > 10) {
+    if (decodeStr.length >= 10) {
         NSDictionary *resultDict = [WalletTools packageWithRequestId:requestId
                                                                data:[decodeStr substringToIndex:10]
                                                                code:OK
@@ -401,12 +401,12 @@
         
         [dictParam setValueIfNotNil:coinModel forKey:@"coinModel"];
         [dictParam setValueIfNotNil:gasstr forKey:@"miner"];
-        [dictParam setValueIfNotNil:[BigNumber bigNumberWithInteger:120] forKey:@"gasPriceCoef"];
+        [dictParam setValueIfNotNil:[BigNumber bigNumberWithInteger:DefaultgasPriceCoef] forKey:@"gasPriceCoef"];
         
-        NSString *clauseDataTemp = [clauseData stringByReplacingOccurrencesOfString:transferMethodId withString:@""];
+        NSString *clauseDataTemp = [clauseData stringByReplacingOccurrencesOfString:TransferMethodId withString:@""];
         NSString *clauseValue = @"";
         
-        if (clauseDataTemp.length > 32) {
+        if (clauseDataTemp.length >= 128) {
             clauseValue = [clauseDataTemp substringWithRange:NSMakeRange(64, 64)];
         }
         

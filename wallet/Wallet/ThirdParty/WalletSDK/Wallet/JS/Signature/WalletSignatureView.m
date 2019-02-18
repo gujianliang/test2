@@ -341,7 +341,6 @@
          if (receiptModel != nil) {
              if (!receiptModel.reverted) {
                  [self uploadSuccess];
-                 
                  [self notificatonJS];
              }else {
                  [self uploadFail];
