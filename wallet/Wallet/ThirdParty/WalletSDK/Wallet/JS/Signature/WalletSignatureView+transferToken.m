@@ -97,9 +97,10 @@
 
 - (void)packageClausesData:(Transaction *)transaction
 {
+    
     BigNumber *subValue;
-    if ([self.currentCoinModel.coinName isEqualToString:@"VET"]) {
-        //ven 转账  data 设置空
+    if (self.transferType == JSVETTransferType) {
+        //vet 转账  data 设置空
         subValue = [Payment parseEther:self.amount];
         if ([self.amount floatValue] == 0.0
             && [subValue lessThanEqualTo:[BigNumber constantZero]]) {
@@ -110,13 +111,13 @@
             transaction.Clauses = @[@[toData,subValue.data,[NSData data]]];
         }
         
-    } else if(self.currentCoinModel) {
+    } else if(self.transferType == JSVTHOTransferType) {
         //token 转账 value 设置0，data 设置见文档
         subValue = [Payment parseToken:self.amount dicimals:self.currentCoinModel.decimals];
         
         SecureData *tokenAddress = [SecureData secureDataWithHexString:self.currentCoinModel.address];
         transaction.Clauses = @[@[tokenAddress.data,[NSData data],self.clauseData]];
-    }else{ // 合约转账
+    }else if(self.transferType == JSContranctTransferType) { // 合约转账
         CGFloat amountF = self.amount.floatValue;
         if (amountF == 0) {
             if (self.tokenAddress.length == 0) {

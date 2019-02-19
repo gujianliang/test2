@@ -374,7 +374,6 @@
         NSString *decimalsHex = dictResult[@"data"];
         NSString *decimals = [BigNumber bigNumberWithHexString:decimalsHex].decimalString;
         
-        
         WalletCoinModel *coinModel = [[WalletCoinModel alloc]init];
         coinModel.coinName         = coinName;
         coinModel.transferGas      = [NSString stringWithFormat:@"%@",gas];
@@ -450,6 +449,29 @@
                                           code:OK];
         }
     };
+    
+    [WalletUtils signViewFrom:from
+                           to:toAddress
+                       amount:[NSString stringWithFormat:@"%.2f",amountTnteger]
+                     coinName:@"VTHO"
+                        block:^(NSString *txId)
+    {
+        if (txId.length == 0) {
+            
+            [WalletTools callbackWithrequestId:requestId
+                                       webView:webView
+                                          data:@""
+                                    callbackId:callbackId
+                                          code:ERROR_CANCEL];
+        }else{
+            
+            [WalletTools callbackWithrequestId:requestId
+                                       webView:webView
+                                          data:txId
+                                    callbackId:callbackId
+                                          code:OK];
+        }
+    }];
 }
 
 - (void)contractSignDictParam:(NSMutableDictionary *)dictParam

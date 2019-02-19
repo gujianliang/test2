@@ -16,7 +16,6 @@
 #import <WebKit/WebKit.h>
 
 
-
 #ifndef weakify
 #if DEBUG
 #if __has_feature(objc_arc)
@@ -68,6 +67,7 @@ typedef NS_ENUM(NSInteger , ContractType)
     Contract_buyNode,           // 购买节点
     Contract_cancelSaleNode,     // 取消拍卖
     Contract_transfer,           // 节点转到另外的钱包
+    
     NoContract_transferToken    //单纯token 转账
 };
 

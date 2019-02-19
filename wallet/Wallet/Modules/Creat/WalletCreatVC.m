@@ -8,7 +8,7 @@
 
 #import "WalletCreatVC.h"
 #import <WalletSDK/Wallet.h>
-#import <WalletSDK/MBProgressHUD.h>
+#import "MBProgressHUD.h"
 
 @interface WalletCreatVC ()
 @property (weak, nonatomic) IBOutlet UIView *coverView;

@@ -9,8 +9,6 @@
 #import "WalletMnemonicImportVC.h"
 #import <WalletSDK/WalletUtils.h>
 #import "WalletDetailVC.h"
-#import <WalletSDK/MBProgressHUD.h>
-//#import "MBProgressHUD.h"
 
 @interface WalletMnemonicImportVC ()
 
@@ -28,24 +26,24 @@
 
     if (self.password.text.length == 0 || self.improtKeys.text.length == 0)
     {
-        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view
-                                                  animated:YES];
-        hud.mode = MBProgressHUDModeText;
-        hud.labelText =  @"Invalid";
-        [hud hide:YES afterDelay:1];
+//        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view
+//                                                  animated:YES];
+//        hud.mode = MBProgressHUDModeText;
+//        hud.labelText =  @"Invalid";
+//        [hud hide:YES afterDelay:1];
         return;
     }
     
-    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view
-                                              animated:YES];
-    hud.mode = MBProgressHUDModeText;
-    hud.labelText =  @"waiting...";
+//    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view
+//                                              animated:YES];
+//    hud.mode = MBProgressHUDModeText;
+//    hud.labelText =  @"waiting...";
     
     [WalletUtils creatWalletWithMnemonic:self.improtKeys.text.lowercaseString
                                 password:self.password.text
                                 callback:^(Account *account)
     {
-        [hud hide:YES];
+//        [hud hide:YES];
         
         [self.navigationController popToRootViewControllerAnimated:NO];
         

@@ -9,8 +9,6 @@
 #import "WalletKeystoreImportVC.h"
 #import <WalletSDK/WalletUtils.h>
 #import "WalletDetailVC.h"
-//#import "MBProgressHUD.h"
-#import <WalletSDK/MBProgressHUD.h>
 #import "AppDelegate.h"
 
 @interface WalletKeystoreImportVC ()
@@ -29,24 +27,24 @@
 - (IBAction)importWallet:(id)sender
 {
     if (self.password.text.length == 0 || self.keystoreTextView.text.length == 0) {
-        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view
-                                                  animated:YES];
-        hud.mode = MBProgressHUDModeText;
-        hud.labelText =  @"Invalid";
-        [hud hide:YES afterDelay:1];
+//        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view
+//                                                  animated:YES];
+//        hud.mode = MBProgressHUDModeText;
+//        hud.labelText =  @"Invalid";
+//        [hud hide:YES afterDelay:1];
         return;
     }
     
-    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view
-                                              animated:YES];
-    hud.mode = MBProgressHUDModeText;
-    hud.labelText =  @"waiting ...";
+//    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view
+//                                              animated:YES];
+//    hud.mode = MBProgressHUDModeText;
+//    hud.labelText =  @"waiting ...";
     
     [WalletUtils decryptSecretStorageJSON:self.keystoreTextView.text.lowercaseString
                                  password:self.password.text
                                  callback:^(Account *account, NSError *NSError)
      {
-         [hud hide:YES];
+//         [hud hide:YES];
          if (NSError == nil) {
              NSString *address = account.address.checksumAddress;
              NSLog(@"address == %@;----\nprivateKey = %@ ",address, [SecureData dataToHexString:account.privateKey]);

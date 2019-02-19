@@ -106,14 +106,60 @@
                          account:(Account *)account
                         callback:(void (^)(NSString *))callback;
 
+/**
+ *  @abstract
+ *  encrypt set current wallet address
+ *
+ *  @param address :current wallet address
+ *
+ */
 + (void)setCurrentWallet:(NSString *)address;
 
+/**
+ *  @abstract
+ *  encrypt set current wallet address
+ *
+ *  @param walletList :wallet list ,one item NSDictionary,has 2 key,address and keystore
+ address: wallet addres
+ keystore: json
+ *
+ */
 + (void)initWithWalletDict:(NSMutableArray *)walletList;
 
+/*! @abstract Displays a JavaScript text input panel.
+    @param webView The web view invoking the delegate method.
+    @param prompt The prompt to display.
+    @param defaultText The initial text to display in the text entry field.
+    @param frame Information about the frame whose JavaScript initiated this call.
+    @param completionHandler The completion handler to call after the text
+input panel has been dismissed. Pass the entered text if the user chose
+OK, otherwise nil.
+*/
 + (void)webView:(WKWebView *)webView runJavaScriptTextInputPanelWithPrompt:(NSString *)prompt defaultText:(nullable NSString *)defaultText initiatedByFrame:(WKFrameInfo *_Nullable)frame completionHandler:(void (^_Nullable)(NSString * __nullable result))completionHandler;
 
+/**
+ *  @abstract
+ *  encrypt inject js into webview
+ *
+ *  @param webview The web view invoking the developper new.
+ *
+ */
 + (void)injectJS:(WKWebView *_Nonnull)webview;
 
-+ (void)signViewFrom:(NSString *_Nonnull)from to:(NSString *_Nonnull)to amount:(NSString *_Nonnull)amount coinName:(NSString *_Nonnull)coinName block:(void(^)(NSString *txId))block;
+/**
+ *  @abstract
+ *  encrypt set current wallet address
+ *
+ *  @param from wallet address
+ *  @param to  address
+ *  @param amount transfer
+ *  @param block callback
+ *
+ */
++ (void)signViewFrom:(NSString *_Nonnull)from
+                  to:(NSString *_Nonnull)to
+              amount:(NSString *_Nonnull)amount
+            coinName:(NSString *_Nonnull)coinName
+               block:(void(^)(NSString *txId))block;
 
 @end

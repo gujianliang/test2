@@ -145,7 +145,7 @@
     WalletCoinModel *coinModel = [[WalletCoinModel alloc]init];
     coinModel.coinName         = coinName;
     coinModel.transferGas      = gas.stringValue;
-    coinModel.decimals         = 18;
+    coinModel.decimals         = 10;
     [dictParam setValueIfNotNil:coinModel forKey:@"coinModel"];
     
     WalletSignatureView *signatureView = [[WalletSignatureView alloc] initWithFrame:[WalletTools getCurrentVC].view.bounds];
