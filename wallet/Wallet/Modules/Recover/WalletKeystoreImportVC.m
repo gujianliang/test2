@@ -10,6 +10,7 @@
 #import <WalletSDK/WalletUtils.h>
 #import "WalletDetailVC.h"
 #import "AppDelegate.h"
+#import <WalletSDK/MBProgressHUD.h>
 
 @interface WalletKeystoreImportVC ()
 @property (weak, nonatomic) IBOutlet UITextView *keystoreTextView;
@@ -26,25 +27,27 @@
 
 - (IBAction)importWallet:(id)sender
 {
+    [self.view endEditing:YES];
+
     if (self.password.text.length == 0 || self.keystoreTextView.text.length == 0) {
-//        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view
-//                                                  animated:YES];
-//        hud.mode = MBProgressHUDModeText;
-//        hud.labelText =  @"Invalid";
-//        [hud hide:YES afterDelay:1];
+        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view
+                                                  animated:YES];
+        hud.mode = MBProgressHUDModeText;
+        hud.labelText =  @"Invalid";
+        [hud hide:YES afterDelay:1];
         return;
     }
     
-//    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view
-//                                              animated:YES];
-//    hud.mode = MBProgressHUDModeText;
-//    hud.labelText =  @"waiting ...";
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view
+                                              animated:YES];
+    hud.mode = MBProgressHUDModeText;
+    hud.labelText =  @"waiting ...";
     
     [WalletUtils decryptSecretStorageJSON:self.keystoreTextView.text.lowercaseString
                                  password:self.password.text
                                  callback:^(Account *account, NSError *NSError)
      {
-//         [hud hide:YES];
+         [hud hide:YES];
          if (NSError == nil) {
              NSString *address = account.address.checksumAddress;
              NSLog(@"address == %@;----\nprivateKey = %@ ",address, [SecureData dataToHexString:account.privateKey]);
@@ -59,6 +62,12 @@
              
              WalletDetailVC *detailVC = [[WalletDetailVC alloc]init];
              [self.navigationController pushViewController:detailVC animated:YES];
+         }else{
+             MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view
+                                                       animated:YES];
+             hud.mode = MBProgressHUDModeText;
+             hud.labelText =  @"Invalid";
+             [hud hide:YES afterDelay:1];
          }
      }];
 }

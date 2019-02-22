@@ -8,7 +8,7 @@
 
 #import "WalletCreatVC.h"
 #import <WalletSDK/Wallet.h>
-#import "MBProgressHUD.h"
+#import <WalletSDK/MBProgressHUD.h>
 
 @interface WalletCreatVC ()
 @property (weak, nonatomic) IBOutlet UIView *coverView;
@@ -26,6 +26,7 @@
 
 - (IBAction)creatWallet:(id)sender
 {
+    [self.view endEditing:YES];
     // 生成钱包
     if (self.passwordLabel.text.length  == 0) {
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view
@@ -60,6 +61,11 @@
         
         [[NSUserDefaults standardUserDefaults]setObject:currentDict forKey:@"currentWallet"];
     }];
+}
+
+- (void)touchesBegan:(NSSet*)touches withEvent:(UIEvent *)event{
+    
+    [self.view endEditing:YES];
 }
 
 @end

@@ -8,7 +8,7 @@
 
 #import "WalletChangePWVC.h"
 #import <WalletSDK/Wallet.h>
-#import "MBProgressHUD.h"
+#import <WalletSDK/MBProgressHUD.h>
 
 @interface WalletChangePWVC ()
 @property (weak, nonatomic) IBOutlet UITextField *oldPWTextField;
@@ -27,6 +27,7 @@
 
 - (IBAction)changePW:(id)sender
 {
+    [self.view endEditing:YES];
     
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view
                                               animated:YES];
@@ -34,6 +35,7 @@
     hud.labelText =  @"waiting...";
     
     if (_oldPWTextField.text.length == 0 || _nextPWTextField.text.length == 0 || _makeSureTextField.text.length == 0) {
+        [hud hide:YES];
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view
                                                   animated:YES];
         hud.mode = MBProgressHUDModeText;
@@ -43,6 +45,7 @@
     }
     
     if (![_nextPWTextField.text isEqualToString:_makeSureTextField.text]) {
+        [hud hide:YES];
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view
                                                   animated:YES];
         hud.mode = MBProgressHUDModeText;
@@ -59,6 +62,7 @@
                                  password:_oldPWTextField.text
                                  callback:^(Account *account, NSError *NSError)
      {
+        [hud hide:YES];
          if (NSError != nil) {
              MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view
                                                        animated:YES];
@@ -69,7 +73,7 @@
          }
          [WalletUtils encryptSecretStorageJSON:self.nextPWTextField.text account:account callback:^(NSString *json) {
              
-             [hud hide:YES];
+            
              if (json.length > 0) {
                  NSMutableDictionary *currentDict = [NSMutableDictionary dictionary];
                  [currentDict setObject:address forKey:@"address"];

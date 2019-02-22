@@ -53,6 +53,8 @@
 
 - (IBAction)transfer:(id)sender
 {
+    [self.view endEditing:YES];
+
     NSDictionary *currentWalletDict = [[NSUserDefaults standardUserDefaults]objectForKey:@"currentWallet"];
     NSString *from = currentWalletDict[@"address"];
     

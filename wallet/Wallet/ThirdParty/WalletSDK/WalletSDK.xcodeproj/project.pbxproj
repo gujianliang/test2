@@ -101,7 +101,7 @@
 		9773F976221412D200DF5972 /* WalletTopSinglePixelLineView.h in Headers */ = {isa = PBXBuildFile; fileRef = 9773F8FD221412D200DF5972 /* WalletTopSinglePixelLineView.h */; };
 		9773F977221412D200DF5972 /* WalletGradientLayerButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 9773F8FE221412D200DF5972 /* WalletGradientLayerButton.m */; };
 		9773F978221412D200DF5972 /* WalletVerticalSingleLineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9773F8FF221412D200DF5972 /* WalletVerticalSingleLineView.m */; };
-		9773F979221412D200DF5972 /* MBProgressHUD.h in Headers */ = {isa = PBXBuildFile; fileRef = 9773F900221412D200DF5972 /* MBProgressHUD.h */; };
+		9773F979221412D200DF5972 /* MBProgressHUD.h in Headers */ = {isa = PBXBuildFile; fileRef = 9773F900221412D200DF5972 /* MBProgressHUD.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9773F97A221412D200DF5972 /* WalletExchangeWalletCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9773F901221412D200DF5972 /* WalletExchangeWalletCell.m */; };
 		9773F97B221412D200DF5972 /* WalletDappStoreSelectView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9773F902221412D200DF5972 /* WalletDappStoreSelectView.m */; };
 		9773F97C221412D200DF5972 /* WalletAlertShower.m in Sources */ = {isa = PBXBuildFile; fileRef = 9773F903221412D200DF5972 /* WalletAlertShower.m */; };
@@ -1138,6 +1138,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9773F9D8221412D200DF5972 /* WalletDAppHandle.h in Headers */,
+				9773F979221412D200DF5972 /* MBProgressHUD.h in Headers */,
 				9773F97E221412D200DF5972 /* WalletGradientLayerButton.h in Headers */,
 				9773F8EF2214109300DF5972 /* AFCompatibilityMacros.h in Headers */,
 				9773F8E52214109300DF5972 /* AFURLSessionManager.h in Headers */,
@@ -1156,7 +1157,6 @@
 				9773F9CD221412D200DF5972 /* WalletObserverSignPreviewVC.h in Headers */,
 				9773F8BC2214109300DF5972 /* MASUtilities.h in Headers */,
 				9773F9A7221412D200DF5972 /* WalletDAppPeersApi.h in Headers */,
-				9773F979221412D200DF5972 /* MBProgressHUD.h in Headers */,
 				E2FA04861E42A5660013E5A7 /* SecureData.h in Headers */,
 				9773F99F221412D200DF5972 /* WalletUserDefaultManager.h in Headers */,
 				E2317EB81E31981D00DBE3E4 /* BigNumber.h in Headers */,

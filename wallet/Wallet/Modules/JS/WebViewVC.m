@@ -50,6 +50,9 @@
 #warning  keystore 具体格式
     // intput wallet list detail
     [WalletUtils initWithWalletDict:walletList];
+    
+//   BOOL ttt = [WalletUtils isValidMnemonicPhrase:@"earth patient ticket rapid domain genuine absorb head situate matrix stone fantasy"];
+//    NSLog(@"dd");
 }
 
 //  页面加载完成之后调用

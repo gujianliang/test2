@@ -9,6 +9,7 @@
 #import "WalletMnemonicImportVC.h"
 #import <WalletSDK/WalletUtils.h>
 #import "WalletDetailVC.h"
+#import <WalletSDK/MBProgressHUD.h>
 
 @interface WalletMnemonicImportVC ()
 
@@ -23,27 +24,38 @@
 
 - (IBAction)recover:(id)sender
 {
-
+    [self.view endEditing:YES];
     if (self.password.text.length == 0 || self.improtKeys.text.length == 0)
     {
-//        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view
-//                                                  animated:YES];
-//        hud.mode = MBProgressHUDModeText;
-//        hud.labelText =  @"Invalid";
-//        [hud hide:YES afterDelay:1];
+        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view
+                                                  animated:YES];
+        hud.mode = MBProgressHUDModeText;
+        hud.labelText =  @"Invalid";
+        [hud hide:YES afterDelay:1];
         return;
     }
     
-//    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view
-//                                              animated:YES];
-//    hud.mode = MBProgressHUDModeText;
-//    hud.labelText =  @"waiting...";
+    if (![WalletUtils isValidMnemonicPhrase:self.improtKeys.text]) {
+        
+        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view
+                                                  animated:YES];
+        hud.mode = MBProgressHUDModeText;
+        hud.labelText =  @"Invalid";
+        [hud hide:YES afterDelay:1];
+        return;
+    }
+    
+    
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view
+                                              animated:YES];
+    hud.mode = MBProgressHUDModeText;
+    hud.labelText =  @"waiting...";
     
     [WalletUtils creatWalletWithMnemonic:self.improtKeys.text.lowercaseString
                                 password:self.password.text
                                 callback:^(Account *account)
     {
-//        [hud hide:YES];
+        [hud hide:YES];
         
         [self.navigationController popToRootViewControllerAnimated:NO];
         
