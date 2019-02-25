@@ -924,7 +924,7 @@
 "h5_select_wallet_title" = "选择钱包";
 "n5_select_wallet_to" = "该钱包为转入地址"; // 1
 "h5_select_wallet_no_exist" = "钱包不存在"; // 2
-"h5_params_error" = "非法参数";
+"h5_params_error" = "h5_params_error";
 "h5_contract_params_confirm_title" = "签名确认";
 "h5_contract_params_confirm_button" = "已知晓风险，继续签名";
 "h5_contract_params_confirm_msg" = "这是一笔钱包不识别的签名，该签名可能包含某些数字货币资产，请确认签名信息，以免造成资产损失";

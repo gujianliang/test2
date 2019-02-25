@@ -255,7 +255,7 @@
                                    webView:_webView
                                 callbackId:callbackId
                                     amount:amount
-                              gasPriceCoef:[NSString stringWithFormat:@"%d",DefaultGasPriceCoef]];
+                              gasPriceCoef:gasPrice];
     };
 }
 

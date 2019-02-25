@@ -450,28 +450,28 @@
         }
     };
     
-    [WalletUtils signViewFrom:from
-                           to:toAddress
-                       amount:[NSString stringWithFormat:@"%.2f",amountTnteger]
-                     coinName:@"VTHO"
-                        block:^(NSString *txId)
-    {
-        if (txId.length == 0) {
-            
-            [WalletTools callbackWithrequestId:requestId
-                                       webView:webView
-                                          data:@""
-                                    callbackId:callbackId
-                                          code:ERROR_CANCEL];
-        }else{
-            
-            [WalletTools callbackWithrequestId:requestId
-                                       webView:webView
-                                          data:txId
-                                    callbackId:callbackId
-                                          code:OK];
-        }
-    }];
+//    [WalletUtils signViewFrom:from
+//                           to:toAddress
+//                       amount:[NSString stringWithFormat:@"%.2f",amountTnteger]
+//                     coinName:@"VTHO"
+//                        block:^(NSString *txId)
+//    {
+//        if (txId.length == 0) {
+//
+//            [WalletTools callbackWithrequestId:requestId
+//                                       webView:webView
+//                                          data:@""
+//                                    callbackId:callbackId
+//                                          code:ERROR_CANCEL];
+//        }else{
+//
+//            [WalletTools callbackWithrequestId:requestId
+//                                       webView:webView
+//                                          data:txId
+//                                    callbackId:callbackId
+//                                          code:OK];
+//        }
+//    }];
 }
 
 - (void)contractSignDictParam:(NSMutableDictionary *)dictParam
@@ -528,6 +528,9 @@
 
 - (BOOL)errorAddressAlert:(NSString *)toAddress
 {
+    if ([toAddress isKindOfClass:[NSNull class]]) {
+        return NO;
+    }
     // 格式校验
     bool isOK = YES;
     if (!toAddress
@@ -551,7 +554,7 @@
         }
         if (!isOK) {
             [WalletAlertShower showAlert:nil
-                                    msg:VCNSLocalizedBundleString(@"非法参数", nil)
+                                    msg:VCNSLocalizedBundleString(@"h5_params_error", nil)
                                   inCtl:[WalletTools getCurrentVC]
                                   items:@[VCNSLocalizedBundleString(@"dialog_yes", nil)]
                              clickBlock:^(NSInteger index) {
@@ -566,7 +569,7 @@
     BOOL allAreValidChar = [predicate evaluateWithObject:toAddress];
     if (!allAreValidChar) {
         [WalletAlertShower showAlert:nil
-                                msg:VCNSLocalizedBundleString(@"非法参数", nil)
+                                msg:VCNSLocalizedBundleString(@"h5_params_error", nil)
                               inCtl:[WalletTools getCurrentVC]
                               items:@[VCNSLocalizedBundleString(@"dialog_yes", nil)]
                          clickBlock:^(NSInteger index) {
@@ -603,7 +606,7 @@
     }
     if (!bAmount) {
         [WalletAlertShower showAlert:nil
-                                msg:VCNSLocalizedBundleString(@"非法参数", nil)
+                                msg:VCNSLocalizedBundleString(@"h5_params_error", nil)
                               inCtl:[WalletTools getCurrentVC]
                               items:@[VCNSLocalizedBundleString(@"dialog_yes", nil)]
                          clickBlock:^(NSInteger index) {
