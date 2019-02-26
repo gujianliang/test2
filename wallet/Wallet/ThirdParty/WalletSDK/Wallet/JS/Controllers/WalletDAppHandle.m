@@ -28,6 +28,7 @@
 #import "WalletDAppTransferDetailApi.h"
 #import "WalletSingletonHandle.h"
 #import "WalletJSCallbackModel.h"
+#import "WalletGetBaseGasPriceApi.h"
 
 @interface WalletDAppHandle ()<WKNavigationDelegate,WKUIDelegate>
 {
@@ -226,7 +227,7 @@
     
     NSMutableDictionary *dictParam = [NSMutableDictionary dictionary];
     
-    [dictParam setValueIfNotNil:gasPrice forKey:@"gasPriceCoef"];
+    [dictParam setValueIfNotNil:[BigNumber bigNumberWithHexString:gasPrice] forKey:@"gasPriceCoef"];
     [dictParam setValueIfNotNil:gas forKey:@"gas"];
     [dictParam setValueIfNotNil:to forKey:@"to"];
     [dictParam setValueIfNotNil:amount forKey:@"amount"];

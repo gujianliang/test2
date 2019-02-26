@@ -18,6 +18,7 @@
 #import "AFNetworkReachabilityManager.h"
 #import "WalletMBProgressShower.h"
 #import "WalletDAppHead.h"
+#import "WalletGetBaseGasPriceApi.h"
 
 @implementation WalletTools
 
@@ -842,14 +843,46 @@
 
 + (BigNumber *)calcThorNeeded:(float)gasPriceCoef gas:(NSNumber *)gas
 {
-    BigNumber *gasBigNumber = [BigNumber bigNumberWithNumber:gas];
+//    NSString *baseGasPrice = @"";
+    NSMutableDictionary* dictParameters = [NSMutableDictionary dictionary];
+    [dictParameters setValueIfNotNil:@"0x8eaa6ac0000000000000000000000000000000000000626173652d6761732d7072696365" forKey:@"data"];
+    [dictParameters setValueIfNotNil:@"0x0" forKey:@"value"];
     
-    BigNumber *baseGasPrice = [BigNumber bigNumberWithDecimalString:@"1000000000000000"];
-    BigNumber *currentGasPrice = [BigNumber bigNumberWithInteger:(1 + gasPriceCoef/255.0)*1000000];
-    BigNumber *removeOffset = [BigNumber bigNumberWithInteger:1000000];
+    NSString *httpAddress =  [NSString stringWithFormat:@"%@/accounts/%@",[WalletUserDefaultManager getBlockUrl],@"0x0000000000000000000000000000506172616D73"];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:httpAddress]];
+    //设置请求方式也POST（默认是GET）
+    request.timeoutInterval = 30;
     
-    BigNumber *gasCanUse = [[[baseGasPrice mul:currentGasPrice] mul:gasBigNumber] div:removeOffset];
-    return gasCanUse;
+    [request setHTTPMethod:@"POST"];
+    
+    [request setHTTPBody:[dictParameters yy_modelToJSONData] ];
+    //同步方式连接服务器
+    NSData *responseObject = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
+    NSError *error;
+    if (responseObject){
+        NSString *responseStr =  [[ NSString alloc]initWithData:responseObject
+                                                       encoding:NSUTF8StringEncoding];
+        NSDictionary *json = [NSJSONSerialization JSONObjectWithData:[responseStr
+                                                                      dataUsingEncoding:NSUTF8StringEncoding] options:kNilOptions error:&error]  ;
+        NSString *baseGasPriceHex = json[@"data"];
+        if (baseGasPriceHex.length > 3) {
+            NSString *baseGasPrice = [BigNumber bigNumberWithHexString:baseGasPriceHex].decimalString;
+            
+            BigNumber *gasBigNumber = [BigNumber bigNumberWithNumber:gas];
+            
+            BigNumber *baseGasPriceBig = [BigNumber bigNumberWithDecimalString:baseGasPrice];
+            BigNumber *currentGasPrice = [BigNumber bigNumberWithInteger:(1 + gasPriceCoef/255.0)*1000000];
+            BigNumber *removeOffset = [BigNumber bigNumberWithInteger:1000000];
+            
+            BigNumber *gasCanUse = [[[baseGasPriceBig mul:currentGasPrice] mul:gasBigNumber] div:removeOffset];
+            return gasCanUse;
+        }
+        
+    }else  {
+        
+        
+    }
+    return nil;
 }
 
 @end

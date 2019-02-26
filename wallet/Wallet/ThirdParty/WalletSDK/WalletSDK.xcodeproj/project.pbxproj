@@ -18,6 +18,8 @@
 		4143EE802202E7C40056C08A /* icon_close_black@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4143EE752202E7C30056C08A /* icon_close_black@2x.png */; };
 		4143EE812202E7C40056C08A /* icon_back_black@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4143EE762202E7C30056C08A /* icon_back_black@2x.png */; };
 		4143EE822202E7C40056C08A /* icon_shibai@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4143EE772202E7C40056C08A /* icon_shibai@3x.png */; };
+		971811FC2224DBD1008F9639 /* WalletGetBaseGasPriceApi.h in Headers */ = {isa = PBXBuildFile; fileRef = 971811FA2224DBD1008F9639 /* WalletGetBaseGasPriceApi.h */; };
+		971811FD2224DBD1008F9639 /* WalletGetBaseGasPriceApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 971811FB2224DBD1008F9639 /* WalletGetBaseGasPriceApi.m */; };
 		9736C126214B8671003DE935 /* WalletUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 9736C124214B8671003DE935 /* WalletUtils.m */; };
 		9736C127214B8671003DE935 /* WalletUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 9736C125214B8671003DE935 /* WalletUtils.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9743A54221FED23F0079C582 /* NSJSONSerialization+NilDataParameter.m in Sources */ = {isa = PBXBuildFile; fileRef = 9743A54021FED23F0079C582 /* NSJSONSerialization+NilDataParameter.m */; };
@@ -317,6 +319,8 @@
 		4143EE752202E7C30056C08A /* icon_close_black@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_close_black@2x.png"; sourceTree = "<group>"; };
 		4143EE762202E7C30056C08A /* icon_back_black@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_back_black@2x.png"; sourceTree = "<group>"; };
 		4143EE772202E7C40056C08A /* icon_shibai@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_shibai@3x.png"; sourceTree = "<group>"; };
+		971811FA2224DBD1008F9639 /* WalletGetBaseGasPriceApi.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WalletGetBaseGasPriceApi.h; sourceTree = "<group>"; };
+		971811FB2224DBD1008F9639 /* WalletGetBaseGasPriceApi.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WalletGetBaseGasPriceApi.m; sourceTree = "<group>"; };
 		9736C124214B8671003DE935 /* WalletUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WalletUtils.m; path = src/WalletUtils.m; sourceTree = "<group>"; };
 		9736C125214B8671003DE935 /* WalletUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WalletUtils.h; path = src/WalletUtils.h; sourceTree = "<group>"; };
 		9743A54021FED23F0079C582 /* NSJSONSerialization+NilDataParameter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSJSONSerialization+NilDataParameter.m"; sourceTree = "<group>"; };
@@ -895,6 +899,8 @@
 				9773F939221412D200DF5972 /* WalletTransantionsReceiptApi.h */,
 				9773F948221412D200DF5972 /* WalletTransantionsReceiptApi.m */,
 				9773F93E221412D200DF5972 /* WalletApiManageMacro.h */,
+				971811FA2224DBD1008F9639 /* WalletGetBaseGasPriceApi.h */,
+				971811FB2224DBD1008F9639 /* WalletGetBaseGasPriceApi.m */,
 			);
 			path = Api;
 			sourceTree = "<group>";
@@ -1146,6 +1152,7 @@
 				9773F8E42214109300DF5972 /* AFNetworkReachabilityManager.h in Headers */,
 				9773F8F02214109300DF5972 /* AFHTTPSessionManager.h in Headers */,
 				9773F8E32214109300DF5972 /* AFSecurityPolicy.h in Headers */,
+				971811FC2224DBD1008F9639 /* WalletGetBaseGasPriceApi.h in Headers */,
 				9773F8E92214109300DF5972 /* AFURLResponseSerialization.h in Headers */,
 				9773F8E62214109300DF5972 /* AFURLRequestSerialization.h in Headers */,
 				9773F9D9221412D200DF5972 /* WalletDAppHead.h in Headers */,
@@ -1498,6 +1505,7 @@
 				9773F978221412D200DF5972 /* WalletVerticalSingleLineView.m in Sources */,
 				9773F8CC2214109300DF5972 /* MASViewAttribute.m in Sources */,
 				9773F986221412D200DF5972 /* WalletObersverTransactionModel.m in Sources */,
+				971811FD2224DBD1008F9639 /* WalletGetBaseGasPriceApi.m in Sources */,
 				9773F9A1221412D200DF5972 /* WalletBlockInfoApi.m in Sources */,
 				E2317F2C1E31994500DBE3E4 /* sha2.c in Sources */,
 				9773F9AC221412D200DF5972 /* NSBundle+Localizable.m in Sources */,

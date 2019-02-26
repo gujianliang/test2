@@ -260,7 +260,7 @@
     
     [dictParam setValueIfNotNil:coinModel forKey:@"coinModel"];
     [dictParam setValueIfNotNil:miner forKey:@"miner"];
-    [dictParam setValueIfNotNil:[BigNumber bigNumberWithInteger:gasPrice.integerValue] forKey:@"gasPriceCoef"];
+    [dictParam setValueIfNotNil:[BigNumber bigNumberWithHexString:gasPrice] forKey:@"gasPriceCoef"];
     [dictParam setValueIfNotNil:[NSNumber numberWithFloat:gas.floatValue] forKey:@"gas"];
     
     WalletSignatureView *signatureView = [[WalletSignatureView alloc] initWithFrame:[WalletTools getCurrentVC].view.bounds];
