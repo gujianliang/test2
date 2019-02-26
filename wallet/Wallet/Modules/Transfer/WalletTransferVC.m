@@ -67,13 +67,19 @@
     [WalletUtils initWithWalletDict:walletList];
     [WalletUtils setCurrentWallet:from];
     
-    [WalletUtils signViewFrom:from
-                           to:self.receiveAddressTextView.text
-                       amount:self.transferAmountTextField.text
-                     coinName:self.coinName.text
-                        block:^(NSString *txId) {
-                            
-                        }];
+    [WalletUtils signViewFromAddress:from toAddress:self.receiveAddressTextView.text amount:self.transferAmountTextField.text symbol:self.coinName.text gas:@"21000" tokenAddress:@"" decimals:18 block:^(NSString *txId) {
+        
+    }];
+    
+//    [WalletUtils signViewFrom:from
+//                           to:self.receiveAddressTextView.text
+//                       amount:self.transferAmountTextField.text
+//                     coinName:self.coinName.text
+//                        block:^(NSString *txId) {
+//                            
+//                        }];
+    
+    
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField

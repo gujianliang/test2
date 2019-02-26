@@ -176,16 +176,17 @@
     NSString *gasPrice = callbackParams[@"gasPrice"];
     if (gasPrice.length == 0) {
         //默认120，如果js没有返回，就给默认的
-        gasPrice = [BigNumber bigNumberWithInteger:DefaultGasPriceCoef].hexString;
+        gasPrice = [BigNumber bigNumberWithHexString:DefaultGasPriceCoef].hexString;
     }
     
     CGFloat amountTnteger = [BigNumber bigNumberWithHexString:[NSString stringWithFormat:@"%@",amount]].decimalString.floatValue/pow(10, 18);
     
-    WalletDappStoreSelectView *selcetView = [[WalletDappStoreSelectView alloc]initWithFrame:[WalletTools getCurrentVC].view.frame ];
-    selcetView.tag = SelectWalletTag;
-    selcetView.amount = [NSString stringWithFormat:@"%lf",amountTnteger];
-    [[WalletTools getCurrentVC].navigationController.view addSubview:selcetView];
-    selcetView.block = ^(NSString *from,WalletDappStoreSelectView *viewSelf){
+    WalletDappStoreSelectView *selectView = [[WalletDappStoreSelectView alloc]initWithFrame:[WalletTools getCurrentVC].view.frame ];
+    selectView.tag = SelectWalletTag;
+    selectView.toAddress = to;
+    selectView.amount = [NSString stringWithFormat:@"%lf",amountTnteger];
+    [[WalletTools getCurrentVC].navigationController.view addSubview:selectView];
+    selectView.block = ^(NSString *from,WalletDappStoreSelectView *viewSelf){
         
         [viewSelf removeFromSuperview];
         
@@ -208,6 +209,28 @@
           completionHandler:(void (^)(NSString * __nullable result))completionHandler
 
 {
+    if ([[WalletTools getCurrentVC].navigationController.view viewWithTag:SelectWalletTag]) {
+        completionHandler(@"{}");
+        return;
+    }
+    
+    NSString *kind = callbackParams[@"kind"];
+    BOOL bCert = NO;
+    if ([kind isEqualToString:@"cert"]) {
+        callbackParams = [NSMutableDictionary dictionaryWithDictionary:callbackParams[@"clauses"]];
+        bCert = YES;
+        
+    }else if([kind isEqualToString:@"tx"]){
+        
+    }else{
+        [WalletTools callbackWithrequestId:requestId
+                                   webView:_webView
+                                      data:@""
+                                callbackId:callbackId
+                                      code:ERROR_REQUEST_PARAMS];
+        return;
+    }
+    
     NSDictionary *clausesDict = callbackParams[@"clauses"][0];
     if (clausesDict == nil) {
         completionHandler(@"{}");
@@ -216,14 +239,13 @@
     
     NSString *to         = clausesDict[@"to"];
     NSString *amount     = clausesDict[@"value"];
-    NSString *clauseData = clausesDict[@"data"];
+    NSString *clauseStr = clausesDict[@"data"];
     NSNumber *gas        = callbackParams[@"options"][@"gas"];
+    NSString *gasPrice   = callbackParams[@"options"][@"gasPrice"];
 
-    NSString *gasPrice = callbackParams[@"options"][@"gasPrice"];
-    if (gasPrice.length == 0) {
-        //默认120，如果js没有返回，就给默认的
-        gasPrice = [BigNumber bigNumberWithInteger:DefaultGasPriceCoef].hexString;
-    }
+    
+    [self checkParamGasPrice:gasPrice gas:(NSString *)gas amount:amount to:to clauseStr:clauseStr];
+    
     
     NSMutableDictionary *dictParam = [NSMutableDictionary dictionary];
     
@@ -232,22 +254,86 @@
     [dictParam setValueIfNotNil:to forKey:@"to"];
     [dictParam setValueIfNotNil:amount forKey:@"amount"];
     
-    NSData *secureData = [SecureData hexStringToData:clauseData];
+    NSData *secureData = [SecureData hexStringToData:clauseStr];
     [dictParam setValueIfNotNil:secureData forKey:@"clauseData"];
     
-    CGFloat amountTnteger = [BigNumber bigNumberWithHexString:[NSString stringWithFormat:@"%@",amount]].decimalString.floatValue/pow(10, 18);
     
-    WalletDappStoreSelectView *selcetView = [[WalletDappStoreSelectView alloc]initWithFrame:[WalletTools getCurrentVC].view.frame ];
-    selcetView.tag = SelectWalletTag;
-    selcetView.amount = [NSString stringWithFormat:@"%lf",amountTnteger];
-    [[WalletTools getCurrentVC].navigationController.view addSubview:selcetView];
-    selcetView.block = ^(NSString *from,WalletDappStoreSelectView *viewSelf){
+    CGFloat amountFloat = 0;
+    if (clauseStr.length < 10) { // vet 转账clauseData == nil,
+        
+        
+        if (![self checkAmountForm:amount amountFloat:amountFloat requestId:requestId webView:_webView callbackId:callbackId]) {
+            return;
+        }
+        
+        if (![self errorAddressAlert:to] ||
+            ![self errorAmount:[NSString stringWithFormat:@"%lf",amountFloat] coinName:@"VET"]
+            ||!(gas.integerValue > 0)) {
+            
+            [WalletTools callbackWithrequestId:requestId
+                                       webView:_webView
+                                          data:@""
+                                    callbackId:callbackId
+                                          code:ERROR_REQUEST_PARAMS];
+            
+            return;
+        }
+        
+    }else{
+        if ([clauseStr hasPrefix:TransferMethodId]) { // token 转账
+            NSString *tokenAddress = to;
+            NSString *clauseTemp =  [clauseStr stringByReplacingOccurrencesOfString:@"0xa9059cbb000000000000000000000000" withString:@""];
+            to = [@"0x" stringByAppendingString:[clauseTemp substringToIndex:40]];
+            
+            [dictParam setValue:to forKey:@"to"];
+            [dictParam setValue:tokenAddress forKey:@"tokenAddress"];
+            
+            if (![WalletTools errorAddressAlert:to]
+                || ![WalletTools errorAddressAlert:tokenAddress]
+                || [tokenAddress isKindOfClass:[NSNull class]]
+                || ![self checkClauseForm:clauseStr]
+                ) {
+                
+                [WalletTools callbackWithrequestId:requestId
+                                           webView:_webView
+                                              data:@""
+                                        callbackId:callbackId
+                                              code:ERROR_REQUEST_PARAMS];
+                
+                return;
+            }
+            
+        }else{ // 其他合约交易
+            
+            if (![self checkAmountForm:amount amountFloat:amountFloat requestId:requestId webView:_webView callbackId:callbackId]) {
+                return;
+            }
+            
+            NSData *newclouseData = [SecureData hexStringToData:clauseStr];
+            if (clauseStr.length == 0 ||
+                !(gas.integerValue > 0) ||
+                newclouseData == nil ||
+                ![WalletTools errorAddressAlert:to] ||
+                ![self checkClauseForm:clauseStr]) {
+                
+                [WalletTools callbackWithrequestId:requestId webView:_webView data:@"" callbackId:callbackId code:ERROR_REQUEST_PARAMS];
+                
+                return;
+            }
+        }
+    }
+    
+    WalletDappStoreSelectView *selectView = [[WalletDappStoreSelectView alloc]initWithFrame:[WalletTools getCurrentVC].view.frame ];
+    selectView.tag = SelectWalletTag;
+    selectView.toAddress = to;
+    selectView.amount = [NSString stringWithFormat:@"%lf",amountFloat];
+    [[WalletTools getCurrentVC].navigationController.view addSubview:selectView];
+    selectView.block = ^(NSString *from,WalletDappStoreSelectView *viewSelf){
         
         [viewSelf removeFromSuperview];
-        
         [dictParam setValueIfNotNil:from forKey:@"from"];
         
-        [self connexTransferWithClauseData:clauseData
+        [self connexTransferWithClauseData:clauseStr
                                  dictParam:dictParam
                                       from:from
                                         to:to
@@ -271,12 +357,17 @@
                             amount:(NSString *)amount
                          gasPriceCoef:(NSString *)gasPriceCoef
 {
-    if (clauseData.length < 3) { // vet 转账clauseData == nil,
-        CGFloat amountTnteger = [BigNumber bigNumberWithDecimalString:amount].decimalString.floatValue/pow(10, 18);
+    if (clauseData.length < 10) { // vet 转账clauseData == nil,
+        CGFloat amountFloat = 0;
+        
+        if (![self checkAmountForm:amount amountFloat:amountFloat requestId:requestId webView:_webView callbackId:callbackId]) {
+            return;
+        }
+        
         [self VETTransferDictParam:dictParam
                               from:from
                                 to:to
-                     amountTnteger:amountTnteger
+                     amountTnteger:amountFloat
                          requestId:requestId
                                gas:gas
                            webView:webView
@@ -288,6 +379,9 @@
             NSString *clauseTemp =  [clauseData stringByReplacingOccurrencesOfString:@"0xa9059cbb000000000000000000000000" withString:@""];
             NSString *toAddress = [@"0x" stringByAppendingString:[clauseTemp substringToIndex:40]];
             
+            [dictParam setValue:toAddress forKey:@"to"];
+            [dictParam setValue:tokenAddress forKey:@"tokenAddress"];
+
             [self VTHOTransferDictParam:dictParam
                                    from:from
                            tokenAddress:tokenAddress
@@ -300,11 +394,15 @@
                              clauseData:clauseData];
             
         }else{ // 其他合约交易
-            CGFloat amountTnteger = [BigNumber bigNumberWithDecimalString:amount].decimalString.floatValue/pow(10, 18);
+            CGFloat amountFloat = 0;
+            
+            if (![self checkAmountForm:amount amountFloat:amountFloat requestId:requestId webView:_webView callbackId:callbackId]) {
+                return;
+            }
             [self contractSignDictParam:dictParam
                                      to:to
                                    from:from
-                          amountTnteger:amountTnteger
+                          amountTnteger:amountFloat
                               requestId:requestId
                                     gas:gas
                                 webView:webView
@@ -382,6 +480,87 @@
     [webview evaluateJavaScript:web3js completionHandler:^(id _Nullable item, NSError * _Nullable error) {
         NSLog(@"web3js error == %@",error);
     }];
+}
+
+- (void)checkParamGasPrice:(NSString *)gasPrice gas:(NSString *)gas amount:(NSString *)amount to:(NSString *)to clauseStr:(NSString *)clauseStr
+{
+    if ([gasPrice isKindOfClass:[NSNull class]]) {
+        gasPrice = DefaultGasPriceCoef;
+    }else if (gasPrice.length == 0) {
+        //默认120，如果js没有返回，就给默认的
+        gasPrice = DefaultGasPriceCoef;
+    }
+    
+    if ([gas isKindOfClass:[NSNull class]]) {
+        gas = nil;
+    }
+    
+    if ([amount isKindOfClass:[NSNull class]]) {
+        amount = @"0";
+    }else if(amount.length == 0){
+        amount = @"0";
+    }
+    
+    if ([clauseStr isKindOfClass:[NSNull class]]) {
+        clauseStr = nil;
+    }
+    
+    if ([to isKindOfClass:[NSNull class]]) {
+        to = nil;
+    }
+}
+
+- (BOOL)checkAmountForm:(NSString *)amount
+            amountFloat:(CGFloat)amountFloat
+              requestId:(NSString *)requestId
+                webView:(WKWebView *)webView
+             callbackId:(NSString *)callbackId
+{
+    if ([amount hasPrefix:@"0x"] || [amount hasPrefix:@"0X"]) { // 16进制
+        
+        NSString *regex =@"[0-9a-fA-F]*";
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",regex];
+        if ([predicate evaluateWithObject:[amount substringFromIndex:2]]) {
+            amountFloat = [BigNumber bigNumberWithHexString:[NSString stringWithFormat:@"%@",amount]].decimalString.doubleValue/pow(10, 18);
+            return YES;
+        }else{
+            [WalletTools callbackWithrequestId:requestId
+                                       webView:webView
+                                          data:@""
+                                    callbackId:callbackId
+                                          code:ERROR_REQUEST_PARAMS];
+            return NO;
+        }
+    }else { // 10进制
+        NSString *regex =@"[0-9]*";
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",regex];
+        if ([predicate evaluateWithObject:amount]) {
+            amountFloat = [BigNumber bigNumberWithDecimalString:[NSString stringWithFormat:@"%@",amount]].decimalString.doubleValue/pow(10, 18);
+            return YES;
+        }else{
+            [WalletTools callbackWithrequestId:requestId
+                                       webView:webView
+                                          data:@""
+                                    callbackId:callbackId
+                                          code:ERROR_REQUEST_PARAMS];
+            return NO;
+        }
+    }
+}
+
+- (BOOL)checkClauseForm:(NSString *)clauseStr
+{
+    if (clauseStr.length > 10) {
+        NSString *temp1 = [clauseStr substringFromIndex:10];
+        NSInteger i = temp1.length % 64;
+        if (i == 0) {
+            return YES;
+        }
+        return NO;
+        
+    }else{
+        return NO;
+    }
 }
 
 @end

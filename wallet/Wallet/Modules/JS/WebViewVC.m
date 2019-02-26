@@ -36,7 +36,18 @@
     _webView.UIDelegate = self;
     _webView.navigationDelegate = self;
     
-    [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:_url]]];
+    
+    NSString *stringurl= _url;
+    
+    NSURL *url=[NSURL URLWithString:stringurl];
+    
+    NSMutableURLRequest *theRequest = [NSMutableURLRequest requestWithURL:url
+                                       
+                                                              cachePolicy:NSURLRequestReloadIgnoringCacheData
+                                       
+                                                          timeoutInterval:1.0];
+    
+    [_webView loadRequest:theRequest];
     [self.view addSubview:_webView];
     
     NSDictionary *currentWallet = [[NSUserDefaults standardUserDefaults]objectForKey:@"currentWallet"];

@@ -117,11 +117,7 @@
         
         if (txid.length == 0) {
             
-            [WalletTools callbackWithrequestId:requestId
-                                       webView:webView
-                                         data:@""
-                                   callbackId:callbackId
-                                         code:ERROR_CANCEL];
+            
         }else{
             
             [WalletTools callbackWithrequestId:requestId
@@ -277,11 +273,7 @@
         NSLog(@"txid = %@",txid);
         if (txid.length == 0) {
             
-            [WalletTools callbackWithrequestId:requestId
-                                       webView:webView
-                                          data:@""
-                                    callbackId:callbackId
-                                          code:ERROR_CANCEL];
+           
         }else{
             
             [WalletTools callbackWithrequestId:requestId
@@ -345,11 +337,7 @@
         NSLog(@"txid = %@",txid);
         if (txid.length == 0) {
             
-            [WalletTools callbackWithrequestId:requestId
-                                       webView:webView
-                                         data:@""
-                                   callbackId:callbackId
-                                         code:ERROR_CANCEL];
+            
         }else{
             
             [WalletTools callbackWithrequestId:requestId

@@ -72,15 +72,17 @@
     
     // 返回箭头按钮
     UIButton *backBtn = [[UIButton alloc]init];
-    [backBtn setImage:[UIImage imageNamed:@"icon_close_white-1"] forState:UIControlStateNormal];
+    UIImage *iamge = [WalletTools localImageWithName:@"icon_close_black"];
+    
+    [backBtn setImage:iamge forState:UIControlStateNormal];
     [titleView addSubview:backBtn];
     [backBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.top.mas_equalTo(0);
         make.size.mas_equalTo(CGSizeMake(40, 40));
     }];
-//    @weakify(self);
+    @weakify(self);
     backBtn.block = ^(UIButton *btn) {
-//        @strongify(self);
+        @strongify(self);
         [UIView animateWithDuration:0.3 animations:^{
             [self setFrame:CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, SCREEN_HEIGHT)];
         } completion:^(BOOL finished) {
@@ -114,7 +116,7 @@
 {
     WalletExchangeWalletCell *cell = [[WalletExchangeWalletCell alloc] init];
     NSArray *walletList =[[WalletSingletonHandle shareWalletHandle] getAllWallet];
-    [cell setModel:walletList[indexPath.row] amount:_amount];
+    [cell setModel:walletList[indexPath.row] amount:_amount toAddress:_toAddress];
     return cell;
 }
 
@@ -136,8 +138,9 @@
     
     [[WalletSingletonHandle shareWalletHandle] setCurrentModel:model.address];
     
-    if([BigNumber bigNumberWithHexString:model.VETCount].decimalString.floatValue >=
-       _amount.floatValue)
+    if ([model.address.lowercaseString isEqualToString:_toAddress.lowercaseString]) {
+        return;
+    }else if(model.VETCount.doubleValue > _amount.doubleValue)
     {
         if (_block) {
             _block(model.address,self);

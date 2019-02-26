@@ -156,10 +156,6 @@ OK, otherwise nil.
  *  @param block callback
  *
  */
-+ (void)signViewFrom:(NSString *_Nonnull)from
-                  to:(NSString *_Nonnull)to
-              amount:(NSString *_Nonnull)amount
-            coinName:(NSString *_Nonnull)coinName
-               block:(void(^)(NSString *txId))block;
++ (void)signViewFromAddress:(NSString *_Nonnull)fromAddress toAddress:(NSString *_Nonnull)toAddress amount:(NSString *_Nonnull)amount symbol:(NSString *_Nonnull)symbol gas:(NSString *_Nonnull)gas tokenAddress:(NSString *_Nonnull)tokenAddress decimals:(int)decimals block:(void(^)(NSString *txId))block;
 
 @end

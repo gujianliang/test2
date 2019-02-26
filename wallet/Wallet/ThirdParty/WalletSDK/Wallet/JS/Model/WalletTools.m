@@ -23,21 +23,6 @@
 @implementation WalletTools
 
 
-+ (NSString *)dateConvertString:(NSDate *)date format:(NSString *)format
-{
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:format];
-    NSString *destDateString = [dateFormatter stringFromDate:date];
-    return destDateString;
-}
-
-+(NSString*)dateStringFrommSecondString:(NSString*)mSecond format:(NSString *)format{
-    NSDate *nd = [NSDate dateWithTimeIntervalSince1970:[mSecond doubleValue]/1000.0];
-    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-    [dateFormat setDateFormat:format];
-    return [dateFormat stringFromDate:nd];
-}
-
 + (UIViewController*)getCurrentVC {
     return [self topViewControllerWithRootViewController:[UIApplication sharedApplication].keyWindow.rootViewController];
 }
@@ -55,44 +40,6 @@
     } else {
         return rootViewController;
     }
-}
-
-+ (BOOL)IsIdentityCard:(NSString *)IDCardNumber
-{
-    if (IDCardNumber.length <= 0) {
-        return NO;
-    }
-    NSString *regex2 = @"^(\\d{14}|\\d{17})(\\d|[xX])$";
-    NSPredicate *identityCardPredicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",regex2];
-    return [identityCardPredicate evaluateWithObject:IDCardNumber];
-}
-
-+(BOOL)isNoNull:(id)Obj
-{
-    if (Obj) {
-        if ([Obj isEqual:[NSNull null]]) {
-            return NO;
-        }
-        return YES;
-    }
-    return NO;
-}
-
-+(NSString*)appVersion
-{
-    NSString* appversion = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
-    appversion = [appversion stringByReplacingOccurrencesOfString:@"." withString:@""];
-    return appversion;
-}
-
-+ (BOOL)checkQRcode:(NSString *)code
-{
-    NSString *regex =@"[A-Z0-9]*";
-    NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",regex];
-    if (![pred evaluateWithObject:code]) {
-        return YES;
-    }
-    return NO;
 }
 
 + (NSString*)localeStringWithKey:(NSString*)key{
@@ -182,37 +129,6 @@
     return  result;
 }
 
-
-+ (NSString *) compareDayTime:(NSString *)str
-{
-    NSTimeInterval time = str.doubleValue;
-    NSDate *detailDate=[NSDate dateWithTimeIntervalSince1970:time];
-    
-    NSDate *currentDate = [NSDate date];
-    NSTimeInterval timeInterval = [currentDate timeIntervalSinceDate:detailDate];
-    
-    long temp = 0;
-    NSString *result;
-    if (timeInterval/60 < 1){
-        result = VCNSLocalizedBundleString(@"刚刚", nil);
-        
-    }else if((temp = timeInterval/60) <60){
-        result = [NSString stringWithFormat:@"%ld %@", temp,
-                  temp == 1 ? VCNSLocalizedBundleString(@"minAgo_single", nil) : VCNSLocalizedBundleString(@"minAgo_plural", nil)];
-        
-    } else if((temp = temp/60) <24){
-        result = [NSString stringWithFormat:@"%ld %@", temp,
-                  temp == 1 ? VCNSLocalizedBundleString(@"hrAgo_single", nil) : VCNSLocalizedBundleString(@"hrAgo_plural", nil)];
-    
-    }else { // 具体 月/日/年 时:分
-        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        [dateFormatter setDateFormat:@"MM/dd/yyyy HH:mm"];
-        result = [dateFormatter stringFromDate: detailDate];
-    }
-    
-    return  result;
-}
-
 + (NSString *)checksumAddress:(NSString *)inputAddress
 {
     Address *a = [Address addressWithString:inputAddress];
@@ -222,21 +138,6 @@
     return inputAddress;
 }
 
-+(NSString *)getSwapAddress:(NSString *)ethAddress thorAddress:(NSString *)thorAddress
-{
-    NSData *data1 = [SecureData hexStringToData:ethAddress.lowercaseString];
-    NSData *data2 = [SecureData hexStringToData:thorAddress];
-    NSMutableData *data3 = [NSMutableData new];
-    [data3 appendData:data1];
-    [data3 appendData:data2];
-    
-    SecureData *last = [SecureData secureDataWithData:data3];
-    NSString *shaStr = last.SHA256.hexString;
-    
-    NSString *result = [NSString stringWithFormat:@"%@%@",@"0x00000000000000000000" ,[shaStr substringFromIndex:46]];
-    return result;
-}
-
 // 大小写
 + (BOOL)InputCapitalAndLowercaseLetter:(NSString*)string
 {
@@ -244,12 +145,6 @@
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",regex];
     BOOL  inputString = [predicate evaluateWithObject:string];
     return inputString;
-}
-
-+ (void)circualarView:(UIView *)view Radius:(CGFloat)radius
-{
-    view.layer.cornerRadius = radius;
-    view.clipsToBounds = YES;
 }
 
 + (void)checkNetwork:(void(^)(BOOL t))block
@@ -279,120 +174,6 @@
     }
 }
 
-+(NSString *)keep4Decimal:(NSString *)input
-{
-    NSArray *valueList = [input componentsSeparatedByString:@"."];
-    NSString *decimals = @"";
-    if (valueList.count > 1 ) {
-        NSString *temp = valueList[1];
-        if (temp.length >3) {
-            decimals = [temp substringToIndex:4];
-        }else{
-            decimals = temp;
-        }
-    }
-    
-    return [NSString stringWithFormat:@"%@.%@",valueList[0],decimals];
-}
-
-+ (NSString *)conventTimeSec:(NSString *)input
-{
-    NSTimeInterval time = input.doubleValue;
-    NSDate *detailDate=[NSDate dateWithTimeIntervalSince1970:time];
-    
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"MM/dd/yyyy HH:mm:ss"];
-    return [dateFormatter stringFromDate:detailDate];
-}
-
-
-+ (NSString *)conventTime:(NSString *)input
-{
-    NSTimeInterval time = input.doubleValue;
-    NSDate *detailDate=[NSDate dateWithTimeIntervalSince1970:time];
-    
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-    return [dateFormatter stringFromDate:detailDate];
-}
-
-+ (NSString *)conventInvalidTime:(NSString *)input
-{
-    NSTimeInterval time = input.doubleValue;
-    NSDate *detailDate=[NSDate dateWithTimeIntervalSince1970:time];
-    
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"MM/dd/yyyy HH:mm"];
-    return [dateFormatter stringFromDate:detailDate];
-}
-
-
-+ (UIImage*) createImageWithColor: (UIColor*) color
-{
-    CGRect rect=CGRectMake(0.0f, 0.0f, 1.0f, 1.0f);
-    UIGraphicsBeginImageContext(rect.size);
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    CGContextSetFillColorWithColor(context, [color CGColor]);
-    CGContextFillRect(context, rect);
-    UIImage *theImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    return theImage;
-}
-
-+ (NSString *)serviceRuleHostWithContent:(NSString *)content
-{
-    NSString *languageCode = [WalletUserDefaultManager getLanuage];
-
-    if ([languageCode containsString:@"zh"]){
-        languageCode = @"cn";
-        
-    }else{
-       languageCode = @"en";
-    }
-    
-    return [NSString stringWithFormat:@"https://cdn.vechain.com/vechainthorwallet/docs/%@/protocol/%@",languageCode,content];
-}
-
-+ (UIViewController *)viewControllerSupportView:(UIView *)view {
-    for (UIView* next = [view superview]; next; next = next.superview) {
-        UIResponder *nextResponder = [next nextResponder];
-        if ([nextResponder isKindOfClass:[UIViewController class]]) {
-            return (UIViewController *)nextResponder;
-        }
-    }
-    return nil;
-}
-
-+ (BOOL)addressChecksum:(NSString *)address
-{
-    if (address.length != 42) {
-        return NO;
-    }
-    NSString *temp = [address substringFromIndex:2];
-    Address *a = [Address addressWithString:temp];
-    
-    if (a == nil) { // 地址检查不通过，不能获得 checksum
-        return NO;
-    }
-    
-    NSString *temp1 = [a.checksumAddress substringFromIndex:2];
-    NSString *temp2 = [address substringFromIndex:2];
-    
-    if (![self checkEthAddress:temp2]) { // 含有异常字符串
-        return NO;
-    }
-    
-    if ([temp2.lowercaseString isEqualToString:temp2]) { // 小写的放过，在外面再做检查
-        return YES;
-    }
-    
-    if (![temp1 isEqualToString:temp2]) { // 输入和输出 不同，输入不是checksum
-        return NO;
-    }
-    
-    return YES;
-}
-
 + (BOOL)checkEthAddress:(NSString *)address
 {
     NSString *regex =@"[0-9a-fA-F]*";
@@ -400,88 +181,6 @@
     return [predicate evaluateWithObject:address];
 }
 
-+(BOOL)hasSpecialWord:(NSString *)words
-{
-    if ([words containsString:@"'"]) {
-        return YES;
-    }
-    return NO;
-}
-
-+(UIImage *)creatQRcodeImage:(NSString *)content
-{
-    // 1.实例化二维码滤镜
-    CIFilter *filter = [CIFilter filterWithName:@"CIQRCodeGenerator"];
-    // 2.恢复滤镜的默认属性 (因为滤镜有可能保存上一次的属性)
-    [filter setDefaults];
-    // 3.将字符串转换成NSdata
-    NSData *data  = [content dataUsingEncoding:NSUTF8StringEncoding];
-    // 4.通过KVO设置滤镜, 传入data, 将来滤镜就知道要通过传入的数据生成二维码
-    [filter setValue:data forKey:@"inputMessage"];
-    // 5.生成二维码
-    CIImage *image = [filter outputImage];
-    
-    CGRect extent = CGRectIntegral(image.extent);
-    CGFloat scale = 3;
-    
-    // 1.创建bitmap;
-    size_t width = CGRectGetWidth(extent) * scale;
-    size_t height = CGRectGetHeight(extent) * scale;
-    CGColorSpaceRef cs = CGColorSpaceCreateDeviceGray();
-    CGContextRef bitmapRef = CGBitmapContextCreate(nil, width, height, 8, 0, cs, (CGBitmapInfo)kCGImageAlphaNone);
-    CIContext *context = [CIContext contextWithOptions:nil];
-    CGImageRef bitmapImage = [context createCGImage:image fromRect:extent];
-    CGContextSetInterpolationQuality(bitmapRef, kCGInterpolationNone);
-    CGContextScaleCTM(bitmapRef, scale, scale);
-    CGContextDrawImage(bitmapRef, extent, bitmapImage);
-    
-    // 2.保存bitmap到图片
-    CGImageRef scaledImage = CGBitmapContextCreateImage(bitmapRef);
-    CGContextRelease(bitmapRef);
-    CGImageRelease(bitmapImage);
-    
-    UIImage *image1 = [UIImage imageWithCGImage:scaledImage];
-    return image1;
-}
-
-+ (void)drawDottedLine:(UIView *)view
-{
-    CAShapeLayer *border = [CAShapeLayer layer];
-    
-    //虚线的颜色
-    border.strokeColor = HEX_RGB(0xDEDEDE).CGColor;
-    //填充的颜色
-    border.fillColor = [UIColor clearColor].CGColor;
-    
-    UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:view.bounds cornerRadius:5];
-    
-    //设置路径
-    border.path = path.CGPath;
-    
-    border.frame = view.bounds;
-    //虚线的宽度
-    border.lineWidth = 1.f;
-    
-    //虚线的间隔
-    border.lineDashPattern = @[@4, @2];
-    
-    view.layer.cornerRadius = 5.f;
-    view.layer.masksToBounds = YES;
-    [view.layer addSublayer:border];
-}
-
-//查询节点信息 余额
-+ (NSString *)blockWtihMethod:(NSString *)methodId tokenID:(NSString *)tokenID
-{
-    NSInteger t = 64 - [methodId substringFromIndex:2].length;
-    NSMutableString *zero = [NSMutableString new];
-    for (int i = 0; i < t; i++) {
-        [zero appendString:@"0"];
-    }
-    NSString *newValue = [NSString stringWithFormat:@"%@%@",methodId,zero];
-    NSString *data = [NSString stringWithFormat:@"%@%@",newValue,tokenID];
-    return data;
-}
 
 //合约签名，data 数据准备
 + (NSString *)contractMethodId:(NSString *)methodId params:(NSArray *)params
@@ -789,40 +488,6 @@
                      }];
 }
 
-
-+ (NSString *)removeExtraZeroAtBegin:(NSString *)valueFormated
-{
-    while ([valueFormated hasPrefix:@"0"]
-           || [valueFormated hasPrefix:@"."]) {
-        if ([valueFormated isEqualToString:@"0."]) {
-            valueFormated = @"0";
-            break;
-        }
-        
-        if ([valueFormated hasPrefix:@"0."]) {
-            break;
-        }
-        
-        if ([valueFormated hasPrefix:@"."] ) {
-            valueFormated = [@"0" stringByAppendingString:valueFormated];
-            break;
-        }
-        
-        if ([valueFormated isEqualToString:@"0"]
-            || ![valueFormated hasPrefix:@"0"]) {
-            break;
-        }
-        
-        if ([valueFormated hasPrefix:@"00"]) {
-            valueFormated = [valueFormated substringFromIndex:1];
-        } else if ([valueFormated hasPrefix:@"0"] && ![valueFormated hasPrefix:@"0."]) {
-            valueFormated = [valueFormated substringFromIndex:1];
-            break;
-        }
-    }
-    return valueFormated;
-}
-
 + (BOOL)fromISToAddress:(NSString *)from to:(NSString *)to
 {
     bool isSame = NO;
@@ -843,24 +508,23 @@
 
 + (BigNumber *)calcThorNeeded:(float)gasPriceCoef gas:(NSNumber *)gas
 {
-//    NSString *baseGasPrice = @"";
+    if (![gas isKindOfClass:[NSNumber class]]) {
+        NSString *gasStr = [NSString stringWithFormat:@"%@",gas];
+        gas = [NSNumber numberWithInteger:gasStr.integerValue];
+    }
     NSMutableDictionary* dictParameters = [NSMutableDictionary dictionary];
     [dictParameters setValueIfNotNil:@"0x8eaa6ac0000000000000000000000000000000000000626173652d6761732d7072696365" forKey:@"data"];
     [dictParameters setValueIfNotNil:@"0x0" forKey:@"value"];
     
     NSString *httpAddress =  [NSString stringWithFormat:@"%@/accounts/%@",[WalletUserDefaultManager getBlockUrl],@"0x0000000000000000000000000000506172616D73"];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:httpAddress]];
-    //设置请求方式也POST（默认是GET）
     request.timeoutInterval = 30;
-    
     [request setHTTPMethod:@"POST"];
-    
-    [request setHTTPBody:[dictParameters yy_modelToJSONData] ];
-    //同步方式连接服务器
+    [request setHTTPBody:[dictParameters yy_modelToJSONData]];
     NSData *responseObject = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
     NSError *error;
     if (responseObject){
-        NSString *responseStr =  [[ NSString alloc]initWithData:responseObject
+        NSString *responseStr = [[NSString alloc]initWithData:responseObject
                                                        encoding:NSUTF8StringEncoding];
         NSDictionary *json = [NSJSONSerialization JSONObjectWithData:[responseStr
                                                                       dataUsingEncoding:NSUTF8StringEncoding] options:kNilOptions error:&error]  ;
@@ -877,12 +541,80 @@
             BigNumber *gasCanUse = [[[baseGasPriceBig mul:currentGasPrice] mul:gasBigNumber] div:removeOffset];
             return gasCanUse;
         }
-        
-    }else  {
-        
-        
     }
     return nil;
+}
+
++ (void)checkParamGasPrice:(NSString *)gasPrice gas:(NSString *)gas amount:(NSString *)amount to:(NSString *)to clauseStr:(NSString *)clauseStr
+{
+    if ([gasPrice isKindOfClass:[NSNull class]]) {
+        gasPrice = DefaultGasPriceCoef;
+    }else if (gasPrice.length == 0) {
+        //默认120，如果js没有返回，就给默认的
+        gasPrice = DefaultGasPriceCoef;
+    }
+    
+    if ([gas isKindOfClass:[NSNull class]]) {
+        gas = nil;
+    }
+    
+    if ([amount isKindOfClass:[NSNull class]]) {
+        amount = @"0";
+    }
+    
+    if ([clauseStr isKindOfClass:[NSNull class]]) {
+        clauseStr = nil;
+    }
+    
+    if ([to isKindOfClass:[NSNull class]]) {
+        to = nil;
+    }
+}
+
+
++ (BOOL)checkHEXStr:(NSString *)hex
+{
+    NSString *regex =@"[0-9a-fA-F]*";
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",regex];
+    return [predicate evaluateWithObject:hex];
+}
+
++ (BOOL)errorAddressAlert:(NSString *)toAddress
+{
+    if ([toAddress isKindOfClass:[NSNull class]]) {
+        return NO;
+    }
+    
+    BOOL isOK = YES;
+    if (toAddress.length != 42) {
+        isOK = NO;
+        
+    }else if (![toAddress.uppercaseString hasPrefix:@"0X"]) {
+        isOK = NO;
+        
+    }else if ([[toAddress substringFromIndex:2].lowercaseString isEqualToString:[toAddress substringFromIndex:2]]) {
+        
+    }else{ //不是全小写，就验证checksum
+        NSString *checksumAddress = [WalletTools checksumAddress:toAddress.lowercaseString];
+        if (![[toAddress substringFromIndex:2] isEqualToString:[checksumAddress substringFromIndex:2]]) {
+            return NO;
+        }
+        return YES;
+    }
+    
+    NSString *regex = @"^(0x|0X){1}[0-9A-Fa-f]{40}$";
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",regex];
+    BOOL allAreValidChar = [predicate evaluateWithObject:toAddress];
+    if (!allAreValidChar) {
+        [WalletAlertShower showAlert:nil
+                                msg:VCNSLocalizedString(@"非法参数", nil)
+                              inCtl:[WalletTools getCurrentVC]
+                              items:@[VCNSLocalizedString(@"dialog_yes", nil)]
+                         clickBlock:^(NSInteger index) {
+                         }];
+        return NO;
+    }
+    return YES;
 }
 
 @end

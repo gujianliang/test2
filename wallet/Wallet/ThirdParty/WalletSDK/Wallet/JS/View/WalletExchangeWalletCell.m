@@ -65,7 +65,7 @@
     }
 }
 
-- (void)setModel:(WalletManageModel *)model amount:(NSString *)amount
+- (void)setModel:(WalletManageModel *)model amount:(NSString *)amount toAddress:(NSString *)toAddress
 {
     _model = model;
     
@@ -73,15 +73,22 @@
     
     _addressLabel.text = _model.address;
     
-    if( [BigNumber bigNumberWithHexString:model.VETCount].decimalString.floatValue >= amount.floatValue){ // 可选中的钱包样式
-        _walletNameLabel.textColor = HEX_RGB(0x202C56); // 黑色
+    if ([model.address.lowercaseString isEqualToString:toAddress.lowercaseString]){
         
+        _walletNameLabel.textColor = HEX_RGB(0xBDBDBD); // 置灰
+        _reasonLabel.text = @"不能与目标地址相同";
+        _imageV.hidden = YES;
+        
+        
+        [model.address.lowercaseString isEqualToString:toAddress.lowercaseString];
+        
+    }else if(model.VETCount.doubleValue > amount.doubleValue){ // 可选中的钱包样式
+        _walletNameLabel.textColor = HEX_RGB(0x202C56); // 黑色
         _reasonLabel.text = @"";
         _imageV.hidden = !_model.isSelect;
         
     }else { // 不可选中的钱包样式
         _walletNameLabel.textColor = HEX_RGB(0xBDBDBD); // 置灰
-        
         _reasonLabel.text = @"余额不足";
         _imageV.hidden = YES;
     }

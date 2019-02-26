@@ -14,6 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,copy) void(^block)(NSString *from,WalletDappStoreSelectView *viewSelf);
 @property(nonatomic,copy) NSString *amount;
+@property(nonatomic,copy) NSString *toAddress;
+
 @end
 
 NS_ASSUME_NONNULL_END

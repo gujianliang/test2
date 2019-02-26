@@ -213,7 +213,6 @@
     }];
 }
 
-
 - (void)getTransaction:(NSString *)callbackId
                webView:(WKWebView *)webView
              requestId:(NSString *)requestId
@@ -300,28 +299,27 @@
         return;
     }
     
-    [WalletUtils signViewFrom:from
-                           to:to
-                       amount:[NSString stringWithFormat:@"%.2f",amountTnteger]
-                     coinName:@"VET"
-                        block:^(NSString *txId)
+    [WalletUtils signViewFromAddress:from
+                           toAddress:to
+                              amount:[NSString stringWithFormat:@"%.2f",amountTnteger]
+                              symbol:@"VET"
+                                 gas:gas.stringValue
+                        tokenAddress:@""
+                            decimals:18
+                               block:^(NSString *txId)
     {
-        
-        if (txId.length == 0) {
-            
-            [WalletTools callbackWithrequestId:requestId
-                                       webView:webView
-                                          data:@""
-                                    callbackId:callbackId
-                                          code:ERROR_CANCEL];
-        }else{
-            
-            [WalletTools callbackWithrequestId:requestId
-                                       webView:webView
-                                          data:txId
-                                    callbackId:callbackId
-                                          code:OK];
-        }
+                                
+           if (txId.length == 0) {
+//               
+              
+           }else{
+               
+               [WalletTools callbackWithrequestId:requestId
+                                          webView:webView
+                                             data:txId
+                                       callbackId:callbackId
+                                             code:OK];
+           }
     }];
 }
 
@@ -392,6 +390,7 @@
         
         CGFloat amountTnteger = [BigNumber bigNumberWithHexString:[NSString stringWithFormat:@"0x%@",clauseValue]].decimalString.floatValue/pow(10, decimals.integerValue);
         
+#warning coinName
         if (![self errorAddressAlert:toAddress] ||
             ![self errorAmount:[NSString stringWithFormat:@"%lf",amountTnteger] coinName:@"!VET"] || //不是vet
             ![WalletTools fromISToAddress:from to:toAddress]||
@@ -510,11 +509,7 @@
         NSLog(@"txid = %@",txid);
         if (txid.length == 0) {
             
-            [WalletTools callbackWithrequestId:requestId
-                                       webView:webView
-                                         data:@""
-                                   callbackId:callbackId
-                                         code:ERROR_CANCEL];
+            
         }else{
             
             [WalletTools callbackWithrequestId:requestId

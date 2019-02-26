@@ -219,9 +219,9 @@
             [self setFrame:CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, SCREEN_HEIGHT)];
         } completion:^(BOOL finished) {
             [self removeFromSuperview];
-            if (self.transferBlock) {
-                self.transferBlock(self.txid);
-            }
+//            if (self.transferBlock) {
+//                self.transferBlock(self.txid);
+//            }
         }];
     }
 }

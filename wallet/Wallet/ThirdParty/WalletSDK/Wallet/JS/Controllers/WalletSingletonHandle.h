@@ -13,8 +13,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface WalletSingletonHandle : NSObject
 
-@property (nonatomic, copy)NSString *baseGasPrice;
-
 + (instancetype)shareWalletHandle;
 
 - (NSArray *)getAllWallet;

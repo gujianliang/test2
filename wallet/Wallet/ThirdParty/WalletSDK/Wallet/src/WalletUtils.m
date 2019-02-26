@@ -123,39 +123,34 @@
     [dappHandle injectJS:webview];
 }
 
-+ (void)signViewFrom:(NSString *_Nonnull)from to:(NSString *_Nonnull)to amount:(NSString *_Nonnull)amount coinName:(NSString *_Nonnull)coinName block:(void(^)(NSString *txId))block
++ (void)signViewFromAddress:(NSString *_Nonnull)fromAddress toAddress:(NSString *_Nonnull)toAddress amount:(NSString *_Nonnull)amount symbol:(NSString *_Nonnull)symbol gas:(NSString *)gas tokenAddress:(NSString *)tokenAddress decimals:(int)decimals block:(void(^)(NSString *txId))block
 {
     NSMutableDictionary *dictParam = [NSMutableDictionary dictionary];
-    
-    NSNumber *gas = @(60000);
-    if ([coinName isEqualToString:@"VET"]) {
-        gas = @(21000);
-    }
-    
-    BigNumber *gasCanUse = [WalletTools calcThorNeeded:DefaultGasPriceCoef gas:gas];
+    CGFloat defaultGasPriceCoef = [BigNumber bigNumberWithHexString:DefaultGasPriceCoef].decimalString.floatValue;
+    BigNumber *gasCanUse = [WalletTools calcThorNeeded:defaultGasPriceCoef gas:[NSNumber numberWithInteger:gas.integerValue]];
     
     NSString *miner = [[Payment formatEther:gasCanUse options:2] stringByAppendingString:@" VTHO"];
     
     [dictParam setValueIfNotNil:miner forKey:@"miner"];
-    [dictParam setValueIfNotNil:[BigNumber bigNumberWithInteger:DefaultGasPriceCoef] forKey:@"gasPriceCoef"];
+    [dictParam setValueIfNotNil:[BigNumber bigNumberWithHexString:DefaultGasPriceCoef] forKey:@"gasPriceCoef"];
     [dictParam setValueIfNotNil:gas forKey:@"gas"];
-    [dictParam setValueIfNotNil:to forKey:@"to"];
+    [dictParam setValueIfNotNil:toAddress forKey:@"to"];
     [dictParam setValueIfNotNil:amount forKey:@"amount"];
     
     WalletCoinModel *coinModel = [[WalletCoinModel alloc]init];
-    coinModel.coinName         = coinName;
-    coinModel.transferGas      = gas.stringValue;
-    coinModel.decimals         = 10;
+    coinModel.coinName         = symbol;
+    coinModel.transferGas      = gas;
+    coinModel.decimals         = decimals;
     [dictParam setValueIfNotNil:coinModel forKey:@"coinModel"];
     
     WalletSignatureView *signatureView = [[WalletSignatureView alloc] initWithFrame:[WalletTools getCurrentVC].view.bounds];
     signatureView.transferType = JSVTHOTransferType;
 
-    if ([coinName isEqualToString:@"VET"]) {
+    if ([symbol.lowercaseString isEqualToString:@"vet"]) {
         signatureView.transferType = JSVETTransferType;
     }
-    [signatureView updateView:from
-                    toAddress:to
+    [signatureView updateView:fromAddress
+                    toAddress:toAddress
                  contractType:NoContract_transferToken
                        amount:amount
                        params:@[dictParam]];

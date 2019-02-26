@@ -216,6 +216,8 @@ typedef NS_ENUM(NSInteger , BusinessType)
 
 + (BigNumber *)calcThorNeeded:(float)gasPriceCoef gas:(NSNumber *)gas;
 
++ (BOOL)errorAddressAlert:(NSString *)toAddress;
+
 @end
 
 
