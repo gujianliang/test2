@@ -21,10 +21,9 @@
 
 @implementation ViewController
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
-
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+ 
     NSDictionary *currentWallet = [[NSUserDefaults standardUserDefaults]objectForKey:@"currentWallet"];;
     
     if (currentWallet) { //有钱包，直接去详情
@@ -36,6 +35,12 @@
             [self.navigationController presentViewController:nav animated:YES completion:NULL];
         });
     }
+}
+
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    // Do any additional setup after loading the view, typically from a nib
 }
 
 - (IBAction)touchMe:(UIButton *)sender

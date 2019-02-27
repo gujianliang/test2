@@ -23,6 +23,8 @@
     NSString *_blockHost;  /* The main network environment of block */
 }
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *topConstrant;
+
 @property (weak, nonatomic) IBOutlet UILabel *addressLabel;       /* The wallet address you created */
 @property (weak, nonatomic) IBOutlet UILabel *vetAmountLabel;     /* The VET label */
 @property (weak, nonatomic) IBOutlet UILabel *vthoAmountLabel;    /* The VTHO label */
@@ -41,6 +43,7 @@
     [self setNetworkEnvironmentHost];
 }
 
+
 - (void)viewDidLoad {
     [super viewDidLoad];
 
@@ -51,18 +54,29 @@
 /* Config subviews and load it */
 - (void)initView {
    
-    // Set right bar buttonItem
+    /* Set right bar buttonItem */
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc]initWithTitle:@"选择网络"
                                                                  style:UIBarButtonItemStyleDone
                                                                 target:self
                                                                 action:@selector(selectTheMainNetworkEnvironment)];
     self.navigationItem.rightBarButtonItem = rightItem;
     
+    
+    /* Set UI */
+    NSString *sysVersion = [UIDevice currentDevice].systemVersion;
+    if (sysVersion.doubleValue < 11.0) {
+        self.topConstrant.constant = 70.0;
+        
+    } else {
+        self.topConstrant.constant = 16.0;
+    }
+    
+    
     /*
      Set up the search engine
      
-     Test_Html is "https://appwallet.oss-cn-shanghai.aliyuncs.com/testJS/test.html"，
-     Test_Main_Page is "https://appwallet.oss-cn-shanghai.aliyuncs.com/testJS/dist/index.html#/test",
+     Test_Html is       "https://appwallet.oss-cn-shanghai.aliyuncs.com/testJS/test.html"，
+     Test_Main_Page is  "https://appwallet.oss-cn-shanghai.aliyuncs.com/testJS/dist/index.html#/test",
 
      These pages are some of the trade methods used to quickly access contracts, Which network environment
      they work in depends on how you set it up.
@@ -76,7 +90,7 @@
     self.searchBar.text = Test_Main_Page;
     
     
-    // Set the VET and VTHO logo
+    /* Set the VET and VTHO logo */
     [self.vetImageView setImage:[UIImage imageNamed:@"VET"]];
     [self.vthoImageView setImage:[UIImage imageNamed:@"VTHO"]];
     
@@ -85,8 +99,11 @@
     NSDictionary *currentWallet = [[NSUserDefaults standardUserDefaults]objectForKey:@"currentWallet"];
     self.addressLabel.text = currentWallet[@"address"];
     
+    /* Set font adjust the the form */
+    self.vetAmountLabel.adjustsFontSizeToFitWidth = YES;
+    self.vthoAmountLabel.adjustsFontSizeToFitWidth = YES;
     
-    // Show the demo version infomation
+    /* Show the demo version infomation */
     NSString *version = [[[NSBundle mainBundle] infoDictionary] valueForKey:@"CFBundleVersion"];
     version = [NSString stringWithFormat:@"版本号：(%@)",version];
     CGFloat y = ScreenH -  kNavigationBarHeight;
@@ -150,21 +167,6 @@
     [self getVETBalance];
     [self getVTHOBalance];
 }
-
-
-#define UISearchBarDelegate
-
-/*
-   When you click search button, then you can access some pages that it has some of the trade methods used to quickly access contracts,
-   they work in the main network environment or what your choice.
- */
-- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
-    
-    NSString *url = searchBar.text;
-    WebViewVC *webVC = [[WebViewVC alloc]initWithURL:url];
-    [self.navigationController pushViewController:webVC animated:YES];
-}
-
 
 /*
  Get the VET balance from network environment, '_blockHost' is a network variable. Which network environment
@@ -251,6 +253,20 @@
     return data;
 }
 
+#define UISearchBarDelegate
+
+/*
+ When you click search button, then you can access some pages that it has some of the trade methods used to quickly access contracts,
+ they work in the main network environment or what your choice.
+ */
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+    
+    NSString *url = searchBar.text;
+    WebViewVC *webVC = [[WebViewVC alloc]initWithURL:url];
+    [self.navigationController pushViewController:webVC animated:YES];
+}
+
+#define click event
 
 /* Enter the address detail ViewControll and see more infomation. */
 - (IBAction)enterMoreInfo:(id)sender {

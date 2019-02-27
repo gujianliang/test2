@@ -63,17 +63,15 @@
                                  callback:^(Account *account, NSError *NSError)
      {
         [hud hide:YES];
-         if (NSError != nil) {
-             MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view
-                                                       animated:YES];
+         if (NSError) {
+             MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
              hud.mode = MBProgressHUDModeText;
-             hud.labelText =  @"Wrong Password";
+             hud.labelText = @"Wrong Password, Try again!";
              [hud hide:YES afterDelay:1];
              return ;
          }
          [WalletUtils encryptSecretStorageJSON:self.nextPWTextField.text account:account callback:^(NSString *json) {
              
-            
              if (json.length > 0) {
                  NSMutableDictionary *currentDict = [NSMutableDictionary dictionary];
                  [currentDict setObject:address forKey:@"address"];
@@ -84,12 +82,11 @@
                  MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view
                                                            animated:YES];
                  hud.mode = MBProgressHUDModeText;
-                 hud.labelText =  @"修改密码成功";
+                 hud.labelText = @"修改密码成功";
                  [hud hide:YES afterDelay:1];
                  
                  dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                      [self.navigationController popViewControllerAnimated:YES];
-
                  });
              }
          }];
