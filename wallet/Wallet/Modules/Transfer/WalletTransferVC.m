@@ -86,5 +86,8 @@
     [self.view endEditing:YES];
 }
 
+- (IBAction)changeSlider:(id)sender{
+    
+}
 
 @end
