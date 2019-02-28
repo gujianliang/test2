@@ -11,10 +11,6 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface WalletCreatVC : UIViewController
-@property (weak, nonatomic) IBOutlet UITextField *passwordLabel;
-@property (weak, nonatomic) IBOutlet UITextView *mnemonicTextView;
-@property (weak, nonatomic) IBOutlet UITextView *keystoreTextVeiw;
-@property (weak, nonatomic) IBOutlet UITextView *addressLabel;
 
 @end
 

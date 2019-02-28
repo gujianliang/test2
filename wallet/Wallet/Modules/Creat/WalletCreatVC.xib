@@ -13,7 +13,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WalletCreatVC">
             <connections>
                 <outlet property="addressLabel" destination="U0B-Eo-K7b" id="R1J-HA-nkD"/>
-                <outlet property="coverView" destination="H35-w3-WNA" id="NMR-Ew-fdV"/>
+                <outlet property="bottomCoverView" destination="H35-w3-WNA" id="dVT-8Q-Yvk"/>
                 <outlet property="keystoreTextVeiw" destination="UZM-Vs-Jp7" id="1D1-H8-Be4"/>
                 <outlet property="mnemonicTextView" destination="L1x-sl-hEh" id="1mq-Wy-46s"/>
                 <outlet property="passwordLabel" destination="sx5-0s-OjB" id="Qs4-ga-5eM"/>
@@ -32,7 +32,7 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="0HM-Mu-l0a"/>
                     </constraints>
-                    <state key="normal" title="Creat a Wallet">
+                    <state key="normal" title="Create a Wallet">
                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </state>
                     <connections>
@@ -109,12 +109,12 @@
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                 </textView>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cta-io-me3">
+                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cta-io-me3">
                     <rect key="frame" x="0.0" y="27" width="320" height="165"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
-                <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="H35-w3-WNA">
-                    <rect key="frame" x="245" y="376" width="75" height="104"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H35-w3-WNA">
+                    <rect key="frame" x="0.0" y="200" width="320" height="280"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
             </subviews>
