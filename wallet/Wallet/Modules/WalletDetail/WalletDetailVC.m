@@ -25,7 +25,7 @@
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *topConstrant;
 
-@property (weak, nonatomic) IBOutlet UILabel *addressLabel;       /* The wallet address you created */
+@property (weak, nonatomic) IBOutlet UILabel *addressLabel;       /* The wallet address taht you created */
 @property (weak, nonatomic) IBOutlet UILabel *vetAmountLabel;     /* The VET label */
 @property (weak, nonatomic) IBOutlet UILabel *vthoAmountLabel;    /* The VTHO label */
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;      /* Search bar control */

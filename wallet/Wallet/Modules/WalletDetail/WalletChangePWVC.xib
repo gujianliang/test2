@@ -60,7 +60,7 @@
                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </state>
                     <connections>
-                        <action selector="changePW:" destination="-1" eventType="touchUpInside" id="hFY-k0-6dn"/>
+                        <action selector="changeTheWalletPassword:" destination="-1" eventType="touchUpInside" id="aQM-Uc-Z9H"/>
                     </connections>
                 </button>
             </subviews>
