@@ -199,130 +199,6 @@
     return totalData;
 }
 
-+ (NSDictionary *)getContractData:(ContractType)contractType params:(NSArray *)params
-{
-    NSString *gasLimit = @"";
-    NSString *contractClauseData = @"";
-    NSString *additionalMsg = @"";
-    NSString *methodID = @"";
-
-    switch (contractType) {
-        case Contract_appyNode:         // 奖励升级
-        {
-            gasLimit = @"200";
-            methodID = APPLY_UPGRADE;
-            contractClauseData = [WalletTools contractMethodId:methodID params:params];
-            additionalMsg = VCNSLocalizedBundleString(@"contract_payment_info_row4_content_node_upgrde", nil);
-        }
-            break;
-        case Contract_cancelNode:       // 奖励取消升级
-        {
-            gasLimit = @"100";
-            methodID = CANCEL_UPGRADE;
-            contractClauseData = [WalletTools contractMethodId:methodID params:params];
-            additionalMsg = VCNSLocalizedBundleString(@"contract_payment_info_row4_content_cancel_upgrade", nil);
-        }
-            break;
-        case Contract_PubicSale:        // 公开拍卖
-        {
-            gasLimit = @"350";
-            methodID = CREATE_SALE_AUCTION;
-            contractClauseData = [WalletTools contractMethodId:methodID params:params];
-            additionalMsg = VCNSLocalizedBundleString(@"contract_payment_info_row4_content_public", nil);
-        }
-            break;
-        case Contract_OrientSale:
-        {
-            gasLimit = @"350";          // 定向拍卖
-            methodID = CREATE_DIRECTION_SALE_AUCTION;
-            contractClauseData = [WalletTools contractMethodId:methodID params:params];
-            additionalMsg = VCNSLocalizedBundleString(@"contract_payment_info_row4_content_auction", nil);
-        }
-            break;
-        case Contract_buyNode:          // 购买节点
-        {
-            gasLimit = @"350";
-            methodID = BID;
-            contractClauseData = [WalletTools contractMethodId:methodID params:params];
-            additionalMsg = VCNSLocalizedBundleString(@"contract_payment_info_row4_content_buy", nil);
-        }
-            break;
-        case Contract_acceptNode:       // 接收节点
-        {
-            gasLimit = @"350";
-            methodID = BID;
-            contractClauseData = [WalletTools contractMethodId:methodID params:params];
-            additionalMsg = VCNSLocalizedBundleString(@"contract_payment_info_row4_content_receive", nil);
-        }
-            break;
-        case Contract_cancelSaleNode:     // 去掉挂单
-        {
-            gasLimit = @"350";
-            methodID = CANCEL_AUCTION;
-            contractClauseData = [WalletTools contractMethodId:methodID params:params];
-            additionalMsg = VCNSLocalizedBundleString(@"contract_payment_info_row4_content_cancel_onsale", nil);
-        }
-            break;
-        case Contract_transfer:     // 转移到另外钱包
-        {
-            gasLimit = @"200";
-            methodID = NODE_TRANSFER;
-            contractClauseData = [WalletTools contractMethodId:methodID params:params];
-            additionalMsg = VCNSLocalizedBundleString(@"transfer_thor_node_title", nil);
-        }
-            break;
-        
-            break;
-//        case NoContract_transferToken:     //其他合约签名
-//        {
-//            gasLimit = @"300";
-//            methodID = NODE_TRANSFER;
-//            contractClauseData = [WalletTools contractMethodId:methodID params:params];
-//            additionalMsg = VCNSLocalizedBundleString(@"transfer_thor_node_title", nil);
-//        }
-//            break;
-//        default:
-            break;
-    }
-    if (gasLimit.length > 0 && contractClauseData.length > 0 && additionalMsg.length > 0) {
-        return [NSDictionary dictionaryWithObjectsAndKeys:gasLimit,@"gasLimit",
-                                       contractClauseData,@"contractClauseData",
-                                           additionalMsg ,@"additionalMsg",
-                                            methodID ,@"methodID",nil];
-    }else{
-        return nil;
-    }
-}
-
-+ (ContractType)methodIDConvertContractType:(NSString *)methodID
-{
-    if ([methodID isEqualToString:APPLY_UPGRADE]) { // 申请节点升级
-        return Contract_appyNode;
-        
-    }else if ([methodID isEqualToString:CANCEL_UPGRADE]){ // 取消升级申请
-        return Contract_cancelNode;
-        
-    }else if ([methodID isEqualToString:CREATE_SALE_AUCTION]){ // 创建公开拍卖
-        return Contract_PubicSale;
-        
-    }else if ([methodID isEqualToString:CREATE_DIRECTION_SALE_AUCTION]){ // 创建定向拍卖
-        return Contract_OrientSale;
-        
-    }else if ([methodID isEqualToString:BID]){ // 拍卖投标
-        return Contract_buyNode;
-        
-    }else if ([methodID isEqualToString:BID]){ //
-        return Contract_acceptNode;
-        
-    }else if ([methodID isEqualToString:CANCEL_AUCTION]){ // 拍卖取消
-        return Contract_cancelSaleNode;
-    }
-    else if ([methodID isEqualToString:NODE_TRANSFER]){ // 节点转移
-        return Contract_transfer;
-    }
-    return Contract_appyNode;
-}
-
 + (NSString *)thousandSeparator:(NSString *)inputStr decimals:(BOOL)decimals
 {
     if (inputStr.length == 0) {
@@ -571,12 +447,17 @@
     }
 }
 
-
 + (BOOL)checkHEXStr:(NSString *)hex
 {
-    NSString *regex =@"[0-9a-fA-F]*";
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",regex];
-    return [predicate evaluateWithObject:hex];
+    if ([hex.lowercaseString hasPrefix:@"0x"] && hex.length > 2) {
+        NSString *regex =@"[0-9a-fA-F]*";
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",regex];
+        return [predicate evaluateWithObject:[hex substringFromIndex:2]];
+    }else{
+        NSString *regex =@"[0-9a-fA-F]*";
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",regex];
+        return [predicate evaluateWithObject:hex ];
+    }
 }
 
 + (BOOL)errorAddressAlert:(NSString *)toAddress
@@ -617,4 +498,34 @@
     return YES;
 }
 
++ (BOOL)checkKeystore:(NSString *)keystore
+{
+    if (keystore.length == 0) {
+        return NO;
+    }
+    NSDictionary *dictKS = [NSJSONSerialization dictionaryWithJsonString:[keystore lowercaseString]];
+    
+    NSDictionary *crypto = dictKS[@"crypto"];
+    NSString *_id = dictKS[@"id"];
+    NSString *version = dictKS[@"version"];
+    
+    BOOL isOK = NO;
+    if ( crypto && _id && version) {
+        if ([crypto isKindOfClass:[NSDictionary class]]) {
+            NSString *cipher = crypto[@"cipher"];
+            NSString *ciphertext = crypto[@"ciphertext"];
+            NSDictionary *cipherparams = crypto[@"cipherparams"];
+            NSString *kdf = crypto[@"kdf"];
+            NSDictionary *kdfparams = crypto[@"kdfparams"];
+            NSString *mac = crypto[@"mac"];
+            if (cipher && ciphertext && cipherparams && kdf && kdfparams && mac) {
+                if ([cipherparams isKindOfClass:[NSDictionary class]] && [kdfparams isKindOfClass:[NSDictionary class]]) {
+                    isOK = YES;
+                }
+            }
+        }else{
+        }
+    }
+    return isOK;
+}
 @end

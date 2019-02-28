@@ -20,6 +20,10 @@
 		4143EE822202E7C40056C08A /* icon_shibai@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4143EE772202E7C40056C08A /* icon_shibai@3x.png */; };
 		971811FC2224DBD1008F9639 /* WalletGetBaseGasPriceApi.h in Headers */ = {isa = PBXBuildFile; fileRef = 971811FA2224DBD1008F9639 /* WalletGetBaseGasPriceApi.h */; };
 		971811FD2224DBD1008F9639 /* WalletGetBaseGasPriceApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 971811FB2224DBD1008F9639 /* WalletGetBaseGasPriceApi.m */; };
+		9718120722263672008F9639 /* TransactionParameter.m in Sources */ = {isa = PBXBuildFile; fileRef = 9718120522263671008F9639 /* TransactionParameter.m */; };
+		9718120822263672008F9639 /* TransactionParameter.h in Headers */ = {isa = PBXBuildFile; fileRef = 9718120622263672008F9639 /* TransactionParameter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9718121022267FE5008F9639 /* WalletSignParamModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 9718120E22267FE5008F9639 /* WalletSignParamModel.h */; };
+		9718121122267FE5008F9639 /* WalletSignParamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9718120F22267FE5008F9639 /* WalletSignParamModel.m */; };
 		9736C126214B8671003DE935 /* WalletUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 9736C124214B8671003DE935 /* WalletUtils.m */; };
 		9736C127214B8671003DE935 /* WalletUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 9736C125214B8671003DE935 /* WalletUtils.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9743A54221FED23F0079C582 /* NSJSONSerialization+NilDataParameter.m in Sources */ = {isa = PBXBuildFile; fileRef = 9743A54021FED23F0079C582 /* NSJSONSerialization+NilDataParameter.m */; };
@@ -185,13 +189,11 @@
 		9773F9C9221412D200DF5972 /* PaymentPasswordView.h in Headers */ = {isa = PBXBuildFile; fileRef = 9773F953221412D200DF5972 /* PaymentPasswordView.h */; };
 		9773F9CA221412D200DF5972 /* WalletSignatureView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9773F954221412D200DF5972 /* WalletSignatureView.m */; };
 		9773F9CC221412D200DF5972 /* WalletSignatureView+transferToken.h in Headers */ = {isa = PBXBuildFile; fileRef = 9773F956221412D200DF5972 /* WalletSignatureView+transferToken.h */; };
-		9773F9CD221412D200DF5972 /* WalletObserverSignPreviewVC.h in Headers */ = {isa = PBXBuildFile; fileRef = 9773F957221412D200DF5972 /* WalletObserverSignPreviewVC.h */; };
 		9773F9CF221412D200DF5972 /* PaymentDetailView.h in Headers */ = {isa = PBXBuildFile; fileRef = 9773F959221412D200DF5972 /* PaymentDetailView.h */; };
 		9773F9D0221412D200DF5972 /* PaymentDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9773F95A221412D200DF5972 /* PaymentDetailView.xib */; };
 		9773F9D1221412D200DF5972 /* WalletSignObserverModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9773F95B221412D200DF5972 /* WalletSignObserverModel.m */; };
 		9773F9D3221412D200DF5972 /* WalletSignatureView.h in Headers */ = {isa = PBXBuildFile; fileRef = 9773F95D221412D200DF5972 /* WalletSignatureView.h */; };
 		9773F9D4221412D200DF5972 /* PaymentPasswordView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9773F95E221412D200DF5972 /* PaymentPasswordView.m */; };
-		9773F9D6221412D200DF5972 /* WalletObserverSignPreviewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9773F960221412D200DF5972 /* WalletObserverSignPreviewVC.m */; };
 		9773F9D7221412D200DF5972 /* WalletSignatureView+transferToken.m in Sources */ = {isa = PBXBuildFile; fileRef = 9773F961221412D200DF5972 /* WalletSignatureView+transferToken.m */; };
 		9773F9D8221412D200DF5972 /* WalletDAppHandle.h in Headers */ = {isa = PBXBuildFile; fileRef = 9773F963221412D200DF5972 /* WalletDAppHandle.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9773F9D9221412D200DF5972 /* WalletDAppHead.h in Headers */ = {isa = PBXBuildFile; fileRef = 9773F964221412D200DF5972 /* WalletDAppHead.h */; };
@@ -321,6 +323,10 @@
 		4143EE772202E7C40056C08A /* icon_shibai@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_shibai@3x.png"; sourceTree = "<group>"; };
 		971811FA2224DBD1008F9639 /* WalletGetBaseGasPriceApi.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WalletGetBaseGasPriceApi.h; sourceTree = "<group>"; };
 		971811FB2224DBD1008F9639 /* WalletGetBaseGasPriceApi.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WalletGetBaseGasPriceApi.m; sourceTree = "<group>"; };
+		9718120522263671008F9639 /* TransactionParameter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TransactionParameter.m; path = src/TransactionParameter.m; sourceTree = "<group>"; };
+		9718120622263672008F9639 /* TransactionParameter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TransactionParameter.h; path = src/TransactionParameter.h; sourceTree = "<group>"; };
+		9718120E22267FE5008F9639 /* WalletSignParamModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WalletSignParamModel.h; sourceTree = "<group>"; };
+		9718120F22267FE5008F9639 /* WalletSignParamModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WalletSignParamModel.m; sourceTree = "<group>"; };
 		9736C124214B8671003DE935 /* WalletUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WalletUtils.m; path = src/WalletUtils.m; sourceTree = "<group>"; };
 		9736C125214B8671003DE935 /* WalletUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WalletUtils.h; path = src/WalletUtils.h; sourceTree = "<group>"; };
 		9743A54021FED23F0079C582 /* NSJSONSerialization+NilDataParameter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSJSONSerialization+NilDataParameter.m"; sourceTree = "<group>"; };
@@ -487,13 +493,11 @@
 		9773F953221412D200DF5972 /* PaymentPasswordView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentPasswordView.h; sourceTree = "<group>"; };
 		9773F954221412D200DF5972 /* WalletSignatureView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WalletSignatureView.m; sourceTree = "<group>"; };
 		9773F956221412D200DF5972 /* WalletSignatureView+transferToken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WalletSignatureView+transferToken.h"; sourceTree = "<group>"; };
-		9773F957221412D200DF5972 /* WalletObserverSignPreviewVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WalletObserverSignPreviewVC.h; sourceTree = "<group>"; };
 		9773F959221412D200DF5972 /* PaymentDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentDetailView.h; sourceTree = "<group>"; };
 		9773F95A221412D200DF5972 /* PaymentDetailView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PaymentDetailView.xib; sourceTree = "<group>"; };
 		9773F95B221412D200DF5972 /* WalletSignObserverModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WalletSignObserverModel.m; sourceTree = "<group>"; };
 		9773F95D221412D200DF5972 /* WalletSignatureView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WalletSignatureView.h; sourceTree = "<group>"; };
 		9773F95E221412D200DF5972 /* PaymentPasswordView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaymentPasswordView.m; sourceTree = "<group>"; };
-		9773F960221412D200DF5972 /* WalletObserverSignPreviewVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WalletObserverSignPreviewVC.m; sourceTree = "<group>"; };
 		9773F961221412D200DF5972 /* WalletSignatureView+transferToken.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WalletSignatureView+transferToken.m"; sourceTree = "<group>"; };
 		9773F963221412D200DF5972 /* WalletDAppHandle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WalletDAppHandle.h; sourceTree = "<group>"; };
 		9773F964221412D200DF5972 /* WalletDAppHead.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WalletDAppHead.h; sourceTree = "<group>"; };
@@ -851,6 +855,8 @@
 				9773F915221412D200DF5972 /* WalletTools.m */,
 				9773F9E722150C5F00DF5972 /* WalletJSCallbackModel.h */,
 				9773F9E822150C5F00DF5972 /* WalletJSCallbackModel.m */,
+				9718120E22267FE5008F9639 /* WalletSignParamModel.h */,
+				9718120F22267FE5008F9639 /* WalletSignParamModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -924,8 +930,6 @@
 				9773F9EC22157CAB00DF5972 /* WalletSignatureViewHandle.m */,
 				9773F9EF22165ADA00DF5972 /* WalletSignatureViewSubView.h */,
 				9773F9F022165ADA00DF5972 /* WalletSignatureViewSubView.m */,
-				9773F957221412D200DF5972 /* WalletObserverSignPreviewVC.h */,
-				9773F960221412D200DF5972 /* WalletObserverSignPreviewVC.m */,
 			);
 			path = Signature;
 			sourceTree = "<group>";
@@ -1117,6 +1121,8 @@
 		E2D1A2B01E3C695A0015CAF8 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				9718120622263672008F9639 /* TransactionParameter.h */,
+				9718120522263671008F9639 /* TransactionParameter.m */,
 				9736C125214B8671003DE935 /* WalletUtils.h */,
 				9736C124214B8671003DE935 /* WalletUtils.m */,
 				E2317EA91E31974F00DBE3E4 /* Utilities */,
@@ -1143,6 +1149,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9718120822263672008F9639 /* TransactionParameter.h in Headers */,
 				9773F9D8221412D200DF5972 /* WalletDAppHandle.h in Headers */,
 				9773F979221412D200DF5972 /* MBProgressHUD.h in Headers */,
 				9773F97E221412D200DF5972 /* WalletGradientLayerButton.h in Headers */,
@@ -1154,6 +1161,7 @@
 				9773F8E32214109300DF5972 /* AFSecurityPolicy.h in Headers */,
 				971811FC2224DBD1008F9639 /* WalletGetBaseGasPriceApi.h in Headers */,
 				9773F8E92214109300DF5972 /* AFURLResponseSerialization.h in Headers */,
+				9718121022267FE5008F9639 /* WalletSignParamModel.h in Headers */,
 				9773F8E62214109300DF5972 /* AFURLRequestSerialization.h in Headers */,
 				9773F9D9221412D200DF5972 /* WalletDAppHead.h in Headers */,
 				9773F974221412D200DF5972 /* WalletDappStoreSelectView.h in Headers */,
@@ -1161,7 +1169,6 @@
 				9773F8BB2214109300DF5972 /* NSArray+MASAdditions.h in Headers */,
 				9736C127214B8671003DE935 /* WalletUtils.h in Headers */,
 				9773F8D82214109300DF5972 /* UIImage+AFNetworking.h in Headers */,
-				9773F9CD221412D200DF5972 /* WalletObserverSignPreviewVC.h in Headers */,
 				9773F8BC2214109300DF5972 /* MASUtilities.h in Headers */,
 				9773F9A7221412D200DF5972 /* WalletDAppPeersApi.h in Headers */,
 				E2FA04861E42A5660013E5A7 /* SecureData.h in Headers */,
@@ -1461,7 +1468,6 @@
 				E2317F291E31994500DBE3E4 /* ripemd160.c in Sources */,
 				9773F8EE2214109300DF5972 /* AFSecurityPolicy.m in Sources */,
 				E2FA04831E42A0300013E5A7 /* Utilities.m in Sources */,
-				9773F9D6221412D200DF5972 /* WalletObserverSignPreviewVC.m in Sources */,
 				E2317EA41E31970900DBE3E4 /* Transaction.m in Sources */,
 				E2317F521E3199BD00DBE3E4 /* scrypt_sha256.c in Sources */,
 				9773F97D221412D200DF5972 /* WalletTextView.m in Sources */,
@@ -1512,6 +1518,7 @@
 				9773F9D7221412D200DF5972 /* WalletSignatureView+transferToken.m in Sources */,
 				E2317EA01E31970900DBE3E4 /* Hash.m in Sources */,
 				9773F9DB221412D200DF5972 /* WalletSingletonHandle.m in Sources */,
+				9718121122267FE5008F9639 /* WalletSignParamModel.m in Sources */,
 				9773F9AA221412D200DF5972 /* WalletGenesisBlockInfoApi.m in Sources */,
 				9773F8C32214109300DF5972 /* MASConstraintMaker.m in Sources */,
 				9773F994221412D200DF5972 /* WalletRewardNodeModel.m in Sources */,
@@ -1567,6 +1574,7 @@
 				9773F9D4221412D200DF5972 /* PaymentPasswordView.m in Sources */,
 				9773F971221412D200DF5972 /* MBProgressHUD.m in Sources */,
 				E2317E9C1E31970900DBE3E4 /* Address.m in Sources */,
+				9718120722263672008F9639 /* TransactionParameter.m in Sources */,
 				97DB21842091B2450040A9D9 /* genkat-c.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

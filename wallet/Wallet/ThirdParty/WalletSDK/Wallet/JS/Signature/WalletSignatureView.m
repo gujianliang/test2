@@ -34,7 +34,6 @@
     UIView *_middleView;
     
     NSString *_contractClauseData;
-    NSArray *_params;
     NSString *_additionalMsg;
     
     NSTimer *_timer;
@@ -43,6 +42,7 @@
     
     WalletSignatureViewHandle *_signatureHandle;
     WalletSignatureViewSubView *_signatureSubView;
+    
 }
 
 @end
@@ -62,59 +62,69 @@
     return self;
 }
 
-- (void)updateView:(NSString *)fromAddress
-         toAddress:(NSString *)toAddress
-      contractType:(ContractType)contractType
-            amount:(NSString *)amount
-            params:(NSArray *)params
+- (void)updateViewParamModel:(WalletSignParamModel *)paramModel
 {
-    _fromAddress  = fromAddress;
-    _toAddress    = toAddress;
-    _contractType = contractType;
-    _params       = params;
-    _amount       = amount;
-
-    NSDictionary *dictContractData = [WalletTools getContractData:contractType params:params];
-    _gasLimit                      = dictContractData[@"gasLimit"];
-    _contractClauseData            = dictContractData[@"contractClauseData"];
-    _additionalMsg                 = dictContractData[@"additionalMsg"];
+    _fromAddress  = paramModel.fromAddress;
+    _toAddress    = paramModel.toAddress;
+    _amount       = paramModel.amount;
+    _keystore     = paramModel.keystore;
+    _clauseList   = paramModel.clauseList;
     
-    if (contractType == NoContract_transferToken) {
-        NSDictionary *dictParam = [params firstObject];
-        
-        _currentCoinModel     = dictParam[@"coinModel"];
-        _gasPriceCoef         = (BigNumber *)(dictParam[@"gasPriceCoef"]);
-        _clauseData           = dictParam[@"clauseData"];
-        _tokenAddress         = dictParam[@"tokenAddress"];
-        _gas                  = dictParam[@"gas"];
-        
-        BigNumber *gasCanUse = [WalletTools calcThorNeeded:_gasPriceCoef.decimalString.floatValue gas:_gas];
-        _gasLimit = [Payment formatEther:gasCanUse options:2];
-
-        if (_transferType == JSContranctTransferType) {
-        
-            [self resolverClouseData];
-        }
-    }
+    _gasPriceCoef         = paramModel.gasPriceCoef;
+    _clauseData           = [paramModel.clauseData dataUsingEncoding:NSUTF8StringEncoding];
+    _tokenAddress         = paramModel.tokenAddress;
+    _gas                  = [NSNumber numberWithInteger:paramModel.gas.integerValue];
     
-    [self initView];
+    BigNumber *gasCanUse = [WalletTools calcThorNeeded:_gasPriceCoef.decimalString.floatValue gas:_gas];
+    _gasLimit = [Payment formatEther:gasCanUse options:2];
+    
+    _currentCoinModel = [[WalletCoinModel alloc]init];
+    _currentCoinModel.transferGas = [NSString stringWithFormat:@"%@",_gas];
+    
+    [self packageCoinModel];
 }
 
-- (void)resolverClouseData
+- (void)packageCoinModel
 {
-    NSString *clouseStr = [SecureData dataToHexString:_clauseData];
-    NSString *temp1     = [clouseStr stringByReplacingOccurrencesOfString:@"0x" withString:@""];
-    NSString *temp2     = [temp1 substringFromIndex:8];
-    
-    NSInteger i = temp2.length%(64);
-    NSInteger j = temp2.length/64;
-    
-    NSMutableArray *tempList = [NSMutableArray array];
-    if (i == 0) {
-        for (NSInteger k = 0;k < j;k++) {
-            NSString *temp3 = [temp2 substringWithRange:NSMakeRange(k*64, 64)];
-            [tempList addObject:temp3];
+    if (_transferType == JSVETTransferType) {
+        _currentCoinModel.symobl = @"VET";
+        _currentCoinModel.decimals = 18;
+        
+        if (_amount.length > 0) {
+            _amount = [Payment formatToken:[BigNumber bigNumberWithHexString:_amount]
+                                  decimals:18
+                                   options:2];
+        }else{
+            _amount = 0;
         }
+        
+        [self initView];
+    }else if (_transferType == JSTokenTransferType){
+        [_signatureHandle tokenAddressConvetCoinInfo:_tokenAddress
+                                           coinModel:_currentCoinModel
+                                               block:^
+        {
+            if (_amount.length > 0) {
+                _amount = [Payment formatToken:[BigNumber bigNumberWithHexString:_amount]
+                                      decimals:_currentCoinModel.decimals
+                                       options:2];
+            }else{
+                _amount = 0;
+            }
+            [self initView];
+        }];
+    }else{ //合约，显示的只能是vet
+        _currentCoinModel.symobl = @"VET";
+        _currentCoinModel.decimals = 18;
+        
+        if (_amount.length > 0) {
+            _amount = [Payment formatToken:[BigNumber bigNumberWithHexString:_amount]
+                                  decimals:18
+                                   options:2];
+        }else{
+            _amount = 0;
+        }
+        [self initView];
     }
 }
 
@@ -154,10 +164,10 @@
     // 主标题标签
     UILabel *titleLabel = [[UILabel alloc]init];
     
-    if (_contractType == NoContract_transferToken) {
-        titleLabel.text = VCNSLocalizedBundleString(@"dialog_coin_transfer_description", nil);
-    }else{
+    if (_transferType == JSContranctTransferType) {
         titleLabel.text = VCNSLocalizedBundleString(@"contract_payment_info_title", nil);
+    }else{
+        titleLabel.text = VCNSLocalizedBundleString(@"dialog_coin_transfer_description", nil);
     }
     
     titleLabel.textAlignment = NSTextAlignmentCenter;
@@ -219,9 +229,6 @@
             [self setFrame:CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, SCREEN_HEIGHT)];
         } completion:^(BOOL finished) {
             [self removeFromSuperview];
-//            if (self.transferBlock) {
-//                self.transferBlock(self.txid);
-//            }
         }];
     }
 }
@@ -230,7 +237,6 @@
 {
     _signatureSubView = [[WalletSignatureViewSubView alloc]init];
     [_signatureSubView initSignature:_scrollView
-                        contractType:_contractType
                               amount:_amount
                     currentCoinModel:_currentCoinModel
                             gasLimit:_gasLimit
@@ -285,10 +291,7 @@
 
 - (void)sign
 {
-    if (_contractType == NoContract_transferToken) {
-        [self signTransfer:_transferBlock];
-        return;
-    }
+    [self signTransfer:_transferBlock];
 }
 
 - (void)timerCountBlock
@@ -354,15 +357,12 @@
 - (void)notificatonJS
 {
     //js 成功后跳转到js 页面
-    if (_contractType == NoContract_transferToken) {
-        
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            if (self.transferBlock) {
-                self.transferBlock(self.txid);
-            }
-            [self removeFromSuperview];
-        });
-    }
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        if (self.transferBlock) {
+            self.transferBlock(self.txid);
+        }
+        [self removeFromSuperview];
+    });
 }
 
 -(void)uploadFail

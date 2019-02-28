@@ -30,7 +30,8 @@ NS_ASSUME_NONNULL_BEGIN
                          gas:(NSString *)gas
                      webView:(WKWebView *)webView
                   callbackId:(NSString *)callbackId
-                    gasPrice:(NSString *)gasPrice;
+                    gasPrice:(NSString *)gasPrice
+                 clauseData:(NSString *)clauseData;
 
 - (void)web3VTHOTransferFrom:(NSString *)from
                   to:(NSString *)to
@@ -40,7 +41,7 @@ NS_ASSUME_NONNULL_BEGIN
             gasPrice:(NSString *)gasPrice
              webView:(WKWebView *)webView
           callbackId:(NSString *)callbackId
-           clauseData:(NSString *)clauseData
+           clauseStr:(NSString *)clauseStr
         tokenAddress:(NSString *)tokenAddress;
 
 
@@ -52,7 +53,7 @@ NS_ASSUME_NONNULL_BEGIN
                 gasPrice:(NSString *)gasPrice
              webView:(WKWebView *)webView
           callbackId:(NSString *)callbackId
-           clauseData:(NSString *)clauseData;
+           clauseStr:(NSString *)clauseStr;
 
 
 - (void)getChainTag:(NSString *)requestId

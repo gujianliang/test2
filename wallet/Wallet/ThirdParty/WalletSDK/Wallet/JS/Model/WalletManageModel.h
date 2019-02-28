@@ -16,7 +16,7 @@
 
 @property (nonatomic, copy)NSString *quantity; // 藏品余额
 
-@property (nonatomic, copy)NSString *coinName;
+@property (nonatomic, copy)NSString *symobl;
 @property (nonatomic, copy)NSString *coinCount;
 @property (nonatomic, copy)NSString *name;
 @property (nonatomic, copy)NSString *walletName;

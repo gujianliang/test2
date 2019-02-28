@@ -9,6 +9,8 @@
 #ifndef WalletDAppHead_h
 #define WalletDAppHead_h
 
+#import "WalletSignParamModel.h"
+
 #define TransferMethodId @"0xa9059cbb"
 #define VETGasLimit      @"21000"
 #define SignViewTag      11001

@@ -14,10 +14,10 @@
             <connections>
                 <outlet property="balanceAmountLabel" destination="EJG-yY-D6p" id="RIJ-zl-vhx"/>
                 <outlet property="coinIcon" destination="aX1-fR-mib" id="jeb-st-bC0"/>
-                <outlet property="coinName" destination="f7b-tm-NAd" id="HUn-7J-Bgp"/>
                 <outlet property="feeLabel" destination="8GR-J0-suV" id="Ohn-f0-dfU"/>
                 <outlet property="minerFeeSlider" destination="mCp-ep-9zo" id="6Tg-1x-6tY"/>
                 <outlet property="receiveAddressTextView" destination="azE-ZQ-UTt" id="jIM-Sz-oZJ"/>
+                <outlet property="symobl" destination="f7b-tm-NAd" id="HUn-7J-Bgp"/>
                 <outlet property="transferAmountTextField" destination="534-sa-her" id="T0i-QE-GRJ"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>

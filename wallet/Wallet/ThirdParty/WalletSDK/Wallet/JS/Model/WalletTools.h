@@ -68,21 +68,11 @@ typedef NS_ENUM(NSInteger , ContractType)
     Contract_cancelSaleNode,     // 取消拍卖
     Contract_transfer,           // 节点转到另外的钱包
     
+#warning 名称
     NoContract_transferToken    //单纯token 转账
 };
 
-typedef NS_ENUM(NSInteger , BusinessType)
-{
-    BusinessType_TRANSFER = 1,              // 转账
-    BusinessType_NodeUpgrade = 2,           // 节点升级
-    BusinessType_CancelNodeUpgrade = 3,     // 取消节点升级
-    BusinessType_OrientSale = 4,            // 定向转卖
-    BusinessType_FIXED_PRICE_AUCTION = 5,   // 定价拍卖
-    BusinessType_DUTCH_PRICE_AUCTION = 6,   // 降价拍卖
-    BusinessType_FIXED_PEICE_BUY = 7,       // 定向转让购买
-    BusinessType_CANCEL_AUCTION = 8,        // 取消拍卖
-    BusinessType_MARKET_PRICE_BUY = 9,      // 市场购买
-};
+
 
 @interface WalletTools : NSObject
 
@@ -217,6 +207,10 @@ typedef NS_ENUM(NSInteger , BusinessType)
 + (BigNumber *)calcThorNeeded:(float)gasPriceCoef gas:(NSNumber *)gas;
 
 + (BOOL)errorAddressAlert:(NSString *)toAddress;
+
++ (BOOL)checkKeystore:(NSString *)keystore;
+
++ (BOOL)checkHEXStr:(NSString *)hex;
 
 @end
 

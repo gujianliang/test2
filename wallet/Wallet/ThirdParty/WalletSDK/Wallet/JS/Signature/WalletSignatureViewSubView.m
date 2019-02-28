@@ -7,7 +7,6 @@
 //
 
 #import "WalletSignatureViewSubView.h"
-
 #define viewHeight 411
 
 @implementation WalletSignatureViewSubView
@@ -24,7 +23,6 @@
     WalletGradientLayerButton *_lastBtn;
     
     UIScrollView *_scrollView;
-    ContractType _contractType;
     NSString *_amount;
     WalletCoinModel *_currentCoinModel;
     NSString *_gasLimit;
@@ -39,22 +37,21 @@
 }
 
 
-- (void)initSignature:(UIScrollView *)scrollView contractType:(ContractType)contractType amount:(NSString *)amount currentCoinModel:(WalletCoinModel *)currentCoinModel gasLimit:(NSString *)gasLimit  fromAddress:(NSString *)fromAddress toAddress:(NSString *)toAddress pwTextField:(UITextField *)pwTextField transferType:(JSTransferType)transferType
+- (void)initSignature:(UIScrollView *)scrollView amount:(NSString *)amount currentCoinModel:(WalletCoinModel *)currentCoinModel gasLimit:(NSString *)gasLimit  fromAddress:(NSString *)fromAddress toAddress:(NSString *)toAddress pwTextField:(UITextField *)pwTextField transferType:(JSTransferType)transferType
                   gas:(NSNumber *)gas gasPriceCoef:(BigNumber *)gasPriceCoef clauseData:(NSData *)clauseData signatureHandle:(WalletSignatureViewHandle *)signatureHandle additionalMsg:(NSString *)additionalMsg
 {
     _scrollView = scrollView;
-    _contractType = contractType;
-    _amount = amount;
-    _currentCoinModel = currentCoinModel;
-    _gasLimit = gasLimit;
-    _fromAddress = fromAddress;
-    _transferType = transferType;
-    _gas = gas;
-    _gasPriceCoef = gasPriceCoef;
-    _clauseData = clauseData;
-    _signatureHandle = signatureHandle;
-    _additionalMsg = additionalMsg;
-    _toAddress = toAddress;
+    _amount     = amount;
+    _currentCoinModel   = currentCoinModel;
+    _gasLimit           = gasLimit;
+    _fromAddress        = fromAddress;
+    _transferType       = transferType;
+    _gas                = gas;
+    _gasPriceCoef       = gasPriceCoef;
+    _clauseData         = clauseData;
+    _signatureHandle    = signatureHandle;
+    _additionalMsg      = additionalMsg;
+    _toAddress          = toAddress;
 }
 
 - (void)creatLeftView:(void(^)(void))enterSignViewBlock
@@ -92,21 +89,12 @@
 
 - (void)initMinerLabel
 {
-    if (_contractType == Contract_acceptNode || _contractType == Contract_buyNode) {
-        if ([_amount isEqualToString:@"0"]) {
-            _valueLabel.text = @"0.00 VET";
-        }else{
-            NSString *vet = [WalletTools thousandSeparator:_amount decimals:YES];
-            _valueLabel.text = [NSString stringWithFormat:@"%@ VET",_amount.length == 0 ? @"0.00" : vet] ;
-        }
-    }else if(_contractType == NoContract_transferToken){
-        
+    
+    if ([_amount isEqualToString:@"0"]) {
+        _valueLabel.text = [NSString stringWithFormat:@"0.00 %@",_currentCoinModel.symobl];
+    }else{
         NSString *vet = [WalletTools thousandSeparator:_amount decimals:YES];
-        
-        _valueLabel.text = [NSString stringWithFormat:@"%@ %@",_amount.length == 0 ? @"0.00" : vet,_currentCoinModel.coinName.length > 0 ?_currentCoinModel.coinName :@"VET" ];
-    }
-    else{
-        _valueLabel.text = [NSString stringWithFormat:@"0.00 VET"] ;
+        _valueLabel.text = [NSString stringWithFormat:@"%@ %@",_amount.length == 0 ? @"0.00" : vet,_currentCoinModel.symobl] ;
     }
 }
 
@@ -141,7 +129,6 @@
         [self enterPreView:enterSignViewBlock];
         
     }else {
-        
         [self checkBalance:enterSignViewBlock];
     }
 }
@@ -187,14 +174,6 @@
                   Y:52 * 3 + 20 + jsOffset
           adjustBtn:NO
  enterSignViewBlock:enterSignViewBlock];
-    
-//    if (!_jsUse) { // js调用没有描述
-//        [self creatCell:VCNSLocalizedBundleString(@"contract_payment_info_row4_title", nil)
-//                  value:_additionalMsg
-//                      Y:52 * 4 + 20
-//              adjustBtn:NO
-//     enterSignViewBlock:enterSignViewBlock];
-//    }
 }
 
 - (void)enterPreView:(void(^)(void))enterSignViewBlock
@@ -509,17 +488,8 @@
         }
         [self removeFromSuperview];
         
-        if (_contractType == NoContract_transferToken) {
-            
-            if (transferBlock) {
-                transferBlock();
-            }
-            return ;
-        }
-        BOOL hasListVC = NO;
-        
-        if (!hasListVC) {
-            [[WalletTools getCurrentVC].navigationController popViewControllerAnimated:YES];
+        if (transferBlock) {
+            transferBlock();
         }
     };
 }

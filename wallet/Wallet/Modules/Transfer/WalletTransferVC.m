@@ -24,7 +24,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *feeLabel;
 @property (weak, nonatomic) IBOutlet UISlider *feeSwitcher;
 
-@property (weak, nonatomic) IBOutlet UILabel *coinName;
+@property (weak, nonatomic) IBOutlet UILabel *symobl;
 @property (weak, nonatomic) IBOutlet UIImageView *coinIcon;
 @property (weak, nonatomic) IBOutlet UISlider *minerFeeSlider;
 @property (nonatomic, strong)UITextField *pwTextField;
@@ -42,10 +42,10 @@
     if (!_isVET) {
         _tokenContractAddress = @"0x0000000000000000000000000000456e65726779";
         [self.coinIcon setImage:[UIImage imageNamed:@"VTHO"]];
-        self.coinName.text = @"VTHO";
+        self.symobl.text = @"VTHO";
     }else{
         [self.coinIcon setImage:[UIImage imageNamed:@"VET"]];
-        self.coinName.text = @"VET";
+        self.symobl.text = @"VET";
     }
     
     self.receiveAddressTextView.text = @"0xe2c3B55d8Aa9920058030F73baCECe582f2123FF";
@@ -67,19 +67,62 @@
     [WalletUtils initWithWalletDict:walletList];
     [WalletUtils setCurrentWallet:from];
     
-    [WalletUtils signViewFromAddress:from toAddress:self.receiveAddressTextView.text amount:self.transferAmountTextField.text symbol:self.coinName.text gas:@"21000" tokenAddress:@"" decimals:18 block:^(NSString *txId) {
-        
-    }];
     
-//    [WalletUtils signViewFrom:from
-//                           to:self.receiveAddressTextView.text
-//                       amount:self.transferAmountTextField.text
-//                     coinName:self.coinName.text
-//                        block:^(NSString *txId) {
-//                            
-//                        }];
+    NSString *keystore = currentWalletDict[@"keystore"];
+    
+//    //vet
+//    TransactionParameter *paramters = [[TransactionParameter alloc]init];
+//    paramters.to = @"0x1231231231231231231231231231231231231231";
+//    paramters.value = @"0x0DE0B6B3A7640000";
+//    paramters.data = @"";
+//
+//    paramters.from = from;
+//    paramters.gas = @"21000";
+//
+//    [WalletUtils transactionWithKeystore:keystore
+//                               parameter:paramters
+//                                   block:^(NSString *txId, NSString *signer)
+//     {
+//
+//        NSLog(@"dd");
+//    }];
+//
+   
+    //vtho
+    TransactionParameter *paramters = [[TransactionParameter alloc]init];
+    paramters.to = @"0x0000000000000000000000000000456e65726779";
+    paramters.value = @"";
+    paramters.data = @"0xa9059cbb00000000000000000000000012312312312312312312312312312312312312310000000000000000000000000000000000000000000000000de0b6b3a7640000";
+
+    paramters.from = from;
+    paramters.gas = @"60000";
+
+    [WalletUtils transactionWithKeystore:keystore
+                               parameter:paramters
+                                   block:^(NSString *txId, NSString *signer)
+     {
+
+         NSLog(@"dd");
+     }];
+    
+    // contract
     
     
+//    TransactionParameter *paramters = [[TransactionParameter alloc]init];
+//    paramters.to = @"0xd4dac3a95c741773f093d59256a21ed6fcc768a7";
+//    paramters.value = @"";
+//    paramters.data = @"bae3e19e00000000000000000000000000000000000000000000000000000000000000680000000000000000000000000000000000000000000000000de0b6b3a76400000000000000000000000000000000000000000000000000000de0b6b3a7640000000000000000000000000000000000000000000000000000000000000003f480";
+//
+//    paramters.from = from;
+//    paramters.gas = @"600000";
+//
+//    [WalletUtils transactionWithKeystore:keystore
+//                               parameter:paramters
+//                                   block:^(NSString *txId, NSString *signer)
+//     {
+//
+//         NSLog(@"dd");
+//     }];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField

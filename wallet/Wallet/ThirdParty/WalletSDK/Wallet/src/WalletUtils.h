@@ -6,6 +6,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "TransactionParameter.h"
 #import "Address.h"
 #import "Signature.h"
 #import "Transaction.h"
@@ -15,6 +16,7 @@
 #import "BigNumber.h"
 #import <UIKit/UIKit.h>
 #import <WebKit/WebKit.h>
+
 
 @interface WalletUtils : NSObject
 
@@ -156,6 +158,6 @@ OK, otherwise nil.
  *  @param block callback
  *
  */
-+ (void)signViewFromAddress:(NSString *_Nonnull)fromAddress toAddress:(NSString *_Nonnull)toAddress amount:(NSString *_Nonnull)amount symbol:(NSString *_Nonnull)symbol gas:(NSString *_Nonnull)gas tokenAddress:(NSString *_Nonnull)tokenAddress decimals:(int)decimals block:(void(^)(NSString *txId))block;
++ (void)transactionWithKeystore:(NSString *)keystore parameter:(TransactionParameter *)parameter block:(void(^)(NSString *txId,NSString *signer))block;
 
 @end

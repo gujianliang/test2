@@ -42,7 +42,7 @@
     
     if (self.transferType == JSContranctTransferType){ //合约签名
         transaction.gasLimit = [BigNumber bigNumberWithInteger:self.gas.integerValue];
-    }else if (![self.currentCoinModel.coinName isEqualToString:@"VET"]) { // token 签名
+    }else if (![self.currentCoinModel.symobl isEqualToString:@"VET"]) { // token 签名
         transaction.gasLimit = [BigNumber bigNumberWithDecimalString:self.currentCoinModel.transferGas];
     }else{ // vet 签名
         if (self.currentCoinModel.transferGas.length > 0) {
@@ -53,6 +53,9 @@
     }
     // 拉创世区块id做chainTag
     [self getGenesisBlockInfo:transaction];
+    
+    
+   
 }
 
 - (void)getGenesisBlockInfo:(Transaction *)transaction
@@ -86,6 +89,7 @@
         NSString *blockRef = [[blockModel.id substringFromIndex:2] substringToIndex:16];
         transaction.BlockRef = [BigNumber bigNumberWithHexString:[NSString stringWithFormat:@"0x%@",blockRef]];
         
+        
         [self packageClausesData:transaction];
         // 尝试用户密码解密keystore
         [self sign:transaction];
@@ -97,7 +101,10 @@
 
 - (void)packageClausesData:(Transaction *)transaction
 {
-    
+    if (self.clauseList.count == 3){
+        transaction.Clauses = self.clauseList;
+        return;
+    }
     BigNumber *subValue;
     if (self.transferType == JSVETTransferType) {
         //vet 转账  data 设置空
@@ -111,7 +118,7 @@
             transaction.Clauses = @[@[toData,subValue.data,[NSData data]]];
         }
         
-    } else if(self.transferType == JSVTHOTransferType) {
+    } else if(self.transferType == JSTokenTransferType) {
         //token 转账 value 设置0，data 设置见文档
         subValue = [Payment parseToken:self.amount dicimals:self.currentCoinModel.decimals];
         
@@ -125,7 +132,6 @@
             }else{
                 transaction.Clauses = @[@[[SecureData hexStringToData:self.tokenAddress],[NSData data], self.clauseData]];
             }
-            
         } else {
             
             if (self.tokenAddress.length == 0) {

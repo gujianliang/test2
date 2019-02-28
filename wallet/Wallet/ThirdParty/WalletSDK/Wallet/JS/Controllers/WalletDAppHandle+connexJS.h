@@ -54,46 +54,32 @@ NS_ASSUME_NONNULL_BEGIN
                         webView:(WKWebView *)webView;
 
 
-- (void)VETTransferDictParam:(NSMutableDictionary *)dictParam
-               from:(NSString *)from
-                 to:(NSString *)to
-      amountTnteger:(CGFloat)amountTnteger
-          requestId:(NSString *)requestId
-                gas:(NSNumber *)gas
-            webView:(WKWebView *)webView
-         callbackId:(NSString *)callbackId;
+- (void)VETTransferDictWithParamModel:(WalletSignParamModel *)paramModel
+                            requestId:(NSString *)requestId
+                              webView:(WKWebView *)webView
+                           callbackId:(NSString *)callbackId;
 
+- (void)VTHOTransferWithParamModel:(WalletSignParamModel *)paramModel
+                         requestId:(NSString *)requestId
+                           webView:(WKWebView *)webView
+                        callbackId:(NSString *)callbackId;
 
-- (void)VTHOTransferDictParam:(NSMutableDictionary *)dictParam
-                         from:(NSString *)from
-                  tokenAddress:(NSString *)tokenAddress
-                    toAddress:(NSString *)toAddress
-           requestId:(NSString *)requestId
-                 gas:(NSNumber *)gas
-             webView:(WKWebView *)webView
-          callbackId:(NSString *)callbackId
-        gasPriceCoef:(NSString *)gasPriceCoef
-          clauseData:(NSString *)clauseData;
-
-- (void)contractSignDictParam:(NSMutableDictionary *)dictParam
-                  to:(NSString *)to
-                from:(NSString *)from
-       amountTnteger:(CGFloat )amountTnteger
-           requestId:(NSString *)requestId
-                 gas:(NSNumber *)gas
-             webView:(WKWebView *)webView
-          callbackId:(NSString *)callbackId
-          clauseData:(NSString *)clauseData;
+- (void)contractSignWithParamModel:(WalletSignParamModel *)paramModel
+                         requestId:(NSString *)requestId
+                           webView:(WKWebView *)webView
+                        callbackId:(NSString *)callbackId;
 
 - (void)methodAsClauseWithDictP:(NSDictionary *)dictP
                       requestId:(NSString *)requestId
               completionHandler:(void (^)(NSString * __nullable result))completionHandler;
 
 
+- (void)certTransferDictParam:(NSMutableDictionary *)dictParam
+                         from:(NSString *)from
+                    requestId:(NSString *)requestId
+                      webView:(WKWebView *)webView
+                   callbackId:(NSString *)callbackId;
 
-- (BOOL)errorAmount:(NSString *)amount coinName:(NSString *)coinName;
-
-- (BOOL)errorAddressAlert:(NSString *)toAddress;
 
 
 @end

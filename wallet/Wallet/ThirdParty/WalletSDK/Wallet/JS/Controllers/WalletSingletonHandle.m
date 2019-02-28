@@ -90,7 +90,7 @@
         }
         
         WalletCoinModel *vthoModel = [[WalletCoinModel alloc]init];
-        vthoModel.coinName = @"VTHO";
+        vthoModel.symobl = @"VTHO";
         vthoModel.coinCount = coinAmount;
         walletModel.vthoModel = vthoModel;
         

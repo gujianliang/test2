@@ -169,7 +169,7 @@
     }
     __block NSString *to = callbackParams[@"to"];
     __block NSString *amount = callbackParams[@"value"];
-    NSString *clauseData = callbackParams[@"data"];
+    NSString *clauseStr = callbackParams[@"data"];
     __block NSString *tokenAddress;
     NSString *gas = [BigNumber bigNumberWithHexString:callbackParams[@"gas"]].decimalString;
     
@@ -190,7 +190,7 @@
         
         [viewSelf removeFromSuperview];
         
-        [self web3TransferWithClauseData:clauseData
+        [self web3TransferWithClauseData:clauseStr
                                     from:from
                                       to:to
                                requestId:requestId
@@ -242,32 +242,20 @@
     NSString *clauseStr = clausesDict[@"data"];
     NSNumber *gas        = callbackParams[@"options"][@"gas"];
     NSString *gasPrice   = callbackParams[@"options"][@"gasPrice"];
-
+    NSString *tokenAddress = @"";
     
     [self checkParamGasPrice:gasPrice gas:(NSString *)gas amount:amount to:to clauseStr:clauseStr];
     
     
-    NSMutableDictionary *dictParam = [NSMutableDictionary dictionary];
-    
-    [dictParam setValueIfNotNil:[BigNumber bigNumberWithHexString:gasPrice] forKey:@"gasPriceCoef"];
-    [dictParam setValueIfNotNil:gas forKey:@"gas"];
-    [dictParam setValueIfNotNil:to forKey:@"to"];
-    [dictParam setValueIfNotNil:amount forKey:@"amount"];
-    
-    NSData *secureData = [SecureData hexStringToData:clauseStr];
-    [dictParam setValueIfNotNil:secureData forKey:@"clauseData"];
-    
-    
     CGFloat amountFloat = 0;
-    if (clauseStr.length < 10) { // vet 转账clauseData == nil,
+    if (clauseStr.length < 10) { // vet 转账clauseStr == nil,
         
         
         if (![self checkAmountForm:amount amountFloat:amountFloat requestId:requestId webView:_webView callbackId:callbackId]) {
             return;
         }
         
-        if (![self errorAddressAlert:to] ||
-            ![self errorAmount:[NSString stringWithFormat:@"%lf",amountFloat] coinName:@"VET"]
+        if (![WalletTools errorAddressAlert:to]
             ||!(gas.integerValue > 0)) {
             
             [WalletTools callbackWithrequestId:requestId
@@ -281,12 +269,9 @@
         
     }else{
         if ([clauseStr hasPrefix:TransferMethodId]) { // token 转账
-            NSString *tokenAddress = to;
+            tokenAddress = to;
             NSString *clauseTemp =  [clauseStr stringByReplacingOccurrencesOfString:@"0xa9059cbb000000000000000000000000" withString:@""];
             to = [@"0x" stringByAppendingString:[clauseTemp substringToIndex:40]];
-            
-            [dictParam setValue:to forKey:@"to"];
-            [dictParam setValue:tokenAddress forKey:@"tokenAddress"];
             
             if (![WalletTools errorAddressAlert:to]
                 || ![WalletTools errorAddressAlert:tokenAddress]
@@ -331,88 +316,68 @@
     selectView.block = ^(NSString *from,WalletDappStoreSelectView *viewSelf){
         
         [viewSelf removeFromSuperview];
-        [dictParam setValueIfNotNil:from forKey:@"from"];
         
-        [self connexTransferWithClauseData:clauseStr
-                                 dictParam:dictParam
-                                      from:from
-                                        to:to
+        WalletSignParamModel *signParamModel = [[WalletSignParamModel alloc]init];
+        
+        signParamModel.toAddress    = to;
+        signParamModel.fromAddress  = from;
+        signParamModel.gasPriceCoef = [BigNumber bigNumberWithHexString:gasPrice];;
+        signParamModel.gas          = [NSString stringWithFormat:@"%@",gas];
+        signParamModel.amount       = amount;
+        signParamModel.clauseData   = clauseStr ;
+        signParamModel.tokenAddress = tokenAddress ;
+        
+        [self connexTransferWithParamModel:signParamModel
                                  requestId:requestId
-                                       gas:gas
                                    webView:_webView
                                 callbackId:callbackId
-                                    amount:amount
-                              gasPriceCoef:gasPrice];
+                                     bCert:bCert];
     };
 }
 
-- (void)connexTransferWithClauseData:(NSString *)clauseData
-                         dictParam:(NSMutableDictionary *)dictParam
-                              from:(NSString *)from
-                                to:(NSString *)to
-                         requestId:(NSString *)requestId
-                               gas:(NSNumber *)gas
-                           webView:(WKWebView *)webView
-                        callbackId:(NSString *)callbackId
-                            amount:(NSString *)amount
-                         gasPriceCoef:(NSString *)gasPriceCoef
+- (void)connexTransferWithParamModel:(WalletSignParamModel *)paramModel
+                           requestId:(NSString *)requestId
+                             webView:(WKWebView *)webView
+                          callbackId:(NSString *)callbackId
+                               bCert:(BOOL)bCert
 {
-    if (clauseData.length < 10) { // vet 转账clauseData == nil,
+    if (bCert) {
+        
+//        [self certTransferDictParam:dictParam
+//                               from:from
+//                          requestId:requestId
+//                            webView:webView
+//                         callbackId:callbackId];
+        
+    }else if (paramModel.clauseData.length < 10) { // vet 转账clauseStr == nil,
         CGFloat amountFloat = 0;
         
-        if (![self checkAmountForm:amount amountFloat:amountFloat requestId:requestId webView:_webView callbackId:callbackId]) {
+        if (![self checkAmountForm:paramModel.amount amountFloat:amountFloat requestId:requestId webView:_webView callbackId:callbackId]) {
             return;
         }
         
-        [self VETTransferDictParam:dictParam
-                              from:from
-                                to:to
-                     amountTnteger:amountFloat
-                         requestId:requestId
-                               gas:gas
-                           webView:webView
-                        callbackId:callbackId];
+        [self VETTransferDictWithParamModel:paramModel requestId:requestId webView:_webView callbackId:callbackId];
+        
+       
         
     }else{
-        if ([clauseData hasPrefix:TransferMethodId]) { // token 转账
-            NSString *tokenAddress = to;
-            NSString *clauseTemp =  [clauseData stringByReplacingOccurrencesOfString:@"0xa9059cbb000000000000000000000000" withString:@""];
-            NSString *toAddress = [@"0x" stringByAppendingString:[clauseTemp substringToIndex:40]];
-            
-            [dictParam setValue:toAddress forKey:@"to"];
-            [dictParam setValue:tokenAddress forKey:@"tokenAddress"];
-
-            [self VTHOTransferDictParam:dictParam
-                                   from:from
-                           tokenAddress:tokenAddress
-                              toAddress:toAddress
-                              requestId:requestId
-                                    gas:gas
-                                webView:webView
-                             callbackId:callbackId
-                              gasPriceCoef:gasPriceCoef
-                             clauseData:clauseData];
+        if ([paramModel.clauseData hasPrefix:TransferMethodId]) { // token 转账
+          
+            [self VTHOTransferWithParamModel:paramModel requestId:requestId webView:_webView callbackId:callbackId];
             
         }else{ // 其他合约交易
             CGFloat amountFloat = 0;
             
-            if (![self checkAmountForm:amount amountFloat:amountFloat requestId:requestId webView:_webView callbackId:callbackId]) {
+            if (![self checkAmountForm:paramModel.amount amountFloat:amountFloat requestId:requestId webView:_webView callbackId:callbackId]) {
                 return;
             }
-            [self contractSignDictParam:dictParam
-                                     to:to
-                                   from:from
-                          amountTnteger:amountFloat
-                              requestId:requestId
-                                    gas:gas
-                                webView:webView
-                             callbackId:callbackId
-                             clauseData:clauseData];
+            [self contractSignWithParamModel:paramModel requestId:requestId webView:_webView callbackId:callbackId];
+            
         }
     }
 }
 
--(void)web3TransferWithClauseData:(NSString *)clauseData
+-(void)web3TransferWithClauseData:(NSString *)clauseStr
                                from:(NSString *)from
                                  to:(NSString *)to
                           requestId:(NSString *)requestId
@@ -427,8 +392,8 @@
     if (conventView) {
         return;
     }
-    if (clauseData.length > 3) {
-        if (![clauseData hasPrefix:TransferMethodId]) { // 签合约
+    if (clauseStr.length > 10) {
+        if (![clauseStr hasPrefix:TransferMethodId]) { // 签合约
             [self web3contractSignFrom:from
                                 to:to
                             amount:amount
@@ -437,7 +402,7 @@
                           gasPrice:gasPrice
                            webView:webView
                         callbackId:callbackId
-                         clauseData:clauseData];
+                         clauseStr:clauseStr];
         }else{
             //vtho 转账
             [self web3VTHOTransferFrom:from
@@ -448,7 +413,7 @@
                           gasPrice:gasPrice
                            webView:webView
                         callbackId:callbackId
-                         clauseData:clauseData
+                         clauseStr:clauseStr
                       tokenAddress:tokenAddress];
         }
     }else{
@@ -460,7 +425,8 @@
                                gas:gas
                            webView:webView
                         callbackId:callbackId
-                          gasPrice:gasPrice];
+                          gasPrice:gasPrice
+                       clauseData:clauseStr];
     }
 }
 

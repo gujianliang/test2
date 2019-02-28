@@ -11,6 +11,10 @@
 #import "WalletTools.h"
 #import "WalletDAppHead.h"
 #import "WalletSingletonHandle.h"
+#import "WalletMBProgressShower.h"
+#import "WalletGetDecimalsApi.h"
+#import "WalletGetSymbolApi.h"
+#import "WalletSignParamModel.h"
 
 @implementation WalletUtils
 {
@@ -123,46 +127,142 @@
     [dappHandle injectJS:webview];
 }
 
-+ (void)signViewFromAddress:(NSString *_Nonnull)fromAddress toAddress:(NSString *_Nonnull)toAddress amount:(NSString *_Nonnull)amount symbol:(NSString *_Nonnull)symbol gas:(NSString *)gas tokenAddress:(NSString *)tokenAddress decimals:(int)decimals block:(void(^)(NSString *txId))block
++ (void)transactionWithKeystore:(NSString *)keystore parameter:(TransactionParameter *)parameter block:(void(^)(NSString *txId,NSString *signer))block
 {
-    NSMutableDictionary *dictParam = [NSMutableDictionary dictionary];
-    CGFloat defaultGasPriceCoef = [BigNumber bigNumberWithHexString:DefaultGasPriceCoef].decimalString.floatValue;
-    BigNumber *gasCanUse = [WalletTools calcThorNeeded:defaultGasPriceCoef gas:[NSNumber numberWithInteger:gas.integerValue]];
+    NSString *toAddress = @"";
+    NSString *tokenAddress = @"";
+    NSString *amount = @"";
+    NSString *clauseStr = @"";
+    JSTransferType transferType = JSVETTransferType;
     
-    NSString *miner = [[Payment formatEther:gasCanUse options:2] stringByAppendingString:@" VTHO"];
+    // check keystore form
+    if (![WalletTools checkKeystore:keystore]) {
+        
+        [WalletMBProgressShower showTextIn:[WalletTools getCurrentVC].view
+                                      Text:ERROR_REQUEST_PARAMS_MSG During:1];
+        return;
+    }
+    NSDictionary *dictKeystore = [NSJSONSerialization dictionaryWithJsonString:keystore];
+    NSString *keystoreFrom = dictKeystore[@"address"];
     
-    [dictParam setValueIfNotNil:miner forKey:@"miner"];
-    [dictParam setValueIfNotNil:[BigNumber bigNumberWithHexString:DefaultGasPriceCoef] forKey:@"gasPriceCoef"];
-    [dictParam setValueIfNotNil:gas forKey:@"gas"];
-    [dictParam setValueIfNotNil:toAddress forKey:@"to"];
-    [dictParam setValueIfNotNil:amount forKey:@"amount"];
+    if ([keystoreFrom.lowercaseString isEqualToString:parameter.from.lowercaseString]) {
+        [WalletMBProgressShower showTextIn:[WalletTools getCurrentVC].view
+                                      Text:ERROR_REQUEST_PARAMS_MSG During:1];
+        return;
+    }
     
-    WalletCoinModel *coinModel = [[WalletCoinModel alloc]init];
-    coinModel.coinName         = symbol;
-    coinModel.transferGas      = gas;
-    coinModel.decimals         = decimals;
-    [dictParam setValueIfNotNil:coinModel forKey:@"coinModel"];
+    if (parameter.data.length == 0) { //vet 转账
+        toAddress = parameter.to;
+        amount = parameter.value;
+        transferType = JSVETTransferType;
+        
+        if (![WalletTools errorAddressAlert:toAddress]
+            || ![WalletTools errorAddressAlert:parameter.from]
+            || (amount.length > 0 && ![WalletTools checkHEXStr:amount])) { // vet 可以转账0
+            
+            [WalletMBProgressShower showTextIn:[WalletTools getCurrentVC].view
+                                          Text:ERROR_REQUEST_PARAMS_MSG During:1];
+            return ;
+        }
+        
+    }else{
+        if ([parameter.data hasPrefix:TransferMethodId]) { //token transfer
+            transferType = JSTokenTransferType;
+            tokenAddress = parameter.to;
+            clauseStr = parameter.data;
+            
+            NSString *clauseTemp =  [clauseStr stringByReplacingOccurrencesOfString:@"0xa9059cbb000000000000000000000000" withString:@""];
+            toAddress = [@"0x" stringByAppendingString:[clauseTemp substringToIndex:40]];
+            
+            NSString *clauseStrTemp = [clauseStr stringByReplacingOccurrencesOfString:TransferMethodId withString:@""];
+            NSString *clauseValue = @"";
+            
+            if (clauseStrTemp.length >= 128) {
+                clauseValue = [clauseStrTemp substringWithRange:NSMakeRange(64, 64)];
+            }
+            
+            parameter.value = [NSString stringWithFormat:@"0x%@",clauseValue];
+            
+            if (![WalletTools errorAddressAlert:parameter.from]
+                || ![WalletTools errorAddressAlert:tokenAddress]
+                || ![WalletTools checkHEXStr:parameter.value]
+                || ![WalletTools checkHEXStr:clauseStr]) { //
+                
+                [WalletMBProgressShower showTextIn:[WalletTools getCurrentVC].view
+                                              Text:ERROR_REQUEST_PARAMS_MSG During:1];
+                return ;
+            }
+            
+        }else{ //contract signature
+            transferType = JSContranctTransferType;
+            amount = parameter.value;
+            clauseStr = parameter.data;
+            toAddress = parameter.to; //token address
+            
+            // toAddress equal to token addres,contract signature can be 0
+            if (![WalletTools errorAddressAlert:parameter.from]
+                || ![WalletTools errorAddressAlert:parameter.to]
+                || ![WalletTools checkHEXStr:clauseStr]) { // vet 可以转账0
+                
+                [WalletMBProgressShower showTextIn:[WalletTools getCurrentVC].view
+                                              Text:ERROR_REQUEST_PARAMS_MSG During:1];
+                return ;
+            }
+            
+            if (amount.length > 0 && ![WalletTools checkHEXStr:amount]) {
+                [WalletMBProgressShower showTextIn:[WalletTools getCurrentVC].view
+                                              Text:ERROR_REQUEST_PARAMS_MSG During:1];
+                return ;
+            }
+        }
+    }
+    
+    
+    NSMutableArray *clauseList = [NSMutableArray array];
+    if (parameter.to.length == 0) {
+        [clauseList addObject:[NSData data]];
+    }else{
+        [clauseList addObject: [parameter.to dataUsingEncoding:NSUTF8StringEncoding]];
+    }
+    
+    if (parameter.value.length == 0) {
+        [clauseList addObject:[NSData data]];
+    }else{
+        [clauseList addObject:[parameter.value dataUsingEncoding:NSUTF8StringEncoding]];
+    }
+    
+    if (parameter.data.length == 0) {
+        [clauseList addObject:[NSData data]];
+    }else{
+        [clauseList addObject:[parameter.data dataUsingEncoding:NSUTF8StringEncoding]];
+    }
+    
+    WalletSignParamModel *signParamModel = [[WalletSignParamModel alloc]init];
+    
+    signParamModel.toAddress    = toAddress;
+    signParamModel.fromAddress  = parameter.from;
+    signParamModel.gasPriceCoef = [BigNumber bigNumberWithHexString:DefaultGasPriceCoef];;
+    signParamModel.gas          = parameter.gas;
+    signParamModel.amount       = parameter.value;
+    signParamModel.clauseData   = parameter.data ;
+    signParamModel.tokenAddress = tokenAddress ;
+    signParamModel.keystore     = keystore;
+    signParamModel.clauseList   = clauseList;
     
     WalletSignatureView *signatureView = [[WalletSignatureView alloc] initWithFrame:[WalletTools getCurrentVC].view.bounds];
-    signatureView.transferType = JSVTHOTransferType;
-
-    if ([symbol.lowercaseString isEqualToString:@"vet"]) {
-        signatureView.transferType = JSVETTransferType;
-    }
-    [signatureView updateView:fromAddress
-                    toAddress:toAddress
-                 contractType:NoContract_transferToken
-                       amount:amount
-                       params:@[dictParam]];
+    signatureView.transferType = transferType;
+    
+    [signatureView updateViewParamModel:signParamModel];
+    
     [[WalletTools getCurrentVC].navigationController.view addSubview:signatureView];
     
     signatureView.transferBlock = ^(NSString * _Nonnull txid) {
-        NSLog(@"txid = %@",txid);
         
         if (block) {
-            block(txid);
+            block(txid,parameter.from);
         }
     };
 }
+
 
 @end

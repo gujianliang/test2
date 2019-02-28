@@ -14,6 +14,8 @@
 #import "WalletManageModel.h"
 #import "WalletUtils.h"
 #import "WalletTools.h"
+#import "WalletSignParamModel.h"
+
 @class WalletSignatureViewSubView;
 
 NS_ASSUME_NONNULL_BEGIN
@@ -21,7 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 typedef NS_ENUM(NSInteger,JSTransferType)
 {
     JSVETTransferType,
-    JSVTHOTransferType,
+    JSTokenTransferType,
     JSContranctTransferType
 };
 
@@ -29,8 +31,7 @@ typedef NS_ENUM(NSInteger,JSTransferType)
 
 @interface WalletSignatureView : UIView
 
-@property (nonatomic,copy) NSString *enter_path;
-@property (nonatomic,assign) BusinessType business_type;
+@property (nonatomic,copy) NSString *keystore;
 
 @property (nonatomic,copy) void(^block)(BOOL result);
 @property (nonatomic,copy) void(^transferBlock)(NSString *txid);
@@ -50,14 +51,10 @@ typedef NS_ENUM(NSInteger,JSTransferType)
 @property(nonatomic, copy) NSString *txid;
 @property(nonatomic, strong) UIScrollView *scrollView;
 @property(nonatomic, strong) WalletSignatureViewSubView *signatureSubView;
+@property(nonatomic, copy) NSArray *clauseList;
 
 
-
-- (void)updateView:(NSString *)fromAddress
-         toAddress:(NSString *)toAddress
-      contractType:(ContractType)contractType
-            amount:(NSString *)amount
-            params:(NSArray *)params;
+- (void)updateViewParamModel:(WalletSignParamModel *)paramModel;
 
 - (void)tokenID:(NSString *)tokenID expiration:(NSString *)expiration;
 

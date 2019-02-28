@@ -9,7 +9,7 @@
 #import "WalletSignatureViewHandle.h"
 #import "WalletManageModel.h"
 #import "WalletAlertShower.h"
-
+#import "WalletMBProgressShower.h"
 #import "WalletSignatureView.h"
 #import "WalletGradientLayerButton.h"
 #import "WalletBlockInfoApi.h"
@@ -22,8 +22,9 @@
 #import "WalletDAppSignPreVC.h"
 #import "WalletSingletonHandle.h"
 #import "NSBundle+Localizable.h"
-
-//#import "WalletCoinModel.h"
+#import "WalletGetSymbolApi.h"
+#import "WalletGetDecimalsApi.h"
+#import "WalletDAppHead.h"
 
 @implementation WalletSignatureViewHandle
 
@@ -157,6 +158,40 @@
     NSString *head = @"0x70a08231000000000000000000000000";
     NSString *data = [NSString stringWithFormat:@"%@%@",head,toAddress];
     return data;
+}
+
+- (void)tokenAddressConvetCoinInfo:(NSString *)tokenAddress coinModel:(WalletCoinModel *)coinModel block:(void(^)(void))block
+{
+    WalletGetSymbolApi *getSymbolApi = [[WalletGetSymbolApi alloc]initWithTokenAddress:tokenAddress];
+    [getSymbolApi loadDataAsyncWithSuccess:^(VCBaseApi *finishApi) {
+        
+        NSDictionary *dictResult = finishApi.resultDict;
+        NSString *symobl = dictResult[@"data"];
+        if (symobl.length < 128) {
+            [WalletMBProgressShower showTextIn:[WalletTools getCurrentVC].view Text:ERROR_REQUEST_PARAMS_MSG During:1];
+            return ;
+        }
+        symobl = [WalletTools abiDecodeString:symobl];
+        coinModel.symobl = symobl;
+        
+        WalletGetDecimalsApi *getDecimalsApi = [[WalletGetDecimalsApi alloc]initWithTokenAddress:tokenAddress];
+        [getDecimalsApi loadDataAsyncWithSuccess:^(VCBaseApi *finishApi) {
+            
+            NSDictionary *dictResult = finishApi.resultDict;
+            NSString *decimalsHex = dictResult[@"data"];
+            NSString *decimals = [BigNumber bigNumberWithHexString:decimalsHex].decimalString;
+            coinModel.decimals = decimals.integerValue;
+            
+            if (block) {
+                block();
+            }
+            
+        }failure:^(VCBaseApi *finishApi, NSString *errMsg) {
+            [WalletMBProgressShower showTextIn:[WalletTools getCurrentVC].view Text:ERROR_REQUEST_PARAMS_MSG During:1];
+        }];
+    }failure:^(VCBaseApi *finishApi, NSString *errMsg) {
+        [WalletMBProgressShower showTextIn:[WalletTools getCurrentVC].view Text:ERROR_REQUEST_PARAMS_MSG During:1];
+    }];
 }
 
 @end
