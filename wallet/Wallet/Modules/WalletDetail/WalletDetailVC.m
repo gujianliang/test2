@@ -12,9 +12,9 @@
 #import <WalletSDK/Payment.h>
 #import "WalletMoreInfoVC.h"
 #import "WebViewVC.h"
-#import "WalletCoverView.h"
+#import "WalletChooseNetworkView.h"
 #import "WalletServerDetailVC.h"
-#import "WalletAddServerVC.h"
+#import "WalletAddVthoNodeVC.h"
 #import "WalletSdkMacro.h"
 
 
@@ -65,8 +65,8 @@
     
     
     /* Set UI */
-    NSString *sysVersion = [UIDevice currentDevice].systemVersion;
-    if (sysVersion.doubleValue < 11.0) {
+    NSString *systemVersion = [UIDevice currentDevice].systemVersion;
+    if (systemVersion.doubleValue < 11.0) {
         self.topConstrant.constant = 70.0;
         
     } else {
@@ -123,9 +123,9 @@
 */
 - (void)selectTheMainNetworkEnvironment {
     
-    WalletCoverView *coverView = [self.view viewWithTag:90];
+    WalletChooseNetworkView *coverView = [self.view viewWithTag:90];
     if (!coverView) {
-        coverView = [[WalletCoverView alloc]initWithFrame:self.view.frame];
+        coverView = [[WalletChooseNetworkView alloc]initWithFrame:self.view.frame];
         coverView.tag = 90;
         [self.view addSubview:coverView];
         
@@ -133,7 +133,7 @@
             
             self.title = netName;
             if ([netName containsString:@"自定义"]) {
-                WalletAddServerVC *detailVC = [[WalletAddServerVC alloc]init];
+                WalletAddVthoNodeVC *detailVC = [[WalletAddVthoNodeVC alloc]init];
                 [self.navigationController pushViewController:detailVC animated:YES];
                 
             }else{

@@ -18,7 +18,7 @@ typedef NS_ENUM(NSInteger,NetType)
     CustomServer
 };
 
-@interface WalletCoverView : UIView<UITableViewDataSource,UITableViewDelegate>
+@interface WalletChooseNetworkView : UIView<UITableViewDataSource,UITableViewDelegate>
 
 @property(nonatomic,copy)void (^block)(NSString *netName,NSString *netUrl);
 @end

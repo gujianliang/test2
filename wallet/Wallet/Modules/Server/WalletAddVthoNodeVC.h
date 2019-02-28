@@ -1,5 +1,5 @@
 //
-//  WalletAddServerVC.h
+//  WalletAddVthoNodeVC.h
 //  walletSDKDemo
 //
 //  Created by 曾新 on 2019/1/30.
@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface WalletAddServerVC : UIViewController
+@interface WalletAddVthoNodeVC : UIViewController
 
 @end
 

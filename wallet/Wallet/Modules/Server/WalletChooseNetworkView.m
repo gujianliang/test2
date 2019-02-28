@@ -6,10 +6,10 @@
 //  Copyright © 2019年 demo. All rights reserved.
 //
 
-#import "WalletCoverView.h"
+#import "WalletChooseNetworkView.h"
 
 
-@implementation WalletCoverView
+@implementation WalletChooseNetworkView
 {
     NSMutableArray *_newList;
 }

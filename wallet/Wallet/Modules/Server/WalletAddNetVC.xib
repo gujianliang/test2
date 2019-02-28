@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WalletAddServerVC">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WalletAddVthoNodeVC">
             <connections>
                 <outlet property="netName" destination="Jms-mN-5Qu" id="DsP-Ru-Rr1"/>
                 <outlet property="netUrl" destination="jJ4-h8-kek" id="QIM-5a-ri9"/>

@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "WalletCoverView.h"
+#import "WalletChooseNetworkView.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

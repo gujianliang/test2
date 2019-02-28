@@ -1,20 +1,20 @@
 //
-//  WalletAddServerVC.m
+//  WalletAddVthoNodeVC.m
 //  walletSDKDemo
 //
 //  Created by 曾新 on 2019/1/30.
 //  Copyright © 2019年 demo. All rights reserved.
 //
 
-#import "WalletAddServerVC.h"
+#import "WalletAddVthoNodeVC.h"
 
-@interface WalletAddServerVC ()
+@interface WalletAddVthoNodeVC ()
 @property (weak, nonatomic) IBOutlet UITextField *netName;
 @property (weak, nonatomic) IBOutlet UITextField *netUrl;
 
 @end
 
-@implementation WalletAddServerVC
+@implementation WalletAddVthoNodeVC
 
 - (void)viewDidLoad
 {
