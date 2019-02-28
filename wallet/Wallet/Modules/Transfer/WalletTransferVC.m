@@ -86,35 +86,16 @@
 //
 //        NSLog(@"dd");
 //    }];
-//
+
    
-    //vtho
-    TransactionParameter *paramters = [[TransactionParameter alloc]init];
-    paramters.to = @"0x0000000000000000000000000000456e65726779";
-    paramters.value = @"";
-    paramters.data = @"0xa9059cbb00000000000000000000000012312312312312312312312312312312312312310000000000000000000000000000000000000000000000000de0b6b3a7640000";
-
-    paramters.from = from;
-    paramters.gas = @"60000";
-
-    [WalletUtils transactionWithKeystore:keystore
-                               parameter:paramters
-                                   block:^(NSString *txId, NSString *signer)
-     {
-
-         NSLog(@"dd");
-     }];
-    
-    // contract
-    
-    
+//    //vtho
 //    TransactionParameter *paramters = [[TransactionParameter alloc]init];
-//    paramters.to = @"0xd4dac3a95c741773f093d59256a21ed6fcc768a7";
+//    paramters.to = @"0x0000000000000000000000000000456e65726779";
 //    paramters.value = @"";
-//    paramters.data = @"bae3e19e00000000000000000000000000000000000000000000000000000000000000680000000000000000000000000000000000000000000000000de0b6b3a76400000000000000000000000000000000000000000000000000000de0b6b3a7640000000000000000000000000000000000000000000000000000000000000003f480";
+//    paramters.data = @"0xa9059cbb00000000000000000000000012312312312312312312312312312312312312310000000000000000000000000000000000000000000000000de0b6b3a7640000";
 //
 //    paramters.from = from;
-//    paramters.gas = @"600000";
+//    paramters.gas = @"60000";
 //
 //    [WalletUtils transactionWithKeystore:keystore
 //                               parameter:paramters
@@ -123,6 +104,25 @@
 //
 //         NSLog(@"dd");
 //     }];
+
+    // contract
+    
+    
+    TransactionParameter *paramters = [[TransactionParameter alloc]init];
+    paramters.to = @"0xd4dac3a95c741773f093d59256a21ed6fcc768a7";
+    paramters.value = @"";
+    paramters.data = @"0xbae3e19e00000000000000000000000000000000000000000000000000000000000000680000000000000000000000000000000000000000000000000de0b6b3a76400000000000000000000000000000000000000000000000000000de0b6b3a7640000000000000000000000000000000000000000000000000000000000000003f480";
+
+    paramters.from = from;
+    paramters.gas = @"600000";
+
+    [WalletUtils transactionWithKeystore:keystore
+                               parameter:paramters
+                                   block:^(NSString *txId, NSString *signer)
+     {
+
+         NSLog(@"dd");
+     }];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField

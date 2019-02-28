@@ -29,7 +29,7 @@
     if (needEncrypt) {
         dict = [WalletModelFetcher encryptParaDict:dict method:@"GET"];
     }
-    
+//    urlString = @"https://vethor-node-test.vechaindev.com/blocks/best";
     httpManager.requestSerializer.cachePolicy = NSURLRequestReturnCacheDataElseLoad;
     [httpManager GET:urlString parameters:dict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
@@ -60,9 +60,9 @@
     AFHTTPSessionManager *httpManager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:urlString]];
     httpManager.requestSerializer.cachePolicy = NSURLRequestReturnCacheDataElseLoad;
     
-    if (![aUrl containsString:@"/transactions"]) {
+//    if (![aUrl containsString:@"/transactions"]) {
         [WalletModelFetcher setHeaderInfo:httpManager useSession:useSession];
-    }
+//    }
     
     [httpManager POST:urlString parameters:dict progress:^(NSProgress * _Nonnull uploadProgress) {
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {

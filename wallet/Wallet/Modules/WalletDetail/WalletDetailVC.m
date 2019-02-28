@@ -16,6 +16,8 @@
 #import "WalletServerDetailVC.h"
 #import "WalletAddServerVC.h"
 
+#import <WalletSDK/WalletUtils.h>
+
 @interface WalletDetailVC ()<UISearchBarDelegate>
 {
     NSString *_blockHost;
@@ -59,13 +61,13 @@
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc]initWithTitle:@"选择网络"
                                                                  style:UIBarButtonItemStyleDone
                                                                 target:self
-                                                                action:@selector(selectNET)];
+                                                                action:@selector(selectNode)];
     self.navigationItem.rightBarButtonItem = rightItem;
     self.searchBar.text = @"https://appwallet.oss-cn-shanghai.aliyuncs.com/testJS/test.html";
 //    self.searchBar.text = @"https://appwallet.oss-cn-shanghai.aliyuncs.com/testJS/dist/index.html#/test";
 }
 
-- (void)selectNET
+- (void)selectNode
 {
     WalletCoverView *coverView = [self.view viewWithTag:90];
     if (!coverView) {
@@ -74,6 +76,8 @@
         [self.view addSubview:coverView];
         
         coverView.block = ^(NSString *netName,NSString *netUrl) {
+            
+            [WalletUtils setNode:netUrl];
             
             self.title = netName;
             if ([netName containsString:@"自定义"]) {
@@ -112,6 +116,8 @@
         [serverDict setObject:self.title forKey:@"serverName"];
     }
     
+    [WalletUtils setNode:_blockHost];
+    
     self.vthoAmountLabel.text = @"";
     self.vetAmountLabel.text = @"";
     
@@ -131,6 +137,7 @@
 - (void)getVETBalance
 {
     NSString *urlString = [NSString stringWithFormat:@"%@/accounts/%@",_blockHost,self.addressLabel.text];
+//    urlString = @"https://vethor-node-test.vechaindev.com/blocks/best";
     AFHTTPSessionManager *httpManager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:urlString]];
     [httpManager GET:urlString
           parameters:nil

@@ -49,8 +49,8 @@
 
 - (void)getVETBalance:(NSString *)address amount:(NSString *)amount block:(void(^)())block
 {
-    NSDictionary *dictCurrentNet = [[NSUserDefaults standardUserDefaults]objectForKey:@"CurrentNet"];
-    NSString *blockHost = dictCurrentNet[@"serverUrl"];
+ 
+    NSString *blockHost = [WalletUserDefaultManager getBlockUrl];
     
     NSString *urlString = [NSString stringWithFormat:@"%@/accounts/%@",blockHost,address];
     AFHTTPSessionManager *httpManager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:urlString]];
@@ -101,8 +101,7 @@
 
 - (void)getVTHOBalance:(NSString *)address gasLimit:(NSString *)gasLimit block:(void(^)())block
 {
-    NSDictionary *dictCurrentNet = [[NSUserDefaults standardUserDefaults]objectForKey:@"CurrentNet"];
-    NSString *blockHost = dictCurrentNet[@"serverUrl"];
+    NSString *blockHost = [WalletUserDefaultManager getBlockUrl];
     NSString *urlString = [blockHost stringByAppendingString:@"/accounts/0x0000000000000000000000000000456e65726779"] ;
     
     NSMutableDictionary *dictParm = [NSMutableDictionary dictionary];
@@ -162,6 +161,8 @@
 
 - (void)tokenAddressConvetCoinInfo:(NSString *)tokenAddress coinModel:(WalletCoinModel *)coinModel block:(void(^)(void))block
 {
+    [WalletMBProgressShower showLoadData:[WalletTools getCurrentVC].view Text:VCNSLocalizedString(@"loading...", nil)];
+//list_load_ing
     WalletGetSymbolApi *getSymbolApi = [[WalletGetSymbolApi alloc]initWithTokenAddress:tokenAddress];
     [getSymbolApi loadDataAsyncWithSuccess:^(VCBaseApi *finishApi) {
         
@@ -176,7 +177,8 @@
         
         WalletGetDecimalsApi *getDecimalsApi = [[WalletGetDecimalsApi alloc]initWithTokenAddress:tokenAddress];
         [getDecimalsApi loadDataAsyncWithSuccess:^(VCBaseApi *finishApi) {
-            
+            [WalletMBProgressShower hide:[WalletTools getCurrentVC].view];
+
             NSDictionary *dictResult = finishApi.resultDict;
             NSString *decimalsHex = dictResult[@"data"];
             NSString *decimals = [BigNumber bigNumberWithHexString:decimalsHex].decimalString;
@@ -187,9 +189,11 @@
             }
             
         }failure:^(VCBaseApi *finishApi, NSString *errMsg) {
+            [WalletMBProgressShower hide:[WalletTools getCurrentVC].view];
             [WalletMBProgressShower showTextIn:[WalletTools getCurrentVC].view Text:ERROR_REQUEST_PARAMS_MSG During:1];
         }];
     }failure:^(VCBaseApi *finishApi, NSString *errMsg) {
+        [WalletMBProgressShower hide:[WalletTools getCurrentVC].view];
         [WalletMBProgressShower showTextIn:[WalletTools getCurrentVC].view Text:ERROR_REQUEST_PARAMS_MSG During:1];
     }];
 }

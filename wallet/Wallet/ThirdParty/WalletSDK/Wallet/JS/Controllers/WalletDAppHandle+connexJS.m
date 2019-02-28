@@ -281,6 +281,7 @@
                   callbackId:(NSString *)callbackId
 
 {
+#warning
     if (![WalletTools errorAddressAlert:paramModel.toAddress] ||
         ![WalletTools fromISToAddress:paramModel.fromAddress to:paramModel.toAddress]
         ||!(paramModel.gas.integerValue > 0)) {
@@ -376,15 +377,7 @@
         
         signatureView.transferBlock = ^(NSString * _Nonnull txid) {
             NSLog(@"txid = %@",txid);
-            if (txid.length == 0) {
-                
-                [WalletTools callbackWithrequestId:requestId
-                                           webView:webView
-                                              data:@""
-                                        callbackId:callbackId
-                                              code:ERROR_CANCEL];
-            }else{
-                
+            if (txid.length != 0) {
                 [WalletTools callbackWithrequestId:requestId
                                            webView:webView
                                               data:txid
@@ -427,16 +420,12 @@
     
     signatureView.transferBlock = ^(NSString * _Nonnull txid) {
         NSLog(@"txid = %@",txid);
-        if (txid.length == 0) {
-            
-            
-        }else{
-            
+        if (txid.length != 0) {
             [WalletTools callbackWithrequestId:requestId
                                        webView:webView
-                                         data:txid
-                                   callbackId:callbackId
-                                         code:OK];
+                                          data:txid
+                                    callbackId:callbackId
+                                          code:OK];
         }
     };
 }
