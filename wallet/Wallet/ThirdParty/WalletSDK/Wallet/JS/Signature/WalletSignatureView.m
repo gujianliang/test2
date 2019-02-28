@@ -22,6 +22,7 @@
 #import "WalletSignatureViewSubView.h"
 #import "WalletSignatureViewSubView.h"
 #import "WalletTools.h"
+#import "SecureData.h"
 
 #define viewHeight 411
 
@@ -71,7 +72,7 @@
     _clauseList   = paramModel.clauseList;
     
     _gasPriceCoef         = paramModel.gasPriceCoef;
-    _clauseData           = [paramModel.clauseData dataUsingEncoding:NSUTF8StringEncoding];
+    _clauseData           = [SecureData secureDataWithHexString:paramModel.clauseData].data;
     _tokenAddress         = paramModel.tokenAddress;
     _gas                  = [NSNumber numberWithInteger:paramModel.gas.integerValue];
     
@@ -90,41 +91,42 @@
         _currentCoinModel.symobl = @"VET";
         _currentCoinModel.decimals = 18;
         
-        if (_amount.length > 0) {
-            _amount = [Payment formatToken:[BigNumber bigNumberWithHexString:_amount]
-                                  decimals:18
-                                   options:2];
-        }else{
-            _amount = 0;
-        }
+        [self amountOpreation];
         
         [self initView];
     }else if (_transferType == JSTokenTransferType){
+        
+       
         [_signatureHandle tokenAddressConvetCoinInfo:_tokenAddress
                                            coinModel:_currentCoinModel
                                                block:^
         {
-            if (_amount.length > 0) {
-                _amount = [Payment formatToken:[BigNumber bigNumberWithHexString:_amount]
-                                      decimals:_currentCoinModel.decimals
-                                       options:2];
-            }else{
-                _amount = 0;
-            }
+            [self amountOpreation];
             [self initView];
         }];
     }else{ //合约，显示的只能是vet
         _currentCoinModel.symobl = @"VET";
         _currentCoinModel.decimals = 18;
         
-        if (_amount.length > 0) {
+        [self amountOpreation];
+        [self initView];
+    }
+}
+
+- (void)amountOpreation{
+    
+    if (_amount.length > 0) {
+        if ([_amount.lowercaseString hasPrefix:@"0x"]) {
             _amount = [Payment formatToken:[BigNumber bigNumberWithHexString:_amount]
                                   decimals:18
                                    options:2];
         }else{
-            _amount = 0;
+            _amount = [Payment formatToken:[BigNumber bigNumberWithInteger:_amount.integerValue]
+                                  decimals:18
+                                   options:2];
         }
-        [self initView];
+    }else{
+        _amount = 0;
     }
 }
 
@@ -369,7 +371,7 @@
 {
     [_signatureSubView.timeBtn setTitle:@"" forState:UIControlStateNormal];
     [_signatureSubView.lastBtn setTitle:VCNSLocalizedBundleString(@"dialog_confirm", nil) forState:UIControlStateNormal];
-    [_signatureSubView.timeBtn setImage:[UIImage imageNamed:@"icon_shibai"] forState:UIControlStateNormal];
+    [_signatureSubView.timeBtn setImage:[WalletTools localImageWithName:@"icon_shibai"] forState:UIControlStateNormal];
     
     UILabel *titleLabel = [_signatureSubView.lastView viewWithTag:10];
     titleLabel.text = VCNSLocalizedBundleString(@"contract_payment_result_fail", nil);

@@ -53,9 +53,6 @@
     }
     // 拉创世区块id做chainTag
     [self getGenesisBlockInfo:transaction];
-    
-    
-   
 }
 
 - (void)getGenesisBlockInfo:(Transaction *)transaction
@@ -101,9 +98,13 @@
 
 - (void)packageClausesData:(Transaction *)transaction
 {
-    if (self.clauseList.count == 3){
-        transaction.Clauses = self.clauseList;
-        return;
+    if (self.clauseList.count > 0){
+        NSArray *subClause = self.clauseList[0];
+        if (subClause.count == 3) {
+            transaction.Clauses = self.clauseList;
+            return;
+        }
+        [self showTransactionFail];
     }
     BigNumber *subValue;
     if (self.transferType == JSVETTransferType) {
@@ -122,7 +123,7 @@
         //token 转账 value 设置0，data 设置见文档
         subValue = [Payment parseToken:self.amount dicimals:self.currentCoinModel.decimals];
         
-        SecureData *tokenAddress = [SecureData secureDataWithHexString:self.currentCoinModel.address];
+        SecureData *tokenAddress = [SecureData secureDataWithHexString:self.tokenAddress];
         transaction.Clauses = @[@[tokenAddress.data,[NSData data],self.clauseData]];
     }else if(self.transferType == JSContranctTransferType) { // 合约转账
         CGFloat amountF = self.amount.floatValue;
@@ -167,10 +168,14 @@
         }
         
         [account sign:transaction];
+        if (transaction.signature.v == 2
+            || transaction.signature.v == 3) {
+            [self showTransactionFail];
         
-        NSString *raw = [SecureData dataToHexString: [transaction serialize]];
-        [self sendRaw:raw];
-        
+        }else{
+            NSString *raw = [SecureData dataToHexString: [transaction serialize]];
+            [self sendRaw:raw];
+        }
     }];
 }
 

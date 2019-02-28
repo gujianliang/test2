@@ -222,19 +222,25 @@
     if (parameter.to.length == 0) {
         [clauseList addObject:[NSData data]];
     }else{
-        [clauseList addObject: [parameter.to dataUsingEncoding:NSUTF8StringEncoding]];
+        [clauseList addObject: [SecureData secureDataWithHexString:parameter.to].data];
     }
     
     if (parameter.value.length == 0) {
         [clauseList addObject:[NSData data]];
     }else{
-        [clauseList addObject:[parameter.value dataUsingEncoding:NSUTF8StringEncoding]];
+        if (transferType == JSTokenTransferType) {
+            [clauseList addObject:[NSData data]];
+
+        }else{
+            [clauseList addObject:[BigNumber bigNumberWithHexString:parameter.value].data];
+        }
+
     }
     
     if (parameter.data.length == 0) {
         [clauseList addObject:[NSData data]];
     }else{
-        [clauseList addObject:[parameter.data dataUsingEncoding:NSUTF8StringEncoding]];
+        [clauseList addObject:[SecureData secureDataWithHexString:parameter.data].data];
     }
     
     WalletSignParamModel *signParamModel = [[WalletSignParamModel alloc]init];
@@ -247,7 +253,7 @@
     signParamModel.clauseData   = parameter.data ;
     signParamModel.tokenAddress = tokenAddress ;
     signParamModel.keystore     = keystore;
-    signParamModel.clauseList   = clauseList;
+    signParamModel.clauseList   = [NSArray arrayWithObject:clauseList];
     
     WalletSignatureView *signatureView = [[WalletSignatureView alloc] initWithFrame:[WalletTools getCurrentVC].view.bounds];
     signatureView.transferType = transferType;
@@ -262,6 +268,11 @@
             block(txid,parameter.from);
         }
     };
+}
+
++ (void)setNode:(NSString *)nodelUrl
+{
+    [WalletUserDefaultManager setBlockUrl:nodelUrl];
 }
 
 

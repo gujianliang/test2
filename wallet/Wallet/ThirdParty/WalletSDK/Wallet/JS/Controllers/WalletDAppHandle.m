@@ -240,18 +240,18 @@
     NSString *to         = clausesDict[@"to"];
     NSString *amount     = clausesDict[@"value"];
     NSString *clauseStr = clausesDict[@"data"];
-    NSNumber *gas        = callbackParams[@"options"][@"gas"];
+    NSString *gas        = callbackParams[@"options"][@"gas"];
     NSString *gasPrice   = callbackParams[@"options"][@"gasPrice"];
     NSString *tokenAddress = @"";
     
-    [self checkParamGasPrice:gasPrice gas:(NSString *)gas amount:amount to:to clauseStr:clauseStr];
-    
+    [self checkParamGasPrice:&gasPrice gas:&gas amount:&amount to:&to clauseStr:&clauseStr];
     
     CGFloat amountFloat = 0;
+    
     if (clauseStr.length < 10) { // vet 转账clauseStr == nil,
         
         
-        if (![self checkAmountForm:amount amountFloat:amountFloat requestId:requestId webView:_webView callbackId:callbackId]) {
+        if (![self checkAmountForm:amount amountFloat:&amountFloat requestId:requestId webView:_webView callbackId:callbackId]) {
             return;
         }
         
@@ -273,6 +273,15 @@
             NSString *clauseTemp =  [clauseStr stringByReplacingOccurrencesOfString:@"0xa9059cbb000000000000000000000000" withString:@""];
             to = [@"0x" stringByAppendingString:[clauseTemp substringToIndex:40]];
             
+            NSString *clauseStrTemp = [clauseStr stringByReplacingOccurrencesOfString:TransferMethodId withString:@""];
+            NSString *clauseValue = @"";
+            
+            if (clauseStrTemp.length >= 128) {
+                clauseValue = [clauseStrTemp substringWithRange:NSMakeRange(64, 64)];
+            }
+            
+            amount = [NSString stringWithFormat:@"0x%@",clauseValue];
+            
             if (![WalletTools errorAddressAlert:to]
                 || ![WalletTools errorAddressAlert:tokenAddress]
                 || [tokenAddress isKindOfClass:[NSNull class]]
@@ -290,10 +299,10 @@
             
         }else{ // 其他合约交易
             
-            if (![self checkAmountForm:amount amountFloat:amountFloat requestId:requestId webView:_webView callbackId:callbackId]) {
+            if (![self checkAmountForm:amount amountFloat:&amountFloat requestId:requestId webView:_webView callbackId:callbackId]) {
                 return;
             }
-            
+            tokenAddress = to;
             NSData *newclouseData = [SecureData hexStringToData:clauseStr];
             if (clauseStr.length == 0 ||
                 !(gas.integerValue > 0) ||
@@ -350,12 +359,8 @@
 //                         callbackId:callbackId];
         
     }else if (paramModel.clauseData.length < 10) { // vet 转账clauseStr == nil,
-        CGFloat amountFloat = 0;
         
-        if (![self checkAmountForm:paramModel.amount amountFloat:amountFloat requestId:requestId webView:_webView callbackId:callbackId]) {
-            return;
-        }
-        
+       
         [self VETTransferDictWithParamModel:paramModel requestId:requestId webView:_webView callbackId:callbackId];
         
        
@@ -368,7 +373,7 @@
         }else{ // 其他合约交易
             CGFloat amountFloat = 0;
             
-            if (![self checkAmountForm:paramModel.amount amountFloat:amountFloat requestId:requestId webView:_webView callbackId:callbackId]) {
+            if (![self checkAmountForm:paramModel.amount amountFloat:&amountFloat requestId:requestId webView:_webView callbackId:callbackId]) {
                 return;
             }
             [self contractSignWithParamModel:paramModel requestId:requestId webView:_webView callbackId:callbackId];
@@ -433,7 +438,6 @@
 
 - (void)injectJS:(WKWebView *)webview 
 {
-    [WalletUserDefaultManager setServerType:TEST_SERVER];
     
     //connex
     NSString *js = connex_js;
@@ -448,46 +452,47 @@
     }];
 }
 
-- (void)checkParamGasPrice:(NSString *)gasPrice gas:(NSString *)gas amount:(NSString *)amount to:(NSString *)to clauseStr:(NSString *)clauseStr
+- (void)checkParamGasPrice:(NSString **)gasPrice gas:(NSString **)gas amount:(NSString **)amount to:(NSString **)to clauseStr:(NSString **)clauseStr
 {
-    if ([gasPrice isKindOfClass:[NSNull class]]) {
-        gasPrice = DefaultGasPriceCoef;
-    }else if (gasPrice.length == 0) {
+    if ([*gasPrice isKindOfClass:[NSNull class]]) {
+        *gasPrice = DefaultGasPriceCoef;
+    }else if ((*gasPrice).length == 0) {
         //默认120，如果js没有返回，就给默认的
-        gasPrice = DefaultGasPriceCoef;
+        *gasPrice = DefaultGasPriceCoef;
     }
     
-    if ([gas isKindOfClass:[NSNull class]]) {
-        gas = nil;
+    if ([*gas isKindOfClass:[NSNull class]]) {
+        *gas = nil;
     }
     
-    if ([amount isKindOfClass:[NSNull class]]) {
-        amount = @"0";
-    }else if(amount.length == 0){
-        amount = @"0";
+    if ([*amount isKindOfClass:[NSNull class]]) {
+        *amount = @"0";
+    }else if((*amount).length == 0){
+        *amount = @"0";
     }
     
-    if ([clauseStr isKindOfClass:[NSNull class]]) {
-        clauseStr = nil;
+    if ([*clauseStr isKindOfClass:[NSNull class]]) {
+        *clauseStr = nil;
     }
     
-    if ([to isKindOfClass:[NSNull class]]) {
-        to = nil;
+    if ([*to isKindOfClass:[NSNull class]]) {
+        *to = nil;
     }
 }
 
 - (BOOL)checkAmountForm:(NSString *)amount
-            amountFloat:(CGFloat)amountFloat
+            amountFloat:(CGFloat *)amountFloat
               requestId:(NSString *)requestId
                 webView:(WKWebView *)webView
              callbackId:(NSString *)callbackId
 {
     if ([amount hasPrefix:@"0x"] || [amount hasPrefix:@"0X"]) { // 16进制
-        
+
         NSString *regex =@"[0-9a-fA-F]*";
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",regex];
         if ([predicate evaluateWithObject:[amount substringFromIndex:2]]) {
-            amountFloat = [BigNumber bigNumberWithHexString:[NSString stringWithFormat:@"%@",amount]].decimalString.doubleValue/pow(10, 18);
+            *amountFloat = [BigNumber bigNumberWithHexString:[NSString stringWithFormat:@"%@",amount]].decimalString.doubleValue/pow(10, 18);
+            *amountFloat = 2;
             return YES;
         }else{
             [WalletTools callbackWithrequestId:requestId
@@ -501,7 +506,7 @@
         NSString *regex =@"[0-9]*";
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",regex];
         if ([predicate evaluateWithObject:amount]) {
-            amountFloat = [BigNumber bigNumberWithDecimalString:[NSString stringWithFormat:@"%@",amount]].decimalString.doubleValue/pow(10, 18);
+            *amountFloat = [BigNumber bigNumberWithDecimalString:[NSString stringWithFormat:@"%@",amount]].decimalString.doubleValue/pow(10, 18);
             return YES;
         }else{
             [WalletTools callbackWithrequestId:requestId

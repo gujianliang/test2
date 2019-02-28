@@ -18,6 +18,8 @@
 #import "WalletSdkMacro.h"
 
 
+#import <WalletSDK/WalletUtils.h>
+
 @interface WalletDetailVC ()<UISearchBarDelegate>
 {
     NSString *_blockHost;  /* The main network environment of block */
@@ -117,6 +119,7 @@
 }
 
 
+
 /**
 *  Displays a selection of network controls，then you can change the main network environment
 *  or add what you custom network environment.
@@ -132,6 +135,8 @@
         [self.view addSubview:chooseNetworkView];
         
         chooseNetworkView.block = ^(NSString *netName,NSString *netUrl) {
+            
+            [WalletUtils setNode:netUrl];
             
             self.title = netName;
             if ([netName containsString:@"自定义"]) {
@@ -167,12 +172,15 @@
         [serverDict setObject:self.title forKey:@"serverName"];
     }
     
+    [WalletUtils setNode:_blockHost];
+    
     self.vthoAmountLabel.text = @"";
     self.vetAmountLabel.text = @"";
     
     [self getVETBalance];
     [self getVTHOBalance];
 }
+
 
 /**
 *  Get the VET balance from network environment, '_blockHost' is a network variable. Which network environment

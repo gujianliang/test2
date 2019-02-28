@@ -20,6 +20,8 @@
 
 @interface WalletUtils : NSObject
 
++ (void)setNode:(NSString *)nodelUrl;
+
 /**
  *  @abstract
  *  create wallet
@@ -159,5 +161,7 @@ OK, otherwise nil.
  *
  */
 + (void)transactionWithKeystore:(NSString *)keystore parameter:(TransactionParameter *)parameter block:(void(^)(NSString *txId,NSString *signer))block;
+
+
 
 @end
