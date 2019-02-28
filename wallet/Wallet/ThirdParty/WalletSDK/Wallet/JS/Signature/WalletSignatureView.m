@@ -23,6 +23,7 @@
 #import "WalletSignatureViewSubView.h"
 #import "WalletTools.h"
 #import "SecureData.h"
+#import "Payment.h"
 
 #define viewHeight 411
 
@@ -97,7 +98,6 @@
         
         [self initView];
     }else if (_transferType == JSTokenTransferType){
-        
        
         [_signatureHandle tokenAddressConvetCoinInfo:_tokenAddress
                                            coinModel:_currentCoinModel
@@ -259,7 +259,7 @@
     }];
     
     [_signatureSubView creatRightView:^{
-        [self sign];
+        [self signTransfer:_transferBlock];
     }];
     
     [_signatureSubView creatLastView:^{
@@ -291,11 +291,6 @@
     else{
         [_backBtn setImage:[WalletTools localImageWithName:@"icon_close_black"] forState:UIControlStateNormal];
     }
-}
-
-- (void)sign
-{
-    [self signTransfer:_transferBlock];
 }
 
 - (void)timerCountBlock

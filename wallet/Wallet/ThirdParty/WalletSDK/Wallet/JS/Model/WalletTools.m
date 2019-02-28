@@ -131,7 +131,7 @@
 
 + (NSString *)checksumAddress:(NSString *)inputAddress
 {
-    Address *a = [Address addressWithString:inputAddress];
+    Address *a = [Address addressWithString:inputAddress.lowercaseString];
     if (a) {
         return a.checksumAddress;
     }

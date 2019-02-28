@@ -42,7 +42,7 @@
     
     if (self.transferType == JSContranctTransferType){ //合约签名
         transaction.gasLimit = [BigNumber bigNumberWithInteger:self.gas.integerValue];
-    }else if (![self.currentCoinModel.symobl isEqualToString:@"VET"]) { // token 签名
+    }else if (self.transferType == JSTokenTransferType) { // token 签名
         transaction.gasLimit = [BigNumber bigNumberWithDecimalString:self.currentCoinModel.transferGas];
     }else{ // vet 签名
         if (self.currentCoinModel.transferGas.length > 0) {

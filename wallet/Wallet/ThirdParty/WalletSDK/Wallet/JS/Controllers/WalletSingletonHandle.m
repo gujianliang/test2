@@ -9,6 +9,7 @@
 #import "WalletSingletonHandle.h"
 #import "WalletManageModel.h"
 #import "WalletGetBaseGasPriceApi.h"
+#import "Payment.h"
 
 @implementation WalletSingletonHandle
 {

@@ -9,17 +9,22 @@
 #import "TransactionParameter.h"
 #import "Address.h"
 #import "Signature.h"
-#import "Transaction.h"
 #import "Account.h"
-#import "SecureData.h"
-#import "Payment.h"
-#import "BigNumber.h"
 #import <UIKit/UIKit.h>
 #import <WebKit/WebKit.h>
 
 
 @interface WalletUtils : NSObject
 
+NS_ASSUME_NONNULL_BEGIN
+
+/**
+ *  @abstract
+ *  setup node url
+ *
+ *  @param nodelUrl :node url
+ *
+ */
 + (void)setNode:(NSString *)nodelUrl;
 
 /**
@@ -31,7 +36,7 @@
  *
  */
 + (void)createWalletWithPassword:(NSString *)password
-                      callback:(void(^)(Account *account))block;
+                        callback:(void(^)(Account *account,NSError *error))block;
 
 /**
  *  @abstract
@@ -41,10 +46,10 @@
  *  @param password :password for wallet
  *  @param block : finish create wallet callback
  */
-#warning  miss error
+
 + (void)creatWalletWithMnemonic:(NSString *)mnemonic
                       password:(NSString *)password
-                      callback:(void(^)(Account *account))block;
+                       callback:(void(^)(Account *account,NSError *error))block;
 
 /**
  *  @abstract
@@ -92,10 +97,10 @@
  *  @param block :finish sign block
  *
  */
-+ (void)sign:(NSData*)message
-    keystore:(NSString*)json
-    password:(NSString*)password
-       block:(void (^)(Signature *signature))block;
++ (void)signature:(NSData*)message
+         keystore:(NSString*)json
+         password:(NSString*)password
+            block:(void (^)(Signature *signature,NSError *error))block;
 
 /**
  *  @abstract
@@ -132,14 +137,12 @@
 
 /*! @abstract Displays a JavaScript text input panel.
     @param webView The web view invoking the delegate method.
-    @param prompt The prompt to display.
     @param defaultText The initial text to display in the text entry field.
-    @param frame Information about the frame whose JavaScript initiated this call.
     @param completionHandler The completion handler to call after the text
 input panel has been dismissed. Pass the entered text if the user chose
 OK, otherwise nil.
 */
-+ (void)webView:(WKWebView *)webView runJavaScriptTextInputPanelWithPrompt:(NSString *)prompt defaultText:(nullable NSString *)defaultText initiatedByFrame:(WKFrameInfo *_Nullable)frame completionHandler:(void (^_Nullable)(NSString * __nullable result))completionHandler;
++ (void)webView:(WKWebView *)webView defaultText:(NSString *)defaultText completionHandler:(void (^)(NSString *result))completionHandler;
 
 /**
  *  @abstract
@@ -148,7 +151,7 @@ OK, otherwise nil.
  *  @param webview The web view invoking the developper new.
  *
  */
-+ (void)injectJS:(WKWebView *_Nonnull)webview;
++ (void)injectJS:(WKWebView *)webview;
 
 /**
  *  @abstract
@@ -163,5 +166,12 @@ OK, otherwise nil.
 + (void)transactionWithKeystore:(NSString *)keystore parameter:(TransactionParameter *)parameter block:(void(^)(NSString *txId,NSString *signer))block;
 
 
+
+
++ (BOOL)isValidKeystore:(NSString *)keystore;
+
++ (NSString *)getChecksumAddress:(NSString *)address;
+
+NS_ASSUME_NONNULL_END
 
 @end

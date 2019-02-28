@@ -22,6 +22,7 @@
 #import "WalletDAppPeerModel.h"
 #import "WalletDAppTransferDetailApi.h"
 #import "WalletSingletonHandle.h"
+#import "WalletSignatureView.h"
 
 @implementation WalletDAppHandle (connexJS)
 

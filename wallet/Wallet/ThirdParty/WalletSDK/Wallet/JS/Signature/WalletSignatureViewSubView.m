@@ -7,32 +7,36 @@
 //
 
 #import "WalletSignatureViewSubView.h"
+#import "Payment.h"
+#import "SecureData.h"
+
 #define viewHeight 411
 
 @implementation WalletSignatureViewSubView
 {
-    BOOL _needAdjust;
-    UILabel *_minerLabel;
-    UIView *_leftView;
-    UIView *_rightView;
-    UILabel *_valueLabel;
-    NSString *_additionalMsg;
-    UIButton *_timeBtn;
+    BOOL        _needAdjust;
+    UILabel     *_minerLabel;
+    UIView      *_leftView;
+    UIView      *_rightView;
+    UILabel     *_valueLabel;
+    NSString    *_additionalMsg;
+    UIButton    *_timeBtn;
     
     WalletGradientLayerButton *_middleBtn;
     WalletGradientLayerButton *_lastBtn;
     
-    UIScrollView *_scrollView;
-    NSString *_amount;
-    WalletCoinModel *_currentCoinModel;
-    NSString *_gasLimit;
-    NSString *_fromAddress;
-    NSString *_toAddress;
-    UITextField *_pwTextField;
-    JSTransferType _transferType;
-    NSNumber *_gas;
-    BigNumber *_gasPriceCoef;
-    NSData *_clauseData;
+    UIScrollView        *_scrollView;
+    NSString            *_amount;
+    WalletCoinModel     *_currentCoinModel;
+    NSString            *_gasLimit;
+    NSString            *_fromAddress;
+    NSString            *_toAddress;
+    UITextField         *_pwTextField;
+    JSTransferType      _transferType;
+    NSNumber            *_gas;
+    BigNumber           *_gasPriceCoef;
+    NSData              *_clauseData;
+    
     WalletSignatureViewHandle *_signatureHandle;
 }
 

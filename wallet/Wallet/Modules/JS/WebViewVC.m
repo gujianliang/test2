@@ -14,7 +14,6 @@
 {
     NSString *_url;
     WKWebView *_webView;
-//    WalletDAppHandle *_dAppHandle;
 }
 
 @end
@@ -58,7 +57,6 @@
         [walletList addObject:currentWallet];
     }
     
-#warning  keystore 具体格式
     // intput wallet list detail
     [WalletUtils initWithWalletDict:walletList];
     
@@ -76,7 +74,6 @@
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:message?:@"" preferredStyle:UIAlertControllerStyleAlert];
     [alertController addAction:([UIAlertAction actionWithTitle:NSLocalizedString(@"dialog_yes", nil)
                                                          style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        //        completionHandler();
     }])];
     [self presentViewController:alertController animated:YES completion:nil];
     completionHandler();
@@ -84,7 +81,6 @@
 
 - (void)webView:(WKWebView *)webView runJavaScriptTextInputPanelWithPrompt:(NSString *)prompt defaultText:(nullable NSString *)defaultText initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(NSString * __nullable result))completionHandler
 {
-
-    [WalletUtils webView:webView runJavaScriptTextInputPanelWithPrompt:prompt defaultText:defaultText initiatedByFrame:frame completionHandler:completionHandler];
+    [WalletUtils webView:webView  defaultText:defaultText completionHandler:completionHandler];
 }
 @end

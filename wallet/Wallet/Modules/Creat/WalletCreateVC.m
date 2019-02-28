@@ -57,7 +57,7 @@
     
     /* Create a wallet with your password. */
     [WalletUtils createWalletWithPassword:self.passwordLabel.text
-                                callback:^(Account *account)
+                                 callback:(void(^)(Account *account,NSError *error))block
     {
         [hud hide:YES];
         self.bottomCoverView.hidden = YES;

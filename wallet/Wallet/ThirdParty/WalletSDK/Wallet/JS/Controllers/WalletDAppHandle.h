@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 -(void)initWithWalletDict:(NSMutableArray *)walletList;
 
-- (void)webView:(WKWebView *)webView runJavaScriptTextInputPanelWithPrompt:(NSString *)prompt defaultText:(nullable NSString *)defaultText initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(NSString * __nullable result))completionHandler;
+- (void)webView:(WKWebView *)webView defaultText:(nullable NSString *)defaultText completionHandler:(void (^)(NSString * __nullable result))completionHandler;
 
 - (void)injectJS:(WKWebView *)webview;
 

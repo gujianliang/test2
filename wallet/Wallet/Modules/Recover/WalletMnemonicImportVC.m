@@ -76,7 +76,7 @@
     /* Create a wallet with your password and mnemonic words. */
     [WalletUtils creatWalletWithMnemonic:self.improtMnemonicWords.text.lowercaseString
                                 password:self.password.text
-                                callback:^(Account *account)
+                                callback:(void(^)(Account *account,NSError *error))block;
     {
         [hud hide:YES];
         

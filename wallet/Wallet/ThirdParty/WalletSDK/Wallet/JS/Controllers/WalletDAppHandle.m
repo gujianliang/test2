@@ -29,6 +29,7 @@
 #import "WalletSingletonHandle.h"
 #import "WalletJSCallbackModel.h"
 #import "WalletGetBaseGasPriceApi.h"
+#import "WalletSignatureView.h"
 
 @interface WalletDAppHandle ()<WKNavigationDelegate,WKUIDelegate>
 {
@@ -59,7 +60,7 @@
     [walletSignlet addWallet:_walletList];
 }
 
-- (void)webView:(WKWebView *)webView runJavaScriptTextInputPanelWithPrompt:(NSString *)prompt defaultText:(nullable NSString *)defaultText initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(NSString * __nullable result))completionHandler
+- (void)webView:(WKWebView *)webView defaultText:(nullable NSString *)defaultText completionHandler:(void (^)(NSString * __nullable result))completionHandler
 {
     NSLog(@"defaultText == %@",defaultText);
     
@@ -175,14 +176,19 @@
     
     NSString *gasPrice = callbackParams[@"gasPrice"];
    
-    
+#warning test
+    gasPrice = @"0x0";
+    gas = @"350000";
+    clauseStr = @"0xbae3e19e00000000000000000000000000000000000000000000000000000000000000680000000000000000000000000000000000000000000000000de0b6b3a76400000000000000000000000000000000000000000000000000000de0b6b3a7640000000000000000000000000000000000000000000000000000000000000003f480";
     [self checkParamGasPrice:&gasPrice gas:&gas amount:&amount to:&to clauseStr:&clauseStr];
     
     CGFloat amountFloat = 0;
     
+    JSTransferType transferType = JSVETTransferType;
+    
     if (clauseStr.length < 10) { // vet 转账clauseStr == nil,
         
-        
+        transferType = JSVETTransferType;
         if (![self checkAmountForm:amount amountFloat:&amountFloat requestId:requestId webView:_webView callbackId:callbackId]) {
             return;
         }
@@ -201,6 +207,7 @@
         
     }else{
         if ([clauseStr hasPrefix:TransferMethodId]) { // token 转账
+            transferType = JSTokenTransferType;
             tokenAddress = to;
             NSString *clauseTemp =  [clauseStr stringByReplacingOccurrencesOfString:@"0xa9059cbb000000000000000000000000" withString:@""];
             to = [@"0x" stringByAppendingString:[clauseTemp substringToIndex:40]];
@@ -230,7 +237,7 @@
             }
             
         }else{ // 其他合约交易
-            
+            transferType = JSContranctTransferType;
             if (![self checkAmountForm:amount amountFloat:&amountFloat requestId:requestId webView:_webView callbackId:callbackId]) {
                 return;
             }
@@ -389,6 +396,7 @@
         }
     }
     
+    
     WalletDappStoreSelectView *selectView = [[WalletDappStoreSelectView alloc]initWithFrame:[WalletTools getCurrentVC].view.frame ];
     selectView.tag = SelectWalletTag;
     selectView.toAddress = to;
@@ -446,6 +454,8 @@
             if (![self checkAmountForm:paramModel.amount amountFloat:&amountFloat requestId:requestId webView:_webView callbackId:callbackId]) {
                 return;
             }
+            
+            
             [self contractSignWithParamModel:paramModel requestId:requestId webView:_webView callbackId:callbackId];
             
         }
@@ -479,7 +489,6 @@
 
 - (void)injectJS:(WKWebView *)webview 
 {
-    
     //connex
     NSString *js = connex_js;
     [webview evaluateJavaScript:js completionHandler:^(id _Nullable item, NSError * _Nullable error) {

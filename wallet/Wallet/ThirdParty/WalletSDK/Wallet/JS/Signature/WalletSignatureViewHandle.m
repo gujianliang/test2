@@ -26,6 +26,7 @@
 #import "WalletGetDecimalsApi.h"
 #import "WalletDAppHead.h"
 
+
 @implementation WalletSignatureViewHandle
 
 - (void)checkBalcanceFromAddress:(NSString *)fromAddress amount:(NSString *)amount gasLimit:(NSString *)gasLimit block:(void(^)())block
