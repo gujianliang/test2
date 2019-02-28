@@ -20,6 +20,23 @@
 
 @implementation WalletMnemonicImportVC
 
+/**
+*  Mnemonic words are taken from a fixed thesaurus, and the number of mnemonic words generated is different in different dimensions.
+*  This demo uses 12 english mnemonic words. Like as as follows:
+*  — — — — — — — — — — — — — — — — — — — — — — — — — — ——
+*    since scrub way wheel omit flush shield remove idea recipe behind mesh
+*  — — — — — — — — — — — — — — — — — — — — — — — — — — ——
+*  Please note that:
+*          1、Every Mnemonic word is a correct word.
+*          2、Mnemonic words are separated by Spaces.
+*          3、Mnemonic words are strictly case-limited and all are lowercase.
+*          4、Mnemonic words are fastidious about correct spelling.
+*
+*  When you recovered a wallet by Mnemonic words, then you should take care of your Mnemonic words and password.
+*  Because once you lose it, it means you lose your crypto assets, and you can't get it back.
+*
+*/
+
 
 /**
 *  Recover a wallet by your mnemonic words.
