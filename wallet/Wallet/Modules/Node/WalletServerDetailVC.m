@@ -7,7 +7,7 @@
 //
 
 #import "WalletServerDetailVC.h"
-#import <WalletSDK/WalletUtils.h>
+#import <WalletSDK/Wallet.h>
 #import <WalletSDK/MBProgressHUD.h>
 #import "WalletSdkMacro.h"
 

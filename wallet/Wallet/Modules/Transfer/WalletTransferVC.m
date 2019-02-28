@@ -7,7 +7,7 @@
 //
 
 #import "WalletTransferVC.h"
-#import <WalletSDK/WalletUtils.h>
+#import <WalletSDK/Wallet.h>
 #import "WalletSdkMacro.h"
 
 #define VETGasLimit  @"21000"

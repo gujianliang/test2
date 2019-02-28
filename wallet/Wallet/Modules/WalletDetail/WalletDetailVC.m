@@ -9,14 +9,13 @@
 #import "WalletDetailVC.h"
 #import <WalletSDK/AFNetworking.h>
 #import "WalletTransferVC.h"
-#import <WalletSDK/Payment.h>
 #import "WalletMoreInfoVC.h"
 #import "WebViewVC.h"
 #import "WalletChooseNetworkView.h"
 #import "WalletServerDetailVC.h"
 #import "WalletAddVthoNodeVC.h"
 #import "WalletSdkMacro.h"
-#import <WalletSDK/WalletUtils.h>
+#import <WalletSDK/Wallet.h>
 
 @interface WalletDetailVC ()<UISearchBarDelegate>
 {

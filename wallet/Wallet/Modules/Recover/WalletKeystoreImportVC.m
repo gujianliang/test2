@@ -9,7 +9,7 @@
 #import "WalletKeystoreImportVC.h"
 #import "WalletDetailVC.h"
 #import <WalletSDK/MBProgressHUD.h>
-#import <WalletSDK/WalletUtils.h>
+#import <WalletSDK/Wallet.h>
 
 @interface WalletKeystoreImportVC ()
 
@@ -98,7 +98,7 @@
          if (NSError == nil) {
              
              NSString *address = account.address.checksumAddress;
-//             NSLog(@"address == %@;----\nprivateKey = %@ ",address, [SecureData dataToHexString:account.privateKey]);
+             NSLog(@"address == %@;----\nprivateKey = %@ ",address, [SecureData dataToHexString:account.privateKey]);
              
              /*
               Please note that this is just a demo that tell you how to recover a wallet by keystore.

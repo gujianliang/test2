@@ -8,7 +8,7 @@
 
 #import "WalletAddVthoNodeVC.h"
 #import <WalletSDK/MBProgressHUD.h>
-#import <WalletSDK/WalletUtils.h>
+#import <WalletSDK/Wallet.h>
 
 @interface WalletAddVthoNodeVC ()
 
