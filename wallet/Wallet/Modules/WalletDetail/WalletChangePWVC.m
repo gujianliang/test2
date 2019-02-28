@@ -12,8 +12,8 @@
 
 @interface WalletChangePWVC ()
 
-@property (weak, nonatomic) IBOutlet UITextField *oldPWTextField;     /* The wallet current password taht you created */
-@property (weak, nonatomic) IBOutlet UITextField *nextPWTextField;    /* The wallet new password taht you want create */
+@property (weak, nonatomic) IBOutlet UITextField *oldPWTextField;     /* The wallet current password that you created */
+@property (weak, nonatomic) IBOutlet UITextField *nextPWTextField;    /* The wallet new password that you want to create */
 @property (weak, nonatomic) IBOutlet UITextField *makeSureTextField;  /* Check the new password */
 
 @end

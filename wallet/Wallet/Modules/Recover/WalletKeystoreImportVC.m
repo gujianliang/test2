@@ -13,35 +13,33 @@
 #import <WalletSDK/MBProgressHUD.h>
 
 @interface WalletKeystoreImportVC ()
-@property (weak, nonatomic) IBOutlet UITextView *keystoreTextView;
+
+@property (weak, nonatomic) IBOutlet UITextView *keystoreTextView;  
 @property (weak, nonatomic) IBOutlet UITextField *password;
 
 @end
 
 @implementation WalletKeystoreImportVC
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
-}
 
-- (IBAction)importWallet:(id)sender
-{
+/**
+*
+*/
+- (IBAction)recoverWalletByKeystore:(id)sender{
     [self.view endEditing:YES];
 
     if (self.password.text.length == 0 || self.keystoreTextView.text.length == 0) {
-        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view
-                                                  animated:YES];
+        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         hud.mode = MBProgressHUDModeText;
         hud.labelText =  @"Invalid";
         [hud hide:YES afterDelay:1];
         return;
     }
     
-    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view
-                                              animated:YES];
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.mode = MBProgressHUDModeText;
     hud.labelText =  @"waiting ...";
+    
     
     [WalletUtils decryptSecretStorageJSON:self.keystoreTextView.text.lowercaseString
                                  password:self.password.text
@@ -62,9 +60,9 @@
              
              WalletDetailVC *detailVC = [[WalletDetailVC alloc]init];
              [self.navigationController pushViewController:detailVC animated:YES];
+             
          }else{
-             MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view
-                                                       animated:YES];
+             MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
              hud.mode = MBProgressHUDModeText;
              hud.labelText =  @"Invalid";
              [hud hide:YES afterDelay:1];
@@ -72,6 +70,13 @@
      }];
 }
 
+
+/**
+ *  Just hidden the keyboard.
+ */
+- (void)touchesBegan:(NSSet*)touches withEvent:(UIEvent *)event{
+    [self.view endEditing:YES];
+}
 
 
 @end

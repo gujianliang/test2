@@ -71,8 +71,8 @@
         NSLog(@"\n **********\n mnemonic words = %@\n wallet address = %@\n wallet privateKey = %@\n keystore = %@\n **********", self.mnemonicTextView.text, self.addressLabel.text, privateKey, self.keystoreTextVeiw.text);
         
         /*
-         * Please note that this is just a demo that tell you how to create a wallet. We save the wallet
-           keystore and addrss in the Sandbox by the class 'NSUserDefaults'. It is not a safety way,
+           Please note that this is just a demo that tell you how to create a wallet. We save the wallet
+           keystore and addrss in the Sandbox by the class 'NSUserDefaults'. It is not a safety way.
            We do not recommend it. You can use some more better way to save it, like as Sqlite、CoreData and so on.
            In general, we recommend that you use some way of secure encryption.
          */

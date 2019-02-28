@@ -25,6 +25,7 @@
     [self initView];
 }
 
+
 /**
 *  Config subviews and load it.
 */
@@ -32,12 +33,13 @@
     
     self.keystoreTextView.layer.cornerRadius = 5.0;
     self.keystoreTextView.layer.borderWidth = 1.0;
-    self.keystoreTextView.layer.borderColor = [UIColor darkGrayColor].CGColor;
+    self.keystoreTextView.layer.borderColor = [UIColor lightGrayColor].CGColor;
     
     NSDictionary *currentWallet = [[NSUserDefaults standardUserDefaults] objectForKey:@"currentWallet"];
     self.addressLabel.text = currentWallet[@"address"];
     self.addressLabel.adjustsFontSizeToFitWidth = YES;
 }
+
 
 /**
 *  Enter the change password ViewControll.
@@ -47,6 +49,7 @@
     [self.navigationController pushViewController:changeVC animated:YES];
 }
 
+
 /**
 *  Export the wallet keystore.
 */
@@ -55,6 +58,7 @@
     NSString *keystore = currentWallet[@"keystore"];
     self.keystoreTextView.text = keystore;
 }
+
 
 /**
 *  Delete the current wallet by the class 'NSUserDefaults'.
@@ -66,5 +70,12 @@
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
 
+
+/**
+*  Just hidden the keyboard.
+*/
+- (void)touchesBegan:(NSSet*)touches withEvent:(UIEvent *)event{
+    [self.view endEditing:YES];
+}
 
 @end
