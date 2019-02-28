@@ -10,17 +10,10 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-
-typedef NS_ENUM(NSInteger,NetType)
-{
-    ProductServer,
-    TestServer,
-    CustomServer
-};
-
 @interface WalletChooseNetworkView : UIView<UITableViewDataSource,UITableViewDelegate>
 
-@property(nonatomic,copy)void (^block)(NSString *netName,NSString *netUrl);
+@property(nonatomic,copy)void (^block)(NSString *netName, NSString *netUrl);
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -7,10 +7,13 @@
 //
 
 #import "WalletAddVthoNodeVC.h"
+#import <WalletSDK/MBProgressHUD.h>
+#import <WalletSDK/WalletUtils.h>
 
 @interface WalletAddVthoNodeVC ()
-@property (weak, nonatomic) IBOutlet UITextField *netName;
-@property (weak, nonatomic) IBOutlet UITextField *netUrl;
+
+@property (weak, nonatomic) IBOutlet UITextView *customNetTextView;
+@property (weak, nonatomic) IBOutlet UITextField *customNameTextFild;
 
 @end
 
@@ -19,25 +22,47 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.title = @"添加网络";
+    self.title = @"Add Custom Network";
 }
 
-- (IBAction)addNet:(id)sender
-{
-    if (self.netName.text.length > 0 && self.netUrl.text.length > 0 )
-    {
-        NSArray *oldList = [[NSUserDefaults standardUserDefaults]objectForKey:@"netList"];
-        NSMutableArray *newList = [NSMutableArray arrayWithArray:oldList];
-        NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-        [dict setObject:self.netName.text forKey:@"serverName"];
-        [dict setObject:self.netUrl.text forKey:@"serverUrl"];
-        
-        [newList addObject:dict];
-        
-        [[NSUserDefaults standardUserDefaults] setObject:newList forKey:@"netList"];
-        [[NSUserDefaults standardUserDefaults]setObject:dict forKey:@"CurrentNet"];
+- (IBAction)setCustomNetworkEnvironment:(id)sender{
+    
+    NSString *netName = self.customNameTextFild.text;
+    NSString *netUrl = self.customNetTextView.text;
+    
+    
+    /* Check your input network name and network url that can not be blank. */
+    if (netName.length == 0 || netUrl.length == 0 ){
+        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        hud.mode = MBProgressHUDModeText;
+        hud.labelText =  @"The name and url can not be blank.";
+        [hud hide:YES afterDelay:2.5];
+        return;
     }
+    
+    
+    NSArray *oldList = [[NSUserDefaults standardUserDefaults] objectForKey:@"netList"];
+    NSMutableArray *newList = [NSMutableArray arrayWithArray:oldList];
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    [dict setObject:netName forKey:@"serverName"];
+    [dict setObject:netUrl forKey:@"serverUrl"];
+    [newList addObject:dict];
+    
+    [[NSUserDefaults standardUserDefaults] setObject:newList forKey:@"netList"];
+    [[NSUserDefaults standardUserDefaults] setObject:dict forKey:@"CurrentNet"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    [WalletUtils setNode:netUrl];
+
     [self.navigationController popViewControllerAnimated:YES];
 }
+
+/**
+*  Just hidden the keyboard.
+*/
+- (void)touchesBegan:(NSSet*)touches withEvent:(UIEvent *)event{
+    [self.view endEditing:YES];
+}
+
 
 @end
