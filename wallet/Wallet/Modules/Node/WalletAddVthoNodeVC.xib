@@ -12,6 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WalletAddVthoNodeVC">
             <connections>
+                <outlet property="customNameTextFild" destination="WHG-4c-Y62" id="jgy-H4-WVQ"/>
                 <outlet property="customNetTextView" destination="Afk-yu-ukO" id="4hT-q7-uZS"/>
                 <outlet property="view" destination="wa3-Ed-AJt" id="7ZO-2C-DwX"/>
             </connections>
@@ -22,7 +23,7 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Afk-yu-ukO">
-                    <rect key="frame" x="30" y="150" width="315" height="100"/>
+                    <rect key="frame" x="20" y="150" width="335" height="100"/>
                     <color key="backgroundColor" red="0.96862745100000003" green="0.97254901959999995" blue="0.98823529409999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="100" id="eGJ-bU-lub"/>
@@ -31,7 +32,7 @@
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                 </textView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LH9-YZ-1vA">
-                    <rect key="frame" x="30" y="303" width="315" height="40"/>
+                    <rect key="frame" x="20" y="303" width="335" height="40"/>
                     <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="qFt-Ty-8GT"/>
@@ -43,8 +44,8 @@
                         <action selector="setCustomNetworkEnvironment:" destination="-1" eventType="touchUpInside" id="VeI-CE-rdd"/>
                     </connections>
                 </button>
-                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="network name" borderStyle="roundedRect" placeholder="Confirm New Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WHG-4c-Y62">
-                    <rect key="frame" x="30" y="95" width="315" height="40"/>
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Custom network name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WHG-4c-Y62">
+                    <rect key="frame" x="20" y="95" width="335" height="40"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="H63-MY-FIF"/>
                     </constraints>
@@ -55,15 +56,15 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="gUD-as-FJS" firstAttribute="trailing" secondItem="Afk-yu-ukO" secondAttribute="trailing" constant="30" id="JPn-t1-Hcv"/>
+                <constraint firstItem="Afk-yu-ukO" firstAttribute="leading" secondItem="WHG-4c-Y62" secondAttribute="leading" id="2kW-km-P7L"/>
                 <constraint firstItem="LH9-YZ-1vA" firstAttribute="leading" secondItem="Afk-yu-ukO" secondAttribute="leading" id="Lii-hA-vgn"/>
                 <constraint firstItem="Afk-yu-ukO" firstAttribute="top" secondItem="WHG-4c-Y62" secondAttribute="bottom" constant="15" id="Lmi-Ba-dWU"/>
                 <constraint firstItem="LH9-YZ-1vA" firstAttribute="trailing" secondItem="Afk-yu-ukO" secondAttribute="trailing" id="STQ-Ll-xLk"/>
                 <constraint firstItem="WHG-4c-Y62" firstAttribute="top" secondItem="gUD-as-FJS" secondAttribute="top" constant="75" id="VAS-hl-hbS"/>
-                <constraint firstItem="gUD-as-FJS" firstAttribute="trailing" secondItem="WHG-4c-Y62" secondAttribute="trailing" constant="30" id="gmj-Pb-7yg"/>
-                <constraint firstItem="Afk-yu-ukO" firstAttribute="leading" secondItem="gUD-as-FJS" secondAttribute="leading" constant="30" id="kKz-At-emk"/>
+                <constraint firstItem="gUD-as-FJS" firstAttribute="trailing" secondItem="WHG-4c-Y62" secondAttribute="trailing" constant="20" id="gmj-Pb-7yg"/>
                 <constraint firstItem="LH9-YZ-1vA" firstAttribute="top" secondItem="Afk-yu-ukO" secondAttribute="bottom" constant="53" id="qIw-hJ-Xdj"/>
-                <constraint firstItem="WHG-4c-Y62" firstAttribute="leading" secondItem="gUD-as-FJS" secondAttribute="leading" constant="30" id="qcq-eB-14W"/>
+                <constraint firstItem="WHG-4c-Y62" firstAttribute="leading" secondItem="gUD-as-FJS" secondAttribute="leading" constant="20" id="qcq-eB-14W"/>
+                <constraint firstItem="Afk-yu-ukO" firstAttribute="trailing" secondItem="WHG-4c-Y62" secondAttribute="trailing" id="vup-UV-fkS"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="gUD-as-FJS"/>
             <point key="canvasLocation" x="223" y="-134"/>

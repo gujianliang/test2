@@ -107,7 +107,7 @@
     
     /* Show the demo version information */
     NSString *version = [[[NSBundle mainBundle] infoDictionary] valueForKey:@"CFBundleVersion"];
-    version = [NSString stringWithFormat:@"版本号：(%@)",version];
+    version = [NSString stringWithFormat:@"Demo Version：(%@)",version];
     CGFloat y = ScreenH -  kNavigationBarHeight;
     UILabel *versionLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, y, ScreenW - 40, 30)];
     versionLabel.text = version;
@@ -128,21 +128,18 @@
     
     WalletChooseNetworkView *chooseNetworkView = [self.view viewWithTag:90];
     if (!chooseNetworkView) {
-        chooseNetworkView = [[WalletChooseNetworkView alloc]initWithFrame:self.view.frame];
+        chooseNetworkView = [[WalletChooseNetworkView alloc] initWithFrame:self.view.frame];
         chooseNetworkView.tag = 90;
         [self.view addSubview:chooseNetworkView];
         
         chooseNetworkView.block = ^(NSString *netName, NSString *netUrl) {
-            
-            if (netUrl.length > 0) {
-                self.title = netName;
-            }
 
-            if ([netName containsString:@"Custom"]) {
+            if (netUrl.length == 0) {
                 WalletAddVthoNodeVC *detailVC = [[WalletAddVthoNodeVC alloc]init];
                 [self.navigationController pushViewController:detailVC animated:YES];
                 
             }else{
+                self.title = netName;
                 
                 [WalletUtils setNode:netUrl];
                 
@@ -163,7 +160,7 @@
     
     if (dictCurrentNet) { /* Set to the main network of your choice. */
         NSString *customServerUrl = dictCurrentNet[@"serverUrl"];
-        if (customServerUrl.length > 0) {
+        if (customServerUrl.length > 0 ) {
             _blockHost = customServerUrl;
             self.title = dictCurrentNet[@"serverName"];
         }

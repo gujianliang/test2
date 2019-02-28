@@ -13,7 +13,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface WalletServerDetailVC : UIViewController
 
-//- (void)netType:(NetType)netType;
 - (void)netName:(NSString *)netName netUrl:(NSString *)netUrl;
 
 @end

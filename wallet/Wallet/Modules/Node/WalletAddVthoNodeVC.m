@@ -13,6 +13,7 @@
 @interface WalletAddVthoNodeVC ()
 
 @property (weak, nonatomic) IBOutlet UITextView *customNetTextView;
+@property (weak, nonatomic) IBOutlet UITextField *customNameTextFild;
 
 @end
 
@@ -21,34 +22,35 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.title = @"Custom Network";
+    self.title = @"Add Custom Network";
 }
 
 - (IBAction)setCustomNetworkEnvironment:(id)sender{
     
+    NSString *netName = self.customNameTextFild.text;
     NSString *netUrl = self.customNetTextView.text;
     
     
-    /* Check your input password that can not be blank. */
-    if (netUrl.length == 0 ){
+    /* Check your input network name and network url that can not be blank. */
+    if (netName.length == 0 || netUrl.length == 0 ){
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         hud.mode = MBProgressHUDModeText;
-        hud.labelText =  @"Check your input node url that can not be blank.";
+        hud.labelText =  @"The name and url can not be blank.";
         [hud hide:YES afterDelay:2.5];
         return;
     }
     
     
-    NSArray *oldList = [[NSUserDefaults standardUserDefaults]objectForKey:@"netList"];
+    NSArray *oldList = [[NSUserDefaults standardUserDefaults] objectForKey:@"netList"];
     NSMutableArray *newList = [NSMutableArray arrayWithArray:oldList];
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-    [dict setObject:@"Custom" forKey:@"serverName"];
+    [dict setObject:netName forKey:@"serverName"];
     [dict setObject:netUrl forKey:@"serverUrl"];
-    
     [newList addObject:dict];
     
     [[NSUserDefaults standardUserDefaults] setObject:newList forKey:@"netList"];
     [[NSUserDefaults standardUserDefaults] setObject:dict forKey:@"CurrentNet"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
     
     [WalletUtils setNode:netUrl];
 
