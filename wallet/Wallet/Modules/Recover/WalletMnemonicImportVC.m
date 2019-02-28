@@ -76,27 +76,27 @@
     /* Create a wallet with your password and mnemonic words. */
     [WalletUtils creatWalletWithMnemonic:self.improtMnemonicWords.text.lowercaseString
                                 password:self.password.text
-                                callback:(void(^)(Account *account,NSError *error))block;
-    {
-        [hud hide:YES];
-        
-        [self.navigationController popToRootViewControllerAnimated:NO];
-        
-        WalletDetailVC *detailVC = [[WalletDetailVC alloc]init];
-        [self.navigationController pushViewController:detailVC animated:YES];
-        
-        
-        /*
-         Please note that this is just a demo that tell you how to recover a wallet by mnemonic words.
-         We save the wallet keystore and addrss in the Sandbox by the class 'NSUserDefaults'. It is not a safety way.
-         We do not recommend it. You can use some more better way to save it, like as Sqlite、CoreData and so on.
-         In general, we recommend that you use some way of secure encryption.
-         */
-        NSMutableDictionary *walletDict = [[NSMutableDictionary alloc]init];
-        [walletDict setObject:account.address.checksumAddress forKey:@"address"];
-        [walletDict setObject:account.keystore forKey:@"keystore"];
-        [[NSUserDefaults standardUserDefaults]setObject:walletDict forKey:@"currentWallet"];
-    }];
+                                callback:^(Account * _Nonnull account, NSError * _Nonnull error)                                    
+     {
+         [hud hide:YES];
+         
+         [self.navigationController popToRootViewControllerAnimated:NO];
+         
+         WalletDetailVC *detailVC = [[WalletDetailVC alloc]init];
+         [self.navigationController pushViewController:detailVC animated:YES];
+         
+         
+         /*
+          Please note that this is just a demo that tell you how to recover a wallet by mnemonic words.
+          We save the wallet keystore and addrss in the Sandbox by the class 'NSUserDefaults'. It is not a safety way.
+          We do not recommend it. You can use some more better way to save it, like as Sqlite、CoreData and so on.
+          In general, we recommend that you use some way of secure encryption.
+          */
+         NSMutableDictionary *walletDict = [[NSMutableDictionary alloc]init];
+         [walletDict setObject:account.address.checksumAddress forKey:@"address"];
+         [walletDict setObject:account.keystore forKey:@"keystore"];
+         [[NSUserDefaults standardUserDefaults]setObject:walletDict forKey:@"currentWallet"];
+     }];
 }
 
 
