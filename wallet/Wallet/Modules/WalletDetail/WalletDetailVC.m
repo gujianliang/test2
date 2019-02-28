@@ -123,13 +123,15 @@
 */
 - (void)selectTheMainNetworkEnvironment {
     
-    WalletChooseNetworkView *coverView = [self.view viewWithTag:90];
-    if (!coverView) {
-        coverView = [[WalletChooseNetworkView alloc]initWithFrame:self.view.frame];
-        coverView.tag = 90;
-        [self.view addSubview:coverView];
+    [self.view endEditing:YES];
+    
+    WalletChooseNetworkView *chooseNetworkView = [self.view viewWithTag:90];
+    if (!chooseNetworkView) {
+        chooseNetworkView = [[WalletChooseNetworkView alloc]initWithFrame:self.view.frame];
+        chooseNetworkView.tag = 90;
+        [self.view addSubview:chooseNetworkView];
         
-        coverView.block = ^(NSString *netName,NSString *netUrl) {
+        chooseNetworkView.block = ^(NSString *netName,NSString *netUrl) {
             
             self.title = netName;
             if ([netName containsString:@"自定义"]) {

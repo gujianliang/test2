@@ -1,5 +1,5 @@
 //
-//  CoverView.h
+//  WalletChooseNetworkView.h
 //  walletSDKDemo
 //
 //  Created by 曾新 on 2019/1/30.

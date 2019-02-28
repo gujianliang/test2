@@ -1,5 +1,5 @@
 //
-//  CoverView.m
+//  WalletChooseNetworkView.m
 //  walletSDKDemo
 //
 //  Created by 曾新 on 2019/1/30.
@@ -31,17 +31,17 @@
     bgView.backgroundColor = [UIColor blackColor];
     [self addSubview:bgView];
     
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(removeFromSuperview)];
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(removeFromSuperview)];
     [bgView addGestureRecognizer:tap];
     [tap setNumberOfTapsRequired:1];
     
     
-    UIView *coverView = [[UIView alloc]init];
-    coverView.frame = CGRectMake(self.frame.size.width - 200, 80, 180, 150);
-    coverView.backgroundColor = UIColor.whiteColor;
-    [self addSubview:coverView];
+    UIView *chooseNetworkCotainView = [[UIView alloc] init];
+    chooseNetworkCotainView.frame = CGRectMake(self.frame.size.width - 200, 80, 180, 150);
+    chooseNetworkCotainView.backgroundColor = UIColor.whiteColor;
+    [self addSubview:chooseNetworkCotainView];
     
-    NSArray *netList = [[NSUserDefaults standardUserDefaults]objectForKey:@"netList"];
+    NSArray *netList = [[NSUserDefaults standardUserDefaults] objectForKey:@"netList"];
     _newList = [NSMutableArray array];
     
     NSMutableDictionary *dict1 = [NSMutableDictionary dictionary];
@@ -63,11 +63,10 @@
     [dict3 setObject:@"11" forKey:@"serverUrl"];
     [_newList addObject:dict3];
     
-    UITableView *tableView = [[UITableView alloc]initWithFrame:coverView.bounds];
+    UITableView *tableView = [[UITableView alloc] initWithFrame:chooseNetworkCotainView.bounds];
     tableView.delegate = self;
     tableView.dataSource = self;
-    [coverView addSubview:tableView];
-    
+    [chooseNetworkCotainView addSubview:tableView];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section

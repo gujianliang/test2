@@ -49,14 +49,14 @@
         case 10:
         {
 
-            WalletCreatVC *creat = [[WalletCreatVC alloc]init];
-            [self.navigationController pushViewController:creat animated:YES];
+            WalletCreatVC *create = [[WalletCreatVC alloc] init];
+            [self.navigationController pushViewController:create animated:YES];
         }
             break;
         case 11:
         {
 
-            WalletRecoverMainVC *recoverVC = [[WalletRecoverMainVC alloc]init];
+            WalletRecoverMainVC *recoverVC = [[WalletRecoverMainVC alloc] init];
             [self.navigationController pushViewController:recoverVC animated:YES];
 
         }

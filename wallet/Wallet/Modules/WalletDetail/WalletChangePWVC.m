@@ -27,11 +27,6 @@
 - (IBAction)changeTheWalletPassword:(id)sender{
     [self.view endEditing:YES];
     
-    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    hud.mode = MBProgressHUDModeText;
-    hud.labelText =  @"waiting...";
-    
-    
     /*
       Please note that you should do more judges according to what your demand is.
       Here, We just do some simple judges. This is just a demo that tell you how to change the password.
@@ -39,7 +34,6 @@
     
     /* Check your input password that can not be blank. */
     if (_oldPWTextField.text.length == 0 || _nextPWTextField.text.length == 0 || _makeSureTextField.text.length == 0) {
-        [hud hide:YES];
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         hud.mode = MBProgressHUDModeText;
         hud.labelText =  @"Check your input password that can not be blank.";
@@ -49,7 +43,6 @@
     
     /*  Check the new password is correct. */
     if (![_nextPWTextField.text isEqualToString:_makeSureTextField.text]) {
-        [hud hide:YES];
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         hud.mode = MBProgressHUDModeText;
         hud.labelText =  @"The new password is not correct.";
@@ -57,7 +50,10 @@
         return;
     }
     
-    
+    /* show loading state */
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.mode = MBProgressHUDModeText;
+    hud.labelText =  @"waiting...";
     
     /* Read the keystore and check the old password is vailable. */
     NSDictionary *currentWallet = [[NSUserDefaults standardUserDefaults] objectForKey:@"currentWallet"];

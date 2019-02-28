@@ -12,7 +12,7 @@
 
 @interface WalletMoreInfoVC ()
 
-@property (weak, nonatomic) IBOutlet UILabel *addressLabel;         /* The wallet address you created */
+@property (weak, nonatomic) IBOutlet UILabel *addressLabel;         /* The wallet address that you created */
 @property (weak, nonatomic) IBOutlet UITextView *keystoreTextView;  /* It is used to show the wallet keystore that you exported */
 
 @end

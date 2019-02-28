@@ -216,12 +216,12 @@
 		971B3E2C21E6000B007845F0 /* Recover */ = {
 			isa = PBXGroup;
 			children = (
-				971B3E2D21E6000B007845F0 /* WalletKeystoreImportVC.h */,
-				971B3E3421E6000B007845F0 /* WalletKeystoreImportVC.m */,
-				971B3E3121E6000B007845F0 /* WalletKeystoreImportVC.xib */,
 				971B3E2E21E6000B007845F0 /* WalletRecoverMainVC.h */,
 				971B3E3321E6000B007845F0 /* WalletRecoverMainVC.m */,
 				971B3E2F21E6000B007845F0 /* WalletRecoverMainVC.xib */,
+				971B3E2D21E6000B007845F0 /* WalletKeystoreImportVC.h */,
+				971B3E3421E6000B007845F0 /* WalletKeystoreImportVC.m */,
+				971B3E3121E6000B007845F0 /* WalletKeystoreImportVC.xib */,
 				971B3E3021E6000B007845F0 /* WalletMnemonicImportVC.h */,
 				971B3E3521E6000B007845F0 /* WalletMnemonicImportVC.m */,
 				971B3E3221E6000B007845F0 /* WalletMnemonicImportVC.xib */,
