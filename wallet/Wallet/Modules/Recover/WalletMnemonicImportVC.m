@@ -7,9 +7,9 @@
 //
 
 #import "WalletMnemonicImportVC.h"
-#import <WalletSDK/WalletUtils.h>
 #import "WalletDetailVC.h"
 #import <WalletSDK/MBProgressHUD.h>
+#import <WalletSDK/WalletUtils.h>
 
 @interface WalletMnemonicImportVC ()
 
