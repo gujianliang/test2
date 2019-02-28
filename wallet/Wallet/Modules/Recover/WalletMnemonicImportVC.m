@@ -13,7 +13,7 @@
 
 @interface WalletMnemonicImportVC ()
 
-@property (weak, nonatomic) IBOutlet UITextView *improtMnemonicWords;   /* The wallet new password that you want to create */
+@property (weak, nonatomic) IBOutlet UITextView *improtMnemonicWords;   /* It is used to input the wallet mnemonic words */
 @property (weak, nonatomic) IBOutlet UITextField *password;             /* The wallet new password that you want to create */
 
 @end
@@ -22,7 +22,7 @@
 
 
 /**
-* Recover a wallet by your mnemonic words.
+*  Recover a wallet by your mnemonic words.
 */
 - (IBAction)recoverWalletByMnemonicWords:(id)sender{
     [self.view endEditing:YES];
@@ -36,8 +36,8 @@
     if (self.password.text.length == 0 || self.improtMnemonicWords.text.length == 0){
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         hud.mode = MBProgressHUDModeText;
-        hud.labelText =  @"Invalid";
-        [hud hide:YES afterDelay:1];
+        hud.labelText =  @"Password and mnemonic words can not be blank.";
+        [hud hide:YES afterDelay:3];
         return;
     }
     
@@ -45,7 +45,7 @@
     if (![WalletUtils isValidMnemonicPhrase:self.improtMnemonicWords.text]) {
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         hud.mode = MBProgressHUDModeText;
-        hud.labelText =  @"Invalid";
+        hud.labelText =  @"Mnemonic Words is not available.";
         [hud hide:YES afterDelay:1];
         return;
     }
@@ -53,7 +53,7 @@
     /* show loading state */
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.mode = MBProgressHUDModeText;
-    hud.labelText =  @"waiting...";
+    hud.labelText =  @"Waiting...";
     
     
     /* Create a wallet with your password and mnemonic words. */

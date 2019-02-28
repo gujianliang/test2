@@ -53,7 +53,7 @@
     /* show loading state */
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.mode = MBProgressHUDModeText;
-    hud.labelText =  @"waiting...";
+    hud.labelText =  @"Waiting...";
     
     /* Read the keystore and check the old password is vailable. */
     NSDictionary *currentWallet = [[NSUserDefaults standardUserDefaults] objectForKey:@"currentWallet"];
