@@ -31,6 +31,7 @@
     hud.mode = MBProgressHUDModeText;
     hud.labelText =  @"waiting...";
     
+    
     /*
       Please note that you should do more judges according to what your demand is.
       Here, We just do some simple judges. This is just a demo that tell you how to change the password.
@@ -55,6 +56,8 @@
         [hud hide:YES afterDelay:2.5];
         return;
     }
+    
+    
     
     /* Read the keystore and check the old password is vailable. */
     NSDictionary *currentWallet = [[NSUserDefaults standardUserDefaults] objectForKey:@"currentWallet"];
