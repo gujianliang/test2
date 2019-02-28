@@ -75,7 +75,7 @@
     
     
     /*
-     Set up the search engine
+     Set up the search bar control
      
      Test_Html      :  "https://appwallet.oss-cn-shanghai.aliyuncs.com/testJS/test.html"，
      Test_Main_Page :  "https://appwallet.oss-cn-shanghai.aliyuncs.com/testJS/dist/index.html#/test",
@@ -83,7 +83,7 @@
      These pages are some of the trade methods used to quickly access contracts, Which network environment
      they work in depends on how you set it up.
      You can choose our test network, main network and your custom network. We have declarations it
-     in the file of WalletSdkMacro.h.
+     in the file of 'WalletSdkMacro.h'.
      test network："https://vethor-node-test.vechaindev.com"
      main network："https://vethor-node-vechaindev.com"     
      */
@@ -105,7 +105,7 @@
     self.vetAmountLabel.adjustsFontSizeToFitWidth = YES;
     self.vthoAmountLabel.adjustsFontSizeToFitWidth = YES;
     
-    /* Show the demo version infomation */
+    /* Show the demo version information */
     NSString *version = [[[NSBundle mainBundle] infoDictionary] valueForKey:@"CFBundleVersion"];
     version = [NSString stringWithFormat:@"版本号：(%@)",version];
     CGFloat y = ScreenH -  kNavigationBarHeight;
@@ -117,9 +117,9 @@
 }
 
 
-/*
-  Displays a selection of network controls，then you can change the main network environment
-  or add what you custom network environment.
+/**
+*  Displays a selection of network controls，then you can change the main network environment
+*  or add what you custom network environment.
 */
 - (void)selectTheMainNetworkEnvironment {
     
@@ -147,7 +147,7 @@
 
 
 /**
-* Change the main network environment or add what you custom network environment.
+*  Change the main network environment or add what you custom network environment.
 */
 - (void)setNetworkEnvironmentHost{
     NSDictionary *dictCurrentNet = [[NSUserDefaults standardUserDefaults] objectForKey:@"CurrentNet"];
@@ -173,8 +173,8 @@
 }
 
 /**
-* Get the VET balance from network environment, '_blockHost' is a network variable. Which network environment
-* they work in depends on how you set it up.
+*  Get the VET balance from network environment, '_blockHost' is a network variable. Which network environment
+*  they work in depends on how you set it up.
 */
 - (void)getVETBalance {
     NSString *urlString = [NSString stringWithFormat:@"%@/accounts/%@", _blockHost, self.addressLabel.text];
@@ -205,7 +205,7 @@
 /**
 *  Get the VTHO balance from network environment, '_blockHost' is a network variable . Which network environment
 *  they work in depends on how you set it up.
-*  'Contract_Address' is a fixed contract address. It is declarationed in the file of WalletSdkMacro.h.
+*  'Contract_Address' is a fixed contract address. It is declarationed in the file of 'WalletSdkMacro.h'.
 *  Contract_Address : '0x0000000000000000000000000000456e65726779'
 */
 - (void)getVTHOBalance {
@@ -277,12 +277,13 @@
 #define click event
 
 /**
-*  Enter the address detail ViewControll and see more infomation.
+*  Enter the address detail ViewControll and see more information.
 */
 - (IBAction)enterMoreInfo:(id)sender {
     WalletMoreInfoVC *moreInfoVC = [[WalletMoreInfoVC alloc]init];
     [self.navigationController pushViewController:moreInfoVC animated:YES];
 }
+
 
 /**
 *  Enter the transfer ViewControll and do some transactions.
@@ -302,5 +303,6 @@
     
     [self.navigationController pushViewController:transfer animated:YES];
 }
+
 
 @end

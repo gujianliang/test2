@@ -22,8 +22,8 @@
 
 
 /**
- *  Change the wallet current password with your new password.
- */
+*  Change the wallet current password with your new password.
+*/
 - (IBAction)changeTheWalletPassword:(id)sender{
     [self.view endEditing:YES];
     
@@ -101,5 +101,6 @@
          }];
      }];
 }
+
 
 @end
