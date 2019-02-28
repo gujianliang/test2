@@ -62,21 +62,15 @@
     }];
 }
 
-- (void)web3VETTransferFrom:(NSString *)from
-                          to:(NSString *)to
-                      amount:(NSString *)amount
-                   requestId:(NSString *)requestId
-                        gas:(NSString *)gas
-                     webView:(WKWebView *)webView
-                  callbackId:(NSString *)callbackId
-                    gasPrice:(NSString *)gasPrice
-                 clauseData:(NSString *)clauseData
+- (void)web3VETTransferWithParamModel:(WalletSignParamModel *)paramModel
+                            requestId:(NSString *)requestId
+                              webView:(WKWebView *)webView
+                           callbackId:(NSString *)callbackId
 {
-    NSString *amountStr = [BigNumber bigNumberWithHexString:amount].decimalString;
-    CGFloat amountTnteger = amountStr.floatValue/pow(10,18);
-    if (![WalletTools errorAddressAlert:to] ||
-        ![WalletTools fromISToAddress:from to:to] ||
-        !(gas.integerValue > 0)) {
+    NSString *amountStr = [BigNumber bigNumberWithHexString:paramModel.amount].decimalString;
+    if (![WalletTools errorAddressAlert:paramModel.toAddress] ||
+        ![WalletTools fromISToAddress:paramModel.fromAddress to:paramModel.toAddress] ||
+        !(paramModel.gas.integerValue > 0)) {
         
         [WalletTools callbackWithrequestId:requestId
                                   webView:webView 
@@ -91,49 +85,29 @@
     signatureView.tag = SignViewTag;
     signatureView.transferType = JSVETTransferType;
     
-    WalletSignParamModel *signParamModel = [[WalletSignParamModel alloc]init];
-    
-    signParamModel.toAddress    = to;
-    signParamModel.fromAddress  = from;
-    signParamModel.gasPriceCoef = [BigNumber bigNumberWithHexString:gasPrice];;
-    signParamModel.gas          = gas;
-    signParamModel.amount       = amount;
-    signParamModel.clauseData   = clauseData ;
-    
-    [signatureView updateViewParamModel:signParamModel];
+    [signatureView updateViewParamModel:paramModel];
     [[WalletTools getCurrentVC].navigationController.view addSubview:signatureView];
     
     signatureView.transferBlock = ^(NSString * _Nonnull txid) {
         NSLog(@"txid = %@",txid);
         
-        if (txid.length == 0) {
-            
-            
-        }else{
-            
+        if (txid.length != 0) {
             [WalletTools callbackWithrequestId:requestId
                                        webView:webView
-                                         data:txid
-                                   callbackId:callbackId
-                                         code:OK];
+                                          data:txid
+                                    callbackId:callbackId
+                                          code:OK];
         }
     };
 }
 
-- (void)web3VTHOTransferFrom:(NSString *)from
-                  to:(NSString *)to
-              amount:(NSString *)amount
-           requestId:(NSString *)requestId
-                 gas:(NSString *)gas
-            gasPrice:(NSString *)gasPrice
-             webView:(WKWebView *)webView
-          callbackId:(NSString *)callbackId
-          clauseStr:(NSString *)clauseStr
-        tokenAddress:(NSString *)tokenAddress
+- (void)web3VTHOTransferWithParamModel:(WalletSignParamModel *)paramModel
+                             requestId:(NSString *)requestId
+                               webView:(WKWebView *)webView
+                            callbackId:(NSString *)callbackId
+
 {
-    __block NSString *symobl = @"";
-    
-    WalletGetSymbolApi *getSymbolApi = [[WalletGetSymbolApi alloc]initWithTokenAddress:tokenAddress];
+    WalletGetSymbolApi *getSymbolApi = [[WalletGetSymbolApi alloc]initWithTokenAddress:paramModel.tokenAddress];
     [getSymbolApi loadDataAsyncWithSuccess:^(VCBaseApi *finishApi) {
         
         NSLog(@"ddd");
@@ -148,7 +122,7 @@
             return ;
         }
    
-        [self getTokenSymobl:tokenAddress requestId:requestId webView:webView callbackId:callbackId clauseStr:clauseStr symobl:symobl to:to from:from gas:gas symobl:symobl gasPrice:gasPrice];
+        [self getTokenSymoblWithParamModel:paramModel webView:webView callbackId:callbackId symobl:symobl requestId:requestId];
             
         
     } failure:^(VCBaseApi *finishApi, NSString *errMsg) {
@@ -160,47 +134,23 @@
     }];
 }
 
-- (void)getTokenSymobl:(NSString *)tokenAddress
-             requestId:(NSString *)requestId
-               webView:(WKWebView *)webView
-            callbackId:(NSString *)callbackId
-             clauseStr:(NSString *)clauseStr
-                symobl:(NSString *)symobl
-                    to:(NSString *)to
-                  from:(NSString *)from
-                   gas:(NSString *)gas
-                symobl:(NSString *)symobl
-              gasPrice:(NSString *)gasPrice
+- (void)getTokenSymoblWithParamModel:(WalletSignParamModel *)paramModel
+                             webView:(WKWebView *)webView
+                          callbackId:(NSString *)callbackId
+                              symobl:(NSString *)symobl
+                           requestId:(NSString *)requestId
 {
-    
-    [self enterVTHOTransferViewClauseData:clauseStr
-                                       to:to
-                                     from:from
-                                      gas:gas
-                                requestId:requestId
-                                  webView:webView
-                               callbackId:callbackId
-                             tokenAddress:tokenAddress
-                                 gasPrice:gasPrice
-     ];
-    return;
-    
-   
-}
-
-- (void)enterVTHOTransferViewClauseData:(NSString *)clauseStr  to:(NSString *)to from:(NSString *)from gas:(NSString *)gas requestId:(NSString *)requestId webView:(WKWebView *)webView callbackId:(NSString *)callbackId  tokenAddress:(NSString *)tokenAddress gasPrice:(NSString *)gasPrice
-{
-    NSString *clauseString = [clauseStr stringByReplacingOccurrencesOfString:TransferMethodId withString:@""];
+    NSString *clauseString = [paramModel.clauseData stringByReplacingOccurrencesOfString:TransferMethodId withString:@""];
     NSString *tokenAmount = @"";
-    if (clauseStr.length >= 128) {
+    if (paramModel.clauseData.length >= 128) {
         tokenAmount = [clauseString substringWithRange:NSMakeRange(64, 64)];
     }
     
 #warning 非vet 不能转0
-    if (![WalletTools errorAddressAlert:to]||
-        ![WalletTools fromISToAddress:from to:to]||
-        !(gas.integerValue > 0)||
-        clauseStr.length == 0) {
+    if (![WalletTools errorAddressAlert:paramModel.toAddress]||
+        ![WalletTools fromISToAddress:paramModel.fromAddress to:paramModel.toAddress]||
+        !(paramModel.gas.integerValue > 0)||
+        paramModel.clauseData.length == 0) {
         
         [WalletTools callbackWithrequestId:requestId
                                    webView:webView
@@ -214,15 +164,7 @@
     signatureView.tag = SignViewTag;
     signatureView.transferType = JSTokenTransferType;
     
-    WalletSignParamModel *signParamModel = [[WalletSignParamModel alloc]init];
-    
-    signParamModel.toAddress    = to;
-    signParamModel.fromAddress  = from;
-    signParamModel.gasPriceCoef = [BigNumber bigNumberWithHexString:gasPrice];;
-    signParamModel.gas          = gas;
-    signParamModel.amount       = tokenAmount;
-    signParamModel.clauseData   = clauseStr ;
-    signParamModel.tokenAddress = tokenAddress ;
+    [signatureView updateViewParamModel:paramModel];
     
     [[WalletTools getCurrentVC].navigationController.view addSubview:signatureView];
     
@@ -241,18 +183,13 @@
     };
 }
 
-- (void)web3contractSignFrom:(NSString *)from
-                      to:(NSString *)to
-                  amount:(NSString *)amount
-               requestId:(NSString *)requestId
-                     gas:(NSString *)gas
-                gasPrice:(NSString *)gasPrice
-                 webView:(WKWebView *)webView
-              callbackId:(NSString *)callbackId
-               clauseStr:(NSString *)clauseStr
+- (void)web3contractSignWithParamModel:(WalletSignParamModel *)paramModel
+                             requestId:(NSString *)requestId
+                               webView:(WKWebView *)webView
+                            callbackId:(NSString *)callbackId
 {
-    if (clauseStr.length == 0 ||
-        !(gas.integerValue > 0)) {
+    if (paramModel.clauseData.length == 0 ||
+        !(paramModel.gas.integerValue > 0)) {
         
         [WalletTools callbackWithrequestId:requestId
                                   webView:webView 
@@ -262,24 +199,16 @@
         
         return;
     }
-   
 
     WalletSignatureView *signatureView = [[WalletSignatureView alloc] initWithFrame:[WalletTools getCurrentVC].view.bounds];
     signatureView.tag = SignViewTag;
     signatureView.transferType = JSContranctTransferType;
     
-    WalletSignParamModel *signParamModel = [[WalletSignParamModel alloc]init];
-   
 #warning to
-    signParamModel.toAddress    = to;
-    signParamModel.fromAddress  = from;
-    signParamModel.gasPriceCoef = [BigNumber bigNumberWithHexString:gasPrice];;
-    signParamModel.gas          = gas;
-    signParamModel.amount       = amount;
-    signParamModel.clauseData   = clauseStr ;
+   
 #warning 地址是不是空的
 //    signParamModel.tokenAddress = tokenAddress ;
-    [signatureView updateViewParamModel:signParamModel];
+    [signatureView updateViewParamModel:paramModel];
     
     [[WalletTools getCurrentVC].navigationController.view addSubview:signatureView];
     signatureView.transferBlock = ^(NSString * _Nonnull txid) {

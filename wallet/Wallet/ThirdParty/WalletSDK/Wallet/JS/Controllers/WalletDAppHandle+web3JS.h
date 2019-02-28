@@ -16,44 +16,28 @@ NS_ASSUME_NONNULL_BEGIN
 @interface WalletDAppHandle (web3JS)
 
 - (void)getBalance:(NSString *)callbackId
-                 webView:(WKWebView *)webView
-               requestId:(NSString *)requestId
-                 address:(NSString *)address;
+           webView:(WKWebView *)webView
+         requestId:(NSString *)requestId
+           address:(NSString *)address;
 
 - (void)getAddress:(WKWebView *)webView callbackId:(NSString *)callbackId;
 
 
-- (void)web3VETTransferFrom:(NSString *)from
-                          to:(NSString *)to
-                      amount:(NSString *)amount
-                   requestId:(NSString *)requestId
-                         gas:(NSString *)gas
-                     webView:(WKWebView *)webView
-                  callbackId:(NSString *)callbackId
-                    gasPrice:(NSString *)gasPrice
-                 clauseData:(NSString *)clauseData;
+- (void)web3VETTransferWithParamModel:(WalletSignParamModel *)paramModel
+                            requestId:(NSString *)requestId
+                              webView:(WKWebView *)webView
+                           callbackId:(NSString *)callbackId;
 
-- (void)web3VTHOTransferFrom:(NSString *)from
-                  to:(NSString *)to
-              amount:(NSString *)amount
-           requestId:(NSString *)requestId
-                 gas:(NSString *)gas
-            gasPrice:(NSString *)gasPrice
-             webView:(WKWebView *)webView
-          callbackId:(NSString *)callbackId
-           clauseStr:(NSString *)clauseStr
-        tokenAddress:(NSString *)tokenAddress;
+- (void)web3VTHOTransferWithParamModel:(WalletSignParamModel *)paramModel
+                             requestId:(NSString *)requestId
+                               webView:(WKWebView *)webView
+                            callbackId:(NSString *)callbackId;
 
 
-- (void)web3contractSignFrom:(NSString *)from
-                  to:(NSString *)to
-              amount:(NSString * )amount
-           requestId:(NSString *)requestId
-                 gas:(NSString *)gas
-                gasPrice:(NSString *)gasPrice
-             webView:(WKWebView *)webView
-          callbackId:(NSString *)callbackId
-           clauseStr:(NSString *)clauseStr;
+- (void)web3contractSignWithParamModel:(WalletSignParamModel *)paramModel
+                             requestId:(NSString *)requestId
+                               webView:(WKWebView *)webView
+                            callbackId:(NSString *)callbackId;
 
 
 - (void)getChainTag:(NSString *)requestId

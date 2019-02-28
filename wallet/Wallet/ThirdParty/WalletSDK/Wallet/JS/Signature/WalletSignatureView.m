@@ -72,7 +72,9 @@
     _clauseList   = paramModel.clauseList;
     
     _gasPriceCoef         = paramModel.gasPriceCoef;
-    _clauseData           = [SecureData secureDataWithHexString:paramModel.clauseData].data;
+    if (paramModel.clauseData.length > 0) {
+        _clauseData           = [SecureData secureDataWithHexString:paramModel.clauseData].data;
+    }
     _tokenAddress         = paramModel.tokenAddress;
     _gas                  = [NSNumber numberWithInteger:paramModel.gas.integerValue];
     
