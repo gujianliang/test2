@@ -10,7 +10,6 @@
 
 @interface WalletServerDetailVC ()
 {
-    NetType _netType;
     NSString *_netNameText;
     NSString *_netUrlText;
 }
@@ -33,11 +32,6 @@
 {
     _netNameText = netName;
     _netUrlText = netUrl;
-}
-
-- (void)netType:(NetType)netType
-{
-    _netType = netType;
 }
 
 

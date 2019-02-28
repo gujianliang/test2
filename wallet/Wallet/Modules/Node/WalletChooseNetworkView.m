@@ -45,12 +45,12 @@
     _newList = [NSMutableArray array];
     
     NSMutableDictionary *dict1 = [NSMutableDictionary dictionary];
-    [dict1 setObject:@"生产节点" forKey:@"serverName"];
+    [dict1 setObject:@"Product Network" forKey:@"serverName"];
     [dict1 setObject:@"https://vethor-node.vechain.com" forKey:@"serverUrl"];
     [_newList addObject:dict1];
     
     NSMutableDictionary *dict2 = [NSMutableDictionary dictionary];
-    [dict2 setObject:@"测试节点" forKey:@"serverName"];
+    [dict2 setObject:@"Develop Network" forKey:@"serverName"];
     [dict2 setObject:@"https://vethor-node-test.vechaindev.com" forKey:@"serverUrl"];
     [_newList addObject:dict2];
 
@@ -59,8 +59,8 @@
     }
     
     NSMutableDictionary *dict3 = [NSMutableDictionary dictionary];
-    [dict3 setObject:@"添加自定义节点" forKey:@"serverName"];
-    [dict3 setObject:@"11" forKey:@"serverUrl"];
+    [dict3 setObject:@"Custom Network" forKey:@"serverName"];
+    [dict3 setObject:@"" forKey:@"serverUrl"];
     [_newList addObject:dict3];
     
     UITableView *tableView = [[UITableView alloc] initWithFrame:chooseNetworkCotainView.bounds];
@@ -69,64 +69,35 @@
     [chooseNetworkCotainView addSubview:tableView];
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return _newList.count;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    UITableViewCell *cell = [[UITableViewCell alloc]init];
-    
+    static NSString *cellIndef = @"cellIndef";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIndef];
+    if (!cell) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIndef];
+        cell.textLabel.adjustsFontSizeToFitWidth = YES;
+    }
     NSDictionary *dict = _newList[indexPath.row];
     cell.textLabel.text = dict[@"serverName"];
+    
     return cell;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 50;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-     NetType netType = TestServer;
-    if (indexPath.row == 0) {
-        netType = ProductServer;
-        
-    }else if (indexPath.row == 1)
-    {
-         netType = TestServer;
-    }else if(indexPath.row  == _newList.count - 1)
-    {
-        netType = CustomServer;
-    }
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
     NSDictionary *dict = _newList[indexPath.row];
     if (_block) {
-        _block(dict[@"serverName"],dict[@"serverUrl"]);
+        _block(dict[@"serverName"], dict[@"serverUrl"]);
     }
-    [[NSUserDefaults standardUserDefaults]setObject:dict forKey:@"CurrentNet"];
-    [self removeFromSuperview];
-}
-
-- (void)selectNode:(UIButton *)sender
-{
-    NetType netType = TestServer;
-    if (sender.tag == 10) {
-        netType = ProductServer;
-        
-       
-        
-    }else if (sender.tag == 20)
-    {
-        netType = TestServer;
-    }else if (sender.tag == 30)
-    {
-        netType = CustomServer;
-    }
-//    if (_block) {
-//        _block(netType);
-//    }
+    [[NSUserDefaults standardUserDefaults] setObject:dict forKey:@"CurrentNet"];
     [self removeFromSuperview];
 }
 

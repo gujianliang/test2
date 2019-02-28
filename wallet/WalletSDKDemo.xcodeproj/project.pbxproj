@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		41A5B18D22266B400025AA1C /* WalletMoreInfoVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41A5B18C22266B400025AA1C /* WalletMoreInfoVC.xib */; };
+		41A5B19E2227EC210025AA1C /* WalletAddVthoNodeVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41A5B19D2227EC210025AA1C /* WalletAddVthoNodeVC.xib */; };
 		971812222227945B008F9639 /* WalletServerDetailVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9718121D2227945B008F9639 /* WalletServerDetailVC.xib */; };
 		971812232227945B008F9639 /* WalletServerDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9718121E2227945B008F9639 /* WalletServerDetailVC.m */; };
 		971B3E3621E6000B007845F0 /* WalletChangePWVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 971B3E1B21E6000B007845F0 /* WalletChangePWVC.m */; };
@@ -82,6 +83,7 @@
 /* Begin PBXFileReference section */
 		41A5B18B222630740025AA1C /* WalletSdkMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WalletSdkMacro.h; sourceTree = "<group>"; };
 		41A5B18C22266B400025AA1C /* WalletMoreInfoVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WalletMoreInfoVC.xib; sourceTree = "<group>"; };
+		41A5B19D2227EC210025AA1C /* WalletAddVthoNodeVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletAddVthoNodeVC.xib; sourceTree = "<group>"; };
 		9718121A2227945B008F9639 /* WalletServerDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WalletServerDetailVC.h; sourceTree = "<group>"; };
 		9718121D2227945B008F9639 /* WalletServerDetailVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WalletServerDetailVC.xib; sourceTree = "<group>"; };
 		9718121E2227945B008F9639 /* WalletServerDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WalletServerDetailVC.m; sourceTree = "<group>"; };
@@ -167,6 +169,7 @@
 			children = (
 				978127642227DACD00BDCC5F /* WalletAddVthoNodeVC.h */,
 				978127622227DACC00BDCC5F /* WalletAddVthoNodeVC.m */,
+				41A5B19D2227EC210025AA1C /* WalletAddVthoNodeVC.xib */,
 				978127632227DACD00BDCC5F /* WalletChooseNetworkView.h */,
 				978127612227DACC00BDCC5F /* WalletChooseNetworkView.m */,
 				9718121A2227945B008F9639 /* WalletServerDetailVC.h */,
@@ -484,6 +487,7 @@
 				9773F8512213B22B00DF5972 /* WalletSDKBundle.bundle in Resources */,
 				971B3E3D21E6000B007845F0 /* WalletCreateVC.xib in Resources */,
 				971B3E4021E6000B007845F0 /* WalletRecoverMainVC.xib in Resources */,
+				41A5B19E2227EC210025AA1C /* WalletAddVthoNodeVC.xib in Resources */,
 				971B3E4221E6000B007845F0 /* WalletMnemonicImportVC.xib in Resources */,
 				9747227F20EDE9FA00F9EAB3 /* Assets.xcassets in Resources */,
 				971B3E3E21E6000B007845F0 /* WalletTransferVC.xib in Resources */,
