@@ -1,16 +1,16 @@
 //
-//  WalletCreatVC.m
+//  WalletCreateVC.m
 //  walletSDKDemo
 //
 //  Created by 曾新 on 2018/12/26.
 //  Copyright © 2018年 demo. All rights reserved.
 //
 
-#import "WalletCreatVC.h"
+#import "WalletCreateVC.h"
 #import <WalletSDK/Wallet.h>
 #import <WalletSDK/MBProgressHUD.h>
 
-@interface WalletCreatVC ()
+@interface WalletCreateVC ()
 
 @property (weak, nonatomic) IBOutlet UITextField *passwordLabel;    /* It is used to input the wallet password */
 
@@ -23,7 +23,7 @@
 
 @end
 
-@implementation WalletCreatVC
+@implementation WalletCreateVC
 
 
 /**

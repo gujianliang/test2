@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WalletCreatVC">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WalletCreateVC">
             <connections>
                 <outlet property="addressLabel" destination="U0B-Eo-K7b" id="R1J-HA-nkD"/>
                 <outlet property="bottomCoverView" destination="H35-w3-WNA" id="dVT-8Q-Yvk"/>

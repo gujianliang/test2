@@ -9,7 +9,7 @@
 #import "ViewController.h"
 #import <WalletSDK/Wallet.h>
 #import "WebViewVC.h"
-#import "WalletCreatVC.h"
+#import "WalletCreateVC.h"
 #import "WalletRecoverMainVC.h"
 #import "WalletDetailVC.h"
 
@@ -49,7 +49,7 @@
         case 10:
         {
 
-            WalletCreatVC *create = [[WalletCreatVC alloc] init];
+            WalletCreateVC *create = [[WalletCreateVC alloc] init];
             [self.navigationController pushViewController:create animated:YES];
         }
             break;
