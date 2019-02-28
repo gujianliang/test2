@@ -11,41 +11,46 @@
 #import <WalletSDK/WalletUtils.h>
 
 @interface WalletMoreInfoVC ()
-@property (weak, nonatomic) IBOutlet UILabel *addressLabel;
-@property (weak, nonatomic) IBOutlet UITextView *keystoreTextView;
+
+@property (weak, nonatomic) IBOutlet UILabel *addressLabel;         /* The wallet address you created */
+@property (weak, nonatomic) IBOutlet UITextView *keystoreTextView;  /* It is used to show the wallet keystore you export. */
 
 @end
 
 @implementation WalletMoreInfoVC
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
+
+    [self initView];
+}
+
+/* Config subviews and load it */
+- (void)initView{
+    
+    self.keystoreTextView.layer.cornerRadius = 5.0;
+    self.keystoreTextView.layer.borderWidth = 1.0;
+    self.keystoreTextView.layer.borderColor = [UIColor darkGrayColor].CGColor;
     
     NSDictionary *currentWallet = [[NSUserDefaults standardUserDefaults]objectForKey:@"currentWallet"];
     self.addressLabel.text = currentWallet[@"address"];
+    self.addressLabel.adjustsFontSizeToFitWidth = YES;
 }
 
-- (IBAction)changePW:(id)sender
-{
+- (IBAction)changeWalletPassWord:(id)sender {
     WalletChangePWVC *changeVC = [[WalletChangePWVC alloc]init];
     [self.navigationController pushViewController:changeVC animated:YES];
 }
 
-- (IBAction)exportKeystore:(id)sender
-{
+- (IBAction)exportWalletKeystore:(id)sender {
     NSDictionary *currentWallet = [[NSUserDefaults standardUserDefaults]objectForKey:@"currentWallet"];
     NSString *keystore = currentWallet[@"keystore"];
     self.keystoreTextView.text = keystore;
 }
 
-- (IBAction)delWallet:(id)sender
-{
+- (IBAction)delCurrentWallet:(id)sender {
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"currentWallet"];
-    [self.navigationController dismissViewControllerAnimated:YES completion:^{
-        NSLog(@"ddd");
-    }];
+    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
-
 
 @end

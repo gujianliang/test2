@@ -11,8 +11,9 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface WalletDetailVC : UIViewController
-@property (weak, nonatomic) IBOutlet UIImageView *vetImageView;
-@property (weak, nonatomic) IBOutlet UIImageView *vthoImageView;
+
+@property (weak, nonatomic) IBOutlet UIImageView *vetImageView;  /* VET logo */
+@property (weak, nonatomic) IBOutlet UIImageView *vthoImageView; /* VTHO logo */
 
 @end
 
