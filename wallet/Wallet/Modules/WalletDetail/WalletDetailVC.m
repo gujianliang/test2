@@ -257,6 +257,8 @@
     return data;
 }
 
+
+
 #define UISearchBarDelegate
 
 /**
@@ -270,6 +272,8 @@
     [self.navigationController pushViewController:webVC animated:YES];
 }
 
+
+
 #define click event
 
 /**
@@ -281,7 +285,7 @@
 }
 
 /**
-*  Enter the transfer ViewControll.
+*  Enter the transfer ViewControll and do some transactions.
 */
 - (IBAction)enterTransfer:(id)sender {
     WalletTransferVC *transfer = [[WalletTransferVC alloc]init];
