@@ -16,19 +16,20 @@
 
 @implementation WalletRecoverMainVC
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-}
 
-- (IBAction)mnemonicImport:(id)sender
-{
+/**
+*  Enter the mnemonic ViewControll.
+*/
+- (IBAction)mnemonicImport:(id)sender {
     WalletMnemonicImportVC *vc = [[WalletMnemonicImportVC alloc]init];
     [self.navigationController pushViewController:vc animated:YES];
 }
 
-- (IBAction)keystoreImport:(id)sender
-{
+
+/**
+*  Enter the keystore ViewControll.
+*/
+- (IBAction)keystoreImport:(id)sender {
     WalletKeystoreImportVC *vc = [[WalletKeystoreImportVC alloc]init];
     [self.navigationController pushViewController:vc animated:YES];
 }

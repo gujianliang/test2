@@ -169,31 +169,31 @@
                     to:(NSString *)to
                   from:(NSString *)from
                    gas:(NSString *)gas
-              symobl:(NSString *)symobl
+                symobl:(NSString *)symobl
               gasPrice:(NSString *)gasPrice
 {
     
-    [self enterVTHOTransferViewCluseData:clauseStr
-                                      to:to
-                                    from:from
-                                     gas:gas
-                               requestId:requestId
-                                 webView:webView
-                              callbackId:callbackId
-                            tokenAddress:tokenAddress
-                                gasPrice:gasPrice
+    [self enterVTHOTransferViewClauseData:clauseStr
+                                       to:to
+                                     from:from
+                                      gas:gas
+                                requestId:requestId
+                                  webView:webView
+                               callbackId:callbackId
+                             tokenAddress:tokenAddress
+                                 gasPrice:gasPrice
      ];
     return;
     
    
 }
 
-- (void)enterVTHOTransferViewCluseData:(NSString *)clauseStr  to:(NSString *)to from:(NSString *)from gas:(NSString *)gas requestId:(NSString *)requestId webView:(WKWebView *)webView callbackId:(NSString *)callbackId  tokenAddress:(NSString *)tokenAddress gasPrice:(NSString *)gasPrice
+- (void)enterVTHOTransferViewClauseData:(NSString *)clauseStr  to:(NSString *)to from:(NSString *)from gas:(NSString *)gas requestId:(NSString *)requestId webView:(WKWebView *)webView callbackId:(NSString *)callbackId  tokenAddress:(NSString *)tokenAddress gasPrice:(NSString *)gasPrice
 {
-    NSString *cluseStr = [clauseStr stringByReplacingOccurrencesOfString:TransferMethodId withString:@""];
+    NSString *clauseString = [clauseStr stringByReplacingOccurrencesOfString:TransferMethodId withString:@""];
     NSString *tokenAmount = @"";
-    if (cluseStr.length >= 128) {
-        tokenAmount = [cluseStr substringWithRange:NSMakeRange(64, 64)];
+    if (clauseStr.length >= 128) {
+        tokenAmount = [clauseString substringWithRange:NSMakeRange(64, 64)];
     }
     
 #warning 非vet 不能转0

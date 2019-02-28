@@ -24,10 +24,10 @@
 
 /**
  *  @abstract
- *  creat wallet
+ *  create wallet
  *
  *  @param password :wallet password
- *  @param block : finish creat wallet callback
+ *  @param block : finish create wallet callback
  *
  */
 + (void)createWalletWithPassword:(NSString *)password
@@ -35,11 +35,11 @@
 
 /**
  *  @abstract
- *  creat wallet with mnemonic
+ *  create wallet with mnemonic
  *
- *  @param mnemonic :12 words for creat wallet
+ *  @param mnemonic :12 words for create wallet
  *  @param password :password for wallet
- *  @param block : finish creat wallet callback
+ *  @param block : finish create wallet callback
  */
 #warning  miss error
 + (void)creatWalletWithMnemonic:(NSString *)mnemonic

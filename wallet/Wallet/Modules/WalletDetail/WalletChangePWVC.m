@@ -11,69 +11,72 @@
 #import <WalletSDK/MBProgressHUD.h>
 
 @interface WalletChangePWVC ()
-@property (weak, nonatomic) IBOutlet UITextField *oldPWTextField;
-@property (weak, nonatomic) IBOutlet UITextField *nextPWTextField;
-@property (weak, nonatomic) IBOutlet UITextField *makeSureTextField;
+
+@property (weak, nonatomic) IBOutlet UITextField *oldPWTextField;     /* The wallet current password that you created */
+@property (weak, nonatomic) IBOutlet UITextField *nextPWTextField;    /* The wallet new password that you want to create */
+@property (weak, nonatomic) IBOutlet UITextField *makeSureTextField;  /* Check the new password */
 
 @end
 
 @implementation WalletChangePWVC
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
 
-    
-}
-
-- (IBAction)changePW:(id)sender
-{
+/**
+*  Change the wallet current password with your new password.
+*/
+- (IBAction)changeTheWalletPassword:(id)sender{
     [self.view endEditing:YES];
     
-    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view
-                                              animated:YES];
-    hud.mode = MBProgressHUDModeText;
-    hud.labelText =  @"waiting...";
+    /*
+      Please note that you should do more judges according to what your demand is.
+      Here, We just do some simple judges. This is just a demo that tell you how to change the password.
+     */
     
+    /* Check your input password that can not be blank. */
     if (_oldPWTextField.text.length == 0 || _nextPWTextField.text.length == 0 || _makeSureTextField.text.length == 0) {
-        [hud hide:YES];
-        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view
-                                                  animated:YES];
+        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         hud.mode = MBProgressHUDModeText;
-        hud.labelText =  @"Invalid";
-        [hud hide:YES afterDelay:1];
+        hud.labelText =  @"Check your input password that can not be blank.";
+        [hud hide:YES afterDelay:2.5];
         return;
     }
     
+    /*  Check the new password is correct. */
     if (![_nextPWTextField.text isEqualToString:_makeSureTextField.text]) {
-        [hud hide:YES];
-        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view
-                                                  animated:YES];
+        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         hud.mode = MBProgressHUDModeText;
-        hud.labelText =  @"Invalid";
-        [hud hide:YES afterDelay:1];
+        hud.labelText =  @"The new password is not correct.";
+        [hud hide:YES afterDelay:2.5];
         return;
     }
     
-    NSDictionary *currentWallet = [[NSUserDefaults standardUserDefaults]objectForKey:@"currentWallet"];
+    /* show loading state */
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.mode = MBProgressHUDModeText;
+    hud.labelText =  @"Waiting...";
+    
+    /* Read the keystore and check the old password is vailable. */
+    NSDictionary *currentWallet = [[NSUserDefaults standardUserDefaults] objectForKey:@"currentWallet"];
     NSString *keystore = currentWallet[@"keystore"];
     NSString *address = currentWallet[@"address"];
-    
     [WalletUtils decryptSecretStorageJSON:keystore
                                  password:_oldPWTextField.text
                                  callback:^(Account *account, NSError *NSError)
      {
         [hud hide:YES];
-         if (NSError != nil) {
-             MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view
-                                                       animated:YES];
+         if (NSError) {
+             MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
              hud.mode = MBProgressHUDModeText;
-             hud.labelText =  @"Wrong Password";
-             [hud hide:YES afterDelay:1];
+             hud.labelText = @"Wrong Password, Try again!";
+             [hud hide:YES afterDelay:1.5];
              return ;
          }
-         [WalletUtils encryptSecretStorageJSON:self.nextPWTextField.text account:account callback:^(NSString *json) {
+         
+         /* Use the new password to encrypt. */
+         [WalletUtils encryptSecretStorageJSON:self.nextPWTextField.text
+                                       account:account
+                                      callback:^(NSString *json) {
              
-            
              if (json.length > 0) {
                  NSMutableDictionary *currentDict = [NSMutableDictionary dictionary];
                  [currentDict setObject:address forKey:@"address"];
@@ -84,12 +87,11 @@
                  MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view
                                                            animated:YES];
                  hud.mode = MBProgressHUDModeText;
-                 hud.labelText =  @"修改密码成功";
-                 [hud hide:YES afterDelay:1];
+                 hud.labelText = @"Change the password success!";
+                 [hud hide:YES afterDelay:1.5];
                  
                  dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                      [self.navigationController popViewControllerAnimated:YES];
-
                  });
              }
          }];

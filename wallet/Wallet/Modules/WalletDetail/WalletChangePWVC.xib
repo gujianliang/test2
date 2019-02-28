@@ -24,7 +24,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Old Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rJr-hN-k47">
-                    <rect key="frame" x="16" y="80" width="288" height="40"/>
+                    <rect key="frame" x="16" y="95" width="288" height="40"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="qPK-Zf-YCa"/>
                     </constraints>
@@ -33,7 +33,7 @@
                     <textInputTraits key="textInputTraits"/>
                 </textField>
                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="New Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1eI-eK-vOo">
-                    <rect key="frame" x="16" y="135" width="288" height="40"/>
+                    <rect key="frame" x="16" y="150" width="288" height="40"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="cpr-4K-hvH"/>
                     </constraints>
@@ -42,7 +42,7 @@
                     <textInputTraits key="textInputTraits"/>
                 </textField>
                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Confirm New Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="d6k-bR-PPo">
-                    <rect key="frame" x="16" y="190" width="288" height="40"/>
+                    <rect key="frame" x="16" y="205" width="288" height="40"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="lNM-vk-mdE"/>
                     </constraints>
@@ -51,16 +51,16 @@
                     <textInputTraits key="textInputTraits"/>
                 </textField>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q3M-FF-6R6">
-                    <rect key="frame" x="16" y="260" width="288" height="40"/>
+                    <rect key="frame" x="16" y="275" width="288" height="40"/>
                     <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="BBS-DS-nJO"/>
                     </constraints>
-                    <state key="normal" title="Next">
+                    <state key="normal" title="Confirm">
                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </state>
                     <connections>
-                        <action selector="changePW:" destination="-1" eventType="touchUpInside" id="hFY-k0-6dn"/>
+                        <action selector="changeTheWalletPassword:" destination="-1" eventType="touchUpInside" id="aQM-Uc-Z9H"/>
                     </connections>
                 </button>
             </subviews>
@@ -76,7 +76,7 @@
                 <constraint firstItem="Q3M-FF-6R6" firstAttribute="top" secondItem="d6k-bR-PPo" secondAttribute="bottom" constant="30" id="jkd-ZA-lXi"/>
                 <constraint firstItem="d6k-bR-PPo" firstAttribute="top" secondItem="1eI-eK-vOo" secondAttribute="bottom" constant="15" id="mhN-Rl-b0y"/>
                 <constraint firstItem="1eI-eK-vOo" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" constant="16" id="pfh-Pm-qWX"/>
-                <constraint firstItem="rJr-hN-k47" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" constant="60" id="ti8-GS-faG"/>
+                <constraint firstItem="rJr-hN-k47" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" constant="75" id="ti8-GS-faG"/>
                 <constraint firstItem="d6k-bR-PPo" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" constant="16" id="xDl-vb-7N5"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>

@@ -9,7 +9,7 @@
 #import "ViewController.h"
 #import <WalletSDK/Wallet.h>
 #import "WebViewVC.h"
-#import "WalletCreatVC.h"
+#import "WalletCreateVC.h"
 #import "WalletRecoverMainVC.h"
 #import "WalletDetailVC.h"
 
@@ -21,10 +21,26 @@
 
 @implementation ViewController
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+ 
+    NSDictionary *currentWallet = [[NSUserDefaults standardUserDefaults]objectForKey:@"currentWallet"];;
+    
+    if (currentWallet) { //有钱包，直接去详情
+        
+        WalletDetailVC *detailVC = [[WalletDetailVC alloc]init];
+        
+        UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:detailVC];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [self.navigationController presentViewController:nav animated:YES completion:NULL];
+        });
+    }
+}
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
-
+    // Do any additional setup after loading the view, typically from a nib
 }
 
 - (IBAction)touchMe:(UIButton *)sender
@@ -33,14 +49,14 @@
         case 10:
         {
 
-            WalletCreatVC *creat = [[WalletCreatVC alloc]init];
-            [self.navigationController pushViewController:creat animated:YES];
+            WalletCreateVC *create = [[WalletCreateVC alloc] init];
+            [self.navigationController pushViewController:create animated:YES];
         }
             break;
         case 11:
         {
 
-            WalletRecoverMainVC *recoverVC = [[WalletRecoverMainVC alloc]init];
+            WalletRecoverMainVC *recoverVC = [[WalletRecoverMainVC alloc] init];
             [self.navigationController pushViewController:recoverVC animated:YES];
 
         }
@@ -49,7 +65,7 @@
         {
 
             WalletDetailVC *detailVC = [[WalletDetailVC alloc]init];
-              [self.navigationController pushViewController:detailVC animated:YES];
+            [self.navigationController pushViewController:detailVC animated:YES];
 //            UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:detailVC];
 //            [self presentViewController:nav animated:YES completion:NULL];
             
@@ -73,28 +89,5 @@
             break;
     }
 }
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    
-    NSDictionary *currentWallet = [[NSUserDefaults standardUserDefaults]objectForKey:@"currentWallet"];;
-
-    if (currentWallet) { //有钱包，直接去详情
-
-        WalletDetailVC *detailVC = [[WalletDetailVC alloc]init];
-//        [self.navigationController pushViewController:detailVC animated:YES];
-
-        UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:detailVC];
-        [self presentViewController:nav animated:YES completion:NULL];
-
-    }
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 
 @end

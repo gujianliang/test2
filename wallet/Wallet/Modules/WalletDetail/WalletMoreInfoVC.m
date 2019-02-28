@@ -11,41 +11,71 @@
 #import <WalletSDK/WalletUtils.h>
 
 @interface WalletMoreInfoVC ()
-@property (weak, nonatomic) IBOutlet UILabel *addressLabel;
-@property (weak, nonatomic) IBOutlet UITextView *keystoreTextView;
+
+@property (weak, nonatomic) IBOutlet UILabel *addressLabel;         /* The wallet address that you created */
+@property (weak, nonatomic) IBOutlet UITextView *keystoreTextView;  /* It is used to show the wallet keystore that you exported */
 
 @end
 
 @implementation WalletMoreInfoVC
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
-    
-    NSDictionary *currentWallet = [[NSUserDefaults standardUserDefaults]objectForKey:@"currentWallet"];
-    self.addressLabel.text = currentWallet[@"address"];
+
+    [self initView];
 }
 
-- (IBAction)changePW:(id)sender
-{
+
+/**
+*  Config subviews and load it.
+*/
+- (void)initView{
+    
+    self.keystoreTextView.layer.cornerRadius = 5.0;
+    self.keystoreTextView.layer.borderWidth = 1.0;
+    self.keystoreTextView.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    
+    NSDictionary *currentWallet = [[NSUserDefaults standardUserDefaults] objectForKey:@"currentWallet"];
+    self.addressLabel.text = currentWallet[@"address"];
+    self.addressLabel.adjustsFontSizeToFitWidth = YES;
+}
+
+
+/**
+*  Enter the change password ViewControll.
+*/
+- (IBAction)changeWalletPassWord:(id)sender {
     WalletChangePWVC *changeVC = [[WalletChangePWVC alloc]init];
     [self.navigationController pushViewController:changeVC animated:YES];
 }
 
-- (IBAction)exportKeystore:(id)sender
-{
-    NSDictionary *currentWallet = [[NSUserDefaults standardUserDefaults]objectForKey:@"currentWallet"];
+
+/**
+*  Export the wallet keystore.
+*/
+- (IBAction)exportWalletKeystore:(id)sender {
+    NSDictionary *currentWallet = [[NSUserDefaults standardUserDefaults] objectForKey:@"currentWallet"];
     NSString *keystore = currentWallet[@"keystore"];
     self.keystoreTextView.text = keystore;
 }
 
-- (IBAction)delWallet:(id)sender
-{
+
+/**
+*  Delete the current wallet by the class 'NSUserDefaults'.
+*  Please note that this is just a demo, We save the wallet information in your SandBox by the class 'NSUserDefaults'.
+*  You should think about the safety and operation, then get a better way to save your wallet information.
+*/
+- (IBAction)delCurrentWallet:(id)sender {
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"currentWallet"];
-    [self.navigationController dismissViewControllerAnimated:YES completion:^{
-        NSLog(@"ddd");
-    }];
+    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
 
+
+/**
+*  Just hidden the keyboard.
+*/
+- (void)touchesBegan:(NSSet*)touches withEvent:(UIEvent *)event{
+    [self.view endEditing:YES];
+}
 
 @end
