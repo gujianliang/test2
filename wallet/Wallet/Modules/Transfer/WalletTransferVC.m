@@ -33,7 +33,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    NSInteger tt = pow(10, 18);
+
+    NSInteger balanceInter =  [BigNumber bigNumberWithHexString:self.amount].integerValue/pow(10,18);
+    self.balanceAmountLabel.text = [NSString stringWithFormat:@"%ld",(long)balanceInter];
     _blockHost = Test_BlockHost;
     
     if (!_isVET) {
@@ -71,10 +74,13 @@
 
 - (void)vetTransfer:(NSString *)from keystore:(NSString *)keystore
 {
+    NSInteger amountInterger = self.transferAmountTextField.text.integerValue * (10^18);
+    NSString *hex = [BigNumber bigNumberWithInteger:amountInterger].hexString;
     //vet
     TransactionParameter *paramters = [[TransactionParameter alloc]init];
     paramters.to = self.receiveAddressTextView.text;
     paramters.value = @"0x0DE0B6B3A7640000"; // amplification 10^18
+    paramters.value = hex;
     paramters.data = @"";
 
     paramters.from = from;
@@ -91,7 +97,7 @@
 
 - (void)vthoTransfer:(NSString *)from keystore:(NSString *)keystore
 {
-    NSString *amount = [BigNumber bigNumberWithInteger:self.balanceAmountLabel.text.integerValue].hexString;
+    NSString *amount = [BigNumber bigNumberWithInteger:self.transferAmountTextField.text.integerValue].hexString;
     
     TransactionParameter *paramters = [[TransactionParameter alloc]init];
     paramters.to = _tokenContractAddress; //token address
