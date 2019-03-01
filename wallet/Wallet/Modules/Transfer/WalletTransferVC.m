@@ -30,29 +30,31 @@
 
 @implementation WalletTransferVC
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad{
     [super viewDidLoad];
-    NSInteger tt = pow(10, 18);
-
-    NSInteger balanceInter =  [BigNumber bigNumberWithHexString:self.amount].integerValue/pow(10,18);
-    self.balanceAmountLabel.text = [NSString stringWithFormat:@"%ld",(long)balanceInter];
-    _blockHost = Test_BlockHost;
+    
+    _blockHost = [WalletUtils getNode];
     
     if (!_isVET) {
+        // vtho contract address
         _tokenContractAddress = @"0x0000000000000000000000000000456e65726779";
         [self.coinIcon setImage:[UIImage imageNamed:@"VTHO"]];
         self.symobl.text = @"VTHO";
+        
     }else{
         [self.coinIcon setImage:[UIImage imageNamed:@"VET"]];
         self.symobl.text = @"VET";
     }
     
+
     self.receiveAddressTextView.text = @"0x1231231231231231231231231231231231231231";
+
+    self.receiveAddressTextView.textContainerInset = UIEdgeInsetsMake(2.5, 2.5, 2.5, 2.5);
+    
+    self.balanceAmountLabel.text = self.coinAmount;
 }
 
-- (IBAction)transfer:(id)sender
-{
+- (IBAction)transfer:(id)sender{
     [self.view endEditing:YES];
 
     NSDictionary *currentWalletDict = [[NSUserDefaults standardUserDefaults]objectForKey:@"currentWallet"];
@@ -70,17 +72,17 @@
     }else{
         [self vthoTransfer:from keystore:keystore];
     }
+    
+//    [self contractSignture:from keystore:keystore];
 }
 
 - (void)vetTransfer:(NSString *)from keystore:(NSString *)keystore
 {
-    NSInteger amountInterger = self.transferAmountTextField.text.integerValue * (10^18);
-    NSString *hex = [BigNumber bigNumberWithInteger:amountInterger].hexString;
+    NSString *amountHex = [Payment parseEther:self.transferAmountTextField.text].hexString;
     //vet
     TransactionParameter *paramters = [[TransactionParameter alloc]init];
     paramters.to = self.receiveAddressTextView.text;
-    paramters.value = @"0x0DE0B6B3A7640000"; // amplification 10^18
-    paramters.value = hex;
+    paramters.value = amountHex;
     paramters.data = @"";
 
     paramters.from = from;
@@ -97,12 +99,13 @@
 
 - (void)vthoTransfer:(NSString *)from keystore:(NSString *)keystore
 {
-    NSString *amount = [BigNumber bigNumberWithInteger:self.transferAmountTextField.text.integerValue].hexString;
+    NSString *amountHex = [Payment parseEther:self.transferAmountTextField.text].hexString;
     
     TransactionParameter *paramters = [[TransactionParameter alloc]init];
     paramters.to = _tokenContractAddress; //token address
     paramters.value = @"";
-    paramters.data = [self calculatenTokenTransferClauseData:self.receiveAddressTextView.text value:amount];;
+    
+    paramters.data = [self calculatenTokenTransferClauseData:self.receiveAddressTextView.text value:amountHex];;
     
     paramters.from = from;
     paramters.gas = @"60000";
@@ -143,17 +146,17 @@
     paramters.data = @"0xbae3e19e00000000000000000000000000000000000000000000000000000000000000680000000000000000000000000000000000000000000000000de0b6b3a76400000000000000000000000000000000000000000000000000000de0b6b3a7640000000000000000000000000000000000000000000000000000000000000003f480";
     
     {
-        //    0x68,
-        //    0x0DE0B6B3A7640000,
-        //    0x3840,
-        //    0x1231231231231231231231231231231231231231
-        
+//        0x68,
+//        0x0DE0B6B3A7640000,
+//        0x3840,
+//        0x1231231231231231231231231231233123121231
+
         NSMutableArray *clauseParamList = [NSMutableArray array];
         [clauseParamList addObject:@"0x68"];
         [clauseParamList addObject:@"0x0DE0B6B3A7640000"];
         [clauseParamList addObject:@"0x3840"];
         [clauseParamList addObject:@"0x1231231231231231231231231231231231231231"];
-        paramters.data = [self contractMethodId:@"0xbae3e19e" params:clauseParamList];
+        paramters.data = [self contractMethodId:@"0x2ed9b4fd" params:clauseParamList];
     }
     
     paramters.from = from;
@@ -191,12 +194,19 @@
     return YES;
 }
 
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+
+/**
+ *  Just hidden the keyboard.
+ */
+- (void)touchesBegan:(NSSet*)touches withEvent:(UIEvent *)event{
     [self.view endEditing:YES];
 }
+
+
 
 - (IBAction)changeSlider:(id)sender{
     
 }
+
 
 @end

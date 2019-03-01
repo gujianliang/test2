@@ -177,9 +177,9 @@ static dispatch_once_t predicate;
     NSString *gasPrice = callbackParams[@"gasPrice"];
    
 #warning test
-    gasPrice = @"0x0";
-    gas = @"350000";
-    clauseStr = @"0xbae3e19e00000000000000000000000000000000000000000000000000000000000000680000000000000000000000000000000000000000000000000de0b6b3a76400000000000000000000000000000000000000000000000000000de0b6b3a7640000000000000000000000000000000000000000000000000000000000000003f480";
+//    gasPrice = @"0x0";
+//    gas = @"350000";
+//    clauseStr = @"0xbae3e19e00000000000000000000000000000000000000000000000000000000000000680000000000000000000000000000000000000000000000000de0b6b3a76400000000000000000000000000000000000000000000000000000de0b6b3a7640000000000000000000000000000000000000000000000000000000000000003f480";
     [self checkParamGasPrice:&gasPrice gas:&gas amount:&amount to:&to clauseStr:&clauseStr];
     
     CGFloat amountFloat = 0;
@@ -295,11 +295,14 @@ static dispatch_once_t predicate;
     
     NSString *kind = callbackParams[@"kind"];
     BOOL bCert = NO;
-    if ([kind isEqualToString:@"cert"]) {
-        callbackParams = [NSMutableDictionary dictionaryWithDictionary:callbackParams[@"clauses"]];
-        bCert = YES;
-        
-    }else if([kind isEqualToString:@"tx"]){
+//    if ([kind isEqualToString:@"cert"]) {
+//        callbackParams = [NSMutableDictionary dictionaryWithDictionary:callbackParams[@"clauses"]];
+//        bCert = YES;
+//
+//    }else
+    
+    
+    if([kind isEqualToString:@"tx"]){
         
     }else{
         [WalletTools callbackWithrequestId:requestId

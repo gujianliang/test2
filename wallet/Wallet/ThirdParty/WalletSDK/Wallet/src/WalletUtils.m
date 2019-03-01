@@ -206,89 +206,7 @@
     NSString *clauseStr = @"";
     JSTransferType transferType = JSVETTransferType;
     
-    [self test:&keystore parameter:parameter toAddress:&toAddress amount:&amount transferType:&transferType tokenAddress:&tokenAddress clauseStr:&clauseStr];
-    
-    // check keystore form
-    if (![WalletTools checkKeystore:keystore]) {
-        
-        [WalletMBProgressShower showTextIn:[WalletTools getCurrentVC].view
-                                      Text:ERROR_REQUEST_PARAMS_MSG During:1];
-        return;
-    }
-    NSDictionary *dictKeystore = [NSJSONSerialization dictionaryWithJsonString:keystore];
-    NSString *keystoreFrom = dictKeystore[@"address"];
-    
-    if ([keystoreFrom.lowercaseString isEqualToString:parameter.from.lowercaseString]) {
-        [WalletMBProgressShower showTextIn:[WalletTools getCurrentVC].view
-                                      Text:ERROR_REQUEST_PARAMS_MSG During:1];
-        return;
-    }
-    
-    if (parameter.data.length == 0) { //vet 转账
-        toAddress = parameter.to;
-        amount = parameter.value;
-        transferType = JSVETTransferType;
-        
-        if (![WalletTools errorAddressAlert:toAddress]
-            || ![WalletTools errorAddressAlert:parameter.from]
-            || (amount.length > 0 && ![WalletTools checkHEXStr:amount])) { // vet 可以转账0
-            
-            [WalletMBProgressShower showTextIn:[WalletTools getCurrentVC].view
-                                          Text:ERROR_REQUEST_PARAMS_MSG During:1];
-            return ;
-        }
-        
-    }else{
-        if ([parameter.data hasPrefix:TransferMethodId]) { //token transfer
-            transferType = JSTokenTransferType;
-            tokenAddress = parameter.to;
-            clauseStr = parameter.data;
-            
-            NSString *clauseTemp =  [clauseStr stringByReplacingOccurrencesOfString:@"0xa9059cbb000000000000000000000000" withString:@""];
-            toAddress = [@"0x" stringByAppendingString:[clauseTemp substringToIndex:40]];
-            
-            NSString *clauseStrTemp = [clauseStr stringByReplacingOccurrencesOfString:TransferMethodId withString:@""];
-            NSString *clauseValue = @"";
-            
-            if (clauseStrTemp.length >= 128) {
-                clauseValue = [clauseStrTemp substringWithRange:NSMakeRange(64, 64)];
-            }
-            
-            parameter.value = [NSString stringWithFormat:@"0x%@",clauseValue];
-            
-            if (![WalletTools errorAddressAlert:parameter.from]
-                || ![WalletTools errorAddressAlert:tokenAddress]
-                || ![WalletTools checkHEXStr:parameter.value]
-                || ![WalletTools checkHEXStr:clauseStr]) { //
-                
-                [WalletMBProgressShower showTextIn:[WalletTools getCurrentVC].view
-                                              Text:ERROR_REQUEST_PARAMS_MSG During:1];
-                return ;
-            }
-            
-        }else{ //contract signature
-            transferType = JSContranctTransferType;
-            amount = parameter.value;
-            clauseStr = parameter.data;
-            toAddress = parameter.to; //token address
-            
-            // toAddress equal to token addres,contract signature can be 0
-            if (![WalletTools errorAddressAlert:parameter.from]
-                || ![WalletTools errorAddressAlert:parameter.to]
-                || ![WalletTools checkHEXStr:clauseStr]) { // vet 可以转账0
-                
-                [WalletMBProgressShower showTextIn:[WalletTools getCurrentVC].view
-                                              Text:ERROR_REQUEST_PARAMS_MSG During:1];
-                return ;
-            }
-            
-            if (amount.length > 0 && ![WalletTools checkHEXStr:amount]) {
-                [WalletMBProgressShower showTextIn:[WalletTools getCurrentVC].view
-                                              Text:ERROR_REQUEST_PARAMS_MSG During:1];
-                return ;
-            }
-        }
-    }
+    [self transactionCheckParams:&keystore parameter:parameter toAddress:&toAddress amount:&amount transferType:&transferType tokenAddress:&tokenAddress clauseStr:&clauseStr];
     
     
     NSMutableArray *clauseList = [NSMutableArray array];
@@ -343,7 +261,7 @@
     };
 }
 
-+ (void)test:(NSString **)keystore  parameter:(TransactionParameter *)parameter toAddress:(NSString **)toAddress amount:(NSString **)amount transferType:(JSTransferType *)transferType tokenAddress:(NSString **)tokenAddress clauseStr:(NSString **)clauseStr
++ (void)transactionCheckParams:(NSString **)keystore  parameter:(TransactionParameter *)parameter toAddress:(NSString **)toAddress amount:(NSString **)amount transferType:(JSTransferType *)transferType tokenAddress:(NSString **)tokenAddress clauseStr:(NSString **)clauseStr
 {
     // check keystore form
     if (![WalletTools checkKeystore:*keystore]) {
@@ -428,11 +346,6 @@
     }
 }
 
-+ (void)setNode:(NSString *)nodelUrl
-{
-    [WalletUserDefaultManager setBlockUrl:nodelUrl];
-}
-
 + (BOOL)isValidKeystore:(NSString *)keystore
 {
    return [WalletTools checkKeystore:keystore];
@@ -443,5 +356,14 @@
    return [WalletTools checksumAddress:address];
 }
 
++ (void)setNode:(NSString *)nodelUrl
+{
+    [WalletUserDefaultManager setBlockUrl:nodelUrl];
+}
+
++ (NSString *)getNode
+{
+    return [WalletUserDefaultManager getBlockUrl];
+}
 
 @end

@@ -58,7 +58,7 @@
 
     NSMutableArray *walletList = [NSMutableArray array];
     if (currentWallet) {
-        [walletList addObject:currentWallet];
+        [walletList addObject:currentWallet[@"keystore"]];
     }
     
     // intput wallet list detail to sdk，

@@ -171,6 +171,15 @@ OK, otherwise nil.
  */
 + (void)setNode:(NSString *)nodelUrl;
 
+/**
+ *  @abstract
+ *  get node url
+ *
+ * 
+ *
+ */
++ (NSString *)getNode;
+
 
 NS_ASSUME_NONNULL_END
 

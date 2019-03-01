@@ -149,7 +149,7 @@
 - (void)sign:(Transaction *)transaction
 {
     // 尝试用户密码解密keystore
-    NSString *keystore = [[WalletSingletonHandle shareWalletHandle]currentWalletModel].keyStore;
+    NSString *keystore = self.keystore.length > 0 ?self.keystore : [[WalletSingletonHandle shareWalletHandle]currentWalletModel].keyStore;
     @weakify(self)
 
     [Account decryptSecretStorageJSON:keystore password:self.signatureSubView.pwTextField.text callback:^(Account *account, NSError *NSError) {
