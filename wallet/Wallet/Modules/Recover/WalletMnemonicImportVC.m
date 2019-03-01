@@ -9,7 +9,7 @@
 #import "WalletMnemonicImportVC.h"
 #import "WalletDetailVC.h"
 #import <WalletSDK/MBProgressHUD.h>
-#import <WalletSDK/WalletUtils.h>
+#import <WalletSDK/Wallet.h>
 
 @interface WalletMnemonicImportVC ()
 
@@ -31,6 +31,7 @@
 *          2、Mnemonic words are separated by Spaces.
 *          3、Mnemonic words are strictly case-limited and all are lowercase.
 *          4、Mnemonic words are fastidious about correct spelling.
+*          5、Do not cotain any other special character，such as "" 、; 、: and so on.
 *
 *  When you recovered a wallet by Mnemonic words, then you should take care of your Mnemonic words and password.
 *  Because once you lose it, it means you lose your crypto assets, and you can't get it back.
@@ -59,7 +60,7 @@
     }
     
     /* Check your input mnemonic words are available. */
-    if (![WalletUtils isValidMnemonicPhrase:self.improtMnemonicWords.text]) {
+    if (![Account isValidMnemonicPhrase:self.improtMnemonicWords.text]) {
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         hud.mode = MBProgressHUDModeText;
         hud.labelText =  @"Mnemonic Words is not available.";

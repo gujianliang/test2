@@ -137,6 +137,7 @@
     [self removeFromSuperview];
 }
 
+
 /**
 *  When you click the foot View will call this method.
 */
@@ -148,5 +149,6 @@
     
     [self removeFromSuperview];
 }
+
 
 @end
