@@ -155,6 +155,7 @@
 *  Change the main network environment or add what you custom network environment.
 */
 - (void)setNetworkEnvironmentHost{
+    
     NSDictionary *dictCurrentNet = [[NSUserDefaults standardUserDefaults] objectForKey:@"CurrentNet"];
     
     if (dictCurrentNet) { /* Set to the main network of your choice. */
@@ -273,7 +274,7 @@
 
 
 
-#define UISearchBarDelegate
+#pragma mark -- UISearchBarDelegate
 
 /**
 *  When you click search button, then you can access some pages that it has some of the trade methods used to quickly access contracts,
@@ -282,7 +283,7 @@
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
     
     NSString *url = searchBar.text;
-    WebViewVC *webVC = [[WebViewVC alloc]initWithURL:url];
+    WebViewVC *webVC = [[WebViewVC alloc] initWithURL:url];
     [self.navigationController pushViewController:webVC animated:YES];
 }
 
@@ -294,7 +295,7 @@
 *  Enter the address detail ViewControll and see more information.
 */
 - (IBAction)enterMoreInfo:(id)sender {
-    WalletMoreInfoVC *moreInfoVC = [[WalletMoreInfoVC alloc]init];
+    WalletMoreInfoVC *moreInfoVC = [[WalletMoreInfoVC alloc] init];
     [self.navigationController pushViewController:moreInfoVC animated:YES];
 }
 
@@ -303,7 +304,7 @@
 *  Enter the transfer ViewControll and do some transactions.
 */
 - (IBAction)enterTransfer:(id)sender {
-    WalletTransferVC *transfer = [[WalletTransferVC alloc]init];
+    WalletTransferVC *transfer = [[WalletTransferVC alloc] init];
     
     UIButton *btn = (UIButton *)sender;
     if (btn.tag == 10) { /* vet transfer */

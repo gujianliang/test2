@@ -36,9 +36,9 @@
     _webView.navigationDelegate = self;
     
     
-    NSString *stringurl= _url;
+    NSString *stringurl = _url;
     
-    NSURL *url=[NSURL URLWithString:stringurl];
+    NSURL *url = [NSURL URLWithString:stringurl];
     
     NSMutableURLRequest *theRequest = [NSMutableURLRequest requestWithURL:url
                                        
