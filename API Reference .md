@@ -1,4 +1,4 @@
-##  create wallet   
+##  Create wallet   
 >
 >    @param password :Wallet password  
 >    @param block : Callback after the end；The attributes of a class has mnemonicPhras , address, privateKey, keystore 
@@ -10,7 +10,7 @@
 
 ```
 
-## create wallet with mnemonic   
+## Create wallet with mnemonic   
 >
 >    @param mnemonicList :12 words for create wallet  
 >    @param password :Wallet password    
@@ -35,7 +35,7 @@
 
 
 
-##  recover address
+##  Recover address
 >
 >  @param message : Data before signature  
 >  @param signatureData : Data after signature  
@@ -47,7 +47,7 @@
                           signatureData:(NSData*)signatureData;
 ```
 
-##   signature message  
+##   Signature message  
 >
 >   @param message : Prepare the data to be signed   
 >   @param json :Keystore in json format   
@@ -120,7 +120,7 @@
 ```
 + (void)injectJSWithWebView:(WKWebView>)webview;
 ```
-##   call sign control
+##   Call sign control
 >
 >  @param parameter: signature parameters   
 >  @param keystore: wallet for keystore    
@@ -148,7 +148,7 @@
 ```
 + (NSString>)getChecksumAddress:(NSString>)address;
 ```
-##  setup node url   
+##  Set node url   
 >
 >  @param nodelUrl :node url   
 >
