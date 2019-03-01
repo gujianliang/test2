@@ -6,7 +6,7 @@
 
 ```
 + (void)creatWalletWithPassword:(NSString *)password
-                       callBack:(void(^)(Account *account)) block;
+                       callBack:(void(^)(WalletAccountModel *account)) block;
 
 ```
 
@@ -30,7 +30,7 @@
 >@return verification results
 > 
 ```
-+ (BOOL)isValidMnemonicPhrase:(NSString*)mnemonicList;
++ (BOOL)isValidMnemonicPhrase:(NSArray*)mnemonicList;
 ```
 
 
