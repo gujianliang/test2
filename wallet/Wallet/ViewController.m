@@ -63,12 +63,8 @@
             break;
         case 12:
         {
-
             WalletDetailVC *detailVC = [[WalletDetailVC alloc]init];
             [self.navigationController pushViewController:detailVC animated:YES];
-//            UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:detailVC];
-//            [self presentViewController:nav animated:YES completion:NULL];
-            
         }
             break;
         case 13:
