@@ -47,7 +47,7 @@
                           signatureData:(NSData*)signatureData;
 ```
 
-##   Signature message  
+##   Signa message  
 >
 >   @param message : Prepare the data to be signed   
 >   @param json :Keystore in json format   
@@ -56,7 +56,7 @@
 >
 
 ```
-+ (void)signature:(NSData*)message
++ (void)signature:(NSData*)hashedMessage
          keystore:(NSString*)json
          password:(NSString*)password
             block:(void (^)(NSData *signatureData,NSError *error))block;
@@ -120,7 +120,7 @@
 ```
 + (void)injectJSWithWebView:(WKWebView>)webview;
 ```
-##   Call sign control
+##   Sign and send
 >
 >  @param parameter: signature parameters   
 >  @param keystore: wallet for keystore    
