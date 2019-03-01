@@ -12,8 +12,8 @@
 
 ## create wallet with mnemonic   
 >
->    @param mnemonicList :12 words for create wallet
->    @param password :Wallet password  
+>    @param mnemonicList :12 words for create wallet  
+>    @param password :Wallet password    
 >    @param block : Callback after the end；The attributes of a class has mnemonicPhras , address, privateKey, keystore 
 > 
 ```
@@ -26,8 +26,8 @@
 
 ##  Verify the mnemonic word is legal     
 >
->   @param mnemonicList :12 words 
->   @return verification results
+>   @param mnemonicList :12 words   
+>@return verification results
 > 
 ```
 + (BOOL)isValidMnemonicPhrase:(NSString*)mnemonicList;
@@ -37,8 +37,8 @@
 
 ##  recover address
 >
->  @param message : Data before signature
->  @param signatureData : Data after signature
+>  @param message : Data before signature  
+>  @param signatureData : Data after signature  
 >  @return  address  
 > 
 
@@ -49,10 +49,10 @@
 
 ##   signature message  
 >
->   @param message : Prepare the data to be signed
->   @param json :Keystore in json format
->   @param password :  Wallet password
->   @param block :Callback after the end
+>   @param message : Prepare the data to be signed   
+>   @param json :Keystore in json format   
+>   @param password :  Wallet password   
+>   @param block :Callback after the end  
 >
 
 ```
@@ -65,9 +65,9 @@
 
 ##  Decryption keystore
 >
- >  @param json : Keystore in json format
- >  @param password : Wallet password
- >  @param callback : Callback after the end
+ >  @param json : Keystore in json format   
+ >  @param password : Wallet password   
+ >  @param callback : Callback after the end   
  >
  >
  ```
@@ -77,9 +77,9 @@
 ```
 ##  Use the new password to encrypt.
 >
->   @param password :Wallet password
->   @param walletAccount :Account object
->   @param callback :Callback after the end
+>   @param password :Wallet password   
+>   @param walletAccount :Account object   
+>   @param callback :Callback after the end   
 > 
 > 
 ```
@@ -96,7 +96,8 @@
 >
 
 ```
-+ (void)initWebViewWithKeystore:(NSArray *)keystoreList;
++ (void)initWebViewWithKeystore:(NSArray *)keystoreList;  
+
 ```
 
 ##  Displays a JavaScript text input panel.  
