@@ -50,6 +50,8 @@
     
     self.receiveAddressTextView.text = @"0xe2c3B55d8Aa9920058030F73baCECe582f2123FF";
     self.receiveAddressTextView.textContainerInset = UIEdgeInsetsMake(2.5, 2.5, 2.5, 2.5);
+    
+    self.balanceAmountLabel.text = self.coinAmount;
 }
 
 - (IBAction)transfer:(id)sender{
