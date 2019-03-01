@@ -96,7 +96,7 @@
         walletModel.vthoModel = vthoModel;
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"dd");
+        NSLog(@"Get VTHO balance failure. error: %@", error);
     }];
 }
 

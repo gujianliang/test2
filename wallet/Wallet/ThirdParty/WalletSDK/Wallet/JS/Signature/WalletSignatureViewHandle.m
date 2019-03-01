@@ -145,6 +145,7 @@
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"Get VTHO balance failure. error: %@", error);
     }];
 }
 

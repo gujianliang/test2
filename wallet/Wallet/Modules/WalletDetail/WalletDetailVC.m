@@ -211,6 +211,7 @@
          self.vetAmount = amount;
                  
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error){
+        NSLog(@"Get VET balance failure. error: %@", error);
     }];
 }
 
@@ -251,7 +252,7 @@
         self.vthoAmount= amount;
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"dd");
+        NSLog(@"Get VTHO balance failure. error: %@", error);
     }];
 }
 
