@@ -156,7 +156,7 @@
     
     CGFloat jsOffset = 0;
     
-    [self creatCell:VCNSLocalizedBundleString(@"contract_ayment_info_row1_title", nil)
+    [self creatCell:VCNSLocalizedBundleString(@"contract_payment_info_row1_title", nil)
               value:gasFormat
                   Y:52 + 20
           adjustBtn: YES

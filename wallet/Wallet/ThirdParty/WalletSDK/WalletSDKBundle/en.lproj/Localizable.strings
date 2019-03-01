@@ -1,10 +1,10 @@
 /*
-  Localizable.strings
-  VCWallet
-
-  Created by 曾新 on 2018/4/9.
-  Copyright © 2018年 VeCahin. All rights reserved.
-*/
+ Localizable.strings
+ VCWallet
+ 
+ Created by 曾新 on 2018/4/9.
+ Copyright © 2018年 VeCahin. All rights reserved.
+ */
 
 
 //<!-- ————————————————————奖励————————————————————-->
@@ -329,7 +329,7 @@
 
 // 用于版本检查弹框描述
 "app_update_version" = "Please update your app to the latest version V%@";
-
+"version_update_dialog_yes" = "Update";
 
 
 //<!-- ———————————————————时间展示————————————————————-->
@@ -938,7 +938,7 @@
 
 //<!--签合约支付组件-->
 "contract_payment_info_title" = "Contract Signature";
-"contract_ayment_info_row1_title" = "Transaction fee";
+"contract_payment_info_row1_title" = "Transaction fee";
 "contract_payment_info_row2_title" = "Signature address";
 "contract_payment_info_row3_title" = "Target address";
 "contract_payment_info_row4_title" = "Contract details";
@@ -1047,12 +1047,12 @@
 "usercenter_dapps" = "Dapps";
 
 //<!--h5与native交互-->
-"h5_select_wallet_title" = "选择钱包";
-"n5_select_wallet_to" = "该钱包为转入地址";
-"h5_select_wallet_no_exist" = "钱包不存在";
+"h5_select_wallet_title" = "Select Wallet";
+"n5_select_wallet_to" = "The selected wallet is a receiving address.";
+"h5_select_wallet_no_exist" = "The selected wallet is not exist.";
 "h5_params_error" = "Invalid parameter";
-"h5_contract_params_confirm_title" = "签名确认";
-"h5_contract_params_confirm_button" = "已知晓风险，继续签名";
-"h5_contract_params_confirm_msg" = "这是一笔钱包不识别的签名，该签名可能包含某些数字货币资产，请确认签名信息，以免造成资产损失";
+"h5_contract_params_confirm_title" = "Signature confirmation";
+"h5_contract_params_confirm_button" = "I\'ve known the risk, and continue to sign.";
+"h5_contract_params_confirm_msg" = "This is a signature unrecognized by wallet, which may contain some digital currency assets. Please confirm the signature information to avoid asset loss.";
 "h5_observer_data_too_long" = "Signature data is too long, and the observe wallet does not support signature temporarily";
-
+"usercenter_faq_title" = "FAQ";

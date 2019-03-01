@@ -18,13 +18,13 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		Ol96vBcI7L/XXVzg94ANnDsv7Mw=
+		4aJWYc4o7m0yJp1debw70kvE0oA=
 		</data>
 		<key>en.lproj/Localizable.strings</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			n7hx1gQ1/DzOkHQROS8xknAHotA=
+			RI3CK4/Dah+bg0f1JiLozBRvGds=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -57,7 +57,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			HO+QirLsWl8oXL6ePtYo/tPYOMQ=
+			aMhfWXtMeOfPZR9dBndRTKLzwl4=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -102,11 +102,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			n7hx1gQ1/DzOkHQROS8xknAHotA=
+			RI3CK4/Dah+bg0f1JiLozBRvGds=
 			</data>
 			<key>hash2</key>
 			<data>
-			tnJfY2r4UpJKX3aQ34J0TK4N+BzMekJ6Uq03mFMSJU0=
+			k2ntjuipsuvNr1ZLts/jslc0HMtp0bw6Z9ux7iMGgwU=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -181,11 +181,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			HO+QirLsWl8oXL6ePtYo/tPYOMQ=
+			aMhfWXtMeOfPZR9dBndRTKLzwl4=
 			</data>
 			<key>hash2</key>
 			<data>
-			ykMTat7rLdYlqqUOcM4vOGWWGGg+7sJJlU3cg3GOf7U=
+			pf8pwyJOI0ySDDd6xhb5/GZT0QK2hnSTMugTvr2s344=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -193,7 +193,7 @@
 	</dict>
 	<key>rules</key>
 	<dict>
-		<key>^</key>
+		<key>^.*</key>
 		<true/>
 		<key>^.*\.lproj/</key>
 		<dict>
@@ -224,24 +224,12 @@
 			<key>weight</key>
 			<real>11</real>
 		</dict>
-		<key>^</key>
-		<dict>
-			<key>weight</key>
-			<real>20</real>
-		</dict>
 		<key>^(.*/)?\.DS_Store$</key>
 		<dict>
 			<key>omit</key>
 			<true/>
 			<key>weight</key>
 			<real>2000</real>
-		</dict>
-		<key>^(Frameworks|SharedFrameworks|PlugIns|Plug-ins|XPCServices|Helpers|MacOS|Library/(Automator|Spotlight|LoginItems))/</key>
-		<dict>
-			<key>nested</key>
-			<true/>
-			<key>weight</key>
-			<real>10</real>
 		</dict>
 		<key>^.*</key>
 		<true/>
@@ -277,13 +265,6 @@
 			<true/>
 			<key>weight</key>
 			<real>20</real>
-		</dict>
-		<key>^[^/]+$</key>
-		<dict>
-			<key>nested</key>
-			<true/>
-			<key>weight</key>
-			<real>10</real>
 		</dict>
 		<key>^embedded\.provisionprofile$</key>
 		<dict>
