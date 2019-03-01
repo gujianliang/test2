@@ -12,30 +12,44 @@
 
 @interface WalletAddVthoNodeVC ()
 
-@property (weak, nonatomic) IBOutlet UITextView *customNetTextView;
-@property (weak, nonatomic) IBOutlet UITextField *customNameTextFild;
+@property (weak, nonatomic) IBOutlet UITextField *customNameTextFild;   /*  It is used to input the custom network environment name */
+@property (weak, nonatomic) IBOutlet UITextView *customNetTextView;     /*  It is used to input the custom network environment URL */
 
 @end
 
 @implementation WalletAddVthoNodeVC
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad{
     [super viewDidLoad];
     self.title = @"Add Custom Network";
 }
 
+
+/**
+*  Set and save custom network environment.
+*/
 - (IBAction)setCustomNetworkEnvironment:(id)sender{
     
     NSString *netName = self.customNameTextFild.text;
     NSString *netUrl = self.customNetTextView.text;
     
     
-    /* Check your input network name and network url that can not be blank. */
+    /* Check your input network name and network URL that can not be blank. */
     if (netName.length == 0 || netUrl.length == 0 ){
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         hud.mode = MBProgressHUDModeText;
-        hud.labelText =  @"The name and url can not be blank.";
+        hud.labelText =  @"The name and URL can not be blank.";
+        [hud hide:YES afterDelay:2.5];
+        return;
+    }
+    
+    
+    /* Check your URL is available */
+    NSURL *URL = [NSURL URLWithString:netUrl];
+    if (!URL) {
+        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        hud.mode = MBProgressHUDModeText;
+        hud.labelText =  @"The URL is not available.";
         [hud hide:YES afterDelay:2.5];
         return;
     }
@@ -56,6 +70,7 @@
 
     [self.navigationController popViewControllerAnimated:YES];
 }
+
 
 /**
 *  Just hidden the keyboard.
