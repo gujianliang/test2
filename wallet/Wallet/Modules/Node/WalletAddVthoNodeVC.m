@@ -38,7 +38,7 @@
     if (netName.length == 0 || netUrl.length == 0 ){
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         hud.mode = MBProgressHUDModeText;
-        hud.labelText =  @"The name and URL can not be blank.";
+        hud.labelText =  @"The input cannot be null.";
         [hud hide:YES afterDelay:2.5];
         return;
     }
