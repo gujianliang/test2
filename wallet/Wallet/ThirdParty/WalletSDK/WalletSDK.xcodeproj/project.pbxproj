@@ -26,6 +26,11 @@
 		9718121122267FE5008F9639 /* WalletSignParamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9718120F22267FE5008F9639 /* WalletSignParamModel.m */; };
 		9719BEB02228085200DA3F74 /* WalletAccountModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 9719BEAE2228085200DA3F74 /* WalletAccountModel.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9719BEB12228085200DA3F74 /* WalletAccountModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9719BEAF2228085200DA3F74 /* WalletAccountModel.m */; };
+		9719BEC22229200F00DA3F74 /* SocketRocketUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 9719BEC02229200F00DA3F74 /* SocketRocketUtility.m */; };
+		9719BEC32229200F00DA3F74 /* SocketRocketUtility.h in Headers */ = {isa = PBXBuildFile; fileRef = 9719BEC12229200F00DA3F74 /* SocketRocketUtility.h */; };
+		9719BEC82229204C00DA3F74 /* SRWebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 9719BEC52229204C00DA3F74 /* SRWebSocket.m */; };
+		9719BEC92229204C00DA3F74 /* SocketRocket.h in Headers */ = {isa = PBXBuildFile; fileRef = 9719BEC62229204C00DA3F74 /* SocketRocket.h */; };
+		9719BECA2229204C00DA3F74 /* SRWebSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = 9719BEC72229204C00DA3F74 /* SRWebSocket.h */; };
 		9736C126214B8671003DE935 /* WalletUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 9736C124214B8671003DE935 /* WalletUtils.m */; };
 		9736C127214B8671003DE935 /* WalletUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 9736C125214B8671003DE935 /* WalletUtils.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9743A54221FED23F0079C582 /* NSJSONSerialization+NilDataParameter.m in Sources */ = {isa = PBXBuildFile; fileRef = 9743A54021FED23F0079C582 /* NSJSONSerialization+NilDataParameter.m */; };
@@ -329,6 +334,11 @@
 		9718120F22267FE5008F9639 /* WalletSignParamModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WalletSignParamModel.m; sourceTree = "<group>"; };
 		9719BEAE2228085200DA3F74 /* WalletAccountModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = WalletAccountModel.h; path = src/WalletAccountModel.h; sourceTree = "<group>"; };
 		9719BEAF2228085200DA3F74 /* WalletAccountModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = WalletAccountModel.m; path = src/WalletAccountModel.m; sourceTree = "<group>"; };
+		9719BEC02229200F00DA3F74 /* SocketRocketUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SocketRocketUtility.m; sourceTree = "<group>"; };
+		9719BEC12229200F00DA3F74 /* SocketRocketUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocketRocketUtility.h; sourceTree = "<group>"; };
+		9719BEC52229204C00DA3F74 /* SRWebSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRWebSocket.m; sourceTree = "<group>"; };
+		9719BEC62229204C00DA3F74 /* SocketRocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocketRocket.h; sourceTree = "<group>"; };
+		9719BEC72229204C00DA3F74 /* SRWebSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRWebSocket.h; sourceTree = "<group>"; };
 		9736C124214B8671003DE935 /* WalletUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WalletUtils.m; path = src/WalletUtils.m; sourceTree = "<group>"; };
 		9736C125214B8671003DE935 /* WalletUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WalletUtils.h; path = src/WalletUtils.h; sourceTree = "<group>"; };
 		9743A54021FED23F0079C582 /* NSJSONSerialization+NilDataParameter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSJSONSerialization+NilDataParameter.m"; sourceTree = "<group>"; };
@@ -663,6 +673,26 @@
 				4143EE6F2202E7C30056C08A /* Localizable.strings */,
 			);
 			path = en.lproj;
+			sourceTree = "<group>";
+		};
+		9719BEBF2229200F00DA3F74 /* WebSocket */ = {
+			isa = PBXGroup;
+			children = (
+				9719BEC42229204C00DA3F74 /* SocketRocket */,
+				9719BEC02229200F00DA3F74 /* SocketRocketUtility.m */,
+				9719BEC12229200F00DA3F74 /* SocketRocketUtility.h */,
+			);
+			path = WebSocket;
+			sourceTree = "<group>";
+		};
+		9719BEC42229204C00DA3F74 /* SocketRocket */ = {
+			isa = PBXGroup;
+			children = (
+				9719BEC52229204C00DA3F74 /* SRWebSocket.m */,
+				9719BEC62229204C00DA3F74 /* SocketRocket.h */,
+				9719BEC72229204C00DA3F74 /* SRWebSocket.h */,
+			);
+			path = SocketRocket;
 			sourceTree = "<group>";
 		};
 		9743A4F121FEB36F0079C582 /* JS */ = {
@@ -1119,6 +1149,7 @@
 		E2D1A2B01E3C695A0015CAF8 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				9719BEBF2229200F00DA3F74 /* WebSocket */,
 				9718120622263672008F9639 /* TransactionParameter.h */,
 				9718120522263671008F9639 /* TransactionParameter.m */,
 				9736C125214B8671003DE935 /* WalletUtils.h */,
@@ -1167,6 +1198,7 @@
 				9773F9D9221412D200DF5972 /* WalletDAppHead.h in Headers */,
 				9773F974221412D200DF5972 /* WalletDappStoreSelectView.h in Headers */,
 				9773F8EC2214109300DF5972 /* AFNetworking.h in Headers */,
+				9719BEC32229200F00DA3F74 /* SocketRocketUtility.h in Headers */,
 				9773F8BB2214109300DF5972 /* NSArray+MASAdditions.h in Headers */,
 				9736C127214B8671003DE935 /* WalletUtils.h in Headers */,
 				9773F8D82214109300DF5972 /* UIImage+AFNetworking.h in Headers */,
@@ -1259,6 +1291,7 @@
 				9773F9A6221412D200DF5972 /* WalletGetDecimalsApi.h in Headers */,
 				9773F8CA2214109300DF5972 /* ViewController+MASAdditions.h in Headers */,
 				9773F9AE221412D200DF5972 /* WalletGetSymbolApi.h in Headers */,
+				9719BEC92229204C00DA3F74 /* SocketRocket.h in Headers */,
 				9773F984221412D200DF5972 /* WalletManageModel.h in Headers */,
 				9773F983221412D200DF5972 /* WalletBaseConfigModel.h in Headers */,
 				9773F99B221412D200DF5972 /* WalletTools.h in Headers */,
@@ -1276,6 +1309,7 @@
 				E2317F4F1E3199BD00DBE3E4 /* crypto_scrypt.h in Headers */,
 				E2317F1D1E31994500DBE3E4 /* aestab.h in Headers */,
 				9773F9ED22157CAB00DF5972 /* WalletSignatureViewHandle.h in Headers */,
+				9719BECA2229204C00DA3F74 /* SRWebSocket.h in Headers */,
 				9773F9A3221412D200DF5972 /* WalletModelFetcher.h in Headers */,
 				9773F8C02214109300DF5972 /* MASConstraint.h in Headers */,
 				9773F8D02214109300DF5972 /* UIButton+AFNetworking.h in Headers */,
@@ -1506,6 +1540,8 @@
 				9773F9B3221412D200DF5972 /* WalletDAppTransferDetailApi.m in Sources */,
 				9773F8B52214109300DF5972 /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
 				9773F988221412D200DF5972 /* WalletAddressAuthModel.m in Sources */,
+				9719BEC82229204C00DA3F74 /* SRWebSocket.m in Sources */,
+				9719BEC22229200F00DA3F74 /* SocketRocketUtility.m in Sources */,
 				E2317F341E31999E00DBE3E4 /* mpi.c in Sources */,
 				9773F8F32214109300DF5972 /* NSObject+YYModel.m in Sources */,
 				9773F9A5221412D200DF5972 /* NSStringAdditions.m in Sources */,

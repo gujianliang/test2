@@ -10,6 +10,7 @@
 #import "WalletManageModel.h"
 #import "WalletGetBaseGasPriceApi.h"
 #import "Payment.h"
+#import "SocketRocketUtility.h"
 
 @implementation WalletSingletonHandle
 {
@@ -146,6 +147,7 @@ static dispatch_once_t predicate;
 +(void)attempDealloc{
     predicate = 0;
     singleton = nil;
+    [[SocketRocketUtility instance] SRWebSocketClose];
 }
 
 @end

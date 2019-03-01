@@ -30,6 +30,8 @@
 #import "WalletJSCallbackModel.h"
 #import "WalletGetBaseGasPriceApi.h"
 #import "WalletSignatureView.h"
+#import "SocketRocketUtility.h"
+
 
 @interface WalletDAppHandle ()<WKNavigationDelegate,WKUIDelegate>
 {
@@ -47,6 +49,9 @@ static dispatch_once_t predicate;
 {
     dispatch_once(&predicate, ^{
         singleton = [[self alloc] init];
+//        [[NSNotificationCenter defaultCenter]addObserver:self
+//                                                selector:@selector(socketRevice:) name:kWebSocketdidReceiveMessageNote
+//                                                  object:nil];
         
     });
     return singleton;
@@ -126,6 +131,10 @@ static dispatch_once_t predicate;
     {
         [self getAccountsWithRequestId:requestId callbackId:callbackId webView:webView];
         
+    }else if ([method isEqualToString:@"tickerNext"])
+    {
+        NSString *url = [[WalletUserDefaultManager getBlockUrl] stringByAppendingString:@"/subscriptions/block"];
+        [[SocketRocketUtility instance] SRWebSocketOpenWithURLString:url];
     }
     else if([method isEqualToString:@"sign"])
     {
