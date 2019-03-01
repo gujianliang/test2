@@ -55,14 +55,14 @@
     }
     
     
-    NSArray *oldList = [[NSUserDefaults standardUserDefaults] objectForKey:@"netList"];
+    NSArray *oldList = [[NSUserDefaults standardUserDefaults] objectForKey:@"nodeList"];
     NSMutableArray *newList = [NSMutableArray arrayWithArray:oldList];
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-    [dict setObject:netName forKey:@"serverName"];
-    [dict setObject:netUrl forKey:@"serverUrl"];
+    [dict setObject:netName forKey:@"nodeName"];
+    [dict setObject:netUrl forKey:@"nodeUrl"];
     [newList addObject:dict];
     
-    [[NSUserDefaults standardUserDefaults] setObject:newList forKey:@"netList"];
+    [[NSUserDefaults standardUserDefaults] setObject:newList forKey:@"nodeList"];
     [[NSUserDefaults standardUserDefaults] setObject:dict forKey:@"CurrentNet"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     

@@ -1,17 +1,17 @@
 //
-//  WalletServerDetailVC.m
+//  WalletNodeDetailVC.m
 //  walletSDKDemo
 //
 //  Created by 曾新 on 2019/1/30.
 //  Copyright © 2019年 demo. All rights reserved.
 //
 
-#import "WalletServerDetailVC.h"
+#import "WalletNodeDetailVC.h"
 #import <WalletSDK/WalletUtils.h>
 #import <WalletSDK/MBProgressHUD.h>
 #import "WalletSdkMacro.h"
 
-@interface WalletServerDetailVC ()
+@interface WalletNodeDetailVC ()
 {
     NSString *_netNameText;   /*  It‘s a temp variable that used to save network environment name */
     NSString *_netUrlText;    /*  It‘s a temp variable that used to save network environment URL */
@@ -21,7 +21,7 @@
 
 @end
 
-@implementation WalletServerDetailVC
+@implementation WalletNodeDetailVC
 
 
 - (void)viewDidLoad {
@@ -47,7 +47,7 @@
 */
 - (IBAction)deleteCustomNewWork:(id)sender {
     
-    NSArray *oldList = [[NSUserDefaults standardUserDefaults] objectForKey:@"netList"];
+    NSArray *oldList = [[NSUserDefaults standardUserDefaults] objectForKey:@"nodeList"];
     
     if (oldList.count == 0) {
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
@@ -62,7 +62,7 @@
     
     BOOL isEqual = NO;
     for (NSDictionary *dic in newList1) {
-        NSString *tempUrl = dic[@"serverUrl"];
+        NSString *tempUrl = dic[@"nodeUrl"];
         if ([_netUrlText isEqualToString:tempUrl]) {
             [newList2 removeObject:dic];
             isEqual = YES;
@@ -72,10 +72,10 @@
     
     if (isEqual) {
         NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-        [dict setObject:@"Develop Network" forKey:@"serverName"];
-        [dict setObject:Test_BlockHost forKey:@"serverUrl"];
+        [dict setObject:@"Develop Network" forKey:@"nodeName"];
+        [dict setObject:Test_BlockHost forKey:@"nodeUrl"];
         
-        [[NSUserDefaults standardUserDefaults] setObject:newList2 forKey:@"netList"];
+        [[NSUserDefaults standardUserDefaults] setObject:newList2 forKey:@"nodeList"];
         [[NSUserDefaults standardUserDefaults] setObject:dict forKey:@"CurrentNet"];
         [[NSUserDefaults standardUserDefaults] synchronize];
         

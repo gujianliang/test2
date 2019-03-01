@@ -86,12 +86,7 @@
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.mode = MBProgressHUDModeText;
     hud.labelText =  @"Waiting ...";
-    
-    
-    [WalletUtils decryptSecretStorageJSON:@"" password:@""
-                                 callback:^(WalletAccountModel * _Nonnull account, NSError * _Nonnull error) {
-                                     
-                                 }];
+
     
     /* Create a wallet with your password and keystore. */
     [WalletUtils decryptSecretStorageJSON:self.keystoreTextView.text.lowercaseString
