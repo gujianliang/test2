@@ -9,16 +9,13 @@
 #import "WalletDetailVC.h"
 #import <WalletSDK/AFNetworking.h>
 #import "WalletTransferVC.h"
-#import <WalletSDK/Payment.h>
 #import "WalletMoreInfoVC.h"
 #import "WebViewVC.h"
 #import "WalletChooseNetworkView.h"
 #import "WalletServerDetailVC.h"
 #import "WalletAddVthoNodeVC.h"
 #import "WalletSdkMacro.h"
-
-
-#import <WalletSDK/WalletUtils.h>
+#import <WalletSDK/Wallet.h>
 
 @interface WalletDetailVC ()<UISearchBarDelegate>
 {
@@ -59,7 +56,7 @@
 - (void)initView {
    
     /* Set right bar buttonItem */
-    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc]initWithTitle:@"选择网络"
+    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc]initWithTitle:@"Choose network"
                                                                  style:UIBarButtonItemStyleDone
                                                                 target:self
                                                                 action:@selector(selectTheMainNetworkEnvironment)];
@@ -109,7 +106,7 @@
     
     /* Show the demo version information */
     NSString *version = [[[NSBundle mainBundle] infoDictionary] valueForKey:@"CFBundleVersion"];
-    version = [NSString stringWithFormat:@"版本号：(%@)",version];
+    version = [NSString stringWithFormat:@"Demo Version：(%@)",version];
     CGFloat y = ScreenH -  kNavigationBarHeight;
     UILabel *versionLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, y, ScreenW - 40, 30)];
     versionLabel.text = version;
@@ -130,20 +127,21 @@
     
     WalletChooseNetworkView *chooseNetworkView = [self.view viewWithTag:90];
     if (!chooseNetworkView) {
-        chooseNetworkView = [[WalletChooseNetworkView alloc]initWithFrame:self.view.frame];
+        chooseNetworkView = [[WalletChooseNetworkView alloc] initWithFrame:self.view.frame];
         chooseNetworkView.tag = 90;
         [self.view addSubview:chooseNetworkView];
         
-        chooseNetworkView.block = ^(NSString *netName,NSString *netUrl) {
-            
-            [WalletUtils setNode:netUrl];
-            
-            self.title = netName;
-            if ([netName containsString:@"自定义"]) {
+        chooseNetworkView.block = ^(NSString *netName, NSString *netUrl) {
+
+            if (netUrl.length == 0) {
                 WalletAddVthoNodeVC *detailVC = [[WalletAddVthoNodeVC alloc]init];
                 [self.navigationController pushViewController:detailVC animated:YES];
                 
             }else{
+                self.title = netName;
+                
+                [WalletUtils setNode:netUrl];
+                
                 WalletServerDetailVC *detailVC = [[WalletServerDetailVC alloc]init];
                 [detailVC netName:netName netUrl:netUrl];
                 [self.navigationController pushViewController:detailVC animated:YES];
@@ -160,22 +158,27 @@
     NSDictionary *dictCurrentNet = [[NSUserDefaults standardUserDefaults] objectForKey:@"CurrentNet"];
     
     if (dictCurrentNet) { /* Set to the main network of your choice. */
-        _blockHost = dictCurrentNet[@"serverUrl"];
-        self.title = dictCurrentNet[@"serverName"];
-        
-    }else{ /* THe default Boloc Host. */
+        NSString *customServerUrl = dictCurrentNet[@"serverUrl"];
+        if (customServerUrl.length > 0 ) {
+            _blockHost = customServerUrl;
+            self.title = dictCurrentNet[@"serverName"];
+        }
+    }
+    
+    if (_blockHost.length == 0) {  /* THe default Boloc Host. */
         _blockHost = Test_BlockHost;
-        self.title =  @"（测试）";
+        self.title =  @"Develop Network";
         
         NSMutableDictionary *serverDict = [NSMutableDictionary dictionary];
         [serverDict setObject:_blockHost forKey:@"serverUrl"];
         [serverDict setObject:self.title forKey:@"serverName"];
     }
     
+    
     [WalletUtils setNode:_blockHost];
     
-    self.vthoAmountLabel.text = @"";
-    self.vetAmountLabel.text = @"";
+    self.vthoAmountLabel.text = @"0.00";
+    self.vetAmountLabel.text = @"0.00";
     
     [self getVETBalance];
     [self getVTHOBalance];
@@ -312,6 +315,14 @@
     }
     
     [self.navigationController pushViewController:transfer animated:YES];
+}
+
+
+/**
+*  Just hidden the keyboard.
+*/
+- (void)touchesBegan:(NSSet*)touches withEvent:(UIEvent *)event{
+    [self.view endEditing:YES];
 }
 
 

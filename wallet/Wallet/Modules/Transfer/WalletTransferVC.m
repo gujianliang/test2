@@ -7,7 +7,8 @@
 //
 
 #import "WalletTransferVC.h"
-#import <WalletSDK/WalletUtils.h>
+#import <WalletSDK/Wallet.h>
+#import "WalletSdkMacro.h"
 
 #define VETGasLimit  @"21000"
 
@@ -37,7 +38,7 @@
 {
     [super viewDidLoad];
     
-    _blockHost = @"https://vethor-node-test.vechaindev.com";
+    _blockHost = Test_BlockHost;
     
     if (!_isVET) {
         _tokenContractAddress = @"0x0000000000000000000000000000456e65726779";

@@ -7,7 +7,7 @@
 //
 
 #import "WalletChooseNetworkView.h"
-
+#import "WalletSdkMacro.h"
 
 @implementation WalletChooseNetworkView
 {
@@ -37,7 +37,6 @@
     
     
     UIView *chooseNetworkCotainView = [[UIView alloc] init];
-    chooseNetworkCotainView.frame = CGRectMake(self.frame.size.width - 200, 80, 180, 150);
     chooseNetworkCotainView.backgroundColor = UIColor.whiteColor;
     [self addSubview:chooseNetworkCotainView];
     
@@ -45,88 +44,93 @@
     _newList = [NSMutableArray array];
     
     NSMutableDictionary *dict1 = [NSMutableDictionary dictionary];
-    [dict1 setObject:@"生产节点" forKey:@"serverName"];
-    [dict1 setObject:@"https://vethor-node.vechain.com" forKey:@"serverUrl"];
+    [dict1 setObject:@"Product Network" forKey:@"serverName"];
+    [dict1 setObject:Main_BlockHost forKey:@"serverUrl"];
     [_newList addObject:dict1];
     
     NSMutableDictionary *dict2 = [NSMutableDictionary dictionary];
-    [dict2 setObject:@"测试节点" forKey:@"serverName"];
-    [dict2 setObject:@"https://vethor-node-test.vechaindev.com" forKey:@"serverUrl"];
+    [dict2 setObject:@"Develop Network" forKey:@"serverName"];
+    [dict2 setObject:Test_BlockHost forKey:@"serverUrl"];
     [_newList addObject:dict2];
 
     if (netList.count > 0) {
         [_newList addObjectsFromArray:netList];
     }
     
-    NSMutableDictionary *dict3 = [NSMutableDictionary dictionary];
-    [dict3 setObject:@"添加自定义节点" forKey:@"serverName"];
-    [dict3 setObject:@"11" forKey:@"serverUrl"];
-    [_newList addObject:dict3];
+    if (_newList.count >= 6) {
+        chooseNetworkCotainView.frame = CGRectMake(self.frame.size.width - 200, 80, 180, 50 * 6 + 10 + 50);
+        
+    }else {
+        chooseNetworkCotainView.frame = CGRectMake(self.frame.size.width - 200, 80, 180, 50 * _newList.count + 10 + 50);
+    }
+    
     
     UITableView *tableView = [[UITableView alloc] initWithFrame:chooseNetworkCotainView.bounds];
     tableView.delegate = self;
     tableView.dataSource = self;
+    tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [chooseNetworkCotainView addSubview:tableView];
+    
+    UIView *footV = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 180, 50)];
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeSystem];
+    btn.frame = CGRectMake(15, 0, 165, 50);
+    btn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    [btn setTitle:@"Add Network" forState:UIControlStateNormal];
+    [btn addTarget:self action:@selector(addNetwork) forControlEvents:UIControlEventTouchUpInside];
+    [footV addSubview:btn];
+    tableView.tableFooterView = footV;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return _newList.count;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    UITableViewCell *cell = [[UITableViewCell alloc]init];
-    
+    static NSString *cellIndef = @"cellIndef";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIndef];
+    if (!cell) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIndef];
+        cell.textLabel.adjustsFontSizeToFitWidth = YES;
+        
+        UILabel *line = [[UILabel alloc] initWithFrame:CGRectMake(15, 49, 165, 1.0)];
+        line.backgroundColor = [UIColor lightGrayColor];
+        [cell addSubview:line];
+    }
     NSDictionary *dict = _newList[indexPath.row];
     cell.textLabel.text = dict[@"serverName"];
+    
     return cell;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 50;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-     NetType netType = TestServer;
-    if (indexPath.row == 0) {
-        netType = ProductServer;
-        
-    }else if (indexPath.row == 1)
-    {
-         netType = TestServer;
-    }else if(indexPath.row  == _newList.count - 1)
-    {
-        netType = CustomServer;
-    }
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
     NSDictionary *dict = _newList[indexPath.row];
+    NSString *serverName = dict[@"serverName"];
+    NSString *serverUrl = dict[@"serverUrl"];
+    
     if (_block) {
-        _block(dict[@"serverName"],dict[@"serverUrl"]);
+        _block(serverName, serverUrl);
     }
-    [[NSUserDefaults standardUserDefaults]setObject:dict forKey:@"CurrentNet"];
+    
+    if (serverUrl.length > 0) {
+        [[NSUserDefaults standardUserDefaults] setObject:dict forKey:@"CurrentNet"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
+    
     [self removeFromSuperview];
 }
 
-- (void)selectNode:(UIButton *)sender
-{
-    NetType netType = TestServer;
-    if (sender.tag == 10) {
-        netType = ProductServer;
-        
-       
-        
-    }else if (sender.tag == 20)
-    {
-        netType = TestServer;
-    }else if (sender.tag == 30)
-    {
-        netType = CustomServer;
+- (void)addNetwork{
+    
+    if (_block) {
+        _block(@"Custom", @"");
     }
-//    if (_block) {
-//        _block(netType);
-//    }
+    
     [self removeFromSuperview];
 }
 

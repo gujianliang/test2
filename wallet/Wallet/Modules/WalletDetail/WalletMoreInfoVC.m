@@ -8,7 +8,7 @@
 
 #import "WalletMoreInfoVC.h"
 #import "WalletChangePWVC.h"
-#import <WalletSDK/WalletUtils.h>
+#import <WalletSDK/Wallet.h>
 
 @interface WalletMoreInfoVC ()
 
@@ -31,7 +31,6 @@
 */
 - (void)initView{
     
-    self.keystoreTextView.layer.cornerRadius = 5.0;
     self.keystoreTextView.layer.borderWidth = 1.0;
     self.keystoreTextView.layer.borderColor = [UIColor lightGrayColor].CGColor;
     

@@ -36,7 +36,7 @@
     if (_oldPWTextField.text.length == 0 || _nextPWTextField.text.length == 0 || _makeSureTextField.text.length == 0) {
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         hud.mode = MBProgressHUDModeText;
-        hud.labelText =  @"Check your input password that can not be blank.";
+        hud.labelText =  @"Password can not be blank.";
         [hud hide:YES afterDelay:2.5];
         return;
     }
@@ -67,7 +67,7 @@
          if (error) {
              MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
              hud.mode = MBProgressHUDModeText;
-             hud.labelText = @"Wrong Password, Try again!";
+             hud.labelText = @"Wrong old password!";
              [hud hide:YES afterDelay:1.5];
              return ;
          }
@@ -76,7 +76,8 @@
          [WalletUtils encryptSecretStorageJSON:self.nextPWTextField.text
                                        account:account
                                       callback:^(NSString *json) {
-             
+             [hud hide:YES];
+                                          
              if (json.length > 0) {
                  NSMutableDictionary *currentDict = [NSMutableDictionary dictionary];
                  [currentDict setObject:address forKey:@"address"];
@@ -84,18 +85,25 @@
                  
                  [[NSUserDefaults standardUserDefaults]setObject:currentDict forKey:@"currentWallet"];;
                  
-                 MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view
-                                                           animated:YES];
+                 MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
                  hud.mode = MBProgressHUDModeText;
                  hud.labelText = @"Change the password success!";
-                 [hud hide:YES afterDelay:1.5];
+                 [hud hide:YES afterDelay:2.5];
                  
-                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                      [self.navigationController popViewControllerAnimated:YES];
                  });
              }
          }];
      }];
+}
+
+
+/**
+*  Just hidden the keyboard.
+*/
+- (void)touchesBegan:(NSSet*)touches withEvent:(UIEvent *)event{
+    [self.view endEditing:YES];
 }
 
 

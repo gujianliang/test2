@@ -7,10 +7,9 @@
 //
 
 #import "WalletKeystoreImportVC.h"
-#import <WalletSDK/WalletUtils.h>
 #import "WalletDetailVC.h"
-#import "AppDelegate.h"
 #import <WalletSDK/MBProgressHUD.h>
+#import <WalletSDK/Wallet.h>
 
 @interface WalletKeystoreImportVC ()
 
