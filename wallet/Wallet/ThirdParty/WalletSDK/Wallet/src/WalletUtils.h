@@ -8,7 +8,6 @@
 #import <Foundation/Foundation.h>
 #import "TransactionParameter.h"
 #import "Payment.h"
-//#import "Account.h"
 #import <UIKit/UIKit.h>
 #import <WebKit/WebKit.h>
 #import "WalletAccountModel.h"
