@@ -47,23 +47,23 @@
                           signatureData:(NSData*)signatureData;
 ```
 
-##   Signa message  
+##   Sign message  
 >
 >   @param message : Prepare the data to be signed   
 >   @param json :Keystore in json format   
 >   @param password :  Wallet password   
->   @param block :Callback after the end  
+>   @param callback :Callback after the end  
 >
 
 ```
-+ (void)signature:(NSData*)hashedMessage
-         keystore:(NSString*)json
-         password:(NSString*)password
-            block:(void (^)(NSData *signatureData,NSError *error))block;
++ (void)sign:(NSData*)hashedMessage
+     keystore:(NSString*)json
+     password:(NSString*)password
+       callback:(void (^)(NSData *signatureData,NSError *error))callback;
 
 ```
 
-##  Decryption keystore
+##  Decrypt keystore
 >
  >  @param json : Keystore in json format   
  >  @param password : Wallet password   
@@ -100,7 +100,7 @@
 
 ```
 
-##  Displays a JavaScript text input panel.  
+##  Display a JavaScript text input panel.  
 >
 > @param webView :The web view invoking the delegate method.   
 > @param defaultText: The initial text to display in the text entry field.   
@@ -128,7 +128,7 @@
 >
 >
 ```
-+ (void)transactionWithKeystore:(NSString>)keystore parameter:(TransactionParameter>)parameter block:(void(^)(NSString>txId,NSString>signer))block;
++ (void)sendWithKeystore:(NSString>)keystore parameter:(TransactionParameter>)parameter block:(void(^)(NSString>txId,NSString>signer))block;
 ```
 ##   Verify the keystore word is legal 
 >
