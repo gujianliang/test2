@@ -13,15 +13,16 @@
 
 @interface WalletServerDetailVC ()
 {
-    NSString *_netNameText;
-    NSString *_netUrlText;
+    NSString *_netNameText;   /*  It‘s a temp variable that used to save network environment name */
+    NSString *_netUrlText;    /*  It‘s a temp variable that used to save network environment URL */
 }
-@property (weak, nonatomic) IBOutlet UILabel *netName;
-@property (weak, nonatomic) IBOutlet UILabel *netUrl;
+@property (weak, nonatomic) IBOutlet UILabel *netName;   /* It's used to show network environment name */
+@property (weak, nonatomic) IBOutlet UILabel *netUrl;    /* It's used to show network environment URL */
 
 @end
 
 @implementation WalletServerDetailVC
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -32,12 +33,18 @@
 }
 
 
+/**
+*  Just save the network environment URL and name.
+*/
 - (void)netName:(NSString *)netName netUrl:(NSString *)netUrl{
     _netNameText = netName;
     _netUrlText = netUrl;
 }
 
 
+/**
+*  Delete the you custom network environment.
+*/
 - (IBAction)deleteCustomNewWork:(id)sender {
     
     NSArray *oldList = [[NSUserDefaults standardUserDefaults] objectForKey:@"netList"];

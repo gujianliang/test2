@@ -9,10 +9,16 @@
 #import "WalletChooseNetworkView.h"
 #import "WalletSdkMacro.h"
 
-@implementation WalletChooseNetworkView
+
+@interface WalletChooseNetworkView()<UITableViewDataSource, UITableViewDelegate>
 {
-    NSMutableArray *_newList;
+    NSMutableArray *_newList;    /* It is used to save all the network environment */
 }
+@end
+
+
+@implementation WalletChooseNetworkView
+
 
 - (instancetype)initWithFrame:(CGRect)frame
 {
@@ -23,9 +29,12 @@
     return self;
 }
 
-- (void)initView
-{
-    self.backgroundColor = UIColor.clearColor;
+
+/**
+*  Config subviews and load it.
+*/
+- (void)initView{
+    
     UIView *bgView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
     [bgView setAlpha:0.4];
     bgView.backgroundColor = [UIColor blackColor];
@@ -81,6 +90,8 @@
     tableView.tableFooterView = footV;
 }
 
+
+#pragma mark -- UITableViewDataSource, UITableViewDelegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return _newList.count;
 }
@@ -108,6 +119,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     NSDictionary *dict = _newList[indexPath.row];
     NSString *serverName = dict[@"serverName"];
@@ -125,6 +137,9 @@
     [self removeFromSuperview];
 }
 
+/**
+*  When you click the foot View will call this method.
+*/
 - (void)addNetwork{
     
     if (_block) {
