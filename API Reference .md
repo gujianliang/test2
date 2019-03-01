@@ -1,7 +1,7 @@
 ##  create wallet   
 >
->    @param password :wallet password  
->    @param block : finish create wallet callback；The attributes of a class has mnemonicPhras , address, privateKey, keystore 
+>    @param password :Wallet password  
+>    @param block : Callback after the end；The attributes of a class has mnemonicPhras , address, privateKey, keystore 
 > */
 
 ```
@@ -13,8 +13,8 @@
 ## create wallet with mnemonic   
 >
 >    @param mnemonicList :12 words for create wallet
->    @param password :wallet password  
->    @param block : finish create wallet callback；The attributes of a class has mnemonicPhras , address, privateKey, keystore 
+>    @param password :Wallet password  
+>    @param block : Callback after the end；The attributes of a class has mnemonicPhras , address, privateKey, keystore 
 > */
 ```
 
@@ -26,7 +26,7 @@
 
 ##  Verify the mnemonic word is legal     
 >
->   @param mnemonicList :12 words for create wallet 
+>   @param mnemonicList :12 words 
 >   @return verification results
 > 
 ```
@@ -35,10 +35,10 @@
 
 
 
-##  verify Message  
+##  recover address
 >
->  @param message : to verify the information  
->  @param signatureData : NSData signature 
+>  @param message : Data before signature
+>  @param signatureData : Data after signature
 >  @return  address  
 > 
 
@@ -49,10 +49,10 @@
 
 ##   signature message  
 >
->   @param message : message for sign  
->   @param json :json string for keystore   
->   @param password :password for wallet  
->   @param block :finish sign block  
+>   @param message : Prepare the data to be signed
+>   @param json :Keystore in json format
+>   @param password :  Wallet password
+>   @param block :Callback after the end
 >
 
 ```
@@ -63,11 +63,23 @@
 
 ```
 
-##  encrypt private key to keystore
+##  Decryption keystore
 >
->   @param password :password for wallet
->   @param walletAccount :object for private key
->   @param callback :finish encrypt callback
+ >  @param json : Keystore in json format
+ >  @param password : Wallet password
+ >  @param callback : Callback after the end
+ >
+ >
+ ```
++ (void)decryptSecretStorageJSON:(NSString*)json
+                        password:(NSString*)password
+                        callback:(void(^)(WalletAccountModel *account,NSError *error))callback;
+```
+##  Use the new password to encrypt.
+>
+>   @param password :Wallet password
+>   @param walletAccount :Account object
+>   @param callback :Callback after the end
 > 
 > 
 ```
@@ -77,16 +89,14 @@
 ```
 
 
-##  encrypt set current wallet address   
+##  Set the keystore list to sdk  
 >
->  @param walletList :wallet list ,one item NSDictionary,has 2 key,address and keystore
-address: wallet addres
-keystore: json
+>  @param keystoreList :Array of keystore json
 >
 >
 
 ```
-+ (void)initWithWalletDict:(NSMutableArray>)walletList;
++ (void)initWebViewWithKeystore:(NSArray *)keystoreList;
 ```
 
 ##  Displays a JavaScript text input panel.  
@@ -101,15 +111,15 @@ keystore: json
 + (void)webView:(WKWebView>)webView defaultText:(NSString>)defaultText completionHandler:(void (^)(NSString>result))completionHandler;
 ```
 
-##  encrypt inject js into webview   
+##   inject js into webview   
 >
->  @param webview: The web view invoking the developper new.
+>  @param webview :Developer generated webview object
 >
 >
 ```
-+ (void)injectJS:(WKWebView>)webview;
++ (void)injectJSWithWebView:(WKWebView>)webview;
 ```
-##   encrypt The call sign control   
+##   call sign control
 >
 >  @param parameter: signature parameters   
 >  @param keystore: wallet for keystore    
@@ -131,7 +141,7 @@ keystore: json
 
 ##  Verify get checksum address    
 >
->  @param address :wallet for address   
+>  @param address :wallet address   
 >  @return checksum address   
 >
 ```
