@@ -7,8 +7,7 @@
 
 #import <Foundation/Foundation.h>
 #import "TransactionParameter.h"
-#import "Signature.h"
-#import "Account.h"
+#import "Payment.h"
 #import <UIKit/UIKit.h>
 #import <WebKit/WebKit.h>
 #import "WalletAccountModel.h"
@@ -182,6 +181,14 @@ OK, otherwise nil.
  *
  */
 + (void)setNode:(NSString *)nodelUrl;
+
+/**
+*  @abstract
+*  Destroy the keystore saved in the wallet
+*
+*
+*/
++ (void)destroyKeystore;
 
 NS_ASSUME_NONNULL_END
 

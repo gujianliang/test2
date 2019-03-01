@@ -40,11 +40,11 @@
 
 @implementation WalletDAppHandle
 
+static WalletDAppHandle *singleton = nil;
+static dispatch_once_t predicate;
 
 + (instancetype)shareWalletHandle
 {
-    static WalletDAppHandle *singleton = nil;
-    static dispatch_once_t predicate;
     dispatch_once(&predicate, ^{
         singleton = [[self alloc] init];
         
@@ -582,6 +582,11 @@
     }else{
         return NO;
     }
+}
+
++(void)attempDealloc{
+    predicate = 0;
+    singleton = nil;
 }
 
 @end

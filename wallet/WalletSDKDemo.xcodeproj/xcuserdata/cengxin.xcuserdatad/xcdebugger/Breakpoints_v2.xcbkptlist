@@ -1147,7 +1147,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "48"
             endingLineNumber = "48"
-            landmarkName = "-delWallet:"
+            landmarkName = "-changeWalletPassWord:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1163,7 +1163,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "46"
             endingLineNumber = "46"
-            landmarkName = "-delWallet:"
+            landmarkName = "-changeWalletPassWord:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1531,8 +1531,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "48"
             endingLineNumber = "48"
-            landmarkName = "WalletDetailVC"
-            landmarkType = "3">
+            landmarkName = "-viewDidLoad"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy

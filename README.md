@@ -36,18 +36,23 @@ To use the Framework, add the ethers.Framework to your project and add:
 #import <WalletSDK/WalletUtils.h>
 ```
 
-1，Basic purse using method    
+###  1，Basic purse using method    
 
-Create a wallet
+#### Create a wallet
 
 ```obj0c
 [WalletUtils createWalletWithPassword:Password
 callback:^(WalletAccountModel * _Nonnull account, NSError * _Nonnull error)
 {}];
 ```
-2，dapp Call web3 connex or development
+### 2，dapp Call web3 connex or development
 
-在webview didCommitNavigation add a callback methods
+#### 1. Add in viewDidLoad
+```
+[WalletUtils initWithWalletDict:walletList];
+````
+
+####  2. webview didCommitNavigation add a callback methods
 ```
 - (void)webView:(WKWebView *)webView didCommitNavigation:(null_unspecified WKNavigation *)navigation;
 {
@@ -55,14 +60,13 @@ callback:^(WalletAccountModel * _Nonnull account, NSError * _Nonnull error)
 }
 ```
 
-Add the callback method in the webview runJavaScriptTextInputPanelWithPrompt
+#### 3. Add the callback method in the webview runJavaScriptTextInputPanelWithPrompt
 ```
 - (void)webView:(WKWebView *)webView runJavaScriptTextInputPanelWithPrompt:(NSString *)prompt defaultText:(nullable NSString *)defaultText initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(NSString * __nullable result))completionHandler
 {
     [WalletUtils webView:webView  defaultText:defaultText completionHandler:completionHandler];
 }
 ```
-3，We do not provide private key preservation solution, we only provide a simple way
 
 
 

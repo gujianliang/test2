@@ -16,7 +16,7 @@
 #import "WalletGetSymbolApi.h"
 #import "WalletSignParamModel.h"
 #import "SecureData.h"
-
+#import "Account.h"
 
 @implementation WalletUtils
 
@@ -441,6 +441,12 @@
 + (NSString *)getChecksumAddress:(NSString *)address
 {
    return [WalletTools checksumAddress:address];
+}
+
++ (void)destroyKeystore
+{
+    [WalletDAppHandle attempDealloc];
+    [WalletSingletonHandle attempDealloc];
 }
 
 @end

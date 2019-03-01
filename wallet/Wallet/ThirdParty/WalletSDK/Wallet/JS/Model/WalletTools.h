@@ -145,8 +145,6 @@ typedef NS_ENUM(NSInteger , ContractType)
 // 创建二维码
 +(UIImage *)creatQRcodeImage:(NSString *)content;
 
-//地址认证签名
-+(NSString *)addressAuthSign:(WalletAuthorizedDataModel *)dataModel account:(Account *)account;
 
 //观察钱包，地址授权
 +(void)observerAuthAddress:(UIViewController *)vc

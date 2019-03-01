@@ -17,10 +17,11 @@
     WalletManageModel *_currentModel;
 }
 
+static WalletSingletonHandle *singleton = nil;
+static dispatch_once_t predicate;
+
 + (instancetype)shareWalletHandle
 {
-    static WalletSingletonHandle *singleton = nil;
-    static dispatch_once_t predicate;
     dispatch_once(&predicate, ^{
         singleton = [[self alloc] init];
         
@@ -141,5 +142,9 @@
     }
 }
 
++(void)attempDealloc{
+    predicate = 0;
+    singleton = nil;
+}
 
 @end
