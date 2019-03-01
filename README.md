@@ -1,46 +1,80 @@
->/* 生成钱包   
->    输入：生成keystore的密码  
-> 	 输出：Account类，这个类的属性有mnemonicPhras>e，address.checksumAddress,privateKey,keystore
-> */
-
-
-    + (void)creatWalletWithPassword:(NSString *)password
-                         callBack:(void(^)(Account *account)) block;
 
 
 
->/* 验证助记词有效   
->  	输入：助记词  
->  	输出：YES，助记词合法，NO，助记词不合法
-> */
-     
-    + (BOOL)isValidMnemonicPhrase: (NSString*)phrase;
+
+# Vechain Wallet Sdk 
 
 
->/* 验证keystore   
-> 	 输入：keystore,密码  
-> 	 输出：NSError == nil   >，密码正确，否则，密码错误；2，account，有助记词，私钥>>，地址信息
-> */
- 
-    + (void)decryptSecretStorageJSON: (NSString*)json
-                                password: (NSString*)password
-                                callback: (void (^)(Account *account, NSError *NSError))callback;
+## Introduction
+
+Vechain wallet SDK provides a series of functional interface can help the iOS developers, for example: developers to quickly create the purse, the private key signature, call vechain block interface, data on the chain, and convenient call vechain connex.
+
+**Features:**
+
+- create wallet
+- create wallet with mnemonic
+- Verify the mnemonic word is legal
+- Decryption keystore
+- verify Message
+- sign message
+- encrypt private key to keystore
+- encrypt set current wallet address
+- Displays a JavaScript text input panel.
+- encrypt inject js into webview
+- encrypt The call sign control
+- Verify the mnemonic word is legal
+- Verify get checksum address
+- setup node url
+
+## Get Started 
+
+API
+===
+
+To use the Framework, add the ethers.Framework to your project and add:
+
+```obj-c
+#import <WalletSDK/WalletUtils.h>
+```
+
+1，Basic purse using method    
+
+Create a wallet
 
 
->/* 签名   
-> 	 输入：message,需要签名的信息；json,keystore;passwor>d,keystore的密码  
-> 	 输出：signature 签名后得到信息，
-> */
- 
-    + (void)sign: (NSData*)message
-     keystore: (NSString*)json
-     password: (NSString*)password
-          block:(void (^)(Signature *signature))block;
+[WalletUtils createWalletWithPassword:Password
+callback:^(WalletAccountModel * _Nonnull account, NSError * _Nonnull error)
+{}];
 
->  /*签名数据recover地址信息  
->	输入：message,需要签名的信息 , 使用BLAKE2B hash  
->  	输出：地址信息
-> */
- 
-    + (Address*)verifyMessage: (NSData*)message
-                signature: (Signature*)signature;
+2，dapp Call web3 connex or development
+
+在webview didCommitNavigation add a callback methods
+
+- (void)webView:(WKWebView *)webView didCommitNavigation:(null_unspecified WKNavigation *)navigation;
+{
+[WalletUtils injectJS:webView];
+}
+
+Add the callback method in the webview runJavaScriptTextInputPanelWithPrompt
+
+- (void)webView:(WKWebView *)webView runJavaScriptTextInputPanelWithPrompt:(NSString *)prompt defaultText:(nullable NSString *)defaultText initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(NSString * __nullable result))completionHandler
+{
+[WalletUtils webView:webView  defaultText:defaultText completionHandler:completionHandler];
+}
+
+3，We do not provide private key preservation solution, we only provide a simple way
+
+
+
+
+
+## API Reference：
+
++ [API Reference](https://vit.digonchain.com/vechain-mobile-apps/ios-wallet-sdk/blob/master/README.md) for VeChain app developers
+
+## License
+
+Connex is licensed under the
+[GNU Lesser General Public License v3.0](https://www.gnu.org/licenses/lgpl-3.0.html), also included
+in *LICENSE* file in the repository.
+
