@@ -12,7 +12,7 @@
 #import "WalletMoreInfoVC.h"
 #import "WebViewVC.h"
 #import "WalletChooseNetworkView.h"
-#import "WalletServerDetailVC.h"
+#import "WalletNodeDetailVC.h"
 #import "WalletAddVthoNodeVC.h"
 #import "WalletSdkMacro.h"
 #import <WalletSDK/WalletUtils.h>
@@ -74,7 +74,7 @@
     
     
     /*
-     Set up the search bar control
+     Set up the search bar control to use some Dapp function.
      
      Test_Html      :  "https://appwallet.oss-cn-shanghai.aliyuncs.com/testJS/test.html"，
      Test_Main_Page :  "https://appwallet.oss-cn-shanghai.aliyuncs.com/testJS/dist/index.html#/test",
@@ -142,7 +142,7 @@
                 
                 [WalletUtils setNode:netUrl];
                 
-                WalletServerDetailVC *detailVC = [[WalletServerDetailVC alloc]init];
+                WalletNodeDetailVC *detailVC = [[WalletNodeDetailVC alloc]init];
                 [detailVC netName:netName netUrl:netUrl];
                 [self.navigationController pushViewController:detailVC animated:YES];
             }
@@ -159,10 +159,10 @@
     NSDictionary *dictCurrentNet = [[NSUserDefaults standardUserDefaults] objectForKey:@"CurrentNet"];
     
     if (dictCurrentNet) { /* Set to the main network of your choice. */
-        NSString *customServerUrl = dictCurrentNet[@"serverUrl"];
+        NSString *customServerUrl = dictCurrentNet[@"nodeUrl"];
         if (customServerUrl.length > 0 ) {
             _blockHost = customServerUrl;
-            self.title = dictCurrentNet[@"serverName"];
+            self.title = dictCurrentNet[@"nodeName"];
         }
     }
     
@@ -171,8 +171,8 @@
         self.title =  @"Develop Network";
         
         NSMutableDictionary *serverDict = [NSMutableDictionary dictionary];
-        [serverDict setObject:_blockHost forKey:@"serverUrl"];
-        [serverDict setObject:self.title forKey:@"serverName"];
+        [serverDict setObject:_blockHost forKey:@"nodeUrl"];
+        [serverDict setObject:self.title forKey:@"nodeName"];
     }
     
     

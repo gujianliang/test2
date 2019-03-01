@@ -77,7 +77,7 @@
     if (self.password.text.length == 0 || self.keystoreTextView.text.length == 0) {
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         hud.mode = MBProgressHUDModeText;
-        hud.labelText =  @"Password and keystore can not be blank";
+        hud.labelText =  @"The input cannot be null";
         [hud hide:YES afterDelay:3];
         return;
     }
@@ -86,12 +86,7 @@
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.mode = MBProgressHUDModeText;
     hud.labelText =  @"Waiting ...";
-    
-    
-    [WalletUtils decryptSecretStorageJSON:@"" password:@""
-                                 callback:^(WalletAccountModel * _Nonnull account, NSError * _Nonnull error) {
-                                     
-                                 }];
+
     
     /* Create a wallet with your password and keystore. */
     [WalletUtils decryptSecretStorageJSON:self.keystoreTextView.text.lowercaseString

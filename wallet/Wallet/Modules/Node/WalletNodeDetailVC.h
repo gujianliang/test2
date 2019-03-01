@@ -1,5 +1,5 @@
 //
-//  WalletServerDetailVC.h
+//  WalletNodeDetailVC.h
 //  walletSDKDemo
 //
 //  Created by 曾新 on 2019/1/30.
@@ -11,7 +11,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface WalletServerDetailVC : UIViewController
+@interface WalletNodeDetailVC : UIViewController
 
 - (void)netName:(NSString *)netName netUrl:(NSString *)netUrl;
 

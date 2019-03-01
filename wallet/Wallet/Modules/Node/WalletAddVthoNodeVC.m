@@ -38,7 +38,7 @@
     if (netName.length == 0 || netUrl.length == 0 ){
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         hud.mode = MBProgressHUDModeText;
-        hud.labelText =  @"The name and URL can not be blank.";
+        hud.labelText =  @"The input cannot be null.";
         [hud hide:YES afterDelay:2.5];
         return;
     }
@@ -55,14 +55,14 @@
     }
     
     
-    NSArray *oldList = [[NSUserDefaults standardUserDefaults] objectForKey:@"netList"];
+    NSArray *oldList = [[NSUserDefaults standardUserDefaults] objectForKey:@"nodeList"];
     NSMutableArray *newList = [NSMutableArray arrayWithArray:oldList];
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-    [dict setObject:netName forKey:@"serverName"];
-    [dict setObject:netUrl forKey:@"serverUrl"];
+    [dict setObject:netName forKey:@"nodeName"];
+    [dict setObject:netUrl forKey:@"nodeUrl"];
     [newList addObject:dict];
     
-    [[NSUserDefaults standardUserDefaults] setObject:newList forKey:@"netList"];
+    [[NSUserDefaults standardUserDefaults] setObject:newList forKey:@"nodeList"];
     [[NSUserDefaults standardUserDefaults] setObject:dict forKey:@"CurrentNet"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     

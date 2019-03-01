@@ -54,7 +54,7 @@
     if (self.password.text.length == 0 || self.improtMnemonicWords.text.length == 0){
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         hud.mode = MBProgressHUDModeText;
-        hud.labelText =  @"Password and mnemonic words can not be blank.";
+        hud.labelText =  @"The input cannot be null.";   
         [hud hide:YES afterDelay:3];
         return;
     }

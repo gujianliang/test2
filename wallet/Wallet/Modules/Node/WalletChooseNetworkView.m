@@ -49,17 +49,17 @@
     chooseNetworkCotainView.backgroundColor = UIColor.whiteColor;
     [self addSubview:chooseNetworkCotainView];
     
-    NSArray *netList = [[NSUserDefaults standardUserDefaults] objectForKey:@"netList"];
+    NSArray *netList = [[NSUserDefaults standardUserDefaults] objectForKey:@"nodeList"];
     _newList = [NSMutableArray array];
     
     NSMutableDictionary *dict1 = [NSMutableDictionary dictionary];
-    [dict1 setObject:@"Product Network" forKey:@"serverName"];
-    [dict1 setObject:Main_BlockHost forKey:@"serverUrl"];
+    [dict1 setObject:@"Product Network" forKey:@"nodeName"];
+    [dict1 setObject:Main_BlockHost forKey:@"nodeUrl"];
     [_newList addObject:dict1];
     
     NSMutableDictionary *dict2 = [NSMutableDictionary dictionary];
-    [dict2 setObject:@"Develop Network" forKey:@"serverName"];
-    [dict2 setObject:Test_BlockHost forKey:@"serverUrl"];
+    [dict2 setObject:@"Develop Network" forKey:@"nodeName"];
+    [dict2 setObject:Test_BlockHost forKey:@"nodeUrl"];
     [_newList addObject:dict2];
 
     if (netList.count > 0) {
@@ -109,7 +109,7 @@
         [cell addSubview:line];
     }
     NSDictionary *dict = _newList[indexPath.row];
-    cell.textLabel.text = dict[@"serverName"];
+    cell.textLabel.text = dict[@"nodeName"];
     
     return cell;
 }
@@ -122,8 +122,8 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     NSDictionary *dict = _newList[indexPath.row];
-    NSString *serverName = dict[@"serverName"];
-    NSString *serverUrl = dict[@"serverUrl"];
+    NSString *serverName = dict[@"nodeName"];
+    NSString *serverUrl = dict[@"nodeUrl"];
     
     if (_block) {
         _block(serverName, serverUrl);
