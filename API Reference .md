@@ -2,7 +2,7 @@
 >
 >    @param password :Wallet password  
 >    @param block : Callback after the end；The attributes of a class has mnemonicPhras , address, privateKey, keystore 
-> */
+> 
 
 ```
 + (void)creatWalletWithPassword:(NSString *)password
@@ -15,7 +15,7 @@
 >    @param mnemonicList :12 words for create wallet
 >    @param password :Wallet password  
 >    @param block : Callback after the end；The attributes of a class has mnemonicPhras , address, privateKey, keystore 
-> */
+> 
 ```
 
 + (void)creatWalletWithMnemonic:(NSArray *)mnemonicList
