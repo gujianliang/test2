@@ -70,11 +70,11 @@ Add the callback method in the webview runJavaScriptTextInputPanelWithPrompt
 
 ## API Reference：
 
-+ [API Reference](https://vit.digonchain.com/vechain-mobile-apps/ios-wallet-sdk/blob/master/README.md) for VeChain app developers
++ [API Reference](https://vit.digonchain.com/vechain-mobile-apps/ios-wallet-sdk/blob/master/API%20Reference%20.md) for VeChain app developers
 
 ## License
 
-Connex is licensed under the
+Vechain Wallet Sdk is licensed under the
 [GNU Lesser General Public License v3.0](https://www.gnu.org/licenses/lgpl-3.0.html), also included
 in *LICENSE* file in the repository.
 
