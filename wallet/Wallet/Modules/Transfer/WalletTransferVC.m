@@ -23,19 +23,17 @@
 @property (weak, nonatomic) IBOutlet UITextField *transferAmountTextField;
 @property (weak, nonatomic) IBOutlet UILabel *balanceAmountLabel;
 @property (weak, nonatomic) IBOutlet UILabel *feeLabel;
-@property (weak, nonatomic) IBOutlet UISlider *feeSwitcher;
 
 @property (weak, nonatomic) IBOutlet UILabel *symobl;
 @property (weak, nonatomic) IBOutlet UIImageView *coinIcon;
 @property (weak, nonatomic) IBOutlet UISlider *minerFeeSlider;
-@property (nonatomic, strong)UITextField *pwTextField;
+@property (strong, nonatomic) UITextField *pwTextField;
 
 @end
 
 @implementation WalletTransferVC
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad{
     [super viewDidLoad];
     
     _blockHost = Test_BlockHost;
@@ -44,16 +42,17 @@
         _tokenContractAddress = @"0x0000000000000000000000000000456e65726779";
         [self.coinIcon setImage:[UIImage imageNamed:@"VTHO"]];
         self.symobl.text = @"VTHO";
+        
     }else{
         [self.coinIcon setImage:[UIImage imageNamed:@"VET"]];
         self.symobl.text = @"VET";
     }
     
     self.receiveAddressTextView.text = @"0xe2c3B55d8Aa9920058030F73baCECe582f2123FF";
+    self.receiveAddressTextView.textContainerInset = UIEdgeInsetsMake(2.5, 2.5, 2.5, 2.5);
 }
 
-- (IBAction)transfer:(id)sender
-{
+- (IBAction)transfer:(id)sender{
     [self.view endEditing:YES];
 
     NSDictionary *currentWalletDict = [[NSUserDefaults standardUserDefaults]objectForKey:@"currentWallet"];
@@ -126,18 +125,19 @@
      }];
 }
 
-- (BOOL)textFieldShouldReturn:(UITextField *)textField
-{
-    [textField resignFirstResponder];
-    return YES;
-}
 
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+/**
+ *  Just hidden the keyboard.
+ */
+- (void)touchesBegan:(NSSet*)touches withEvent:(UIEvent *)event{
     [self.view endEditing:YES];
 }
+
+
 
 - (IBAction)changeSlider:(id)sender{
     
 }
+
 
 @end
