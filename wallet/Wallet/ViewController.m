@@ -24,9 +24,10 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
  
-    NSDictionary *currentWallet = [[NSUserDefaults standardUserDefaults]objectForKey:@"currentWallet"];;
+    /* Read the local cache information and decide whether to go to the detail ViewController */
+    NSDictionary *currentWallet = [[NSUserDefaults standardUserDefaults] objectForKey:@"currentWallet"];;
     
-    if (currentWallet) { //有钱包，直接去详情
+    if (currentWallet) {
         
         WalletDetailVC *detailVC = [[WalletDetailVC alloc]init];
         
@@ -38,52 +39,25 @@
 }
 
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib
-}
-
-- (IBAction)touchMe:(UIButton *)sender
-{
+/**
+*  Enter the Create Or Import ViewController to generate a wallet.
+*/
+- (IBAction)clickCreateOrImportWalletEvent:(UIButton *)sender{
     switch (sender.tag) {
-        case 10:
-        {
-
+        case 10:{
+            
             WalletCreateVC *create = [[WalletCreateVC alloc] init];
             [self.navigationController pushViewController:create animated:YES];
-        }
-            break;
-        case 11:
-        {
-
+        }break;
+            
+        case 11:{
             WalletRecoverMainVC *recoverVC = [[WalletRecoverMainVC alloc] init];
             [self.navigationController pushViewController:recoverVC animated:YES];
-
-        }
-            break;
-        case 12:
-        {
-            WalletDetailVC *detailVC = [[WalletDetailVC alloc]init];
-            [self.navigationController pushViewController:detailVC animated:YES];
-        }
-            break;
-        case 13:
-        {
-            
-            WebViewVC *detailVC = [[WebViewVC alloc]init];
-            [self.navigationController pushViewController:detailVC animated:YES];
-        }
-            break;
-        case 14:
-        {
-            WebViewVC *detailVC = [[WebViewVC alloc]init];
-            [self.navigationController pushViewController:detailVC animated:YES];
-        }
-            break;
-
-        default:
-            break;
+        }break;
+    
+        default:break;
     }
 }
+
 
 @end
