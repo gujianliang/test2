@@ -89,17 +89,22 @@
     hud.labelText =  @"Waiting ...";
     
     
+    [WalletUtils decryptSecretStorageJSON:@"" password:@""
+                                 callback:^(WalletAccountModel * _Nonnull account, NSError * _Nonnull error) {
+                                     
+                                 }];
+    
     /* Create a wallet with your password and keystore. */
     [WalletUtils decryptSecretStorageJSON:self.keystoreTextView.text.lowercaseString
                                  password:self.password.text
-                                 callback:^(Account *account, NSError *NSError)
+                                 callback:^(WalletAccountModel * _Nonnull account, NSError * _Nonnull error)
      {
          [hud hide:YES];
          
-         if (NSError == nil) {
+         if (error == nil) {
              
-             NSString *address = account.address.checksumAddress;
-             NSLog(@"address == %@;----\nprivateKey = %@ ",address, [SecureData dataToHexString:account.privateKey]);
+             NSString *address = account.address;
+             NSLog(@"address == %@;----\nprivateKey = %@ ",address,account.privatekey);
              
              /*
               Please note that this is just a demo that tell you how to recover a wallet by keystore.
@@ -108,7 +113,7 @@
               In general, we recommend that you use some way of secure encryption.
               */
               NSMutableDictionary *walletDict = [[NSMutableDictionary alloc]init];
-             [walletDict setObject:account.address.checksumAddress forKey:@"address"];
+             [walletDict setObject:account.address forKey:@"address"];
              [walletDict setObject:self.keystoreTextView.text forKey:@"keystore"];
              [[NSUserDefaults standardUserDefaults]setObject:walletDict forKey:@"currentWallet"];
              

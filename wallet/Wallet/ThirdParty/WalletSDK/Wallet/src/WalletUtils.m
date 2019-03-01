@@ -17,11 +17,12 @@
 #import "WalletSignParamModel.h"
 #import "SecureData.h"
 
+
 @implementation WalletUtils
 
 
 + (void)createWalletWithPassword:(NSString *)password
-                       callback:(void(^)(Account *account,NSError *error))block
+                       callback:(void(^)(WalletAccountModel *accountModel,NSError *error))block
 {
     __block Account *account = [Account randomMnemonicAccount];
     
@@ -42,17 +43,23 @@
             }
         }else{
             if (block) {
-                block(account,nil);
+                WalletAccountModel *accountModel = [[WalletAccountModel alloc]init];
+                accountModel.keystore = json;
+                accountModel.privatekey = [SecureData dataToHexString:account.privateKey];
+                accountModel.address = account.address.checksumAddress;
+                accountModel.words = [account.mnemonicPhrase componentsSeparatedByString:@" "];
+                
+                block(accountModel,nil);
             }
         }
     }];
 }
 
-+ (void)creatWalletWithMnemonic:(NSString *)mnemonic
++ (void)creatWalletWithMnemonic:(NSArray *)mnemonicList
                       password:(NSString *)password
-                       callback:(void(^)(Account *account,NSError *error))block
+                       callback:(void(^)(WalletAccountModel *account,NSError *error))block
 {
-    __block Account *account = [Account accountWithMnemonicPhrase:mnemonic];
+    __block Account *account = [Account accountWithMnemonicPhrase:[mnemonicList componentsJoinedByString:@" "]];
     
     [account encryptSecretStorageJSON:password callback:^(NSString *json) {
         
@@ -71,34 +78,56 @@
             }
         }else{
             if (block) {
-                block(account,nil);
+                
+                WalletAccountModel *accountModel = [[WalletAccountModel alloc]init];
+                accountModel.keystore = json;
+                accountModel.privatekey = [SecureData dataToHexString:account.privateKey];
+                accountModel.address = account.address.checksumAddress;
+                accountModel.words = [account.mnemonicPhrase componentsSeparatedByString:@" "];
+                
+                block(accountModel,nil);
             }
         }
     }];
 }
 
-+ (BOOL)isValidMnemonicPhrase:(NSString*)phrase
++ (BOOL)isValidMnemonicPhrase:(NSArray*)mnemonicList;
 {
-    return [Account isValidMnemonicPhrase:phrase];
+    return [Account isValidMnemonicPhrase:[mnemonicList componentsJoinedByString:@" "]];
 }
 
 + (void)decryptSecretStorageJSON:(NSString*)json
                         password:(NSString*)password
-                        callback:(void (^)(Account *account, NSError *NSError))callback
+                        callback:(void(^)(WalletAccountModel *account,NSError *error))callback
 {
-    [Account decryptSecretStorageJSON:json password:password callback:callback];
+//    [Account decryptSecretStorageJSON:json password:password callback:callback];
+    [Account decryptSecretStorageJSON:json password:password callback:^(Account *account, NSError *NSError) {
+        if (NSError == nil) {
+            WalletAccountModel *accountModel = [[WalletAccountModel alloc]init];
+            accountModel.keystore = json;
+            accountModel.privatekey = [SecureData dataToHexString:account.privateKey];
+            accountModel.address = account.address.checksumAddress;
+            accountModel.words = [account.mnemonicPhrase componentsSeparatedByString:@" "];
+            
+            callback(accountModel,nil);
+        }else{
+            callback(nil,NSError);
+        }
+    }];
 }
 
-+ (Address*)recoverAddressFromMessage:(NSData*)message
-                signature:(Signature*)signature
++ (NSString *)recoverAddressFromMessage:(NSData*)message
+                signatureData:(NSData *)signatureData
 {
-   return [Account verifyMessage:message signature:signature];
+    Signature *signature = [Signature signatureWithData:signatureData];
+    
+   return [Account verifyMessage:message signature:signature].checksumAddress;
 }
 
 + (void)signature:(NSData*)message
          keystore:(NSString*)json
          password:(NSString*)password
-         block:(void (^)(Signature *signature,NSError *error))block
+         block:(void (^)(NSData *signatureData,NSError *error))block
 {
     [Account decryptSecretStorageJSON:json
                              password:password
@@ -109,7 +138,17 @@
             SecureData *data = [SecureData BLAKE2B:message];
             Signature *signature = [account signDigest:data.data];
              if (block) {
-                 block(signature,nil);
+                 SecureData *vData = [[SecureData alloc]init];
+                 [vData appendByte:signature.v];
+                 
+                 NSString *s = [SecureData dataToHexString:signature.s];
+                 NSString *r = [SecureData dataToHexString:signature.r];
+                 
+                 NSString *hashStr = [NSString stringWithFormat:@"0x%@%@%@",
+                                      [r substringFromIndex:2],
+                                      [s substringFromIndex:2],
+                                      [vData.hexString substringFromIndex:2]];
+                 block([SecureData hexStringToData:hashStr],nil);
              }
          }else{
              if (block) {
@@ -120,9 +159,10 @@
 }
 
 + (void)encryptSecretStorageJSON:(NSString*)password
-                         account:(Account *)account
+                         account:(WalletAccountModel *)walletAccount
                         callback:(void (^)(NSString *))callback
 {
+    Account *account = [Account accountWithMnemonicPhrase:[walletAccount.words componentsJoinedByString:@" "]];
     [account encryptSecretStorageJSON:password
                              callback:^(NSString *json)
     {

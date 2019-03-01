@@ -74,9 +74,9 @@
     
     
     /* Create a wallet with your password and mnemonic words. */
-    [WalletUtils creatWalletWithMnemonic:self.improtMnemonicWords.text.lowercaseString
+    [WalletUtils creatWalletWithMnemonic:[self.improtMnemonicWords.text.lowercaseString componentsSeparatedByString:@" "]
                                 password:self.password.text
-                                callback:(void(^)(Account *account,NSError *error))block;
+                                callback:^(WalletAccountModel * _Nonnull account, NSError * _Nonnull error) 
     {
         [hud hide:YES];
         
@@ -93,7 +93,7 @@
          In general, we recommend that you use some way of secure encryption.
          */
         NSMutableDictionary *walletDict = [[NSMutableDictionary alloc]init];
-        [walletDict setObject:account.address.checksumAddress forKey:@"address"];
+        [walletDict setObject:account.address forKey:@"address"];
         [walletDict setObject:account.keystore forKey:@"keystore"];
         [[NSUserDefaults standardUserDefaults]setObject:walletDict forKey:@"currentWallet"];
     }];
