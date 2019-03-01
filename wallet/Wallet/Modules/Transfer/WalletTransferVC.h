@@ -12,8 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface WalletTransferVC : UIViewController
 
-@property (nonatomic ,copy)NSString *amount;
-@property (nonatomic ,assign)BOOL isVET;
+@property (copy, nonatomic) NSString *coinAmount;     /* The balance of the coin */
+@property (assign, nonatomic) BOOL isVET;             /* It is used to mark whether a VET or a VTHO coin */
 
 @end
 

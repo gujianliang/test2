@@ -29,9 +29,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *vthoAmountLabel;    /* The VTHO label */
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;      /* Search bar control */
 
-@property (copy, nonatomic) NSString *vetAmount;    /* The VET balance of wallet address */
-@property (copy, nonatomic) NSString *vthoAmount;   /* The VTHO balance of wallet address */
-
 @end
 
 @implementation WalletDetailVC
@@ -209,7 +206,6 @@
                                        options:2]; //Keep 2 decimals
          }
          self.vetAmountLabel.text = coinAmount;
-         self.vetAmount = amount;
                  
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error){
         NSLog(@"Get VET balance failure. error: %@", error);
@@ -250,7 +246,6 @@
                                       options:2];
         }
         self.vthoAmountLabel.text = coinAmount;
-        self.vthoAmount= amount;
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"Get VTHO balance failure. error: %@", error);
@@ -309,11 +304,11 @@
     UIButton *btn = (UIButton *)sender;
     if (btn.tag == 10) { /* vet transfer */
         transfer.isVET = YES;
-        transfer.amount = _vetAmount;
+        transfer.coinAmount = [self.vetAmountLabel.text stringByReplacingOccurrencesOfString:@"," withString:@""];
         
     }else if (btn.tag == 20){ /* vtho transfer */
         transfer.isVET = NO;
-        transfer.amount = _vthoAmount;
+        transfer.coinAmount = [self.vthoAmountLabel.text stringByReplacingOccurrencesOfString:@"," withString:@""];
     }
     
     [self.navigationController pushViewController:transfer animated:YES];
