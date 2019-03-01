@@ -62,13 +62,13 @@
     }
     
     // intput wallet list detail to sdk，
-    [WalletUtils initWithWalletDict:walletList];
+    [WalletUtils initWebViewWithKeystore:walletList];
     
 }
 
 - (void)webView:(WKWebView *)webView didCommitNavigation:(null_unspecified WKNavigation *)navigation;
 {
-    [WalletUtils injectJS:webView];
+    [WalletUtils injectJSWithWebView:webView];
 }
 
 -(void)webView:(WKWebView *)webView runJavaScriptAlertPanelWithMessage:(NSString *)message initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(void))completionHandler{

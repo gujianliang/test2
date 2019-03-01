@@ -32,10 +32,11 @@ static dispatch_once_t predicate;
 -(void)addWallet:(NSArray *)walletList
 {
     _walletList = [NSMutableArray array];
-    for (NSDictionary *dict in walletList) {
+    for (NSString *keystore in walletList) {
+        NSDictionary *dictKeystore = [NSJSONSerialization dictionaryWithJsonString:keystore];
         WalletManageModel *walletModel = [[WalletManageModel alloc]init];
-        walletModel.address = dict[@"address"];
-        walletModel.keyStore = dict[@"keystore"];
+        walletModel.address = dictKeystore[@"address"];
+        walletModel.keyStore = keystore;
         [_walletList addObject:walletModel];
         [self getVETBalance:walletModel];
         [self getVTHOBalance:walletModel];

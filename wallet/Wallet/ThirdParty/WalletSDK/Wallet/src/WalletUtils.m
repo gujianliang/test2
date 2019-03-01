@@ -179,7 +179,7 @@
     [[WalletSingletonHandle shareWalletHandle] setCurrentModel:address];
 }
 
-+ (void)initWithWalletDict:(NSMutableArray *)walletList
++ (void)initWebViewWithKeystore:(NSMutableArray *)walletList
 {
     [[WalletDAppHandle shareWalletHandle]initWithWalletDict:walletList];
 }
@@ -192,7 +192,7 @@
     [dappHandle webView:webView defaultText:defaultText completionHandler:completionHandler];
 }
 
-+ (void)injectJS:(WKWebView *)webview
++ (void)injectJSWithWebView:(WKWebView *)webview
 {
     WalletDAppHandle *dappHandle = [WalletDAppHandle shareWalletHandle];
     [dappHandle injectJS:webview];
@@ -443,10 +443,5 @@
    return [WalletTools checksumAddress:address];
 }
 
-+ (void)destroyKeystore
-{
-    [WalletDAppHandle attempDealloc];
-    [WalletSingletonHandle attempDealloc];
-}
 
 @end
