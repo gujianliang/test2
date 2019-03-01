@@ -1,4 +1,3 @@
-
 > /* create wallet   
 >
 >    @param password :wallet password  
@@ -110,11 +109,11 @@ keystore: json
 + (void)initWithWalletDict:(NSMutableArray>)walletList;
 
 /*! @abstract Displays a JavaScript text input panel.  
-@param webView The web view invoking the delegate method.   
-@param defaultText The initial text to display in the text entry field.   
-@param completionHandler The completion handler to call after the text   
-input panel has been dismissed. Pass the entered text if the user chose
-OK, otherwise nil.
+> param webView The web view invoking the delegate method.   
+> @param defaultText The initial text to display in the text entry field.   
+> @param completionHandler The completion handler to call after the text   
+  input panel has been dismissed. Pass the entered text if the user chose
+  OK, otherwise nil.
 >/
 
 + (void)webView:(WKWebView>)webView defaultText:(NSString>)defaultText completionHandler:(void (^)(NSString>result))completionHandler;
