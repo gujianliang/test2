@@ -49,21 +49,22 @@
     [_webView loadRequest:theRequest];
     [self.view addSubview:_webView];
     
+    /*
+     CurrentWallet has two key, addres and ketstore
+                Address: 0 x hex 20 bytes
+                Keystore: NSDictionary, specific format, please read the readme
+     */
     NSDictionary *currentWallet = [[NSUserDefaults standardUserDefaults]objectForKey:@"currentWallet"];
-    
-    // 设置 钱包
+
     NSMutableArray *walletList = [NSMutableArray array];
     if (currentWallet) {
         [walletList addObject:currentWallet];
     }
     
-    // intput wallet list detail
+    // intput wallet list detail to sdk，
     [WalletUtils initWithWalletDict:walletList];
     
-//   BOOL ttt = [WalletUtils isValidMnemonicPhrase:@"earth patient ticket rapid domain genuine absorb head situate matrix stone fantasy"];
-//    NSLog(@"dd");
 }
-
 
 - (void)webView:(WKWebView *)webView didCommitNavigation:(null_unspecified WKNavigation *)navigation;
 {
@@ -83,4 +84,6 @@
 {
     [WalletUtils webView:webView  defaultText:defaultText completionHandler:completionHandler];
 }
+
+
 @end

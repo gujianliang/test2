@@ -183,6 +183,14 @@ OK, otherwise nil.
  */
 + (void)setNode:(NSString *)nodelUrl;
 
+/**
+*  @abstract
+*  Destroy the keystore saved in the wallet
+*
+*
+*/
++ (void)destroyKeystore;
+
 NS_ASSUME_NONNULL_END
 
 @end

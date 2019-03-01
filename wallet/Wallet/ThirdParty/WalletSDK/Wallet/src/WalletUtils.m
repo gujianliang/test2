@@ -184,6 +184,12 @@
     [[WalletDAppHandle shareWalletHandle]initWithWalletDict:walletList];
 }
 
++ (void)destroyKeystore
+{
+    [WalletDAppHandle attempDealloc];
+    [WalletSingletonHandle attempDealloc];
+}
+
 + (void)webView:(WKWebView *)webView defaultText:(NSString *)defaultText completionHandler:(void (^)(NSString * result))completionHandler
 {
     NSLog(@"defaultText == %@",defaultText);
