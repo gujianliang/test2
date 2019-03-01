@@ -7,25 +7,15 @@
 
 #import <Foundation/Foundation.h>
 #import "TransactionParameter.h"
-#import "Address.h"
 #import "Signature.h"
 #import "Account.h"
 #import <UIKit/UIKit.h>
 #import <WebKit/WebKit.h>
-
+#import "WalletAccountModel.h"
 
 @interface WalletUtils : NSObject
 
 NS_ASSUME_NONNULL_BEGIN
-
-/**
- *  @abstract
- *  setup node url
- *
- *  @param nodelUrl :node url
- *
- */
-+ (void)setNode:(NSString *)nodelUrl;
 
 /**
  *  @abstract
@@ -36,30 +26,30 @@ NS_ASSUME_NONNULL_BEGIN
  *
  */
 + (void)createWalletWithPassword:(NSString *)password
-                        callback:(void(^)(Account *account,NSError *error))block;
+                        callback:(void(^)(WalletAccountModel *account,NSError *error))block;
 
 /**
  *  @abstract
  *  create wallet with mnemonic
  *
- *  @param mnemonic :12 words for create wallet
+ *  @param mnemonicList :12 words for create wallet
  *  @param password :password for wallet
  *  @param block : finish create wallet callback
  */
 
-+ (void)creatWalletWithMnemonic:(NSString *)mnemonic
++ (void)creatWalletWithMnemonic:(NSArray *)mnemonicList
                       password:(NSString *)password
-                       callback:(void(^)(Account *account,NSError *error))block;
+                       callback:(void(^)(WalletAccountModel *account,NSError *error))block;
 
 /**
  *  @abstract
  *  Verify the mnemonic word is legal
  *
- *  @param mnemonic :12 words
+ *  @param mnemonicList :12 words
  *
  *  @return verification results
  */
-+ (BOOL)isValidMnemonicPhrase:(NSString*)mnemonic;
++ (BOOL)isValidMnemonicPhrase:(NSString*)mnemonicList;
 
 
 /**
@@ -72,20 +62,20 @@ NS_ASSUME_NONNULL_BEGIN
  *
  */
 + (void)decryptSecretStorageJSON:(NSString*)json
-                                password:(NSString*)password
-                                callback:(void (^)(Account *account, NSError *NSError))callback;
+                        password:(NSString*)password
+                        callback:(void(^)(WalletAccountModel *account,NSError *error))callback;
 
 /**
  *  @abstract
  *  verify Message
  *
  *  @param message : to verify the information
- *  @param signature : object signature
+ *  @param signatureData : NSData signature (r,s,v)
  *
  *  @return object for address
  */
-+ (Address*)recoverAddressFromMessage:(NSData*)message
-                signature:(Signature*)signature;
++ (NSString *)recoverAddressFromMessage:(NSData*)message
+                          signatureData:(NSData*)signatureData;
 
 /**
  *  @abstract
@@ -100,19 +90,19 @@ NS_ASSUME_NONNULL_BEGIN
 + (void)signature:(NSData*)message
          keystore:(NSString*)json
          password:(NSString*)password
-            block:(void (^)(Signature *signature,NSError *error))block;
+            block:(void (^)(NSData *signatureData,NSError *error))block;
 
 /**
  *  @abstract
  *  encrypt private key to keystore
  *
  *  @param password :password for wallet
- *  @param account :object for private key
+ *  @param walletAccount :object for private key
  *  @param callback :finish encrypt callback
  *
  */
 + (void)encryptSecretStorageJSON:(NSString*)password
-                         account:(Account *)account
+                         account:(WalletAccountModel *)walletAccount
                         callback:(void (^)(NSString *))callback;
 
 /**
@@ -155,22 +145,43 @@ OK, otherwise nil.
 
 /**
  *  @abstract
- *  encrypt set current wallet address
+ *  encrypt The call sign control
  *
- *  @param from wallet address
- *  @param to  address
- *  @param amount transfer
+ *  @param parameter Signature parameters
+ *  @param keystore wallet for keystore
  *  @param block callback
  *
  */
 + (void)transactionWithKeystore:(NSString *)keystore parameter:(TransactionParameter *)parameter block:(void(^)(NSString *txId,NSString *signer))block;
 
-
-
-
+/**
+ *  @abstract
+ *  Verify the mnemonic word is legal
+ *
+ *  @param keystore :wallet for keystore
+ *
+ *  @return verification results
+ */
 + (BOOL)isValidKeystore:(NSString *)keystore;
 
+/**
+ *  @abstract
+ *  Verify get checksum address
+ *
+ *  @param address :wallet for address
+ *
+ *  @return checksum address
+ */
 + (NSString *)getChecksumAddress:(NSString *)address;
+
+/**
+ *  @abstract
+ *  setup node url
+ *
+ *  @param nodelUrl :node url
+ *
+ */
++ (void)setNode:(NSString *)nodelUrl;
 
 NS_ASSUME_NONNULL_END
 

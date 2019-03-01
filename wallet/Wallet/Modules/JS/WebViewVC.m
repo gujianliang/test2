@@ -64,8 +64,8 @@
 //    NSLog(@"dd");
 }
 
-//  页面加载完成之后调用
-- (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation
+
+- (void)webView:(WKWebView *)webView didCommitNavigation:(null_unspecified WKNavigation *)navigation;
 {
     [WalletUtils injectJS:webView];
 }

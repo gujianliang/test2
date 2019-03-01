@@ -24,6 +24,8 @@
 		9718120822263672008F9639 /* TransactionParameter.h in Headers */ = {isa = PBXBuildFile; fileRef = 9718120622263672008F9639 /* TransactionParameter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9718121022267FE5008F9639 /* WalletSignParamModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 9718120E22267FE5008F9639 /* WalletSignParamModel.h */; };
 		9718121122267FE5008F9639 /* WalletSignParamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9718120F22267FE5008F9639 /* WalletSignParamModel.m */; };
+		9719BEB02228085200DA3F74 /* WalletAccountModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 9719BEAE2228085200DA3F74 /* WalletAccountModel.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9719BEB12228085200DA3F74 /* WalletAccountModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9719BEAF2228085200DA3F74 /* WalletAccountModel.m */; };
 		9736C126214B8671003DE935 /* WalletUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 9736C124214B8671003DE935 /* WalletUtils.m */; };
 		9736C127214B8671003DE935 /* WalletUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 9736C125214B8671003DE935 /* WalletUtils.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9743A54221FED23F0079C582 /* NSJSONSerialization+NilDataParameter.m in Sources */ = {isa = PBXBuildFile; fileRef = 9743A54021FED23F0079C582 /* NSJSONSerialization+NilDataParameter.m */; };
@@ -325,6 +327,8 @@
 		9718120622263672008F9639 /* TransactionParameter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TransactionParameter.h; path = src/TransactionParameter.h; sourceTree = "<group>"; };
 		9718120E22267FE5008F9639 /* WalletSignParamModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WalletSignParamModel.h; sourceTree = "<group>"; };
 		9718120F22267FE5008F9639 /* WalletSignParamModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WalletSignParamModel.m; sourceTree = "<group>"; };
+		9719BEAE2228085200DA3F74 /* WalletAccountModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = WalletAccountModel.h; path = src/WalletAccountModel.h; sourceTree = "<group>"; };
+		9719BEAF2228085200DA3F74 /* WalletAccountModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = WalletAccountModel.m; path = src/WalletAccountModel.m; sourceTree = "<group>"; };
 		9736C124214B8671003DE935 /* WalletUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WalletUtils.m; path = src/WalletUtils.m; sourceTree = "<group>"; };
 		9736C125214B8671003DE935 /* WalletUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WalletUtils.h; path = src/WalletUtils.h; sourceTree = "<group>"; };
 		9743A54021FED23F0079C582 /* NSJSONSerialization+NilDataParameter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSJSONSerialization+NilDataParameter.m"; sourceTree = "<group>"; };
@@ -1119,6 +1123,8 @@
 				9718120522263671008F9639 /* TransactionParameter.m */,
 				9736C125214B8671003DE935 /* WalletUtils.h */,
 				9736C124214B8671003DE935 /* WalletUtils.m */,
+				9719BEAE2228085200DA3F74 /* WalletAccountModel.h */,
+				9719BEAF2228085200DA3F74 /* WalletAccountModel.m */,
 				E2317EA91E31974F00DBE3E4 /* Utilities */,
 				E2317E8F1E31970900DBE3E4 /* Account.h */,
 				E2317E901E31970900DBE3E4 /* Account.m */,
@@ -1143,6 +1149,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9719BEB02228085200DA3F74 /* WalletAccountModel.h in Headers */,
 				9718120822263672008F9639 /* TransactionParameter.h in Headers */,
 				9773F9D8221412D200DF5972 /* WalletDAppHandle.h in Headers */,
 				9773F979221412D200DF5972 /* MBProgressHUD.h in Headers */,
@@ -1459,6 +1466,7 @@
 				9757450721FFED530046C8A0 /* UIButton+block.m in Sources */,
 				9773F9B6221412D200DF5972 /* WalletGetDecimalsApi.m in Sources */,
 				E2317F291E31994500DBE3E4 /* ripemd160.c in Sources */,
+				9719BEB12228085200DA3F74 /* WalletAccountModel.m in Sources */,
 				9773F8EE2214109300DF5972 /* AFSecurityPolicy.m in Sources */,
 				E2FA04831E42A0300013E5A7 /* Utilities.m in Sources */,
 				E2317EA41E31970900DBE3E4 /* Transaction.m in Sources */,

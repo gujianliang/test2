@@ -61,10 +61,10 @@
     NSString *address = currentWallet[@"address"];
     [WalletUtils decryptSecretStorageJSON:keystore
                                  password:_oldPWTextField.text
-                                 callback:^(Account *account, NSError *NSError)
+                                 callback:^(WalletAccountModel * _Nonnull account, NSError * _Nonnull error)
      {
-         [hud hide:YES];
-         if (NSError) {
+        [hud hide:YES];
+         if (error) {
              MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
              hud.mode = MBProgressHUDModeText;
              hud.labelText = @"Wrong old password!";
