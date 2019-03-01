@@ -46,7 +46,7 @@
     
     /* Check your URL is available */
     NSURL *URL = [NSURL URLWithString:netUrl];
-    if (!URL) {
+    if (![[UIApplication sharedApplication] canOpenURL:URL]) {
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         hud.mode = MBProgressHUDModeText;
         hud.labelText =  @"The URL is not available.";
