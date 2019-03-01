@@ -16,7 +16,7 @@
 #import "WalletGetSymbolApi.h"
 #import "WalletSignParamModel.h"
 #import "SecureData.h"
-
+#import "Account.h"
 
 @implementation WalletUtils
 

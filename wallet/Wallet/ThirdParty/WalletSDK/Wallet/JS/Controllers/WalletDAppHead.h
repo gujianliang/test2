@@ -12,6 +12,8 @@
 #import "WalletSignParamModel.h"
 #import "Payment.h"
 #import "SecureData.h"
+#import "Account.h"
+#import "Transaction.h"
 
 #define TransferMethodId @"0xa9059cbb"
 #define VETGasLimit      @"21000"
