@@ -53,25 +53,35 @@
     NSMutableArray *newList1 = [NSMutableArray arrayWithArray:oldList];
     NSMutableArray *newList2 = [NSMutableArray arrayWithArray:oldList];
     
+    BOOL isEqual = NO;
     for (NSDictionary *dic in newList1) {
         NSString *tempUrl = dic[@"serverUrl"];
         if ([_netUrlText isEqualToString:tempUrl]) {
             [newList2 removeObject:dic];
+            isEqual = YES;
             break;
         }
     }
     
-    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-    [dict setObject:@"Develop Network" forKey:@"serverName"];
-    [dict setObject:Test_BlockHost forKey:@"serverUrl"];
-    
-    [[NSUserDefaults standardUserDefaults] setObject:newList2 forKey:@"netList"];
-    [[NSUserDefaults standardUserDefaults] setObject:dict forKey:@"CurrentNet"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-    
-    [WalletUtils setNode:Test_BlockHost];
-    
-    [self.navigationController popViewControllerAnimated:YES];
+    if (isEqual) {
+        NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+        [dict setObject:@"Develop Network" forKey:@"serverName"];
+        [dict setObject:Test_BlockHost forKey:@"serverUrl"];
+        
+        [[NSUserDefaults standardUserDefaults] setObject:newList2 forKey:@"netList"];
+        [[NSUserDefaults standardUserDefaults] setObject:dict forKey:@"CurrentNet"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
+        [WalletUtils setNode:Test_BlockHost];
+        
+        [self.navigationController popViewControllerAnimated:YES];
+        
+    }else {
+        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        hud.mode = MBProgressHUDModeText;
+        hud.labelText =  @"It's not a custom network.";
+        [hud hide:YES afterDelay:2.5];
+    }
 }
 
 
