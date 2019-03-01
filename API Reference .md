@@ -140,7 +140,7 @@
 + (BOOL)isValidKeystore:(NSString>)keystore;
 ```
 
-##  Verify get checksum address    
+##  Get checksum address    
 >
 >  @param address :wallet address   
 >  @return checksum address   
