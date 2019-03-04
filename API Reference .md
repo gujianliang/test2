@@ -118,7 +118,7 @@
 >
 >
 ```
-+ (void)injectJSWithWebView:(WKWebView>)webview;
++ (void)injectJSWithWebView:(WKWebView*)webview;
 ```
 ##   Sign and send
 >
@@ -128,7 +128,7 @@
 >
 >
 ```
-+ (void)sendWithKeystore:(NSString>)keystore parameter:(TransactionParameter>)parameter block:(void(^)(NSString *txId,NSString *signer))callback;
++ (void)sendWithKeystore:(NSString *)keystore parameter:(TransactionParameter *)parameter block:(void(^)(NSString *txId,NSString *signer))callback;
 ```
 ##   Verify the keystore word is legal 
 >
@@ -137,7 +137,7 @@
 >
 
 ```
-+ (BOOL)isValidKeystore:(NSString>)keystore;
++ (BOOL)isValidKeystore:(NSString *)keystore;
 ```
 
 ##  Get checksum address    
@@ -146,7 +146,7 @@
 >  @return checksum address   
 >
 ```
-+ (NSString>)getChecksumAddress:(NSString>)address;
++ (NSString *)getChecksumAddress:(NSString *)address;
 ```
 ##  Set node url   
 >
@@ -154,7 +154,7 @@
 >
 >
 ```
-+ (void)setNode:(NSString>)nodelUrl;
++ (void)setNode:(NSString *)nodelUrl;
 ```
 
 
