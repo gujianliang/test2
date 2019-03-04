@@ -1,6 +1,5 @@
 
 
-
 # Vechain Wallet Sdk 
 
 
@@ -10,20 +9,22 @@ Vechain wallet SDK provides a series of functional interface can help the iOS de
 
 **Features:**
 
-- create wallet
-- create wallet with mnemonic
-- Verify the mnemonic word is legal
+- Create wallet
+- Create wallet with mnemonic words
+- Verify mnemonic words
 - Decryption keystore
-- verify Message
-- sign message
-- encrypt private key to keystore
-- encrypt set current wallet address
+- Verify Message
+- Sign message
+- Get checksum address
+- Decrypt keystore
+- Encrypt keystore
 - Displays a JavaScript text input panel.
-- encrypt inject js into webview
-- encrypt The call sign control
-- Verify the mnemonic word is legal
-- Verify get checksum address
-- setup node url
+- Inject js into webview
+- Sign and send
+- Verify mnemonic words
+- Get checksum address
+- Set node url
+- Get node url
 
 ## Get Started 
 
@@ -45,26 +46,36 @@ To use the Framework, add the ethers.Framework to your project and add:
 callback:^(WalletAccountModel * _Nonnull account, NSError * _Nonnull error)
 {}];
 ```
-### 2，dapp Call web3 connex or development
+### 2，Dapp Call web3 connex or development
 
-#### 1. Add in viewDidLoad
+#### 1. Set node url.
+##### Set up the node environment. Test node environment and main node environment and custom node environment in demo
+
 ```
-[WalletUtils initWithWalletDict:walletList];
+[WalletUtils setNode:Test_Node];
 ````
 
-####  2. webview didCommitNavigation add a callback methods
+
+#### 2. Import keystore to SDK. 
+##### 
+```
+[WalletUtils initDappWebViewWithKeystore:walletList];
+
+````
+
+####  3. webview didCommitNavigation add a callback methods
 ```
 - (void)webView:(WKWebView *)webView didCommitNavigation:(null_unspecified WKNavigation *)navigation;
 {
-[WalletUtils injectJS:webView];
+    [WalletUtils injectJSWithWebView:webView];
 }
 ```
 
-#### 3. Add the callback method in the webview runJavaScriptTextInputPanelWithPrompt
+#### 4. Add the callback method in the webview runJavaScriptTextInputPanelWithPrompt
 ```
 - (void)webView:(WKWebView *)webView runJavaScriptTextInputPanelWithPrompt:(NSString *)prompt defaultText:(nullable NSString *)defaultText initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(NSString * __nullable result))completionHandler
 {
-[WalletUtils webView:webView  defaultText:defaultText completionHandler:completionHandler];
+    [WalletUtils webView:webView  defaultText:defaultText completionHandler:completionHandler];
 }
 ```
 ## 3. Several main data structures
