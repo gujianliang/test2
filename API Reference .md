@@ -6,7 +6,7 @@
 
 ```
 + (void)creatWalletWithPassword:(NSString *)password
-                       callBack:(void(^)(WalletAccountModel *account)) callBack;
+                       callBack:(void(^)(WalletAccountModel *account))callBack;
 
 ```
 
