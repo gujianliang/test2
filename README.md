@@ -35,7 +35,7 @@ To use the Framework, add the WalletSDK.Framework to your project :
 
 ###  1，Basic wallet development
 
-#### 1.1 Set node url.
+#### 1.1 Set node url
 ##### Set up the node environment. (Test_node environment , Main_node environment and custom node environment in demo)
 
 ```
