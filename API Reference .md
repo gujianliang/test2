@@ -1,12 +1,12 @@
 ##  Create wallet   
 >
 >    @param password :Wallet password  
->    @param block : Callback after the end；The attributes of a class has mnemonicPhras , address, privateKey, keystore 
+>    @param callback : Callback after the end；The attributes of a class has mnemonicPhras , address, privateKey, keystore 
 > 
 
 ```
 + (void)creatWalletWithPassword:(NSString *)password
-                       callback:(void(^)(WalletAccountModel *account,NSError *error))callBack;
+                       callback:(void(^)(WalletAccountModel *account,NSError *error))callback;
 
 ```
 
@@ -14,7 +14,7 @@
 >
 >    @param mnemonicList :12 words
 >    @param password :Wallet password    
->    @param block : Callback after the end；The attributes of a class has mnemonicPhras , address, privateKey, keystore 
+>    @param callback : Callback after the end；The attributes of a class has mnemonicPhras , address, privateKey, keystore 
 > 
 ```
 
@@ -119,7 +119,7 @@
 >
 >  @param parameter: signature parameters   
 >  @param keystoreJson: Keystore in json format   
->  @param block: callback   
+>  @param callback: Callback after the end     
 >
 >
 ```
