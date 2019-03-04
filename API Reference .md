@@ -6,7 +6,7 @@
 
 ```
 + (void)creatWalletWithPassword:(NSString *)password
-                       callBack:(void(^)(WalletAccountModel *account))callBack;
+                       callback:(void(^)(WalletAccountModel *account,NSError *error))callBack;
 
 ```
 
@@ -24,13 +24,13 @@
 
 ```
 
-##  Verify the mnemonic word     
+##  Verify the mnemonic words    
 >
 >   @param mnemonicList :12 words   
 >@return verification results
 > 
 ```
-+ (BOOL)isValidMnemonicPhrase:(NSArray *)mnemonicList;
++ (BOOL)isValidMnemonic:(NSArray *)mnemonicList;
 ```
 
 
@@ -70,7 +70,7 @@
                password:(NSString *)password
                callback:(void(^)(WalletAccountModel *account,NSError *error))callback;
 ```
-##  change wallet password
+##  Change wallet password
 >
 >   @param password :Wallet password   
 >   @param account :WalletAccountModel object   
@@ -82,44 +82,6 @@
                 account:(WalletAccountModel *)account
                callback:(void (^)(NSString *))callback;
 ```
-
-##   Sign message  
->
->   @param message : Prepare the data to be signed   
->   @param keystore :Keystore in json format   
->   @param password :  Wallet password   
->   @param callback :Callback after the end  
->
-
-```
-+ (void)sign:(NSData *)hashedMessage
-    keystore:(NSString *)keystore
-    password:(NSString *)password
-    callback:(void (^)(NSData *signatureData,NSError *error))callback;
-
-```
-
-##   Sign and send
->
->  @param parameter: signature parameters   
->  @param keystore: wallet for keystore    
->  @param block: callback   
->
->
-```
-+ (void)sendWithKeystore:(NSString *)keystore parameter:(TransactionParameter *)parameter callback:(void(^)(NSString *txId,NSString *signer))callback;
-```
-
-##   Verify the keystore word is legal 
->
->  @param keystore :wallet for keystore   
->  @return verification results   
->
-
-```
-+ (BOOL)isValidKeystore:(NSString *)keystore;
-```
-
 ##  Set node url   
 >
 >  @param nodelUrl :node url   
@@ -128,6 +90,53 @@
 ```
 + (void)setNode:(NSString *)nodelUrl;
 ```
+
+/**
+ *  @abstract
+ *  get node url
+ *
+ */
++ (NSString *)getNode;
+
+
+
+##   Sign message  
+>
+>   @param message : Prepare the data to be signed   
+>   @param keystoreJson :Keystore in json format   
+>   @param password :  Wallet password   
+>   @param callback :Callback after the end  
+>
+
+```
++ (void)sign:(NSData *)hashedMessage
+    keystore:(NSString *)keystoreJson
+    password:(NSString *)password
+    callback:(void (^)(NSData *signatureData,NSError *error))callback;
+
+```
+
+##   Sign and send
+>
+>  @param parameter: signature parameters   
+>  @param keystoreJson: wallet for keystore    
+>  @param block: callback   
+>
+>
+```
++ (void)sendWithKeystore:(NSString *)keystoreJson parameter:(TransactionParameter *)parameter callback:(void(^)(NSString *txId,NSString *signer))callback;
+```
+
+##   Verify the keystore word is legal 
+>
+>  @param keystoreJson : wallet for keystore   
+>  @return verification results   
+>
+
+```
++ (BOOL)isValidKeystore:(NSString *)keystoreJson;
+```
+
 
 ##  Set the keystore list to sdk  
 >
