@@ -86,7 +86,7 @@
     paramters.data = @"";
 
     paramters.from = from;
-    paramters.gas = @"21000";
+    paramters.gas = @"21000";//Set maximum gas allowed for call
 
     [WalletUtils sendWithKeystore:keystore
                                parameter:paramters
