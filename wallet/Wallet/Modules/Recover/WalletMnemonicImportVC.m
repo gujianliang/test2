@@ -13,7 +13,7 @@
 
 @interface WalletMnemonicImportVC ()
 
-@property (weak, nonatomic) IBOutlet UITextView *improtMnemonicWords;   /* It is used to input the wallet mnemonic words */
+@property (weak, nonatomic) IBOutlet UITextView *importMnemonicWords;   /* It is used to input the wallet mnemonic words */
 @property (weak, nonatomic) IBOutlet UITextField *password;             /* The wallet new password that you want to create */
 
 @end
@@ -51,7 +51,7 @@
      */
     
     /* Check your input password and mnemonic words that can not be blank. */
-    if (self.password.text.length == 0 || self.improtMnemonicWords.text.length == 0){
+    if (self.password.text.length == 0 || self.importMnemonicWords.text.length == 0){
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         hud.mode = MBProgressHUDModeText;
         hud.labelText =  @"The input cannot be null.";   
@@ -60,7 +60,7 @@
     }
     
     /* Check your input mnemonic words are available. */
-    if (![Account isValidMnemonicPhrase:self.improtMnemonicWords.text]) {
+    if (![WalletUtils isValidMnemonicWords:self.importMnemonicWords.text]) {
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         hud.mode = MBProgressHUDModeText;
         hud.labelText =  @"Mnemonic Words is not available.";
@@ -75,7 +75,7 @@
     
     
     /* Create a wallet with your password and mnemonic words. */
-    [WalletUtils creatWalletWithMnemonic:[self.improtMnemonicWords.text.lowercaseString componentsSeparatedByString:@" "]
+    [WalletUtils creatWalletWithMnemonicWords:[self.importMnemonicWords.text.lowercaseString componentsSeparatedByString:@" "]
                                 password:self.password.text
                                 callback:^(WalletAccountModel * _Nonnull account, NSError * _Nonnull error)
      {

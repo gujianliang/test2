@@ -282,10 +282,7 @@
                   callbackId:(NSString *)callbackId
 
 {
-#warning
-    if (![WalletTools errorAddressAlert:paramModel.toAddress] ||
-        ![WalletTools fromISToAddress:paramModel.fromAddress to:paramModel.toAddress]
-        ||!(paramModel.gas.integerValue > 0)) {
+    if (![WalletTools fromISToAddress:paramModel.fromAddress to:paramModel.toAddress]) {
         
         [WalletTools callbackWithrequestId:requestId
                                   webView:webView

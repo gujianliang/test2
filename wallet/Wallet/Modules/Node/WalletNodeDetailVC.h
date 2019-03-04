@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface WalletNodeDetailVC : UIViewController
 
-- (void)netName:(NSString *)netName netUrl:(NSString *)netUrl;
+- (void)nodeName:(NSString *)nodeName nodeUrl:(NSString *)nodeUrl;
 
 @end
 

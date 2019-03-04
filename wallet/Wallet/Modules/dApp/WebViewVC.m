@@ -50,7 +50,7 @@
     [self.view addSubview:_webView];
     
     /*
-     CurrentWallet has two key, addres and ketstore
+     CurrentWallet has two key; addres and ketstore
                 Address: 0 x hex 20 bytes
                 Keystore: NSDictionary, specific format, please read the readme
      */
@@ -62,7 +62,7 @@
     }
     
     // intput wallet list detail to sdk，
-    [WalletUtils initWebViewWithKeystore:walletList];
+    [WalletUtils initDappWebViewWithKeystore:walletList];
     
 }
 

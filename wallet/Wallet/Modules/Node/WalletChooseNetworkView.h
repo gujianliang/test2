@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface WalletChooseNetworkView : UIView
 
-@property(nonatomic,copy)void (^block)(NSString *netName, NSString *netUrl);
+@property(nonatomic,copy)void (^block)(NSString *nodeName, NSString *nodeUrl);
 
 @end
 

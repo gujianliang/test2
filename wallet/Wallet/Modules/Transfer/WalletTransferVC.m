@@ -88,9 +88,9 @@
     paramters.from = from;
     paramters.gas = @"21000";
 
-    [WalletUtils transactionWithKeystore:keystore
+    [WalletUtils sendWithKeystore:keystore
                                parameter:paramters
-                                   block:^(NSString *txId, NSString *signer)
+                                   callback:^(NSString *txId, NSString *signer)
      {
 
         NSLog(@"dd");
@@ -110,9 +110,9 @@
     paramters.from = from;
     paramters.gas = @"60000";
     
-    [WalletUtils transactionWithKeystore:keystore
+    [WalletUtils sendWithKeystore:keystore
                                parameter:paramters
-                                   block:^(NSString *txId, NSString *signer)
+                                   callback:^(NSString *txId, NSString *signer)
      {
          NSLog(@"dd");
      }];
@@ -162,9 +162,9 @@
     paramters.from = from;
     paramters.gas = @"600000";
     
-    [WalletUtils transactionWithKeystore:keystore
-                               parameter:paramters
-                                   block:^(NSString *txId, NSString *signer)
+    [WalletUtils sendWithKeystore:keystore
+                        parameter:paramters
+                                callback:^(NSString *txId, NSString *signer)
      {
          NSLog(@"dd");
      }];

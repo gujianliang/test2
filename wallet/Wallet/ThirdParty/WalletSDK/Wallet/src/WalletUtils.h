@@ -18,42 +18,42 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  *  @abstract
- *  create wallet
+ *  Create wallet
  *
- *  @param password :Wallet password
- *  @param block : Callback after the end
+ *  @param password : Wallet password
+ *  @param callBack : Callback after the end;The attributes of a class has mnemonicPhras , address, privateKey, keystore
  *
  */
-+ (void)createWalletWithPassword:(NSString *)password
-                        callback:(void(^)(WalletAccountModel *account,NSError *error))block;
++ (void)creatWalletWithPassword:(NSString *)password
+                       callback:(void(^)(WalletAccountModel *account,NSError *error))callback;
 
 /**
  *  @abstract
- *  create wallet with mnemonic
+ *  Create wallet with mnemonic
  *
- *  @param mnemonicList :12 words for create wallet
- *  @param password :Wallet password
- *  @param block : Callback after the end
+ *  @param mnemonicWords :12 words for create wallet
+ *  @param password : Wallet password
+ *  @param callback : Callback after the end;The attributes of a class has mnemonicPhras , address, privateKey, keystore
  */
 
-+ (void)creatWalletWithMnemonic:(NSArray *)mnemonicList
-                      password:(NSString *)password
-                       callback:(void(^)(WalletAccountModel *account,NSError *error))block;
++ (void)creatWalletWithMnemonicWords:(NSArray *)mnemonicWords
+                            password:(NSString *)password
+                            callback:(void(^)(WalletAccountModel *account,NSError *error))callback;
 
 /**
  *  @abstract
- *  Verify the mnemonic word is legal
+ *  Verify the mnemonic words
  *
- *  @param mnemonicList :12 words
+ *  @param mnemonicWords : 12 words
  *  @return verification results
  */
-+ (BOOL)isValidMnemonicPhrase:(NSString*)mnemonicList;
++ (BOOL)isValidMnemonicWords:(NSString *)mnemonicWords;
 
 
 
 /**
  *  @abstract
- *  recover address
+ *  Recover address
  *
  *  @param message : Data before signature
  *  @param signatureData : Data after signature
@@ -65,54 +65,101 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  *  @abstract
- *  sign message
+ *  Verify the mnemonic word is legal
+ *  @param keystoreJson :Keystore in json format
  *
- *  @param message : Prepare the data to be signed
- *  @param json :Keystore in json format
- *  @param password :Wallet password
- *  @param block :Callback after the end
- *
+ *  @return verification result
  */
-+ (void)signature:(NSData*)message
-         keystore:(NSString*)json
-         password:(NSString*)password
-            block:(void (^)(NSData *signatureData,NSError *error))block;
++ (BOOL)isValidKeystore:(NSString *)keystoreJson;
+
+/**
+ *  @abstract
+ *  Get checksum address
+ *
+ *  @param address :Wallet address
+ *
+ *  @return checksum address
+ */
++ (NSString *)getChecksumAddress:(NSString *)address;
+
 
 /**
  *  @abstract
  *  Decryption keystore
  *
- *  @param json : Keystore in json format
+ *  @param keystoreJson : Keystore in json format
  *  @param password : Wallet password
  *  @param callback : Callback after the end
  *
  */
-+ (void)decryptSecretStorageJSON:(NSString*)json
-                        password:(NSString*)password
-                        callback:(void(^)(WalletAccountModel *account,NSError *error))callback;
++ (void)decryptKeystore:(NSString*)keystoreJson
+               password:(NSString*)password
+               callback:(void(^)(WalletAccountModel *account,NSError *error))callback;
 
 
 /**
  *  @abstract
- *  Use the new password to encrypt.
+ *  Change keystore password
  *
- *  @param password :Wallet password
- *  @param walletAccount :Account object
+ *  @param password : Wallet password
+ *  @param account : WalletAccountModel object
+ *  @param callback : Callback after the end
+ *
+ */
++ (void)encryptKeystore:(NSString*)password
+                account:(WalletAccountModel *)account
+               callback:(void (^)(NSString *keystoreJson))callback;
+
+/**
+ *  @abstract
+ *  Set node url
+ *
+ *  @param nodelUrl :node url
+ *
+ */
++ (void)setNode:(NSString *)nodelUrl;
+
+/**
+ *  @abstract
+ *  get node url
+ *
+ */
++ (NSString *)getNode;
+
+/**
+ *  @abstract
+ *  Sign message
+ *
+ *  @param hashedMessage : Prepare the data to be signed
+ *  @param keystoreJson : Keystore in json format
+ *  @param password : Wallet password
+ *  @param callback : Callback after the end
+ *
+ */
++ (void)sign:(NSData*)hashedMessage
+    keystore:(NSString*)keystoreJson
+    password:(NSString*)password
+    callback:(void (^)(NSData *signatureData,NSError *error))callback;
+
+/**
+ *  @abstract
+ *  Sign and send
+ *
+ *  @param parameter :Signature parameters
+ *  @param keystoreJson :Keystore in json format
  *  @param callback :Callback after the end
  *
  */
-+ (void)encryptSecretStorageJSON:(NSString*)password
-                         account:(WalletAccountModel *)walletAccount
-                        callback:(void (^)(NSString *))callback;
++ (void)sendWithKeystore:(NSString *)keystoreJson parameter:(TransactionParameter *)parameter callback:(void(^)(NSString *txId,NSString *signer))callback;
 
 /**
  *  @abstract
  *  Set the keystore list to sdk
  *
- *  @param keystoreList :Array of keystore json
+ *  @param keystoreList : Array of keystore json
  *
  */
-+ (void)initWebViewWithKeystore:(NSArray *)keystoreList;
++ (void)initDappWebViewWithKeystore:(NSArray *)keystoreList;
 
 /*! @abstract Displays a JavaScript text input panel.
  *  @param webView The web view invoking the delegate method.
@@ -125,60 +172,13 @@ OK, otherwise nil.
 
 /**
  *  @abstract
- *  inject js into webview
+ *  Inject js into webview
  *
- *  @param webview :Developer generated webview object
+ *  @param webview : Developer generated webview object
  *
  */
 + (void)injectJSWithWebView:(WKWebView *)webview;
 
-/**
- *  @abstract
- *   call sign control
- *
- *  @param parameter :Signature parameters
- *  @param keystore :Keystore in json format
- *  @param block :Callback after the end
- *
- */
-+ (void)transactionWithKeystore:(NSString *)keystore parameter:(TransactionParameter *)parameter block:(void(^)(NSString *txId,NSString *signer))block;
-
-/**
- *  @abstract
- *  Verify the mnemonic word is legal
- *  @param keystore :Keystore in json format
- *
- *  @return verification results
- */
-+ (BOOL)isValidKeystore:(NSString *)keystore;
-
-/**
- *  @abstract
- *  Verify get checksum address
- *
- *  @param address :Wallet address
- *
- *  @return checksum address
- */
-+ (NSString *)getChecksumAddress:(NSString *)address;
-
-/**
- *  @abstract
- *  setup node url
- *
- *  @param nodelUrl :node url
- *
- */
-+ (void)setNode:(NSString *)nodelUrl;
-
-/**
- *  @abstract
- *  get node url
- *
- * 
- *
- */
-+ (NSString *)getNode;
 
 
 NS_ASSUME_NONNULL_END

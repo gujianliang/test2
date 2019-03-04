@@ -21,7 +21,7 @@
 
 - (void)viewDidLoad{
     [super viewDidLoad];
-    self.title = @"Add Custom Network";
+    self.title = @"Add Custom Node";
 }
 
 
@@ -30,12 +30,12 @@
 */
 - (IBAction)setCustomNetworkEnvironment:(id)sender{
     
-    NSString *netName = self.customNameTextFild.text;
-    NSString *netUrl = self.customNetTextView.text;
+    NSString *nodeName = self.customNameTextFild.text;
+    NSString *nodeUrl = self.customNetTextView.text;
     
     
     /* Check your input network name and network URL that can not be blank. */
-    if (netName.length == 0 || netUrl.length == 0 ){
+    if (nodeName.length == 0 || nodeUrl.length == 0 ){
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         hud.mode = MBProgressHUDModeText;
         hud.labelText =  @"The input cannot be null.";
@@ -45,7 +45,7 @@
     
     
     /* Check your URL is available */
-    NSURL *URL = [NSURL URLWithString:netUrl];
+    NSURL *URL = [NSURL URLWithString:nodeUrl];
     if (![[UIApplication sharedApplication] canOpenURL:URL]) {
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         hud.mode = MBProgressHUDModeText;
@@ -58,15 +58,15 @@
     NSArray *oldList = [[NSUserDefaults standardUserDefaults] objectForKey:@"nodeList"];
     NSMutableArray *newList = [NSMutableArray arrayWithArray:oldList];
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-    [dict setObject:netName forKey:@"nodeName"];
-    [dict setObject:netUrl forKey:@"nodeUrl"];
+    [dict setObject:nodeName forKey:@"nodeName"];
+    [dict setObject:nodeUrl forKey:@"nodeUrl"];
     [newList addObject:dict];
     
     [[NSUserDefaults standardUserDefaults] setObject:newList forKey:@"nodeList"];
-    [[NSUserDefaults standardUserDefaults] setObject:dict forKey:@"CurrentNet"];
+    [[NSUserDefaults standardUserDefaults] setObject:dict forKey:@"CurrentNode"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
-    [WalletUtils setNode:netUrl];
+    [WalletUtils setNode:nodeUrl];
 
     [self.navigationController popViewControllerAnimated:YES];
 }

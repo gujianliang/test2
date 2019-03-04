@@ -59,9 +59,9 @@
     NSDictionary *currentWallet = [[NSUserDefaults standardUserDefaults] objectForKey:@"currentWallet"];
     NSString *keystore = currentWallet[@"keystore"];
     NSString *address = currentWallet[@"address"];
-    [WalletUtils decryptSecretStorageJSON:keystore
-                                 password:_oldPWTextField.text
-                                 callback:^(WalletAccountModel * _Nonnull account, NSError * _Nonnull error)
+    [WalletUtils decryptKeystore:keystore
+                        password:_oldPWTextField.text
+                        callback:^(WalletAccountModel * _Nonnull account, NSError * _Nonnull error)
      {
         [hud hide:YES];
          if (error) {
@@ -73,7 +73,7 @@
          }
          
          /* Use the new password to encrypt. */
-         [WalletUtils encryptSecretStorageJSON:self.nextPWTextField.text
+         [WalletUtils encryptKeystore:self.nextPWTextField.text
                                        account:account
                                       callback:^(NSString *json) {
              [hud hide:YES];

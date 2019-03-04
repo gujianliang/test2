@@ -13,11 +13,11 @@
 
 @interface WalletNodeDetailVC ()
 {
-    NSString *_netNameText;   /*  It‘s a temp variable that used to save network environment name */
-    NSString *_netUrlText;    /*  It‘s a temp variable that used to save network environment URL */
+    NSString *_nodeNameText;   /*  It‘s a temp variable that used to save network environment name */
+    NSString *_nodeUrlText;    /*  It‘s a temp variable that used to save network environment URL */
 }
-@property (weak, nonatomic) IBOutlet UILabel *netName;   /* It's used to show network environment name */
-@property (weak, nonatomic) IBOutlet UILabel *netUrl;    /* It's used to show network environment URL */
+@property (weak, nonatomic) IBOutlet UILabel *nodeName;   /* It's used to show network environment name */
+@property (weak, nonatomic) IBOutlet UILabel *nodeUrl;    /* It's used to show network environment URL */
 
 @end
 
@@ -28,17 +28,17 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    _netName.text = _netNameText;
-    _netUrl.text = _netUrlText;
+    _nodeName.text = _nodeNameText;
+    _nodeUrl.text = _nodeUrlText;
 }
 
 
 /**
 *  Just save the network environment URL and name.
 */
-- (void)netName:(NSString *)netName netUrl:(NSString *)netUrl{
-    _netNameText = netName;
-    _netUrlText = netUrl;
+- (void)nodeName:(NSString *)nodeName nodeUrl:(NSString *)nodeUrl{
+    _nodeNameText = nodeName;
+    _nodeUrlText = nodeUrl;
 }
 
 
@@ -63,7 +63,7 @@
     BOOL isEqual = NO;
     for (NSDictionary *dic in newList1) {
         NSString *tempUrl = dic[@"nodeUrl"];
-        if ([_netUrlText isEqualToString:tempUrl]) {
+        if ([_nodeUrlText isEqualToString:tempUrl]) {
             [newList2 removeObject:dic];
             isEqual = YES;
             break;
@@ -72,11 +72,11 @@
     
     if (isEqual) {
         NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-        [dict setObject:@"Develop Network" forKey:@"nodeName"];
+        [dict setObject:@"Develop Node" forKey:@"nodeName"];
         [dict setObject:Test_BlockHost forKey:@"nodeUrl"];
         
         [[NSUserDefaults standardUserDefaults] setObject:newList2 forKey:@"nodeList"];
-        [[NSUserDefaults standardUserDefaults] setObject:dict forKey:@"CurrentNet"];
+        [[NSUserDefaults standardUserDefaults] setObject:dict forKey:@"CurrentNode"];
         [[NSUserDefaults standardUserDefaults] synchronize];
         
         [WalletUtils setNode:Test_BlockHost];

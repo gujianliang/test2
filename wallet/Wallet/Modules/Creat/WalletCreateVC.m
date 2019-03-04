@@ -56,7 +56,7 @@
     
     
     /* Create a wallet with your password. */
-    [WalletUtils createWalletWithPassword:self.passwordLabel.text
+    [WalletUtils creatWalletWithPassword:self.passwordLabel.text
                                  callback:^(WalletAccountModel * _Nonnull account, NSError * _Nonnull error)
 
     {

@@ -89,9 +89,9 @@
 
     
     /* Create a wallet with your password and keystore. */
-    [WalletUtils decryptSecretStorageJSON:self.keystoreTextView.text.lowercaseString
-                                 password:self.password.text
-                                 callback:^(WalletAccountModel * _Nonnull account, NSError * _Nonnull error)
+    [WalletUtils decryptKeystore:self.keystoreTextView.text.lowercaseString
+                        password:self.password.text
+                        callback:^(WalletAccountModel * _Nonnull account, NSError * _Nonnull error)
      {
          [hud hide:YES];
          

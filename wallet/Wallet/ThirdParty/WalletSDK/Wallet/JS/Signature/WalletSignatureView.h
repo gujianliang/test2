@@ -41,7 +41,6 @@ typedef NS_ENUM(NSInteger,JSTransferType)
 @property(nonatomic, strong) WalletCoinModel *currentCoinModel;
 @property(nonatomic, copy) NSString *fromAddress;
 @property(nonatomic, copy) NSString *toAddress;
-@property(nonatomic, assign) ContractType contractType;
 @property(nonatomic, copy) NSString *amount;
 @property(nonatomic, strong) NSNumber *gas;
 @property(nonatomic, copy) NSString *gasLimit;

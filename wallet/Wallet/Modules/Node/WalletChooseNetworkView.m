@@ -53,12 +53,12 @@
     _newList = [NSMutableArray array];
     
     NSMutableDictionary *dict1 = [NSMutableDictionary dictionary];
-    [dict1 setObject:@"Product Network" forKey:@"nodeName"];
+    [dict1 setObject:@"Product Node" forKey:@"nodeName"];
     [dict1 setObject:Main_BlockHost forKey:@"nodeUrl"];
     [_newList addObject:dict1];
     
     NSMutableDictionary *dict2 = [NSMutableDictionary dictionary];
-    [dict2 setObject:@"Develop Network" forKey:@"nodeName"];
+    [dict2 setObject:@"Develop Node" forKey:@"nodeName"];
     [dict2 setObject:Test_BlockHost forKey:@"nodeUrl"];
     [_newList addObject:dict2];
 
@@ -84,7 +84,7 @@
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeSystem];
     btn.frame = CGRectMake(15, 0, 165, 50);
     btn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-    [btn setTitle:@"Add Network" forState:UIControlStateNormal];
+    [btn setTitle:@"Add Node" forState:UIControlStateNormal];
     [btn addTarget:self action:@selector(addNetwork) forControlEvents:UIControlEventTouchUpInside];
     [footV addSubview:btn];
     tableView.tableFooterView = footV;
@@ -130,7 +130,7 @@
     }
     
     if (serverUrl.length > 0) {
-        [[NSUserDefaults standardUserDefaults] setObject:dict forKey:@"CurrentNet"];
+        [[NSUserDefaults standardUserDefaults] setObject:dict forKey:@"CurrentNode"];
         [[NSUserDefaults standardUserDefaults] synchronize];
     }
     

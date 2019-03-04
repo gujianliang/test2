@@ -50,30 +50,6 @@
 
 
 
-typedef NS_ENUM(NSInteger,SwapXnode)
-{
-    TokenSwapType = 10,
-    XNodeType,
-    NothingType
-};
-
-typedef NS_ENUM(NSInteger , ContractType)
-{
-    Contract_appyNode,          // 升级
-    Contract_cancelNode,        // 取消升级
-    Contract_PubicSale,         // 公开拍卖
-    Contract_OrientSale,        // 定向拍卖
-    Contract_acceptNode,        // 接收节点
-    Contract_buyNode,           // 购买节点
-    Contract_cancelSaleNode,     // 取消拍卖
-    Contract_transfer,           // 节点转到另外的钱包
-    
-#warning 名称
-    NoContract_transferToken    //单纯token 转账
-};
-
-
-
 @interface WalletTools : NSObject
 
 
@@ -142,24 +118,6 @@ typedef NS_ENUM(NSInteger , ContractType)
 
 +(BOOL)hasSpecialWord:(NSString *)words;
 
-// 创建二维码
-+(UIImage *)creatQRcodeImage:(NSString *)content;
-
-
-//观察钱包，地址授权
-+(void)observerAuthAddress:(UIViewController *)vc
-                     model:(WalletAddressAuthModel *)model
-              sessiontoken:(NSString *)sessiontoken;
-
-
-//正常地址授权
-+(void)normalAddressProgress:(NSString *)address
-                          vc:(UIViewController *)vc
-                   AuthModel:(WalletAddressAuthModel *)model
-                sessiontoken:(NSString *)sessiontoken;
-
-//画虚线
-+ (void)drawDottedLine:(UIView *)view;
 
 //查询block节点信息 交易信息
 + (NSString *)blockWtihMethod:(NSString *)methodId tokenID:(NSString *)tokenID;
@@ -168,10 +126,6 @@ typedef NS_ENUM(NSInteger , ContractType)
 + (NSString *)contractMethodId:(NSString *)methodId params:(NSArray *)params;
 
 
-//合约组合相关信息
-+ (NSDictionary *)getContractData:(ContractType)contractType params:(NSArray *)params;
-
-+(ContractType)methodIDConvertContractType:(NSString *)methodID;
 
 // 10进制转千分符格式， decimals 是否保留小数 结尾 甚至【.00】
 + (NSString *)thousandSeparator:(NSString *)inputStr decimals:(BOOL)decimals;

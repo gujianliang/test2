@@ -13,12 +13,12 @@
 
 + (NSString *)getBlockUrl
 {
-    return [[NSUserDefaults standardUserDefaults] objectForKey:@"BlockUrl"];
+    return [[NSUserDefaults standardUserDefaults] objectForKey:@"wallerSDK_BlockUrl"];
 }
 
 + (void)setBlockUrl:(NSString *)blockUrl
 {
-    [[NSUserDefaults standardUserDefaults] setObject:blockUrl forKey:@"BlockUrl"];
+    [[NSUserDefaults standardUserDefaults] setObject:blockUrl forKey:@"wallerSDK_BlockUrl"];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 

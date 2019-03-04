@@ -128,19 +128,19 @@
         chooseNetworkView.tag = 90;
         [self.view addSubview:chooseNetworkView];
         
-        chooseNetworkView.block = ^(NSString *netName, NSString *netUrl) {
+        chooseNetworkView.block = ^(NSString *nodeName, NSString *nodeUrl) {
 
-            if (netUrl.length == 0) {
+            if (nodeUrl.length == 0) {
                 WalletAddVthoNodeVC *detailVC = [[WalletAddVthoNodeVC alloc]init];
                 [self.navigationController pushViewController:detailVC animated:YES];
                 
             }else{
-                self.title = netName;
+                self.title = nodeName;
                 
-                [WalletUtils setNode:netUrl];
+                [WalletUtils setNode:nodeUrl];
                 
                 WalletNodeDetailVC *detailVC = [[WalletNodeDetailVC alloc]init];
-                [detailVC netName:netName netUrl:netUrl];
+                [detailVC nodeName:nodeName nodeUrl:nodeUrl];
                 [self.navigationController pushViewController:detailVC animated:YES];
             }
         };
@@ -153,19 +153,19 @@
 */
 - (void)setNetworkEnvironmentHost{
     
-    NSDictionary *dictCurrentNet = [[NSUserDefaults standardUserDefaults] objectForKey:@"CurrentNet"];
+    NSDictionary *dictCurrentNode = [[NSUserDefaults standardUserDefaults] objectForKey:@"CurrentNode"];
     
-    if (dictCurrentNet) { /* Set to the main network of your choice. */
-        NSString *customServerUrl = dictCurrentNet[@"nodeUrl"];
+    if (dictCurrentNode) { /* Set to the main network of your choice. */
+        NSString *customServerUrl = dictCurrentNode[@"nodeUrl"];
         if (customServerUrl.length > 0 ) {
             _blockHost = customServerUrl;
-            self.title = dictCurrentNet[@"nodeName"];
+            self.title = dictCurrentNode[@"nodeName"];
         }
     }
     
     if (_blockHost.length == 0) {  /* THe default Boloc Host. */
         _blockHost = Test_BlockHost;
-        self.title =  @"Develop Network";
+        self.title =  @"Develop Node";
         
         NSMutableDictionary *serverDict = [NSMutableDictionary dictionary];
         [serverDict setObject:_blockHost forKey:@"nodeUrl"];
