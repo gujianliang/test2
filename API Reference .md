@@ -149,7 +149,7 @@
 ```
 
 
-##   inject js into webview   
+##   Inject js into webview   
 >
 >  @param webview :Developer generated webview object   
 >
@@ -158,7 +158,7 @@
 + (void)injectJSWithWebView:(WKWebView *)webview;
 ```
 
-##  Display a JavaScript text input panel.  
+##  Analyze data in webview's runJavaScriptTextInputPanelWithPrompt callback method
 >
 > @param webView :The web view invoking the delegate method.   
 > @param defaultText: The initial text to display in the text entry field.   
