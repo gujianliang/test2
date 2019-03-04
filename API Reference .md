@@ -24,7 +24,7 @@
 
 ```
 
-##  Verify the mnemonic word is legal     
+##  Verify the mnemonic word     
 >
 >   @param mnemonicList :12 words   
 >@return verification results
@@ -65,17 +65,17 @@
 
 ##  Decrypt keystore
 >
- >  @param json : Keystore in json format   
+ >  @param keystore : Keystore in json format   
  >  @param password : Wallet password   
  >  @param callback : Callback after the end   
  >
  >
  ```
-+ (void)decryptSecretStorageJSON:(NSString*)json
++ (void)decryptkeystore:(NSString*)keystore
                         password:(NSString*)password
                         callback:(void(^)(WalletAccountModel *account,NSError *error))callback;
 ```
-##  Use the new password to encrypt.
+##  change wallet password
 >
 >   @param password :Wallet password   
 >   @param walletAccount :Account object   
@@ -83,9 +83,9 @@
 > 
 > 
 ```
-+ (void)encryptSecretStorageJSON:(NSString*)password
-                         account:(WalletAccountModel *)walletAccount
-                        callback:(void (^)(NSString *))callback;
++ (void)encryptkeystore:(NSString*)keystore
+                account:(WalletAccountModel *)walletAccount
+               callback:(void (^)(NSString *))callback;
 ```
 
 
@@ -109,7 +109,7 @@
   OK, otherwise nil.
 >
 ```
-+ (void)webView:(WKWebView*)webView defaultText:(NSString*)defaultText completionHandler:(void (^)(NSString>result))completionHandler;
++ (void)webView:(WKWebView *)webView defaultText:(NSString *)defaultText completionHandler:(void (^)(NSString *result))completionHandler;
 ```
 
 ##   inject js into webview   
@@ -118,7 +118,7 @@
 >
 >
 ```
-+ (void)injectJSWithWebView:(WKWebView*)webview;
++ (void)injectJSWithWebView:(WKWebView *)webview;
 ```
 ##   Sign and send
 >
