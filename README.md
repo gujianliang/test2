@@ -15,7 +15,7 @@ Vechain wallet SDK provides a series of functional interface can help the iOS de
 - Change Wallet password
 - Verify mnemonic words
 - Verify keystore
-- Verify Message
+- Recover address
 - Sign message
 - Sign and send
 - Inject js into webview
