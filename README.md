@@ -50,14 +50,14 @@ callback:^(WalletAccountModel * _Nonnull account, NSError * _Nonnull error)
 ```
 ### 2，Support dapp development environment (connex or web3)
 
-#### 2.1 Import keystore to SDK. 
+#### 2.1 Import keystore to SDK
 
 ```
 [WalletUtils initDappWebViewWithKeystore:walletList];
 
 ````
 
-#### 2.2  Inject js bridge into webview.
+#### 2.2  Inject js bridge into webview
 ##### 
 
 ```
