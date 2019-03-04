@@ -59,7 +59,7 @@ callback:^(WalletAccountModel * _Nonnull account, NSError * _Nonnull error)
 
 ````
 
-#### 2.2  webview didCommitNavigation add a callback methods
+#### 2.2  Added in the webview callback method didCommitNavigation
 ```
 - (void)webView:(WKWebView *)webView didCommitNavigation:(null_unspecified WKNavigation *)navigation;
 {
