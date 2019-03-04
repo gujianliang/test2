@@ -20,7 +20,7 @@
 
 + (void)creatWalletWithMnemonic:(NSArray *)mnemonicList
                        password:(NSString *)password
-                       callback:(void(^)(WalletAccountModel *account,NSError *error))block;
+                       callback:(void(^)(WalletAccountModel *account,NSError *error))callback;
 
 ```
 
@@ -128,7 +128,7 @@
 >
 >
 ```
-+ (void)sendWithKeystore:(NSString>)keystore parameter:(TransactionParameter>)parameter block:(void(^)(NSString>txId,NSString>signer))block;
++ (void)sendWithKeystore:(NSString>)keystore parameter:(TransactionParameter>)parameter block:(void(^)(NSString *txId,NSString *signer))callback;
 ```
 ##   Verify the keystore word is legal 
 >
