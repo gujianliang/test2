@@ -72,14 +72,14 @@
     
     if (isEqual) {
         NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-        [dict setObject:@"Develop Node" forKey:@"nodeName"];
-        [dict setObject:Test_BlockHost forKey:@"nodeUrl"];
+        [dict setObject:@"Test Node" forKey:@"nodeName"];
+        [dict setObject:Test_Node forKey:@"nodeUrl"];
         
         [[NSUserDefaults standardUserDefaults] setObject:newList2 forKey:@"nodeList"];
         [[NSUserDefaults standardUserDefaults] setObject:dict forKey:@"CurrentNode"];
         [[NSUserDefaults standardUserDefaults] synchronize];
         
-        [WalletUtils setNode:Test_BlockHost];
+        [WalletUtils setNode:Test_Node];
         
         [self.navigationController popViewControllerAnimated:YES];
         

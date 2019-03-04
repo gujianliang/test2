@@ -53,13 +53,13 @@
     _newList = [NSMutableArray array];
     
     NSMutableDictionary *dict1 = [NSMutableDictionary dictionary];
-    [dict1 setObject:@"Product Node" forKey:@"nodeName"];
-    [dict1 setObject:Main_BlockHost forKey:@"nodeUrl"];
+    [dict1 setObject:@"Main Node" forKey:@"nodeName"];
+    [dict1 setObject:Main_Node forKey:@"nodeUrl"];
     [_newList addObject:dict1];
     
     NSMutableDictionary *dict2 = [NSMutableDictionary dictionary];
-    [dict2 setObject:@"Develop Node" forKey:@"nodeName"];
-    [dict2 setObject:Test_BlockHost forKey:@"nodeUrl"];
+    [dict2 setObject:@"Test Node" forKey:@"nodeName"];
+    [dict2 setObject:Test_Node forKey:@"nodeUrl"];
     [_newList addObject:dict2];
 
     if (netList.count > 0) {

@@ -164,8 +164,8 @@
     }
     
     if (_blockHost.length == 0) {  /* THe default Boloc Host. */
-        _blockHost = Test_BlockHost;
-        self.title =  @"Develop Node";
+        _blockHost = Test_Node;
+        self.title =  @"Test Node";
         
         NSMutableDictionary *serverDict = [NSMutableDictionary dictionary];
         [serverDict setObject:_blockHost forKey:@"nodeUrl"];

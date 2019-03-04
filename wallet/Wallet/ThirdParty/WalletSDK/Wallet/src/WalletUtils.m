@@ -59,21 +59,33 @@
                             password:(NSString *)password
                             callback:(void(^)(WalletAccountModel *account,NSError *error))callback
 {
-    __block Account *account = [Account accountWithMnemonicPhrase:[mnemonicWords componentsJoinedByString:@" "]];
+    
+    NSString *domain = @"com.wallet.ErrorDomain";
+    NSString *desc = @"Generate keystore fail";
+    NSDictionary *userInfo = @{ NSLocalizedDescriptionKey : desc };
+    
+    NSError *error = [NSError errorWithDomain:domain
+                                         code:-101
+                                     userInfo:userInfo];
+    
+    NSMutableArray *trimeList = [NSMutableArray array];
+    for (NSString * word in mnemonicWords) {
+        if (word.length == 0) {
+            callback(nil,error);
+            break;
+        }else{
+            NSString *trimeWord = [word stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+            [trimeList addObject:trimeWord];
+        }
+    }
+    
+    __block Account *account = [Account accountWithMnemonicPhrase:[trimeList componentsJoinedByString:@" "]];
     
     [account encryptSecretStorageJSON:password callback:^(NSString *json) {
         
         account.keystore = json;
         if (json.length == 0) {
             if (callback) {
-                NSString *domain = @"com.wallet.ErrorDomain";
-                NSString *desc = @"Generate keystore fail";
-                NSDictionary *userInfo = @{ NSLocalizedDescriptionKey : desc };
-                
-                NSError *error = [NSError errorWithDomain:domain
-                                                     code:-101
-                                                 userInfo:userInfo];
-                
                 callback(nil,error);
             }
         }else{
@@ -93,6 +105,15 @@
 
 + (BOOL)isValidMnemonicWords:(NSArray*)mnemonicWords;
 {
+    NSMutableArray *trimeList = [NSMutableArray array];
+    for (NSString * word in mnemonicWords) {
+        if (word.length == 0) {
+            return NO;
+        }else{
+            NSString *trimeWord = [word stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+            [trimeList addObject:trimeWord];
+        }
+    }
     return [Account isValidMnemonicPhrase:[mnemonicWords componentsJoinedByString:@" "]];
 }
 
