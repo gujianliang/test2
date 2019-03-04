@@ -3,7 +3,7 @@
 
 ## Introduction
 
-Vechain wallet SDK provides a series of functional interface can help the iOS developers, for example: developers to quickly create the purse, the private key signature, call vechain block interface, data on the chain, and convenient call vechain connex.
+Vechain wallet SDK provides a series of functional interface can help the iOS developers, for example: quickly create the purse, the private key signature, call vechain block interface, data on the chain, and support dapp development environment.
 
 **Features:**
 
@@ -36,7 +36,7 @@ To use the Framework, add the WalletSDK.Framework to your project :
 ###  1，Basic wallet development
 
 #### 1.1 Set node url.
-##### Set up the node environment. Test_node environment and Main_node environment and custom node environment in demo
+##### Set up the node environment. (Test_node environment , Main_node environment and custom node environment in demo)
 
 ```
 [WalletUtils setNode:Test_Node];
