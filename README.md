@@ -1,5 +1,4 @@
 
-
 # Vechain Wallet Sdk 
 
 
@@ -18,7 +17,7 @@ Vechain wallet SDK provides a series of functional interface can help the iOS de
 - Get checksum address
 - Decrypt keystore
 - Encrypt keystore
-- Displays a JavaScript text input panel.
+- Displays a JavaScript text input panel
 - Inject js into webview
 - Sign and send
 - Verify mnemonic words
