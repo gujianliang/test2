@@ -215,14 +215,9 @@ static NSData *NullData = nil;
         }
 
         NSError *error = nil;
-        NSData *test1 = [RLPSerialization dataWithObject:raw error:&error];
-        NSString *hex = [SecureData dataToHexString:test1];
-        NSLog(@"RLP = %@",hex);
         SecureData *digest = [SecureData BLAKE2B:[RLPSerialization dataWithObject:raw error:&error]];
-        NSString *tt = [SecureData dataToHexString:digest.data];
         _fromAddress = account.address;
         _signature = [account signDigest:digest.data];
-        NSLog(@"%@",tt);
     } else {
         _fromAddress = nil;
         _signature = nil;

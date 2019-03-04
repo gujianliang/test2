@@ -1334,7 +1334,7 @@
                   moduleName = "WalletSDKDemo"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/cengxin/Documents/VeChain/iOS/ios-wallet-sdk/wallet/Wallet/ThirdParty/WalletSDK/Wallet/JS/Controllers/WalletDAppHandle+web3JS.m"
-                  timestampString = "573123015.425505"
+                  timestampString = "573131856.601734"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "111"
@@ -1349,7 +1349,7 @@
                   moduleName = "WalletSDKDemo"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/cengxin/Documents/VeChain/iOS/ios-wallet-sdk/wallet/Wallet/ThirdParty/WalletSDK/Wallet/JS/Controllers/WalletDAppHandle+web3JS.m"
-                  timestampString = "573123015.4297169"
+                  timestampString = "573131856.604477"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "113"
@@ -1366,7 +1366,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Wallet/ThirdParty/WalletSDK/Wallet/JS/Controllers/WalletDAppHandle.m"
-            timestampString = "573123015.057072"
+            timestampString = "573131856.23343"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "325"
@@ -1382,7 +1382,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Wallet/ThirdParty/WalletSDK/Wallet/JS/Signature/WalletSignatureView.m"
-            timestampString = "573123015.057714"
+            timestampString = "573131856.233874"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "243"
@@ -1750,7 +1750,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Wallet/ThirdParty/WalletSDK/Wallet/JS/Controllers/WalletDAppHandle.m"
-            timestampString = "573123015.059669"
+            timestampString = "573131856.235252"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "349"
@@ -1766,7 +1766,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Wallet/ThirdParty/WalletSDK/Wallet/JS/Controllers/WalletDAppHandle.m"
-            timestampString = "573123015.060164"
+            timestampString = "573131856.235602"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "429"
@@ -1782,7 +1782,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Wallet/ThirdParty/WalletSDK/Wallet/JS/Controllers/WalletDAppHandle.m"
-            timestampString = "573123015.06051"
+            timestampString = "573131856.235934"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "376"
@@ -1798,7 +1798,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Wallet/ThirdParty/WalletSDK/Wallet/JS/Signature/WalletSignatureView.m"
-            timestampString = "573123015.0608391"
+            timestampString = "573131856.236249"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "80"
@@ -1814,7 +1814,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Wallet/ThirdParty/WalletSDK/Wallet/JS/Controllers/WalletDAppHandle.m"
-            timestampString = "573123015.061155"
+            timestampString = "573131856.236549"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "194"
@@ -1869,6 +1869,38 @@
             endingLineNumber = "85"
             landmarkName = "-webView:runJavaScriptTextInputPanelWithPrompt:defaultText:initiatedByFrame:completionHandler:"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Wallet/ThirdParty/WalletSDK/Wallet/src/Account.m"
+            timestampString = "573131591.594726"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "180"
+            endingLineNumber = "180"
+            landmarkName = "-initWithMnemonicPhrase:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Wallet/ThirdParty/WalletSDK/Wallet/ThirdParty/trezor-crypto/bip39.c"
+            timestampString = "573132714.608837"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "194"
+            endingLineNumber = "194"
+            landmarkName = "data_from_mnemonic"
+            landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
