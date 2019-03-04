@@ -6,7 +6,7 @@
 
 ```
 + (void)creatWalletWithPassword:(NSString *)password
-                       callBack:(void(^)(Account *account)) block;
+                       callBack:(void(^)(WalletAccountModel *account))callBack;
 
 ```
 
@@ -20,17 +20,17 @@
 
 + (void)creatWalletWithMnemonic:(NSArray *)mnemonicList
                        password:(NSString *)password
-                       callback:(void(^)(WalletAccountModel *account,NSError *error))block;
+                       callback:(void(^)(WalletAccountModel *account,NSError *error))callback;
 
 ```
 
-##  Verify the mnemonic word is legal     
+##  Verify the mnemonic word     
 >
 >   @param mnemonicList :12 words   
 >@return verification results
 > 
 ```
-+ (BOOL)isValidMnemonicPhrase:(NSString*)mnemonicList;
++ (BOOL)isValidMnemonicPhrase:(NSArray *)mnemonicList;
 ```
 
 
@@ -43,39 +43,39 @@
 > 
 
 ```
-+ (NSString *)recoverAddressFromMessage:(NSData*)message
-                          signatureData:(NSData*)signatureData;
++ (NSString *)recoverAddressFromMessage:(NSData *)message
+                          signatureData:(NSData *)signatureData;
 ```
 
-##   Signature message  
+##   Sign message  
 >
 >   @param message : Prepare the data to be signed   
 >   @param json :Keystore in json format   
 >   @param password :  Wallet password   
->   @param block :Callback after the end  
+>   @param callback :Callback after the end  
 >
 
 ```
-+ (void)signature:(NSData*)message
-         keystore:(NSString*)json
-         password:(NSString*)password
-            block:(void (^)(NSData *signatureData,NSError *error))block;
++ (void)sign:(NSData *)hashedMessage
+    keystore:(NSString *)keystore
+    password:(NSString *)password
+    callback:(void (^)(NSData *signatureData,NSError *error))callback;
 
 ```
 
-##  Decryption keystore
+##  Decrypt keystore
 >
- >  @param json : Keystore in json format   
+ >  @param keystore : Keystore in json format   
  >  @param password : Wallet password   
  >  @param callback : Callback after the end   
  >
  >
  ```
-+ (void)decryptSecretStorageJSON:(NSString*)json
-                        password:(NSString*)password
-                        callback:(void(^)(WalletAccountModel *account,NSError *error))callback;
++ (void)decryptkeystore:(NSString *)keystore
+               password:(NSString *)password
+               callback:(void(^)(WalletAccountModel *account,NSError *error))callback;
 ```
-##  Use the new password to encrypt.
+##  change wallet password
 >
 >   @param password :Wallet password   
 >   @param walletAccount :Account object   
@@ -83,9 +83,9 @@
 > 
 > 
 ```
-+ (void)encryptSecretStorageJSON:(NSString*)password
-                         account:(WalletAccountModel *)walletAccount
-                        callback:(void (^)(NSString *))callback;
++ (void)encryptkeystore:(NSString *)keystore
+                account:(WalletAccountModel *)account
+               callback:(void (^)(NSString *))callback;
 ```
 
 
@@ -100,7 +100,7 @@
 
 ```
 
-##  Displays a JavaScript text input panel.  
+##  Display a JavaScript text input panel.  
 >
 > @param webView :The web view invoking the delegate method.   
 > @param defaultText: The initial text to display in the text entry field.   
@@ -109,7 +109,7 @@
   OK, otherwise nil.
 >
 ```
-+ (void)webView:(WKWebView>)webView defaultText:(NSString>)defaultText completionHandler:(void (^)(NSString>result))completionHandler;
++ (void)webView:(WKWebView *)webView defaultText:(NSString *)defaultText completionHandler:(void (^)(NSString *result))completionHandler;
 ```
 
 ##   inject js into webview   
@@ -118,9 +118,9 @@
 >
 >
 ```
-+ (void)injectJSWithWebView:(WKWebView>)webview;
++ (void)injectJSWithWebView:(WKWebView *)webview;
 ```
-##   Call sign control
+##   Sign and send
 >
 >  @param parameter: signature parameters   
 >  @param keystore: wallet for keystore    
@@ -128,7 +128,7 @@
 >
 >
 ```
-+ (void)transactionWithKeystore:(NSString>)keystore parameter:(TransactionParameter>)parameter block:(void(^)(NSString>txId,NSString>signer))block;
++ (void)sendWithKeystore:(NSString *)keystore parameter:(TransactionParameter *)parameter callback:(void(^)(NSString *txId,NSString *signer))callback;
 ```
 ##   Verify the keystore word is legal 
 >
@@ -137,16 +137,16 @@
 >
 
 ```
-+ (BOOL)isValidKeystore:(NSString>)keystore;
++ (BOOL)isValidKeystore:(NSString *)keystore;
 ```
 
-##  Verify get checksum address    
+##  Get checksum address    
 >
 >  @param address :wallet address   
 >  @return checksum address   
 >
 ```
-+ (NSString>)getChecksumAddress:(NSString>)address;
++ (NSString *)getChecksumAddress:(NSString *)address;
 ```
 ##  Set node url   
 >
@@ -154,7 +154,7 @@
 >
 >
 ```
-+ (void)setNode:(NSString>)nodelUrl;
++ (void)setNode:(NSString *)nodelUrl;
 ```
 
 
