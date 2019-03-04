@@ -6,11 +6,11 @@
 
 ```
 + (void)creatWalletWithPassword:(NSString *)password
-                       callBack:(void(^)(WalletAccountModel *account))callBack;
+                       callback:(void(^)(WalletAccountModel *account,NSError *error))callBack;
 
 ```
 
-## Create wallet with mnemonic   
+## Create wallet with mnemonic words   
 >
 >    @param mnemonicList :12 words for create wallet  
 >    @param password :Wallet password    
@@ -18,20 +18,31 @@
 > 
 ```
 
-+ (void)creatWalletWithMnemonic:(NSArray *)mnemonicList
++ (void)creatWalletWithMnemonicWords:(NSArray *)mnemonicWords
                        password:(NSString *)password
                        callback:(void(^)(WalletAccountModel *account,NSError *error))callback;
 
 ```
 
-##  Verify the mnemonic word     
+##  Verify the mnemonic words    
 >
 >   @param mnemonicList :12 words   
 >@return verification results
 > 
 ```
-+ (BOOL)isValidMnemonicPhrase:(NSArray *)mnemonicList;
++ (BOOL)isValidMnemonicWords:(NSArray *)mnemonicWords;
 ```
+
+
+##  Get checksum address    
+>
+>  @param address :wallet address   
+>  @return checksum address   
+>
+```
++ (NSString *)getChecksumAddress:(NSString *)address;
+```
+
 
 
 
@@ -47,22 +58,6 @@
                           signatureData:(NSData *)signatureData;
 ```
 
-##   Sign message  
->
->   @param message : Prepare the data to be signed   
->   @param json :Keystore in json format   
->   @param password :  Wallet password   
->   @param callback :Callback after the end  
->
-
-```
-+ (void)sign:(NSData *)hashedMessage
-    keystore:(NSString *)keystore
-    password:(NSString *)password
-    callback:(void (^)(NSData *signatureData,NSError *error))callback;
-
-```
-
 ##  Decrypt keystore
 >
  >  @param keystore : Keystore in json format   
@@ -75,10 +70,10 @@
                password:(NSString *)password
                callback:(void(^)(WalletAccountModel *account,NSError *error))callback;
 ```
-##  change wallet password
+##  Change wallet password
 >
 >   @param password :Wallet password   
->   @param walletAccount :Account object   
+>   @param account :WalletAccountModel object   
 >   @param callback :Callback after the end   
 > 
 > 
@@ -86,6 +81,61 @@
 + (void)encryptkeystore:(NSString *)keystore
                 account:(WalletAccountModel *)account
                callback:(void (^)(NSString *))callback;
+```
+##  Set node url   
+>
+>  @param nodelUrl :node url   
+>
+>
+```
++ (void)setNode:(NSString *)nodelUrl;
+```
+
+
+
+## get node url
+>
+>
+```
++ (NSString *)getNode;
+```
+
+
+##   Sign message  
+>
+>   @param message : Prepare the data to be signed   
+>   @param keystoreJson :Keystore in json format   
+>   @param password :  Wallet password   
+>   @param callback :Callback after the end  
+>
+
+```
++ (void)sign:(NSData *)hashedMessage
+    keystore:(NSString *)keystoreJson
+    password:(NSString *)password
+    callback:(void (^)(NSData *signatureData,NSError *error))callback;
+
+```
+
+##   Sign and send
+>
+>  @param parameter: signature parameters   
+>  @param keystoreJson: wallet for keystore    
+>  @param block: callback   
+>
+>
+```
++ (void)sendWithKeystore:(NSString *)keystoreJson parameter:(TransactionParameter *)parameter callback:(void(^)(NSString *txId,NSString *signer))callback;
+```
+
+##   Verify the keystore word is legal 
+>
+>  @param keystoreJson : wallet for keystore   
+>  @return verification results   
+>
+
+```
++ (BOOL)isValidKeystore:(NSString *)keystoreJson;
 ```
 
 
@@ -96,8 +146,18 @@
 >
 
 ```
-+ (void)initWebViewWithKeystore:(NSArray *)keystoreList;  
++ (void)initDappWebViewWithKeystore:(NSArray *)keystoreList;  
 
+```
+
+
+##   inject js into webview   
+>
+>  @param webview :Developer generated webview object
+>
+>
+```
++ (void)injectJSWithWebView:(WKWebView *)webview;
 ```
 
 ##  Display a JavaScript text input panel.  
@@ -111,50 +171,3 @@
 ```
 + (void)webView:(WKWebView *)webView defaultText:(NSString *)defaultText completionHandler:(void (^)(NSString *result))completionHandler;
 ```
-
-##   inject js into webview   
->
->  @param webview :Developer generated webview object
->
->
-```
-+ (void)injectJSWithWebView:(WKWebView *)webview;
-```
-##   Sign and send
->
->  @param parameter: signature parameters   
->  @param keystore: wallet for keystore    
->  @param block: callback   
->
->
-```
-+ (void)sendWithKeystore:(NSString *)keystore parameter:(TransactionParameter *)parameter callback:(void(^)(NSString *txId,NSString *signer))callback;
-```
-##   Verify the keystore word is legal 
->
->  @param keystore :wallet for keystore   
->  @return verification results   
->
-
-```
-+ (BOOL)isValidKeystore:(NSString *)keystore;
-```
-
-##  Get checksum address    
->
->  @param address :wallet address   
->  @return checksum address   
->
-```
-+ (NSString *)getChecksumAddress:(NSString *)address;
-```
-##  Set node url   
->
->  @param nodelUrl :node url   
->
->
-```
-+ (void)setNode:(NSString *)nodelUrl;
-```
-
-
