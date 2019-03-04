@@ -109,7 +109,7 @@
   OK, otherwise nil.
 >
 ```
-+ (void)webView:(WKWebView>)webView defaultText:(NSString>)defaultText completionHandler:(void (^)(NSString>result))completionHandler;
++ (void)webView:(WKWebView*)webView defaultText:(NSString*)defaultText completionHandler:(void (^)(NSString>result))completionHandler;
 ```
 
 ##   inject js into webview   
