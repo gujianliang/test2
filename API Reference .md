@@ -10,7 +10,7 @@
 
 ```
 
-## Create wallet with mnemonic   
+## Create wallet with mnemonic words   
 >
 >    @param mnemonicList :12 words for create wallet  
 >    @param password :Wallet password    
@@ -18,7 +18,7 @@
 > 
 ```
 
-+ (void)creatWalletWithMnemonic:(NSArray *)mnemonicList
++ (void)creatWalletWithMnemonicWords:(NSArray *)mnemonicWords
                        password:(NSString *)password
                        callback:(void(^)(WalletAccountModel *account,NSError *error))callback;
 
@@ -30,7 +30,7 @@
 >@return verification results
 > 
 ```
-+ (BOOL)isValidMnemonic:(NSArray *)mnemonicList;
++ (BOOL)isValidMnemonicWords:(NSArray *)mnemonicWords;
 ```
 
 
@@ -91,13 +91,14 @@
 + (void)setNode:(NSString *)nodelUrl;
 ```
 
-/**
- *  @abstract
- *  get node url
- *
- */
-+ (NSString *)getNode;
 
+
+## get node url
+>
+>
+```
++ (NSString *)getNode;
+```
 
 
 ##   Sign message  
