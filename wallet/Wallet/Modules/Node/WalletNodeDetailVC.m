@@ -13,11 +13,11 @@
 
 @interface WalletNodeDetailVC ()
 {
-    NSString *_nodeNameText;   /*  It‘s a temp variable that used to save network environment name */
-    NSString *_nodeUrlText;    /*  It‘s a temp variable that used to save network environment URL */
+    NSString *_nodeNameText;   /*  It‘s a temp variable that used to save node environment name */
+    NSString *_nodeUrlText;    /*  It‘s a temp variable that used to save node environment URL */
 }
-@property (weak, nonatomic) IBOutlet UILabel *nodeName;   /* It's used to show network environment name */
-@property (weak, nonatomic) IBOutlet UILabel *nodeUrl;    /* It's used to show network environment URL */
+@property (weak, nonatomic) IBOutlet UILabel *nodeName;   /* It's used to show node environment name */
+@property (weak, nonatomic) IBOutlet UILabel *nodeUrl;    /* It's used to show node environment URL */
 
 @end
 
@@ -34,7 +34,7 @@
 
 
 /**
-*  Just save the network environment URL and name.
+*  Just save the node environment URL and name.
 */
 - (void)nodeName:(NSString *)nodeName nodeUrl:(NSString *)nodeUrl{
     _nodeNameText = nodeName;
@@ -43,7 +43,7 @@
 
 
 /**
-*  Delete the you custom network environment.
+*  Delete the you custom node environment.
 */
 - (IBAction)deleteCustomNewWork:(id)sender {
     
@@ -52,7 +52,7 @@
     if (oldList.count == 0) {
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         hud.mode = MBProgressHUDModeText;
-        hud.labelText =  @"It's not a custom network.";
+        hud.labelText =  @"It's not a custom node.";
         [hud hide:YES afterDelay:2.5];
         return;
     }
@@ -86,7 +86,7 @@
     }else {
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         hud.mode = MBProgressHUDModeText;
-        hud.labelText =  @"It's not a custom network.";
+        hud.labelText =  @"It's not a custom node.";
         [hud hide:YES afterDelay:2.5];
     }
 }

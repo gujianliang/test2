@@ -11,7 +11,7 @@
 #import "WalletTransferVC.h"
 #import "WalletMoreInfoVC.h"
 #import "WebViewVC.h"
-#import "WalletChooseNetworkView.h"
+#import "WalletChooseNodeView.h"
 #import "WalletNodeDetailVC.h"
 #import "WalletAddVthoNodeVC.h"
 #import "WalletSdkMacro.h"
@@ -87,7 +87,8 @@
     self.searchBar.text = Test_Html;
     self.searchBar.text = Test_Main_Page;
     
-    
+    self.searchBar.text = @"https://itunes.apple.com/cn/app/id1335906787?mt=8";
+    self.searchBar.text = @"itms-apps://itunes.apple.com/app/1335906787";
     /* Set the VET and VTHO logo */
     [self.vetImageView setImage:[UIImage imageNamed:@"VET"]];
     [self.vthoImageView setImage:[UIImage imageNamed:@"VTHO"]];
@@ -122,9 +123,9 @@
     
     [self.view endEditing:YES];
     
-    WalletChooseNetworkView *chooseNetworkView = [self.view viewWithTag:90];
+    WalletChooseNodeView *chooseNetworkView = [self.view viewWithTag:90];
     if (!chooseNetworkView) {
-        chooseNetworkView = [[WalletChooseNetworkView alloc] initWithFrame:self.view.frame];
+        chooseNetworkView = [[WalletChooseNodeView alloc] initWithFrame:self.view.frame];
         chooseNetworkView.tag = 90;
         [self.view addSubview:chooseNetworkView];
         
@@ -278,6 +279,7 @@
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
     
     NSString *url = searchBar.text;
+    url = @"itms-apps://itunes.apple.com/app/1335906787";
     WebViewVC *webVC = [[WebViewVC alloc] initWithURL:url];
     [self.navigationController pushViewController:webVC animated:YES];
 }

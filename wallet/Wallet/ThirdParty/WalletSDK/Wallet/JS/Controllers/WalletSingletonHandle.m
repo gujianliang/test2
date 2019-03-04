@@ -144,7 +144,7 @@ static dispatch_once_t predicate;
     }
 }
 
-+(void)attempDealloc{
++ (void)attempDealloc{
     predicate = 0;
     singleton = nil;
     [[SocketRocketUtility instance] SRWebSocketClose];

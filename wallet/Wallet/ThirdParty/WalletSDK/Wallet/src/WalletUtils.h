@@ -21,7 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  Create wallet
  *
  *  @param password : Wallet password
- *  @param callBack : Callback after the end;The attributes of a class has mnemonicPhras , address, privateKey, keystore
+ *  @param callback : Callback after the end;The attributes of a class has mnemonicPhras , address, privateKey, keystore
  *
  */
 + (void)creatWalletWithPassword:(NSString *)password
@@ -29,9 +29,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  *  @abstract
- *  Create wallet with mnemonic
+ *  Create wallet with mnemonic words
  *
- *  @param mnemonicWords :12 words for create wallet
+ *  @param mnemonicWords :12 words
  *  @param password : Wallet password
  *  @param callback : Callback after the end;The attributes of a class has mnemonicPhras , address, privateKey, keystore
  */
@@ -42,10 +42,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  *  @abstract
- *  Verify the mnemonic words
+ *  Verify mnemonic words
  *
  *  @param mnemonicWords : 12 words
- *  @return verification results
+ *  @return result
  */
 + (BOOL)isValidMnemonicWords:(NSString *)mnemonicWords;
 
@@ -85,11 +85,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  *  @abstract
- *  Decryption keystore
+ *  Decrypt keystore
  *
  *  @param keystoreJson : Keystore in json format
  *  @param password : Wallet password
- *  @param callback : Callback after the end
+ *  @param callback : Callback after the end. Callback after the end;The attributes of a class has mnemonicPhras , address, privateKey, keystore
  *
  */
 + (void)decryptKeystore:(NSString*)keystoreJson
@@ -103,12 +103,12 @@ NS_ASSUME_NONNULL_BEGIN
  *
  *  @param password : Wallet password
  *  @param account : WalletAccountModel object
- *  @param callback : Callback after the end
+ *  @param callback : Callback after the end. keystoreJson : Keystore in json format
  *
  */
-+ (void)encryptKeystore:(NSString*)password
-                account:(WalletAccountModel *)account
-               callback:(void (^)(NSString *keystoreJson))callback;
++ (void)encryptKeystoreWithPassword:(NSString*)password
+                            account:(WalletAccountModel *)account
+                           callback:(void (^)(NSString *keystoreJson))callback;
 
 /**
  *  @abstract
@@ -121,7 +121,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  *  @abstract
- *  get node url
+ *  Get node url
  *
  */
 + (NSString *)getNode;
@@ -150,25 +150,31 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param callback :Callback after the end
  *
  */
-+ (void)sendWithKeystore:(NSString *)keystoreJson parameter:(TransactionParameter *)parameter callback:(void(^)(NSString *txId,NSString *signer))callback;
++ (void)sendWithKeystore:(NSString *)keystoreJson
+               parameter:(TransactionParameter *)parameter
+                callback:(void(^)(NSString *txId,NSString *signer))callback;
 
 /**
  *  @abstract
- *  Set the keystore list to sdk
+ *  Set keystore list to SDK
  *
  *  @param keystoreList : Array of keystore json
  *
  */
 + (void)initDappWebViewWithKeystore:(NSArray *)keystoreList;
 
-/*! @abstract Displays a JavaScript text input panel.
+/*! @abstract
+ *  Displays a JavaScript text input panel.
+ *
  *  @param webView The web view invoking the delegate method.
  *  @param defaultText The initial text to display in the text entry field.
  *  @param completionHandler The completion handler to call after the text
 input panel has been dismissed. Pass the entered text if the user chose
 OK, otherwise nil.
 */
-+ (void)webView:(WKWebView *)webView defaultText:(NSString *)defaultText completionHandler:(void (^)(NSString *result))completionHandler;
++ (void)webView:(WKWebView *)webView
+    defaultText:(NSString *)defaultText
+completionHandler:(void (^)(NSString *result))completionHandler;
 
 /**
  *  @abstract

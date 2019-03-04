@@ -12,8 +12,8 @@
 
 @interface WalletAddVthoNodeVC ()
 
-@property (weak, nonatomic) IBOutlet UITextField *customNameTextFild;   /*  It is used to input the custom network environment name */
-@property (weak, nonatomic) IBOutlet UITextView *customNetTextView;     /*  It is used to input the custom network environment URL */
+@property (weak, nonatomic) IBOutlet UITextField *customNameTextFild;   /*  It is used to input the custom node environment name */
+@property (weak, nonatomic) IBOutlet UITextView *customNodeTextView;     /*  It is used to input the custom node environment URL */
 
 @end
 
@@ -26,15 +26,15 @@
 
 
 /**
-*  Set and save custom network environment.
+*  Set and save custom node environment.
 */
-- (IBAction)setCustomNetworkEnvironment:(id)sender{
+- (IBAction)setCustomNodeEnvironment:(id)sender{
     
     NSString *nodeName = self.customNameTextFild.text;
-    NSString *nodeUrl = self.customNetTextView.text;
+    NSString *nodeUrl = self.customNodeTextView.text;
     
     
-    /* Check your input network name and network URL that can not be blank. */
+    /* Check your input node name and node URL that can not be blank. */
     if (nodeName.length == 0 || nodeUrl.length == 0 ){
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         hud.mode = MBProgressHUDModeText;

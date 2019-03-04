@@ -1,23 +1,23 @@
 //
-//  WalletChooseNetworkView.m
+//  WalletChooseNodeView.m
 //  walletSDKDemo
 //
 //  Created by 曾新 on 2019/1/30.
 //  Copyright © 2019年 demo. All rights reserved.
 //
 
-#import "WalletChooseNetworkView.h"
+#import "WalletChooseNodeView.h"
 #import "WalletSdkMacro.h"
 
 
-@interface WalletChooseNetworkView()<UITableViewDataSource, UITableViewDelegate>
+@interface WalletChooseNodeView()<UITableViewDataSource, UITableViewDelegate>
 {
-    NSMutableArray *_newList;    /* It is used to save all the network environment */
+    NSMutableArray *_newList;    /* It is used to save all the node environment */
 }
 @end
 
 
-@implementation WalletChooseNetworkView
+@implementation WalletChooseNodeView
 
 
 - (instancetype)initWithFrame:(CGRect)frame
@@ -45,9 +45,9 @@
     [tap setNumberOfTapsRequired:1];
     
     
-    UIView *chooseNetworkCotainView = [[UIView alloc] init];
-    chooseNetworkCotainView.backgroundColor = UIColor.whiteColor;
-    [self addSubview:chooseNetworkCotainView];
+    UIView *chooseNodeCotainView = [[UIView alloc] init];
+    chooseNodeCotainView.backgroundColor = UIColor.whiteColor;
+    [self addSubview:chooseNodeCotainView];
     
     NSArray *netList = [[NSUserDefaults standardUserDefaults] objectForKey:@"nodeList"];
     _newList = [NSMutableArray array];
@@ -67,25 +67,25 @@
     }
     
     if (_newList.count >= 6) {
-        chooseNetworkCotainView.frame = CGRectMake(self.frame.size.width - 200, 80, 180, 50 * 6 + 10 + 50);
+        chooseNodeCotainView.frame = CGRectMake(self.frame.size.width - 200, 80, 180, 50 * 6 + 10 + 50);
         
     }else {
-        chooseNetworkCotainView.frame = CGRectMake(self.frame.size.width - 200, 80, 180, 50 * _newList.count + 10 + 50);
+        chooseNodeCotainView.frame = CGRectMake(self.frame.size.width - 200, 80, 180, 50 * _newList.count + 10 + 50);
     }
     
     
-    UITableView *tableView = [[UITableView alloc] initWithFrame:chooseNetworkCotainView.bounds];
+    UITableView *tableView = [[UITableView alloc] initWithFrame:chooseNodeCotainView.bounds];
     tableView.delegate = self;
     tableView.dataSource = self;
     tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    [chooseNetworkCotainView addSubview:tableView];
+    [chooseNodeCotainView addSubview:tableView];
     
     UIView *footV = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 180, 50)];
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeSystem];
     btn.frame = CGRectMake(15, 0, 165, 50);
     btn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     [btn setTitle:@"Add Node" forState:UIControlStateNormal];
-    [btn addTarget:self action:@selector(addNetwork) forControlEvents:UIControlEventTouchUpInside];
+    [btn addTarget:self action:@selector(addNode) forControlEvents:UIControlEventTouchUpInside];
     [footV addSubview:btn];
     tableView.tableFooterView = footV;
 }
@@ -141,7 +141,7 @@
 /**
 *  When you click the foot View will call this method.
 */
-- (void)addNetwork{
+- (void)addNode{
     
     if (_block) {
         _block(@"Custom", @"");

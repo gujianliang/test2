@@ -1,5 +1,5 @@
 //
-//  WalletChooseNetworkView.h
+//  WalletChooseNodeView.h
 //  walletSDKDemo
 //
 //  Created by 曾新 on 2019/1/30.
@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface WalletChooseNetworkView : UIView
+@interface WalletChooseNodeView : UIView
 
 @property(nonatomic,copy)void (^block)(NSString *nodeName, NSString *nodeUrl);
 

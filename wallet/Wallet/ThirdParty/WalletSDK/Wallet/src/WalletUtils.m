@@ -179,9 +179,9 @@
      }];
 }
 
-+ (void)encryptKeystore:(NSString*)password
-                account:(WalletAccountModel *)account
-               callback:(void (^)(NSString *keystoreJson))callback
++ (void)encryptKeystoreWithPassword:(NSString*)password
+                            account:(WalletAccountModel *)account
+                           callback:(void (^)(NSString *keystoreJson))callback
 {
     Account *ethAccount = [Account accountWithMnemonicPhrase:[account.words componentsJoinedByString:@" "]];
     [ethAccount encryptSecretStorageJSON:password
@@ -216,10 +216,10 @@
 
 + (void)sendWithKeystore:(NSString *)keystoreJson parameter:(TransactionParameter *)parameter callback:(void(^)(NSString *txId,NSString *signer))callback
 {
-    NSString *toAddress = @"";
-    NSString *tokenAddress = @"";
-    NSString *amount = @"";
-    NSString *clauseStr = @"";
+    NSString *toAddress     = @"";
+    NSString *tokenAddress  = @"";
+    NSString *amount        = @"";
+    NSString *clauseStr     = @"";
     JSTransferType transferType = JSVETTransferType;
     
     [self transactionCheckParams:&keystoreJson parameter:parameter toAddress:&toAddress amount:&amount transferType:&transferType tokenAddress:&tokenAddress clauseStr:&clauseStr];

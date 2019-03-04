@@ -73,7 +73,7 @@
          }
          
          /* Use the new password to encrypt. */
-         [WalletUtils encryptKeystore:self.nextPWTextField.text
+         [WalletUtils encryptKeystoreWithPassword:self.nextPWTextField.text
                                        account:account
                                       callback:^(NSString *json) {
              [hud hide:YES];
