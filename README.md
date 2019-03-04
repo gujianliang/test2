@@ -1,4 +1,4 @@
-# Vechain Wallet Sdk 
+# Vechain Wallet SDK    
 
 
 ## Introduction
