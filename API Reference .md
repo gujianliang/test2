@@ -12,22 +12,22 @@
 
 ## Create wallet with mnemonic words   
 >
->    @param mnemonicList :12 words for create wallet  
+>    @param mnemonicList :12 words
 >    @param password :Wallet password    
 >    @param block : Callback after the end；The attributes of a class has mnemonicPhras , address, privateKey, keystore 
 > 
 ```
 
 + (void)creatWalletWithMnemonicWords:(NSArray *)mnemonicWords
-                       password:(NSString *)password
-                       callback:(void(^)(WalletAccountModel *account,NSError *error))callback;
+                            password:(NSString *)password
+                            callback:(void(^)(WalletAccountModel *account,NSError *error))callback;
 
 ```
 
 ##  Verify the mnemonic words    
 >
 >   @param mnemonicList :12 words   
->@return verification results
+>@return result
 > 
 ```
 + (BOOL)isValidMnemonicWords:(NSArray *)mnemonicWords;
@@ -36,7 +36,7 @@
 
 ##  Get checksum address    
 >
->  @param address :wallet address   
+>  @param address :Wallet address   
 >  @return checksum address   
 >
 ```
@@ -44,11 +44,9 @@
 ```
 
 
-
-
 ##  Recover address
 >
->  @param message : Data before signature  
+>  @param message : Data before signature
 >  @param signatureData : Data after signature  
 >  @return  address  
 > 
@@ -60,13 +58,13 @@
 
 ##  Decrypt keystore
 >
- >  @param keystore : Keystore in json format   
+ >  @param keystoreJson : Keystore in json format   
  >  @param password : Wallet password   
  >  @param callback : Callback after the end   
  >
  >
  ```
-+ (void)decryptkeystore:(NSString *)keystore
++ (void)decryptkeystore:(NSString *)keystoreJson
                password:(NSString *)password
                callback:(void(^)(WalletAccountModel *account,NSError *error))callback;
 ```
@@ -78,9 +76,9 @@
 > 
 > 
 ```
-+ (void)encryptkeystore:(NSString *)keystore
-                account:(WalletAccountModel *)account
-               callback:(void (^)(NSString *))callback;
++ (void)encryptKeystoreWithPassword:(NSString *)password
+                            account:(WalletAccountModel *)account
+                           callback:(void (^)(NSString *))callback;
 ```
 ##  Set node url   
 >
@@ -93,7 +91,7 @@
 
 
 
-## get node url
+## Get node url
 >
 >
 ```
@@ -120,7 +118,7 @@
 ##   Sign and send
 >
 >  @param parameter: signature parameters   
->  @param keystoreJson: wallet for keystore    
+>  @param keystoreJson: Keystore in json format   
 >  @param block: callback   
 >
 >
@@ -128,10 +126,10 @@
 + (void)sendWithKeystore:(NSString *)keystoreJson parameter:(TransactionParameter *)parameter callback:(void(^)(NSString *txId,NSString *signer))callback;
 ```
 
-##   Verify the keystore word is legal 
+##   Verify keystore format
 >
->  @param keystoreJson : wallet for keystore   
->  @return verification results   
+>  @param keystoreJson : Keystore in json format   
+>  @return result
 >
 
 ```
@@ -139,7 +137,7 @@
 ```
 
 
-##  Set the keystore list to sdk  
+##  Set keystore list to SDK
 >
 >  @param keystoreList :Array of keystore json
 >
