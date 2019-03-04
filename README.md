@@ -7,8 +7,8 @@ Vechain wallet SDK provides a series of functional interface can help the iOS de
 
 **Features:**
 
-- Set node
-- Get node
+- Set node url
+- Get node url
 - Creat wallet
 - Creat wallet with mnemonic words
 - Get checksum address
