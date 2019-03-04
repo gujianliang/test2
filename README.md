@@ -3,7 +3,7 @@
 
 ## Introduction
 
-Vechain wallet SDK provides a series of functional interface can help the iOS developers, for example: quickly create the purse, the private key signature, call vechain block interface, data on the chain, and support dapp development environment.
+Vechain wallet SDK provides a series of functional interface can help the iOS developers, for example: quickly create the wallet, the private key signature, call the vechain block interface, put data in the vechain block, and support dapp development environment.
 
 **Features:**
 
@@ -12,7 +12,7 @@ Vechain wallet SDK provides a series of functional interface can help the iOS de
 - Create wallet
 - Create wallet with mnemonic words
 - Get checksum address
-- Change Wallet password
+- Change wallet password
 - Verify mnemonic words
 - Verify keystore
 - Recover address
