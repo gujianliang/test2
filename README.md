@@ -10,7 +10,6 @@ Vechain wallet SDK provides a series of functional interface can help the iOS de
 - Create wallet
 - Create wallet with mnemonic words
 - Verify mnemonic words
-- Decryption keystore
 - Verify Message
 - Sign message
 - Get checksum address
@@ -59,7 +58,9 @@ callback:^(WalletAccountModel * _Nonnull account, NSError * _Nonnull error)
 
 ````
 
-#### 2.2  Added in the webview callback method didCommitNavigation
+#### 2.2  Inject js bridge into webview.
+##### 
+
 ```
 - (void)webView:(WKWebView *)webView didCommitNavigation:(null_unspecified WKNavigation *)navigation;
 {
