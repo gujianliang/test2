@@ -30,7 +30,7 @@
 >@return verification results
 > 
 ```
-+ (BOOL)isValidMnemonicPhrase:(NSArray*)mnemonicList;
++ (BOOL)isValidMnemonicPhrase:(NSArray *)mnemonicList;
 ```
 
 
@@ -43,8 +43,8 @@
 > 
 
 ```
-+ (NSString *)recoverAddressFromMessage:(NSData*)message
-                          signatureData:(NSData*)signatureData;
++ (NSString *)recoverAddressFromMessage:(NSData *)message
+                          signatureData:(NSData *)signatureData;
 ```
 
 ##   Sign message  
@@ -56,10 +56,10 @@
 >
 
 ```
-+ (void)sign:(NSData*)hashedMessage
-     keystore:(NSString*)json
-     password:(NSString*)password
-       callback:(void (^)(NSData *signatureData,NSError *error))callback;
++ (void)sign:(NSData *)hashedMessage
+    keystore:(NSString *)keystore
+    password:(NSString *)password
+    callback:(void (^)(NSData *signatureData,NSError *error))callback;
 
 ```
 
@@ -71,9 +71,9 @@
  >
  >
  ```
-+ (void)decryptkeystore:(NSString*)keystore
-                        password:(NSString*)password
-                        callback:(void(^)(WalletAccountModel *account,NSError *error))callback;
++ (void)decryptkeystore:(NSString *)keystore
+               password:(NSString *)password
+               callback:(void(^)(WalletAccountModel *account,NSError *error))callback;
 ```
 ##  change wallet password
 >
@@ -83,8 +83,8 @@
 > 
 > 
 ```
-+ (void)encryptkeystore:(NSString*)keystore
-                account:(WalletAccountModel *)walletAccount
++ (void)encryptkeystore:(NSString *)keystore
+                account:(WalletAccountModel *)account
                callback:(void (^)(NSString *))callback;
 ```
 
@@ -128,7 +128,7 @@
 >
 >
 ```
-+ (void)sendWithKeystore:(NSString *)keystore parameter:(TransactionParameter *)parameter block:(void(^)(NSString *txId,NSString *signer))callback;
++ (void)sendWithKeystore:(NSString *)keystore parameter:(TransactionParameter *)parameter callback:(void(^)(NSString *txId,NSString *signer))callback;
 ```
 ##   Verify the keystore word is legal 
 >
