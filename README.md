@@ -1,73 +1,78 @@
-
-
-
-# Vechain Wallet Sdk 
+# Vechain Wallet SDK    
 
 
 ## Introduction
 
-Vechain wallet SDK provides a series of functional interface can help the iOS developers, for example: developers to quickly create the purse, the private key signature, call vechain block interface, data on the chain, and convenient call vechain connex.
+Vechain wallet SDK provides a series of functional interface can help the iOS developers, for example: quickly create the wallet, the private key signature, call the vechain block interface, put data in the vechain block, and support dapp development environment.
 
 **Features:**
 
-- create wallet
-- create wallet with mnemonic
-- Verify the mnemonic word is legal
-- Decryption keystore
-- verify Message
-- sign message
-- encrypt private key to keystore
-- encrypt set current wallet address
-- Displays a JavaScript text input panel.
-- encrypt inject js into webview
-- encrypt The call sign control
-- Verify the mnemonic word is legal
-- Verify get checksum address
-- setup node url
+- Set node url
+- Get node url
+- Creat wallet
+- Creat wallet with mnemonic words
+- Get checksum address
+- Change wallet password
+- Verify mnemonic words
+- Verify keystore
+- Recover address
+- Sign message
+- Sign and send
+- Inject js into webview
+- Support dapp development environment
+
 
 ## Get Started 
 
-API
-===
 
-To use the Framework, add the ethers.Framework to your project and add:
+To use the Framework, add the WalletSDK.Framework to your project :
 
-```obj-c
+```
 #import <WalletSDK/WalletUtils.h>
 ```
 
-###  1，Basic purse using method    
+###  1，Basic wallet development
 
-#### Create a wallet
+#### 1.1 Set node url
+##### Set up the node environment. (Test_node environment , Main_node environment and custom node environment in demo)
 
-```obj0c
+```
+[WalletUtils setNode:Test_Node];
+````
+#### 1.2 Create wallet
+
+```
 [WalletUtils createWalletWithPassword:Password
 callback:^(WalletAccountModel * _Nonnull account, NSError * _Nonnull error)
 {}];
 ```
-### 2，dapp Call web3 connex or development
+### 2，Support dapp development environment (connex or web3)
 
-#### 1. Add in viewDidLoad
+#### 2.1 Import keystore to SDK
+
 ```
-[WalletUtils initWithWalletDict:walletList];
+[WalletUtils initDappWebViewWithKeystore:walletList];
+
 ````
 
-####  2. webview didCommitNavigation add a callback methods
+#### 2.2  Inject js bridge into webview
+##### 
+
 ```
 - (void)webView:(WKWebView *)webView didCommitNavigation:(null_unspecified WKNavigation *)navigation;
 {
-[WalletUtils injectJS:webView];
+    [WalletUtils injectJSWithWebView:webView];
 }
 ```
 
-#### 3. Add the callback method in the webview runJavaScriptTextInputPanelWithPrompt
+#### 2.3 Analyze data in webview's runJavaScriptTextInputPanelWithPrompt callback method
 ```
 - (void)webView:(WKWebView *)webView runJavaScriptTextInputPanelWithPrompt:(NSString *)prompt defaultText:(nullable NSString *)defaultText initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(NSString * __nullable result))completionHandler
 {
-[WalletUtils webView:webView  defaultText:defaultText completionHandler:completionHandler];
+    [WalletUtils webView:webView  defaultText:defaultText completionHandler:completionHandler];
 }
 ```
-## 3. Several main data structures
+### 3. Several main data structures
 
 #### 1，keystore
 ```
@@ -119,7 +124,7 @@ callback:^(WalletAccountModel * _Nonnull account, NSError * _Nonnull error)
 
 ## License
 
-Vechain Wallet Sdk is licensed under the
+Vechain Wallet SDK is licensed under the
 [GNU Lesser General Public License v3.0](https://www.gnu.org/licenses/lgpl-3.0.html), also included
 in *LICENSE* file in the repository.
 
