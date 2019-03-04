@@ -7,21 +7,20 @@ Vechain wallet SDK provides a series of functional interface can help the iOS de
 
 **Features:**
 
+- Set node url
+- Get node url
 - Create wallet
 - Create wallet with mnemonic words
+- Get checksum address
 - Verify mnemonic words
 - Verify Message
 - Sign message
 - Get checksum address
-- Decrypt keystore
-- Encrypt keystore
-- Displays a JavaScript text input panel
+- Change Wallet password
 - Inject js into webview
 - Sign and send
-- Verify mnemonic words
-- Get checksum address
-- Set node url
-- Get node url
+- Support dapp development environment
+
 
 ## Get Started 
 
@@ -34,7 +33,7 @@ To use the Framework, add the WalletSDK.Framework to your project :
 #import <WalletSDK/WalletUtils.h>
 ```
 
-###  1，Develop a basic wallet
+###  1，Basic wallet development
 
 #### 1.1 Set node url.
 ##### Set up the node environment. Test_node environment and Main_node environment and custom node environment in demo
@@ -49,7 +48,7 @@ To use the Framework, add the WalletSDK.Framework to your project :
 callback:^(WalletAccountModel * _Nonnull account, NSError * _Nonnull error)
 {}];
 ```
-### 2，Develop dapp (connex or web3)
+### 2，Support dapp development environment (connex or web3)
 
 #### 2.1 Import keystore to SDK. 
 
@@ -68,7 +67,7 @@ callback:^(WalletAccountModel * _Nonnull account, NSError * _Nonnull error)
 }
 ```
 
-#### 2.3 Add the callback method in the webview runJavaScriptTextInputPanelWithPrompt
+#### 2.3 Analyze data in webview's runJavaScriptTextInputPanelWithPrompt callback method
 ```
 - (void)webView:(WKWebView *)webView runJavaScriptTextInputPanelWithPrompt:(NSString *)prompt defaultText:(nullable NSString *)defaultText initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(NSString * __nullable result))completionHandler
 {
