@@ -13,7 +13,13 @@
 
 + (NSString *)getBlockUrl
 {
-    return [[NSUserDefaults standardUserDefaults] objectForKey:@"wallerSDK_BlockUrl"];
+    // 如果没有设置block host ，默认是正式环境
+    NSString *blockUrl = [[NSUserDefaults standardUserDefaults] objectForKey:@"wallerSDK_BlockUrl"];
+    if (blockUrl.length == 0 || blockUrl == nil) {
+        return @"https://vethor-node-vechaindev.com";
+    }else{
+        return [[NSUserDefaults standardUserDefaults] objectForKey:@"wallerSDK_BlockUrl"];
+    }
 }
 
 + (void)setBlockUrl:(NSString *)blockUrl
