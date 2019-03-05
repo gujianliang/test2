@@ -67,7 +67,7 @@
 }
 
 //获得chainTag
-- (void)getChainTag:(NSString *)requestId
+- (void)getNodeUrl:(NSString *)requestId
   completionHandler:(void (^)(NSString * __nullable result))completionHandler
 {
 //返回当前的 block url

@@ -169,7 +169,16 @@
                                       [r substringFromIndex:2],
                                       [s substringFromIndex:2],
                                       [vData.hexString substringFromIndex:2]];
-                 callback([SecureData hexStringToData:hashStr],nil);
+                 
+                 if (signature.v == 2
+                     || signature.v == 3) {
+                     [WalletMBProgressShower showTextIn:[WalletTools getCurrentVC].view
+                                                   Text:ERROR_REQUEST_PARAMS_MSG During:1];
+                     
+                 }else{
+                     callback([SecureData hexStringToData:hashStr],nil);
+
+                 }
              }
          }else{
              if (callback) {
@@ -270,6 +279,8 @@
     [[WalletTools getCurrentVC].navigationController.view addSubview:signatureView];
     
     signatureView.transferBlock = ^(NSString * _Nonnull txid) {
+        
+#warning txid local
         
         if (callback) {
             callback(txid,parameter.from);

@@ -22,7 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)getAddress:(WKWebView *)webView requestId:(NSString *)requestId callbackId:(NSString *)callbackId;
 
-- (void)getChainTag:(NSString *)requestId
+- (void)getNodeUrl:(NSString *)requestId
   completionHandler:(void (^)(NSString * __nullable result))completionHandler;
 
 @end

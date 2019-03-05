@@ -151,9 +151,9 @@ static dispatch_once_t predicate;
                requestId:requestId
                  address:callbackParams[@"address"]];
         
-    }else if([method isEqualToString:@"getChainTag"]){
+    }else if([method isEqualToString:@"getNodeUrl"]){
       
-        [self getChainTag:requestId completionHandler:completionHandler];
+        [self getNodeUrl:requestId completionHandler:completionHandler];
         return;
     }else if ([method isEqualToString:@"send"]){
         

@@ -572,7 +572,6 @@ static NSDateFormatter *TimeFormatter = nil;
             return;
         }
         
-        
         sendResult([[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding]);
     });
 

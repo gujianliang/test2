@@ -166,7 +166,7 @@
              }];
             return;
         }
-        
+        self.txid = [transaction txID:account];
         [account sign:transaction];
         if (transaction.signature.v == 2
             || transaction.signature.v == 3) {

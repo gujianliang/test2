@@ -229,7 +229,7 @@
         }];
         //通知webview
         if (self.transferBlock) {
-            self.transferBlock(@"");
+            self.transferBlock(_txid);
         }
     }
 }
