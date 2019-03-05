@@ -169,13 +169,13 @@
 ```
 
 
- ## Release the singleton object in the dapp
+ ## Release the singleton of dapp
  >  Call this method when exiting the contrller where dapp is located
  >
  >
  >
  ```obj-c
-+ (void)attempDealloc;
++ (void)deallocDappSingletion;
 ```
 
 
