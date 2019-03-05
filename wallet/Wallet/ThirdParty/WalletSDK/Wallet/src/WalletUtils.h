@@ -187,13 +187,12 @@ completionHandler:(void (^)(NSString *result))completionHandler;
 
 /**
  *  @abstract
- *  Release the singleton object in the dapp
+ *  Release the singleton of dapp
  *
  *  Call this method when exiting the contrller where dapp is located
  *
- *
  */
-+ (void)attempDealloc;
++ (void)deallocDappSingletion;
 
 NS_ASSUME_NONNULL_END
 

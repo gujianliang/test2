@@ -87,7 +87,7 @@
 
 - (void)dealloc
 {
-    [WalletUtils attempDealloc];
+    [WalletUtils deallocDappSingletion];
 }
 
 @end
