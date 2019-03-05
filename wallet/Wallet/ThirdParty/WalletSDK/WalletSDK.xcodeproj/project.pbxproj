@@ -683,7 +683,7 @@
 			path = SocketRocket;
 			sourceTree = "<group>";
 		};
-		9743A4F121FEB36F0079C582 /* JS */ = {
+		9743A4F121FEB36F0079C582 /* DApp */ = {
 			isa = PBXGroup;
 			children = (
 				9773F924221412D200DF5972 /* Api */,
@@ -693,7 +693,7 @@
 				9773F8F6221412D200DF5972 /* View */,
 				9773F8522213F14900DF5972 /* Category */,
 			);
-			path = JS;
+			path = DApp;
 			sourceTree = "<group>";
 		};
 		9773F8522213F14900DF5972 /* Category */ = {
@@ -1004,7 +1004,7 @@
 		E2317E651E3191AC00DBE3E4 /* Wallet */ = {
 			isa = PBXGroup;
 			children = (
-				9743A4F121FEB36F0079C582 /* JS */,
+				9743A4F121FEB36F0079C582 /* DApp */,
 				E2D1A2B01E3C695A0015CAF8 /* src */,
 				E2317EE01E3198D100DBE3E4 /* ThirdParty */,
 				E2317E661E3191AC00DBE3E4 /* Wallet.h */,

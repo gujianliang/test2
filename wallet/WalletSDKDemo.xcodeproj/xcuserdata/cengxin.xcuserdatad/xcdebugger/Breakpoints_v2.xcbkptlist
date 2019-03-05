@@ -1829,22 +1829,6 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Wallet/Modules/DApp/WebViewVC.m"
-            timestampString = "573446310.10263"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "90"
-            endingLineNumber = "90"
-            landmarkName = "-dealloc"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "Wallet/ThirdParty/WalletSDK/Wallet/JS/Controllers/WalletSingletonHandle.m"
             timestampString = "573446338.053874"
             startingColumnNumber = "9223372036854775807"
