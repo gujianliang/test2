@@ -41,7 +41,7 @@ To use the Framework, add the WalletSDK.Framework and WalletSDKBundle.bundle to 
 ````
 #### 1.2 Create wallet
 
-```
+```obj-c
 [WalletUtils createWalletWithPassword:Password
 callback:^(WalletAccountModel * _Nonnull account, NSError * _Nonnull error)
 {}];
