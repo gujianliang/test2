@@ -7,8 +7,6 @@
 //
 
 #import "VCBaseModel.h"
-#import "WalletRewardNodeModel.h"
-#import "WalletNodeListModel.h"
 
 @interface WalletCoinModel : VCBaseModel
 
@@ -64,7 +62,6 @@
 @property (nonatomic, assign) BOOL enable;    // 是否支持可选中
 
 @property (nonatomic, copy)NSArray <WalletCoinModel *> *coinList;
-@property (nonatomic, strong)WalletNodeModel *nodeModel; //node 信息
 @property (nonatomic, copy)NSArray <WalletCoinModel *> *showCoinList;//显示的icon
 
 @property (nonatomic, strong)WalletCoinModel *vthoModel;

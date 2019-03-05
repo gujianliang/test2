@@ -6,25 +6,10 @@
 //  Copyright © 2018年 VeChain. All rights reserved.
 //
 
-#import "WalletTools+NodeModel.h"
 #import "WalletManageModel.h"
 
 @implementation WalletManageModel
 
-//+ (NSDictionary *)modelContainerPropertyGenericClass
-//{
-//    return @{
-//             @"tokens" : [WalletTokenModel class]
-//             };
-//}
-
-- (void)setAddressNodeType:(NSString *)addressNodeType {
-    _addressNodeType = addressNodeType;
-    
-    NSString *nodeType = addressNodeType.uppercaseString;
-    
-    self.addressNodeTypeImageName = [WalletTools convertXnodeImageName:nodeType];
-}
 
 @end
 
