@@ -25,9 +25,9 @@ Vechain wallet SDK provides a series of functional interface can help the iOS de
 ## Get Started 
 
 
-To use the Framework, add the WalletSDK.Framework to your project :
+To use the Framework, add the WalletSDK.Framework and WalletSDKBundle.bundle to your project :
 
-```
+```obj-c
 #import <WalletSDK/WalletUtils.h>
 ```
 
@@ -36,12 +36,12 @@ To use the Framework, add the WalletSDK.Framework to your project :
 #### 1.1 Set node url
 ##### Set up the node environment. (Test_node environment , Main_node environment and custom node environment in demo)
 
-```
+```obj-c
 [WalletUtils setNode:Test_Node];
 ````
 #### 1.2 Create wallet
 
-```
+```obj-c
 [WalletUtils createWalletWithPassword:Password
 callback:^(WalletAccountModel * _Nonnull account, NSError * _Nonnull error)
 {}];
@@ -50,7 +50,7 @@ callback:^(WalletAccountModel * _Nonnull account, NSError * _Nonnull error)
 
 #### 2.1 Import keystore to SDK
 
-```
+```obj-c
 [WalletUtils initDappWebViewWithKeystore:walletList];
 
 ````
@@ -58,7 +58,7 @@ callback:^(WalletAccountModel * _Nonnull account, NSError * _Nonnull error)
 #### 2.2  Inject js bridge into webview
 ##### 
 
-```
+```obj-c
 - (void)webView:(WKWebView *)webView didCommitNavigation:(null_unspecified WKNavigation *)navigation;
 {
     [WalletUtils injectJSWithWebView:webView];
@@ -66,7 +66,7 @@ callback:^(WalletAccountModel * _Nonnull account, NSError * _Nonnull error)
 ```
 
 #### 2.3 Analyze data in webview's runJavaScriptTextInputPanelWithPrompt callback method
-```
+```obj-c
 - (void)webView:(WKWebView *)webView runJavaScriptTextInputPanelWithPrompt:(NSString *)prompt defaultText:(nullable NSString *)defaultText initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(NSString * __nullable result))completionHandler
 {
     [WalletUtils webView:webView  defaultText:defaultText completionHandler:completionHandler];
@@ -75,7 +75,7 @@ callback:^(WalletAccountModel * _Nonnull account, NSError * _Nonnull error)
 ### 3. Several main data structures
 
 #### 1，keystore
-```
+```obj-c
 /**
 *  Keystore is a json string. Its file structure is as follows:
 *
