@@ -175,7 +175,7 @@
  >
  >
  ```obj-c
-+ (void)attempDealloc;
++ (void)dealocDappSingletion;
 ```
 
 
