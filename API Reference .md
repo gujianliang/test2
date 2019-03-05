@@ -4,7 +4,7 @@
 >    @param callback : Callback after the end；The attributes of a class has mnemonicPhras , address, privateKey and keystore    
 > 
 
-```
+```obj-c
 + (void)creatWalletWithPassword:(NSString *)password
                        callback:(void(^)(WalletAccountModel *account,NSError *error))callback;
 
@@ -16,7 +16,7 @@
 >    @param password :Wallet password    
 >    @param callback : Callback after the end；The attributes of a class has mnemonicPhras , address, privateKey and keystore    
 > 
-```
+```obj-c
 
 + (void)creatWalletWithMnemonicWords:(NSArray *)mnemonicWords
                             password:(NSString *)password
@@ -29,7 +29,7 @@
 >   @param mnemonicList :12 words   
 >   @return result   
 > 
-```
+```obj-c
 + (BOOL)isValidMnemonicWords:(NSArray *)mnemonicWords;
 ```
 
@@ -39,7 +39,7 @@
 >  @param address :Wallet address   
 >  @return checksum address   
 >
-```
+```obj-c
 + (NSString *)getChecksumAddress:(NSString *)address;
 ```
 
@@ -51,7 +51,7 @@
 >  @return  address  
 > 
 
-```
+```obj-c
 + (NSString *)recoverAddressFromMessage:(NSData *)message
                           signatureData:(NSData *)signatureData;
 ```
@@ -75,7 +75,7 @@
 >   @param callback :Callback after the end . keystore :Keystore in json format   
 > 
 > 
-```
+```obj-c
 + (void)encryptKeystoreWithPassword:(NSString *)password
                             account:(WalletAccountModel *)account
                            callback:(void (^)(NSString *keystoreJson))callback;
@@ -85,16 +85,14 @@
 >  @param nodelUrl :node url   
 >
 >
-```
+```obj-c
 + (void)setNode:(NSString *)nodelUrl;
 ```
 
 
 
-## Get node url
->
->
-```
+##  Get node url   
+```obj-c
 + (NSString *)getNode;
 ```
 
@@ -107,7 +105,7 @@
 >   @param callback :Callback after the end .   
 >
 
-```
+```obj-c
 + (void)sign:(NSData *)hashedMessage
     keystore:(NSString *)keystoreJson
     password:(NSString *)password
@@ -122,7 +120,7 @@
 >  @param callback: Callback after the end. txId: Transaction identifier ; signer:  signer address   
 >
 >
-```
+```obj-c
 + (void)sendWithKeystore:(NSString *)keystoreJson parameter:(TransactionParameter *)parameter callback:(void(^)(NSString *txId,NSString *signer))callback;
 ```
 
@@ -132,7 +130,7 @@
 >  @return result  
 >
 
-```
+```obj-c
 + (BOOL)isValidKeystore:(NSString *)keystoreJson;
 ```
 
@@ -143,7 +141,7 @@
 >
 >
 
-```
+```obj-c
 + (void)initDappWebViewWithKeystore:(NSArray *)keystoreList;  
 
 ```
@@ -154,7 +152,7 @@
 >  @param webview :Developer generated webview object   
 >
 >
-```
+```obj-c
 + (void)injectJSWithWebView:(WKWebView *)webview;
 ```
 
@@ -166,6 +164,18 @@
   input panel has been dismissed. Pass the entered text if the user chose
   OK, otherwise nil.
 >
-```
+```obj-c
 + (void)webView:(WKWebView *)webView defaultText:(NSString *)defaultText completionHandler:(void (^)(NSString *result))completionHandler;
 ```
+
+
+ ## Release the singleton object in the dapp
+ >  Call this method when exiting the contrller where dapp is located
+ >
+ >
+ >
+ ```obj-c
++ (void)attempDealloc;
+```
+
+
