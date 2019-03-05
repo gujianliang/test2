@@ -314,18 +314,8 @@
             *transferType = WalletTokenTransferType;
             *tokenAddress = parameter.to;
             *clauseStr = parameter.data;
-            
-            NSString *clauseTemp =  [*clauseStr stringByReplacingOccurrencesOfString:@"0xa9059cbb000000000000000000000000" withString:@""];
-            *toAddress = [@"0x" stringByAppendingString:[clauseTemp substringToIndex:40]];
-            
-            NSString *clauseStrTemp = [*clauseStr stringByReplacingOccurrencesOfString:TransferMethodId withString:@""];
-            NSString *clauseValue = @"";
-            
-            if (clauseStrTemp.length >= 128) {
-                clauseValue = [clauseStrTemp substringWithRange:NSMakeRange(64, 64)];
-            }
-            
-            parameter.value = [NSString stringWithFormat:@"0x%@",clauseValue];
+
+            parameter.value =  [WalletTools getAmountFromClause:*clauseStr to:&*toAddress];
             
             if (![WalletTools errorAddressAlert:parameter.from]
                 || ![WalletTools errorAddressAlert:*tokenAddress]

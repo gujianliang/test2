@@ -213,17 +213,7 @@ static dispatch_once_t predicate;
         if ([clauseStr hasPrefix:TransferMethodId]) { // token 转账
             transferType = WalletTokenTransferType;
             tokenAddress = to;
-            NSString *clauseTemp =  [clauseStr stringByReplacingOccurrencesOfString:@"0xa9059cbb000000000000000000000000" withString:@""];
-            to = [@"0x" stringByAppendingString:[clauseTemp substringToIndex:40]];
-            
-            NSString *clauseStrTemp = [clauseStr stringByReplacingOccurrencesOfString:TransferMethodId withString:@""];
-            NSString *clauseValue = @"";
-            
-            if (clauseStrTemp.length >= 128) {
-                clauseValue = [clauseStrTemp substringWithRange:NSMakeRange(64, 64)];
-            }
-            
-            amount = [NSString stringWithFormat:@"0x%@",clauseValue];
+            amount = [WalletTools getAmountFromClause:clauseStr to:&to];
             
             if (![WalletTools errorAddressAlert:to]
                 || ![WalletTools errorAddressAlert:tokenAddress]
@@ -357,17 +347,8 @@ static dispatch_once_t predicate;
     }else{
         if ([clauseStr hasPrefix:TransferMethodId]) { // token 转账
             tokenAddress = to;
-            NSString *clauseTemp =  [clauseStr stringByReplacingOccurrencesOfString:@"0xa9059cbb000000000000000000000000" withString:@""];
-            to = [@"0x" stringByAppendingString:[clauseTemp substringToIndex:40]];
             
-            NSString *clauseStrTemp = [clauseStr stringByReplacingOccurrencesOfString:TransferMethodId withString:@""];
-            NSString *clauseValue = @"";
-            
-            if (clauseStrTemp.length >= 128) {
-                clauseValue = [clauseStrTemp substringWithRange:NSMakeRange(64, 64)];
-            }
-            
-            amount = [NSString stringWithFormat:@"0x%@",clauseValue];
+            amount = [WalletTools getAmountFromClause:clauseStr to:&to];
             
             if (![WalletTools errorAddressAlert:to]
                 || ![WalletTools errorAddressAlert:tokenAddress]
@@ -590,6 +571,21 @@ static dispatch_once_t predicate;
         return NO;
     }
 }
+
+//- (NSString *)getAmountFromClause:(NSString *)clauseStr to:(NSString **)to
+//{
+//    NSString *clauseTemp =  [clauseStr stringByReplacingOccurrencesOfString:@"0xa9059cbb000000000000000000000000" withString:@""];
+//    *to = [@"0x" stringByAppendingString:[clauseTemp substringToIndex:40]];
+//
+//    NSString *clauseStrTemp = [clauseStr stringByReplacingOccurrencesOfString:TransferMethodId withString:@""];
+//    NSString *clauseValue = @"";
+//
+//    if (clauseStrTemp.length >= 128) {
+//        clauseValue = [clauseStrTemp substringWithRange:NSMakeRange(64, 64)];
+//    }
+//    return [NSString stringWithFormat:@"0x%@",clauseValue];
+//}
+
 
 +(void)attempDealloc{
     predicate = 0;

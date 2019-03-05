@@ -103,6 +103,8 @@
 
 + (BOOL)checkHEXStr:(NSString *)hex;
 
++ (NSString *)getAmountFromClause:(NSString *)clauseStr to:(NSString **)to;
+
 @end
 
 

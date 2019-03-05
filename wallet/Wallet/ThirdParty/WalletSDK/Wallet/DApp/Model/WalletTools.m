@@ -521,4 +521,18 @@
     }
     return isOK;
 }
+
++ (NSString *)getAmountFromClause:(NSString *)clauseStr to:(NSString **)to
+{
+    NSString *clauseTemp =  [clauseStr stringByReplacingOccurrencesOfString:@"0xa9059cbb000000000000000000000000" withString:@""];
+    *to = [@"0x" stringByAppendingString:[clauseTemp substringToIndex:40]];
+    
+    NSString *clauseStrTemp = [clauseStr stringByReplacingOccurrencesOfString:TransferMethodId withString:@""];
+    NSString *clauseValue = @"";
+    
+    if (clauseStrTemp.length >= 128) {
+        clauseValue = [clauseStrTemp substringWithRange:NSMakeRange(64, 64)];
+    }
+    return [NSString stringWithFormat:@"0x%@",clauseValue];
+}
 @end
