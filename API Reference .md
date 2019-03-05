@@ -92,8 +92,6 @@
 
 
 ##  Get node url   
->
->
 ```obj-c
 + (NSString *)getNode;
 ```
