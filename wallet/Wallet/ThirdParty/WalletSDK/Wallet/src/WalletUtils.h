@@ -50,8 +50,6 @@ NS_ASSUME_NONNULL_BEGIN
  */
 + (BOOL)isValidMnemonicWords:(NSString *)mnemonicWords;
 
-
-
 /**
  *  @abstract
  *  Recover address

@@ -96,12 +96,6 @@
     return image;
 }
 
-+ (BOOL)validateWithRegExp: (NSString *)regExp text:(NSString *)text
-{
-    NSPredicate * predicate = [NSPredicate predicateWithFormat: @"SELF MATCHES %@", regExp];
-    return [predicate evaluateWithObject:text];
-}
-
 //查询thor 余额
 + (NSString *)tokenBalanceData:(NSString *)toAddress
 {
@@ -150,12 +144,6 @@
 + (void)checkNetwork:(void(^)(BOOL t))block
 {
     BOOL result = YES;
-    
-    if (block) {
-        block(result);
-    }
-    return;
-#warning test
     AFNetworkReachabilityManager *reachManager = [AFNetworkReachabilityManager sharedManager];
     if (![reachManager isReachable]) {
 

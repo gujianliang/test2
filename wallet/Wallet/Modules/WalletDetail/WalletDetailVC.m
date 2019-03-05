@@ -19,7 +19,7 @@
 
 @interface WalletDetailVC ()<UISearchBarDelegate>
 {
-    NSString *_blockHost;  /* The main network environment of block */
+    NSString *_blockHost;  /* The main Node environment of block */
 }
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *topConstrant;
@@ -36,7 +36,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    [self setNetworkEnvironmentHost];
+    [self setNodeEnvironmentHost];
 }
 
 
@@ -53,10 +53,10 @@
 - (void)initView {
    
     /* Set right bar buttonItem */
-    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc]initWithTitle:@"Choose network"
+    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc]initWithTitle:@"Choose Node"
                                                                  style:UIBarButtonItemStyleDone
                                                                 target:self
-                                                                action:@selector(selectTheMainNetworkEnvironment)];
+                                                                action:@selector(selectTheMainNodeEnvironment)];
     self.navigationItem.rightBarButtonItem = rightItem;
     
     
@@ -69,23 +69,8 @@
         self.topConstrant.constant = 16.0;
     }
     
-    
-    /*
-     Set up the search bar control to use some Dapp function.
-     
-     Test_Html      :  "https://appwallet.oss-cn-shanghai.aliyuncs.com/testJS/test.html"，
-     Test_Main_Page :  "https://appwallet.oss-cn-shanghai.aliyuncs.com/testJS/dist/index.html#/test",
-
-     These pages are some of the trade methods used to quickly access contracts, Which network environment
-     they work in depends on how you set it up.
-     You can choose our test network, main network and your custom network. We have declarations it
-     in the file of 'WalletSdkMacro.h'.
-     test network："https://vethor-node-test.vechaindev.com"
-     main network："https://vethor-node.vechain.com"     
-     */
     self.searchBar.delegate = self;
     self.searchBar.text = Test_Html;
-//    self.searchBar.text = Test_Main_Page;
     
     /* Set the VET and VTHO logo */
     [self.vetImageView setImage:[UIImage imageNamed:@"VET"]];
@@ -114,20 +99,20 @@
 
 
 /**
-*  Displays a selection of network controls，then you can change the main network environment
-*  or add what you custom network environment.
+*  Displays a selection of Node controls，then you can change the main Node environment
+*  or add what you custom Node environment.
 */
-- (void)selectTheMainNetworkEnvironment {
+- (void)selectTheMainNodeEnvironment {
     
     [self.view endEditing:YES];
     
-    WalletChooseNodeView *chooseNetworkView = [self.view viewWithTag:90];
-    if (!chooseNetworkView) {
-        chooseNetworkView = [[WalletChooseNodeView alloc] initWithFrame:self.view.frame];
-        chooseNetworkView.tag = 90;
-        [self.view addSubview:chooseNetworkView];
+    WalletChooseNodeView *chooseNodeView = [self.view viewWithTag:90];
+    if (!chooseNodeView) {
+        chooseNodeView = [[WalletChooseNodeView alloc] initWithFrame:self.view.frame];
+        chooseNodeView.tag = 90;
+        [self.view addSubview:chooseNodeView];
         
-        chooseNetworkView.block = ^(NSString *nodeName, NSString *nodeUrl) {
+        chooseNodeView.block = ^(NSString *nodeName, NSString *nodeUrl) {
 
             if (nodeUrl.length == 0) {
                 WalletAddVthoNodeVC *detailVC = [[WalletAddVthoNodeVC alloc]init];
@@ -148,13 +133,13 @@
 
 
 /**
-*  Change the main network environment or add what you custom network environment.
+*  Change the main Node environment or add what you custom Node environment.
 */
-- (void)setNetworkEnvironmentHost{
+- (void)setNodeEnvironmentHost{
     
-    NSDictionary *dictCurrentNode = [[NSUserDefaults standardUserDefaults] objectForKey:@"CurrentNode"];
+    NSDictionary *dictCurrentNode = [[NSUserDefaults standardUserDefaults] objectForKey:@"currentNode"];
     
-    if (dictCurrentNode) { /* Set to the main network of your choice. */
+    if (dictCurrentNode) { /* Set to the main Node of your choice. */
         NSString *customServerUrl = dictCurrentNode[@"nodeUrl"];
         if (customServerUrl.length > 0 ) {
             _blockHost = customServerUrl;
@@ -183,7 +168,7 @@
 
 
 /**
-*  Get the VET balance from network environment, '_blockHost' is a network variable. Which network environment
+*  Get the VET balance from Node environment, '_blockHost' is a Node variable. Which Node environment
 *  they work in depends on how you set it up.
 */
 - (void)getVETBalance {
@@ -213,13 +198,13 @@
 
 
 /**
-*  Get the VTHO balance from network environment, '_blockHost' is a network variable . Which network environment
+*  Get the VTHO balance from Node environment, '_blockHost' is a Node variable . Which Node environment
 *  they work in depends on how you set it up.
-*  'Contract_Address' is a fixed contract address. It is declarationed in the file of 'WalletSdkMacro.h'.
-*  Contract_Address : '0x0000000000000000000000000000456e65726779'
+*  'vthoTokenAddress' is a fixed contract address. It is declarationed in the file of 'WalletSdkMacro.h'.
+*  vthoTokenAddress : '0x0000000000000000000000000000456e65726779'
 */
 - (void)getVTHOBalance {
-    NSString *contractAddress = [NSString stringWithFormat:@"/accounts/%@", Contract_Address];
+    NSString *contractAddress = [NSString stringWithFormat:@"/accounts/%@", vthoTokenAddress];
     NSString *urlString = [_blockHost stringByAppendingString:contractAddress];
 
     NSMutableDictionary *dictParm = [NSMutableDictionary dictionary];
@@ -253,9 +238,9 @@
 
 
 /**
-*  This methor is used to splicing header information.
-*  The total length of the header is 34 and the rule is: 0x + methorID + twentyfour 0's.
-*  MethorID is an 8-length fixed value used to access methods on a contract.
+*  This method is used to splicing header information.
+*  The total length of the header is 34 and the rule is: 0x + methodID + twentyfour 0's.
+*  MethodID is an 8-length hex string , used to access methods on a contract.
 */
 - (NSString *)tokenBalanceData:(NSString *)toAddress {
     if ([[toAddress lowercaseString] hasPrefix:@"0x"]) {
@@ -267,13 +252,8 @@
 }
 
 
-
 #pragma mark -- UISearchBarDelegate
 
-/**
-*  When you click search button, then you can access some pages that it has some of the trade methods used to quickly access contracts,
-*  they work in the main network environment or what your choice.
-*/
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
     
     NSString *url = searchBar.text;

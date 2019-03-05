@@ -106,7 +106,7 @@
     NSString *urlString = [blockHost stringByAppendingString:@"/accounts/0x0000000000000000000000000000456e65726779"] ;
     
     NSMutableDictionary *dictParm = [NSMutableDictionary dictionary];
-    [dictParm setObject:[self tokenBalanceData:address] forKey:@"data"];
+    [dictParm setObject:[WalletTools tokenBalanceData:address] forKey:@"data"];
     [dictParm setObject:@"0x0" forKey:@"value"];
     
     AFHTTPSessionManager *httpManager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:urlString]];
@@ -149,17 +149,6 @@
     }];
 }
 
-
-//查询thor 余额
-- (NSString *)tokenBalanceData:(NSString *)toAddress
-{
-    if ([[toAddress lowercaseString] hasPrefix:@"0x"]) {
-        toAddress = [toAddress stringByReplacingOccurrencesOfString:@"0x" withString:@""];
-    }
-    NSString *head = @"0x70a08231000000000000000000000000";
-    NSString *data = [NSString stringWithFormat:@"%@%@",head,toAddress];
-    return data;
-}
 
 - (void)tokenAddressConvetCoinInfo:(NSString *)tokenAddress coinModel:(WalletCoinModel *)coinModel block:(void(^)(void))block
 {

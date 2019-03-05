@@ -48,84 +48,25 @@
 #endif
 #endif
 
-
-
 @interface WalletTools : NSObject
 
-
-+ (NSString *)dateConvertString:(NSDate *)date format:(NSString *)format;
-
-+(NSString*)dateStringFrommSecondString:(NSString*)mSecond format:(NSString *)format;
-
 + (UIViewController*)getCurrentVC;
-
-+ (void) restoreTabNavToRoot;
-
-+ (BOOL)IsIdentityCard:(NSString *)IDCardNumber;
-
-+(BOOL)isNoNull:(id)Obj;
-
-+(NSString*)appVersion;
-
-+ (BOOL)checkQRcode:(NSString *)code;
-
 + (NSString*)localeStringWithKey:(NSString*)key; // 去本地包key
 + (NSString *)localStringBundlekey:(NSString *)key; // 取bundle key
-
-+ (UIImage *)walletAddreeConvertImage:(NSString *)address;
 
 + (NSString *)tokenBalanceData:(NSString *)toAddress;
 
 + (NSString *)signData:(NSString *)address
                  value:(NSString *)value;
 
-// 1 天以内显示时分，1天以后显示具体年月日时分
-+ (NSString *) compareDayTime:(NSString *)str;
-
-+ (NSTimeInterval) compareTimeSpace:(NSString *)str;
-
 + (NSString *)checksumAddress:(NSString *)inputAddress;
-
-+ (NSString *)getSwapAddress:(NSString *)ethAddress
-                thorAddress:(NSString *)thorAddress;
-+(UIViewController *)getPresentedViewConreoller;
-
-+ (BOOL)InputCapitalAndLowercaseLetter:(NSString*)string;
-
-+ (void)circualarView:(UIView *)view Radius:(CGFloat)radius;
 
 + (void)checkNetwork:(void(^)(BOOL t))block;
 
-+(NSString *)keep4Decimal:(NSString *)input;
-
 + (UIViewController*)topViewControllerWithRootViewController:(UIViewController*)rootViewController;
-
-+ (NSString *)conventTimeSec:(NSString *)input; // MM/dd/yyyy HH:mm:ss
-
-+ (NSString *)conventTime:(NSString *)input;    // yyyy-MM-dd HH:mm:ss
-
-+ (NSString *)conventInvalidTime:(NSString *)input; // MM/dd/yyyy HH:mm
-
-+ (UIImage*) createImageWithColor: (UIColor*) color;
-
-+ (NSString *)serviceRuleHostWithContent:(NSString *)content;
-
-+ (UIViewController *)viewControllerSupportView:(UIView *)view;
-
-+ (BOOL)addressChecksum:(NSString *)address;
-
-+ (BOOL)checkHasToken:(NSString *)tokenSymbol;
-
-+(BOOL)hasSpecialWord:(NSString *)words;
-
-
-//查询block节点信息 交易信息
-+ (NSString *)blockWtihMethod:(NSString *)methodId tokenID:(NSString *)tokenID;
 
 //合约签名，data 数据准备
 + (NSString *)contractMethodId:(NSString *)methodId params:(NSArray *)params;
-
-
 
 // 10进制转千分符格式， decimals 是否保留小数 结尾 甚至【.00】
 + (NSString *)thousandSeparator:(NSString *)inputStr decimals:(BOOL)decimals;
@@ -151,8 +92,6 @@
 + (void)jsErrorAlert:(NSString *)message;
 
 + (UIImage *)localImageWithName:(NSString *)name;
-
-+ (NSString *)removeExtraZeroAtBegin:(NSString *)valueFormated;
 
 + (BOOL)fromISToAddress:(NSString *)from to:(NSString *)to;
 

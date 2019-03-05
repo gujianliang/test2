@@ -60,7 +60,6 @@
     NSDictionary *currentWalletDict = [[NSUserDefaults standardUserDefaults]objectForKey:@"currentWallet"];
     NSString *from = currentWalletDict[@"address"];
     
-    // 设置 钱包
     NSMutableArray *walletList = [NSMutableArray array];
     if (currentWalletDict) {
         [walletList addObject:currentWalletDict];
@@ -73,6 +72,7 @@
         [self vthoTransfer:from keystore:keystore];
     }
     
+    //sign contract demo
 //    [self contractSignture:from keystore:keystore];
 }
 
@@ -86,14 +86,14 @@
     paramters.data = @"";
 
     paramters.from = from;
-    paramters.gas = @"21000";//Set maximum gas allowed for call
+    paramters.gas = @"21000";//Set maximum gas allowed for call,
 
     [WalletUtils sendWithKeystore:keystore
                                parameter:paramters
                                    callback:^(NSString *txId, NSString *signer)
      {
 
-        NSLog(@"dd");
+
     }];
 }
 
@@ -114,12 +114,12 @@
                                parameter:paramters
                                    callback:^(NSString *txId, NSString *signer)
      {
-         NSLog(@"dd");
      }];
 
 }
 
-//address: receive address
+//address: Accept the address of the account
+//value: Token transfer amount
 - (NSString *)calculatenTokenTransferClauseData:(NSString *)address
                                      value:(NSString *)value
 {
@@ -146,17 +146,13 @@
     paramters.data = @"0xbae3e19e00000000000000000000000000000000000000000000000000000000000000680000000000000000000000000000000000000000000000000de0b6b3a76400000000000000000000000000000000000000000000000000000de0b6b3a7640000000000000000000000000000000000000000000000000000000000000003f480";
     
     {
-//        0x68,
-//        0x0DE0B6B3A7640000,
-//        0x3840,
-//        0x1231231231231231231231231231233123121231
-
-        NSMutableArray *clauseParamList = [NSMutableArray array];
-        [clauseParamList addObject:@"0x68"];
-        [clauseParamList addObject:@"0x0DE0B6B3A7640000"];
-        [clauseParamList addObject:@"0x3840"];
-        [clauseParamList addObject:@"0x1231231231231231231231231231231231231231"];
-        paramters.data = [self contractMethodId:@"0x2ed9b4fd" params:clauseParamList];
+// Method of splicing data
+//        NSMutableArray *clauseParamList = [NSMutableArray array];
+//        [clauseParamList addObject:@"0x68"];
+//        [clauseParamList addObject:@"0x0DE0B6B3A7640000"];
+//        [clauseParamList addObject:@"0x3840"];
+//        [clauseParamList addObject:@"0x1231231231231231231231231231231231231231"];
+//        paramters.data = [self contractMethodId:@"0x2ed9b4fd" params:clauseParamList];
     }
     
     paramters.from = from;
@@ -170,7 +166,7 @@
      }];
 }
 
-//Contract signature, clause data preparation
+//Sign contract,splice clause data 
 - (NSString *)contractMethodId:(NSString *)methodId params:(NSArray *)params
 {
     

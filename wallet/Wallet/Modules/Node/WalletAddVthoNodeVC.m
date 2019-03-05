@@ -63,7 +63,7 @@
     [newList addObject:dict];
     
     [[NSUserDefaults standardUserDefaults] setObject:newList forKey:@"nodeList"];
-    [[NSUserDefaults standardUserDefaults] setObject:dict forKey:@"CurrentNode"];
+    [[NSUserDefaults standardUserDefaults] setObject:dict forKey:@"currentNode"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
     [WalletUtils setNode:nodeUrl];

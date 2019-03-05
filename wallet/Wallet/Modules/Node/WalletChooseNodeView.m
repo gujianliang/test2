@@ -12,7 +12,7 @@
 
 @interface WalletChooseNodeView()<UITableViewDataSource, UITableViewDelegate>
 {
-    NSMutableArray *_newList;    /* It is used to save all the node environment */
+    NSMutableArray *_nodeList;    /* It is used to save all the node environment */
 }
 @end
 
@@ -49,28 +49,28 @@
     chooseNodeCotainView.backgroundColor = UIColor.whiteColor;
     [self addSubview:chooseNodeCotainView];
     
-    NSArray *netList = [[NSUserDefaults standardUserDefaults] objectForKey:@"nodeList"];
-    _newList = [NSMutableArray array];
+    NSArray *nodeList = [[NSUserDefaults standardUserDefaults] objectForKey:@"nodeList"];
+    _nodeList = [NSMutableArray array];
     
-    NSMutableDictionary *dict1 = [NSMutableDictionary dictionary];
-    [dict1 setObject:@"Main Node" forKey:@"nodeName"];
-    [dict1 setObject:Main_Node forKey:@"nodeUrl"];
-    [_newList addObject:dict1];
+    NSMutableDictionary *dictMain = [NSMutableDictionary dictionary];
+    [dictMain setObject:@"Main Node" forKey:@"nodeName"];
+    [dictMain setObject:Main_Node forKey:@"nodeUrl"];
+    [_nodeList addObject:dictMain];
     
-    NSMutableDictionary *dict2 = [NSMutableDictionary dictionary];
-    [dict2 setObject:@"Test Node" forKey:@"nodeName"];
-    [dict2 setObject:Test_Node forKey:@"nodeUrl"];
-    [_newList addObject:dict2];
+    NSMutableDictionary *dictTest = [NSMutableDictionary dictionary];
+    [dictTest setObject:@"Test Node" forKey:@"nodeName"];
+    [dictTest setObject:Test_Node forKey:@"nodeUrl"];
+    [_nodeList addObject:dictTest];
 
-    if (netList.count > 0) {
-        [_newList addObjectsFromArray:netList];
+    if (nodeList.count > 0) {
+        [_nodeList addObjectsFromArray:nodeList];
     }
     
-    if (_newList.count >= 6) {
+    if (_nodeList.count >= 6) {
         chooseNodeCotainView.frame = CGRectMake(self.frame.size.width - 200, 80, 180, 50 * 6 + 10 + 50);
         
     }else {
-        chooseNodeCotainView.frame = CGRectMake(self.frame.size.width - 200, 80, 180, 50 * _newList.count + 10 + 50);
+        chooseNodeCotainView.frame = CGRectMake(self.frame.size.width - 200, 80, 180, 50 * _nodeList.count + 10 + 50);
     }
     
     
@@ -93,7 +93,7 @@
 
 #pragma mark -- UITableViewDataSource, UITableViewDelegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return _newList.count;
+    return _nodeList.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -108,7 +108,7 @@
         line.backgroundColor = [UIColor lightGrayColor];
         [cell addSubview:line];
     }
-    NSDictionary *dict = _newList[indexPath.row];
+    NSDictionary *dict = _nodeList[indexPath.row];
     cell.textLabel.text = dict[@"nodeName"];
     
     return cell;
@@ -121,7 +121,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    NSDictionary *dict = _newList[indexPath.row];
+    NSDictionary *dict = _nodeList[indexPath.row];
     NSString *serverName = dict[@"nodeName"];
     NSString *serverUrl = dict[@"nodeUrl"];
     
@@ -130,7 +130,7 @@
     }
     
     if (serverUrl.length > 0) {
-        [[NSUserDefaults standardUserDefaults] setObject:dict forKey:@"CurrentNode"];
+        [[NSUserDefaults standardUserDefaults] setObject:dict forKey:@"currentNode"];
         [[NSUserDefaults standardUserDefaults] synchronize];
     }
     

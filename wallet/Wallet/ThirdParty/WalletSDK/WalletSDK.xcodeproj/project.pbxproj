@@ -967,7 +967,7 @@
 			isa = PBXGroup;
 			children = (
 				9743A4F121FEB36F0079C582 /* DApp */,
-				E2D1A2B01E3C695A0015CAF8 /* src */,
+				E2D1A2B01E3C695A0015CAF8 /* Basic */,
 				E2317EE01E3198D100DBE3E4 /* ThirdParty */,
 			);
 			path = Wallet;
@@ -1091,7 +1091,7 @@
 			name = "trezor-crypto";
 			sourceTree = "<group>";
 		};
-		E2D1A2B01E3C695A0015CAF8 /* src */ = {
+		E2D1A2B01E3C695A0015CAF8 /* Basic */ = {
 			isa = PBXGroup;
 			children = (
 				9736C125214B8671003DE935 /* WalletUtils.h */,
@@ -1110,7 +1110,7 @@
 				E2317E8D1E31970900DBE3E4 /* Transaction.h */,
 				E2317E8E1E31970900DBE3E4 /* Transaction.m */,
 			);
-			name = src;
+			name = Basic;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

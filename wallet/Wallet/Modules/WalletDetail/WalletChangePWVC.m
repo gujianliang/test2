@@ -22,7 +22,7 @@
 
 
 /**
-*  Change the wallet current password with your new password.
+*  Change wallet password.
 */
 - (IBAction)changeTheWalletPassword:(id)sender{
     [self.view endEditing:YES];

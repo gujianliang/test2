@@ -76,7 +76,7 @@
         [dict setObject:Test_Node forKey:@"nodeUrl"];
         
         [[NSUserDefaults standardUserDefaults] setObject:newList2 forKey:@"nodeList"];
-        [[NSUserDefaults standardUserDefaults] setObject:dict forKey:@"CurrentNode"];
+        [[NSUserDefaults standardUserDefaults] setObject:dict forKey:@"currentNode"];
         [[NSUserDefaults standardUserDefaults] synchronize];
         
         [WalletUtils setNode:Test_Node];
