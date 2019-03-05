@@ -22,6 +22,10 @@
 #define DefaultGasPriceCoef     @"0x78"
 #define DefaultExpiration       720
 
+#define vthoTokenAddress        @"0x0000000000000000000000000000456e65726779"
+
+
+
 static int OK = 1;
 static int ERROR_REQUEST_PARAMS = 200;
 static int ERROR_REQUEST_METHOD = 201;

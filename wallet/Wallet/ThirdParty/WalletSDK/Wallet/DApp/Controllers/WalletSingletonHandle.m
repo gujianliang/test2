@@ -11,6 +11,7 @@
 #import "WalletGetBaseGasPriceApi.h"
 #import "Payment.h"
 #import "SocketRocketUtility.h"
+#import "WalletDAppHead.h"
 
 @implementation WalletSingletonHandle
 {
@@ -66,14 +67,13 @@ static dispatch_once_t predicate;
          
      } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error)
      {
-         
-         
+         NSLog(@"Get VET balance failure. error: %@", error);
      }];
 }
 
 - (void)getVTHOBalance:(WalletManageModel *)walletModel
 {
-    NSString *urlString = [[WalletUserDefaultManager getBlockUrl] stringByAppendingString:@"/accounts/0x0000000000000000000000000000456e65726779"] ;
+    NSString *urlString = [NSString stringWithFormat:@"%@/accounts/%@",[WalletUserDefaultManager getBlockUrl],vthoTokenAddress]  ;
     
     NSMutableDictionary *dictParm = [NSMutableDictionary dictionary];
     [dictParm setObject:[WalletTools tokenBalanceData:walletModel.address] forKey:@"data"];

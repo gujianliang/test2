@@ -103,7 +103,7 @@
 - (void)getVTHOBalance:(NSString *)address gasLimit:(NSString *)gasLimit block:(void(^)())block
 {
     NSString *blockHost = [WalletUserDefaultManager getBlockUrl];
-    NSString *urlString = [blockHost stringByAppendingString:@"/accounts/0x0000000000000000000000000000456e65726779"] ;
+    NSString *urlString = [NSString stringWithFormat:@"%@/accounts/%@",blockHost,vthoTokenAddress]  ;
     
     NSMutableDictionary *dictParm = [NSMutableDictionary dictionary];
     [dictParm setObject:[WalletTools tokenBalanceData:address] forKey:@"data"];
