@@ -25,7 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (WalletManageModel *)currentWalletModel;
 
-+(void)attempDealloc;
++ (void)attempDealloc;
 
 @end
 

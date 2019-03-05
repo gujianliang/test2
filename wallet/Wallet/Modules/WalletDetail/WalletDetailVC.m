@@ -81,14 +81,12 @@
      You can choose our test network, main network and your custom network. We have declarations it
      in the file of 'WalletSdkMacro.h'.
      test network："https://vethor-node-test.vechaindev.com"
-     main network："https://vethor-node-vechaindev.com"     
+     main network："https://vethor-node.vechain.com"     
      */
     self.searchBar.delegate = self;
     self.searchBar.text = Test_Html;
-    self.searchBar.text = Test_Main_Page;
+//    self.searchBar.text = Test_Main_Page;
     
-    self.searchBar.text = @"https://itunes.apple.com/cn/app/id1335906787?mt=8";
-    self.searchBar.text = @"itms-apps://itunes.apple.com/app/1335906787";
     /* Set the VET and VTHO logo */
     [self.vetImageView setImage:[UIImage imageNamed:@"VET"]];
     [self.vthoImageView setImage:[UIImage imageNamed:@"VTHO"]];
@@ -279,7 +277,6 @@
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
     
     NSString *url = searchBar.text;
-    url = @"itms-apps://itunes.apple.com/app/1335906787";
     WebViewVC *webVC = [[WebViewVC alloc] initWithURL:url];
     [self.navigationController pushViewController:webVC animated:YES];
 }

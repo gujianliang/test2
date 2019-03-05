@@ -185,7 +185,15 @@ completionHandler:(void (^)(NSString *result))completionHandler;
  */
 + (void)injectJSWithWebView:(WKWebView *)webview;
 
-
+/**
+ *  @abstract
+ *  Release the singleton object in the dapp
+ *
+ *  Call this method when exiting the contrller where dapp is located
+ *
+ *
+ */
++ (void)attempDealloc;
 
 NS_ASSUME_NONNULL_END
 

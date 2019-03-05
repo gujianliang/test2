@@ -8,6 +8,7 @@
 
 #import "WalletUserDefaultManager.h"
 
+
 @implementation WalletUserDefaultManager
 
 
@@ -16,7 +17,7 @@
     // 如果没有设置block host ，默认是正式环境
     NSString *blockUrl = [[NSUserDefaults standardUserDefaults] objectForKey:@"wallerSDK_BlockUrl"];
     if (blockUrl.length == 0 || blockUrl == nil) {
-        return @"https://vethor-node-vechaindev.com";
+        return blockChain_host_release;
     }else{
         return [[NSUserDefaults standardUserDefaults] objectForKey:@"wallerSDK_BlockUrl"];
     }

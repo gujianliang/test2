@@ -148,6 +148,7 @@ static dispatch_once_t predicate;
     predicate = 0;
     singleton = nil;
     [[SocketRocketUtility instance] SRWebSocketClose];
+    
 }
 
 @end

@@ -382,4 +382,10 @@
     return [WalletUserDefaultManager getBlockUrl];
 }
 
++ (void)attempDealloc
+{
+    [WalletSingletonHandle attempDealloc];
+    [WalletDAppHandle attempDealloc];
+}
+
 @end

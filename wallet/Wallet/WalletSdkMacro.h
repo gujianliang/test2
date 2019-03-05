@@ -23,7 +23,7 @@
 #define     Test_Html           @"https://appwallet.oss-cn-shanghai.aliyuncs.com/testJS/test.html"                 /* Contract shortcut page */
 #define     Test_Main_Page      @"https://appwallet.oss-cn-shanghai.aliyuncs.com/testJS/dist/index.html#/test"     /* Contract shortcut page */
 #define     Test_Node      @"https://vethor-node-test.vechaindev.com"      /* The test Node environment of block */
-#define     Main_Node      @"https://vethor-node-vechaindev.com"           /* The main Node environment of block */
+#define     Main_Node      @"https://vethor-node.vechain.com"           /* The main Node environment of block */
 
 #define     Contract_Address    @"0x0000000000000000000000000000456e65726779"   /* A fixed contract address */
 

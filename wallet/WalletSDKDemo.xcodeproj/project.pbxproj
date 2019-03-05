@@ -183,7 +183,7 @@
 			isa = PBXGroup;
 			children = (
 				971812162227945B008F9639 /* Node */,
-				97574754220056FB0046C8A0 /* dApp */,
+				97574754220056FB0046C8A0 /* DApp */,
 				971B3E1A21E6000B007845F0 /* WalletDetail */,
 				971B3E2421E6000B007845F0 /* Creat */,
 				971B3E2821E6000B007845F0 /* Transfer */,
@@ -312,14 +312,14 @@
 			path = WalletUITests;
 			sourceTree = "<group>";
 		};
-		97574754220056FB0046C8A0 /* dApp */ = {
+		97574754220056FB0046C8A0 /* DApp */ = {
 			isa = PBXGroup;
 			children = (
 				975747552200573E0046C8A0 /* WebViewVC.h */,
 				975747562200573E0046C8A0 /* WebViewVC.m */,
 				975747572200573E0046C8A0 /* WebViewVC.xib */,
 			);
-			path = dApp;
+			path = DApp;
 			sourceTree = "<group>";
 		};
 		975DAE27212159340094D6F8 /* Frameworks */ = {

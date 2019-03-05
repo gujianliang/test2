@@ -154,12 +154,6 @@
     }
     
     self.isLoading = YES;
-
-#ifdef DEBUG
-//    if ([[WalletUserDefaultManager getSaveServerType] intValue] == DEVELOP_SERVER) {
-//        self.needEncrypt = NO;
-//    }
-#endif
     
     NSMutableDictionary *postDict = [self buildRequestDict];
     NSError *error = nil;
@@ -352,75 +346,6 @@
         NSString *temp = dictError[@"message"];
         errMsg = temp.length > 0 ? temp : @"no network";
         errCode = dictError[@"code"];
-        
-        
-        switch (errCode.integerValue) {
-            case 20001:
-                errMsg = VCNSLocalizedBundleString(@"token_swap_thor_format_error",nil);
-                break;
-            case 20002:
-                errMsg = VCNSLocalizedBundleString(@"ETH地址不合法",nil);
-                break;
-            case 20003:
-                errMsg = VCNSLocalizedBundleString(@"关联地址不合法",nil);
-                break;
-            case 20004:
-                errMsg = VCNSLocalizedBundleString(@"token_swap_thor_binded_error",nil);
-                break;
-            case 20005:
-                errMsg = VCNSLocalizedBundleString(@"ETH地址已被其他地址绑定",nil);
-                break;
-            case 20007:
-                errMsg = VCNSLocalizedBundleString(@"VeChainThor地址还未进行过绑定",nil);
-                break;
-            case 20010:
-            {
-                
-                errMsg = VCNSLocalizedBundleString(@"token_swap_function_closed",nil);
-
-            }
-                break;
-
-            case 30000:
-                errMsg = VCNSLocalizedBundleString(@"企业鉴权信息无效",nil);
-                break;
-            case 30001:
-                errMsg = VCNSLocalizedBundleString(@"授权回调地址无效",nil);
-                break;
-            case 30002:
-                errMsg = VCNSLocalizedBundleString(@"授权等级参数无效",nil);
-                break;
-            case 30003:
-                errMsg = VCNSLocalizedBundleString(@"authorized_error_qr_invalid",nil);
-                break;
-            case 30004:
-                errMsg = VCNSLocalizedBundleString(@"authorized_address_invalid",nil);
-                break;
-            case 30005:
-                errMsg = VCNSLocalizedBundleString(@"authorized_signature_invalid",nil);
-                break;
-            case 30006:
-                errMsg = VCNSLocalizedBundleString(@"authorized_error_qr_invalid",nil);
-                break;
-            case 30007:
-                errMsg = VCNSLocalizedBundleString(@"白盒加密失败",nil);
-                break;
-            case 90000:
-                errMsg = VCNSLocalizedBundleString(@"sessiontoken已存在",nil);
-                break;
-            case 90001:
-                errMsg = VCNSLocalizedBundleString(@"qrcode超时",nil);
-                break;
-            case 90002:
-                errMsg = VCNSLocalizedBundleString(@"签名校验超时",nil);
-                break;
-            case 90003:
-                errMsg = VCNSLocalizedBundleString(@"签名校验时间戳不合法",nil);
-                break;
-                
-            default:
-                break;
-        }
         
         self.lastError = [NSError errorWithDomain:@"Wallet"
                                              code:errCode.integerValue

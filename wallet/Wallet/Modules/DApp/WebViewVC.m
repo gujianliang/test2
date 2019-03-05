@@ -85,5 +85,9 @@
     [WalletUtils webView:webView  defaultText:defaultText completionHandler:completionHandler];
 }
 
+- (void)dealloc
+{
+    [WalletUtils attempDealloc];
+}
 
 @end

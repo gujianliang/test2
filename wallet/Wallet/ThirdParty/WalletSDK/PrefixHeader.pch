@@ -11,6 +11,7 @@
 
 // Include any system framework and library headers here that should be included in all compilation units.
 // You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
 #import "NSMutableDictionary+Helpers.h"
 #import "UIColor+SNFoundation.h"
 #import "Masonry.h"
@@ -21,7 +22,6 @@
 #import "NSStringAdditions.h"
 #import "UIButton+block.h"
 
-//#import "RACEXTScope.h"
 
 #define VCNSLocalizedString(key, comment) [WalletTools localeStringWithKey:(key)]
 #define VCNSLocalizedBundleString(key, comment) [WalletTools localStringBundlekey:(key)]
@@ -29,17 +29,11 @@
 #define SCREEN_WIDTH          ([UIScreen mainScreen].bounds.size.width)
 #define SCREEN_HEIGHT         ([UIScreen mainScreen].bounds.size.height)
 
-
 #define MAIN_BLUE_COLOR     HEX_RGB(0x2baafa)
-#define BG_GRAY_COLOR       HEX_RGB(0xdddddd)
-
-#define RGBCOLOR(r,g,b) [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:1]
 
 #define PLACE_HOLDER_COLOR  RGBACOLOR(150, 150, 150, 0.5)
 
 #define HEX_RGB(V)        [UIColor colorWithRGBHex:V]
-
-
 
 #define IOS8 [[[UIDevice currentDevice]systemVersion] floatValue] >= 8.0
 #define IOS7 [[[UIDevice currentDevice]systemVersion] floatValue] == 7.0
@@ -47,22 +41,12 @@
 #define IOS11 [[[UIDevice currentDevice]systemVersion] floatValue] == 11.0
 #define LessiOS11 [[[UIDevice currentDevice]systemVersion] floatValue] < 11.0
 
-
 #define RGB(r, g, b) [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:1]
 #define RGBA(r, g, b, a) [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:a]
 
 #define SCREEN_SCALE        ([UIScreen mainScreen].scale)
 #define SCREEN_WIDTH_LL     ([UIScreen mainScreen].bounds.size.width) * (SCREEN_SCALE)
 
-#define ONE_PIXEL_WIDTH     (1.0f / ([UIScreen mainScreen].scale))
-
-
-#define SCREEN_BOUNDS ([UIScreen mainScreen].bounds)
-#define SCREEN_WIDTH ([UIScreen mainScreen].bounds.size.width)
-#define SCREEN_HEIGHT         ([UIScreen mainScreen].bounds.size.height)
-//#define ONE_PIXEL_WIDTH       (1.0f/[UIScreen mainScreen].scale)
-#define WidthScale(__width__) ((__width__)/375.0 * SCREEN_WIDTH)
-#define POINT_MINUS_ONE_PIXEL (([UIScreen mainScreen].scale - 1.0f) / [UIScreen mainScreen].scale)
 #define CGDrawingOnePixelWidth       (1.0f)
 // MARK: -
 // MARK: iPhoneX
@@ -79,14 +63,6 @@
 #define Scale(num)          ((num) * SCREEN_WIDTH / 375.0)          // 缩放值
 #define ScaleH(num)         ((num) * SCREEN_HEIGHT / 667.0)         // 垂直缩放值
 
-#define navigationHeight    44
-
-#define MAIN_BLUE_COLOR     HEX_RGB(0x2baafa)
-#define BG_GRAY_COLOR       HEX_RGB(0xdddddd)
-#define TEXT_GRAY_COLOR     HEX_RGB(0x969696)
-#define PLACE_HOLDER_COLOR  RGBACOLOR(150, 150, 150, 0.5)
-#define IMAGE_BODER_COLOR   HEX_RGB(0xeeeeee)
-
 
 #define iPhone6 ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone && MAX([UIScreen mainScreen].bounds.size.height,[UIScreen mainScreen].bounds.size.width) == 667)
 
@@ -95,75 +71,6 @@
 #define iPhone5sORiPhone5 ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone && MAX([UIScreen mainScreen].bounds.size.height,[UIScreen mainScreen].bounds.size.width) == 568)
 
 #define iPhone4SORiPhone4 ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone && MAX([UIScreen mainScreen].bounds.size.height,[UIScreen mainScreen].bounds.size.width) == 480)
-
-// 暂未用到
-#define kAppBakgroundColor          HEX_RGB(0xF9F7F8)
-#define kAppModalBackgroundColor    [kBlackColor colorWithAlphaComponent:0.6]
-#define kAppModalDimbackgroundColor [RGB(16, 16, 16) colorWithAlphaComponent:0.3]
-
-// TIMChat没有在此处设置
-// 主色调
-// 导航按钮
-#define kNavBarThemeColor             RGB(128, 64, 122)
-#define kNavBarHighlightThemeColor    RGB(161, 92, 154)
-
-// 默认TableViewCell高度
-#define kDefaultCellHeight 50
-// 默认界面之间的间距
-#define kDefaultMargin     8
-
-// 默认的字体颜色
-#define kMainTextColor                kBlackColor
-
-#define kDetailTextColor              RGB(145, 145, 145)
-
-
-// CommonLibrary中常用的字体
-#define kCommonLargeTextFont       [UIFont systemFontOfSize:16]
-#define kCommonMiddleTextFont      [UIFont systemFontOfSize:14]
-#define kCommonSmallTextFont       [UIFont systemFontOfSize:12]
-
-#define kDefaultMargin  8
-
-
-#define kDefaultSubGroupIcon        [UIImage imageWithColor:kOrangeColor size:CGSizeMake(32, 32)]
-
-
-#define kAppLargeTextFont       [UIFont systemFontOfSize:16]
-#define kAppMiddleTextFont      [UIFont systemFontOfSize:14]
-#define kAppSmallTextFont       [UIFont systemFontOfSize:12]
-
-#define kDefaultSilentUntil     100
-
-
-
-// 定义通用颜色
-#define kBlackColor         [UIColor blackColor]
-#define kDarkGrayColor      [UIColor darkGrayColor]
-#define kLightGrayColor     [UIColor lightGrayColor]
-#define kWhiteColor         [UIColor whiteColor]
-#define kGrayColor          [UIColor grayColor]
-#define kRedColor           [UIColor redColor]
-#define kGreenColor         [UIColor greenColor]
-#define kBlueColor          [UIColor blueColor]
-#define kCyanColor          [UIColor cyanColor]
-#define kYellowColor        [UIColor yellowColor]
-#define kMagentaColor       [UIColor magentaColor]
-#define kOrangeColor        [UIColor orangeColor]
-#define kPurpleColor        [UIColor purpleColor]
-#define kClearColor         [UIColor clearColor]
-
-#define kRandomFlatColor    [UIColor randomFlatColor]
-
-#define kBlackColor68       RGB(68,68,68)
-#define kBlackColor102      RGB(102,102,102)
-#define kBlackColor120      RGB(120,120,120)
-#define kBlackColor230      RGB(230,230,230)
-#define kBlackColor195      RGB(195,195,195)
-#define kBlackColor199      RGB(199,199,199)
-
-#define iPhone6W 375.0
-#define iPhone6H 667.0
 
 // 计算比例
 // x比例 1.293750 在iPhone7的屏幕上
@@ -185,109 +92,18 @@
 #undef HEX_COLOR
 #define HEX_COLOR(h)  [UIColor colorWithRGBHex:(h)]
 
-
-/********************* 合约方法类 *****************/
-
-//3.1.1.1 查询地址是否持有节点
-#define  QUERY_ADDRESS_NODE_INFO    @"0x19f37361"
-
-//3.1.1.2 查询节点信息
-#define  QUERY_NODE_INFO            @"0xa574cea4"
-
-//3.1.1.3 查询等级参数
-#define  QUERY_NODE_LEVEL_INFO      @"0x287e8495"
-
-//3.1.1.4 查询节点是否可以转移
-#define  QUERY_NODE_CAN_TRANSFER    @"0x4d4f6ea9"
-
-//3.1.1.5 申请节点升级
-#define  APPLY_UPGRADE              @"0x79512513"
-
-//3.1.1.6 取消升级申请
-#define  CANCEL_UPGRADE             @"0xba2a954d"
-
-//3.1.1.7 创建公开拍卖
-#define  CREATE_SALE_AUCTION        @"0xbae3e19e"
-
-//3.1.1.8 创建定向拍卖
-#define  CREATE_DIRECTION_SALE_AUCTION   @"0x2ed9b4fd"
-
-//3.1.1.9 拍卖投标
-#define  BID              @"0x454a2ab3"
-
-//3.1.1.10 拍卖取消
-#define  CANCEL_AUCTION   @"0x96b5a755"
-
-//3.1.2.1 查询拍卖信息
-#define  GET_AUCTION      @"0x78bd7935"
-
-//3.1.2.2 拍卖协议升级
-#define  SET_SALE_AUCTION_ADDRESS   @"0x6fbde40d"
-
-//3.1.2.3 是否拍卖中
-#define  IS_AUCTION       @"0x37e246ad"
-
-//3.1.2.4 转移节点
-#define  NODE_TRANSFER    @"0xa9059cbb"
-
 //基础钱包功能API(Explorer服务)
 #define  explorer_host_test         @"https://vethor-explorer-test.vechaindev.com/api"      //测试环境
 #define  explorer_host_dev          @"https://vethor-explorer-dev.vechaindev.com/api"       //开发环境
 #define  explorer_host_staging      @"https://vethor-explorer-staging.vechaindev.com/api"   //Staging环境
 #define  explorer_host_release      @"https://vethor-explorer.vechain.com/api"              //正式环境
 
-//换币功能API(有加密)
-#define  token_swap_host_test       @"https://tokenswap-test.vechaindev.com/api"            //测试环境
-#define  token_swap_host_dev        @"https://tokenswap-dev.vechaindev.com/api"             //开发环境
-#define  token_swap_host_staging    @"https://tokenswap-staging.vechaindev.com/api"         //Staging环境
-#define  token_swap_host_release    @"https://tokenswap.vechain.com/api"                    //正式环境
-
-//版本升级、tokenswap开关、获取系统配置信息(有加密)
-#define  base_wallet_host_test      @"https://wallet-test.vechaindev.com/api"               //测试环境
-#define  base_wallet_host_dev       @"https://wallet-dev.vechaindev.com/api"                //开发环境
-#define  base_wallet_host_staging   @"https://wallet-staging.vechaindev.com/api"            //Staging环境
-#define  base_wallet_host_release   @"https://wallet.vechain.com/api"                       //正式环境
 
 //区块链节点地址
 #define  blockChain_host_test       @"https://vethor-node-test.vechaindev.com"              //测试环境
 #define  blockChain_host_dev        @"https://vethor-node-dev.vechaindev.com"               //开发环境
 #define  blockChain_host_staging    @"https://vethor-node-staging.vechaindev.com"           //Staging环境
 #define  blockChain_host_release    @"https://vethor-node.vechain.com"                      //正式环境
-
-//藏品
-#define  category_host_test         @"https://wallet-app.vechaindev.com/test/api"           //测试环境
-#define  category_host_dev          @"https://wallet-app.vechaindev.com/api"                //开发环境
-#define  category_host_staging      @"https://wallet-app-staging.vechaindev.com/api"        //Staging环境
-#define  category_host_release      @"https://wallet-app.vechain.com/api"                   //正式环境
-
-//地址授权
-#define  authorized_host_test       @"https://authorized-test.vechaindev.com/api"           //测试环境
-#define  authorized_host_dev        @"https://authorized-dev.vechaindev.com/api"            //开发环境
-#define  authorized_host_staging    @"https://authorized-staging.vechaindev.com/api"        //Staging环境
-#define  authorized_host_release    @"https://authorized.vechain.com/api"                   //正式环境
-
-// 推送
-#define push_host_test              @"https://wallet-push-notification-test.vechaindev.com/api"  // 测试环境
-#define push_host_dev               @"https://wallet-push-notification.vechaindev.com/api"  // 开发环境
-#define push_host_staging           @"https://wallet-push-notification.vechaindev.com/api"  // Staging环境
-#define push_host_release           @"https://wallet-push-notification.vechaindev.com/api"  // 正式环境
-
-/********************* 合约地址 *****************/
-//TEST
-#define  NODE_CONTRACT_ADDRESS_TEST         @"0xd4dac3a95c741773f093d59256a21ed6fcc768a7"   // 节点合约地址:创建拍卖，节点状态，节点信息
-//#define  AUCTION_CONTRACT_ADDRESS_TEST      @"0x7712a3e90235bf0d44c53919a73d6dac188d704c"   // 拍卖合约地址：查询拍卖
-
-//DEV
-#define  NODE_CONTRACT_ADDRESS_DEBUG        @"0xF9185B9d1Fd7311B9A54A53DC870A459C67af5Bc"   // 节点合约地址:创建拍卖，节点状态，节点信息
-//#define  AUCTION_CONTRACT_ADDRESS_DEBUG     @"0x78DfceF8F066b47F5c8821D9B25bA8E26809aFeF"   // 拍卖合约地址：查询拍卖
-
-//staging
-#define  NODE_CONTRACT_ADDRESS_STAGING      @"0x78763722b9182df0bfda6d0a07c07f391f4669e5"   // 节点合约地址:创建拍卖，节点状态，节点信息
-//#define  AUCTION_CONTRACT_ADDRESS_STAGING   @"0x5530511838c65245cdab5d81c84128f0479acff6"   // 拍卖合约地址：查询拍卖
-
-//release
-#define  NODE_CONTRACT_ADDRESS_RELEASE      @"0xb81e9c5f9644dec9e5e3cac86b4461a222072302"   // 节点合约地址:创建拍卖，节点状态，节点信息
-//#define  AUCTION_CONTRACT_ADDRESS_RELEASE   @"0xe28ce32d637eb93cbda105f87fbb829e9ef8540b"   // 拍卖合约地址：查询拍卖
 
 
 
