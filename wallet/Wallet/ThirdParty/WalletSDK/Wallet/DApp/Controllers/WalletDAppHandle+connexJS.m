@@ -215,9 +215,7 @@
         revisionOK = YES;
     }else{
         
-        NSString *regex =@"[0-9]*";
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",regex];
-        if ([predicate evaluateWithObject:revision]) {
+        if ([WalletTools checkDecimalStr:revision]) {
             revisionOK = YES;
         }
     }

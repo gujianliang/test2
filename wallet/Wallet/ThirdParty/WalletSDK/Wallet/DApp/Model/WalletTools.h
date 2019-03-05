@@ -105,6 +105,8 @@
 
 + (NSString *)getAmountFromClause:(NSString *)clauseStr to:(NSString **)to;
 
++ (BOOL)checkDecimalStr:(NSString *)decimalString;
+
 @end
 
 

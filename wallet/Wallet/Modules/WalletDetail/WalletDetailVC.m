@@ -71,7 +71,7 @@
     
     self.searchBar.delegate = self;
     self.searchBar.text = @"https://appwallet.oss-cn-shanghai.aliyuncs.com/testJS/test.html";
-    self.searchBar.text = @"https://appwallet.oss-cn-shanghai.aliyuncs.com/testJS/dist/index.html#test";
+//    self.searchBar.text = @"https://appwallet.oss-cn-shanghai.aliyuncs.com/testJS/dist/index.html#/test";
     
     /* Set the VET and VTHO logo */
     [self.vetImageView setImage:[UIImage imageNamed:@"VET"]];
@@ -261,8 +261,6 @@
     WebViewVC *webVC = [[WebViewVC alloc] initWithURL:url];
     [self.navigationController pushViewController:webVC animated:YES];
 }
-
-
 
 #define click event
 

@@ -442,6 +442,9 @@
 
 + (BOOL)checkHEXStr:(NSString *)hex
 {
+    if (hex.length == 0) {
+        return NO;
+    }
     if ([hex.lowercaseString hasPrefix:@"0x"] && hex.length > 2) {
         NSString *regex =@"[0-9a-fA-F]*";
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",regex];
@@ -451,6 +454,16 @@
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",regex];
         return [predicate evaluateWithObject:hex ];
     }
+}
+
++ (BOOL)checkDecimalStr:(NSString *)decimalString
+{
+    if (decimalString.length == 0) {
+        return NO;
+    }
+    NSString *regex =@"[0-9]*";
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",regex];
+    return [predicate evaluateWithObject:decimalString];
 }
 
 + (BOOL)errorAddressAlert:(NSString *)toAddress
