@@ -11,6 +11,7 @@
 #import <UIKit/UIKit.h>
 #import <WebKit/WebKit.h>
 #import "WalletAccountModel.h"
+#import "MBProgressHUD.h"
 
 @interface WalletUtils : NSObject
 

@@ -11,7 +11,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface WalletExchangeWalletCell : UITableViewCell
+@interface WalletDappStoreSelectCell : UITableViewCell
 
 @property (strong, nonatomic) WalletManageModel *model;
 

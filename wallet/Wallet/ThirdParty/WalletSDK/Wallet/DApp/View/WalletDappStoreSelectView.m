@@ -7,7 +7,7 @@
 //
 
 #import "WalletDappStoreSelectView.h"
-#import "WalletExchangeWalletCell.h"
+#import "WalletDappStoreSelectCell.h"
 #import "UIButton+block.h"
 #import "WalletSingletonHandle.h"
 
@@ -114,7 +114,7 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    WalletExchangeWalletCell *cell = [[WalletExchangeWalletCell alloc] init];
+    WalletDappStoreSelectCell *cell = [[WalletDappStoreSelectCell alloc] init];
     NSArray *walletList =[[WalletSingletonHandle shareWalletHandle] getAllWallet];
     [cell setModel:walletList[indexPath.row] amount:_amount toAddress:_toAddress];
     return cell;

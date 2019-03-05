@@ -1,14 +1,14 @@
 //
-//  WalletExchangeWalletCell.m
+//  WalletDappStoreSelectCell.m
 //  VeWallet
 //
 //  Created by 曾新 on 2018/10/8.
 //  Copyright © 2018年 VeChain. All rights reserved.
 //
 
-#import "WalletExchangeWalletCell.h"
+#import "WalletDappStoreSelectCell.h"
 
-@interface WalletExchangeWalletCell ()
+@interface WalletDappStoreSelectCell ()
 {
     UILabel *_walletNameLabel;        // 钱包名称
     UILabel *_addressLabel;           // 钱包地址
@@ -19,12 +19,12 @@
 }
 @end
 
-@implementation WalletExchangeWalletCell
+@implementation WalletDappStoreSelectCell
 
 - (instancetype)initWithTable:(UITableView *)table
 {
-    _cellIndef = @"WalletExchangeWalletCell";
-    WalletExchangeWalletCell *cell = [table dequeueReusableCellWithIdentifier:_cellIndef];
+    _cellIndef = @"WalletDappStoreSelectCell";
+    WalletDappStoreSelectCell *cell = [table dequeueReusableCellWithIdentifier:_cellIndef];
     if (!cell) {
         cell = [self initWithStyle:UITableViewCellStyleDefault reuseIdentifier:_cellIndef];
         table.separatorStyle = UITableViewCellSeparatorStyleNone;
