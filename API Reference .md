@@ -4,7 +4,7 @@
 >    @param callback : Callback after the end；The attributes of a class has mnemonicPhras , address, privateKey and keystore    
 > 
 
-```php
+```obj-c
 + (void)creatWalletWithPassword:(NSString *)password
                        callback:(void(^)(WalletAccountModel *account,NSError *error))callback;
 
