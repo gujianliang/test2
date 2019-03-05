@@ -49,9 +49,6 @@ static dispatch_once_t predicate;
 {
     dispatch_once(&predicate, ^{
         singleton = [[self alloc] init];
-//        [[NSNotificationCenter defaultCenter]addObserver:self
-//                                                selector:@selector(socketRevice:) name:kWebSocketdidReceiveMessageNote
-//                                                  object:nil];
         
     });
     return singleton;
@@ -177,27 +174,25 @@ static dispatch_once_t predicate;
         completionHandler(@"{}");
         return;
     }
-    __block NSString *to = callbackParams[@"to"];
-    __block NSString *amount = callbackParams[@"value"];
-    NSString *clauseStr = callbackParams[@"data"];
-    __block NSString *tokenAddress;
-    NSString *gas = [BigNumber bigNumberWithHexString:callbackParams[@"gas"]].decimalString;
     
+    __block NSString *to     = callbackParams[@"to"];
+    __block NSString *amount = callbackParams[@"value"];
+    NSString *clauseStr      = callbackParams[@"data"];
+    
+    __block NSString *tokenAddress;
+    
+    NSString *gas      = [BigNumber bigNumberWithHexString:callbackParams[@"gas"]].decimalString;
     NSString *gasPrice = callbackParams[@"gasPrice"];
-   
-#warning test
-//    gasPrice = @"0x0";
-//    gas = @"350000";
-//    clauseStr = @"0xbae3e19e00000000000000000000000000000000000000000000000000000000000000680000000000000000000000000000000000000000000000000de0b6b3a76400000000000000000000000000000000000000000000000000000de0b6b3a7640000000000000000000000000000000000000000000000000000000000000003f480";
+  
     [self checkParamGasPrice:&gasPrice gas:&gas amount:&amount to:&to clauseStr:&clauseStr];
     
     CGFloat amountFloat = 0;
     
-    JSTransferType transferType = JSVETTransferType;
+    WalletTransferType transferType = WalletVETTransferType;
     
     if (clauseStr.length < 10) { // vet 转账clauseStr == nil,
         
-        transferType = JSVETTransferType;
+        transferType = WalletVETTransferType;
         if (![self checkAmountForm:amount amountFloat:&amountFloat requestId:requestId webView:_webView callbackId:callbackId]) {
             return;
         }
@@ -216,7 +211,7 @@ static dispatch_once_t predicate;
         
     }else{
         if ([clauseStr hasPrefix:TransferMethodId]) { // token 转账
-            transferType = JSTokenTransferType;
+            transferType = WalletTokenTransferType;
             tokenAddress = to;
             NSString *clauseTemp =  [clauseStr stringByReplacingOccurrencesOfString:@"0xa9059cbb000000000000000000000000" withString:@""];
             to = [@"0x" stringByAppendingString:[clauseTemp substringToIndex:40]];
@@ -246,7 +241,7 @@ static dispatch_once_t predicate;
             }
             
         }else{ // 其他合约交易
-            transferType = JSContranctTransferType;
+            transferType = WalletContranctTransferType;
             if (![self checkAmountForm:amount amountFloat:&amountFloat requestId:requestId webView:_webView callbackId:callbackId]) {
                 return;
             }
@@ -304,6 +299,7 @@ static dispatch_once_t predicate;
     
     NSString *kind = callbackParams[@"kind"];
     BOOL bCert = NO;
+    
 //    if ([kind isEqualToString:@"cert"]) {
 //        callbackParams = [NSMutableDictionary dictionaryWithDictionary:callbackParams[@"clauses"]];
 //        bCert = YES;
@@ -311,9 +307,9 @@ static dispatch_once_t predicate;
 //    }else
     
     
-    if([kind isEqualToString:@"tx"]){
+    if(![kind isEqualToString:@"tx"]){
         
-    }else{
+    
         [WalletTools callbackWithrequestId:requestId
                                    webView:_webView
                                       data:@""
@@ -330,7 +326,7 @@ static dispatch_once_t predicate;
     
     NSString *to         = clausesDict[@"to"];
     NSString *amount     = clausesDict[@"value"];
-    NSString *clauseStr = clausesDict[@"data"];
+    NSString *clauseStr  = clausesDict[@"data"];
     NSString *gas        = callbackParams[@"options"][@"gas"];
     NSString *gasPrice   = callbackParams[@"options"][@"gasPrice"];
     NSString *tokenAddress = @"";
@@ -554,7 +550,6 @@ static dispatch_once_t predicate;
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",regex];
         if ([predicate evaluateWithObject:[amount substringFromIndex:2]]) {
             *amountFloat = [BigNumber bigNumberWithHexString:[NSString stringWithFormat:@"%@",amount]].decimalString.doubleValue/pow(10, 18);
-            *amountFloat = 2;
             return YES;
         }else{
             [WalletTools callbackWithrequestId:requestId

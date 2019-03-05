@@ -220,7 +220,7 @@
     NSString *tokenAddress  = @"";
     NSString *amount        = @"";
     NSString *clauseStr     = @"";
-    JSTransferType transferType = JSVETTransferType;
+    WalletTransferType transferType = WalletVETTransferType;
     
     [self transactionCheckParams:&keystoreJson parameter:parameter toAddress:&toAddress amount:&amount transferType:&transferType tokenAddress:&tokenAddress clauseStr:&clauseStr];
     
@@ -235,7 +235,7 @@
     if (parameter.value.length == 0) {
         [clauseList addObject:[NSData data]];
     }else{
-        if (transferType == JSTokenTransferType) {
+        if (transferType == WalletTokenTransferType) {
             [clauseList addObject:[NSData data]];
 
         }else{
@@ -277,7 +277,7 @@
     };
 }
 
-+ (void)transactionCheckParams:(NSString **)keystore  parameter:(TransactionParameter *)parameter toAddress:(NSString **)toAddress amount:(NSString **)amount transferType:(JSTransferType *)transferType tokenAddress:(NSString **)tokenAddress clauseStr:(NSString **)clauseStr
++ (void)transactionCheckParams:(NSString **)keystore  parameter:(TransactionParameter *)parameter toAddress:(NSString **)toAddress amount:(NSString **)amount transferType:(WalletTransferType *)transferType tokenAddress:(NSString **)tokenAddress clauseStr:(NSString **)clauseStr
 {
     // check keystore form
     if (![WalletTools checkKeystore:*keystore]) {
@@ -298,7 +298,7 @@
     if ((parameter.data).length == 0) { //vet 转账
         *toAddress = parameter.to;
         *amount = parameter.value;
-        *transferType = JSVETTransferType;
+        *transferType = WalletVETTransferType;
         
         if (![WalletTools errorAddressAlert:*toAddress]
             || ![WalletTools errorAddressAlert:parameter.from]
@@ -311,7 +311,7 @@
         
     }else{
         if ([parameter.data hasPrefix:TransferMethodId]) { //token transfer
-            *transferType = JSTokenTransferType;
+            *transferType = WalletTokenTransferType;
             *tokenAddress = parameter.to;
             *clauseStr = parameter.data;
             
@@ -338,7 +338,7 @@
             }
             
         }else{ //contract signature
-            *transferType = JSContranctTransferType;
+            *transferType = WalletContranctTransferType;
             *amount = parameter.value;
             *clauseStr = parameter.data;
             *toAddress = parameter.to; //token address

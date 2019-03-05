@@ -90,14 +90,14 @@
 
 - (void)packageCoinModel
 {
-    if (_transferType == JSVETTransferType) {
+    if (_transferType == WalletVETTransferType) {
         _currentCoinModel.symobl = @"VET";
         _currentCoinModel.decimals = 18;
         
         [self amountOpreation];
         
         [self initView];
-    }else if (_transferType == JSTokenTransferType){
+    }else if (_transferType == WalletTokenTransferType){
        
         [_signatureHandle tokenAddressConvetCoinInfo:_tokenAddress
                                            coinModel:_currentCoinModel
@@ -168,7 +168,7 @@
     // 主标题标签
     UILabel *titleLabel = [[UILabel alloc]init];
     
-    if (_transferType == JSContranctTransferType) {
+    if (_transferType == WalletContranctTransferType) {
         titleLabel.text = VCNSLocalizedBundleString(@"contract_payment_info_title", nil);
     }else{
         titleLabel.text = VCNSLocalizedBundleString(@"dialog_coin_transfer_description", nil);

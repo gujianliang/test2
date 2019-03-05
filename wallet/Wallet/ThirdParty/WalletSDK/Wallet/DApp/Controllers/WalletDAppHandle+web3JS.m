@@ -25,9 +25,9 @@
 @implementation WalletDAppHandle (web3JS)
 
 - (void)getBalance:(NSString *)callbackId
-                 webView:(WKWebView *)webView
-               requestId:(NSString *)requestId
-                 address:(NSString *)address
+           webView:(WKWebView *)webView
+         requestId:(NSString *)requestId
+           address:(NSString *)address
 {
     WalletVETBalanceApi *vetBalanceApi = [[WalletVETBalanceApi alloc]initWith:address];
     [vetBalanceApi loadDataAsyncWithSuccess:^(VCBaseApi *finishApi) {
@@ -67,7 +67,6 @@
                               webView:(WKWebView *)webView
                            callbackId:(NSString *)callbackId
 {
-    NSString *amountStr = [BigNumber bigNumberWithHexString:paramModel.amount].decimalString;
     if (![WalletTools errorAddressAlert:paramModel.toAddress] ||
         ![WalletTools fromISToAddress:paramModel.fromAddress to:paramModel.toAddress] ||
         !(paramModel.gas.integerValue > 0)) {
@@ -81,24 +80,8 @@
         return;
     }
     
-    WalletSignatureView *signatureView = [[WalletSignatureView alloc] initWithFrame:[WalletTools getCurrentVC].view.bounds];
-    signatureView.tag = SignViewTag;
-    signatureView.transferType = JSVETTransferType;
+    [self showSignView:WalletVETTransferType paramModel:paramModel requestId:requestId webView:webView callbackId:callbackId];
     
-    [signatureView updateViewParamModel:paramModel];
-    [[WalletTools getCurrentVC].navigationController.view addSubview:signatureView];
-    
-    signatureView.transferBlock = ^(NSString * _Nonnull txid) {
-        NSLog(@"txid = %@",txid);
-        
-        if (txid.length != 0) {
-            [WalletTools callbackWithrequestId:requestId
-                                       webView:webView
-                                          data:txid
-                                    callbackId:callbackId
-                                          code:OK];
-        }
-    };
 }
 
 - (void)web3VTHOTransferWithParamModel:(WalletSignParamModel *)paramModel
@@ -146,10 +129,9 @@
         tokenAmount = [clauseString substringWithRange:NSMakeRange(64, 64)];
     }
     
-#warning 非vet 不能转0
     if (![WalletTools errorAddressAlert:paramModel.toAddress]||
         ![WalletTools fromISToAddress:paramModel.fromAddress to:paramModel.toAddress]||
-        !(paramModel.gas.integerValue > 0)||
+        paramModel.gas.integerValue == 0||
         paramModel.clauseData.length == 0) {
         
         [WalletTools callbackWithrequestId:requestId
@@ -160,27 +142,8 @@
         return;
     }
     
-    WalletSignatureView *signatureView = [[WalletSignatureView alloc] initWithFrame:[WalletTools getCurrentVC].view.bounds];
-    signatureView.tag = SignViewTag;
-    signatureView.transferType = JSTokenTransferType;
+    [self showSignView:WalletTokenTransferType paramModel:paramModel requestId:requestId webView:webView callbackId:callbackId];
     
-    [signatureView updateViewParamModel:paramModel];
-    
-    [[WalletTools getCurrentVC].navigationController.view addSubview:signatureView];
-    
-    signatureView.transferBlock = ^(NSString * _Nonnull txid) {
-        NSLog(@"txid = %@",txid);
-        if (txid.length == 0) {
-           
-        }else{
-            
-            [WalletTools callbackWithrequestId:requestId
-                                       webView:webView
-                                          data:txid
-                                    callbackId:callbackId
-                                          code:OK];
-        }
-    };
 }
 
 - (void)web3contractSignWithParamModel:(WalletSignParamModel *)paramModel
@@ -200,29 +163,28 @@
         return;
     }
 
+    [self showSignView:WalletContranctTransferType paramModel:paramModel requestId:requestId webView:webView callbackId:callbackId];
+    
+}
+
+- (void)showSignView:(WalletTransferType)transferType paramModel:(WalletSignParamModel *)paramModel requestId:(NSString *)requestId webView:(WKWebView *)webView callbackId:(NSString *)callbackId
+{
     WalletSignatureView *signatureView = [[WalletSignatureView alloc] initWithFrame:[WalletTools getCurrentVC].view.bounds];
     signatureView.tag = SignViewTag;
-    signatureView.transferType = JSContranctTransferType;
+    signatureView.transferType = WalletTokenTransferType;
     
-#warning to
-   
-#warning 地址是不是空的
-//    signParamModel.tokenAddress = tokenAddress ;
     [signatureView updateViewParamModel:paramModel];
     
     [[WalletTools getCurrentVC].navigationController.view addSubview:signatureView];
+    
     signatureView.transferBlock = ^(NSString * _Nonnull txid) {
         NSLog(@"txid = %@",txid);
-        if (txid.length == 0) {
-            
-            
-        }else{
-            
+        if (txid.length != 0) {
             [WalletTools callbackWithrequestId:requestId
                                        webView:webView
-                                         data:txid
-                                   callbackId:callbackId
-                                         code:OK];
+                                          data:txid
+                                    callbackId:callbackId
+                                          code:OK];
         }
     };
 }

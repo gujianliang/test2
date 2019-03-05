@@ -40,9 +40,9 @@
     transaction.Expiration = DefaultExpiration;
     transaction.gasPrice = self.gasPriceCoef;
     
-    if (self.transferType == JSContranctTransferType){ //合约签名
+    if (self.transferType == WalletContranctTransferType){ //合约签名
         transaction.gasLimit = [BigNumber bigNumberWithInteger:self.gas.integerValue];
-    }else if (self.transferType == JSTokenTransferType) { // token 签名
+    }else if (self.transferType == WalletTokenTransferType) { // token 签名
         transaction.gasLimit = [BigNumber bigNumberWithDecimalString:self.currentCoinModel.transferGas];
     }else{ // vet 签名
         if (self.currentCoinModel.transferGas.length > 0) {
@@ -107,7 +107,7 @@
         [self showTransactionFail];
     }
     BigNumber *subValue;
-    if (self.transferType == JSVETTransferType) {
+    if (self.transferType == WalletVETTransferType) {
         //vet 转账  data 设置空
         subValue = [Payment parseEther:self.amount];
         if ([self.amount floatValue] == 0.0
@@ -119,13 +119,13 @@
             transaction.Clauses = @[@[toData,subValue.data,[NSData data]]];
         }
         
-    } else if(self.transferType == JSTokenTransferType) {
+    } else if(self.transferType == WalletTokenTransferType) {
         //token 转账 value 设置0，data 设置见文档
         subValue = [Payment parseToken:self.amount dicimals:self.currentCoinModel.decimals];
         
         SecureData *tokenAddress = [SecureData secureDataWithHexString:self.tokenAddress];
         transaction.Clauses = @[@[tokenAddress.data,[NSData data],self.clauseData]];
-    }else if(self.transferType == JSContranctTransferType) { // 合约转账
+    }else if(self.transferType == WalletContranctTransferType) { // 合约转账
         CGFloat amountF = self.amount.floatValue;
         if (amountF == 0) {
             if (self.tokenAddress.length == 0) {

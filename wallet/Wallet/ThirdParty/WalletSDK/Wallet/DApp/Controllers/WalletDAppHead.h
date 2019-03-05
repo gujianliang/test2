@@ -15,12 +15,12 @@
 #import "Account.h"
 #import "Transaction.h"
 
-#define TransferMethodId @"0xa9059cbb"
-#define VETGasLimit      @"21000"
-#define SignViewTag      11001
-#define SelectWalletTag  11002
-#define DefaultGasPriceCoef @"0x78"
-#define DefaultExpiration 720
+#define TransferMethodId        @"0xa9059cbb"
+#define VETGasLimit             @"21000"
+#define SignViewTag             11001
+#define SelectWalletTag         11002
+#define DefaultGasPriceCoef     @"0x78"
+#define DefaultExpiration       720
 
 static int OK = 1;
 static int ERROR_REQUEST_PARAMS = 200;

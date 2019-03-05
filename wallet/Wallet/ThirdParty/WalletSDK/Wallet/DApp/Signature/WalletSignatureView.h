@@ -20,11 +20,11 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef NS_ENUM(NSInteger,JSTransferType)
+typedef NS_ENUM(NSInteger,WalletTransferType)
 {
-    JSVETTransferType,
-    JSTokenTransferType,
-    JSContranctTransferType
+    WalletVETTransferType,
+    WalletTokenTransferType,
+    WalletContranctTransferType
 };
 
 
@@ -46,7 +46,7 @@ typedef NS_ENUM(NSInteger,JSTransferType)
 @property(nonatomic, copy) NSString *gasLimit;
 @property(nonatomic, strong) NSData *clauseData;
 @property(nonatomic, copy) NSString *tokenAddress;
-@property (nonatomic, assign) JSTransferType transferType;
+@property (nonatomic, assign) WalletTransferType transferType;
 @property(nonatomic, copy) NSString *txid;
 @property(nonatomic, strong) UIScrollView *scrollView;
 @property(nonatomic, strong) WalletSignatureViewSubView *signatureSubView;

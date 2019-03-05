@@ -32,7 +32,7 @@
     NSString            *_fromAddress;
     NSString            *_toAddress;
     UITextField         *_pwTextField;
-    JSTransferType      _transferType;
+    WalletTransferType      _transferType;
     NSNumber            *_gas;
     BigNumber           *_gasPriceCoef;
     NSData              *_clauseData;
@@ -41,7 +41,7 @@
 }
 
 
-- (void)initSignature:(UIScrollView *)scrollView amount:(NSString *)amount currentCoinModel:(WalletCoinModel *)currentCoinModel gasLimit:(NSString *)gasLimit  fromAddress:(NSString *)fromAddress toAddress:(NSString *)toAddress pwTextField:(UITextField *)pwTextField transferType:(JSTransferType)transferType
+- (void)initSignature:(UIScrollView *)scrollView amount:(NSString *)amount currentCoinModel:(WalletCoinModel *)currentCoinModel gasLimit:(NSString *)gasLimit  fromAddress:(NSString *)fromAddress toAddress:(NSString *)toAddress pwTextField:(UITextField *)pwTextField transferType:(WalletTransferType)transferType
                   gas:(NSNumber *)gas gasPriceCoef:(BigNumber *)gasPriceCoef clauseData:(NSData *)clauseData signatureHandle:(WalletSignatureViewHandle *)signatureHandle additionalMsg:(NSString *)additionalMsg
 {
     _scrollView = scrollView;
@@ -128,7 +128,7 @@
 
 - (void)leftViewClick:(void(^)(void))enterSignViewBlock
 {
-    if (_transferType == JSContranctTransferType) {
+    if (_transferType == WalletContranctTransferType) {
         
         [self enterPreView:enterSignViewBlock];
         

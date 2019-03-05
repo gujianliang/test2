@@ -293,20 +293,7 @@
         return;
     }
     
-    WalletSignatureView *signatureView = [[WalletSignatureView alloc] initWithFrame:[WalletTools getCurrentVC].view.bounds];
-    signatureView.transferType = JSVETTransferType;
-    [signatureView updateViewParamModel:paramModel];
-    
-    [[WalletTools getCurrentVC].navigationController.view addSubview:signatureView];
-    
-    signatureView.transferBlock = ^(NSString * _Nonnull txid) {
-        
-        [WalletTools callbackWithrequestId:requestId
-                                   webView:webView
-                                      data:txid
-                                callbackId:callbackId
-                                      code:OK];
-    };
+    [self showSignView:WalletVETTransferType paramModel:paramModel requestId:requestId webView:webView callbackId:callbackId];
 }
 
 - (void)VTHOTransferWithParamModel:(WalletSignParamModel *)paramModel
@@ -350,12 +337,12 @@
         NSString *decimalsHex = dictResult[@"data"];
         NSString *decimals = [BigNumber bigNumberWithHexString:decimalsHex].decimalString;
         
-        CGFloat amountTnteger = [BigNumber bigNumberWithHexString:paramModel.amount].decimalString.floatValue/pow(10, decimals.integerValue);
+        CGFloat amountF = [BigNumber bigNumberWithHexString:paramModel.amount].decimalString.floatValue/pow(10, decimals.integerValue);
 
         if (![WalletTools errorAddressAlert:paramModel.toAddress] ||
-            ![self errorAmount:[NSString stringWithFormat:@"%lf",amountTnteger]]||
+            ![self errorAmount:[NSString stringWithFormat:@"%lf",amountF]]||
             ![WalletTools fromISToAddress:paramModel.fromAddress to:paramModel.toAddress]||
-            !(paramModel.gas.integerValue > 0)||
+            paramModel.gas.integerValue == 0||
             paramModel.clauseData.length == 0) {
             
             [WalletTools callbackWithrequestId:requestId
@@ -366,23 +353,8 @@
             return;
         }
         
-        WalletSignatureView *signatureView = [[WalletSignatureView alloc] initWithFrame:[WalletTools getCurrentVC].view.bounds];
-        signatureView.tag = SignViewTag;
-        signatureView.transferType = JSTokenTransferType;
-        [signatureView updateViewParamModel:paramModel];
+        [self showSignView:WalletTokenTransferType paramModel:paramModel requestId:requestId webView:webView callbackId:callbackId];
         
-        [[WalletTools getCurrentVC].navigationController.view addSubview:signatureView];
-        
-        signatureView.transferBlock = ^(NSString * _Nonnull txid) {
-            NSLog(@"txid = %@",txid);
-            if (txid.length != 0) {
-                [WalletTools callbackWithrequestId:requestId
-                                           webView:webView
-                                              data:txid
-                                        callbackId:callbackId
-                                              code:OK];
-            }
-        };
         
     } failure:^(VCBaseApi *finishApi, NSString *errMsg) {
         [WalletTools callbackWithrequestId:requestId
@@ -399,7 +371,7 @@
                     callbackId:(NSString *)callbackId
 {
     if (paramModel.clauseData.length == 0 ||
-        !(paramModel.gas.integerValue > 0)) {
+        paramModel.gas.integerValue  == 0) {
         
         [WalletTools callbackWithrequestId:requestId
                                   webView:webView
@@ -409,68 +381,53 @@
         
         return;
     }
-    WalletSignatureView *signatureView = [[WalletSignatureView alloc] initWithFrame:[WalletTools getCurrentVC].view.bounds];
-    signatureView.tag = SignViewTag;
-    signatureView.transferType = JSContranctTransferType;
-    [signatureView updateViewParamModel:paramModel];
     
-    [[WalletTools getCurrentVC].navigationController.view addSubview:signatureView];
-    
-    signatureView.transferBlock = ^(NSString * _Nonnull txid) {
-        NSLog(@"txid = %@",txid);
-        if (txid.length != 0) {
-            [WalletTools callbackWithrequestId:requestId
-                                       webView:webView
-                                          data:txid
-                                    callbackId:callbackId
-                                          code:OK];
-        }
-    };
+    [self showSignView:WalletContranctTransferType paramModel:paramModel requestId:requestId webView:webView callbackId:callbackId];
 }
 
-- (void)certTransferParamModel:(WalletSignParamModel *)paramModel
-                    requestId:(NSString *)requestId
-                      webView:(WKWebView *)webView
-                   callbackId:(NSString *)callbackId
-{
-#warning
-   
-//    NSString *purpose = dictParam[@"purpose"];
-//    NSString *payload = dictParam[@"payload"][@"type"];
-//    NSString *content = dictParam[@"payload"][@"content"];
-//    
-//    if (purpose.length == 0 ||
-//        payload.length == 0 ||
-//        content.length == 0 ) {
-//        
-//        [WalletTools callbackWithrequestId:requestId webView:webView data:@"" callbackId:callbackId code:ERROR_REQUEST_PARAMS];
-//        
-//        return;
-//    }
-//    WalletSignatureView *signaVC = [[WalletSignatureView alloc] initWithFrame:[UIScreen mainScreen].bounds];
-//    signaVC.tag = SignViewTag;
-//    signaVC.transferType = JSVETTransferType;
-//    
-//#warning 
-////    signaVC.jsUse = YES;
-////    signaVC.bCert = YES;
-//    [signaVC updateView:from
-//              toAddress:@""
-//                 amount:[NSString stringWithFormat:@"%.2d",0]
-//                 params:@[dictParam]];
-//    [[WalletTools getCurrentVC].view addSubview:signaVC];
-//    
-//    signaVC.transferBlock = ^(NSString * _Nonnull txid) {
-//        NSLog(@"txid = %@",txid);
-//        if (txid.length == 0) {
-//            
-//            [WalletTools callbackWithrequestId:requestId webView:webView data:@"" callbackId:callbackId code:ERROR_CANCEL];
-//        }else{
-//            
-//            [WalletTools callbackWithrequestId:requestId webView:webView data:txid callbackId:callbackId code:OK];
-//        }
-//    };
-}
+//- (void)certTransferParamModel:(WalletSignParamModel *)paramModel
+//                    requestId:(NSString *)requestId
+//                      webView:(WKWebView *)webView
+//                   callbackId:(NSString *)callbackId
+//{
+////#warning
+//
+////    NSString *purpose = dictParam[@"purpose"];
+////    NSString *payload = dictParam[@"payload"][@"type"];
+////    NSString *content = dictParam[@"payload"][@"content"];
+////
+////    if (purpose.length == 0 ||
+////        payload.length == 0 ||
+////        content.length == 0 ) {
+////
+////        [WalletTools callbackWithrequestId:requestId webView:webView data:@"" callbackId:callbackId code:ERROR_REQUEST_PARAMS];
+////
+////        return;
+////    }
+////    WalletSignatureView *signaVC = [[WalletSignatureView alloc] initWithFrame:[UIScreen mainScreen].bounds];
+////    signaVC.tag = SignViewTag;
+////    signaVC.transferType = WalletVETTransferType;
+////
+////#warning
+//////    signaVC.jsUse = YES;
+//////    signaVC.bCert = YES;
+////    [signaVC updateView:from
+////              toAddress:@""
+////                 amount:[NSString stringWithFormat:@"%.2d",0]
+////                 params:@[dictParam]];
+////    [[WalletTools getCurrentVC].view addSubview:signaVC];
+////
+////    signaVC.transferBlock = ^(NSString * _Nonnull txid) {
+////        NSLog(@"txid = %@",txid);
+////        if (txid.length == 0) {
+////
+////            [WalletTools callbackWithrequestId:requestId webView:webView data:@"" callbackId:callbackId code:ERROR_CANCEL];
+////        }else{
+////
+////            [WalletTools callbackWithrequestId:requestId webView:webView data:txid callbackId:callbackId code:OK];
+////        }
+////    };
+//}
 
 - (BOOL)errorAmount:(NSString *)amount
 {
@@ -519,4 +476,25 @@
                                  code:ERROR_SERVER_DATA];
 }
 
+- (void)showSignView:(WalletTransferType)transferType paramModel:(WalletSignParamModel *)paramModel requestId:(NSString *)requestId webView:(WKWebView *)webView callbackId:(NSString *)callbackId
+{
+    WalletSignatureView *signatureView = [[WalletSignatureView alloc] initWithFrame:[WalletTools getCurrentVC].view.bounds];
+    signatureView.tag = SignViewTag;
+    signatureView.transferType = WalletTokenTransferType;
+    
+    [signatureView updateViewParamModel:paramModel];
+    
+    [[WalletTools getCurrentVC].navigationController.view addSubview:signatureView];
+    
+    signatureView.transferBlock = ^(NSString * _Nonnull txid) {
+        NSLog(@"txid = %@",txid);
+        if (txid.length != 0) {
+            [WalletTools callbackWithrequestId:requestId
+                                       webView:webView
+                                          data:txid
+                                    callbackId:callbackId
+                                          code:OK];
+        }
+    };
+}
 @end
