@@ -481,7 +481,6 @@
     WalletSignatureView *signatureView = [[WalletSignatureView alloc] initWithFrame:[WalletTools getCurrentVC].view.bounds];
     signatureView.tag = SignViewTag;
     signatureView.transferType = WalletTokenTransferType;
-    
     [signatureView updateViewParamModel:paramModel];
     
     [[WalletTools getCurrentVC].navigationController.view addSubview:signatureView];
@@ -494,6 +493,12 @@
                                           data:txid
                                     callbackId:callbackId
                                           code:OK];
+        }else{
+            [WalletTools callbackWithrequestId:requestId
+                                       webView:webView
+                                          data:@""
+                                    callbackId:callbackId
+                                          code:ERROR_SERVER_DATA];
         }
     };
 }

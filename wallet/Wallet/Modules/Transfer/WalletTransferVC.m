@@ -37,7 +37,7 @@
     
     if (!_isVET) {
         // vtho contract address
-        _tokenContractAddress = @"0x0000000000000000000000000000456e65726779";
+        _tokenContractAddress = vthoTokenAddress;
         [self.coinIcon setImage:[UIImage imageNamed:@"VTHO"]];
         self.symobl.text = @"VTHO";
         

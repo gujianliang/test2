@@ -185,6 +185,12 @@
                                           data:txid
                                     callbackId:callbackId
                                           code:OK];
+        }else{
+            [WalletTools callbackWithrequestId:requestId
+                                       webView:webView
+                                          data:@""
+                                    callbackId:callbackId
+                                          code:ERROR_SERVER_DATA];
         }
     };
 }

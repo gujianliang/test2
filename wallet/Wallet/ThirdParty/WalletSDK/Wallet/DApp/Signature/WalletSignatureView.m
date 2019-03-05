@@ -120,11 +120,11 @@
     if (_amount.length > 0) {
         if ([_amount.lowercaseString hasPrefix:@"0x"]) {
             _amount = [Payment formatToken:[BigNumber bigNumberWithHexString:_amount]
-                                  decimals:18
+                                  decimals:_currentCoinModel.decimals
                                    options:2];
         }else{
             _amount = [Payment formatToken:[BigNumber bigNumberWithInteger:_amount.integerValue]
-                                  decimals:18
+                                  decimals:_currentCoinModel.decimals
                                    options:2];
         }
     }else{
@@ -221,19 +221,16 @@
     
     if (self.scrollView.contentOffset.x == SCREEN_WIDTH) {
         [self.scrollView scrollRectToVisible:CGRectMake(0, 0, SCREEN_WIDTH, viewHeight - 40) animated:YES];
-    }else if (self.scrollView.contentOffset.x == SCREEN_WIDTH * 2) {
-        [self removeFromSuperview];
-        BOOL hasListVC = NO;
-        if (!hasListVC) {
-            [[WalletTools getCurrentVC].navigationController popViewControllerAnimated:YES];
-        }
-        
     }else{
         [UIView animateWithDuration:0.3 animations:^{
             [self setFrame:CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, SCREEN_HEIGHT)];
         } completion:^(BOOL finished) {
             [self removeFromSuperview];
         }];
+        //通知webview
+        if (self.transferBlock) {
+            self.transferBlock(@"");
+        }
     }
 }
 
@@ -397,8 +394,6 @@
 {
     [_timer invalidate];
     _timer = nil;
-    
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 @end

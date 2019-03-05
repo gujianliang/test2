@@ -78,12 +78,12 @@
                  tempAmount = [Payment formatEther:bigNumberCount];
              }
              
-             NSString *msg = [NSString stringWithFormat:@"您当前地址余额%.2fVET，不够支付%.2fVET",vetBalance.floatValue,tempAmount.floatValue];
+             NSString *msg = [NSString stringWithFormat:VCNSLocalizedString(@"contact_buy_failed_not_enough1", nil),vetBalance.floatValue,tempAmount.floatValue];
              
-             [WalletAlertShower showAlert:@"余额不足提示"
+             [WalletAlertShower showAlert:VCNSLocalizedString(@"transfer_wallet_send_balance_not_enough", nil)
                                       msg:msg
                                     inCtl:[WalletTools getCurrentVC]
-                                    items:@[@"确定"]
+                                    items:@[VCNSLocalizedString(@"dialog_yes", nil)]
                                clickBlock:^(NSInteger index)
               {
               }];
@@ -125,19 +125,17 @@
         
         NSDecimalNumber *transferVthoAmount = [NSDecimalNumber decimalNumberWithString:gasLimit];
         
-        if ([vthoBalanceNum   compare:transferVthoAmount] == NSOrderedAscending) {
+        if ([vthoBalanceNum  compare:transferVthoAmount] == NSOrderedAscending) {
             
-            NSString *msg = [NSString stringWithFormat:@"您当前地址余额%.2fVTHO，不够支付%.2fVTHO",vthoBalanceNum.floatValue,gasLimit.floatValue];
+            NSString *msg = [NSString stringWithFormat:VCNSLocalizedString(@"contact_buy_failed_not_enough3", nil),vthoBalanceNum.floatValue,gasLimit.floatValue];
             
-            [WalletAlertShower showAlert:@"余额不足提示"
+            [WalletAlertShower showAlert:VCNSLocalizedString(@"transfer_wallet_send_balance_not_enough", nil)
                                      msg:msg
                                    inCtl:[WalletTools getCurrentVC]
-                                   items:@[@"确定"]
+                                   items:@[VCNSLocalizedString(@"dialog_yes", nil)]
                               clickBlock:^(NSInteger index)
              {
-                 
              }];
-            return;
         }else{
             if (block) {
                 block();
@@ -153,7 +151,6 @@
 - (void)tokenAddressConvetCoinInfo:(NSString *)tokenAddress coinModel:(WalletCoinModel *)coinModel block:(void(^)(void))block
 {
     [WalletMBProgressShower showLoadData:[WalletTools getCurrentVC].view Text:VCNSLocalizedString(@"loading...", nil)];
-//list_load_ing
     WalletGetSymbolApi *getSymbolApi = [[WalletGetSymbolApi alloc]initWithTokenAddress:tokenAddress];
     [getSymbolApi loadDataAsyncWithSuccess:^(VCBaseApi *finishApi) {
         

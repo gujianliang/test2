@@ -25,6 +25,6 @@
 #define     Test_Node      @"https://vethor-node-test.vechaindev.com"      /* The test Node environment of block */
 #define     Main_Node      @"https://vethor-node.vechain.com"           /* The main Node environment of block */
 
-#define     vthoTokenAddress    @"0x0000000000000000000000000000456e65726779"   /* A fixed contract address */
+#define     vthoTokenAddress    @"0x0000000000000000000000000000456e65726779"   /* vtho contract address */
 
 #endif /* WalletSdkMacro_h */

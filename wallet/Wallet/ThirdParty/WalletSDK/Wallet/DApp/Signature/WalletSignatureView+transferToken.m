@@ -215,6 +215,9 @@
                           items:@[VCNSLocalizedBundleString(@"dialog_yes", nil)]
                      clickBlock:^(NSInteger index) {
                      }];
+    if (self.transferBlock) {
+        self.transferBlock(@"");
+    }
 }
 
 @end
