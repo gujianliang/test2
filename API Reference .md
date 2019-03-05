@@ -169,3 +169,15 @@
 ```obj-c
 + (void)webView:(WKWebView *)webView defaultText:(NSString *)defaultText completionHandler:(void (^)(NSString *result))completionHandler;
 ```
+
+
+ ## Release the singleton object in the dapp
+ >  Call this method when exiting the contrller where dapp is located
+ >
+ >
+ >
+ ```obj-c
++ (void)attempDealloc;
+```
+
+
