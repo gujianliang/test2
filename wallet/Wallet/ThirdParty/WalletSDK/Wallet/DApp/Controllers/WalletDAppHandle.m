@@ -142,7 +142,7 @@ static dispatch_once_t predicate;
         
     }else if ([method isEqualToString:@"getAddress"] ) {
         
-        [self getAddress:webView callbackId:callbackId];
+        [self getAddress:webView requestId:requestId callbackId:callbackId];
         
     }else if ([method isEqualToString:@"getBalance"]){
         
@@ -228,7 +228,7 @@ static dispatch_once_t predicate;
             if (![WalletTools errorAddressAlert:to]
                 || ![WalletTools errorAddressAlert:tokenAddress]
                 || [tokenAddress isKindOfClass:[NSNull class]]
-                || ![self checkClauseForm:clauseStr]
+                || ![self checkClauseDataFormat:clauseStr]
                 ) {
                 
                 [WalletTools callbackWithrequestId:requestId
@@ -251,7 +251,7 @@ static dispatch_once_t predicate;
                 !(gas.integerValue > 0) ||
                 newclouseData == nil ||
                 ![WalletTools errorAddressAlert:to] ||
-                ![self checkClauseForm:clauseStr]) {
+                ![self checkClauseDataFormat:clauseStr]) {
                 
                 [WalletTools callbackWithrequestId:requestId webView:_webView data:@"" callbackId:callbackId code:ERROR_REQUEST_PARAMS];
                 
@@ -372,7 +372,7 @@ static dispatch_once_t predicate;
             if (![WalletTools errorAddressAlert:to]
                 || ![WalletTools errorAddressAlert:tokenAddress]
                 || [tokenAddress isKindOfClass:[NSNull class]]
-                || ![self checkClauseForm:clauseStr]
+                || ![self checkClauseDataFormat:clauseStr]
                 ) {
                 
                 [WalletTools callbackWithrequestId:requestId
@@ -395,7 +395,7 @@ static dispatch_once_t predicate;
                 !(gas.integerValue > 0) ||
                 newclouseData == nil ||
                 ![WalletTools errorAddressAlert:to] ||
-                ![self checkClauseForm:clauseStr]) {
+                ![self checkClauseDataFormat:clauseStr]) {
                 
                 [WalletTools callbackWithrequestId:requestId webView:_webView data:@"" callbackId:callbackId code:ERROR_REQUEST_PARAMS];
                 
@@ -576,7 +576,7 @@ static dispatch_once_t predicate;
     }
 }
 
-- (BOOL)checkClauseForm:(NSString *)clauseStr
+- (BOOL)checkClauseDataFormat:(NSString *)clauseStr
 {
     if (clauseStr.length > 10) {
         NSString *temp1 = [clauseStr substringFromIndex:10];

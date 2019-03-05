@@ -70,7 +70,7 @@
     }
     
     self.searchBar.delegate = self;
-    self.searchBar.text = Test_Html;
+    self.searchBar.text = @"https://appwallet.oss-cn-shanghai.aliyuncs.com/testJS/test.html";
     
     /* Set the VET and VTHO logo */
     [self.vetImageView setImage:[UIImage imageNamed:@"VET"]];

@@ -151,6 +151,15 @@
                     address:(NSString *)address
                  callbackId:(NSString *)callbackId
 {
+    if (![WalletTools errorAddressAlert:address]) {
+        [WalletTools callbackWithrequestId:requestId
+                                   webView:webView
+                                      data:@""
+                                callbackId:callbackId
+                                      code:ERROR_REQUEST_PARAMS];
+        return;
+    }
+    
     WalletVETBalanceApi *vetBalanceApi = [[WalletVETBalanceApi alloc]initWith:address];
     [vetBalanceApi loadDataAsyncWithSuccess:^(VCBaseApi *finishApi) {
         [WalletTools callbackWithrequestId:requestId
@@ -198,6 +207,30 @@
        requestId:(NSString *)requestId
         revision:(NSString *)revision
 {
+    BOOL revisionOK = NO;
+    
+    if (revision != nil ) {
+        revisionOK = YES;
+    }else if ([revision isEqualToString:@"best"]) {
+        revisionOK = YES;
+    }else{
+        
+        NSString *regex =@"[0-9]*";
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",regex];
+        if ([predicate evaluateWithObject:revision]) {
+            revisionOK = YES;
+        }
+    }
+    
+    if (!revisionOK) {
+        [WalletTools callbackWithrequestId:requestId
+                                   webView:webView
+                                      data:@""
+                                callbackId:callbackId
+                                      code:ERROR_REQUEST_PARAMS];
+        return;
+    }
+    
     WalletBlockApi *vetBalanceApi = [[WalletBlockApi alloc]initWithRevision:revision];
     [vetBalanceApi loadDataAsyncWithSuccess:^(VCBaseApi *finishApi) {
         [WalletTools callbackWithrequestId:requestId
@@ -219,6 +252,15 @@
              requestId:(NSString *)requestId
                   txID:(NSString *)txID
 {
+    if (txID == nil || ![WalletTools checkHEXStr:txID] || txID.length != 66) {
+        [WalletTools callbackWithrequestId:requestId
+                                   webView:webView
+                                      data:@""
+                                callbackId:callbackId
+                                      code:ERROR_REQUEST_PARAMS];
+        return;
+    }
+    
     WalletDAppTransferDetailApi *vetBalanceApi = [[WalletDAppTransferDetailApi alloc]initWithTxid:txID];
     [vetBalanceApi loadDataAsyncWithSuccess:^(VCBaseApi *finishApi) {
         NSDictionary *balanceModel = finishApi.resultDict;
@@ -242,6 +284,15 @@
                     requestId:(NSString *)requestId
                          txid:(NSString *)txid
 {
+    if (txid == nil || ![WalletTools checkHEXStr:txid] || txid.length != 66) {
+        [WalletTools callbackWithrequestId:requestId
+                                   webView:webView
+                                      data:@""
+                                callbackId:callbackId
+                                      code:ERROR_REQUEST_PARAMS];
+        return;
+    }
+    
     WalletTransantionsReceiptApi *vetBalanceApi = [[WalletTransantionsReceiptApi alloc]initWithTxid:txid];
     [vetBalanceApi loadDataAsyncWithSuccess:^(VCBaseApi *finishApi) {
         [WalletTools callbackWithrequestId:requestId
@@ -259,6 +310,7 @@
     }];
 }
 
+//获取本地wallet地址
 -(void)getAccountsWithRequestId:(NSString *)requestId
                      callbackId:(NSString *)callbackId
                         webView:(WKWebView *)webView
@@ -266,16 +318,17 @@
     NSMutableArray *addressList = [NSMutableArray array];
     WalletSingletonHandle *single = [WalletSingletonHandle shareWalletHandle];
     
-        for (WalletManageModel *model in [single getAllWallet]) {
-            [addressList addObject:model.address];
-        }
-        [WalletTools callbackWithrequestId:requestId
-                                  webView:webView
-                                     data:addressList
-                               callbackId:callbackId
-                                     code:OK];
+    for (WalletManageModel *model in [single getAllWallet]) {
+        [addressList addObject:model.address];
+    }
+    [WalletTools callbackWithrequestId:requestId
+                              webView:webView
+                                 data:addressList
+                           callbackId:callbackId
+                                 code:OK];
 }
 
+//vet 转账
 - (void)VETTransferDictWithParamModel:(WalletSignParamModel *)paramModel
                    requestId:(NSString *)requestId
                      webView:(WKWebView *)webView
@@ -296,6 +349,7 @@
     [self showSignView:WalletVETTransferType paramModel:paramModel requestId:requestId webView:webView callbackId:callbackId];
 }
 
+//vtho转账
 - (void)VTHOTransferWithParamModel:(WalletSignParamModel *)paramModel
                     requestId:(NSString *)requestId
                       webView:(WKWebView *)webView
@@ -328,6 +382,7 @@
     }];
 }
 
+//获得token decimals
 - (void)getTokenDecimalsWithParamModel:(WalletSignParamModel *)paramModel requestId:(NSString *)requestId webView:(WKWebView *)webView callbackId:(NSString *)callbackId
 {
     WalletGetDecimalsApi *getDecimalsApi = [[WalletGetDecimalsApi alloc]initWithTokenAddress:paramModel.tokenAddress];
@@ -365,6 +420,7 @@
     }];
 }
 
+// contranct 签名
 - (void)contractSignWithParamModel:(WalletSignParamModel *)paramModel
                          requestId:(NSString *)requestId
                            webView:(WKWebView *)webView
@@ -476,6 +532,7 @@
                                  code:ERROR_SERVER_DATA];
 }
 
+//调用签名view
 - (void)showSignView:(WalletTransferType)transferType paramModel:(WalletSignParamModel *)paramModel requestId:(NSString *)requestId webView:(WKWebView *)webView callbackId:(NSString *)callbackId
 {
     WalletSignatureView *signatureView = [[WalletSignatureView alloc] initWithFrame:[WalletTools getCurrentVC].view.bounds];

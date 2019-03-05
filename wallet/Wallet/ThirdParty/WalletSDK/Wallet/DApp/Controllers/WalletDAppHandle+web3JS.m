@@ -24,6 +24,7 @@
 
 @implementation WalletDAppHandle (web3JS)
 
+//获取vet 金额
 - (void)getBalance:(NSString *)callbackId
            webView:(WKWebView *)webView
          requestId:(NSString *)requestId
@@ -48,20 +49,25 @@
     }];
 }
 
-- (NSString *)getAddress
+//获得wallet 地址
+
+- (void)getAddress:(WKWebView *)webView requestId:(NSString *)requestId callbackId:(NSString *)callbackId
 {
-    return [[WalletSingletonHandle shareWalletHandle] currentWalletModel].address;
+    NSMutableArray *addressList = [NSMutableArray array];
+    WalletSingletonHandle *single = [WalletSingletonHandle shareWalletHandle];
+    
+    for (WalletManageModel *model in [single getAllWallet]) {
+        [addressList addObject:model.address];
+    }
+    
+    [WalletTools callbackWithrequestId:requestId
+                               webView:webView
+                                  data:addressList
+                            callbackId:callbackId
+                                  code:OK];
 }
 
-- (void)getAddress:(WKWebView *)webView callbackId:(NSString *)callbackId
-{
-    NSString *injectJS = [NSString stringWithFormat:@"%@('%@')",callbackId,[self getAddress]];
-    NSLog(@"inject func %@",injectJS);
-    [webView evaluateJavaScript:injectJS completionHandler:^(id _Nullable item, NSError * _Nullable error) {
-        NSLog(@"error == %@",error);
-    }];
-}
-
+//vet 转账
 - (void)web3VETTransferWithParamModel:(WalletSignParamModel *)paramModel
                             requestId:(NSString *)requestId
                               webView:(WKWebView *)webView
@@ -84,6 +90,7 @@
     
 }
 
+//token转账
 - (void)web3VTHOTransferWithParamModel:(WalletSignParamModel *)paramModel
                              requestId:(NSString *)requestId
                                webView:(WKWebView *)webView
@@ -117,6 +124,7 @@
     }];
 }
 
+//获得token 的Symobl
 - (void)getTokenSymoblWithParamModel:(WalletSignParamModel *)paramModel
                              webView:(WKWebView *)webView
                           callbackId:(NSString *)callbackId
@@ -146,6 +154,7 @@
     
 }
 
+//合约签名
 - (void)web3contractSignWithParamModel:(WalletSignParamModel *)paramModel
                              requestId:(NSString *)requestId
                                webView:(WKWebView *)webView
@@ -167,6 +176,7 @@
     
 }
 
+//展示签名控件
 - (void)showSignView:(WalletTransferType)transferType paramModel:(WalletSignParamModel *)paramModel requestId:(NSString *)requestId webView:(WKWebView *)webView callbackId:(NSString *)callbackId
 {
     WalletSignatureView *signatureView = [[WalletSignatureView alloc] initWithFrame:[WalletTools getCurrentVC].view.bounds];
@@ -195,14 +205,26 @@
     };
 }
 
+//获得chaintag
 - (void)getChainTag:(NSString *)requestId
   completionHandler:(void (^)(NSString * __nullable result))completionHandler
 {
-    NSDictionary *dict1 = [WalletTools packageWithRequestId:requestId
-                                                      data:[WalletUserDefaultManager getBlockUrl]
-                                                      code:OK
-                                                   message:@""];
-    completionHandler([dict1 yy_modelToJSONString]);
+    // 拉创世区块id做chainTag
+    WalletGenesisBlockInfoApi *genesisBlock = [WalletGenesisBlockInfoApi new];
+    [genesisBlock loadDataAsyncWithSuccess:^(VCBaseApi *finishApi) {
+        WalletBlockInfoModel *genesisblockModel = finishApi.resultModel;
+        NSString *blockID = genesisblockModel.id;
+        NSString *chainTag = [NSString stringWithFormat:@"0x%@", [blockID substringFromIndex:blockID.length-2]];
+        
+        NSDictionary *dict1 = [WalletTools packageWithRequestId:requestId
+                                                           data:chainTag
+                                                           code:OK
+                                                        message:@""];
+        completionHandler([dict1 yy_modelToJSONString]);
+        
+    } failure:^(VCBaseApi *finishApi, NSString *errMsg) {
+        completionHandler(@"{}");
+    }];
 }
 
 

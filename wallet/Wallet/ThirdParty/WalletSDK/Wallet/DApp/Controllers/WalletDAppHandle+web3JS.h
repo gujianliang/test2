@@ -20,8 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
          requestId:(NSString *)requestId
            address:(NSString *)address;
 
-- (void)getAddress:(WKWebView *)webView callbackId:(NSString *)callbackId;
-
+- (void)getAddress:(WKWebView *)webView requestId:(NSString *)requestId callbackId:(NSString *)callbackId;
 
 - (void)web3VETTransferWithParamModel:(WalletSignParamModel *)paramModel
                             requestId:(NSString *)requestId
