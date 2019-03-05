@@ -166,11 +166,11 @@
      }];
 }
 
-//Sign contract,splice clause data 
+//splice clause data
 - (NSString *)contractMethodId:(NSString *)methodId params:(NSArray *)params
 {
     
-    NSString *totalData = methodId;
+    NSString *clauseData = methodId;
     for (NSString *param in params) {
         NSInteger t = 64 - [param substringFromIndex:2].length;
         NSMutableString *zero = [NSMutableString new];
@@ -179,9 +179,9 @@
         }
         NSString *newValue = [NSString stringWithFormat:@"%@%@",zero,[param substringFromIndex:2]];
         
-        totalData = [totalData stringByAppendingString:newValue];
+        clauseData = [clauseData stringByAppendingString:newValue];
     }
-    return totalData;
+    return clauseData;
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField

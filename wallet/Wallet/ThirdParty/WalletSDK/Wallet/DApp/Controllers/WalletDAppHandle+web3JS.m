@@ -50,7 +50,6 @@
 }
 
 //获得wallet 地址
-
 - (void)getAddress:(WKWebView *)webView requestId:(NSString *)requestId callbackId:(NSString *)callbackId
 {
     NSMutableArray *addressList = [NSMutableArray array];
@@ -181,7 +180,7 @@
 {
     WalletSignatureView *signatureView = [[WalletSignatureView alloc] initWithFrame:[WalletTools getCurrentVC].view.bounds];
     signatureView.tag = SignViewTag;
-    signatureView.transferType = WalletTokenTransferType;
+    signatureView.transferType = transferType;
     
     [signatureView updateViewParamModel:paramModel];
     

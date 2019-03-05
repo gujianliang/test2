@@ -279,7 +279,7 @@
 
 + (void)transactionCheckParams:(NSString **)keystore  parameter:(TransactionParameter *)parameter toAddress:(NSString **)toAddress amount:(NSString **)amount transferType:(WalletTransferType *)transferType tokenAddress:(NSString **)tokenAddress clauseStr:(NSString **)clauseStr
 {
-    // check keystore form
+    // check keystore format
     if (![WalletTools checkKeystore:*keystore]) {
         
         [WalletMBProgressShower showTextIn:[WalletTools getCurrentVC].view

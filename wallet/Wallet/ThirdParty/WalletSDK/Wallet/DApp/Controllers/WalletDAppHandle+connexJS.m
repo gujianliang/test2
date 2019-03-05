@@ -537,7 +537,7 @@
 {
     WalletSignatureView *signatureView = [[WalletSignatureView alloc] initWithFrame:[WalletTools getCurrentVC].view.bounds];
     signatureView.tag = SignViewTag;
-    signatureView.transferType = WalletTokenTransferType;
+    signatureView.transferType = transferType;
     [signatureView updateViewParamModel:paramModel];
     
     [[WalletTools getCurrentVC].navigationController.view addSubview:signatureView];

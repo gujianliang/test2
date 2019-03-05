@@ -63,12 +63,21 @@
     
     // intput wallet list detail to sdk，
     [WalletUtils initDappWebViewWithKeystore:walletList];
+     [WalletUtils injectJSWithWebView:_webView];
+}
+
+- (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(null_unspecified WKNavigation *)navigation
+{
     
+}
+
+- (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation
+{
 }
 
 - (void)webView:(WKWebView *)webView didCommitNavigation:(null_unspecified WKNavigation *)navigation;
 {
-    [WalletUtils injectJSWithWebView:webView];
+//    [WalletUtils injectJSWithWebView:webView];
 }
 
 -(void)webView:(WKWebView *)webView runJavaScriptAlertPanelWithMessage:(NSString *)message initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(void))completionHandler{
