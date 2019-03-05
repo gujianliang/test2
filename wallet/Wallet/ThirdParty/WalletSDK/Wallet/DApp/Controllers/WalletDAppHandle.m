@@ -174,6 +174,14 @@ static dispatch_once_t predicate;
         completionHandler(@"{}");
         return;
     }
+     BOOL bCert = NO;
+    NSString *kind = callbackParams[@"kind"];
+    
+    //    if ([kind isEqualToString:@"cert"]) {
+    //        callbackParams = [NSMutableDictionary dictionaryWithDictionary:callbackParams[@"clauses"]];
+    //        bCert = YES;
+    //
+    //    }else
     
     __block NSString *to     = callbackParams[@"to"];
     __block NSString *amount = callbackParams[@"value"];
@@ -269,10 +277,11 @@ static dispatch_once_t predicate;
         signParamModel.clauseData   = clauseStr ;
         signParamModel.tokenAddress = tokenAddress ;
         
-        [self web3TransferWithParamModel:signParamModel
+        [self transferWithParamModel:signParamModel
                                requestId:requestId
                                  webView:_webView
-                              callbackId:callbackId];
+                              callbackId:callbackId
+                               bCert:bCert];
     };
 }
 
@@ -295,7 +304,6 @@ static dispatch_once_t predicate;
 //        bCert = YES;
 //
 //    }else
-    
     
     if(![kind isEqualToString:@"tx"]){
         
@@ -405,7 +413,7 @@ static dispatch_once_t predicate;
         signParamModel.clauseData   = clauseStr ;
         signParamModel.tokenAddress = tokenAddress ;
         
-        [self connexTransferWithParamModel:signParamModel
+        [self transferWithParamModel:signParamModel
                                  requestId:requestId
                                    webView:_webView
                                 callbackId:callbackId
@@ -413,57 +421,30 @@ static dispatch_once_t predicate;
     };
 }
 
-- (void)connexTransferWithParamModel:(WalletSignParamModel *)paramModel
-                           requestId:(NSString *)requestId
-                             webView:(WKWebView *)webView
-                          callbackId:(NSString *)callbackId
-                               bCert:(BOOL)bCert
-{
-    if (bCert) {
-        
-//        [self certTransferDictParam:dictParam
-//                               from:from
-//                          requestId:requestId
-//                            webView:webView
-//                         callbackId:callbackId];
-        
-    }else if (paramModel.clauseData.length < 10) { // vet 转账clauseStr == nil,
-        
-       
-        [self VETTransferDictWithParamModel:paramModel requestId:requestId webView:_webView callbackId:callbackId];
-        
-    }else{
-        if ([paramModel.clauseData hasPrefix:TransferMethodId]) { // token 转账
-          
-            [self VTHOTransferWithParamModel:paramModel requestId:requestId webView:_webView callbackId:callbackId];
-            
-        }else{ // 其他合约交易
-            CGFloat amountFloat = 0;
-            
-            if (![self checkAmountForm:paramModel.amount amountFloat:&amountFloat requestId:requestId webView:_webView callbackId:callbackId]) {
-                return;
-            }
-            
-            
-            [self contractSignWithParamModel:paramModel requestId:requestId webView:_webView callbackId:callbackId];
-            
-        }
-    }
-}
 
--(void)web3TransferWithParamModel:(WalletSignParamModel *)paramModel
-                          requestId:(NSString *)requestId
-                            webView:(WKWebView *)webView
-                         callbackId:(NSString *)callbackId
+-(void)transferWithParamModel:(WalletSignParamModel *)paramModel
+                    requestId:(NSString *)requestId
+                      webView:(WKWebView *)webView
+                   callbackId:(NSString *)callbackId
+                        bCert:(BOOL)bCert
 
 {
     UIView *conventView = [[WalletTools getCurrentVC].navigationController.view viewWithTag:SignViewTag];
     if (conventView) {
         return;
     }
-    if (paramModel.clauseData.length > 10) {
-        if (![paramModel.clauseData hasPrefix:TransferMethodId]) { // 签合约
-            [self web3contractSignWithParamModel:paramModel requestId:requestId webView:webView callbackId:callbackId];
+    if (bCert) {
+        
+        //        [self certTransferDictParam:dictParam
+        //                               from:from
+        //                          requestId:requestId
+        //                            webView:webView
+        //                         callbackId:callbackId];
+        
+    }else if (paramModel.clauseData.length > 10) {
+        if (![paramModel.clauseData hasPrefix:TransferMethodId]) { // 合约
+            
+           [self contractSignWithParamModel:paramModel requestId:requestId webView:_webView callbackId:callbackId];
            
         }else{
             //vtho 转账

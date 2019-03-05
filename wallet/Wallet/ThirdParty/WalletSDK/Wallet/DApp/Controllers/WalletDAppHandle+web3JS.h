@@ -22,23 +22,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)getAddress:(WKWebView *)webView requestId:(NSString *)requestId callbackId:(NSString *)callbackId;
 
-- (void)web3VETTransferWithParamModel:(WalletSignParamModel *)paramModel
-                            requestId:(NSString *)requestId
-                              webView:(WKWebView *)webView
-                           callbackId:(NSString *)callbackId;
-
-- (void)web3VTHOTransferWithParamModel:(WalletSignParamModel *)paramModel
-                             requestId:(NSString *)requestId
-                               webView:(WKWebView *)webView
-                            callbackId:(NSString *)callbackId;
-
-
-- (void)web3contractSignWithParamModel:(WalletSignParamModel *)paramModel
-                             requestId:(NSString *)requestId
-                               webView:(WKWebView *)webView
-                            callbackId:(NSString *)callbackId;
-
-
 - (void)getChainTag:(NSString *)requestId
   completionHandler:(void (^)(NSString * __nullable result))completionHandler;
 
