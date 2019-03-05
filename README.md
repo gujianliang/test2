@@ -25,7 +25,7 @@ Vechain wallet SDK provides a series of functional interface can help the iOS de
 ## Get Started 
 
 
-To use the Framework, add the WalletSDK.Framework to your project :
+To use the Framework, add the WalletSDK.Framework and WalletSDKBundle.bundle to your project :
 
 ```
 #import <WalletSDK/WalletUtils.h>
