@@ -28,9 +28,13 @@ Requires iOS 10.
 
 Latest version 1.0.0
 
-依赖的的的
-
-
+The dependency libraries are as follows:
+```
+SocketRocket
+Masonry
+AFNetworking
+MBProgressHUD
+```
 To use the Framework, add the WalletSDK.Framework and WalletSDKBundle.bundle to your project :
 
 ```obj-c
