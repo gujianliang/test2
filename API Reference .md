@@ -106,7 +106,7 @@
 >
 
 ```obj-c
-+ (void)sign:(NSData *)hashedMessage
++ (void)sign:(NSData *)message
     keystore:(NSString *)keystoreJson
     password:(NSString *)password
     callback:(void (^)(NSData *signatureData,NSError *error))callback;
