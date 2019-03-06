@@ -24,6 +24,12 @@ Vechain wallet SDK provides a series of functional interface can help the iOS de
 
 ## Get Started 
 
+Requires iOS 10.
+
+Latest version 1.0.0
+
+依赖的的的
+
 
 To use the Framework, add the WalletSDK.Framework and WalletSDKBundle.bundle to your project :
 
