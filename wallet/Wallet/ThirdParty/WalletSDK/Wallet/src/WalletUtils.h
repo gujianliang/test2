@@ -48,7 +48,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param mnemonicWords : 12 words
  *  @return result
  */
-+ (BOOL)isValidMnemonicWords:(NSString *)mnemonicWords;
++ (BOOL)isValidMnemonicWords:(NSArray *)mnemonicWords;
 
 /**
  *  @abstract

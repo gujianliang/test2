@@ -60,7 +60,8 @@
     }
     
     /* Check your input mnemonic words are available. */
-    if (![WalletUtils isValidMnemonicWords:self.importMnemonicWords.text]) {
+    NSArray *arr = [self.importMnemonicWords.text componentsSeparatedByString:@" "];
+    if (![WalletUtils isValidMnemonicWords:arr]) {
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         hud.mode = MBProgressHUDModeText;
         hud.label.text =  @"Mnemonic Words is not available.";
