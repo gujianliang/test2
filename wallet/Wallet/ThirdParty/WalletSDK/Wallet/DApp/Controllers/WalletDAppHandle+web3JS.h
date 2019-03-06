@@ -25,6 +25,10 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)getNodeUrl:(NSString *)requestId
   completionHandler:(void (^)(NSString * __nullable result))completionHandler;
 
+//获得chaintag
+- (void)getChainTag:(NSString *)requestId
+  completionHandler:(void (^)(NSString * __nullable result))completionHandler;
+
 @end
 
 NS_ASSUME_NONNULL_END

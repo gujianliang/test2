@@ -48,7 +48,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param mnemonicWords : 12 words
  *  @return result
  */
-+ (BOOL)isValidMnemonicWords:(NSString *)mnemonicWords;
++ (BOOL)isValidMnemonicWords:(NSArray *)mnemonicWords;
 
 /**
  *  @abstract
@@ -129,13 +129,13 @@ NS_ASSUME_NONNULL_BEGIN
  *  @abstract
  *  Sign message
  *
- *  @param hashedMessage : Prepare the data to be signed
+ *  @param message : Prepare the data to be signed
  *  @param keystoreJson : Keystore in json format
  *  @param password : Wallet password
  *  @param callback : Callback after the end
  *
  */
-+ (void)sign:(NSData*)hashedMessage
++ (void)sign:(NSData*)message
     keystore:(NSString*)keystoreJson
     password:(NSString*)password
     callback:(void (^)(NSData *signatureData,NSError *error))callback;

@@ -78,5 +78,27 @@
     completionHandler([dict1 yy_modelToJSONString]);
 }
 
+//获得chaintag
+- (void)getChainTag:(NSString *)requestId
+  completionHandler:(void (^)(NSString * __nullable result))completionHandler
+{
+    // 拉创世区块id做chainTag
+    WalletGenesisBlockInfoApi *genesisBlock = [WalletGenesisBlockInfoApi new];
+    [genesisBlock loadDataAsyncWithSuccess:^(VCBaseApi *finishApi) {
+        WalletBlockInfoModel *genesisblockModel = finishApi.resultModel;
+        NSString *blockID = genesisblockModel.id;
+        NSString *chainTag = [NSString stringWithFormat:@"0x%@", [blockID substringFromIndex:blockID.length-2]];
+        
+        NSDictionary *dict1 = [WalletTools packageWithRequestId:requestId
+                                                           data:chainTag
+                                                           code:OK
+                                                        message:@""];
+        completionHandler([dict1 yy_modelToJSONString]);
+        
+    } failure:^(VCBaseApi *finishApi, NSString *errMsg) {
+        completionHandler(@"{}");
+    }];
+}
+
 
 @end

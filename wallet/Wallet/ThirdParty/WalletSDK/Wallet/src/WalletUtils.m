@@ -17,6 +17,7 @@
 #import "WalletSignParamModel.h"
 #import "SecureData.h"
 #import "Account.h"
+#import "RLPSerialization.h"
 
 @implementation WalletUtils
 
@@ -139,12 +140,13 @@
 + (NSString *)recoverAddressFromMessage:(NSData*)message
                 signatureData:(NSData *)signatureData
 {
-    Signature *signature = [Signature signatureWithData:signatureData];
     
-    return [Account verifyMessage:message signature:signature].checksumAddress.lowercaseString;
+    NSError *error = nil;
+    SecureData *digest = [SecureData BLAKE2B:message];
+    Signature *signature = [Signature signatureWithData:signatureData];
+    return [Account verifyMessage:digest.data signature:signature].checksumAddress.lowercaseString;
 }
 
-#warning message hashed ,还是没有hash 的
 + (void)sign:(NSData*)message
     keystore:(NSString*)keystoreJson
     password:(NSString*)password
@@ -279,9 +281,7 @@
     [[WalletTools getCurrentVC].navigationController.view addSubview:signatureView];
     
     signatureView.transferBlock = ^(NSString * _Nonnull txid) {
-        
-#warning txid local
-        
+                
         if (callback) {
             callback(txid,parameter.from);
         }
