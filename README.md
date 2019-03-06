@@ -24,16 +24,16 @@ Vechain wallet SDK provides a series of functional interface can help the iOS de
 
 ## Get Started 
 
-Requires iOS 10.
+####  Requires iOS 10
 
-Latest version 1.0.0
+#### Latest version 1.0.0
 
-The dependency libraries are as follows:
-```
-SocketRocket
-Masonry
-AFNetworking
-MBProgressHUD
+#### The dependency package should be added to the project, as listed below:
+```obj-c
+SocketRocket  --> v0.4.2
+Masonry       --> v1.1.0
+AFNetworking  --> v2.7.0
+MBProgressHUD --> v1.1.0
 ```
 To use the Framework, add the WalletSDK.Framework and WalletSDKBundle.bundle to your project :
 
