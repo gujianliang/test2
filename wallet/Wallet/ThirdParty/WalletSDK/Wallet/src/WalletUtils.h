@@ -11,6 +11,7 @@
 #import <UIKit/UIKit.h>
 #import <WebKit/WebKit.h>
 #import "WalletAccountModel.h"
+#import "MBProgressHUD.h"
 
 @interface WalletUtils : NSObject
 
@@ -18,164 +19,99 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  *  @abstract
- *  create wallet
+ *  Create wallet
  *
- *  @param password :wallet password
- *  @param block : finish create wallet callback
+ *  @param password : Wallet password
+ *  @param callback : Callback after the end;The attributes of a class has mnemonicPhras , address, privateKey, keystore
  *
  */
-+ (void)createWalletWithPassword:(NSString *)password
-                        callback:(void(^)(WalletAccountModel *account,NSError *error))block;
++ (void)creatWalletWithPassword:(NSString *)password
+                       callback:(void(^)(WalletAccountModel *account,NSError *error))callback;
 
 /**
  *  @abstract
- *  create wallet with mnemonic
+ *  Create wallet with mnemonic words
  *
- *  @param mnemonicList :12 words for create wallet
- *  @param password :password for wallet
- *  @param block : finish create wallet callback
+ *  @param mnemonicWords :12 words
+ *  @param password : Wallet password
+ *  @param callback : Callback after the end;The attributes of a class has mnemonicPhras , address, privateKey, keystore
  */
 
-+ (void)creatWalletWithMnemonic:(NSArray *)mnemonicList
-                      password:(NSString *)password
-                       callback:(void(^)(WalletAccountModel *account,NSError *error))block;
++ (void)creatWalletWithMnemonicWords:(NSArray *)mnemonicWords
+                            password:(NSString *)password
+                            callback:(void(^)(WalletAccountModel *account,NSError *error))callback;
 
 /**
  *  @abstract
- *  Verify the mnemonic word is legal
+ *  Verify mnemonic words
  *
- *  @param mnemonicList :12 words
- *
- *  @return verification results
+ *  @param mnemonicWords : 12 words
+ *  @return result
  */
-+ (BOOL)isValidMnemonicPhrase:(NSString*)mnemonicList;
-
++ (BOOL)isValidMnemonicWords:(NSArray *)mnemonicWords;
 
 /**
  *  @abstract
- *  Decryption keystore
+ *  Recover address
  *
- *  @param json : json string for keystore
- *  @param password : password for wallet
- *  @param callback : finish decryption keystore callback
+ *  @param message : Data before signature
+ *  @param signatureData : Data after signature
  *
- */
-+ (void)decryptSecretStorageJSON:(NSString*)json
-                        password:(NSString*)password
-                        callback:(void(^)(WalletAccountModel *account,NSError *error))callback;
-
-/**
- *  @abstract
- *  verify Message
- *
- *  @param message : to verify the information
- *  @param signatureData : NSData signature (r,s,v)
- *
- *  @return object for address
+ *  @return address
  */
 + (NSString *)recoverAddressFromMessage:(NSData*)message
                           signatureData:(NSData*)signatureData;
 
 /**
  *  @abstract
- *  sign message
- *
- *  @param message : message for sign
- *  @param json :json string for keystore
- *  @param password :password for wallet
- *  @param block :finish sign block
- *
- */
-+ (void)signature:(NSData*)message
-         keystore:(NSString*)json
-         password:(NSString*)password
-            block:(void (^)(NSData *signatureData,NSError *error))block;
-
-/**
- *  @abstract
- *  encrypt private key to keystore
- *
- *  @param password :password for wallet
- *  @param walletAccount :object for private key
- *  @param callback :finish encrypt callback
- *
- */
-+ (void)encryptSecretStorageJSON:(NSString*)password
-                         account:(WalletAccountModel *)walletAccount
-                        callback:(void (^)(NSString *))callback;
-
-/**
- *  @abstract
- *  encrypt set current wallet address
- *
- *  @param address :current wallet address
- *
- */
-+ (void)setCurrentWallet:(NSString *)address;
-
-/**
- *  @abstract
- *  encrypt set current wallet address
- *
- *  @param walletList :wallet list ,one item NSDictionary,has 2 key,address and keystore
- address: wallet addres
- keystore: json
- *
- */
-+ (void)initWithWalletDict:(NSMutableArray *)walletList;
-
-/*! @abstract Displays a JavaScript text input panel.
-    @param webView The web view invoking the delegate method.
-    @param defaultText The initial text to display in the text entry field.
-    @param completionHandler The completion handler to call after the text
-input panel has been dismissed. Pass the entered text if the user chose
-OK, otherwise nil.
-*/
-+ (void)webView:(WKWebView *)webView defaultText:(NSString *)defaultText completionHandler:(void (^)(NSString *result))completionHandler;
-
-/**
- *  @abstract
- *  encrypt inject js into webview
- *
- *  @param webview The web view invoking the developper new.
- *
- */
-+ (void)injectJS:(WKWebView *)webview;
-
-/**
- *  @abstract
- *  encrypt The call sign control
- *
- *  @param parameter Signature parameters
- *  @param keystore wallet for keystore
- *  @param block callback
- *
- */
-+ (void)transactionWithKeystore:(NSString *)keystore parameter:(TransactionParameter *)parameter block:(void(^)(NSString *txId,NSString *signer))block;
-
-/**
- *  @abstract
  *  Verify the mnemonic word is legal
+ *  @param keystoreJson :Keystore in json format
  *
- *  @param keystore :wallet for keystore
- *
- *  @return verification results
+ *  @return verification result
  */
-+ (BOOL)isValidKeystore:(NSString *)keystore;
++ (BOOL)isValidKeystore:(NSString *)keystoreJson;
 
 /**
  *  @abstract
- *  Verify get checksum address
+ *  Get checksum address
  *
- *  @param address :wallet for address
+ *  @param address :Wallet address
  *
  *  @return checksum address
  */
 + (NSString *)getChecksumAddress:(NSString *)address;
 
+
 /**
  *  @abstract
- *  setup node url
+ *  Decrypt keystore
+ *
+ *  @param keystoreJson : Keystore in json format
+ *  @param password : Wallet password
+ *  @param callback : Callback after the end. Callback after the end;The attributes of a class has mnemonicPhras , address, privateKey, keystore
+ *
+ */
++ (void)decryptKeystore:(NSString*)keystoreJson
+               password:(NSString*)password
+               callback:(void(^)(WalletAccountModel *account,NSError *error))callback;
+
+
+/**
+ *  @abstract
+ *  Change keystore password
+ *
+ *  @param password : Wallet password
+ *  @param account : WalletAccountModel object
+ *  @param callback : Callback after the end. keystoreJson : Keystore in json format
+ *
+ */
++ (void)encryptKeystoreWithPassword:(NSString*)password
+                            account:(WalletAccountModel *)account
+                           callback:(void (^)(NSString *keystoreJson))callback;
+
+/**
+ *  @abstract
+ *  Set node url
  *
  *  @param nodelUrl :node url
  *
@@ -183,12 +119,79 @@ OK, otherwise nil.
 + (void)setNode:(NSString *)nodelUrl;
 
 /**
-*  @abstract
-*  Destroy the keystore saved in the wallet
-*
-*
+ *  @abstract
+ *  Get node url
+ *
+ */
++ (NSString *)getNode;
+
+/**
+ *  @abstract
+ *  Sign message
+ *
+ *  @param hashedMessage : Prepare the data to be signed
+ *  @param keystoreJson : Keystore in json format
+ *  @param password : Wallet password
+ *  @param callback : Callback after the end
+ *
+ */
++ (void)sign:(NSData*)hashedMessage
+    keystore:(NSString*)keystoreJson
+    password:(NSString*)password
+    callback:(void (^)(NSData *signatureData,NSError *error))callback;
+
+/**
+ *  @abstract
+ *  Sign and send
+ *
+ *  @param parameter :Signature parameters
+ *  @param keystoreJson :Keystore in json format
+ *  @param callback :Callback after the end
+ *
+ */
++ (void)sendWithKeystore:(NSString *)keystoreJson
+               parameter:(TransactionParameter *)parameter
+                callback:(void(^)(NSString *txId,NSString *signer))callback;
+
+/**
+ *  @abstract
+ *  Set keystore list to SDK
+ *
+ *  @param keystoreList : Array of keystore json
+ *
+ */
++ (void)initDappWebViewWithKeystore:(NSArray *)keystoreList;
+
+/*! @abstract
+ *  Displays a JavaScript text input panel.
+ *
+ *  @param webView The web view invoking the delegate method.
+ *  @param defaultText The initial text to display in the text entry field.
+ *  @param completionHandler The completion handler to call after the text
+input panel has been dismissed. Pass the entered text if the user chose
+OK, otherwise nil.
 */
-+ (void)destroyKeystore;
++ (void)webView:(WKWebView *)webView
+    defaultText:(NSString *)defaultText
+completionHandler:(void (^)(NSString *result))completionHandler;
+
+/**
+ *  @abstract
+ *  Inject js into webview
+ *
+ *  @param webview : Developer generated webview object
+ *
+ */
++ (void)injectJSWithWebView:(WKWebView *)webview;
+
+/**
+ *  @abstract
+ *  Release the singleton of dapp
+ *
+ *  Call this method when exiting the contrller where dapp is located
+ *
+ */
++ (void)deallocDappSingletion;
 
 NS_ASSUME_NONNULL_END
 

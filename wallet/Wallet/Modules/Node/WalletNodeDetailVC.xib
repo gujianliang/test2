@@ -12,8 +12,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WalletNodeDetailVC">
             <connections>
-                <outlet property="netName" destination="0hL-qe-4o2" id="lXR-yB-lBu"/>
-                <outlet property="netUrl" destination="JbS-Av-Tqs" id="nlg-ym-ZRy"/>
+                <outlet property="nodeName" destination="0hL-qe-4o2" id="lXR-yB-lBu"/>
+                <outlet property="nodeUrl" destination="JbS-Av-Tqs" id="nlg-ym-ZRy"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -43,7 +43,7 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="37" id="CGX-E2-ecX"/>
                     </constraints>
-                    <state key="normal" title="Delete Network">
+                    <state key="normal" title="Delete Node">
                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </state>
                     <connections>

@@ -13,7 +13,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WalletAddVthoNodeVC">
             <connections>
                 <outlet property="customNameTextFild" destination="WHG-4c-Y62" id="jgy-H4-WVQ"/>
-                <outlet property="customNetTextView" destination="Afk-yu-ukO" id="4hT-q7-uZS"/>
+                <outlet property="customNodeTextView" destination="Afk-yu-ukO" id="4hT-q7-uZS"/>
                 <outlet property="view" destination="wa3-Ed-AJt" id="7ZO-2C-DwX"/>
             </connections>
         </placeholder>
@@ -41,10 +41,10 @@
                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </state>
                     <connections>
-                        <action selector="setCustomNetworkEnvironment:" destination="-1" eventType="touchUpInside" id="VeI-CE-rdd"/>
+                        <action selector="setCustomNodeEnvironment:" destination="-1" eventType="touchUpInside" id="VeI-CE-rdd"/>
                     </connections>
                 </button>
-                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Custom network name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WHG-4c-Y62">
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Custom node name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WHG-4c-Y62">
                     <rect key="frame" x="20" y="95" width="335" height="40"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="H63-MY-FIF"/>

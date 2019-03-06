@@ -7,13 +7,13 @@
 //
 
 #import "WalletAddVthoNodeVC.h"
-#import <WalletSDK/MBProgressHUD.h>
+#import "MBProgressHUD.h"
 #import <WalletSDK/WalletUtils.h>
 
 @interface WalletAddVthoNodeVC ()
 
-@property (weak, nonatomic) IBOutlet UITextField *customNameTextFild;   /*  It is used to input the custom network environment name */
-@property (weak, nonatomic) IBOutlet UITextView *customNetTextView;     /*  It is used to input the custom network environment URL */
+@property (weak, nonatomic) IBOutlet UITextField *customNameTextFild;   /*  It is used to input the custom node environment name */
+@property (weak, nonatomic) IBOutlet UITextView *customNodeTextView;     /*  It is used to input the custom node environment URL */
 
 @end
 
@@ -21,36 +21,36 @@
 
 - (void)viewDidLoad{
     [super viewDidLoad];
-    self.title = @"Add Custom Network";
+    self.title = @"Add Custom Node";
 }
 
 
 /**
-*  Set and save custom network environment.
+*  Set and save custom node environment.
 */
-- (IBAction)setCustomNetworkEnvironment:(id)sender{
+- (IBAction)setCustomNodeEnvironment:(id)sender{
     
-    NSString *netName = self.customNameTextFild.text;
-    NSString *netUrl = self.customNetTextView.text;
+    NSString *nodeName = self.customNameTextFild.text;
+    NSString *nodeUrl = self.customNodeTextView.text;
     
     
-    /* Check your input network name and network URL that can not be blank. */
-    if (netName.length == 0 || netUrl.length == 0 ){
+    /* Check your input node name and node URL that can not be blank. */
+    if (nodeName.length == 0 || nodeUrl.length == 0 ){
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         hud.mode = MBProgressHUDModeText;
-        hud.labelText =  @"The input cannot be null.";
-        [hud hide:YES afterDelay:2.5];
+        hud.label.text =  @"The input cannot be null.";
+        [hud hideAnimated:YES afterDelay:2.5];
         return;
     }
     
     
     /* Check your URL is available */
-    NSURL *URL = [NSURL URLWithString:netUrl];
+    NSURL *URL = [NSURL URLWithString:nodeUrl];
     if (![[UIApplication sharedApplication] canOpenURL:URL]) {
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         hud.mode = MBProgressHUDModeText;
-        hud.labelText =  @"The URL is not available.";
-        [hud hide:YES afterDelay:2.5];
+        hud.label.text =  @"The URL is not available.";
+        [hud hideAnimated:YES afterDelay:2.5];
         return;
     }
     
@@ -58,15 +58,15 @@
     NSArray *oldList = [[NSUserDefaults standardUserDefaults] objectForKey:@"nodeList"];
     NSMutableArray *newList = [NSMutableArray arrayWithArray:oldList];
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-    [dict setObject:netName forKey:@"nodeName"];
-    [dict setObject:netUrl forKey:@"nodeUrl"];
+    [dict setObject:nodeName forKey:@"nodeName"];
+    [dict setObject:nodeUrl forKey:@"nodeUrl"];
     [newList addObject:dict];
     
     [[NSUserDefaults standardUserDefaults] setObject:newList forKey:@"nodeList"];
-    [[NSUserDefaults standardUserDefaults] setObject:dict forKey:@"CurrentNet"];
+    [[NSUserDefaults standardUserDefaults] setObject:dict forKey:@"currentNode"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
-    [WalletUtils setNode:netUrl];
+    [WalletUtils setNode:nodeUrl];
 
     [self.navigationController popViewControllerAnimated:YES];
 }

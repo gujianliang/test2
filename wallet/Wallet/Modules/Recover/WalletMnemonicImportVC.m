@@ -8,12 +8,12 @@
 
 #import "WalletMnemonicImportVC.h"
 #import "WalletDetailVC.h"
-#import <WalletSDK/MBProgressHUD.h>
-#import <WalletSDK/Wallet.h>
+#import <WalletSDK/WalletUtils.h>
+
 
 @interface WalletMnemonicImportVC ()
 
-@property (weak, nonatomic) IBOutlet UITextView *improtMnemonicWords;   /* It is used to input the wallet mnemonic words */
+@property (weak, nonatomic) IBOutlet UITextView *importMnemonicWords;   /* It is used to input the wallet mnemonic words */
 @property (weak, nonatomic) IBOutlet UITextField *password;             /* The wallet new password that you want to create */
 
 @end
@@ -51,35 +51,36 @@
      */
     
     /* Check your input password and mnemonic words that can not be blank. */
-    if (self.password.text.length == 0 || self.improtMnemonicWords.text.length == 0){
+    if (self.password.text.length == 0 || self.importMnemonicWords.text.length == 0){
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         hud.mode = MBProgressHUDModeText;
-        hud.labelText =  @"The input cannot be null.";   
-        [hud hide:YES afterDelay:3];
+        hud.label.text =  @"The input cannot be null.";
+        [hud hideAnimated:YES afterDelay:3];
         return;
     }
     
     /* Check your input mnemonic words are available. */
-    if (![Account isValidMnemonicPhrase:self.improtMnemonicWords.text]) {
+    NSArray *arr = [self.importMnemonicWords.text componentsSeparatedByString:@" "];
+    if (![WalletUtils isValidMnemonicWords:arr]) {
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         hud.mode = MBProgressHUDModeText;
-        hud.labelText =  @"Mnemonic Words is not available.";
-        [hud hide:YES afterDelay:1];
+        hud.label.text =  @"Mnemonic Words is not available.";
+        [hud hideAnimated:YES afterDelay:1];
         return;
     }
     
     /* show loading state */
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.mode = MBProgressHUDModeText;
-    hud.labelText =  @"Waiting...";
+    hud.label.text =  @"Waiting...";
     
     
     /* Create a wallet with your password and mnemonic words. */
-    [WalletUtils creatWalletWithMnemonic:[self.improtMnemonicWords.text.lowercaseString componentsSeparatedByString:@" "]
+    [WalletUtils creatWalletWithMnemonicWords:[self.importMnemonicWords.text.lowercaseString componentsSeparatedByString:@" "]
                                 password:self.password.text
                                 callback:^(WalletAccountModel * _Nonnull account, NSError * _Nonnull error)
      {
-         [hud hide:YES];
+         [hud hideAnimated:YES];
          
          [self.navigationController popToRootViewControllerAnimated:NO];
          

@@ -10,8 +10,6 @@
 #import <WalletSDK/WalletUtils.h>
 #import "WalletSdkMacro.h"
 
-#define VETGasLimit  @"21000"
-
 @interface WalletTransferVC ()<UITextFieldDelegate>
 {
     NSString *_toAddress;
@@ -22,12 +20,11 @@
 @property (weak, nonatomic) IBOutlet UITextView *receiveAddressTextView;
 @property (weak, nonatomic) IBOutlet UITextField *transferAmountTextField;
 @property (weak, nonatomic) IBOutlet UILabel *balanceAmountLabel;
-@property (weak, nonatomic) IBOutlet UILabel *feeLabel;
+
 
 @property (weak, nonatomic) IBOutlet UILabel *symobl;
 @property (weak, nonatomic) IBOutlet UIImageView *coinIcon;
-@property (weak, nonatomic) IBOutlet UISlider *minerFeeSlider;
-@property (strong, nonatomic) UITextField *pwTextField;
+@property (nonatomic, strong)UITextField *pwTextField;
 
 @end
 
@@ -36,10 +33,11 @@
 - (void)viewDidLoad{
     [super viewDidLoad];
     
-    _blockHost = Test_BlockHost;
+    _blockHost = [WalletUtils getNode];
     
     if (!_isVET) {
-        _tokenContractAddress = @"0x0000000000000000000000000000456e65726779";
+        // vtho contract address
+        _tokenContractAddress = vthoTokenAddress;
         [self.coinIcon setImage:[UIImage imageNamed:@"VTHO"]];
         self.symobl.text = @"VTHO";
         
@@ -48,7 +46,9 @@
         self.symobl.text = @"VET";
     }
     
-    self.receiveAddressTextView.text = @"0xe2c3B55d8Aa9920058030F73baCECe582f2123FF";
+
+    self.receiveAddressTextView.text = @"0x1231231231231231231231231231231231231231";
+
     self.receiveAddressTextView.textContainerInset = UIEdgeInsetsMake(2.5, 2.5, 2.5, 2.5);
     
     self.balanceAmountLabel.text = self.coinAmount;
@@ -60,71 +60,143 @@
     NSDictionary *currentWalletDict = [[NSUserDefaults standardUserDefaults]objectForKey:@"currentWallet"];
     NSString *from = currentWalletDict[@"address"];
     
-    // 设置 钱包
     NSMutableArray *walletList = [NSMutableArray array];
     if (currentWalletDict) {
         [walletList addObject:currentWalletDict];
     }
     
-    [WalletUtils initWithWalletDict:walletList];
-    [WalletUtils setCurrentWallet:from];
-    
-    
     NSString *keystore = currentWalletDict[@"keystore"];
+    if (_isVET) {
+        [self vetTransfer:from keystore:keystore];
+    }else{
+        [self vthoTransfer:from keystore:keystore];
+    }
     
-//    //vet
-//    TransactionParameter *paramters = [[TransactionParameter alloc]init];
-//    paramters.to = @"0x1231231231231231231231231231231231231231";
-//    paramters.value = @"0x0DE0B6B3A7640000";
-//    paramters.data = @"";
-//
-//    paramters.from = from;
-//    paramters.gas = @"21000";
-//
-//    [WalletUtils transactionWithKeystore:keystore
-//                               parameter:paramters
-//                                   block:^(NSString *txId, NSString *signer)
-//     {
-//
-//        NSLog(@"dd");
-//    }];
+    //sign contract demo
+//    [self contractSignture:from keystore:keystore];
+}
 
-   
-//    //vtho
-//    TransactionParameter *paramters = [[TransactionParameter alloc]init];
-//    paramters.to = @"0x0000000000000000000000000000456e65726779";
-//    paramters.value = @"";
-//    paramters.data = @"0xa9059cbb00000000000000000000000012312312312312312312312312312312312312310000000000000000000000000000000000000000000000000de0b6b3a7640000";
-//
-//    paramters.from = from;
-//    paramters.gas = @"60000";
-//
-//    [WalletUtils transactionWithKeystore:keystore
-//                               parameter:paramters
-//                                   block:^(NSString *txId, NSString *signer)
-//     {
-//
-//         NSLog(@"dd");
-//     }];
-
-    // contract
-    
-    
+- (void)vetTransfer:(NSString *)from keystore:(NSString *)keystore
+{
+    NSString *amountHex = [Payment parseEther:self.transferAmountTextField.text].hexString;
+    //vet
     TransactionParameter *paramters = [[TransactionParameter alloc]init];
-    paramters.to = @"0xd4dac3a95c741773f093d59256a21ed6fcc768a7";
-    paramters.value = @"";
-    paramters.data = @"0xbae3e19e00000000000000000000000000000000000000000000000000000000000000680000000000000000000000000000000000000000000000000de0b6b3a76400000000000000000000000000000000000000000000000000000de0b6b3a7640000000000000000000000000000000000000000000000000000000000000003f480";
+    paramters.to = self.receiveAddressTextView.text;
+    paramters.value = amountHex;
+    paramters.data = @"";
 
     paramters.from = from;
-    paramters.gas = @"600000";
+    paramters.gas = @"21000";//Set maximum gas allowed for call,
 
-    [WalletUtils transactionWithKeystore:keystore
+    [WalletUtils sendWithKeystore:keystore
                                parameter:paramters
-                                   block:^(NSString *txId, NSString *signer)
+                                   callback:^(NSString *txId, NSString *signer)
      {
 
+
+    }];
+}
+
+- (void)vthoTransfer:(NSString *)from keystore:(NSString *)keystore
+{
+    if (self.transferAmountTextField.text.length == 0
+        || self.transferAmountTextField.text.integerValue == 0) {
+        
+        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        hud.mode = MBProgressHUDModeText;
+        hud.label.text =  @"Please fill in the amount";
+        [hud hideAnimated:YES afterDelay:1.5];
+        return;
+    }
+    NSString *amountHex = [Payment parseEther:self.transferAmountTextField.text].hexString;
+    
+    TransactionParameter *paramters = [[TransactionParameter alloc]init];
+    paramters.to = _tokenContractAddress; //token address
+    paramters.value = @"";
+    
+    paramters.data = [self calculatenTokenTransferClauseData:self.receiveAddressTextView.text value:amountHex];;
+    
+    paramters.from = from;
+    paramters.gas = @"60000";
+    
+    [WalletUtils sendWithKeystore:keystore
+                               parameter:paramters
+                                   callback:^(NSString *txId, NSString *signer)
+     {
+     }];
+
+}
+
+//address: Accept the address of the account
+//value: Token transfer amount
+- (NSString *)calculatenTokenTransferClauseData:(NSString *)address
+                                     value:(NSString *)value
+{
+    NSString *head = @"0xa9059cbb"; // method id
+    NSString *newAddrss = [NSString stringWithFormat:@"000000000000000000000000%@",[address substringFromIndex:2]];
+    NSInteger t = 64 - [value substringFromIndex:2].length;
+    NSMutableString *zero = [NSMutableString new];
+    for (int i = 0; i < t; i++) {
+        [zero appendString:@"0"];
+    }
+    NSString *newValue = [NSString stringWithFormat:@"%@%@",zero,[value substringFromIndex:2]];
+    NSString *result = [NSString stringWithFormat:@"%@%@%@",head,newAddrss,newValue];
+    return  result;
+}
+
+- (void)contractSignture:(NSString *)from keystore:(NSString *)keystore
+{
+
+
+    //xnode pending order contract
+    TransactionParameter *paramters = [[TransactionParameter alloc]init];
+    paramters.to = @"0xd4dac3a95c741773f093d59256a21ed6fcc768a7"; //token address
+    paramters.value = @"";
+    paramters.data = @"0xbae3e19e00000000000000000000000000000000000000000000000000000000000000680000000000000000000000000000000000000000000000000de0b6b3a76400000000000000000000000000000000000000000000000000000de0b6b3a7640000000000000000000000000000000000000000000000000000000000000003f480";
+    
+    {
+// Method of splicing data
+//        NSMutableArray *clauseParamList = [NSMutableArray array];
+//        [clauseParamList addObject:@"0x68"];
+//        [clauseParamList addObject:@"0x0DE0B6B3A7640000"];
+//        [clauseParamList addObject:@"0x3840"];
+//        [clauseParamList addObject:@"0x1231231231231231231231231231231231231231"];
+//        paramters.data = [self contractMethodId:@"0x2ed9b4fd" params:clauseParamList];
+    }
+    
+    paramters.from = from;
+    paramters.gas = @"600000";
+    
+    [WalletUtils sendWithKeystore:keystore
+                        parameter:paramters
+                                callback:^(NSString *txId, NSString *signer)
+     {
          NSLog(@"dd");
      }];
+}
+
+//splice clause data
+- (NSString *)contractMethodId:(NSString *)methodId params:(NSArray *)params
+{
+    
+    NSString *clauseData = methodId;
+    for (NSString *param in params) {
+        NSInteger t = 64 - [param substringFromIndex:2].length;
+        NSMutableString *zero = [NSMutableString new];
+        for (int i = 0; i < t; i++) {
+            [zero appendString:@"0"];
+        }
+        NSString *newValue = [NSString stringWithFormat:@"%@%@",zero,[param substringFromIndex:2]];
+        
+        clauseData = [clauseData stringByAppendingString:newValue];
+    }
+    return clauseData;
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return YES;
 }
 
 

@@ -21,8 +21,8 @@
 @implementation WalletUtils
 
 
-+ (void)createWalletWithPassword:(NSString *)password
-                       callback:(void(^)(WalletAccountModel *accountModel,NSError *error))block
++ (void)creatWalletWithPassword:(NSString *)password
+                       callback:(void(^)(WalletAccountModel *accountModel,NSError *error))callback
 {
     __block Account *account = [Account randomMnemonicAccount];
     
@@ -30,7 +30,7 @@
         
          account.keystore = json;
         if (json.length == 0) {
-            if (block) {
+            if (callback) {
                 NSString *domain = @"com.wallet.ErrorDomain";
                 NSString *desc = @"Generate keystore fail";
                 NSDictionary *userInfo = @{ NSLocalizedDescriptionKey : desc };
@@ -39,45 +39,57 @@
                                                      code:-101
                                                  userInfo:userInfo];
                 
-                block(nil,error);
+                callback(nil,error);
             }
         }else{
-            if (block) {
+            if (callback) {
                 WalletAccountModel *accountModel = [[WalletAccountModel alloc]init];
                 accountModel.keystore = json;
                 accountModel.privatekey = [SecureData dataToHexString:account.privateKey];
                 accountModel.address = account.address.checksumAddress;
                 accountModel.words = [account.mnemonicPhrase componentsSeparatedByString:@" "];
                 
-                block(accountModel,nil);
+                callback(accountModel,nil);
             }
         }
     }];
 }
 
-+ (void)creatWalletWithMnemonic:(NSArray *)mnemonicList
-                      password:(NSString *)password
-                       callback:(void(^)(WalletAccountModel *account,NSError *error))block
++ (void)creatWalletWithMnemonicWords:(NSArray *)mnemonicWords
+                            password:(NSString *)password
+                            callback:(void(^)(WalletAccountModel *account,NSError *error))callback
 {
-    __block Account *account = [Account accountWithMnemonicPhrase:[mnemonicList componentsJoinedByString:@" "]];
+    
+    NSString *domain = @"com.wallet.ErrorDomain";
+    NSString *desc = @"Generate keystore fail";
+    NSDictionary *userInfo = @{ NSLocalizedDescriptionKey : desc };
+    
+    NSError *error = [NSError errorWithDomain:domain
+                                         code:-101
+                                     userInfo:userInfo];
+    
+    NSMutableArray *trimeList = [NSMutableArray array];
+    for (NSString * word in mnemonicWords) {
+        if (word.length == 0) {
+            callback(nil,error);
+            break;
+        }else{
+            NSString *trimeWord = [word stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+            [trimeList addObject:trimeWord];
+        }
+    }
+    
+    __block Account *account = [Account accountWithMnemonicPhrase:[trimeList componentsJoinedByString:@" "]];
     
     [account encryptSecretStorageJSON:password callback:^(NSString *json) {
         
         account.keystore = json;
         if (json.length == 0) {
-            if (block) {
-                NSString *domain = @"com.wallet.ErrorDomain";
-                NSString *desc = @"Generate keystore fail";
-                NSDictionary *userInfo = @{ NSLocalizedDescriptionKey : desc };
-                
-                NSError *error = [NSError errorWithDomain:domain
-                                                     code:-101
-                                                 userInfo:userInfo];
-                
-                block(nil,error);
+            if (callback) {
+                callback(nil,error);
             }
         }else{
-            if (block) {
+            if (callback) {
                 
                 WalletAccountModel *accountModel = [[WalletAccountModel alloc]init];
                 accountModel.keystore = json;
@@ -85,26 +97,34 @@
                 accountModel.address = account.address.checksumAddress;
                 accountModel.words = [account.mnemonicPhrase componentsSeparatedByString:@" "];
                 
-                block(accountModel,nil);
+                callback(accountModel,nil);
             }
         }
     }];
 }
 
-+ (BOOL)isValidMnemonicPhrase:(NSArray*)mnemonicList;
++ (BOOL)isValidMnemonicWords:(NSArray*)mnemonicWords;
 {
-    return [Account isValidMnemonicPhrase:[mnemonicList componentsJoinedByString:@" "]];
+    NSMutableArray *trimeList = [NSMutableArray array];
+    for (NSString * word in mnemonicWords) {
+        if (word.length == 0) {
+            return NO;
+        }else{
+            NSString *trimeWord = [word stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+            [trimeList addObject:trimeWord];
+        }
+    }
+    return [Account isValidMnemonicPhrase:[mnemonicWords componentsJoinedByString:@" "]];
 }
 
-+ (void)decryptSecretStorageJSON:(NSString*)json
-                        password:(NSString*)password
-                        callback:(void(^)(WalletAccountModel *account,NSError *error))callback
++ (void)decryptKeystore:(NSString*)keystoreJson
+               password:(NSString*)password
+               callback:(void(^)(WalletAccountModel *account,NSError *error))callback
 {
-//    [Account decryptSecretStorageJSON:json password:password callback:callback];
-    [Account decryptSecretStorageJSON:json password:password callback:^(Account *account, NSError *NSError) {
+    [Account decryptSecretStorageJSON:keystoreJson password:password callback:^(Account *account, NSError *NSError) {
         if (NSError == nil) {
             WalletAccountModel *accountModel = [[WalletAccountModel alloc]init];
-            accountModel.keystore = json;
+            accountModel.keystore = keystoreJson;
             accountModel.privatekey = [SecureData dataToHexString:account.privateKey];
             accountModel.address = account.address.checksumAddress;
             accountModel.words = [account.mnemonicPhrase componentsSeparatedByString:@" "];
@@ -121,15 +141,16 @@
 {
     Signature *signature = [Signature signatureWithData:signatureData];
     
-   return [Account verifyMessage:message signature:signature].checksumAddress;
+    return [Account verifyMessage:message signature:signature].checksumAddress.lowercaseString;
 }
 
-+ (void)signature:(NSData*)message
-         keystore:(NSString*)json
-         password:(NSString*)password
-         block:(void (^)(NSData *signatureData,NSError *error))block
+#warning message hashed ,还是没有hash 的
++ (void)sign:(NSData*)message
+    keystore:(NSString*)keystoreJson
+    password:(NSString*)password
+    callback:(void (^)(NSData *signatureData,NSError *error))callback
 {
-    [Account decryptSecretStorageJSON:json
+    [Account decryptSecretStorageJSON:keystoreJson
                              password:password
                              callback:^(Account *account, NSError *error)
      {
@@ -137,7 +158,7 @@
          if (error == nil) {
             SecureData *data = [SecureData BLAKE2B:message];
             Signature *signature = [account signDigest:data.data];
-             if (block) {
+             if (callback) {
                  SecureData *vData = [[SecureData alloc]init];
                  [vData appendByte:signature.v];
                  
@@ -148,22 +169,31 @@
                                       [r substringFromIndex:2],
                                       [s substringFromIndex:2],
                                       [vData.hexString substringFromIndex:2]];
-                 block([SecureData hexStringToData:hashStr],nil);
+                 
+                 if (signature.v == 2
+                     || signature.v == 3) {
+                     [WalletMBProgressShower showTextIn:[WalletTools getCurrentVC].view
+                                                   Text:ERROR_REQUEST_PARAMS_MSG During:1];
+                     
+                 }else{
+                     callback([SecureData hexStringToData:hashStr],nil);
+
+                 }
              }
          }else{
-             if (block) {
-                 block(nil,error);
+             if (callback) {
+                 callback(nil,error);
              }
          }
      }];
 }
 
-+ (void)encryptSecretStorageJSON:(NSString*)password
-                         account:(WalletAccountModel *)walletAccount
-                        callback:(void (^)(NSString *))callback
++ (void)encryptKeystoreWithPassword:(NSString*)password
+                            account:(WalletAccountModel *)account
+                           callback:(void (^)(NSString *keystoreJson))callback
 {
-    Account *account = [Account accountWithMnemonicPhrase:[walletAccount.words componentsJoinedByString:@" "]];
-    [account encryptSecretStorageJSON:password
+    Account *ethAccount = [Account accountWithMnemonicPhrase:[account.words componentsJoinedByString:@" "]];
+    [ethAccount encryptSecretStorageJSON:password
                              callback:^(NSString *json)
     {
          if (json.length > 0) {
@@ -174,12 +204,7 @@
     }];
 }
 
-+ (void)setCurrentWallet:(NSString *)address
-{
-    [[WalletSingletonHandle shareWalletHandle] setCurrentModel:address];
-}
-
-+ (void)initWithWalletDict:(NSMutableArray *)walletList
++ (void)initDappWebViewWithKeystore:(NSMutableArray *)walletList
 {
     [[WalletDAppHandle shareWalletHandle]initWithWalletDict:walletList];
 }
@@ -192,103 +217,21 @@
     [dappHandle webView:webView defaultText:defaultText completionHandler:completionHandler];
 }
 
-+ (void)injectJS:(WKWebView *)webview
++ (void)injectJSWithWebView:(WKWebView *)webview
 {
     WalletDAppHandle *dappHandle = [WalletDAppHandle shareWalletHandle];
     [dappHandle injectJS:webview];
 }
 
-+ (void)transactionWithKeystore:(NSString *)keystore parameter:(TransactionParameter *)parameter block:(void(^)(NSString *txId,NSString *signer))block
++ (void)sendWithKeystore:(NSString *)keystoreJson parameter:(TransactionParameter *)parameter callback:(void(^)(NSString *txId,NSString *signer))callback
 {
-    NSString *toAddress = @"";
-    NSString *tokenAddress = @"";
-    NSString *amount = @"";
-    NSString *clauseStr = @"";
-    JSTransferType transferType = JSVETTransferType;
+    NSString *toAddress     = @"";
+    NSString *tokenAddress  = @"";
+    NSString *amount        = @"";
+    NSString *clauseStr     = @"";
+    WalletTransferType transferType = WalletVETTransferType;
     
-    [self test:&keystore parameter:parameter toAddress:&toAddress amount:&amount transferType:&transferType tokenAddress:&tokenAddress clauseStr:&clauseStr];
-    
-    // check keystore form
-    if (![WalletTools checkKeystore:keystore]) {
-        
-        [WalletMBProgressShower showTextIn:[WalletTools getCurrentVC].view
-                                      Text:ERROR_REQUEST_PARAMS_MSG During:1];
-        return;
-    }
-    NSDictionary *dictKeystore = [NSJSONSerialization dictionaryWithJsonString:keystore];
-    NSString *keystoreFrom = dictKeystore[@"address"];
-    
-    if ([keystoreFrom.lowercaseString isEqualToString:parameter.from.lowercaseString]) {
-        [WalletMBProgressShower showTextIn:[WalletTools getCurrentVC].view
-                                      Text:ERROR_REQUEST_PARAMS_MSG During:1];
-        return;
-    }
-    
-    if (parameter.data.length == 0) { //vet 转账
-        toAddress = parameter.to;
-        amount = parameter.value;
-        transferType = JSVETTransferType;
-        
-        if (![WalletTools errorAddressAlert:toAddress]
-            || ![WalletTools errorAddressAlert:parameter.from]
-            || (amount.length > 0 && ![WalletTools checkHEXStr:amount])) { // vet 可以转账0
-            
-            [WalletMBProgressShower showTextIn:[WalletTools getCurrentVC].view
-                                          Text:ERROR_REQUEST_PARAMS_MSG During:1];
-            return ;
-        }
-        
-    }else{
-        if ([parameter.data hasPrefix:TransferMethodId]) { //token transfer
-            transferType = JSTokenTransferType;
-            tokenAddress = parameter.to;
-            clauseStr = parameter.data;
-            
-            NSString *clauseTemp =  [clauseStr stringByReplacingOccurrencesOfString:@"0xa9059cbb000000000000000000000000" withString:@""];
-            toAddress = [@"0x" stringByAppendingString:[clauseTemp substringToIndex:40]];
-            
-            NSString *clauseStrTemp = [clauseStr stringByReplacingOccurrencesOfString:TransferMethodId withString:@""];
-            NSString *clauseValue = @"";
-            
-            if (clauseStrTemp.length >= 128) {
-                clauseValue = [clauseStrTemp substringWithRange:NSMakeRange(64, 64)];
-            }
-            
-            parameter.value = [NSString stringWithFormat:@"0x%@",clauseValue];
-            
-            if (![WalletTools errorAddressAlert:parameter.from]
-                || ![WalletTools errorAddressAlert:tokenAddress]
-                || ![WalletTools checkHEXStr:parameter.value]
-                || ![WalletTools checkHEXStr:clauseStr]) { //
-                
-                [WalletMBProgressShower showTextIn:[WalletTools getCurrentVC].view
-                                              Text:ERROR_REQUEST_PARAMS_MSG During:1];
-                return ;
-            }
-            
-        }else{ //contract signature
-            transferType = JSContranctTransferType;
-            amount = parameter.value;
-            clauseStr = parameter.data;
-            toAddress = parameter.to; //token address
-            
-            // toAddress equal to token addres,contract signature can be 0
-            if (![WalletTools errorAddressAlert:parameter.from]
-                || ![WalletTools errorAddressAlert:parameter.to]
-                || ![WalletTools checkHEXStr:clauseStr]) { // vet 可以转账0
-                
-                [WalletMBProgressShower showTextIn:[WalletTools getCurrentVC].view
-                                              Text:ERROR_REQUEST_PARAMS_MSG During:1];
-                return ;
-            }
-            
-            if (amount.length > 0 && ![WalletTools checkHEXStr:amount]) {
-                [WalletMBProgressShower showTextIn:[WalletTools getCurrentVC].view
-                                              Text:ERROR_REQUEST_PARAMS_MSG During:1];
-                return ;
-            }
-        }
-    }
+    [self transactionCheckParams:&keystoreJson parameter:parameter toAddress:&toAddress amount:&amount transferType:&transferType tokenAddress:&tokenAddress clauseStr:&clauseStr];
     
     
     NSMutableArray *clauseList = [NSMutableArray array];
@@ -301,7 +244,7 @@
     if (parameter.value.length == 0) {
         [clauseList addObject:[NSData data]];
     }else{
-        if (transferType == JSTokenTransferType) {
+        if (transferType == WalletTokenTransferType) {
             [clauseList addObject:[NSData data]];
 
         }else{
@@ -325,7 +268,7 @@
     signParamModel.amount       = parameter.value;
     signParamModel.clauseData   = parameter.data ;
     signParamModel.tokenAddress = tokenAddress ;
-    signParamModel.keystore     = keystore;
+    signParamModel.keystore     = keystoreJson;
     signParamModel.clauseList   = [NSArray arrayWithObject:clauseList];
     
     WalletSignatureView *signatureView = [[WalletSignatureView alloc] initWithFrame:[WalletTools getCurrentVC].view.bounds];
@@ -337,15 +280,17 @@
     
     signatureView.transferBlock = ^(NSString * _Nonnull txid) {
         
-        if (block) {
-            block(txid,parameter.from);
+#warning txid local
+        
+        if (callback) {
+            callback(txid,parameter.from);
         }
     };
 }
 
-+ (void)test:(NSString **)keystore  parameter:(TransactionParameter *)parameter toAddress:(NSString **)toAddress amount:(NSString **)amount transferType:(JSTransferType *)transferType tokenAddress:(NSString **)tokenAddress clauseStr:(NSString **)clauseStr
++ (void)transactionCheckParams:(NSString **)keystore  parameter:(TransactionParameter *)parameter toAddress:(NSString **)toAddress amount:(NSString **)amount transferType:(WalletTransferType *)transferType tokenAddress:(NSString **)tokenAddress clauseStr:(NSString **)clauseStr
 {
-    // check keystore form
+    // check keystore format
     if (![WalletTools checkKeystore:*keystore]) {
         
         [WalletMBProgressShower showTextIn:[WalletTools getCurrentVC].view
@@ -364,7 +309,7 @@
     if ((parameter.data).length == 0) { //vet 转账
         *toAddress = parameter.to;
         *amount = parameter.value;
-        *transferType = JSVETTransferType;
+        *transferType = WalletVETTransferType;
         
         if (![WalletTools errorAddressAlert:*toAddress]
             || ![WalletTools errorAddressAlert:parameter.from]
@@ -377,21 +322,11 @@
         
     }else{
         if ([parameter.data hasPrefix:TransferMethodId]) { //token transfer
-            *transferType = JSTokenTransferType;
+            *transferType = WalletTokenTransferType;
             *tokenAddress = parameter.to;
             *clauseStr = parameter.data;
-            
-            NSString *clauseTemp =  [*clauseStr stringByReplacingOccurrencesOfString:@"0xa9059cbb000000000000000000000000" withString:@""];
-            *toAddress = [@"0x" stringByAppendingString:[clauseTemp substringToIndex:40]];
-            
-            NSString *clauseStrTemp = [*clauseStr stringByReplacingOccurrencesOfString:TransferMethodId withString:@""];
-            NSString *clauseValue = @"";
-            
-            if (clauseStrTemp.length >= 128) {
-                clauseValue = [clauseStrTemp substringWithRange:NSMakeRange(64, 64)];
-            }
-            
-            parameter.value = [NSString stringWithFormat:@"0x%@",clauseValue];
+
+            parameter.value =  [WalletTools getAmountFromClause:*clauseStr to:&*toAddress];
             
             if (![WalletTools errorAddressAlert:parameter.from]
                 || ![WalletTools errorAddressAlert:*tokenAddress]
@@ -404,7 +339,7 @@
             }
             
         }else{ //contract signature
-            *transferType = JSContranctTransferType;
+            *transferType = WalletContranctTransferType;
             *amount = parameter.value;
             *clauseStr = parameter.data;
             *toAddress = parameter.to; //token address
@@ -428,14 +363,9 @@
     }
 }
 
-+ (void)setNode:(NSString *)nodelUrl
++ (BOOL)isValidKeystore:(NSString *)keystoreJson
 {
-    [WalletUserDefaultManager setBlockUrl:nodelUrl];
-}
-
-+ (BOOL)isValidKeystore:(NSString *)keystore
-{
-   return [WalletTools checkKeystore:keystore];
+   return [WalletTools checkKeystore:keystoreJson];
 }
 
 + (NSString *)getChecksumAddress:(NSString *)address
@@ -443,10 +373,20 @@
    return [WalletTools checksumAddress:address];
 }
 
-+ (void)destroyKeystore
++ (void)setNode:(NSString *)nodelUrl
 {
-    [WalletDAppHandle attempDealloc];
+    [WalletUserDefaultManager setBlockUrl:nodelUrl];
+}
+
++ (NSString *)getNode
+{
+    return [WalletUserDefaultManager getBlockUrl];
+}
+
++ (void)deallocDappSingletion
+{
     [WalletSingletonHandle attempDealloc];
+    [WalletDAppHandle attempDealloc];
 }
 
 @end
