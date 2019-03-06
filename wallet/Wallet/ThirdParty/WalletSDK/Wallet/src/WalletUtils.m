@@ -141,7 +141,6 @@
                 signatureData:(NSData *)signatureData
 {
     
-    NSError *error = nil;
     SecureData *digest = [SecureData BLAKE2B:message];
     Signature *signature = [Signature signatureWithData:signatureData];
     return [Account verifyMessage:digest.data signature:signature].checksumAddress.lowercaseString;
@@ -194,7 +193,8 @@
                             account:(WalletAccountModel *)account
                            callback:(void (^)(NSString *keystoreJson))callback
 {
-    Account *ethAccount = [Account accountWithMnemonicPhrase:[account.words componentsJoinedByString:@" "]];
+    NSData *dataPrivate = [SecureData hexStringToData:account.privatekey];
+    Account *ethAccount = [Account accountWithPrivateKey:dataPrivate];
     [ethAccount encryptSecretStorageJSON:password
                              callback:^(NSString *json)
     {
