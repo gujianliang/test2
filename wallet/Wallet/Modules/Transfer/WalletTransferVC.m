@@ -99,6 +99,15 @@
 
 - (void)vthoTransfer:(NSString *)from keystore:(NSString *)keystore
 {
+    if (self.transferAmountTextField.text.length == 0
+        || self.transferAmountTextField.text.integerValue != 0) {
+        
+        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        hud.mode = MBProgressHUDModeText;
+        hud.label.text =  @"Please fill in the amount";
+        [hud hideAnimated:YES afterDelay:1.5];
+        return;
+    }
     NSString *amountHex = [Payment parseEther:self.transferAmountTextField.text].hexString;
     
     TransactionParameter *paramters = [[TransactionParameter alloc]init];
