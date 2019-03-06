@@ -100,7 +100,7 @@
 - (void)vthoTransfer:(NSString *)from keystore:(NSString *)keystore
 {
     if (self.transferAmountTextField.text.length == 0
-        || self.transferAmountTextField.text.integerValue != 0) {
+        || self.transferAmountTextField.text.integerValue == 0) {
         
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         hud.mode = MBProgressHUDModeText;
