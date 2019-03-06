@@ -8,7 +8,7 @@
 
 #import "WalletNodeDetailVC.h"
 #import <WalletSDK/WalletUtils.h>
-#import <WalletSDK/MBProgressHUD.h>
+#import "MBProgressHUD.h"
 #import "WalletSdkMacro.h"
 
 @interface WalletNodeDetailVC ()
@@ -52,8 +52,8 @@
     if (oldList.count == 0) {
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         hud.mode = MBProgressHUDModeText;
-        hud.labelText =  @"It's not a custom node.";
-        [hud hide:YES afterDelay:2.5];
+        hud.label.text =  @"It's not a custom node.";
+        [hud hideAnimated:YES afterDelay:2.5];
         return;
     }
     
@@ -86,8 +86,8 @@
     }else {
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         hud.mode = MBProgressHUDModeText;
-        hud.labelText =  @"It's not a custom node.";
-        [hud hide:YES afterDelay:2.5];
+        hud.label.text =  @"It's not a custom node.";
+        [hud hideAnimated:YES afterDelay:2.5];
     }
 }
 

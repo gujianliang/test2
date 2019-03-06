@@ -7,7 +7,8 @@
 // 
 
 #import "WalletDetailVC.h"
-#import <WalletSDK/AFNetworking.h>
+//#import <WalletSDK/AFNetworking.h>
+#import "AFNetworking.h"
 #import "WalletTransferVC.h"
 #import "WalletMoreInfoVC.h"
 #import "WebViewVC.h"
@@ -44,6 +45,7 @@
     [super viewDidLoad];
 
     [self initView];
+    
 }
 
 

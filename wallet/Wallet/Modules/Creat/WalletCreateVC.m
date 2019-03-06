@@ -8,7 +8,7 @@
 
 #import "WalletCreateVC.h"
 #import <WalletSDK/WalletUtils.h>
-#import <WalletSDK/MBProgressHUD.h>
+#import "MBProgressHUD.h"
 
 @interface WalletCreateVC ()
 
@@ -43,8 +43,8 @@
     if (self.passwordLabel.text.length  == 0) {
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         hud.mode = MBProgressHUDModeText;
-        hud.labelText =  @"Password can not be blank.";
-        [hud hide:YES afterDelay:1.5];
+        hud.label.text =  @"Password can not be blank.";
+        [hud hideAnimated:YES afterDelay:1.5];
         return;
     }
     
@@ -52,7 +52,7 @@
     /* show loading state. */
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.mode = MBProgressHUDModeText;
-    hud.labelText =  @"Waiting...";
+    hud.label.text =  @"Waiting...";
     
     
     /* Create a wallet with your password. */
@@ -60,7 +60,7 @@
                                  callback:^(WalletAccountModel * _Nonnull account, NSError * _Nonnull error)
 
     {
-        [hud hide:YES];
+        [hud hideAnimated:YES];
         self.bottomCoverView.hidden = YES;
         self.topCoverView.hidden = NO;
         

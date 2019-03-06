@@ -7,7 +7,7 @@
 //
 
 #import "WalletAddVthoNodeVC.h"
-#import <WalletSDK/MBProgressHUD.h>
+#import "MBProgressHUD.h"
 #import <WalletSDK/WalletUtils.h>
 
 @interface WalletAddVthoNodeVC ()
@@ -38,8 +38,8 @@
     if (nodeName.length == 0 || nodeUrl.length == 0 ){
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         hud.mode = MBProgressHUDModeText;
-        hud.labelText =  @"The input cannot be null.";
-        [hud hide:YES afterDelay:2.5];
+        hud.label.text =  @"The input cannot be null.";
+        [hud hideAnimated:YES afterDelay:2.5];
         return;
     }
     
@@ -49,8 +49,8 @@
     if (![[UIApplication sharedApplication] canOpenURL:URL]) {
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         hud.mode = MBProgressHUDModeText;
-        hud.labelText =  @"The URL is not available.";
-        [hud hide:YES afterDelay:2.5];
+        hud.label.text =  @"The URL is not available.";
+        [hud hideAnimated:YES afterDelay:2.5];
         return;
     }
     

@@ -8,7 +8,7 @@
 
 #import "WalletKeystoreImportVC.h"
 #import "WalletDetailVC.h"
-#import <WalletSDK/MBProgressHUD.h>
+#import "MBProgressHUD.h"
 #import <WalletSDK/WalletUtils.h>
 
 @interface WalletKeystoreImportVC ()
@@ -77,15 +77,15 @@
     if (self.password.text.length == 0 || self.keystoreTextView.text.length == 0) {
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         hud.mode = MBProgressHUDModeText;
-        hud.labelText =  @"The input cannot be null";
-        [hud hide:YES afterDelay:3];
+        hud.label.text =  @"The input cannot be null";
+        [hud hideAnimated:YES afterDelay:3];
         return;
     }
     
     /* show loading state */
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.mode = MBProgressHUDModeText;
-    hud.labelText =  @"Waiting ...";
+    hud.label.text =  @"Waiting ...";
 
     
     /* Create a wallet with your password and keystore. */
@@ -93,7 +93,7 @@
                         password:self.password.text
                         callback:^(WalletAccountModel * _Nonnull account, NSError * _Nonnull error)
      {
-         [hud hide:YES];
+         [hud hideAnimated:YES];
          
          if (error == nil) {
              
@@ -121,8 +121,8 @@
          }else{
              MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
              hud.mode = MBProgressHUDModeText;
-             hud.labelText = @"Import failure, Please check keystore and password are correct";
-             [hud hide:YES afterDelay:3];
+             hud.label.text = @"Import failure, Please check keystore and password are correct";
+             [hud hideAnimated:YES afterDelay:3];
          }
      }];
 }

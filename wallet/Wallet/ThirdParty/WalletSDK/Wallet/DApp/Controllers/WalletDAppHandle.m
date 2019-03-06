@@ -60,6 +60,10 @@ static dispatch_once_t predicate;
     
     WalletSingletonHandle *walletSignlet = [WalletSingletonHandle shareWalletHandle];
     [walletSignlet addWallet:_walletList];
+    
+    [WalletTools checkNetwork:^(BOOL t) {
+        NSLog(@"dd");
+    }];
 }
 
 - (void)webView:(WKWebView *)webView defaultText:(nullable NSString *)defaultText completionHandler:(void (^)(NSString * __nullable result))completionHandler
