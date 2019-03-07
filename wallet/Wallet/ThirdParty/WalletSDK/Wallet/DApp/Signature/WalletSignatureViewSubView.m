@@ -10,7 +10,7 @@
 #import "Payment.h"
 #import "SecureData.h"
 
-#define viewHeight 411
+#define viewHeight Scale(411)
 
 @implementation WalletSignatureViewSubView
 {
@@ -113,7 +113,7 @@
     [nextBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(Scale(20));
         make.right.mas_equalTo(-Scale(20));
-        make.height.mas_equalTo(Scale(44));
+        make.height.mas_equalTo(44);
         make.bottom.mas_equalTo(-Scale(30));
     }];
     nextBtn.block = ^(UIButton *btn) {
@@ -158,24 +158,24 @@
     
     [self creatCell:VCNSLocalizedBundleString(@"contract_payment_info_row1_title", nil)
               value:gasFormat
-                  Y:52 + 20
+                  Y: Scale(52 + 20)
           adjustBtn: YES
  enterSignViewBlock:enterSignViewBlock];
     
     if (_needAdjust) {
-        [self addAdj_Y:52 + 20 + 52];
+        [self addAdj_Y:Scale(52 + 20 + 52)];
         jsOffset = 52;
     }
     
     [self creatCell:VCNSLocalizedBundleString(@"contract_payment_info_row2_title", nil)
               value:[WalletTools checksumAddress:_fromAddress]
-                  Y:52 * 2 + 20 + jsOffset
+                  Y:Scale(52 * 2 + 20 + jsOffset)
           adjustBtn:NO
  enterSignViewBlock:enterSignViewBlock];
     
     [self creatCell:VCNSLocalizedBundleString(@"contract_payment_info_row3_title", nil)
               value:[WalletTools checksumAddress:_toAddress]
-                  Y:52 * 3 + 20 + jsOffset
+                  Y:Scale(52 * 3 + 20 + jsOffset)
           adjustBtn:NO
  enterSignViewBlock:enterSignViewBlock];
 }
@@ -204,7 +204,7 @@
 
 - (UIView *)creatCell:(NSString *)title value:(NSString *)value Y:(CGFloat)Y adjustBtn:(BOOL)adjustBtn enterSignViewBlock:(void(^)(void))enterSignViewBlock
 {
-    UIView *contentView = [[UIView alloc]initWithFrame:CGRectMake(0, Y, SCREEN_WIDTH, 40)];
+    UIView *contentView = [[UIView alloc]initWithFrame:CGRectMake(0, Y, SCREEN_WIDTH, Scale(52))];
     contentView.backgroundColor = UIColor.whiteColor;
     [_leftView addSubview:contentView];
     
@@ -224,7 +224,7 @@
     // 右值标签
     UILabel *rightLabel = [[UILabel alloc]init];
     rightLabel.numberOfLines = 0;
-    rightLabel.backgroundColor = UIColor.clearColor;
+    rightLabel.backgroundColor = UIColor.whiteColor;
     rightLabel.lineBreakMode = NSLineBreakByTruncatingMiddle;
     rightLabel.text = value;
     rightLabel.textColor = CommonBlack;
@@ -246,7 +246,7 @@
         [btn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.bottom.mas_equalTo(0);
             make.left.mas_equalTo(rightLabel.mas_right).offset(Scale(10.0));
-            make.height.mas_equalTo(50);
+            make.height.mas_equalTo(Scale(50));
         }];
         btn.block = ^(UIButton *btn) {
             if (!_needAdjust) {
@@ -290,7 +290,7 @@
         make.left.mas_equalTo(20);
         make.top.mas_equalTo(0);
         make.bottom.mas_equalTo(0);
-        make.width.mas_equalTo(50);
+        make.width.mas_equalTo(Scale(50));
     }];
     
     UISlider *slider = [[UISlider alloc]init];
@@ -318,7 +318,7 @@
         make.right.mas_equalTo(0);
         make.top.mas_equalTo(0);
         make.bottom.mas_equalTo(0);
-        make.width.mas_equalTo(50);
+        make.width.mas_equalTo(Scale(50));
     }];
 }
 

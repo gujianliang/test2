@@ -25,7 +25,7 @@
 #import "SecureData.h"
 #import "Payment.h"
 
-#define viewHeight 411
+#define viewHeight Scale(411)
 
 @interface WalletSignatureView ()<UIScrollViewDelegate,UITextFieldDelegate>
 {
@@ -155,7 +155,7 @@
     [_middleView.layer setCornerRadius:4];
     [_middleView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.bottom.mas_equalTo(self);
-        make.height.mas_equalTo(viewHeight);
+        make.height.mas_equalTo(viewHeight );
     }];
     
     UIView *titleView = [[UIView alloc]init];
