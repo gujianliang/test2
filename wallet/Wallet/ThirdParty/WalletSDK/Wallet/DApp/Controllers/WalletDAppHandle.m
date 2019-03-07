@@ -60,10 +60,6 @@ static dispatch_once_t predicate;
     
     WalletSingletonHandle *walletSignlet = [WalletSingletonHandle shareWalletHandle];
     [walletSignlet addWallet:_walletList];
-    
-    [WalletTools checkNetwork:^(BOOL t) {
-        NSLog(@"dd");
-    }];
 }
 
 - (void)webView:(WKWebView *)webView defaultText:(nullable NSString *)defaultText completionHandler:(void (^)(NSString * __nullable result))completionHandler
@@ -134,15 +130,16 @@ static dispatch_once_t predicate;
         
     }else if ([method isEqualToString:@"tickerNext"])
     {
-        NSString *url = [[WalletUserDefaultManager getBlockUrl] stringByAppendingString:@"/subscriptions/block"];
-        [[SocketRocketUtility instance] SRWebSocketOpenWithURLString:url];
+        [self tickerNextRequestId:requestId callbackId:callbackId];
+
     }
     else if([method isEqualToString:@"sign"])
     {
-        [self connexCallbackParams:callbackParams
-                         requestId:requestId
-                        callbackId:callbackId
-                 completionHandler:completionHandler];
+        [self transferCallbackParams:callbackParams
+                              connex:YES
+                           requestId:requestId
+                          callbackId:callbackId
+                   completionHandler:completionHandler];
         
     }else if ([method isEqualToString:@"getAddress"] ) {
         
@@ -164,7 +161,8 @@ static dispatch_once_t predicate;
         return;
     }else if ([method isEqualToString:@"send"]){
         
-        [self web3CallbackParams:callbackParams
+        [self transferCallbackParams:callbackParams
+                          connex:NO
                        requestId:requestId
                       callbackId:callbackId
                completionHandler:completionHandler];
@@ -172,7 +170,8 @@ static dispatch_once_t predicate;
     completionHandler(@"{}");
 }
 
-- (void)web3CallbackParams:(NSDictionary *)callbackParams
+- (void)transferCallbackParams:(NSDictionary *)callbackParams
+                    connex:(BOOL)bConnex
                  requestId:(NSString *)requestId
                 callbackId:(NSString *)callbackId
          completionHandler:(void (^)(NSString * __nullable result))completionHandler
@@ -189,14 +188,35 @@ static dispatch_once_t predicate;
     //
     //    }else
     
-    __block NSString *to     = callbackParams[@"to"];
-    __block NSString *amount = callbackParams[@"value"];
-    NSString *clauseStr      = callbackParams[@"data"];
-    NSString *gas      = callbackParams[@"gas"];
-    __block NSString *tokenAddress;
+   NSString *to     = callbackParams[@"to"];
+   NSString *amount = callbackParams[@"value"];
+   NSString *clauseStr      = callbackParams[@"data"];
+   NSString *gas      = callbackParams[@"gas"];
+   NSString *tokenAddress;
+   NSString *gasPrice = callbackParams[@"gasPrice"];
     
-    NSString *gasPrice = callbackParams[@"gasPrice"];
-  
+    if (bConnex) {
+        
+        NSDictionary *clausesDict = callbackParams[@"clauses"][0];
+        if (clausesDict == nil) {
+            completionHandler(@"{}");
+            return;
+        }
+        
+        to         = clausesDict[@"to"];
+        amount     = clausesDict[@"value"];
+        clauseStr  = clausesDict[@"data"];
+        gas        = callbackParams[@"options"][@"gas"];
+        gasPrice   = callbackParams[@"options"][@"gasPrice"];
+        tokenAddress = @"";
+    }else{
+        to         = callbackParams[@"to"];
+        amount     = callbackParams[@"value"];
+        clauseStr  = callbackParams[@"data"];
+        gas        = callbackParams[@"gas"];
+        gasPrice   = callbackParams[@"gasPrice"];
+    }
+    
     [self initParamGasPrice:&gasPrice gas:&gas amount:&amount to:&to clauseStr:&clauseStr];
     
     CGFloat amountFloat = 0;
@@ -206,14 +226,9 @@ static dispatch_once_t predicate;
     if (clauseStr.length < 10) { // vet 转账clauseStr == nil,
         
         transferType = WalletVETTransferType;
-        if (![self checkAmountForm:amount amountFloat:&amountFloat requestId:requestId webView:_webView callbackId:callbackId]) {
-            
-            [self paramsError:requestId callbackId:callbackId];
-
-            return;
-        }
         
-        if (![WalletTools errorAddressAlert:to]
+        if (![self checkAmountForm:amount amountFloat:&amountFloat requestId:requestId webView:_webView callbackId:callbackId]
+            ||![WalletTools errorAddressAlert:to]
             ||![WalletTools checkDecimalStr:gas]
             ||![WalletTools checkHEXStr:gasPrice]) {
             
@@ -242,153 +257,19 @@ static dispatch_once_t predicate;
             }
             
         }else{ // 其他合约交易
+            
             transferType = WalletContranctTransferType;
-            if (![self checkAmountForm:amount amountFloat:&amountFloat requestId:requestId webView:_webView callbackId:callbackId]) {
-                
-                [self paramsError:requestId callbackId:callbackId];
-
-                return;
-            }
             tokenAddress = to;
             NSData *newclouseData = [SecureData hexStringToData:clauseStr];
-            if (clauseStr.length == 0 ||
-                !(gas.integerValue > 0) ||
-                newclouseData == nil ||
-                ![self checkClauseDataFormat:clauseStr toAddress:to]
-                ||![WalletTools checkDecimalStr:gas]
-                ||![WalletTools checkHEXStr:gasPrice]) {
-                
-                [self paramsError:requestId callbackId:callbackId];
-                
-                return;
-            }
-        }
-    }
-    
-    WalletDappStoreSelectView *selectView = [[WalletDappStoreSelectView alloc]initWithFrame:[WalletTools getCurrentVC].view.frame ];
-    selectView.tag = SelectWalletTag;
-    selectView.toAddress = to;
-    selectView.amount = [NSString stringWithFormat:@"%lf",amountFloat];
-    [[WalletTools getCurrentVC].navigationController.view addSubview:selectView];
-    selectView.block = ^(NSString *from,WalletDappStoreSelectView *viewSelf){
-        
-        [viewSelf removeFromSuperview];
-        
-        WalletSignParamModel *signParamModel = [[WalletSignParamModel alloc]init];
-        
-        signParamModel.toAddress    = to;
-        signParamModel.fromAddress  = from;
-        signParamModel.gasPriceCoef = [BigNumber bigNumberWithHexString:gasPrice];;
-        signParamModel.gas          = [NSString stringWithFormat:@"%@",gas];
-        signParamModel.amount       = amount;
-        signParamModel.clauseData   = clauseStr ;
-        signParamModel.tokenAddress = tokenAddress ;
-        
-        [self transferWithParamModel:signParamModel
-                           requestId:requestId
-                             webView:_webView
-                          callbackId:callbackId
-                               bCert:bCert
-                        transferType:transferType];
-    };
-}
-
-- (void)connexCallbackParams:(NSDictionary *)callbackParams
-                  requestId:(NSString *)requestId
-                 callbackId:(NSString *)callbackId
-          completionHandler:(void (^)(NSString * __nullable result))completionHandler
-
-{
-    if ([[WalletTools getCurrentVC].navigationController.view viewWithTag:SelectWalletTag]) {
-
-        return;
-    }
-    
-    NSString *kind = callbackParams[@"kind"];
-    BOOL bCert = NO;
-    
-//    if ([kind isEqualToString:@"cert"]) {
-//        callbackParams = [NSMutableDictionary dictionaryWithDictionary:callbackParams[@"clauses"]];
-//        bCert = YES;
-//
-//    }else
-    
-    if(![kind isEqualToString:@"tx"]){
-        
-        [self paramsError:requestId callbackId:callbackId];
-        return;
-    }
-    
-    NSDictionary *clausesDict = callbackParams[@"clauses"][0];
-    if (clausesDict == nil) {
-        completionHandler(@"{}");
-        return;
-    }
-    
-    NSString *to         = clausesDict[@"to"];
-    NSString *amount     = clausesDict[@"value"];
-    NSString *clauseStr  = clausesDict[@"data"];
-    NSString *gas        = callbackParams[@"options"][@"gas"];
-    NSString *gasPrice   = callbackParams[@"options"][@"gasPrice"];
-    NSString *tokenAddress = @"";
-    
-    [self initParamGasPrice:&gasPrice gas:&gas amount:&amount to:&to clauseStr:&clauseStr];
-    
-    CGFloat amountFloat = 0;
-    WalletTransferType transferType = WalletVETTransferType;
-    if (clauseStr.length < 10) { // vet 转账clauseStr == nil,
-        
-        transferType = WalletVETTransferType;
-        if (![self checkAmountForm:amount amountFloat:&amountFloat requestId:requestId webView:_webView callbackId:callbackId]
-            ||![WalletTools checkDecimalStr:gas]
-            ||![WalletTools checkHEXStr:gasPrice]
-            ||![WalletTools errorAddressAlert:to]) {
             
-            [self paramsError:requestId callbackId:callbackId];
-            
-            return;
-        }
-        
-        
-    }else{
-        if ([clauseStr hasPrefix:TransferMethodId]) { // token 转账
-            tokenAddress = to;
-            transferType = WalletTokenTransferType;
-            amount = [WalletTools getAmountFromClause:clauseStr to:&to];
-            
-            if (![WalletTools errorAddressAlert:to]
-                || ![WalletTools errorAddressAlert:tokenAddress]
-                || [tokenAddress isKindOfClass:[NSNull class]]
-                || ![self checkClauseDataFormat:clauseStr toAddress:to]
-                ||![WalletTools checkDecimalStr:gas]
-                ||![WalletTools checkHEXStr:gasPrice]) {
-                
-                [self paramsError:requestId callbackId:callbackId];
-                
-                return;
-            }
-            
-        }else{ // 其他合约交易
-
             if (![self checkAmountForm:amount amountFloat:&amountFloat requestId:requestId webView:_webView callbackId:callbackId]
+                ||newclouseData == nil
+                ||![self checkClauseDataFormat:clauseStr toAddress:to]
                 ||![WalletTools checkDecimalStr:gas]
                 ||![WalletTools checkHEXStr:gasPrice]) {
                 
                 [self paramsError:requestId callbackId:callbackId];
-
-                return;
-            }
-            transferType = WalletContranctTransferType;
-
-            tokenAddress = to;
-            NSData *newclouseData = [SecureData hexStringToData:clauseStr];
-            if (clauseStr.length == 0 ||
-                !(gas.integerValue > 0) ||
-                newclouseData == nil ||
-                ![self checkClauseDataFormat:clauseStr toAddress:to]) {
                 
-                [self paramsError:requestId callbackId:callbackId];
-
                 return;
             }
         }

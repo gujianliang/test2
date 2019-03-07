@@ -306,7 +306,7 @@
         NSLog(@"error == %@",error);
     }];
     
-    if (code != 1 || code != 500) {
+    if (code != 1 && code != 500) {
         [self jsErrorAlert:message];
     }
 }

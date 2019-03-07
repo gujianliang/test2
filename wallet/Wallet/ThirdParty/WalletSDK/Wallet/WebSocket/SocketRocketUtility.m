@@ -26,10 +26,6 @@ NSString * const kWebSocketdidReceiveMessageNote = @"kWebSocketdidReceiveMessage
     NSTimer * heartBeat;
     NSTimeInterval reConnectTime;
     
-    NSString *_callbackId;
-    WKWebView *_webView;
-    NSString *_requestId;
-    
 }
 
 @property (nonatomic,strong) SRWebSocket *socket;
@@ -51,14 +47,7 @@ NSString * const kWebSocketdidReceiveMessageNote = @"kWebSocketdidReceiveMessage
 
 #pragma mark - **************** public methods
 -(void)SRWebSocketOpenWithURLString:(NSString *)urlString
-                         callbackId:(NSString *)callbackId
-                            webView:(WKWebView *)webView
-                          requestId:(NSString *)requestId
 {
-    _callbackId = callbackId;
-    _webView = webView;
-    _requestId = requestId;
-
     //如果是同一个url return
     if (self.socket) {
         return;
@@ -237,7 +226,11 @@ NSString * const kWebSocketdidReceiveMessageNote = @"kWebSocketdidReceiveMessage
         NSLog(@"我这后台约定的 message 是 json 格式数据收到数据，就按格式解析吧，然后把数据发给调用层");
         NSLog(@"message:%@",message);
         
-        [[NSNotificationCenter defaultCenter] postNotificationName:kWebSocketdidReceiveMessageNote object:message];
+        NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+        [dict setValueIfNotNil:_callbackId forKey:@"callbackId"];
+        [dict setValueIfNotNil:_requestIdList forKey:@"requestId"];
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:kWebSocketdidReceiveMessageNote object:dict];
     }
 }
 

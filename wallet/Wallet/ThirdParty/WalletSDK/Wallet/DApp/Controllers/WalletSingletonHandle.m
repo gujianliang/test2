@@ -37,7 +37,7 @@ static dispatch_once_t predicate;
     for (NSString *keystore in walletList) {
         NSDictionary *dictKeystore = [NSJSONSerialization dictionaryWithJsonString:keystore];
         WalletManageModel *walletModel = [[WalletManageModel alloc]init];
-        walletModel.address = dictKeystore[@"address"];
+        walletModel.address = [@"0x" stringByAppendingString:dictKeystore[@"address"]];
         walletModel.keyStore = keystore;
         [_walletList addObject:walletModel];
         [self getVETBalance:walletModel];
