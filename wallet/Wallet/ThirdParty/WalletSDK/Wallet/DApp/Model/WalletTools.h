@@ -109,6 +109,8 @@
 
 + (BOOL)checkClauseDataFormat:(NSString *)clauseStr toAddress:(NSString *)toAddress;
 
++ (NSString *)errorMessageWith:(NSInteger)code;
+
 @end
 
 

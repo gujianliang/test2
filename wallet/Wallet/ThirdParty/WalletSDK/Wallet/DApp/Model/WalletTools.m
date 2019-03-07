@@ -489,9 +489,9 @@
     BOOL allAreValidChar = [predicate evaluateWithObject:toAddress];
     if (!allAreValidChar) {
         [WalletAlertShower showAlert:nil
-                                msg:VCNSLocalizedString(@"非法参数", nil)
+                                msg:VCNSLocalizedBundleString(@"h5_params_error", nil)
                               inCtl:[WalletTools getCurrentVC]
-                              items:@[VCNSLocalizedString(@"dialog_yes", nil)]
+                              items:@[VCNSLocalizedBundleString(@"dialog_yes", nil)]
                          clickBlock:^(NSInteger index) {
                          }];
         return NO;

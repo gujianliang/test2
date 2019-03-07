@@ -98,7 +98,7 @@
         
         [self initView];
     }else if (_transferType == WalletTokenTransferType){
-       
+        _currentCoinModel.tokenAddress = _tokenAddress;
         [_signatureHandle tokenAddressConvetCoinInfo:_tokenAddress
                                            coinModel:_currentCoinModel
                                                block:^
@@ -127,6 +127,21 @@
                                   decimals:_currentCoinModel.decimals
                                    options:2];
         }
+        
+        if (_transferType == WalletVETTransferType) {
+            if (_amount.length > 20) {
+                
+                [UIView animateWithDuration:0.3 animations:^{
+                    
+                } completion:^(BOOL finished) {
+                    if (self.transferBlock) {
+                        self.transferBlock(@"",ERROR_REQUEST_PARAMS);
+                        [self removeFromSuperview];
+                    }
+                }];
+            }
+        }
+        
     }else{
         _amount = 0;
     }

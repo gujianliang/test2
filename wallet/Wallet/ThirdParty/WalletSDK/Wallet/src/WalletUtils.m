@@ -234,7 +234,7 @@
     
     WalletTransferType transferType = WalletVETTransferType;
     
-    if( [self transactionCheckParams:&keystoreJson parameter:parameter toAddress:&toAddress amount:&amount transferType:&transferType tokenAddress:&tokenAddress clauseStr:&clauseStr]){
+    if(![self transactionCheckParams:&keystoreJson parameter:parameter toAddress:&toAddress amount:&amount transferType:&transferType tokenAddress:&tokenAddress clauseStr:&clauseStr]){
         return;
     }
     
@@ -282,9 +282,19 @@
     [[WalletTools getCurrentVC].navigationController.view addSubview:signatureView];
     
     signatureView.transferBlock = ^(NSString * _Nonnull txid,NSInteger code) {
-                
-        if (callback) {
-            callback(txid,parameter.from);
+        
+        if (txid.length != 0) {
+            if (callback) {
+                callback(txid,parameter.from);
+            }
+        }else{
+            if (code != 500) {
+                NSString *message = [WalletTools errorMessageWith:code];
+                [WalletTools jsErrorAlert:message];
+            }
+            if (callback) {
+                callback(txid,parameter.from);
+            }
         }
     };
 }
@@ -299,9 +309,9 @@
         return NO;
     }
     NSDictionary *dictKeystore = [NSJSONSerialization dictionaryWithJsonString:*keystore];
-    NSString *keystoreFrom = dictKeystore[@"address"];
+    NSString *keystoreFrom = [@"0x" stringByAppendingString:dictKeystore[@"address"]];
     
-    if ([keystoreFrom.lowercaseString isEqualToString:(parameter.from).lowercaseString]) {
+    if (![keystoreFrom.lowercaseString isEqualToString:(parameter.from).lowercaseString]) {
         [WalletMBProgressShower showTextIn:[WalletTools getCurrentVC].view
                                       Text:ERROR_REQUEST_PARAMS_MSG During:1];
         return NO;
