@@ -254,7 +254,6 @@ static dispatch_once_t predicate;
             if (clauseStr.length == 0 ||
                 !(gas.integerValue > 0) ||
                 newclouseData == nil ||
-                ![WalletTools errorAddressAlert:to] ||
                 ![self checkClauseDataFormat:clauseStr toAddress:to]
                 ||![WalletTools checkDecimalStr:gas]
                 ||![WalletTools checkHEXStr:gasPrice]) {
@@ -386,7 +385,6 @@ static dispatch_once_t predicate;
             if (clauseStr.length == 0 ||
                 !(gas.integerValue > 0) ||
                 newclouseData == nil ||
-                ![WalletTools errorAddressAlert:to] ||
                 ![self checkClauseDataFormat:clauseStr toAddress:to]) {
                 
                 [self paramsError:requestId callbackId:callbackId];
