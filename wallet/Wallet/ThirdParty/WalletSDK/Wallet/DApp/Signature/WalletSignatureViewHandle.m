@@ -32,29 +32,29 @@
     WalletCoinModel *_coinModel;
 }
 
-- (void)checkBalcanceFromAddress:(NSString *)fromAddress coinModel:(WalletCoinModel *)coinModel amount:(NSString *)amount gasLimit:(NSString *)gasLimit block:(void(^)())block
+- (void)checkBalcanceFromAddress:(NSString *)fromAddress coinModel:(WalletCoinModel *)coinModel amount:(NSString *)amount gasLimit:(NSString *)gasLimit block:(void(^)(BOOL result))block
 {
     _coinModel = coinModel;
     
     if ([coinModel.symobl.lowercaseString isEqualToString:@"vet"]) {
         // vet检查
-        [self getVETBalance:fromAddress amount:(NSString *)amount block:^{
+        [self getVETBalance:fromAddress amount:(NSString *)amount block:^(BOOL result){
             
 #warning 要不要判断gas
             if (block) {
-                block();
+                block(result);
             }
         }];
     }else if(coinModel.tokenAddress.length > 0){
-        [self getTokenBalance:fromAddress tokenAddress:coinModel.tokenAddress gasLimit:amount block:^{
+        [self getTokenBalance:fromAddress tokenAddress:coinModel.tokenAddress gasLimit:amount block:^(BOOL result){
             if (block) {
-                block();
+                block(result);
             }
         }];
     }
 }
 
-- (void)getVETBalance:(NSString *)address amount:(NSString *)amount block:(void(^)())block
+- (void)getVETBalance:(NSString *)address amount:(NSString *)amount block:(void(^)(BOOL result))block
 {
     NSString *blockHost = [WalletUserDefaultManager getBlockUrl];
     
@@ -94,18 +94,21 @@
               }];
          }else{
              if (block) {
-                 block();
+                 block(YES);
              }
          }
          
      } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error)
      {
-         
-         
+         [WalletMBProgressShower hide:[WalletTools getCurrentVC].view];
+         [WalletMBProgressShower showTextIn:[WalletTools getCurrentVC].view Text:ERROR_REQUEST_PARAMS_MSG During:1];
+         if (block) {
+             block(NO);
+         }
      }];
 }
 
-- (void)getTokenBalance:(NSString *)address tokenAddress:(NSString *)tokenAddress gasLimit:(NSString *)gasLimit block:(void(^)())block
+- (void)getTokenBalance:(NSString *)address tokenAddress:(NSString *)tokenAddress gasLimit:(NSString *)gasLimit block:(void(^)(BOOL result))block
 {
     NSString *blockHost = [WalletUserDefaultManager getBlockUrl];
     NSString *urlString = [NSString stringWithFormat:@"%@/accounts/%@",blockHost,tokenAddress]  ;
@@ -144,17 +147,22 @@
              }];
         }else{
             if (block) {
-                block();
+                block(YES);
             }
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"Get VTHO balance failure. error: %@", error);
+        [WalletMBProgressShower hide:[WalletTools getCurrentVC].view];
+        [WalletMBProgressShower showTextIn:[WalletTools getCurrentVC].view Text:ERROR_REQUEST_PARAMS_MSG During:1];
+        if (block) {
+            block(NO);
+        }
     }];
 }
 
 
-- (void)tokenAddressConvetCoinInfo:(NSString *)tokenAddress coinModel:(WalletCoinModel *)coinModel block:(void(^)(void))block
+- (void)tokenAddressConvetCoinInfo:(NSString *)tokenAddress coinModel:(WalletCoinModel *)coinModel block:(void(^)(BOOL result))block
 {
     _coinModel = coinModel;
     
@@ -181,16 +189,23 @@
             coinModel.decimals = decimals.integerValue;
             
             if (block) {
-                block();
+                block(YES);
             }
             
         }failure:^(VCBaseApi *finishApi, NSString *errMsg) {
             [WalletMBProgressShower hide:[WalletTools getCurrentVC].view];
             [WalletMBProgressShower showTextIn:[WalletTools getCurrentVC].view Text:ERROR_REQUEST_PARAMS_MSG During:1];
+            if (block) {
+                block(NO);
+            }
         }];
     }failure:^(VCBaseApi *finishApi, NSString *errMsg) {
         [WalletMBProgressShower hide:[WalletTools getCurrentVC].view];
         [WalletMBProgressShower showTextIn:[WalletTools getCurrentVC].view Text:ERROR_REQUEST_PARAMS_MSG During:1];
+        
+        if (block) {
+            block(NO);
+        }
     }];
 }
 

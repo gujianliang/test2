@@ -141,10 +141,14 @@
                                      coinModel:_currentCoinModel
                                         amount:_amount
                                       gasLimit:_gasLimit
-                                         block:^
+                                         block:^(BOOL result)
      {
-         if (enterSignViewBlock) {
-             enterSignViewBlock();
+         if (result) {
+             if (enterSignViewBlock) {
+                 enterSignViewBlock();
+             }
+         }else{
+             [_scrollView.superview.superview removeFromSuperview];
          }
      }];
 }

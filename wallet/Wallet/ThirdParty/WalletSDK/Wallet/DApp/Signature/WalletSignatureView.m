@@ -101,10 +101,15 @@
         _currentCoinModel.tokenAddress = _tokenAddress;
         [_signatureHandle tokenAddressConvetCoinInfo:_tokenAddress
                                            coinModel:_currentCoinModel
-                                               block:^
+                                               block:^(BOOL result)
         {
-            [self amountOpreation];
-            [self initView];
+            if (result) {
+                [self amountOpreation];
+                [self initView];
+            }else{
+                [self removeFromSuperview];
+            }
+            
         }];
     }else{ //合约，显示的只能是vet
         _currentCoinModel.symobl = @"VET";

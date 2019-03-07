@@ -120,8 +120,8 @@
     paramters.gas = @"60000";
     
     [WalletUtils sendWithKeystore:keystore
-                               parameter:paramters
-                                   callback:^(NSString *txId, NSString *signer)
+                        parameter:paramters
+                         callback:^(NSString *txId, NSString *signer)
      {
      }];
 

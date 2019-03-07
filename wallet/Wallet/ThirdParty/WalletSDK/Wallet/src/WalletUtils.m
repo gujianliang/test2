@@ -288,7 +288,7 @@
                 callback(txid,parameter.from);
             }
         }else{
-            if (code != 500) {
+            if (code != ERROR_CANCEL) {
                 NSString *message = [WalletTools errorMessageWith:code];
                 [WalletTools jsErrorAlert:message];
             }
