@@ -540,7 +540,7 @@
     
     [[WalletTools getCurrentVC].navigationController.view addSubview:signatureView];
     
-    signatureView.transferBlock = ^(NSString * _Nonnull txid) {
+    signatureView.transferBlock = ^(NSString * _Nonnull txid ,NSInteger code) {
         NSLog(@"txid = %@",txid);
         if (txid.length != 0) {
             [WalletTools callbackWithrequestId:requestId
@@ -553,7 +553,7 @@
                                        webView:webView
                                           data:@""
                                     callbackId:callbackId
-                                          code:ERROR_SERVER_DATA];
+                                          code:code];
         }
     };
 }

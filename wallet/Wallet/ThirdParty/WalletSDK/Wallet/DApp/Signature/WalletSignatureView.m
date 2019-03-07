@@ -229,7 +229,7 @@
         }];
         //通知webview
         if (self.transferBlock) {
-            self.transferBlock(_txid);
+            self.transferBlock(_txid,ERROR_CANCEL);
         }
     }
 }
@@ -261,7 +261,7 @@
     
     [_signatureSubView creatLastView:^{
         if (self.transferBlock) {
-            self.transferBlock(self.txid);
+            self.transferBlock(self.txid,ERROR_CANCEL);
         }
     }removeBlock:^{
         [self removeFromSuperview];
@@ -355,7 +355,7 @@
     //js 成功后跳转到js 页面
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         if (self.transferBlock) {
-            self.transferBlock(self.txid);
+            self.transferBlock(self.txid,OK);
         }
         [self removeFromSuperview];
     });

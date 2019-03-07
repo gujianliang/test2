@@ -17,7 +17,7 @@
 
 @implementation WalletSignatureView (transferToken)
 
-- (void)signTransfer:(void(^)(NSString *txid))transferBlock;
+- (void)signTransfer:(void(^)(NSString *txid,NSInteger code))transferBlock
 {
     // 显示Loading
     [WalletMBProgressShower showCircleIn:self];
@@ -166,13 +166,14 @@
              }];
             return;
         }
-        self.txid = [transaction txID:account];
+        
         [account sign:transaction];
         if (transaction.signature.v == 2
             || transaction.signature.v == 3) {
             [self showTransactionFail];
         
         }else{
+            self.txid = [transaction txID:account];
             NSString *raw = [SecureData dataToHexString: [transaction serialize]];
             [self sendRaw:raw];
         }
@@ -216,7 +217,7 @@
                      clickBlock:^(NSInteger index) {
                      }];
     if (self.transferBlock) {
-        self.transferBlock(@"");
+        self.transferBlock(@"",ERROR_SERVER_DATA);
     }
 }
 

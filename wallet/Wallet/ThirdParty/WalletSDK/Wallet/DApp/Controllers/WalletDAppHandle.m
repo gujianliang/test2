@@ -231,7 +231,7 @@ static dispatch_once_t predicate;
             if (![WalletTools errorAddressAlert:to]
                 || ![WalletTools errorAddressAlert:tokenAddress]
                 || [tokenAddress isKindOfClass:[NSNull class]]
-                || ![self checkClauseDataFormat:clauseStr]
+                || ![self checkClauseDataFormat:clauseStr toAddress:to]
                 || ![WalletTools checkDecimalStr:gas]
                 || ![WalletTools checkHEXStr:gasPrice]
                 ) {
@@ -255,7 +255,7 @@ static dispatch_once_t predicate;
                 !(gas.integerValue > 0) ||
                 newclouseData == nil ||
                 ![WalletTools errorAddressAlert:to] ||
-                ![self checkClauseDataFormat:clauseStr]
+                ![self checkClauseDataFormat:clauseStr toAddress:to]
                 ||![WalletTools checkDecimalStr:gas]
                 ||![WalletTools checkHEXStr:gasPrice]) {
                 
@@ -360,7 +360,7 @@ static dispatch_once_t predicate;
             if (![WalletTools errorAddressAlert:to]
                 || ![WalletTools errorAddressAlert:tokenAddress]
                 || [tokenAddress isKindOfClass:[NSNull class]]
-                || ![self checkClauseDataFormat:clauseStr]
+                || ![self checkClauseDataFormat:clauseStr toAddress:to]
                 ||![WalletTools checkDecimalStr:gas]
                 ||![WalletTools checkHEXStr:gasPrice]) {
                 
@@ -387,7 +387,7 @@ static dispatch_once_t predicate;
                 !(gas.integerValue > 0) ||
                 newclouseData == nil ||
                 ![WalletTools errorAddressAlert:to] ||
-                ![self checkClauseDataFormat:clauseStr]) {
+                ![self checkClauseDataFormat:clauseStr toAddress:to]) {
                 
                 [self paramsError:requestId callbackId:callbackId];
 
@@ -553,8 +553,11 @@ static dispatch_once_t predicate;
     }
 }
 
-- (BOOL)checkClauseDataFormat:(NSString *)clauseStr
+- (BOOL)checkClauseDataFormat:(NSString *)clauseStr toAddress:(NSString *)toAddress
 {
+    if (toAddress.length == 0) {
+        return YES;
+    }
     if (clauseStr.length > 10) {
         NSString *temp1 = [clauseStr substringFromIndex:10];
         NSInteger i = temp1.length % 64;
