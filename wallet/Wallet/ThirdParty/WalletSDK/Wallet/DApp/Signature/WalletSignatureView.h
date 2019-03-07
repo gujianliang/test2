@@ -15,6 +15,7 @@
 #import "WalletUtils.h"
 #import "WalletTools.h"
 #import "WalletSignParamModel.h"
+#import "WalletDAppHead.h"
 
 @class WalletSignatureViewSubView;
 
@@ -34,7 +35,7 @@ typedef NS_ENUM(NSInteger,WalletTransferType)
 @property (nonatomic,copy) NSString *keystore;
 
 @property (nonatomic,copy) void(^block)(BOOL result);
-@property (nonatomic,copy) void(^transferBlock)(NSString *txid);
+@property (nonatomic,copy) void(^transferBlock)(NSString *txid,NSInteger code);
 
 @property(nonatomic, strong) BigNumber *gasPriceCoef;
 @property(nonatomic, assign) BOOL isICO;

@@ -280,7 +280,7 @@
     
     [[WalletTools getCurrentVC].navigationController.view addSubview:signatureView];
     
-    signatureView.transferBlock = ^(NSString * _Nonnull txid) {
+    signatureView.transferBlock = ^(NSString * _Nonnull txid,NSInteger code) {
                 
         if (callback) {
             callback(txid,parameter.from);
