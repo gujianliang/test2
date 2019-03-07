@@ -107,6 +107,8 @@
 
 + (BOOL)checkDecimalStr:(NSString *)decimalString;
 
++ (BOOL)checkClauseDataFormat:(NSString *)clauseStr toAddress:(NSString *)toAddress;
+
 @end
 
 

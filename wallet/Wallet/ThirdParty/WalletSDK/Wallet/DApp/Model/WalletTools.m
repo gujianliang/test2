@@ -543,4 +543,24 @@
     }
     return [NSString stringWithFormat:@"0x%@",clauseValue];
 }
+
++ (BOOL)checkClauseDataFormat:(NSString *)clauseStr toAddress:(NSString *)toAddress
+{
+    if (toAddress.length == 0) {
+        return YES;
+    }else if (clauseStr.length > 10) {
+        
+        if ([WalletTools checkHEXStr:clauseStr]) {
+            NSString *temp1 = [clauseStr substringFromIndex:10];
+            NSInteger i = temp1.length % 64;
+            if (i == 0) {
+                return YES;
+            }
+        }
+        return NO;
+        
+    }else{
+        return NO;
+    }
+}
 @end

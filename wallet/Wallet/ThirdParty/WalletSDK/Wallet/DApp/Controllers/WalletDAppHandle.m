@@ -188,12 +188,12 @@ static dispatch_once_t predicate;
     //
     //    }else
     
-   NSString *to     = callbackParams[@"to"];
-   NSString *amount = callbackParams[@"value"];
-   NSString *clauseStr      = callbackParams[@"data"];
-   NSString *gas      = callbackParams[@"gas"];
-   NSString *tokenAddress;
-   NSString *gasPrice = callbackParams[@"gasPrice"];
+    NSString *to            = @"";
+    NSString *amount        = @"";
+    NSString *clauseStr     = @"";
+    NSString *gas           = @"";
+    NSString *tokenAddress  = @"";
+    NSString *gasPrice      = @"";
     
     if (bConnex) {
         
@@ -246,7 +246,7 @@ static dispatch_once_t predicate;
             if (![WalletTools errorAddressAlert:to]
                 || ![WalletTools errorAddressAlert:tokenAddress]
                 || [tokenAddress isKindOfClass:[NSNull class]]
-                || ![self checkClauseDataFormat:clauseStr toAddress:to]
+                || ![WalletTools checkClauseDataFormat:clauseStr toAddress:to]
                 || ![WalletTools checkDecimalStr:gas]
                 || ![WalletTools checkHEXStr:gasPrice]
                 ) {
@@ -264,7 +264,7 @@ static dispatch_once_t predicate;
             
             if (![self checkAmountForm:amount amountFloat:&amountFloat requestId:requestId webView:_webView callbackId:callbackId]
                 ||newclouseData == nil
-                ||![self checkClauseDataFormat:clauseStr toAddress:to]
+                ||![WalletTools checkClauseDataFormat:clauseStr toAddress:to]
                 ||![WalletTools checkDecimalStr:gas]
                 ||![WalletTools checkHEXStr:gasPrice]) {
                 
@@ -432,23 +432,6 @@ static dispatch_once_t predicate;
     }
 }
 
-- (BOOL)checkClauseDataFormat:(NSString *)clauseStr toAddress:(NSString *)toAddress
-{
-    if (toAddress.length == 0) {
-        return YES;
-    }
-    if (clauseStr.length > 10) {
-        NSString *temp1 = [clauseStr substringFromIndex:10];
-        NSInteger i = temp1.length % 64;
-        if (i == 0) {
-            return YES;
-        }
-        return NO;
-        
-    }else{
-        return NO;
-    }
-}
 
 - (void)paramsError:(NSString *)requestId callbackId:(NSString *)callbackId
 {

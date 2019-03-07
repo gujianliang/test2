@@ -231,10 +231,12 @@
     NSString *tokenAddress  = @"";
     NSString *amount        = @"";
     NSString *clauseStr     = @"";
+    
     WalletTransferType transferType = WalletVETTransferType;
     
-    [self transactionCheckParams:&keystoreJson parameter:parameter toAddress:&toAddress amount:&amount transferType:&transferType tokenAddress:&tokenAddress clauseStr:&clauseStr];
-    
+    if( [self transactionCheckParams:&keystoreJson parameter:parameter toAddress:&toAddress amount:&amount transferType:&transferType tokenAddress:&tokenAddress clauseStr:&clauseStr]){
+        return;
+    }
     
     NSMutableArray *clauseList = [NSMutableArray array];
     if (parameter.to.length == 0) {
@@ -252,7 +254,6 @@
         }else{
             [clauseList addObject:[BigNumber bigNumberWithHexString:parameter.value].data];
         }
-
     }
     
     if (parameter.data.length == 0) {
@@ -288,14 +289,14 @@
     };
 }
 
-+ (void)transactionCheckParams:(NSString **)keystore  parameter:(TransactionParameter *)parameter toAddress:(NSString **)toAddress amount:(NSString **)amount transferType:(WalletTransferType *)transferType tokenAddress:(NSString **)tokenAddress clauseStr:(NSString **)clauseStr
++ (BOOL )transactionCheckParams:(NSString **)keystore  parameter:(TransactionParameter *)parameter toAddress:(NSString **)toAddress amount:(NSString **)amount transferType:(WalletTransferType *)transferType tokenAddress:(NSString **)tokenAddress clauseStr:(NSString **)clauseStr
 {
     // check keystore format
     if (![WalletTools checkKeystore:*keystore]) {
         
         [WalletMBProgressShower showTextIn:[WalletTools getCurrentVC].view
                                       Text:ERROR_REQUEST_PARAMS_MSG During:1];
-        return;
+        return NO;
     }
     NSDictionary *dictKeystore = [NSJSONSerialization dictionaryWithJsonString:*keystore];
     NSString *keystoreFrom = dictKeystore[@"address"];
@@ -303,7 +304,7 @@
     if ([keystoreFrom.lowercaseString isEqualToString:(parameter.from).lowercaseString]) {
         [WalletMBProgressShower showTextIn:[WalletTools getCurrentVC].view
                                       Text:ERROR_REQUEST_PARAMS_MSG During:1];
-        return;
+        return NO;
     }
     
     if ((parameter.data).length == 0) { //vet 转账
@@ -313,11 +314,12 @@
         
         if (![WalletTools errorAddressAlert:*toAddress]
             || ![WalletTools errorAddressAlert:parameter.from]
+            || ![WalletTools checkDecimalStr:parameter.gas]
             || ((*amount).length > 0 && ![WalletTools checkHEXStr:*amount])) { // vet 可以转账0
             
             [WalletMBProgressShower showTextIn:[WalletTools getCurrentVC].view
                                           Text:ERROR_REQUEST_PARAMS_MSG During:1];
-            return ;
+           return NO;
         }
         
     }else{
@@ -330,12 +332,13 @@
             
             if (![WalletTools errorAddressAlert:parameter.from]
                 || ![WalletTools errorAddressAlert:*tokenAddress]
+                || ![WalletTools checkDecimalStr:parameter.gas]
                 || ![WalletTools checkHEXStr:parameter.value]
-                || ![WalletTools checkHEXStr:*clauseStr]) { //
+                || ![WalletTools checkClauseDataFormat:*clauseStr toAddress:parameter.to]) { //
                 
                 [WalletMBProgressShower showTextIn:[WalletTools getCurrentVC].view
                                               Text:ERROR_REQUEST_PARAMS_MSG During:1];
-                return ;
+                return NO;
             }
             
         }else{ //contract signature
@@ -346,21 +349,23 @@
             
             // toAddress equal to token addres,contract signature can be 0
             if (![WalletTools errorAddressAlert:parameter.from]
-                || ![WalletTools errorAddressAlert:parameter.to]
-                || ![WalletTools checkHEXStr:*clauseStr]) { // vet 可以转账0
+                || ![WalletTools checkHEXStr:*clauseStr]
+                || ![WalletTools checkDecimalStr:parameter.gas]
+                || ![WalletTools checkClauseDataFormat:*clauseStr toAddress:parameter.to]) {
                 
                 [WalletMBProgressShower showTextIn:[WalletTools getCurrentVC].view
                                               Text:ERROR_REQUEST_PARAMS_MSG During:1];
-                return ;
+                return NO;
             }
             
             if ((*amount).length > 0 && ![WalletTools checkHEXStr:*amount]) {
                 [WalletMBProgressShower showTextIn:[WalletTools getCurrentVC].view
                                               Text:ERROR_REQUEST_PARAMS_MSG During:1];
-                return ;
+                return NO;
             }
         }
     }
+    return YES;
 }
 
 + (BOOL)isValidKeystore:(NSString *)keystoreJson
