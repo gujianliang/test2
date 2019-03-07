@@ -375,6 +375,7 @@
 
 + (void)setNode:(NSString *)nodelUrl
 {
+    [[AFNetworkReachabilityManager sharedManager] startMonitoring];
     [WalletUserDefaultManager setBlockUrl:nodelUrl];
 }
 
