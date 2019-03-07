@@ -1231,7 +1231,7 @@
 					E2317E621E3191AC00DBE3E4 = {
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = G687LKP7Q7;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 					};
 					E2317E6B1E3191AC00DBE3E4 = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -1610,7 +1610,8 @@
 		E2317E781E3191AC00DBE3E4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				DEAD_CODE_STRIPPING = YES;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = G687LKP7Q7;
@@ -1628,6 +1629,7 @@
 				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = WalletSDK;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
@@ -1635,7 +1637,8 @@
 		E2317E791E3191AC00DBE3E4 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				DEAD_CODE_STRIPPING = YES;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = G687LKP7Q7;
@@ -1653,6 +1656,7 @@
 				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = WalletSDK;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
