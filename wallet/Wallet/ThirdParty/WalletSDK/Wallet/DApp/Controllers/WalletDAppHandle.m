@@ -35,7 +35,6 @@
 
 @interface WalletDAppHandle ()<WKNavigationDelegate,WKUIDelegate>
 {
-    WKWebView *_webView;
     NSMutableArray *_walletList;
 }
 @end
@@ -136,6 +135,7 @@ static dispatch_once_t predicate;
     else if([method isEqualToString:@"sign"])
     {
         [self transferCallbackParams:callbackParams
+                             webView:webView
                               connex:YES
                            requestId:requestId
                           callbackId:callbackId
@@ -162,6 +162,7 @@ static dispatch_once_t predicate;
     }else if ([method isEqualToString:@"send"]){
         
         [self transferCallbackParams:callbackParams
+                             webView:webView
                           connex:NO
                        requestId:requestId
                       callbackId:callbackId
@@ -171,6 +172,7 @@ static dispatch_once_t predicate;
 }
 
 - (void)transferCallbackParams:(NSDictionary *)callbackParams
+                       webView:(WKWebView *)webView
                     connex:(BOOL)bConnex
                  requestId:(NSString *)requestId
                 callbackId:(NSString *)callbackId
@@ -227,12 +229,12 @@ static dispatch_once_t predicate;
         
         transferType = WalletVETTransferType;
         
-        if (![self checkAmountForm:amount amountFloat:&amountFloat requestId:requestId webView:_webView callbackId:callbackId]
+        if (![self checkAmountForm:amount amountFloat:&amountFloat requestId:requestId webView:webView callbackId:callbackId]
             ||![WalletTools errorAddressAlert:to]
             ||![WalletTools checkDecimalStr:gas]
             ||![WalletTools checkHEXStr:gasPrice]) {
             
-            [self paramsError:requestId callbackId:callbackId];
+            [self paramsError:requestId webView:webView callbackId:callbackId];
             
             return;
         }
@@ -251,7 +253,7 @@ static dispatch_once_t predicate;
                 || ![WalletTools checkHEXStr:gasPrice]
                 ) {
                 
-                [self paramsError:requestId callbackId:callbackId];
+                [self paramsError:requestId webView:webView callbackId:callbackId];
                 
                 return;
             }
@@ -262,13 +264,13 @@ static dispatch_once_t predicate;
             tokenAddress = to;
             NSData *newclouseData = [SecureData hexStringToData:clauseStr];
             
-            if (![self checkAmountForm:amount amountFloat:&amountFloat requestId:requestId webView:_webView callbackId:callbackId]
+            if (![self checkAmountForm:amount amountFloat:&amountFloat requestId:requestId webView:webView callbackId:callbackId]
                 ||newclouseData == nil
                 ||![WalletTools checkClauseDataFormat:clauseStr toAddress:to]
                 ||![WalletTools checkDecimalStr:gas]
                 ||![WalletTools checkHEXStr:gasPrice]) {
                 
-                [self paramsError:requestId callbackId:callbackId];
+                [self paramsError:requestId webView:webView callbackId:callbackId];
                 
                 return;
             }
@@ -296,7 +298,7 @@ static dispatch_once_t predicate;
         
         [self transferWithParamModel:signParamModel
                            requestId:requestId
-                             webView:_webView
+                             webView:webView
                           callbackId:callbackId
                                bCert:bCert
                         transferType:transferType];
@@ -327,7 +329,7 @@ static dispatch_once_t predicate;
     }else if (paramModel.clauseData.length > 10) {
         if (![paramModel.clauseData hasPrefix:TransferMethodId]) { // 合约
             
-           [self contractSignWithParamModel:paramModel requestId:requestId webView:_webView callbackId:callbackId];
+           [self contractSignWithParamModel:paramModel requestId:requestId webView:webView callbackId:callbackId];
            
         }else{
             //vtho 转账
@@ -417,7 +419,7 @@ static dispatch_once_t predicate;
             *amountFloat = [BigNumber bigNumberWithHexString:[NSString stringWithFormat:@"%@",amount]].decimalString.doubleValue/pow(10, 18);
             return YES;
         }else{
-            [self paramsError:requestId callbackId:callbackId];
+            [self paramsError:requestId webView:webView callbackId:callbackId];
 
             return NO;
         }
@@ -426,16 +428,16 @@ static dispatch_once_t predicate;
             *amountFloat = [BigNumber bigNumberWithDecimalString:[NSString stringWithFormat:@"%@",amount]].decimalString.doubleValue/pow(10, 18);
             return YES;
         }else{
-            [self paramsError:requestId callbackId:callbackId];
+            [self paramsError:requestId webView:webView callbackId:callbackId];
             return NO;
         }
     }
 }
 
 
-- (void)paramsError:(NSString *)requestId callbackId:(NSString *)callbackId
+- (void)paramsError:(NSString *)requestId webView:(WKWebView *)webView callbackId:(NSString *)callbackId
 {
-    [WalletTools callbackWithrequestId:requestId webView:_webView data:@"" callbackId:callbackId code:ERROR_REQUEST_PARAMS];
+    [WalletTools callbackWithrequestId:requestId webView:webView data:@"" callbackId:callbackId code:ERROR_REQUEST_PARAMS];
 }
 
 +(void)attempDealloc
