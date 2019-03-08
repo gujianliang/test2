@@ -187,7 +187,7 @@
          
          NSString *coinAmount = @"0.00";
          if (!bigNumberCount.isZero) {
-             coinAmount = [Payment formatToken:bigNumberCount
+             coinAmount = [WalletUtils formatToken:bigNumberCount
                                       decimals:18  //coin decimals
                                        options:2]; //Keep 2 decimals
          }
@@ -226,7 +226,7 @@
         
         NSString *coinAmount = @"0.00";
         if (!bigNumberCount.isZero) {
-            coinAmount = [Payment formatToken:bigNumberCount
+            coinAmount = [WalletUtils formatToken:bigNumberCount
                                      decimals:18
                                       options:2];
         }
@@ -299,6 +299,5 @@
 - (void)touchesBegan:(NSSet*)touches withEvent:(UIEvent *)event{
     [self.view endEditing:YES];
 }
-
 
 @end

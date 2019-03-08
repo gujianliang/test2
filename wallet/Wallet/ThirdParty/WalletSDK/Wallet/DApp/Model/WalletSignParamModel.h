@@ -22,7 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, copy)NSString *tokenAddress;
 @property (nonatomic, copy)NSString *keystore;
-@property (nonatomic, copy)NSArray  *clauseList;
+@property (nonatomic, copy)NSArray  *clauseList; // to ,value,data 添加顺序
 
 @end
 

@@ -7,11 +7,11 @@
 
 #import <Foundation/Foundation.h>
 #import "TransactionParameter.h"
-#import "Payment.h"
 #import <UIKit/UIKit.h>
 #import <WebKit/WebKit.h>
 #import "WalletAccountModel.h"
 #import "MBProgressHUD.h"
+#import "BigNumber.h"
 
 @interface WalletUtils : NSObject
 
@@ -192,6 +192,12 @@ completionHandler:(void (^)(NSString *result))completionHandler;
  *
  */
 + (void)deallocDappSingletion;
+
+
++ (NSString*)formatToken: (BigNumber*)wei decimals:(NSUInteger)decimals options: (NSUInteger)options;
+
+
++ (BigNumber*)parseToken: (NSString*)etherString dicimals:(NSUInteger)decimals;
 
 NS_ASSUME_NONNULL_END
 

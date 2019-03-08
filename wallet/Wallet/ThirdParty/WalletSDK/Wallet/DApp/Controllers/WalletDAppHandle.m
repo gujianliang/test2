@@ -182,7 +182,12 @@ static dispatch_once_t predicate;
         return;
     }
      BOOL bCert = NO;
-//    NSString *kind = callbackParams[@"kind"];
+    
+    NSString *kind = callbackParams[@"kind"];
+    if (![kind isEqualToString:@"tx"]) {
+        [WalletTools callbackWithrequestId:requestId webView:webView data:@"" callbackId:callbackId code:ERROR_REQUEST_PARAMS];
+        return;
+    }
     
     //    if ([kind isEqualToString:@"cert"]) {
     //        callbackParams = [NSMutableDictionary dictionaryWithDictionary:callbackParams[@"clauses"]];
@@ -263,7 +268,7 @@ static dispatch_once_t predicate;
             transferType = WalletContranctTransferType;
             tokenAddress = to;
             NSData *newclouseData = [SecureData hexStringToData:clauseStr];
-            
+
             if (![self checkAmountForm:amount amountFloat:&amountFloat requestId:requestId webView:webView callbackId:callbackId]
                 ||newclouseData == nil
                 ||![WalletTools checkClauseDataFormat:clauseStr toAddress:to]

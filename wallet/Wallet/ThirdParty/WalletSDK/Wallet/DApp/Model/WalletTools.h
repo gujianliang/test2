@@ -14,6 +14,7 @@
 #import <AssetsLibrary/AssetsLibrary.h>
 #import <Photos/PHPhotoLibrary.h>
 #import <WebKit/WebKit.h>
+#import "BigNumber.h"
 
 
 #ifndef weakify

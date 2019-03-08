@@ -25,6 +25,10 @@
 + (void)creatWalletWithPassword:(NSString *)password
                        callback:(void(^)(WalletAccountModel *accountModel,NSError *error))callback
 {
+    if (password.length == 0) {
+        [WalletMBProgressShower showTextIn:[WalletTools getCurrentVC].view
+                                      Text:ERROR_REQUEST_PARAMS_MSG During:1];
+    }
     __block Account *account = [Account randomMnemonicAccount];
     
     [account encryptSecretStorageJSON:password callback:^(NSString *json) {
@@ -60,7 +64,10 @@
                             password:(NSString *)password
                             callback:(void(^)(WalletAccountModel *account,NSError *error))callback
 {
-    
+    if (password.length == 0) {
+        [WalletMBProgressShower showTextIn:[WalletTools getCurrentVC].view
+                                      Text:ERROR_REQUEST_PARAMS_MSG During:1];
+    }
     NSString *domain = @"com.wallet.ErrorDomain";
     NSString *desc = @"Generate keystore fail";
     NSDictionary *userInfo = @{ NSLocalizedDescriptionKey : desc };
@@ -212,6 +219,14 @@
         [WalletMBProgressShower showTextIn:[WalletTools getCurrentVC].view
                                       Text:VCNSLocalizedBundleString(@"h5_select_wallet_no_exist", nil) During:1];
     }
+    for (NSString *keystore in walletList) {
+        if (![WalletUtils isValidKeystore:keystore]) {
+            [WalletMBProgressShower showTextIn:[WalletTools getCurrentVC].view
+                                          Text:VCNSLocalizedBundleString(@"Invalid Keystore", nil) During:1];
+            return;
+            
+        }
+    }
     [[WalletDAppHandle shareWalletHandle]initWithWalletDict:walletList];
 }
 
@@ -256,7 +271,17 @@
             [clauseList addObject:[NSData data]];
 
         }else{
-            [clauseList addObject:[BigNumber bigNumberWithHexString:parameter.value].data];
+            if ([WalletTools checkHEXStr:parameter.value]) {
+                [clauseList addObject:[BigNumber bigNumberWithHexString:parameter.value].data];
+
+            }else if([WalletTools checkDecimalStr:parameter.value]){
+                [clauseList addObject:[BigNumber bigNumberWithDecimalString:parameter.value].data];
+            }else{
+                
+                [WalletMBProgressShower showTextIn:[WalletTools getCurrentVC].view
+                                              Text:ERROR_REQUEST_PARAMS_MSG During:1];
+                return;
+            }
         }
     }
     
@@ -328,12 +353,18 @@
         
         if (![WalletTools errorAddressAlert:*toAddress]
             || ![WalletTools errorAddressAlert:parameter.from]
-            || ![WalletTools checkDecimalStr:parameter.gas]
-            || ((*amount).length > 0 && ![WalletTools checkHEXStr:*amount])) { // vet 可以转账0
+            || ![WalletTools checkDecimalStr:parameter.gas]) { // vet 可以转账0
             
             [WalletMBProgressShower showTextIn:[WalletTools getCurrentVC].view
                                           Text:ERROR_REQUEST_PARAMS_MSG During:1];
-           return NO;
+            return NO;
+        }
+        if((*amount).length > 0){
+            if(![WalletTools checkHEXStr:*amount] && ![WalletTools checkDecimalStr:*amount]){
+                [WalletMBProgressShower showTextIn:[WalletTools getCurrentVC].view
+                                              Text:ERROR_REQUEST_PARAMS_MSG During:1];
+                return NO;
+            }
         }
         
     }else{
@@ -372,10 +403,12 @@
                 return NO;
             }
             
-            if ((*amount).length > 0 && ![WalletTools checkHEXStr:*amount]) {
-                [WalletMBProgressShower showTextIn:[WalletTools getCurrentVC].view
-                                              Text:ERROR_REQUEST_PARAMS_MSG During:1];
-                return NO;
+            if((*amount).length > 0){
+                if(![WalletTools checkHEXStr:*amount] && ![WalletTools checkDecimalStr:*amount]){
+                    [WalletMBProgressShower showTextIn:[WalletTools getCurrentVC].view
+                                                  Text:ERROR_REQUEST_PARAMS_MSG During:1];
+                    return NO;
+                }
             }
         }
     }
@@ -394,6 +427,10 @@
 
 + (void)setNode:(NSString *)nodelUrl
 {
+    if (nodelUrl.length == 0) {
+        [WalletMBProgressShower showTextIn:[WalletTools getCurrentVC].view
+                                      Text:ERROR_REQUEST_PARAMS_MSG During:1];
+    }
     [[AFNetworkReachabilityManager sharedManager] startMonitoring];
     [WalletUserDefaultManager setBlockUrl:nodelUrl];
 }
@@ -407,6 +444,16 @@
 {
     [WalletSingletonHandle attempDealloc];
     [WalletDAppHandle attempDealloc];
+}
+
++ (NSString *)formatToken: (BigNumber*)wei decimals:(NSUInteger)decimals options: (NSUInteger)options
+{
+   return [Payment formatToken:wei decimals:decimals options:options];
+}
+
++ (BigNumber*)parseToken: (NSString*)etherString dicimals:(NSUInteger)decimals
+{
+    return [Payment parseToken:etherString dicimals:decimals];
 }
 
 @end

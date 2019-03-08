@@ -7,7 +7,6 @@
 //
 
 #import "VCBaseModel.h"
-//#import "NSObject+RuntimeEx.h"
 
 @implementation VCBaseModel
 

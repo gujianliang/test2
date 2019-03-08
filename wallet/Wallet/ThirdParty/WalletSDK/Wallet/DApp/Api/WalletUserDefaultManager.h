@@ -7,12 +7,8 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
-//#import "WalletContractConfig.h"
-
-
 
 @interface WalletUserDefaultManager : NSObject
-
 
 + (NSString *)getBlockUrl;
 
