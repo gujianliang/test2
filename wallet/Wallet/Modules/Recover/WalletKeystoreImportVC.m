@@ -50,7 +50,7 @@
 *  — — — — — — — — — — — — — — — — — — — — — — — — — — ——
 *  Field description:
 *          version: This is a version information, when you decryption, you should use the same version.
-*          id: You can ignore.
+*          id: You can ignore. It is just a UUIDString.
 *          Kdf: This is a encryption function.
 *          mac: This is the mac device information.
 *          cipher: Describes the encryption algorithm used.
@@ -121,7 +121,7 @@
          }else{
              MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
              hud.mode = MBProgressHUDModeText;
-             hud.label.text = @"Import failure, Please check keystore and password are correct";
+             hud.label.text = @"Import failure, Please check the input is correct";
              [hud hideAnimated:YES afterDelay:3];
          }
      }];

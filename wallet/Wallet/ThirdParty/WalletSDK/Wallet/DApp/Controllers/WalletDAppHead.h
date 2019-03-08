@@ -36,7 +36,7 @@ static int ERROR_SERVER_DATA = 400;
 static int ERROR_CANCEL = 500;//User cancelled
 
 static NSString *ERROR_REQUEST_PARAMS_MSG = @"request params error";
-static NSString *ERROR_REQUEST_METHOD_MSG = @"method not exit error";
+static NSString *ERROR_REQUEST_METHOD_MSG = @"method not exist error";
 static NSString *ERROR_REQUEST_MULTI_CLAUSE_MSG = @"Multiple clause is not supported";
 static NSString *ERROR_REQUEST_QR_TOO_LONG_MSG = @"QR data is too long";
 static NSString *ERROR_NETWORK_MSG = @"network error";
