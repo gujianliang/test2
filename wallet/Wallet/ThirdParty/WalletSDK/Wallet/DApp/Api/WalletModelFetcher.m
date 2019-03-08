@@ -26,12 +26,18 @@
     NSString *urlString = [NSString stringWithString:aUrl];
     AFHTTPSessionManager *httpManager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:urlString]];
     
+//    httpManager GET:urlString parameters:dict success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+//
+//    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+//
+//    }
+    
     if (needEncrypt) {
         dict = [WalletModelFetcher encryptParaDict:dict method:@"GET"];
     }
 //    urlString = @"https://vethor-node-test.vechaindev.com/blocks/best";
     httpManager.requestSerializer.cachePolicy = NSURLRequestReturnCacheDataElseLoad;
-    [httpManager GET:urlString parameters:dict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    [httpManager GET:urlString parameters:dict  success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         [WalletModelFetcher debugLog:responseObject andUrl:urlString];
         
@@ -64,8 +70,7 @@
         [WalletModelFetcher setHeaderInfo:httpManager useSession:useSession];
 //    }
     
-    [httpManager POST:urlString parameters:dict progress:^(NSProgress * _Nonnull uploadProgress) {
-    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    [httpManager POST:urlString parameters:dict  success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         [WalletModelFetcher debugLog:responseObject andUrl:urlString];
         
@@ -206,7 +211,7 @@
         NSError *error = nil;
         NSString *origString;
         if ([method isEqualToString:@"GET"]) {
-            origString = AFQueryStringFromParameters(dict);
+//            origString = AFQueryStringFromParameters(dict);
         } else {
             NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dict options:0 error:&error];
             origString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];

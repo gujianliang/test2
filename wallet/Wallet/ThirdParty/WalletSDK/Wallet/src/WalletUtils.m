@@ -208,6 +208,10 @@
 
 + (void)initDappWebViewWithKeystore:(NSMutableArray *)walletList
 {
+    if (walletList.count == 0) {
+        [WalletMBProgressShower showTextIn:[WalletTools getCurrentVC].view
+                                      Text:VCNSLocalizedBundleString(@"h5_select_wallet_no_exist", nil) During:1];
+    }
     [[WalletDAppHandle shareWalletHandle]initWithWalletDict:walletList];
 }
 

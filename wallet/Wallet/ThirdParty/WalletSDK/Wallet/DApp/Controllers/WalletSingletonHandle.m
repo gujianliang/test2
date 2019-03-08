@@ -51,7 +51,6 @@ static dispatch_once_t predicate;
     AFHTTPSessionManager *httpManager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:urlString]];
     [httpManager GET:urlString
           parameters:nil
-            progress:nil
              success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject)
      {
          NSDictionary *dictResponse = (NSDictionary *)responseObject;
@@ -81,8 +80,7 @@ static dispatch_once_t predicate;
     
     AFHTTPSessionManager *httpManager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:urlString]];
     httpManager.requestSerializer = [AFJSONRequestSerializer serializer];
-    [httpManager POST:urlString parameters:dictParm progress:^(NSProgress * _Nonnull uploadProgress) {
-    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    [httpManager POST:urlString parameters:dictParm success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         NSDictionary *dictResponse = (NSDictionary *)responseObject;
         NSString *amount = dictResponse[@"data"];
