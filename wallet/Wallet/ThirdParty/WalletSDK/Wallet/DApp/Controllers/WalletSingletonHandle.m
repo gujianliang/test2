@@ -124,6 +124,7 @@ static dispatch_once_t predicate;
 
 - (void)setCurrentModel:(NSString *)address
 {
+#warning 什么时候确认
     for (WalletManageModel *model in _walletList) {
         if ([model.address.lowercaseString isEqualToString:address.lowercaseString] ) {
             _currentModel = model;

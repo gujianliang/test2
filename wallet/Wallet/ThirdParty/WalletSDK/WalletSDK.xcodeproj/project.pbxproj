@@ -114,7 +114,7 @@
 		9773F9CC221412D200DF5972 /* WalletSignatureView+transferToken.h in Headers */ = {isa = PBXBuildFile; fileRef = 9773F956221412D200DF5972 /* WalletSignatureView+transferToken.h */; };
 		9773F9D3221412D200DF5972 /* WalletSignatureView.h in Headers */ = {isa = PBXBuildFile; fileRef = 9773F95D221412D200DF5972 /* WalletSignatureView.h */; };
 		9773F9D7221412D200DF5972 /* WalletSignatureView+transferToken.m in Sources */ = {isa = PBXBuildFile; fileRef = 9773F961221412D200DF5972 /* WalletSignatureView+transferToken.m */; };
-		9773F9D8221412D200DF5972 /* WalletDAppHandle.h in Headers */ = {isa = PBXBuildFile; fileRef = 9773F963221412D200DF5972 /* WalletDAppHandle.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9773F9D8221412D200DF5972 /* WalletDAppHandle.h in Headers */ = {isa = PBXBuildFile; fileRef = 9773F963221412D200DF5972 /* WalletDAppHandle.h */; };
 		9773F9D9221412D200DF5972 /* WalletDAppHead.h in Headers */ = {isa = PBXBuildFile; fileRef = 9773F964221412D200DF5972 /* WalletDAppHead.h */; };
 		9773F9DA221412D200DF5972 /* WalletDAppHandle+connexJS.m in Sources */ = {isa = PBXBuildFile; fileRef = 9773F965221412D200DF5972 /* WalletDAppHandle+connexJS.m */; };
 		9773F9DB221412D200DF5972 /* WalletSingletonHandle.m in Sources */ = {isa = PBXBuildFile; fileRef = 9773F966221412D200DF5972 /* WalletSingletonHandle.m */; };
@@ -144,15 +144,15 @@
 		97EC5C802200AC25001E6B68 /* NSMutableDictionary+Helpers.h in Headers */ = {isa = PBXBuildFile; fileRef = 97EC5C7E2200AC25001E6B68 /* NSMutableDictionary+Helpers.h */; };
 		97EC5C812200AC25001E6B68 /* NSMutableDictionary+Helpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 97EC5C7F2200AC25001E6B68 /* NSMutableDictionary+Helpers.m */; };
 		E2317E6D1E3191AC00DBE3E4 /* WalletSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2317E631E3191AC00DBE3E4 /* WalletSDK.framework */; };
-		E2317E931E31970900DBE3E4 /* Payment.h in Headers */ = {isa = PBXBuildFile; fileRef = E2317E7D1E31970900DBE3E4 /* Payment.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E2317E931E31970900DBE3E4 /* Payment.h in Headers */ = {isa = PBXBuildFile; fileRef = E2317E7D1E31970900DBE3E4 /* Payment.h */; };
 		E2317E941E31970900DBE3E4 /* Payment.m in Sources */ = {isa = PBXBuildFile; fileRef = E2317E7E1E31970900DBE3E4 /* Payment.m */; };
-		E2317E9B1E31970900DBE3E4 /* Address.h in Headers */ = {isa = PBXBuildFile; fileRef = E2317E851E31970900DBE3E4 /* Address.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E2317E9B1E31970900DBE3E4 /* Address.h in Headers */ = {isa = PBXBuildFile; fileRef = E2317E851E31970900DBE3E4 /* Address.h */; };
 		E2317E9C1E31970900DBE3E4 /* Address.m in Sources */ = {isa = PBXBuildFile; fileRef = E2317E861E31970900DBE3E4 /* Address.m */; };
-		E2317E9F1E31970900DBE3E4 /* Hash.h in Headers */ = {isa = PBXBuildFile; fileRef = E2317E891E31970900DBE3E4 /* Hash.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E2317E9F1E31970900DBE3E4 /* Hash.h in Headers */ = {isa = PBXBuildFile; fileRef = E2317E891E31970900DBE3E4 /* Hash.h */; };
 		E2317EA01E31970900DBE3E4 /* Hash.m in Sources */ = {isa = PBXBuildFile; fileRef = E2317E8A1E31970900DBE3E4 /* Hash.m */; };
-		E2317EA31E31970900DBE3E4 /* Transaction.h in Headers */ = {isa = PBXBuildFile; fileRef = E2317E8D1E31970900DBE3E4 /* Transaction.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E2317EA31E31970900DBE3E4 /* Transaction.h in Headers */ = {isa = PBXBuildFile; fileRef = E2317E8D1E31970900DBE3E4 /* Transaction.h */; };
 		E2317EA41E31970900DBE3E4 /* Transaction.m in Sources */ = {isa = PBXBuildFile; fileRef = E2317E8E1E31970900DBE3E4 /* Transaction.m */; };
-		E2317EA51E31970900DBE3E4 /* Account.h in Headers */ = {isa = PBXBuildFile; fileRef = E2317E8F1E31970900DBE3E4 /* Account.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E2317EA51E31970900DBE3E4 /* Account.h in Headers */ = {isa = PBXBuildFile; fileRef = E2317E8F1E31970900DBE3E4 /* Account.h */; };
 		E2317EA61E31970900DBE3E4 /* Account.m in Sources */ = {isa = PBXBuildFile; fileRef = E2317E901E31970900DBE3E4 /* Account.m */; };
 		E2317EB41E31981D00DBE3E4 /* RegEx.h in Headers */ = {isa = PBXBuildFile; fileRef = E2317EAC1E31981D00DBE3E4 /* RegEx.h */; };
 		E2317EB51E31981D00DBE3E4 /* RegEx.m in Sources */ = {isa = PBXBuildFile; fileRef = E2317EAD1E31981D00DBE3E4 /* RegEx.m */; };
@@ -207,11 +207,11 @@
 		E2317F521E3199BD00DBE3E4 /* scrypt_sha256.c in Sources */ = {isa = PBXBuildFile; fileRef = E2317F4B1E3199BD00DBE3E4 /* scrypt_sha256.c */; };
 		E2317F531E3199BD00DBE3E4 /* sysendian.h in Headers */ = {isa = PBXBuildFile; fileRef = E2317F4C1E3199BD00DBE3E4 /* sysendian.h */; };
 		E2317F541E3199BD00DBE3E4 /* scrypt_sha256.h in Headers */ = {isa = PBXBuildFile; fileRef = E2317F4D1E3199BD00DBE3E4 /* scrypt_sha256.h */; };
-		E2FA03D21E406FB30013E5A7 /* Signature.h in Headers */ = {isa = PBXBuildFile; fileRef = E2FA03D01E406FB30013E5A7 /* Signature.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E2FA03D21E406FB30013E5A7 /* Signature.h in Headers */ = {isa = PBXBuildFile; fileRef = E2FA03D01E406FB30013E5A7 /* Signature.h */; };
 		E2FA03D31E406FB30013E5A7 /* Signature.m in Sources */ = {isa = PBXBuildFile; fileRef = E2FA03D11E406FB30013E5A7 /* Signature.m */; };
 		E2FA04821E42A0300013E5A7 /* Utilities.h in Headers */ = {isa = PBXBuildFile; fileRef = E2FA04801E42A0300013E5A7 /* Utilities.h */; };
 		E2FA04831E42A0300013E5A7 /* Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = E2FA04811E42A0300013E5A7 /* Utilities.m */; };
-		E2FA04861E42A5660013E5A7 /* SecureData.h in Headers */ = {isa = PBXBuildFile; fileRef = E2FA04841E42A5660013E5A7 /* SecureData.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E2FA04861E42A5660013E5A7 /* SecureData.h in Headers */ = {isa = PBXBuildFile; fileRef = E2FA04841E42A5660013E5A7 /* SecureData.h */; };
 		E2FA04871E42A5660013E5A7 /* SecureData.m in Sources */ = {isa = PBXBuildFile; fileRef = E2FA04851E42A5660013E5A7 /* SecureData.m */; };
 /* End PBXBuildFile section */
 
@@ -1065,27 +1065,27 @@
 			files = (
 				9719BEB02228085200DA3F74 /* WalletAccountModel.h in Headers */,
 				9718120822263672008F9639 /* TransactionParameter.h in Headers */,
-				9773F9D8221412D200DF5972 /* WalletDAppHandle.h in Headers */,
 				9773F97E221412D200DF5972 /* WalletGradientLayerButton.h in Headers */,
 				9773F99D221412D200DF5972 /* WalletDAppTransferDetailApi.h in Headers */,
 				971811FC2224DBD1008F9639 /* WalletGetBaseGasPriceApi.h in Headers */,
-				9718121022267FE5008F9639 /* WalletSignParamModel.h in Headers */,
-				9773F9D9221412D200DF5972 /* WalletDAppHead.h in Headers */,
-				9773F974221412D200DF5972 /* WalletDappStoreSelectView.h in Headers */,
-				9719BEC32229200F00DA3F74 /* SocketRocketUtility.h in Headers */,
-				9736C127214B8671003DE935 /* WalletUtils.h in Headers */,
-				9773F9A7221412D200DF5972 /* WalletDAppPeersApi.h in Headers */,
 				E2FA04861E42A5660013E5A7 /* SecureData.h in Headers */,
+				9718121022267FE5008F9639 /* WalletSignParamModel.h in Headers */,
+				E2317E931E31970900DBE3E4 /* Payment.h in Headers */,
+				9773F9D8221412D200DF5972 /* WalletDAppHandle.h in Headers */,
+				9773F9D9221412D200DF5972 /* WalletDAppHead.h in Headers */,
+				E2317EA31E31970900DBE3E4 /* Transaction.h in Headers */,
+				9773F974221412D200DF5972 /* WalletDappStoreSelectView.h in Headers */,
+				E2FA03D21E406FB30013E5A7 /* Signature.h in Headers */,
+				9719BEC32229200F00DA3F74 /* SocketRocketUtility.h in Headers */,
+				E2317E9F1E31970900DBE3E4 /* Hash.h in Headers */,
+				9736C127214B8671003DE935 /* WalletUtils.h in Headers */,
+				E2317E9B1E31970900DBE3E4 /* Address.h in Headers */,
+				9773F9A7221412D200DF5972 /* WalletDAppPeersApi.h in Headers */,
+				E2317EA51E31970900DBE3E4 /* Account.h in Headers */,
 				9773F99F221412D200DF5972 /* WalletUserDefaultManager.h in Headers */,
 				E2317EB81E31981D00DBE3E4 /* BigNumber.h in Headers */,
-				E2317EA31E31970900DBE3E4 /* Transaction.h in Headers */,
 				9773F996221412D200DF5972 /* WalletBalanceModel.h in Headers */,
-				E2FA03D21E406FB30013E5A7 /* Signature.h in Headers */,
 				9773F9F122165ADA00DF5972 /* WalletSignatureViewSubView.h in Headers */,
-				E2317E931E31970900DBE3E4 /* Payment.h in Headers */,
-				E2317E9F1E31970900DBE3E4 /* Hash.h in Headers */,
-				E2317E9B1E31970900DBE3E4 /* Address.h in Headers */,
-				E2317EA51E31970900DBE3E4 /* Account.h in Headers */,
 				E2317F1F1E31994500DBE3E4 /* bignum.h in Headers */,
 				97DB21892091B2450040A9D9 /* blake2-impl.h in Headers */,
 				9773F9E2221412D200DF5972 /* WalletDAppHandle+web3JS.h in Headers */,

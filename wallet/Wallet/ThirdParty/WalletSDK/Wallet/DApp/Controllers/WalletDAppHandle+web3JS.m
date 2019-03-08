@@ -66,7 +66,7 @@
                                   code:OK];
 }
 
-//获得chainTag
+//获得NodeUrl
 - (void)getNodeUrl:(NSString *)requestId
   completionHandler:(void (^)(NSString * __nullable result))completionHandler
 {
@@ -78,6 +78,7 @@
     completionHandler([dict1 yy_modelToJSONString]);
 }
 
+#warning connex 有接口
 //获得chaintag
 - (void)getChainTag:(NSString *)requestId
   completionHandler:(void (^)(NSString * __nullable result))completionHandler

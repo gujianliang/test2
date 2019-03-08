@@ -440,14 +440,13 @@
     if (hex.length == 0) {
         return NO;
     }
-    if ([hex.lowercaseString hasPrefix:@"0x"] && hex.length > 2) {
+    if ([hex.lowercaseString hasPrefix:@"0x"] && hex.length >= 2) {
         NSString *regex =@"[0-9a-fA-F]*";
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",regex];
         return [predicate evaluateWithObject:[hex substringFromIndex:2]];
     }else{
-        NSString *regex =@"[0-9a-fA-F]*";
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",regex];
-        return [predicate evaluateWithObject:hex ];
+       
+        return NO;
     }
 }
 
