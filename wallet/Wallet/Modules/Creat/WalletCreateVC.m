@@ -25,12 +25,6 @@
 
 @implementation WalletCreateVC
 
-
-- (void)viewDidLoad
-{
-    
-}
-
 /**
 * Create a wallet.
 */
