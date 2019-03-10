@@ -2088,7 +2088,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "218"
             endingLineNumber = "218"
-            landmarkName = "+initDappWebViewWithKeystore:"
+            landmarkName = "+encryptKeystoreWithPassword:account:callback:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

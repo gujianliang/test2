@@ -25,9 +25,18 @@
 + (void)creatWalletWithPassword:(NSString *)password
                        callback:(void(^)(WalletAccountModel *accountModel,NSError *error))callback
 {
+    NSString *domain = @"com.wallet.ErrorDomain";
+    NSString *desc = @"Generate keystore fail";
+    NSDictionary *userInfo = @{ NSLocalizedDescriptionKey : desc };
+    
+    NSError *error = [NSError errorWithDomain:domain
+                                         code:-101
+                                     userInfo:userInfo];
+    
     if (password.length == 0) {
-        [WalletMBProgressShower showTextIn:[WalletTools getCurrentVC].view
-                                      Text:ERROR_REQUEST_PARAMS_MSG During:1];
+        
+        callback(nil,error);
+
     }
     __block Account *account = [Account randomMnemonicAccount];
     
@@ -36,13 +45,6 @@
          account.keystore = json;
         if (json.length == 0) {
             if (callback) {
-                NSString *domain = @"com.wallet.ErrorDomain";
-                NSString *desc = @"Generate keystore fail";
-                NSDictionary *userInfo = @{ NSLocalizedDescriptionKey : desc };
-                
-                NSError *error = [NSError errorWithDomain:domain
-                                                     code:-101
-                                                 userInfo:userInfo];
                 
                 callback(nil,error);
             }
@@ -64,10 +66,7 @@
                             password:(NSString *)password
                             callback:(void(^)(WalletAccountModel *account,NSError *error))callback
 {
-    if (password.length == 0) {
-        [WalletMBProgressShower showTextIn:[WalletTools getCurrentVC].view
-                                      Text:ERROR_REQUEST_PARAMS_MSG During:1];
-    }
+    
     NSString *domain = @"com.wallet.ErrorDomain";
     NSString *desc = @"Generate keystore fail";
     NSDictionary *userInfo = @{ NSLocalizedDescriptionKey : desc };
@@ -76,6 +75,9 @@
                                          code:-101
                                      userInfo:userInfo];
     
+    if (password.length == 0) {
+        callback(nil,error);
+    }
     NSMutableArray *trimeList = [NSMutableArray array];
     for (NSString * word in mnemonicWords) {
         if (word.length == 0) {
@@ -147,7 +149,6 @@
 + (NSString *)recoverAddressFromMessage:(NSData*)message
                 signatureData:(NSData *)signatureData
 {
-    
     SecureData *digest = [SecureData BLAKE2B:message];
     Signature *signature = [Signature signatureWithData:signatureData];
     return [Account verifyMessage:digest.data signature:signature].checksumAddress.lowercaseString;
@@ -180,12 +181,14 @@
                  
                  if (signature.v == 2
                      || signature.v == 3) {
-                     [WalletMBProgressShower showTextIn:[WalletTools getCurrentVC].view
-                                                   Text:ERROR_REQUEST_PARAMS_MSG During:1];
                      
+                     if (callback) {
+                         callback(nil,error);
+                     }
                  }else{
-                     callback([SecureData hexStringToData:hashStr],nil);
-
+                     if (callback) {
+                         callback([SecureData hexStringToData:hashStr],nil);
+                     }
                  }
              }
          }else{
@@ -208,6 +211,10 @@
          if (json.length > 0) {
              if (callback) {
                  callback(json);
+             }
+         }else{
+             if (callback) {
+                 callback(nil);
              }
          }
     }];
@@ -254,6 +261,10 @@
     WalletTransferType transferType = WalletVETTransferType;
     
     if(![self transactionCheckParams:&keystoreJson parameter:parameter toAddress:&toAddress amount:&amount transferType:&transferType tokenAddress:&tokenAddress clauseStr:&clauseStr]){
+        
+        if (callback) {
+            callback(nil,parameter.from);
+        }
         return;
     }
     
@@ -278,8 +289,9 @@
                 [clauseList addObject:[BigNumber bigNumberWithDecimalString:parameter.value].data];
             }else{
                 
-                [WalletMBProgressShower showTextIn:[WalletTools getCurrentVC].view
-                                              Text:ERROR_REQUEST_PARAMS_MSG During:1];
+                if (callback) {
+                    callback(nil,parameter.from);
+                }
                 return;
             }
         }
