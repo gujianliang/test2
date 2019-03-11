@@ -71,8 +71,11 @@
 }
 
 -(void)webView:(WKWebView *)webView runJavaScriptAlertPanelWithMessage:(NSString *)message initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(void))completionHandler{
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:message?:@"" preferredStyle:UIAlertControllerStyleAlert];
-    [alertController addAction:([UIAlertAction actionWithTitle:NSLocalizedString(@"dialog_yes", nil)
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil
+                                                                             message:message?:@""
+                                                                      preferredStyle:UIAlertControllerStyleAlert];
+    
+    [alertController addAction:([UIAlertAction actionWithTitle: @"Confirm"
                                                          style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
     }])];
     [self presentViewController:alertController animated:YES completion:nil];

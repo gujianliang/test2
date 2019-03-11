@@ -115,9 +115,9 @@ callback:^(WalletAccountModel * _Nonnull account, NSError * _Nonnull error)
 *  — — — — — — — — — — — — — — — — — — — — — — — — — — ——
 *  Field description:
 *          version: This is a version information, when you decryption, you should use the same version.
-*          id: You can ignore.
+*          id: You can ignore. It is just a UUIDString.
 *          Kdf: This is a encryption function.
-*          mac: This is the mac deveice infomation.
+*          mac: This is the mac device information.
 *          cipher: Describes the encryption algorithm used.
 *          address：The wallet address.
 *          crypto: This section is the main encryption area.
