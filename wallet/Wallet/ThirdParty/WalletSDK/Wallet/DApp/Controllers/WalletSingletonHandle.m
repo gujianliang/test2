@@ -37,7 +37,7 @@ static dispatch_once_t predicate;
     for (NSString *keystore in walletList) {
         NSDictionary *dictKeystore = [NSJSONSerialization dictionaryWithJsonString:keystore];
         WalletManageModel *walletModel = [[WalletManageModel alloc]init];
-        walletModel.address = dictKeystore[@"address"];
+        walletModel.address = [@"0x" stringByAppendingString:dictKeystore[@"address"]];
         walletModel.keyStore = keystore;
         [_walletList addObject:walletModel];
         [self getVETBalance:walletModel];
@@ -51,7 +51,6 @@ static dispatch_once_t predicate;
     AFHTTPSessionManager *httpManager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:urlString]];
     [httpManager GET:urlString
           parameters:nil
-            progress:nil
              success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject)
      {
          NSDictionary *dictResponse = (NSDictionary *)responseObject;
@@ -81,8 +80,7 @@ static dispatch_once_t predicate;
     
     AFHTTPSessionManager *httpManager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:urlString]];
     httpManager.requestSerializer = [AFJSONRequestSerializer serializer];
-    [httpManager POST:urlString parameters:dictParm progress:^(NSProgress * _Nonnull uploadProgress) {
-    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    [httpManager POST:urlString parameters:dictParm success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         NSDictionary *dictResponse = (NSDictionary *)responseObject;
         NSString *amount = dictResponse[@"data"];
@@ -126,6 +124,7 @@ static dispatch_once_t predicate;
 
 - (void)setCurrentModel:(NSString *)address
 {
+#warning 什么时候确认
     for (WalletManageModel *model in _walletList) {
         if ([model.address.lowercaseString isEqualToString:address.lowercaseString] ) {
             _currentModel = model;

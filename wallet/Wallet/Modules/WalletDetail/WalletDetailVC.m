@@ -179,7 +179,6 @@
     AFHTTPSessionManager *httpManager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:urlString]];
     [httpManager GET:urlString
           parameters:nil
-            progress:nil
              success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject){
                  
          NSDictionary *dictResponse = (NSDictionary *)responseObject;
@@ -188,7 +187,7 @@
          
          NSString *coinAmount = @"0.00";
          if (!bigNumberCount.isZero) {
-             coinAmount = [Payment formatToken:bigNumberCount
+             coinAmount = [WalletUtils formatToken:bigNumberCount
                                       decimals:18  //coin decimals
                                        options:2]; //Keep 2 decimals
          }
@@ -219,7 +218,6 @@
     
     [httpManager POST:urlString
            parameters:dictParm
-             progress:nil
               success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         NSDictionary *dictResponse = (NSDictionary *)responseObject;
@@ -228,7 +226,7 @@
         
         NSString *coinAmount = @"0.00";
         if (!bigNumberCount.isZero) {
-            coinAmount = [Payment formatToken:bigNumberCount
+            coinAmount = [WalletUtils formatToken:bigNumberCount
                                      decimals:18
                                       options:2];
         }
@@ -301,6 +299,5 @@
 - (void)touchesBegan:(NSSet*)touches withEvent:(UIEvent *)event{
     [self.view endEditing:YES];
 }
-
 
 @end

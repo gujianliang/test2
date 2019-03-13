@@ -33,6 +33,8 @@
 - (void)viewDidLoad{
     [super viewDidLoad];
     
+    self.transferAmountTextField.keyboardType = UIKeyboardTypeDecimalPad;
+    
     _blockHost = [WalletUtils getNode];
     
     if (!_isVET) {
@@ -78,19 +80,20 @@
 
 - (void)vetTransfer:(NSString *)from keystore:(NSString *)keystore
 {
-    NSString *amountHex = [Payment parseEther:self.transferAmountTextField.text].hexString;
+    BigNumber *amountBig = [WalletUtils parseToken:self.transferAmountTextField.text dicimals:18];
+
     //vet
     TransactionParameter *paramters = [[TransactionParameter alloc]init];
     paramters.to = self.receiveAddressTextView.text;
-    paramters.value = amountHex;
+    paramters.value = amountBig.hexString; // hex string or decimal string
     paramters.data = @"";
 
     paramters.from = from;
-    paramters.gas = @"21000";//Set maximum gas allowed for call,
+    paramters.gas = @"21000";  //Set maximum gas allowed for call,
 
     [WalletUtils sendWithKeystore:keystore
-                               parameter:paramters
-                                   callback:^(NSString *txId, NSString *signer)
+                        parameter:paramters
+                         callback:^(NSString *txId, NSString *signer)
      {
 
 
@@ -108,20 +111,21 @@
         [hud hideAnimated:YES afterDelay:1.5];
         return;
     }
-    NSString *amountHex = [Payment parseEther:self.transferAmountTextField.text].hexString;
+    
+    BigNumber *amountBig = [WalletUtils parseToken:self.transferAmountTextField.text dicimals:18];
     
     TransactionParameter *paramters = [[TransactionParameter alloc]init];
     paramters.to = _tokenContractAddress; //token address
     paramters.value = @"";
     
-    paramters.data = [self calculatenTokenTransferClauseData:self.receiveAddressTextView.text value:amountHex];;
+    paramters.data = [self calculatenTokenTransferClauseData:self.receiveAddressTextView.text value:amountBig.hexString];
     
     paramters.from = from;
     paramters.gas = @"60000";
     
     [WalletUtils sendWithKeystore:keystore
-                               parameter:paramters
-                                   callback:^(NSString *txId, NSString *signer)
+                        parameter:paramters
+                         callback:^(NSString *txId, NSString *signer)
      {
      }];
 
@@ -206,8 +210,6 @@
 - (void)touchesBegan:(NSSet*)touches withEvent:(UIEvent *)event{
     [self.view endEditing:YES];
 }
-
-
 
 - (IBAction)changeSlider:(id)sender{
     

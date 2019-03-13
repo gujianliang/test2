@@ -23,6 +23,7 @@
 #import "WalletDAppTransferDetailApi.h"
 #import "WalletSingletonHandle.h"
 #import "WalletSignatureView.h"
+#import "SocketRocketUtility.h"
 
 @implementation WalletDAppHandle (connexJS)
 
@@ -324,6 +325,18 @@
                                  data:addressList
                            callbackId:callbackId
                                  code:OK];
+}
+
+- (void)tickerNextRequestId:(NSString *)requestId
+                 callbackId:(NSString *)callbackId
+{
+    NSString *url = [[WalletUserDefaultManager getBlockUrl] stringByAppendingString:@"/subscriptions/block"];
+    
+    SocketRocketUtility *socket = [SocketRocketUtility instance];
+    
+    socket.requestIdList = @[requestId];
+    socket.callbackId = callbackId;
+    [socket SRWebSocketOpenWithURLString:url];
 }
 
 //vet 转账

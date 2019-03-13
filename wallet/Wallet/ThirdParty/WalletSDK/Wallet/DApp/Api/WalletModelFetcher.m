@@ -26,12 +26,8 @@
     NSString *urlString = [NSString stringWithString:aUrl];
     AFHTTPSessionManager *httpManager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:urlString]];
     
-    if (needEncrypt) {
-        dict = [WalletModelFetcher encryptParaDict:dict method:@"GET"];
-    }
-//    urlString = @"https://vethor-node-test.vechaindev.com/blocks/best";
     httpManager.requestSerializer.cachePolicy = NSURLRequestReturnCacheDataElseLoad;
-    [httpManager GET:urlString parameters:dict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    [httpManager GET:urlString parameters:dict  success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         [WalletModelFetcher debugLog:responseObject andUrl:urlString];
         
@@ -59,13 +55,10 @@
     
     AFHTTPSessionManager *httpManager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:urlString]];
     httpManager.requestSerializer.cachePolicy = NSURLRequestReturnCacheDataElseLoad;
+
+    [WalletModelFetcher setHeaderInfo:httpManager useSession:useSession];
     
-//    if (![aUrl containsString:@"/transactions"]) {
-        [WalletModelFetcher setHeaderInfo:httpManager useSession:useSession];
-//    }
-    
-    [httpManager POST:urlString parameters:dict progress:^(NSProgress * _Nonnull uploadProgress) {
-    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    [httpManager POST:urlString parameters:dict  success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         [WalletModelFetcher debugLog:responseObject andUrl:urlString];
         
@@ -90,10 +83,6 @@
     AFHTTPSessionManager *httpManager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:urlString]];
     httpManager.requestSerializer.cachePolicy = NSURLRequestReturnCacheDataElseLoad;
     [WalletModelFetcher setHeaderInfo:httpManager useSession:useSession];
-    
-    if (needEncrypt) {
-        dict = [WalletModelFetcher encryptParaDict:dict method:@"PUT"];
-    }
     
     [httpManager PUT:urlString parameters:dict success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
@@ -125,10 +114,6 @@
     httpManager.requestSerializer.cachePolicy = NSURLRequestReturnCacheDataElseLoad;
     httpManager.requestSerializer.HTTPMethodsEncodingParametersInURI = [NSSet setWithObjects:@"HEAD",@"GET",nil];
     [WalletModelFetcher setHeaderInfo:httpManager useSession:useSession];
-    
-    if (needEncrypt) {
-        dict = [WalletModelFetcher encryptParaDict:dict method:@"DEL"];
-    }
     
     [httpManager DELETE:urlString parameters:dict success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
@@ -198,21 +183,6 @@
     httpManager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", nil];
     
     httpManager.requestSerializer = [AFJSONRequestSerializer serializer];
-}
-
-+ (NSMutableDictionary *)encryptParaDict:(NSMutableDictionary *)dict method:(NSString *)method {
-    if (dict && 0 != dict.count)
-    {
-        NSError *error = nil;
-        NSString *origString;
-        if ([method isEqualToString:@"GET"]) {
-            origString = AFQueryStringFromParameters(dict);
-        } else {
-            NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dict options:0 error:&error];
-            origString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-        }
-    }
-    return nil;
 }
 
 + (void)debugLog:(id)responseObject andUrl:(id)url{

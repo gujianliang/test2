@@ -135,6 +135,7 @@
     // 地址
     _addressLabel = [[UILabel alloc]init];
     _addressLabel.text = @"";
+    _addressLabel.numberOfLines = 2;
     _addressLabel.font = MediumFont(12);
     _addressLabel.textColor = HEX_RGB(0xBDBDBD);
     _addressLabel.lineBreakMode = NSLineBreakByTruncatingMiddle;
@@ -142,8 +143,8 @@
     [_addressLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(_walletNameLabel.mas_bottom).offset(3);
         make.left.mas_equalTo(_walletNameLabel.mas_left);
-        make.width.mas_equalTo(Scale(115));
-        make.height.mas_equalTo(17);
+        make.right.mas_equalTo(-20);
+        make.height.mas_equalTo(32);
     }];
     
     

@@ -22,8 +22,6 @@ extern NSString * const kWebSocketdidReceiveMessageNote;
 /** 开始连接 */
 - (void)SRWebSocketOpenWithURLString:(NSString *)urlString;
 
--(void)SRWebSocketOpenWithURLString:(NSString *)urlString completionHandler:(void (^)(NSString * __nullable result))completionHandler;
-
 /** 关闭连接 */
 - (void)SRWebSocketClose;
 
@@ -31,5 +29,9 @@ extern NSString * const kWebSocketdidReceiveMessageNote;
 - (void)sendData:(id)data;
 
 + (SocketRocketUtility *)instance;
+
+
+@property (nonatomic,copy) NSArray *requestIdList;
+@property (nonatomic,copy) NSString *callbackId;
 
 @end

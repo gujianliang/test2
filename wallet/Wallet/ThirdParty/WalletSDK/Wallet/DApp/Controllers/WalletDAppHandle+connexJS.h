@@ -53,6 +53,8 @@ NS_ASSUME_NONNULL_BEGIN
                      callbackId:(NSString *)callbackId
                         webView:(WKWebView *)webView;
 
+- (void)tickerNextRequestId:(NSString *)requestId
+                 callbackId:(NSString *)callbackId;
 
 - (void)VETTransferDictWithParamModel:(WalletSignParamModel *)paramModel
                             requestId:(NSString *)requestId

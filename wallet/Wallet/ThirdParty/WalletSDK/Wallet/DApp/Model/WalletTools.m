@@ -306,7 +306,7 @@
         NSLog(@"error == %@",error);
     }];
     
-    if (code != 1 || code != 500) {
+    if (code != 1 && code != 500) {
         [self jsErrorAlert:message];
     }
 }
@@ -440,14 +440,13 @@
     if (hex.length == 0) {
         return NO;
     }
-    if ([hex.lowercaseString hasPrefix:@"0x"] && hex.length > 2) {
+    if ([hex.lowercaseString hasPrefix:@"0x"] && hex.length >= 2) {
         NSString *regex =@"[0-9a-fA-F]*";
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",regex];
         return [predicate evaluateWithObject:[hex substringFromIndex:2]];
     }else{
-        NSString *regex =@"[0-9a-fA-F]*";
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",regex];
-        return [predicate evaluateWithObject:hex ];
+       
+        return NO;
     }
 }
 
@@ -489,9 +488,9 @@
     BOOL allAreValidChar = [predicate evaluateWithObject:toAddress];
     if (!allAreValidChar) {
         [WalletAlertShower showAlert:nil
-                                msg:VCNSLocalizedString(@"非法参数", nil)
+                                msg:VCNSLocalizedBundleString(@"h5_params_error", nil)
                               inCtl:[WalletTools getCurrentVC]
-                              items:@[VCNSLocalizedString(@"dialog_yes", nil)]
+                              items:@[VCNSLocalizedBundleString(@"dialog_yes", nil)]
                          clickBlock:^(NSInteger index) {
                          }];
         return NO;
@@ -542,5 +541,25 @@
         clauseValue = [clauseStrTemp substringWithRange:NSMakeRange(64, 64)];
     }
     return [NSString stringWithFormat:@"0x%@",clauseValue];
+}
+
++ (BOOL)checkClauseDataFormat:(NSString *)clauseStr toAddress:(NSString *)toAddress
+{
+    if (toAddress.length == 0) {
+        return YES;
+    }else if (clauseStr.length > 10) {
+        
+        if ([WalletTools checkHEXStr:clauseStr]) {
+            NSString *temp1 = [clauseStr substringFromIndex:10];
+            NSInteger i = temp1.length % 64;
+            if (i == 0) {
+                return YES;
+            }
+        }
+        return NO;
+        
+    }else{
+        return NO;
+    }
 }
 @end

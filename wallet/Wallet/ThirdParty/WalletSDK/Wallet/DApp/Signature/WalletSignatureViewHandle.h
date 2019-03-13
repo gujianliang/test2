@@ -13,9 +13,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface WalletSignatureViewHandle : NSObject
 
-- (void)checkBalcanceFromAddress:(NSString *)fromAddress amount:(NSString *)amount gasLimit:(NSString *)gasLimit block:(void(^)())blcok;
+- (void)checkBalcanceFromAddress:(NSString *)fromAddress coinModel:(WalletCoinModel *)coinModel amount:(NSString *)amount gasLimit:(NSString *)gasLimit block:(void(^)(BOOL result))block;
 
-- (void)tokenAddressConvetCoinInfo:(NSString *)tokenAddress coinModel:(WalletCoinModel *)coinModel block:(void(^)(void))block;
+- (void)tokenAddressConvetCoinInfo:(NSString *)tokenAddress coinModel:(WalletCoinModel *)coinModel block:(void(^)(BOOL result))block;
 @end
 
 NS_ASSUME_NONNULL_END

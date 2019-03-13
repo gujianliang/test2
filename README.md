@@ -30,10 +30,14 @@ Vechain wallet SDK provides a series of functional interface can help the iOS de
 
 #### The dependency package should be added to the project, as listed below:
 ```obj-c
-SocketRocket  --> v0.4.2
-Masonry       --> v1.1.0
-AFNetworking  --> v2.7.0
-MBProgressHUD --> v1.1.0
+ 
+    pod 'AFNetworking', '~> 3.0'
+
+    pod 'MBProgressHUD', '1.1.0'
+
+    pod 'Masonry', '1.1.0'
+
+    pod 'SocketRocket', '~> 0.4.2'
 ```
 To use the Framework, add the WalletSDK.Framework and WalletSDKBundle.bundle to your project :
 
@@ -115,9 +119,9 @@ callback:^(WalletAccountModel * _Nonnull account, NSError * _Nonnull error)
 *  — — — — — — — — — — — — — — — — — — — — — — — — — — ——
 *  Field description:
 *          version: This is a version information, when you decryption, you should use the same version.
-*          id: You can ignore.
+*          id: You can ignore. It is just a UUIDString.
 *          Kdf: This is a encryption function.
-*          mac: This is the mac deveice infomation.
+*          mac: This is the mac device information.
 *          cipher: Describes the encryption algorithm used.
 *          address：The wallet address.
 *          crypto: This section is the main encryption area.

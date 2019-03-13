@@ -14,6 +14,7 @@
 #import <AssetsLibrary/AssetsLibrary.h>
 #import <Photos/PHPhotoLibrary.h>
 #import <WebKit/WebKit.h>
+#import "BigNumber.h"
 
 
 #ifndef weakify
@@ -106,6 +107,10 @@
 + (NSString *)getAmountFromClause:(NSString *)clauseStr to:(NSString **)to;
 
 + (BOOL)checkDecimalStr:(NSString *)decimalString;
+
++ (BOOL)checkClauseDataFormat:(NSString *)clauseStr toAddress:(NSString *)toAddress;
+
++ (NSString *)errorMessageWith:(NSInteger)code;
 
 @end
 

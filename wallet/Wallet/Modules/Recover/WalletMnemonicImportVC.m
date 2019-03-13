@@ -50,8 +50,13 @@
      Here, We just do some simple judges. This is just a demo that tell you how to recover a wallet by mnemonic words.
      */
     
+    
+    /* Removing the string both ends the whitespace and newline characters. */
+    NSString *string = self.importMnemonicWords.text;
+    NSString *mnemonicWords = [string stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    
     /* Check your input password and mnemonic words that can not be blank. */
-    if (self.password.text.length == 0 || self.importMnemonicWords.text.length == 0){
+    if (self.password.text.length == 0 || mnemonicWords.length == 0){
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         hud.mode = MBProgressHUDModeText;
         hud.label.text =  @"The input cannot be null.";
@@ -60,7 +65,7 @@
     }
     
     /* Check your input mnemonic words are available. */
-    NSArray *arr = [self.importMnemonicWords.text componentsSeparatedByString:@" "];
+    NSArray *arr = [mnemonicWords componentsSeparatedByString:@" "];
     if (![WalletUtils isValidMnemonicWords:arr]) {
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         hud.mode = MBProgressHUDModeText;
@@ -76,7 +81,7 @@
     
     
     /* Create a wallet with your password and mnemonic words. */
-    [WalletUtils creatWalletWithMnemonicWords:[self.importMnemonicWords.text.lowercaseString componentsSeparatedByString:@" "]
+    [WalletUtils creatWalletWithMnemonicWords:arr
                                 password:self.password.text
                                 callback:^(WalletAccountModel * _Nonnull account, NSError * _Nonnull error)
      {

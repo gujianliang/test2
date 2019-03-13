@@ -93,12 +93,10 @@
 
 - (void)initMinerLabel
 {
-    
     if ([_amount isEqualToString:@"0"]) {
         _valueLabel.text = [NSString stringWithFormat:@"0.00 %@",_currentCoinModel.symobl];
     }else{
-        NSString *vet = [WalletTools thousandSeparator:_amount decimals:YES];
-        _valueLabel.text = [NSString stringWithFormat:@"%@ %@",_amount.length == 0 ? @"0.00" : vet,_currentCoinModel.symobl] ;
+        _valueLabel.text = [NSString stringWithFormat:@"%@ %@",_amount.length == 0 ? @"0.00" : _amount,_currentCoinModel.symobl] ;
     }
 }
 
@@ -140,12 +138,17 @@
 - (void)checkBalance:(void(^)(void))enterSignViewBlock
 {
     [_signatureHandle checkBalcanceFromAddress:_fromAddress
+                                     coinModel:_currentCoinModel
                                         amount:_amount
                                       gasLimit:_gasLimit
-                                         block:^
+                                         block:^(BOOL result)
      {
-         if (enterSignViewBlock) {
-             enterSignViewBlock();
+         if (result) {
+             if (enterSignViewBlock) {
+                 enterSignViewBlock();
+             }
+         }else{
+             [_scrollView.superview.superview removeFromSuperview];
          }
      }];
 }

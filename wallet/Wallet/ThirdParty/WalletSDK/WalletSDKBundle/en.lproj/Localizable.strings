@@ -920,8 +920,11 @@
 
 //<!--购买节点 - 余额不足-->
 "contact_buy_failed_not_enough1" = "Your current balance is %@ VET, and cannot afford %@ VET";
-"contact_buy_failed_not_enough2" = "Insufficient balance and unable to buy. \ncurrent wallet address: %@\n Balance is %@ VET and cannot afford %@ VET.\n\nPlease switch to another wallet which does not have a node but has enough VET, and try again.";
 
+
+"contact_buy_failed_not_enough2" = "Insufficient balance and unable to buy. \ncurrent wallet address: %@\n Balance is %@ %@ and cannot afford %@ %@.\n\nPlease switch to another wallet which does not have a node but has enough VET, and try again.";
+
+"contact_buy_failed_not_enough3" = "Your current balance is %@ %@, and cannot afford %@ %@";
 
 //<!--公开拍卖 - 更换钱包-->
 "contact_change_wallet_title" = "Change a wallet";
