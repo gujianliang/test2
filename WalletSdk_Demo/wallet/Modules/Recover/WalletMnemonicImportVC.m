@@ -22,13 +22,13 @@
 
 /**
 *  Mnemonic words are taken from a fixed thesaurus, and the number of mnemonic words generated is different in different dimensions.
-*  This demo uses 12 english mnemonic words. Like as as follows:
+*  This demo uses 12 english mnemonic words. Like as follows:
 *  — — — — — — — — — — — — — — — — — — — — — — — — — — ——
 *    since scrub way wheel omit flush shield remove idea recipe behind mesh
 *  — — — — — — — — — — — — — — — — — — — — — — — — — — ——
 *  Please note that:
 *          1、Every Mnemonic word is a correct word.
-*          2、Mnemonic words are separated by Spaces.
+*          2、Mnemonic words are separated by Spaces.Do not use other separator.
 *          3、Mnemonic words are strictly case-limited and all are lowercase.
 *          4、Mnemonic words are fastidious about correct spelling.
 *          5、Do not cotain any other special character，such as "" 、; 、: and so on.
