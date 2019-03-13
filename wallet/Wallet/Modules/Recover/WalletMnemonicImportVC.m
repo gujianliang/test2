@@ -22,16 +22,16 @@
 
 /**
 *  Mnemonic words are taken from a fixed thesaurus, and the number of mnemonic words generated is different in different dimensions.
-*  This demo uses 12 english mnemonic words. Like as as follows:
+*  This demo uses 12 english mnemonic words. Like as follows:
 *  — — — — — — — — — — — — — — — — — — — — — — — — — — ——
-*    since scrub way wheel omit flush shield remove idea recipe behind mesh
+*  since scrub way wheel omit flush shield remove idea recipe behind mesh
 *  — — — — — — — — — — — — — — — — — — — — — — — — — — ——
 *  Please note that:
-*          1、Every Mnemonic word is a correct word.
-*          2、Mnemonic words are separated by Spaces.
+*          1、Every mnemonic word is a correctly spelled word.
+*          2、Mnemonic words are separated by Spaces, do not use ',' or '、' and other separator.
 *          3、Mnemonic words are strictly case-limited and all are lowercase.
 *          4、Mnemonic words are fastidious about correct spelling.
-*          5、Do not cotain any other special character，such as "" 、; 、: and so on.
+*          5、Do not contain any other special character，such as ‘; , \ : 、’and so on.
 *
 *  When you recovered a wallet by Mnemonic words, then you should take care of your Mnemonic words and password.
 *  Because once you lose it, it means you lose your crypto assets, and you can't get it back.
@@ -52,7 +52,7 @@
     
     
     /* Removing the string both ends the whitespace and newline characters. */
-    NSString *string = self.importMnemonicWords.text;
+    NSString *string = @"arch token soft aerobic song scheme cost envelope measure force lemon  farm";//self.importMnemonicWords.text;
     NSString *mnemonicWords = [string stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     
     /* Check your input password and mnemonic words that can not be blank. */
@@ -82,10 +82,15 @@
     
     /* Create a wallet with your password and mnemonic words. */
     [WalletUtils creatWalletWithMnemonicWords:arr
-                                password:self.password.text
-                                callback:^(WalletAccountModel * _Nonnull account, NSError * _Nonnull error)
+                                     password:self.password.text
+                                     callback:^(WalletAccountModel * _Nonnull account, NSError * _Nonnull error)
      {
          [hud hideAnimated:YES];
+         
+         if (error) {
+             NSLog(@"error: %@", error);
+             return ;
+         }
          
          [self.navigationController popToRootViewControllerAnimated:NO];
          
