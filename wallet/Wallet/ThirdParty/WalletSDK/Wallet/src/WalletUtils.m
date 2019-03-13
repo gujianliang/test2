@@ -76,13 +76,16 @@
                                      userInfo:userInfo];
     
     if (password.length == 0) {
-        callback(nil,error);
+        NSLog(@"Password can not be blank.");
+        callback(nil, error);
+        return;
     }
     NSMutableArray *trimeList = [NSMutableArray array];
     for (NSString * word in mnemonicWords) {
         if (word.length == 0) {
-            callback(nil,error);
-            break;
+            NSLog(@"Mnemonic words is not available.");
+            callback(nil, error);
+            return;
         }else{
             NSString *trimeWord = [word stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
             [trimeList addObject:trimeWord];
@@ -91,13 +94,20 @@
     
     __block Account *account = [Account accountWithMnemonicPhrase:[trimeList componentsJoinedByString:@" "]];
     
+    if (!account) {
+        NSLog(@"Mnemonic words is not available.");
+        callback(nil, error);
+        return;
+    }
+    
     [account encryptSecretStorageJSON:password callback:^(NSString *json) {
         
         account.keystore = json;
         if (json.length == 0) {
             if (callback) {
-                callback(nil,error);
+                callback(nil, error);
             }
+            
         }else{
             if (callback) {
                 
@@ -107,7 +117,7 @@
                 accountModel.address = account.address.checksumAddress;
                 accountModel.words = [account.mnemonicPhrase componentsSeparatedByString:@" "];
                 
-                callback(accountModel,nil);
+                callback(accountModel, nil);
             }
         }
     }];
