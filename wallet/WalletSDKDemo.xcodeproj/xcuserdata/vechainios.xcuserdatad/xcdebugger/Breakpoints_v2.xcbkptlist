@@ -133,53 +133,6 @@
             endingLineNumber = "34"
             landmarkName = "+creatWalletWithPassword:callback:"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "+[WalletUtils creatWalletWithPassword:callback:]"
-                  moduleName = "WalletSDKDemo"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/vechainios/Desktop/Project/wsdk/wallet/Wallet/ThirdParty/WalletSDK/Wallet/src/WalletUtils.m"
-                  timestampString = "573736078.152316"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "34"
-                  endingLineNumber = "34"
-                  offsetFromSymbolStart = "377">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__48+[WalletUtils creatWalletWithPassword:callback:]_block_invoke"
-                  moduleName = "WalletSDKDemo"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/vechainios/Desktop/Project/wsdk/wallet/Wallet/ThirdParty/WalletSDK/Wallet/src/WalletUtils.m"
-                  timestampString = "573736078.154001"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "34"
-                  endingLineNumber = "34"
-                  offsetFromSymbolStart = "33">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__destroy_helper_block_"
-                  moduleName = "WalletSDKDemo"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/vechainios/Desktop/Project/wsdk/wallet/Wallet/ThirdParty/WalletSDK/Wallet/src/WalletUtils.m"
-                  timestampString = "573736078.15584"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "34"
-                  endingLineNumber = "34"
-                  offsetFromSymbolStart = "17">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -212,6 +165,53 @@
             endingLineNumber = "43"
             landmarkName = "+creatWalletWithPassword:callback:"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "+[WalletUtils creatWalletWithPassword:callback:]"
+                  moduleName = "WalletSDKDemo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/vechainios/Desktop/Project/wsdk/wallet/Wallet/ThirdParty/WalletSDK/Wallet/src/WalletUtils.m"
+                  timestampString = "574135335.970266"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "43"
+                  endingLineNumber = "43"
+                  offsetFromSymbolStart = "440">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__48+[WalletUtils creatWalletWithPassword:callback:]_block_invoke"
+                  moduleName = "WalletSDKDemo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/vechainios/Desktop/Project/wsdk/wallet/Wallet/ThirdParty/WalletSDK/Wallet/src/WalletUtils.m"
+                  timestampString = "574135335.97161"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "43"
+                  endingLineNumber = "43"
+                  offsetFromSymbolStart = "19">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__destroy_helper_block_"
+                  moduleName = "WalletSDKDemo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/vechainios/Desktop/Project/wsdk/wallet/Wallet/ThirdParty/WalletSDK/Wallet/src/WalletUtils.m"
+                  timestampString = "574135335.972927"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "43"
+                  endingLineNumber = "43"
+                  offsetFromSymbolStart = "17">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -610,7 +610,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "244"
             endingLineNumber = "244"
-            landmarkName = "+injectJSWithWebView:"
+            landmarkName = "+webView:defaultText:completionHandler:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

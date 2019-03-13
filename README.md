@@ -63,7 +63,7 @@ callback:^(WalletAccountModel * _Nonnull account, NSError * _Nonnull error)
 ### 2，Support dapp development environment (connex or web3)
 
 #### 2.1 Import keystore to SDK
-
+#####  More information about The keystore structures,  you can see it at the end of article.
 ```obj-c
 [WalletUtils initDappWebViewWithKeystore:walletList];
 
@@ -71,8 +71,11 @@ callback:^(WalletAccountModel * _Nonnull account, NSError * _Nonnull error)
 
 #### 2.2  Inject js bridge into webview
 ##### 
+You must  conform to the WKNavigationDelegate protocol  of  WKWebView,  and   implement the method  webView: didCommitNavigation or webView: didStartProvisionalNavigation: , 
+then you can Inject js bridge into webview.
 
-```obj-c
+```obj-c  
+as example:
 - (void)webView:(WKWebView *)webView didCommitNavigation:(null_unspecified WKNavigation *)navigation;
 {
     [WalletUtils injectJSWithWebView:webView];
@@ -80,6 +83,7 @@ callback:^(WalletAccountModel * _Nonnull account, NSError * _Nonnull error)
 ```
 
 #### 2.3 Analyze data in webview's runJavaScriptTextInputPanelWithPrompt callback method
+##### 
 ```obj-c
 - (void)webView:(WKWebView *)webView runJavaScriptTextInputPanelWithPrompt:(NSString *)prompt defaultText:(nullable NSString *)defaultText initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(NSString * __nullable result))completionHandler
 {
