@@ -52,7 +52,7 @@
     
     
     /* Removing the string both ends the whitespace and newline characters. */
-    NSString *string = @"arch token soft aerobic song scheme cost envelope measure force lemon  farm";//self.importMnemonicWords.text;
+    NSString *string = self.importMnemonicWords.text;
     NSString *mnemonicWords = [string stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     
     /* Check your input password and mnemonic words that can not be blank. */

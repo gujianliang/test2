@@ -242,7 +242,7 @@ static NSDateFormatter *TimeFormatter = nil;
     };
     
     if (json.length == 0) {
-        sendError(kAccountErrorJSONInvalid, @"数据为空");
+        sendError(kAccountErrorJSONInvalid, @"Parameter cannot be nil");
         return nil;
     }
     
