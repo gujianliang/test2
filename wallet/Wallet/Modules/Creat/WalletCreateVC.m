@@ -85,8 +85,8 @@
 
 
 /**
- * Just hidden the keyboard.
- */
+* Just hidden the keyboard.
+*/
 - (void)touchesBegan:(NSSet*)touches withEvent:(UIEvent *)event{
     [self.view endEditing:YES];
 }

@@ -15,6 +15,7 @@
 
 
 @interface ViewController ()
+
 @property (weak, nonatomic) IBOutlet UILabel *rawLabel;
 
 @end
@@ -44,8 +45,8 @@
 */
 - (IBAction)clickCreateOrImportWalletEvent:(UIButton *)sender{
     switch (sender.tag) {
-        case 10:{
             
+        case 10:{
             WalletCreateVC *create = [[WalletCreateVC alloc] init];
             [self.navigationController pushViewController:create animated:YES];
         }break;

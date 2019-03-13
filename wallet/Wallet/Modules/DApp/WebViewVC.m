@@ -9,45 +9,44 @@
 #import "WebViewVC.h"
 #import <WebKit/WebKit.h>
 #import <WalletSDK/WalletUtils.h>
+#import "WalletSdkMacro.h"
 
 @interface WebViewVC ()<WKNavigationDelegate,WKUIDelegate>
 {
-    NSString *_url;
-    WKWebView *_webView;
+    NSURL *_URL;
+    WKWebView *_webView;  /* It is a 'WKWebView' object that used to interact with dapp. */
 }
 
 @end
 
 @implementation WebViewVC
 
-- (instancetype)initWithURL:(NSString *)url
-{
+- (instancetype)initWithURL:(NSURL *)URL{
     self = [super init];
     if (self) {
-        _url = url;
+        _URL = URL;
     }
     return self;
 }
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    _webView = [[WKWebView alloc]initWithFrame:CGRectMake(0, 0,self.view.frame.size.width  , self.view.frame.size.height)];
-    _webView.UIDelegate = self;
-    _webView.navigationDelegate = self;
+    
+    /*
+     Please note that, This is a 'WKWebView' object, does not support a "UIWebView" object.
+     */
+    _webView = [[WKWebView alloc]initWithFrame:CGRectMake(0, 0, ScreenW, ScreenH)];
+    _webView.UIDelegate = self;             /* set UIDelegate */
+    _webView.navigationDelegate = self;     /* set navigationDelegate */
     
     
-    NSString *stringurl = _url;
-    
-    NSURL *url = [NSURL URLWithString:stringurl];
-    
-    NSMutableURLRequest *theRequest = [NSMutableURLRequest requestWithURL:url
-                                       
+    NSMutableURLRequest *theRequest = [NSMutableURLRequest requestWithURL:_URL
                                                               cachePolicy:NSURLRequestReloadIgnoringCacheData
-                                       
                                                           timeoutInterval:1.0];
-    
     [_webView loadRequest:theRequest];
     [self.view addSubview:_webView];
+    
     
     /*
      CurrentWallet has two key; addres and ketstore
@@ -65,30 +64,57 @@
     [WalletUtils initDappWebViewWithKeystore:walletList];
 }
 
-- (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(null_unspecified WKNavigation *)navigation
-{
+
+#pragma mark -- WKNavigationDelegate
+/**
+* You must implement this method that is used to inject js to WebView。
+*/
+- (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(null_unspecified WKNavigation *)navigation{
      [WalletUtils injectJSWithWebView:webView];
 }
 
+
+#pragma mark -- WKUIDelegate
+
+/**
+* You must implement this method that is used to response js feedback。
+*/
 -(void)webView:(WKWebView *)webView runJavaScriptAlertPanelWithMessage:(NSString *)message initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(void))completionHandler{
+    
+    /* This method can be called if you want to display js call information. This is optional. */
+    [self alertMessage:message];
+    
+    completionHandler();
+}
+
+
+/**
+* Show the js call information.
+*/
+- (void)alertMessage:(NSString *)message{
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil
                                                                              message:message?:@""
                                                                       preferredStyle:UIAlertControllerStyleAlert];
     
     [alertController addAction:([UIAlertAction actionWithTitle: @"Confirm"
                                                          style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-    }])];
+                                                         }])];
     [self presentViewController:alertController animated:YES completion:nil];
-    completionHandler();
 }
 
-- (void)webView:(WKWebView *)webView runJavaScriptTextInputPanelWithPrompt:(NSString *)prompt defaultText:(nullable NSString *)defaultText initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(NSString * __nullable result))completionHandler
-{
+
+/**
+* You must implement this method to call js. This js is used in response to web3 operations or connex.
+*/
+- (void)webView:(WKWebView *)webView runJavaScriptTextInputPanelWithPrompt:(NSString *)prompt defaultText:(nullable NSString *)defaultText initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(NSString * __nullable result))completionHandler{
     [WalletUtils webView:webView  defaultText:defaultText completionHandler:completionHandler];
 }
 
-- (void)dealloc
-{
+
+/**
+* You must implement this method to free memory, otherwise there may be a memory overflow or leak.
+*/
+- (void)dealloc{
     [WalletUtils deallocDappSingletion];
 }
 
