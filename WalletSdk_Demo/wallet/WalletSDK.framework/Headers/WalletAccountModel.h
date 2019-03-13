@@ -12,10 +12,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface WalletAccountModel : NSObject
 
-@property (nonatomic, copy) NSString *keystore;
-@property (nonatomic, copy) NSString *address;
-@property (nonatomic, copy) NSString *privatekey;
-@property (nonatomic, copy) NSArray *words;
+@property (nonatomic, copy)NSString *keystore;
+@property (nonatomic, copy)NSString *address;
+@property (nonatomic, copy)NSString *privatekey;
+@property (nonatomic, copy)NSArray *words;
 
 @end
 

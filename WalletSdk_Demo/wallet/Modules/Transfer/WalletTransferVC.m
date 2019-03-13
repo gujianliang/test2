@@ -24,7 +24,7 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *symobl;
 @property (weak, nonatomic) IBOutlet UIImageView *coinIcon;
-@property (nonatomic, strong)UITextField *pwTextField;
+@property (nonatomic, strong) UITextField *pwTextField;
 
 @end
 
@@ -78,8 +78,7 @@
 //    [self contractSignture:from keystore:keystore];
 }
 
-- (void)vetTransfer:(NSString *)from keystore:(NSString *)keystore
-{
+- (void)vetTransfer:(NSString *)from keystore:(NSString *)keystore{
     BigNumber *amountBig = [WalletUtils parseToken:self.transferAmountTextField.text dicimals:18];
 
     //vet
@@ -100,8 +99,7 @@
     }];
 }
 
-- (void)vthoTransfer:(NSString *)from keystore:(NSString *)keystore
-{
+- (void)vthoTransfer:(NSString *)from keystore:(NSString *)keystore{
     if (self.transferAmountTextField.text.length == 0
         || self.transferAmountTextField.text.integerValue == 0) {
         
@@ -131,11 +129,12 @@
 
 }
 
-//address: Accept the address of the account
-//value: Token transfer amount
+/**
+* address: Accept the address of the account
+* value: Token transfer amount
+*/
 - (NSString *)calculatenTokenTransferClauseData:(NSString *)address
-                                     value:(NSString *)value
-{
+                                     value:(NSString *)value{
     NSString *head = @"0xa9059cbb"; // method id
     NSString *newAddrss = [NSString stringWithFormat:@"000000000000000000000000%@",[address substringFromIndex:2]];
     NSInteger t = 64 - [value substringFromIndex:2].length;
@@ -148,10 +147,7 @@
     return  result;
 }
 
-- (void)contractSignture:(NSString *)from keystore:(NSString *)keystore
-{
-
-
+- (void)contractSignture:(NSString *)from keystore:(NSString *)keystore{
     //xnode pending order contract
     TransactionParameter *paramters = [[TransactionParameter alloc]init];
     paramters.to = @"0xd4dac3a95c741773f093d59256a21ed6fcc768a7"; //token address
@@ -179,10 +175,10 @@
      }];
 }
 
-//splice clause data
-- (NSString *)contractMethodId:(NSString *)methodId params:(NSArray *)params
-{
-    
+/**
+* splice clause data
+*/
+- (NSString *)contractMethodId:(NSString *)methodId params:(NSArray *)params{
     NSString *clauseData = methodId;
     for (NSString *param in params) {
         NSInteger t = 64 - [param substringFromIndex:2].length;
@@ -197,22 +193,17 @@
     return clauseData;
 }
 
-- (BOOL)textFieldShouldReturn:(UITextField *)textField
-{
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{
     [textField resignFirstResponder];
     return YES;
 }
 
 
 /**
- *  Just hidden the keyboard.
- */
+*  Just hidden the keyboard.
+*/
 - (void)touchesBegan:(NSSet*)touches withEvent:(UIEvent *)event{
     [self.view endEditing:YES];
-}
-
-- (IBAction)changeSlider:(id)sender{
-    
 }
 
 

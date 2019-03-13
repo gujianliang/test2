@@ -7,7 +7,6 @@
 // 
 
 #import "WalletDetailVC.h"
-//#import <WalletSDK/AFNetworking.h>
 #import "AFNetworking.h"
 #import "WalletTransferVC.h"
 #import "WalletMoreInfoVC.h"
@@ -257,10 +256,19 @@
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
     
-    NSString *url = searchBar.text;
-    WebViewVC *webVC = [[WebViewVC alloc] initWithURL:url];
-    [self.navigationController pushViewController:webVC animated:YES];
+    NSURL *URL = [NSURL URLWithString: searchBar.text];
+    
+    if([[UIApplication sharedApplication] canOpenURL:URL]){
+        
+        WebViewVC *webVC = [[WebViewVC alloc] initWithURL:URL];
+        [self.navigationController pushViewController:webVC animated:YES];
+        
+    }else {
+        NSLog(@"error: The url is invalid.");
+    }
 }
+
+
 
 #define click event
 
