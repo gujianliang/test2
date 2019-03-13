@@ -30,14 +30,35 @@ Vechain wallet SDK provides a series of functional interface can help the iOS de
 
 #### The dependency package should be added to the project, as listed below:
 ```obj-c
+
+1、Support installation with CocoaPods
+ 
+ source 'https://github.com/CocoaPods/Specs.git'
+ platform :ios, '10.0'
+ target 'TargetName' do 
  
     pod 'AFNetworking', '~> 3.0'
-
-    pod 'MBProgressHUD', '1.1.0'
-
+ 
+    pod 'MBProgressHUD', '1.1.0'            
+ 
     pod 'Masonry', '1.1.0'
-
+ 
     pod 'SocketRocket', '~> 0.4.2'
+ 
+ end
+
+2、Support manual install
+
+git clone --recursive https://github.com/AFNetworking/AFNetworking.git
+git clone --recursive https://github.com/jdg/MBProgressHUD.git
+git clone --recursive https://github.com/SnapKit/Masonry.git
+git clone --recursive https://github.com/facebook/SocketRocket.git
+
+Clone or download them and then drag them into your project.
+
+**note that: The frameWork 'MBProgressHUD' is just a indicator example in this demo. If you develop your project, 
+you can custom it and this is optional.
+
 ```
 To use the Framework, add the WalletSDK.Framework and WalletSDKBundle.bundle to your project :
 
