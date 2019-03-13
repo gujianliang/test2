@@ -141,8 +141,9 @@
                password:(NSString*)password
                callback:(void(^)(WalletAccountModel *account,NSError *error))callback
 {
-    [Account decryptSecretStorageJSON:keystoreJson password:password callback:^(Account *account, NSError *NSError) {
-        if (NSError == nil) {
+    [Account decryptSecretStorageJSON:keystoreJson password:password callback:^(Account *account, NSError *decryptError) {
+        
+        if (decryptError == nil) {
             WalletAccountModel *accountModel = [[WalletAccountModel alloc]init];
             accountModel.keystore = keystoreJson;
             accountModel.privatekey = [SecureData dataToHexString:account.privateKey];
@@ -150,8 +151,9 @@
             accountModel.words = [account.mnemonicPhrase componentsSeparatedByString:@" "];
             
             callback(accountModel,nil);
+            
         }else{
-            callback(nil,NSError);
+            callback(nil, decryptError);
         }
     }];
 }

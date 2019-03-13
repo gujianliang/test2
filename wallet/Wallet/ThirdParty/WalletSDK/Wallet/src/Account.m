@@ -253,6 +253,7 @@ static NSDateFormatter *TimeFormatter = nil;
                                                            error:&error];
     
     if (error) {
+        NSLog(@"The Keystore format is incorrect.");
         sendError(kAccountErrorJSONInvalid, [error description]);
         return nil;
     }
