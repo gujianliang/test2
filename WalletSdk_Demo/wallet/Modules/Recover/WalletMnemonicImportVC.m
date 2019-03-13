@@ -87,6 +87,11 @@
      {
          [hud hideAnimated:YES];
          
+         if (error) {
+             NSLog(@"error：%@", error);
+             return ;
+         }
+         
          [self.navigationController popToRootViewControllerAnimated:NO];
          
          WalletDetailVC *detailVC = [[WalletDetailVC alloc]init];
