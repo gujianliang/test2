@@ -63,7 +63,9 @@ static dispatch_once_t predicate;
 
 - (void)webView:(WKWebView *)webView defaultText:(nullable NSString *)defaultText completionHandler:(void (^)(NSString * __nullable result))completionHandler
 {
+#if  ReleaseVersion
     NSLog(@"defaultText == %@",defaultText);
+#endif
     
     NSString *result = [defaultText stringByReplacingOccurrencesOfString:@"wallet://" withString:@""];
     NSDictionary *dict = [NSJSONSerialization dictionaryWithJsonString:result];
@@ -352,13 +354,17 @@ static dispatch_once_t predicate;
     //connex
     NSString *js = connex_js;
     [webview evaluateJavaScript:js completionHandler:^(id _Nullable item, NSError * _Nullable error) {
+#if ReleaseVersion
         NSLog(@"inject error == %@",error);
+#endif
     }];
     
     //web3
     NSString *web3js = web3_js;
     [webview evaluateJavaScript:web3js completionHandler:^(id _Nullable item, NSError * _Nullable error) {
+#if ReleaseVersion
         NSLog(@"web3js error == %@",error);
+#endif
     }];
 }
 

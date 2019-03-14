@@ -121,7 +121,7 @@
          }else{
              MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
              hud.mode = MBProgressHUDModeText;
-             hud.label.text = @"Import failure, Please check the input is correct";
+             hud.label.text = @"Check the input is correct";
              [hud hideAnimated:YES afterDelay:3];
          }
      }];

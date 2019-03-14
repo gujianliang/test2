@@ -42,7 +42,7 @@
     
     
     NSMutableURLRequest *theRequest = [NSMutableURLRequest requestWithURL:_URL
-                                                              cachePolicy:NSURLRequestReloadIgnoringCacheData
+                                                              cachePolicy:NSURLRequestUseProtocolCachePolicy
                                                           timeoutInterval:1.0];
     [_webView loadRequest:theRequest];
     [self.view addSubview:_webView];
@@ -104,9 +104,13 @@
 
 
 /**
-* You must implement this method to call js. This js is used in response to web3 operations or connex.
+* You must implement this delegate method to call js.
 */
 - (void)webView:(WKWebView *)webView runJavaScriptTextInputPanelWithPrompt:(NSString *)prompt defaultText:(nullable NSString *)defaultText initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(NSString * __nullable result))completionHandler{
+        
+    /*
+     You must call this method. It is used to response web3 or connex operations.
+     */
     [WalletUtils webView:webView  defaultText:defaultText completionHandler:completionHandler];
 }
 

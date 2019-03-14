@@ -106,5 +106,9 @@
 #define  blockChain_host_release    @"https://vethor-node.vechain.com"                      //正式环境
 
 
+// 配置调试log是否打印
+#define     ReleaseVersion    0
+
+
 
 #endif /* PrefixHeader_pch */

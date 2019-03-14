@@ -186,13 +186,13 @@
 }
 
 + (void)debugLog:(id)responseObject andUrl:(id)url{
-#ifdef DEBUG
+#if ReleaseVersion
     NSLog(@"\n\n请求地址：%@  decode -- >%@  \n\n", url, responseObject);
 #endif
 }
 
 + (void)debugError:(id)responseObject andUrl:(id)url{
-#ifdef DEBUG
+#if ReleaseVersion
     NSLog(@"\n\n请求地址：%@  error -- >%@  \n\n", url, responseObject);
 #endif
 }

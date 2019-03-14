@@ -251,8 +251,6 @@
 
 + (void)webView:(WKWebView *)webView defaultText:(NSString *)defaultText completionHandler:(void (^)(NSString * result))completionHandler
 {
-    NSLog(@"defaultText == %@",defaultText);
-    
     WalletDAppHandle *dappHandle = [WalletDAppHandle shareWalletHandle];
     [dappHandle webView:webView defaultText:defaultText completionHandler:completionHandler];
 }
