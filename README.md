@@ -54,7 +54,7 @@ git clone --recursive https://github.com/jdg/MBProgressHUD.git
 git clone --recursive https://github.com/SnapKit/Masonry.git
 git clone --recursive https://github.com/facebook/SocketRocket.git
 
-Clone or download them and then drag them into your project.
+Clone or download them and drag them into your project.
 
 **note that: The frameWork 'MBProgressHUD' is just a indicator example in this demo. If you develop your project, 
 you can custom it and this is optional.
