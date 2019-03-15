@@ -554,7 +554,9 @@
     [[WalletTools getCurrentVC].navigationController.view addSubview:signatureView];
     
     signatureView.transferBlock = ^(NSString * _Nonnull txid ,NSInteger code) {
+#if ReleaseVersion
         NSLog(@"txid = %@",txid);
+#endif
         if (txid.length != 0) {
             [WalletTools callbackWithrequestId:requestId
                                        webView:webView

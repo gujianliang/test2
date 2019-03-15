@@ -301,9 +301,17 @@
                                                             code:code
                                                          message:message];
     NSString *injectJS = [NSString stringWithFormat:@"%@('%@')",callbackId,[packageDict yy_modelToJSONString]];
-    NSLog(@"inject == %@",injectJS);
+
+#if ReleaseVersion
+    NSLog(@"injectJS == %@",injectJS);
+#endif
+    
     [webView evaluateJavaScript:injectJS completionHandler:^(id _Nullable item, NSError * _Nullable error) {
-        NSLog(@"error == %@",error);
+        if (error) {
+            NSLog(@"injectJS error == %@",error);
+        }else {
+            NSLog(@"injectJS success");
+        }
     }];
     
     if (code != 1 && code != 500) {

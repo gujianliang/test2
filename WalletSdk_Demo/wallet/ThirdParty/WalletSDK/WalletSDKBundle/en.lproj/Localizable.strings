@@ -1,0 +1,1061 @@
+/*
+ Localizable.strings
+ VCWallet
+ 
+ Created by 曾新 on 2018/4/9.
+ Copyright © 2018年 VeCahin. All rights reserved.
+ */
+
+
+//<!-- ————————————————————奖励————————————————————-->
+"reward_thor_total" = "Received";
+"reward_thor_current_week" = "Unclaimed";
+"reward_agreement_text" = "VeThor Rewards Service Agreement";
+"reward_not_open_node_content" = "Bind your X Node to VeChainThor ASAP";
+"reward_card_verify" = "Cancel upgrade";
+"reward_card_rewarding" = "Rewarding";
+"reward_card_upgrade" = "Upgrade";
+"node_transfer_sucess_msg1" = "• VeChainThor Node Program begins soon. Apply and get more VeThor rewards;";
+"reward_history_total" = "Total VTHO Rewards";
+"reward_not_open_item1" = "VeChainThor Node Program";
+"reward_card_upgrade_fail_dialog_title" = "Node upgrade failed";
+"reward_node_status_dialog_upgrade_title" = "Node upgrade successful";
+"reward_node_status_dialog_downgrade_title" = "Node Downgrade";
+"reward_card_upgrade_card" = "Join Node Program. Get Extra VTHO Rewards";
+"transfer_coin_balance" = "Balance:";
+"reward_not_open_binding_minbalance" = " Minimum VET required： ";
+"node_transfer_sucess_item2" = "Balance";
+"reward_card_min_coin" = "Min VET ";
+"node_transfer_sucess_item5" = "Binding Add";
+"reward_history_received_time" = "After applying for the award, the VTHO award will arrive within 1 days.";
+"reward_not_open_item2" = "Start soon, stay tuned!";
+"reward_history_received" = "Received rewards";
+"reward_card_upgrade_dialog_title" = "Apply to upgrade Node";
+"reward_history_last_record" = "Recent reward records";
+"node_transfer_sucess_item1" = "VeChainThor Address";
+"reward_not_open_thor_reward" = "VeChainThor Node Program begins soon. Apply and get more VeThor rewards";
+"reward_history_wait_received" = "Pending rewards";
+"node_transfer_sucess_item4" = "Minimum VET";
+"reward_card_x_node_multiple" = "X Node+";
+"vethor_x_node" = "VeThor X Node";
+"strength_x_node" = "Strength X Node";
+"thunder_x_node" = "Thunder X Node";
+"mjolnir_x_node" = "Mjolnir X Node";
+"strength_node" = "Strength Node";
+"thunder_node" = "Thunder Node";
+"mjolnir_node" = "Mjolnir Node";
+"reward_history_vethor_fund" = "VeChain Foundation";
+"reward_card_multiple_normal" = "Node+";
+"reward_card_empty_ball" = "Rewards are processing, please check later";
+"reward_history_detail" = "History";
+
+
+
+//<!-- ———————————————————钱包创建、导入————————————————————-->
+"wallet_count_exceed_max" = "The quantity of wallet reached the limit";
+"reward_agreement_title" = "VeThor Rewards";
+"reward_history" = "Rewards history";
+"reward_node_empty_name" = "Non-Economy Node";
+"reward_history_read_record_failed" = "Rewards history error";
+"import_wallet_exit_dialog" = "This wallet already exists, do you want to reset the password and wallet name?";
+"transfer_wallet_password_error" = "Password Incorrect";
+"app_password_login_error" = "The entered password is incorrect";
+"import_wallet_name_hint" = "New Wallet Name";
+"import_wallet_import_button_txt" = "Import";
+"mnemonic_word_backup_write" = "Please write down the mnemonic phrases";
+"mnemonic_word_backup_tips" = "The 12 mnemonic phrases are used for recovering your wallet, write them down correctly to a piece of paper and keep it safe";
+"import_wallet_keystore_tip" = "Use your keystore file or use the keystore QR code to input your keystore";
+"mnemonic_word_verify_tips" = "Please choose mnemonic words in order and make sure you have written them down correctly.";
+"import_wallet_input_keystore_hint"  = "Keystore Content";
+"import_wallet_input_keystore_password_hint" = "Keystore Password";
+"import_wallet_importing" = "Importing";
+"export_wallet_explain_keystore_content1" = "Please store the Keystore file in a safe offline environment. Never store this file on any online storage.";
+"forget_password_hint" = "Forget your wallet password? Reset password by importing mnemonic phrases. ";
+"build_string_length_beyond_error" = "Wallet name cannot exceed 20 characters";
+"build_string_wallet_name_exist_error" = "This name is taken, please try another";
+"mnemonic_word_backup" = "Back up mnemonic phrases";
+"backup_wallet_dialog_right" = "Continue";
+"version_update_dialog_exit_app" = "Exit";
+"mnemonic_dialog_background_ok" = "Continue";
+"export_keystore" = "Export Keystore";
+"build_wallet_password_length_error" = "The password must be at least 8 characters in length";
+"forget_password_import_keystore" = "Import Now";
+"import_wallet_password_hint" = "New Password";
+"import_wallet_input_mnemonicwords_hint" = "Please use spaces to separate the mnemonic phrases";
+"app_password_delete" = "Delete";
+"buid_wallet_backup_first_butn_txt" = "How to backup";
+"build_wallet_name_hint" = "Wallet Name";
+"mnemonic_dialog_background_ge5_title" = "Creation Failed";
+"create_wallet_success" = "Wallet successfully created";
+"build_wallet_tips2" = "• We DO NOT store your password, nor can we recover them. Please backup cautiously;";
+"build_wallet_tips3" = "• Passwords must be at least 8 characters in length, contain at least 3 out of 4 of the following: one uppercase, one lowercase, one digit, and one symbol.";
+"modify_password_old_password_error" = "Current Password Incorrect";
+"backup_explain_title2" = "DO NOT store your mnemonic phrases online";
+"backup_wallet_dialog_back" = "The wallet creation will fail if you quit now. Are you sure you want to exit? ";
+"manager_wallet_edit_sucess" = "Wallet name change successful";
+"mnemonic_dialog_background_msg" = "Wallet creation/backup has been interrupted. For your assets safety, we strongly recommend you create a new wallet";
+"wallet_name" = "Wallet Name";
+"export_wallet_keystore_file" = "Keystore";
+"backup_wallet_detail" = "How to backup my wallet?";
+"export_wallet_explain_keystore_content2" = "DO NOT use Email/Cloud Storage/Notepad/IM tools to transfer keystore. It can easily get hacked and result in irreversible loss";
+"build_wallet_password_error" = "Passwords must contain at least 3 out of 4 of the following: one uppercase, one lowercase, one digit, and one symbol";
+"import_wallet_mnemonic_word_error" = "The quantity of mnemonic phrases is not 12";
+"import_wallet_repassword_hint" = "Confirm New Password";
+"mnemonic_dialog_background_ge5_msg" = "The creation failed for long-time interruption. Please restart";
+"node_transfer_select_wallet_confirm" = "Confirm";
+"export_wallet_explain_qr_content1" = "It is forbidden to save/screenshot/or take photos of the QR code. Only scan it to transfer your wallet to another device in a safe environment";
+"export_wallet_explain_qr_content2" = "Please make sure there is nobody around or watching via a camera when using this. Loss of the QR code may lead to irreversible loss";
+"change_wallet_password" = "Change Wallet Password";
+"dialog_confirm_delete_wallet" = "Confirm to delete this wallet?";
+"sencond_new_password" = "Confirm New Password";
+"import_wallet_mnemonic_word_format" = "Invalid mnemonic phrases";
+"wallet_manager_no_wallet" = "No Wallets";
+"build_string_length_error" = "Wallet name cannot be blank";
+"import_wallet_keystore_error" = "Please scan the QR code of keystore";
+"mnemonic_dialog_dont_screenshot" = "Don't take screenshot";
+"mnemonic_dialog_writing_title" = "Complete";
+"build_wallet_repassword" = "Please confirm your password";
+"modifiy_wallet_password_sucess" = "Password change successful";
+"backup_wallet_dialog_ready" = "Please confirm you are ready to write down your mnemonic phrases";
+"mnemonic_check_todo1" = "Verification failed";
+"export_wallet_copy_keystore" = "Copy Keystore";
+"current_password" = "Current Password";
+"mnemonic_word_verify_step" = "Confirm your mnemonic phrases";
+"import_wallet_sucess" = "Import Successful";
+"wallet_save" = "Save";
+"mnemonic_dialog_finished_dialog" = "Confirmed! The mnemonic phrases will be deleted from this device";
+"backup_wallet" = "Backup Now";
+"mnemonic_dialog_dont_screenshot_msg" = "Anyone who gets access to your mnemonic phrases can recover your wallet and control your assets. Please write these down on paper and keep it safe.";
+"manager_wallet_deit_delete" = "Are you sure to delete the wallet?";
+"build_wallet_password_hint" = "Password";
+"backup_explain_title1" = "Mnemonic phrases are the key of your wallet";
+"import_wallet_fail" = "Import failed";
+"delete_wallet" = "Delete a wallet";
+"title_change_password" = "Change Wallet Password";
+"mnemonic_dialog_background_title" = "Creation interrupted";
+"mnemonic_check_todo3" = "Recopy";
+"build_wallet_password" = "Please input your password";
+"mnemonic_dialog_background_cancel" = "Recreate";
+"import_wallet_item1" = "Mnemonic Phrases";
+"mnemonic_dialog_writing_finished" = "Confirm your mnemonic phrases are properly stored?";
+"address_checksum_cancel" = "Recheck";
+"start_with_countdown_default" = "Accept and set login password";
+"build_wallet_title" = "Create a wallet";
+"import_wallet_title" = "Import a wallet";
+"contacts_added_success" = "Add successful";
+"contacts_udpated_success" = "Update successful";
+"delete_wallet_success" = "Wallet delete successful";
+"delete_wallet_failed" = "Wallet delete failed";
+"address_char_not_hex" = "Input valid VeChainThor address.";
+
+
+
+//<!-- ———————————————————登录————————————————————-->
+"login_Face_ID" = "Enable Face ID to login?";
+"login_Touch_ID" = "Enable Touch ID to login?";
+"Touch_ID_login" = "Touch ID";
+"Face_ID_login" = "Face ID";
+"unable_Face_ID" = "This device does not support Face ID";
+"unable_Touch_ID" = "This device does not support Touch ID";
+"Cant_use_Face_ID" = "You haven't setup your iPhone passcode, therefore Face ID is not available";
+"Cant_use_Touch_ID" = "You haven't setup your iPhone passcode, therefore Touch ID is not available";
+"setting_system_modify_password" = "Change login password";
+"app_password_forget" = "Forget password?";
+"app_password_reseting" = "Please reset your password";
+"ap_password_input" = "Enter your password";
+"ap_password_seting_again" = "Confirm your password";
+"ap_password_seting" = "Set your password";
+"first_new_password" = "New Password";
+
+
+
+
+//<!-- ———————————————————待定翻译————————————————————-->
+"收款地址" = "Pay to";
+"什么是助记词？" = "What are mnemonic phrases?";
+"交易费用" = "Tx Fee";
+"完成" = "Complete";
+"VTHO" = "VTHO";
+"guancha" = "guancha_En";
+"创建钱包中…" = "Creating…";
+"Keystore格式不正确" = "Invalid Keystore";
+"交易详情" = "Transaction Log";
+"是唯链雷神钱包地址" = "is VeChainThor Wallet Address";
+"发款地址: " = "Sender's Address:";
+"观察钱包暂不支持领取VeThor奖励！" = "Observe wallet DOES NOT support VeThor rewards claim";
+"您的设备已处于越狱状态，\n唯链雷神钱包在此设备状态下不可使用。" = "VeChainThor Wallet is not available in JailBroken mode.";
+"请输入Keystore密码" = "Input the Keystore password";
+"助记词可以恢复您的钱包，拥有助记词就拥有您的全部资产。" = "Anyone who gains access to your mnemonic phrases can recover your wallet and control all your assets.";
+"我们不存储助记词，也无法帮您找回，请备份好您的助记词。" = " We DO NOT store your mnemonic phrases, nor can we recover them. Please backup cautiously.";
+"请准备好纸和笔，抄写助记词在纸上，并存放在安全的地方。" = "Please write down the mnemonic phrases on paper and keep it safe.";
+"千万不要存放在网络上。助记词备份若中断，钱包创建失败。" = " DO NOT save them to any online storage.";
+"若您有特殊需求，请与基金会联系：" = "Contact the VeChain Foundation for further support:";
+"关联地址复制成功" = "Intermediary Address copied";
+"请扫描 %@ 的收款二维码" = "Please scan the receiver's QR code of %@";
+"从原钱包转账 0.01 VEN，完成原钱包绑定。" = "Transfer 0.01 ERC20 VEN from your Ethereum address to the intermediary address to complete the binding.";
+" 观察钱包： " = " Observe wallet: ";
+" 联系我们： " = " Contact us: ";
+"订单类型" = "Order";
+"唯一的合规VET关联地址。关联地址基于您选择的唯链雷神钱包地址与您填写的以太坊地址通过算法直接创建生成，无任何人拥有私钥。转入的资金将永久锁定不可提取。" = "The intermediary address is used for X Node binding and VET token swap service. The intermediary address is generated based on the VeChainThor wallet address you selected and the Ethereum address you provided. No one owns the private key to the intermediary address. Assets transferred to this address CANNOT be withdrawn.";
+"唯一的合规X节点绑定关联地址。关联地址是基于您选择的唯链雷神钱包地址与您填写的以太坊地址通过算法直接创建生成，无任何人拥有私钥。转入的资金将永久锁定不可提取。" = "The intermediary address is used for X Node binding and VET token swap service. The intermediary address is generated based on the VeChainThor wallet address you selected and the Ethereum address you provided. No one owns the private key to the intermediary address. Assets transferred to this address CANNOT be withdrawn.";
+" 雷神地址： " = " Address： ";
+"X_Days_Left" = "%@ days left";
+"Y_Day_Left" = "%@ day left";
+
+"交易费用：" = "Tx Fee: ";
+"确定删除联系人" = "Confirm to delete";
+"您未创建唯链雷神钱包。请您先创建钱包或导入钱包，才可参加经济节点奖励。" = "We cannot detect your wallet address. To get your VeThor rewards, please create or import a wallet address.";
+" 当前持币量： " = " Balance： ";
+"请输入转账金额 " = "Please enter the amount";
+"从原钱包转账 0.01 VEN，完成X节点绑定。" = "Transfer 0.01 VEN to intermediary address to complete X Node binding.";
+"雷神钱包地址应为42位的数字与字母组合" = "The VeChainThor wallet address is 42 characters in length starting with 0x";
+"以太坊钱包地址应为42位的数字与字母组合" = "The Ethereum wallet address is 42 characters in length starting with 0x";
+"唯链雷神区块链与包括以太坊在内的区块链 相互独立，助记词、地址、通证等信息均不互通，" = "VeChainThor and the Ethereum blockchain are two completely separate platforms and the mnemonic phrases, address and tokens CANNOT be shared.";
+"直接转账会造成资产丢失且无法找回！" = "Transferring assets directly from Ethereum to VeChainThor (or vice versa) will cause irreparable loss.";
+" 节点类型： " = " Node type： ";
+"将二维码放入框内并稍等片刻..." = "Put the QR code in the square and\n wait...";
+"金额错误" = "Invalid amount";
+"转账发起成功" = "Send successful";
+"请输入地址" = "Please enter the VeChainThor Wallet address.";
+"您的关联地址是：" = "Your Intermediary Address: ";
+"请您按如下引导，转账 0.01 VEN。" = "Please follow the manual to complete the transaction of 0.01 ERC20 VEN.";
+"您将要置换的VET从原钱包地址转账到关联地址销毁：" = "Please transfer your ERC20 VEN to the intermediary Address:";
+"验证中..." = "Verifying";
+"请扫描0x开头的42位以太坊钱包地址" = "Scan a valid Ethereum address starting from 0x.";
+"当前为观察钱包，不可进行转账和地址授权操作" = "Observe wallet DOES NOT support \'Fund transfer\' or  \'Address authentication\' function";
+"刚刚" = "just now";
+"等待开放_CN" = "等待开放_EN";
+"检测到您对助记词进行截屏，为保证您的钱包安全，建议您重新创建钱包" = "You took a screenshot of the mnemonic phrases. To keep your wallet safe, we recommend you create a new one.";
+"金额过长" = "Amount entered is too long";
+" VET置换服务 " = "VET Token Swap Service";
+" X节点绑定 " = "X Node Binding";
+"通过Home键验证已有指纹" = "Press Home Button to Verify";
+"0x开头" = "Starts with 0x";
+"重试" = "Retry";
+"请输入原登录密码" = "Please enter the current password";
+"请输入新密码" = "Please enter new password";
+"请再次输入新密码" = "Please confirm new password";
+"更新联系人失败" = "Failed to update";
+"ETH地址不合法" = "Invalid ETH address";
+"关联地址不合法" = "Invalid intermediary address";
+"ETH地址已被其他地址绑定" = "The ETH address has been bound to a VeChainThor address";
+"VeChainThor地址还未进行过绑定" = "The VeChainThor address has not been bound";
+"钱包未找到" = "Open wallet failed";
+"请选择钱包地址" = "Choose a wallet to proceed";
+"什么是关联地址 内置长图" = "什么是关联地址 内置长图_en";
+"什么是关联地址（X节点） 长图切片" = "什么是关联地址（X节点） 长图切片_en";
+"VET置换服务操作引导2 Copy" = "VET置换服务操作引导2 Copy_en";
+"检查交易合规" = "Tx verifying";
+"绑定以太坊钱包" = "ETH addr binding";
+"X节点绑定服务开启日期：2018-07-09" =  "X Node binding starts on 2018/07/09";
+"钱包名修改失败" = "Wallet name change failed";
+"密码修改失败" = "Password change failed";
+"请同意服务条款" = "Please agree to the terms of service";
+"数据格式错误" = "Data error";
+"企业鉴权信息无效" ="Invalid corporate authentication information";
+"授权回调地址无效" = "Invalid authorized callback address";
+"授权等级参数无效" = "Invalid authorization level parameter";
+"白盒加密失败" = "White box encryption failed";
+"签名校验超时" = "Signature check timeout";
+"sessiontoken已存在" = "Sessiontoken exists";
+"qrcode超时" = "Qrcode timeout";
+"签名校验时间戳不合法" = "Signature verification time stamp not valid";
+"10 分钟" = "10 mins";
+"1 小时" = "1 hour";
+"5 小时" = "5 hours";
+"12 小时" = "12 hours";
+"24 小时" = "24 hours";
+
+
+//<!-- ———————————————————其他————————————————————-->
+"permission_camera_content" = "Cemera unavailable. Please enable VeChainThor Wallet to access your camera.";
+"setting_system_multiple_language" = "Language";
+"dialog_coin_transfer_description" = "Payment Request";
+"token_swap_recevice_title" = "Receiver's Address：";
+"main_tab_candy" = "Rewards";
+"usercenter_contact" = "Contacts";
+"dialog_coin_transfer_token_type" = "Currency";
+"export_wallet_qr" = "QR code";
+"main_tab_asset" = "Assets";
+"usercenter_setting" = "Settings";
+"home_menu_scan_qr" = "Scan";
+"trans_record_block" = "Block #";
+"main_tab_user_center" = "Me";
+"token_swap_result_item_wait" = "Processing";
+"transaction_detail_no_detail_list" = "No transaction logs";
+"usercenter_about_us" = "About";
+"usercenter_wallet_manager" = "Manage Wallets";
+"app_name" = "VeChainThor Wallet ";
+"transfer_coin_next_page" = "Next";
+"token_swap_thor_binded_error" = "Selected VeChainThor wallet has been bound";
+"contacts_list_no_contact" = "No Contacts";
+"export_wallet_explain_qr_item2" = "Only use this in the safe environment";
+"export_wallet_explain_qr_item1" = "Only for wallet transfer";
+"export_wallet_explain_keystore_item1" = "Store Offline";
+"export_wallet_explain_keystore_content3" = "If you would like to store online, please make sure to use password vault apps such as 1Password/KeePass";
+"export_wallet_explain_keystore_item2" = "Don't transfer your keystore via internet";
+"token_detail_recently_trade_record" = "Transaction Log";
+"token_swap_input_eth_length" = "The VeChainThor wallet address is 42 characters in length starting with 0x";
+"export_wallet_qr_image_tip" = "Please check around to ensure you are not being watched by someone or by hidden cameras";
+"list_load_more_end" = "No more";
+"trans_record_comment" = "Memo";
+"dialog_coin_transfer_pay_from" = "Pay by";
+"about_wallet_des" = "VeChainThor Wallet is a light mobile wallet app. We aim to provide users with a powerful, secure, simple and fully functional portal to the VeChainThor blockchain.";
+"restore_app_password_title" = "Identity Authentication";
+"contact_wallet_receive_address" = "Receiver's Address";
+"app_use_agreement_title" = "Agreement";
+"contact_name" = "Name";
+"contact_save_name_length_error" = "Name is at most 50 characters";
+"mnemonic_dialog_finished_dialog_ok" = "Already backed up. Please delete";
+"no_network_hint" = "No internet access.";
+"receive_coin_has_copy" = "Copied";
+"usercenter_setting" = "Settings";
+"app_password_is_not_same" = "Passwords do not match, please retry";
+"about_contact_us" = "Contact us";
+
+
+// 用于冷钱包，观察钱包 IconFont 有色字体
+"f9_cold_wallet" = "cold wallet";
+"f9_hot_wallet" = "observed wallet";
+"f9_HOT_wallet" = "Observe Wallet";
+"f9_COLD_wallet" = "Cold Wallet";
+
+// 用于奖励引导图的图片文件名
+"1_cn" = "1_en";
+"2_cn" = "2_en";
+"3_cn" = "3_en";
+"4_cn" = "4_en";
+"5_cn" = "5_en";
+
+// 用于版本检查弹框描述
+"app_update_version" = "Please update your app to the latest version V%@";
+"version_update_dialog_yes" = "Update";
+
+
+//<!-- ———————————————————时间展示————————————————————-->
+"yearAgo_single" = "year ago";
+"yearAgo_plural" = "years ago";
+"monthAgo_single"= "month ago";
+"monthAgo_plural"= "months ago";
+"dayAgo_single"= "day ago";
+"dayAgo_plural"= "days ago";
+"hrAgo_single"= "hour ago";
+"hrAgo_plural"= "hours ago";
+"minAgo_single"= "minute ago";
+"minAgo_plural"= "minutes ago";
+
+
+
+
+//<!-- ————————————————————MJ 刷新————————————————————-->
+
+"MJRefreshHeaderIdleText" = "Pull down to refresh";
+"MJRefreshHeaderPullingText" = "Release to refresh";
+"MJRefreshHeaderRefreshingText" = "Loading...";
+
+"MJRefreshAutoFooterIdleText" = "Tap or pull up to load more";
+"MJRefreshAutoFooterRefreshingText" = "Loading...";
+"MJRefreshAutoFooterNoMoreDataText" = "No more";
+
+"MJRefreshBackFooterIdleText" = "Pull up to load more";
+"MJRefreshBackFooterPullingText" = "Release to load more.";
+"正在加载更多的数据..." = "Loading...";
+"MJRefreshBackFooterNoMoreDataText" = "No more";
+
+"MJRefreshHeaderLastTimeText" = "Last update:";
+"MJRefreshHeaderDateTodayText" = "Today";
+"MJRefreshHeaderNoneLastDateText" = "No record";
+
+
+
+
+//<!-- ————————————————————交易————————————————————-->
+"buidl_wallet_privacy_text" = " <VeChainThor wallet user agreement> ";
+"buidl_wallet_policy_text" = "<VeChainThor wallet privacy policy>";
+"buidl_wallet_symbol_text" = ",";
+
+"buidl_wallet_agreement_text" = "I accept";
+"transaction_dialog_button_count" = "I understand %@";
+"transaction_dialog_button" = "I understand";
+"transaction_dialog_no_more" = "Don't prompt me about this again";
+"transaction_dialog_title2_send" = "DO NOT transfer any assets from the VeChainThor wallet to an Ethereum wallet (including ERC20 VEN)!";
+"transaction_dialog_title2_receive" = "DO NOT transfer any assets from an Ethereum wallet (including ERC20 VEN) to the VeChainThor wallet!";
+"transaction_dialog_title1" = "The VeChainThor Blockchain only supports tokens that are native to the VeChainThor platform such as VET and VTHO.";
+"dialog_eth_node_check_node_name" = "X Node Name";
+"dialog_eth_node_check_address" = "Ethereum Address";
+"transfer_coin_title" = "Transfer";
+"transfer_coin_adjust_cost" = "Change";
+"transfer_coin_address_title" = "Receiver's Address";
+"token_swap_no_swapchecked_dialog_title" = "No valid transactions";
+"transfer_coin_vx_address_hint" = "The VeChainThor wallet address is 42 characters in length starting with 0x";
+"transfer_scan_format_error" = "Please scan the QR code of receiver\'s address";
+"home_scan_format_error" = "Please scan the QR code of receiver\'s address or authorization signature";
+"trans_record_sender" = "Sender";
+"eth_address_checksum_error" = "The input address failed in the checksum, please recheck.";
+"token_swap_address_value" = "Amount:";
+"trans_record_time" = "Transaction Time";
+"token_swap_address_to" = "Receiver\'s Address(Intermediary Address):";
+"receive_coin_title" = "Receiver\’s QR code";
+"export_wallet_explain_keystore_item3" = "Store to Password Vault";
+"transfer_coin_slow" = "Slow";
+"transfer_coin_quick" = "Fast";
+"transfer_coin_change_comment_default" = "Add Memo";
+"transaction_comment_dialog_hint" = "You can only view the memo on this device";
+"transfer_wallet_send_fail" = "Send transaction failed";
+"trans_record_trans_code" = "Transaction #";
+"vtoken_list_transaction_fail" = "Failed";
+"transfer_wallet_send_balance_not_enough" = "Insufficient Balance";
+"transfer_coin_change_comment" = "Edit";
+"token_list_confirming" = "Transaction confirming";
+"token_list_transaction_fail" = "Failed";
+"token_list_timeout_todo" = "Timeout";
+"trans_record_receiver" = "Receiver";
+"token_list_packaging" = "Processing";
+"token_detail_receive_coin" = "Receive";
+
+
+//<!-- ————————————————————弹框，对话框————————————————————-->
+"list_load_ing" = "Loading";
+"import_wallet_keystore_password_error" = "Password Incorrect";
+"dialog_tip_title" = "Reminder";
+"dialog_yes" = "Confirm";
+"dialog_no" = "Cancel";
+
+
+
+//<!-- ————————————————————X 绑定， VET 置换————————————————————-->
+"reward_not_open_swap" = "VET Token Swap";
+"dialog_eth_node_check_title" = "X Node Verification Successful";
+"dialog_eth_node_check_start_button" = "Start X Node Binding";
+"reward_not_open_swap_and_unbinding" = "VET Token Swap Service begins now. Please swap your ERC20 VEN to native VeChainThor token VET.";
+"home_menu_exchange" = "VET Token Swap";
+"token_swap_change_eth_dialog_title" = "Bind Another Address";
+"token_swap_card_msg2" = "VET will be sent to your VeChainThor address：";
+"token_swap_eth_already_bind_dialog_title" = "Bound Ethereum Address";
+"node_transfer_old_wallet_desc" = "VeChainThor wallet will be linked to the Ethereum address you provided above and generate a unique intermediary address for X Node binding.";
+"swap_old_wallet_title" = "Step2：Input your Ethereum address";
+"token_swap_bind_to" = "Receiver's Address:\n(Intermediary\nAddress)";
+"swap_foundation_title" = "VeChain Foundation wallet";
+"x_node_move" = "X Node Binding";
+"token_swap_step2_button" = "Ethereum VEN wallet verification";
+"usercenter_wallet_exchange" = "VET Token Swap Service";
+"token_swap_bind_des2" = "Note: This step is ONLY for X Node binding";
+"token_swap_result_list_record" = "VET Token Swap History";
+"token_swap_address_title" = "Copy Intermediary Address";
+"token_swap_bind_warn" = "(DO NOT TRANSFER MORE THAN 0.01 VEN)";
+"token_swap_bind_title" = "Perform this in your Ethereum wallet";
+"node_transfer_select_wallet_hint" = "Step1: Select a VeChainThor wallet to bind X Node";
+"token_swap_illegal_dialog_title" = "Address binding failed";
+"token_swap_bind_copy_address" = "Copy";
+"token_swap_bind_list_item_title1" = "Ethereum TxID:";
+"token_swap_bind_list_item_title2" = "VeChainThor TxID:";
+"token_swap_function_closed" = "VET Token Swap Service Closed";
+"transfer_coin_to_from_same_error" = "The receiver's address cannot be the same as sender's address";
+"node_transfer_sucess" = "X Node Binding Completed";
+"token_swap_bind_title2" = "Step3：Bind token swap address";
+"node_move_guide_title" = "VET Token Swap Manual";
+"token_swap_eth_not_x_dialog_message" = "Please provide valid X Node address";
+"token_swap_guide_button_normal" = "Understood, start binding";
+"token_swap_card_title2" = "VET";
+"xnode_binding_no_swapchecked_dialog_message" = "Please wait. Double check your input addresses and come back in 10 mins.";
+"token_swap_no_swapchecked_dialog_message" = "Please wait. Double check your input addresses and come back in 10 mins.";
+"token_swap_address_hint" = "Please double confirm the receiver's address and follow the manual to complete the transaction";
+"token_swap_guide_title" = "X Node Binding Manual";
+"token_swap_input_starts_ox" = "Ethereum address starts with 0x";
+"token_swap_bind_des1" = "Read Manual";
+"node_move_protocol" = "X Node Binding Service Agreement";
+"swap_no_wallet_hint" = "Cannot find valid VeChainThor addresses. Please create or import a wallet first";
+"token_swap_address_email_address" = "Email Intermediary Address";
+"node_transfer_bind_address_from" = "Sender\'s Address:";
+"token_swap_step2_title1" = "Input Ethereum VEN wallet address";
+"token_swap_eth_already_bind_dialog_message" = "Your Ethereum address has already been bounded to a VeChainThor wallet address via a valid token swap transaction. Please use another Ethereum address and try again";
+"token_swap_change_eth_dialog_message" = "Please wait 300 seconds to bind a new Ethereum address";
+"node_transfer_sucess_msg3" = "• If you have multiple X Node addresses, please create new VeChainThor addresses for X Node binding.";
+"node_transfer_bind_address_hint" = "Note: This step is ONLY for X Node binding.";
+"receive_coin_copy_address" = "Copy wallet address";
+"token_swap_eth_not_x_dialog_title" = "Invalid Ethereum X Node address";
+"node_transfer_bind_change_address" = "Swap";
+"node_transfer_bind_confirm_hint_no_count" = "Please complete ERC20 VEN transfer and wait 10 mins for processing";
+"node_transfer_old_wallet_check_default" = "X Node verification";
+"token_swap_thor_format_error" = "Wrong format of VeChainThor wallet";
+"token_swap_bind_title1" = "Step3: Bind X Node";
+"token_swap_select_wallet_hint" = "Step1: Select a VeChainThor wallet to proceed token swap service";
+"transfer_coin_to_address_error_format" = "The VeChainThor wallet address is 42 characters in length starting with 0x";
+"token_swap_bind_next_button" = "ERC20 VEN transferred, next";
+"node_transfer_bind_next_button" = "ERC20 VEN transferred, next";
+"transfer_coin_input_amount_hint" = "Amount";
+"token_swap_step2_title2" = "The VeChainThor address will be bound to the above Ethereum address and used for VET token swap";
+"token_swap_bind_des3" = "In Step3, complete binding your Ethereum address, intermediary address and VeChainThor address.";
+"token_swap_card_title1" = "ERC20 VEN";
+"token_swap_protocol" = "VET Token Swap Service Agreement";
+"node_transfer_old_wallet_title" = "Step2: Input Ethereum X Node address";
+"node_transfer_sucess_item3" = "X Node Type";
+"node_transfer_sucess_msg2" = "• To secure your X Node, please complete token swap via exchanges and store your VET in VeChainThor wallet before Node Program monitoring resumes;";
+"token_swap_illegal_dialog_message" = "Cannot find valid transactions in your intermediary address. Please recheck your input addresses.";
+"build_wallet_tips1" = "• Password is used for private key protection and transaction authorization;";
+"export_wallet_qr_image_butn_txt" = "Show QR code";
+"token_swap_result_list_record_default_time" = "VET tokens will be sent to your VeChainThor address based on 1:100 ratio soon. More details, please refer to announcements on official twitter";
+"transfer_coin_thor_hint" = "Transaction fee is paid in VTHO. The transaction fee actually consumed may vary based on the execution of the transactions.";
+"node_transfer_function_closed" = "X Node Binding Service Closed";
+"address_checksum_error_msg" = "Your address can\'t be verified since it only contains lower case characters. Please carefully check every character before clicking continue.";
+
+
+
+
+
+
+
+
+
+//<!-- ————————————————————地址授权————————————————————-->
+
+//<!--授权-->
+"authorized_title" = "Address Authorization";
+
+//<!--授权协议-->
+"authorized_agreement_linked" = "Address Authorization Service Agreement";
+"authorized_agreement_start" = "Start";
+
+//<!--授权——选择钱包-->
+"authorized_wallet_hint" = "Select a VeChainThor wallet to proceed address authorization";
+"authorized_wallet_button" = "Confirm and Input Password";
+
+"authorized_wallet_dialog_msg" = "Abort address authorization?";
+"authorized_wallet_dialog_continue" = "Continue";
+"authorized_wallet_dialog_cancel" = "Abort";
+
+
+//<!--开始授权信息提示页-->
+"authorized_status_start_tip" = "Please confirm the contents below for address authorization";
+"authorized_status_start_row0_name" = "Authorization purpose:";
+"authorized_status_start_row1_name" = "Authorization requester:";
+"authorized_status_start_row2_name" = "Address:";
+"authorized_status_start" = "Start authorization";
+"authorized_status_success_tip" = "Authorization successful, continue on requester\'s platform";
+"authorized_status_close" = "OK";
+
+"authorized_dialog_close_content" = "Abort address authorization?";
+"authorized_dialog_close_cancel" = "Continue";
+"authorized_dialog_not_exist_wallet_title" = "No wallets pending for authorization";
+"authorized_dialog_not_exist_wallet_content" = "Pending address：\n";
+"authorized_dialog_not_exist_wallet_return" = "Back";
+"authorized_dialog_not_exist_wallet_import" = "Import the wallet";
+"authorized_dialog_sign_password_hint" = "Input wallet password to confirm your ownership of the wallet.";
+"authorized_dialog_loading" = "Authorizing…";
+"authorized_fail" = "Authorization failed";
+
+//<!-- ————————————————————导入观察者钱包————————————————————-->
+
+//<!--观察者钱包-->
+"import_wallet_observer_explain1" = "Observe a wallet does not require the private key, this function shall be used with cold storage or hardware wallet to better manage your assets. Main functions include balance check, X Node Binding, VET Token Swap and VTHO rewards claim.";
+"import_wallet_observer_explain2" = " Observers DO NOT own the assets in the addresses!";
+"import_wallet_observer_address_hint" = "Scan QR code or input wallet address";
+"import_wallet_item3" = "Observe Wallet";
+"import_wallet_observer_exist_keystore" = "Address exists, please retry";
+"import_wallet_observer_max_count" = "Your observe wallets have reached the limit";
+"import_wallet_observer_qr" = "Scan receiver's QR code";
+"import_wallet_warning_dialog_title" = "Note";
+"import_wallet_warning_dialog_msg" = "Import observe wallet address. However, observers DO NOT own the assets in the addresses";
+"improt_wallet_warning_dialog_butn" = "Understood";
+
+"assets_current_observer_qr_error" = "Observe wallet DOES NOT support 'Fund transfer' or  'Address authorization' function";
+"reward_observer_wallet_explain" = "Observe wallet functions include balance check, X Node binding, VET token swap and VTHO rewards claim. However, observers DO NOT own the assets in the addresses.";
+
+"import_wallet_authorized" = "Observe Wallet Authorization";
+//<!--导入授权观察钱包签名验证-->
+"import_authorized_observer_wallet" = "Observe a wallet";
+"import_authorized_observer_help" = " Read manual";
+
+"import_authorized_first_text1" = "1. To observe a wallet (ffffe900 cold wallet）, navigate to 'Create a wallet -> Import a wallet -> Observe wallet'";
+
+"import_authorized_observer_text1" = "ffffe900 Select a wallet to observe:";
+"import_authorized_observer_text2" = "ffffe900 Enter your 6 digits authentication code:";
+"import_authorized_observer_text3" = "ffffe900 Verify password and obtain authorization signature.";
+
+"import_authorized_second_text1" = "2. Use current wallet (ffffe900 observed wallet), paste the authorization signature or scan the QR code, click 'Signature Authorization' to complete importing the observe wallet.";
+
+"import_authorized_observer_edit_hint" = "Paste or scan the QR code of the authorization signature";
+"import_authorized_observer_check_signature" = "Verify signature";
+
+"import_authorized_observer_close_activity_title" = "Exit observe wallet importing？";
+"import_authorized_observer_close_activity_content" = "If exit, the authentication code will be invalid, wallet import aborted.";
+
+"import_authorized_observer_close_button_right" = "Exit";
+"import_authorized_observer_close_button_left" = "Continue";
+
+"import_authorized_observer_fail_dialog_title" = "Observe wallet failed";
+"import_authorized_observer_fail_dialog_msg" = "Invalid authorization signature. \n Please recheck your input address, authentication code and retry.";
+"import_authorized_observer_dialog_row1_tag" = "Observe address";
+"import_authorized_observer_fail_dialog_row2_tag" = "Authentication code";
+"import_authorized_observer_fail_dialog_return" = "Back";
+
+"import_authorized_observer_success_dialog_title" = "Observe wallet successful!";
+"import_authorized_observer_success_dialog_row2_tag" = "Observe Wallet Name";
+"import_authorized_observer_success_dialog_confirmed" = "Confirm";
+
+
+//<!-- ————————————————————授权观察钱包————————————————————-->
+
+//<!--授权观察钱包 step1-->
+"authorized_observer_step1_title" = " Observe Wallet Authorization";
+"authorized_observer_step1_des1" = "For better manage your assets, input your VeChainThor address to use \'Observe wallet\' function, including balance check, X Node Binding, VET Token Swap and VTHO rewards claim.";
+"authorized_observer_step1_des2" = "Observers DO NOT own the assets in the addresses.";
+"authorized_observer_step1_title1" = " Select a wallet to observe";
+"authorized_observer_step1_button" = "Authorizing";
+
+//<!--授权观察钱包 step2-->
+"authorized_observer_step2_title1" = " Input Authentication Code";
+"authorized_observer_step2_description1_l" = "1. Use ffffe900 observed wallet，navigate to 'Create a wallet -> Import a wallet -> Observe wallet':";
+"authorized_observer_step2_description2_l" = "2. In the ffffe900 cold wallet, input 6 digits authentication code and generate authorization signature.";
+"authorized_observer_step2_hint1" = "ffffe900 Input or scan the QR code of the observe wallet address：";
+"authorized_observer_step2_hint2" = "ffffe900 Obtain 6 digits authentication code";
+
+"authorized_observer_step2_hint3" = "Please input 6 digits authentication code displayed in observed wallet";
+"authorized_observer_step2_button" = "Generate Authorization Signature";
+
+//<!--授权观察钱包 step2 复制toast-->
+"authorized_observer_step2_copy_sucess" = "Copy Successful";
+
+//<!--授权观察钱包 step2 弹框-->
+"authorized_observer_step2_dialog_content" = "Use the observed wallet to scan the QR code of VeChainThor address";
+
+//<!--授权观察钱包 step3-->
+"authorize_observer_step3_title" = " Export signature";
+"authorize_observer_step3_explain1" = "Use ffffe900 observed wallet, input or scan QR code of authorization signiture to complete wallet import.";
+"authorize_observer_step3_code_title" = "Observe wallet authorization signature";
+"authorize_observer_step3_address" = "Wallet address：";
+"authorize_observer_step3_random" = "Authentication code：";
+"authorize_observer_step3_success_button" = "Import Successful";
+"authorize_observer_step3_fail_button" = "Observe failed, please retry";
+"authorize_observer_no_wallet" = "Please create or import a wallet before you use 'Observe wallet' function.";
+
+//<!--观察钱包改为授权观察钱包后，老的观察钱包删除提示-->
+"db_observer_update_dialog" = "Observe wallet has been upgraded with authorization function. Please read the manual and import observe wallets. Previous imported observe wallets will be securely removed.";
+"db_observer_update_copy" = "Copy observed wallet address list";
+"db_observer_update_delete" = "Understood, please delete";
+
+//<!-- ————————————————————增补————————————————————-->
+"authorized_status_expire" = "Invalid authorization QR code";
+"authorized_not_support" = "Authorization is not supported";
+"authorized_address_cancel_dialog_title" = "Abort address authorization?";
+"authorized_address_success" = "Observe Address Authorization Successful！";
+"authorized_error_qr_invalid" = "Invalid QR code, please refresh and try again";
+"authorized_address_invalid" = "Invalid authorization address";
+"authorized_signature_invalid" = "Invalid authorization signature, please retry";
+
+"import_wallet_input_mnemonicwords_error" = "Please enter the mnemonic phrases.";
+"import_wallet_input_keystore_error" = "Input your keystore";
+"dialog_create_wallet_ok" = "OK";
+
+"reward_guide_confirm_button" = "Understood";
+"qr_title" = "Address code";
+"receive_coin_exchange" = "Unable to verify the receiver's QR code. Retry with the address code.";
+
+"delete_old_observer_toast" = "Deleted, wallet address copied.";
+
+"reward_auto_draw_title" = "Auto collect VTHO rewards";
+"reward_auto_draw_tips" = "VeChain Foundation collect your VTHO rewards automatically every 12 hours and credit to your balance of 'Rewards Processing'. The 'Rewards Processing' balance shall be allocated to your VeChainThor wallet address every Monday.";
+"authorized_address_qr_completed" = "Address Authorization Completed.";
+
+"reward_draw_all" = "Auto\nCollect";
+
+"mnemonic_word_verify_error" = "Mnemonic phrases DO NOT match. Please check your mnemonic phrases, Or re-write mnemonic phrases.";
+"dialog_coin_transfer_password" = "Wallet Password";
+"wallet_detail_modify_password_dialog_title" = "Please enter wallet password";
+
+"name_can_not_single_quotes" = "Wallet name cannot contain the apostrophe (')";
+
+"reward_node_status_dialog_downgrade_title2" = "Node Upgrade Unsuccessful";
+"reward_node_status_dialog_downgrade_msg2" = "The VET amount in your wallet does not meet the minimum requirement of corresponding Node category in the last 2 hours, your Node will be downgraded.";
+
+
+"cold_token_detail_send_coin" = "Sign the transaction";
+"observer_wallet_tip_1_1" = "Current wallet is ffffe901 Observe Wallet, please use the private key stored in the cold wallet to sign the transaction.";
+"observer_wallet_tip_2_2" = "How does offline transaction signing work?";
+"observer_transfer_dialog_des1_1" = "Current wallet is ffffe901 Observe Wallet";
+"observer_transfer_dialog_des2" = "Please scan the QR code with your Cold Wallet and proceed after signing is completed.";
+"observer_transfer_dialog_title" = "Scan the QR code with your Cold Wallet";
+"observer_transfer_dialog2_title" = "Read signature data";
+"observer_transfer_dialog2_des2" = "Scan the QR code of Cold Wallet signature";
+"observer_transfer_dialog2_button" = "Send transaction";
+"observer_transfer_dialog2_sign_hint" = "Signature data await importing";
+"transaction_signature_v_error_title" = "Offline signature failure";
+"transaction_signature_v_error" = "Abnormal signature. Please use the Cold Wallet to scan the new QR code to sign the transaction.";
+"transaction_signature_v_error_button" = "Generate a new QR code";
+"offline_wallet_dialog_button" = "Understood";
+"offline_wallet_dialog_content" = "Your device is in offline mode. To send a transaction, please scan the QR code displayed on the observe wallet. To fully utilize the wallet functions, please connect to internet.";
+"transaction_cold_sign_detail_error" = "Transaction information error";
+"auth_cold_sign_detail_error" = "Address Authorization information error";
+"transaction_cold_sign_success" = "Offline Signature completed";
+"transaction_cold_dialog_des1_1" = "Current wallet is ffffe902 Cold Wallet";
+"transaction_cold_dialog_des2_1" = "Please use the corresponding Observe Wallet to scan QR code of authorization signature to proceed transactions.";
+"transaction_cold_wallet_not_exist" = "CANNOT find Observe Wallet address";
+"authorized_address_scan_signature_qr" = "Signature data await importing";
+"cold_auth_type" = "Address authorization";
+"cold_auth_type_title" = "Order type";
+"cold_auth_cost_title" = "Transaction fee";
+"cold_auth_transfer_title" = "Transaction amount";
+"cold_auth_address_title" = "Authorization address";
+"cold_auth_function_title" = "Authorization purpose";
+"cold_auth_business_title" = "Service requester";
+"cold_auth_cost" = "0.00 VTHO";
+"cold_auth_transfer" = "0.00 VET";
+"cold_wallet_sign_button" = "Signature authorization";
+"cold_wallet_sign_review_title" = "Transaction preview";
+"cold_transfer_type" = "Transaction";
+"cold_transfer_amount" = "Amount";
+"cold_transfer_to_address" = "Receiver\'s address";
+"cold_transfer_contract_address" = "Contract address";
+"cold_transfer_from_address" = "Sender\'s address";
+"usercenter_exchanging" = "Project Promotion";
+"usercenter_exchanging_title" = "Project Promotion";
+"exchanging_item_content" = "Contribute";
+"exchanging_list_load_error" = "Failed to load project list";
+"exchangelist_no_data" = "No data";
+"transaction_ico_title" = "Contract transaction";
+"transaction_ico_web" = "View introduction to XXX";
+"transaction_ico_address" = "Tokensale contract address";
+"asset_list_item_exchanging" = "Promotion";
+"transaction_ico_send_dialog_title" = "Reminder";
+"transaction_ico_send_dialog_yes" = "I agree";
+"token_list_ico" = "Contribute";
+"token_list_head_ico_right_title" = " View contribution history";
+"token_list_head_normal_right_title" = " View transaction history";
+"token_list_head_normal_left_title" = "Participation history";
+"transaction_cold_wallet_explain" = "Your device is currently in offline mode and is being used as a Cold Wallet. To sign and send transactions, please use the corresponding Observe Wallet. For details, see the ‘Offline Signature Guide’. If you have not set up an Observe Wallet, please import one using an online device.";
+
+"cold_wallet_icon" = "cold_wallet_icon_en";
+
+"transaction_cold_wallet_observer" = "Your current wallet is an Observe wallet, please use the private key stored in the cold wallet to sign the transaction.";
+
+"transaction_signature_scheme_error" = "Scan the transaction QR code";
+"authorized_signature_scheme_error" = "Scan the QR code of authorization signature";
+
+//<!-- ————————————————————增补 v1.3————————————————————-->
+
+//<!--首页-->
+"asset_home_title1" = "Assets";
+"asset_home_title2" = "Collectibles";
+"asset_home_manager_token" = "Manage asset list";
+"token_setting_edit_hint" = "Input token name";
+"token_setting_title" = "Configure asset list";
+
+
+//<!--奖励页-->
+"reward_draw_ball" = "Collect reward";
+"reward_draw_dialog_title" = "Collect all rewards";
+"reward_draw_dialog_msg" = "The reward you can collect for this period is %@ VTHO, and on-chain processing cost is %@ VTHO. Therefore, %.2lf VTHO will be credited to your address in a few hours.";
+"reward_upgrade_error_title" = "Abnormal Node Reminder";
+"reward_upgrade_error_content" = "Your current node status is upgrading and cannot apply for upgrade.";
+"reward_upgrade_get_node_error" = "Failed to get node information";
+"reward_upgrade_address_error" = "The node does not belong to this address";
+"reward_upgrading_error" = "Upgrading";
+"reward_card_downgrage_notic" = "If the wallet has less than %@, your Node will be revoked.";
+"reward_card_x_downgrage_notic" = "If the wallet has less than %@, your X Node status will be lost forever.";
+"reward_card_verify_downgrage_notic" = "If the wallet has less than %@, the upgrade application will be suspended.";
+"reward_card_apply_s_verify" = "Get minimum 1,000,000 VET, join node program to get more rewards";
+
+
+//<!-- ————————————————————收藏品————————————————————-->
+
+"contact_x_title" = "VeChainThor Node";
+
+//<!--项目介绍页面  节点状态中心页-->
+"contact_intro_record_button" = "Transaction Log";
+"contact_intro_market_button" = "Check The Trading Market";
+
+
+//<!--节点信息-->
+"contact_node_id" = "ID:";
+"contact_node_type" = "Type:";
+"contact_node_requirement" = "Minimum VET requirement:";
+"contact_node_x_ratio_requirement" = "X Node reward rate:";
+"contact_node_ratio_requirement" = "Economic Node reward rate:";
+
+//<!--节点详情 - 持有-->
+"contact_node_list_id" = "ID: %@";
+"contact_node_state_own" = "Holding";
+"contact_node_state_own_warn" = "Holding monitoring countdown:%@";
+"contract_auction_title" = "Public Auction";
+"contact_confirm_sale_btn" = "Designated Transfer";
+
+
+//<!--节点详情 - 挂单-->
+"contact_node_state_sale" = "Processing";
+"contact_cancel_order_btn" = "Cancel Your Order";
+"contact_onsale_expiration" = "Order validity remaining:%@";
+
+"contact_node_order_invalid" = "invalid processing order";
+
+
+//<!--节点详情 - 待支付-->
+"contact_node_unpay_warn" = "Unpaid remaining payment time:%@";
+"contact_node_state_unpay" = "Unpaid";
+"contact_refuse_node_btn" = "Rejected";
+"contact_accept_node_btn" = "Accepted";
+
+//<!--拒绝弹框-->
+"contact_dialog_refuse_title" = "Refuse to accept";
+"contact_dialog_refuse_content" = "You have successfully rejected this designated node transfer.";
+
+//<!--挂单异常提醒-->
+"contact_onsale_warn_title" = "Reminder";
+
+"contact_onsale_warn_confirm" = "Continue";
+"contact_onsale_warn_cancel" = "Cancel";
+"contact_onsale_warn_content_froze" = "The %@ you obtained cannot trade now. Please wait for 24 hours.";
+
+
+"contact_onsale_warn_content_upgrading" = "The %@ you currently obtained is applying for an upgrade and cannot be transferred during this time. Please apply for the transaction after completion.";
+"contact_onsale_warn_error_node" = "This token cannot be transferred by auction";
+"contact_onsale_warn_level_changed" = "Your current node has been changed to a %@, continue to auction?";
+
+
+
+//<!--交易市场-->
+"contact_market_title" = "Trading Market";
+"contact_market_introduction" = "Click for transaction details";
+"contact_market_same_level_count" = "%ld %@ left in the trading market";
+"contact_market_invalid_time" = "Order invalid time:";
+
+
+"contact_market_visit_statistics" = "there are %@ buyers browsing";
+
+//<!--交易市场 空-->
+"no_auction_hint" = "No processing orders";
+
+//<!--购买-->
+"contact_buy_node_btn" = "Buy";
+
+//<!--公开拍卖-->
+"contact_auction_type" = "Auction plan";
+
+
+"contact_sold_price" = "Sales price";
+"contact_sold_valid_duration" = "Order validity:";
+"contact_public_auction_hint" = "The node will be auctioned at the price of %@ VET for %ld days. When the buyer pays the full payment, the transaction will be dealt automatically. If the order is not dealt in %ld days, it will be cancelled automatically (you can also cancel the order at any time).";
+
+
+"contact_public_auction_down_hint" = "At the auction stage, please maintain the amount of VET required by the current node. If the node is downgraded, the processing order will be cancelled by the system.";
+"unit_day" = "days";
+
+//<!--降价拍卖-->
+"contact_public_auction_btn" = "Fixed Price Auction";
+"contact_dutch_auction_btn" = "Dutch Auction";
+
+"contact_sold_start_price" = "Starting price";
+"contact_sold_end_price" = "Lowest price";
+"appoint_sell_thor_node_start_price_hint" = "Please enter starting price";
+"appoint_sell_thor_node_end_price_hint" = "Please enter lowest price";
+"contact_dutch_auction_hint" = "The node will be auctioned at the price of %@ VET for %ld days. The price will be lowered automatically every 5 minutes. When the buyer pays the full payment, the transaction will be dealt automatically. If the order is not dealt in %ld days, it will be cancelled automatically (you can also cancel the order at any time).";
+"contract_dutch_start_le_end" = "Starting price must be greater than lowest price";
+"contract_auction_start_price_error" = "Starting price must be greater than 0";
+"contract_auction_end_price_error" = "Lowest price must be greater than 0";
+"contract_sell_price_error" = "Price must be greater than 0";
+
+//<!--节点定向转卖-->
+"appoint_sell_thor_node_title" = "Designated transfer";
+
+
+"appoint_sell_thor_node_link_text" = "Transactions are automatically processed by smart contracts, click for details";
+"appoint_sell_thor_node_address_title" = "Target address";
+"appoint_sell_thor_node_price_title" = "Sales Price";
+"appoint_sell_thor_node_price_hint" = "Please enter target price";
+"appoint_sell_thor_node_limited_time" = "Order validity: 4 hours";
+"appoint_sell_thor_node_transaction_cost" = "Transaction fee:";
+"appoint_sell_thor_node_not_to_myself" = "CAN NOT transfer VeChainThor node to current address.";
+"service_fee" = "Service fee：";
+"service_fee_5%" = "%@%% of the transaction price (VET)";
+
+//<!--提示dialog-->
+"contract_sell_dialog_content" = "The transaction of a VeChainThor node is automatically processed by a node smart contract on the VeChainThor blockchain and the contracts are transparent and completely decentralized to ensure the security of the transaction.\n\nAfter you request for sale, you still hold the node. Please ensure the VET amount meets the requirement of the node before the sale is completed.";
+
+
+//<!--买入节点 待支付接收-->
+"confirm_buy_thor_node_title" = "Accept";
+"confirm_buy_thor_node_amount_title" = "Payment amount";
+"confirm_buy_thor_node_amount_hint" = "Please enter payment amount";
+
+//<!--提示dialog-->
+"confirm_buy_dialog_title" = "Important Reminder";
+"confirm_buy_dialog_message" = "Purchasing a %@ requires the receiving account to maintain a balance of at least %@.  After the purchase is successful, the user will have approximately 4 hours to deposit this minimum balance to the address containing the newly purchased node.  If the balance is insufficient, the node will be dropped or downgraded!";
+"confirm_buy_dialog_message_sub1" = "will have approximately 4 hours";
+"confirm_buy_dialog_message_sub2" = "at least %@";
+
+
+
+
+//<!--定向转卖节点-->
+"appoint_sell_node_link_help_title" = "Transaction Reminder";
+"appoint_sell_node_link_help_content" = "The transaction of a VeChainThor node is automatically processed by a node smart contract on the VeChainThor blockchain and the contracts are transparent and completely decentralized to ensure the security of the transaction.";
+"appoint_sell_node_period_help_title" = "Expiration Reminder";
+"appoint_sell_node_period_help_content" = "The valid time of processing an order is 4 hours. If the transfer is not accepted within 4 hours, the order will be automatically cancelled.";
+
+
+
+"appoint_sell_node_charge_help_title" = "Service fee tips";
+"appoint_sell_node_charge_help_content" = " %@%% of the turnover will be charged as service fee.";
+"appoint_sell_node_cost_help_title" = "Transaction fee tips";
+"appoint_sell_node_cost_help_content" = "The actual transaction fee depends on the execution of mainnet. No more than %d VTHO will be charged, and the remainder will be returned to your address.";
+
+
+//<!--购买节点 - 已经是节点-->
+"contact_buy_warn_title" = "Unable to buy";
+"contact_buy_warn_already_node1" = "A wallet address can only own one node at the same time. \ncurrent wallet address: %@ \nalready owned nodes: %@\nID:%@";
+"contact_buy_warn_already_node2" = "A wallet address can only own one node at the same time. \ncurrent wallet address: %@ \nalready owned nodes: %@\nID:%@\n\nPlease switch to a non-node address, or you can sell the currently holding node, then you can proceed to buy other nodes.";
+"contact_buy_warn_change_wallet" = "Change Address";
+"contact_buy_warn_button" = "Understood";
+
+
+//<!--购买节点 - 交易失败-->
+"contact_buy_failed_title" = "Transaction failed";
+
+
+"contact_buy_failed_cancelled" = "The processing node has expired, please go to the market for other auction nodes.";
+"contact_buy_failed_button" = "Go To Market";
+
+
+//<!--购买节点 - 申请节点-->
+"contact_buy_failed_updating" = "Your current address is applying to be a node, please withdraw your application before purchasing";
+
+//<!--购买节点 - 余额不足-->
+"contact_buy_failed_not_enough1" = "Your current balance is %@ VET, and cannot afford %@ VET";
+
+
+"contact_buy_failed_not_enough2" = "Insufficient balance and unable to buy. \ncurrent wallet address: %@\n Balance is %@ %@ and cannot afford %@ %@.\n\nPlease switch to another wallet which does not have a node but has enough VET, and try again.";
+
+"contact_buy_failed_not_enough3" = "Your current balance is %@ %@, and cannot afford %@ %@";
+
+//<!--公开拍卖 - 更换钱包-->
+"contact_change_wallet_title" = "Change a wallet";
+
+"contact_change_wallet_not_enough" = "Insufficient balance";
+"contact_change_wallet_already_node" = "Already owned a node";
+
+//<!--状态异常弹窗-->
+"contact_dialog_error_title" = "Abnormal Node Status";
+"contact_dialog_content" = "The current node status has changed, please refresh the page and try again.";
+
+
+//<!-- ————————————————————签名组件————————————————————-->
+
+//<!--签合约支付组件-->
+"contract_payment_info_title" = "Contract Signature";
+"contract_payment_info_row1_title" = "Transaction fee";
+"contract_payment_info_row2_title" = "Signature address";
+"contract_payment_info_row3_title" = "Target address";
+"contract_payment_info_row4_title" = "Contract details";
+"contract_payment_confirm_wait_name" = "Waiting for the smart contract data packet to upload to the blockchain";
+"contract_payment_confirm_explain" = "The packing time depends on the congestion of the mainnet. Normally, the packing will be completed in about 10 seconds, please wait patiently.";
+"contract_payment_confirm_success" = "Successfully packaged and block is generating";
+"contract_payment_confirm_actual_explian" = "The actual results are subjected the confirmation of the whole network.";
+"contract_payment_confirm_wait_button" = "Wait no more and take a look first";
+"contract_payment_wait_time" = "%@";
+"contract_payment_result_fail" = "Transaction failed";
+"dialog_confirm" = "Confirm";
+
+//<!--领取奖励，奖励升级，取消升级-->
+//<!--合约说明-->
+"contract_payment_info_row4_content_public" = "Nodes for public auction";
+"contract_payment_info_row4_content_auction" = "Nodes for designated transfer";
+"contract_payment_info_row4_content_receive" = "Accept designated node transfer";
+"contract_payment_info_row4_content_buy" = "Purchase node in trading market";
+"contract_payment_info_row4_content_cancel_onsale" = "Cancel processing order";
+"contract_payment_info_row4_content_node_upgrde" = "Upgrade node";
+"contract_payment_info_row4_content_cancel_upgrade" = "Cancel node upgrade";
+"reward_draw_thor_less_50" = "The collected amount must be more than %@ VTHO.";
+"reward_cancel_upgrade_dialog_title" = "Cancel upgrade reminder";
+"reward_cancel_upgrade_dialog_message" = "You still have %@ days to successfully upgrade to a %@, if you cancel upgrade application, you will not be entitled to extra rewards for nodes. Confirm to cancel?";
+"reward_upgrade_dialog_auction_title" = "Upgrade reminder";
+"reward_upgrade_dialog_auction_message" = "You current node order is processing and cannot apply for upgrade before you cancel the order. Do you want to cancel the order? Yes, No";
+"reward_upgrade_dialog_auction_ok" = "Confirm";
+
+"vet_price" = "%@ VET";
+"default_time" = "--:--:--";
+
+//<!--转账提示-->
+"transfer_coin_vet_dialog_title" = "Transfer reminder";
+"transfer_coin_vet_dialog_message" = "After you transfer %@ VET, you will not meet the %@ requirement of a %@. Do you want to continue to transfer?";
+"transfer_coin_vet_dialog_ok" = "Continue";
+
+//<!--thorNode转让协议-->
+"collection_agreement_button" = "Read and agree the Agreement";
+
+//<!--版本更新,下载-->
+"version_update_dialog_hint" = "Update available";
+
+//<!--转账-->
+"transaction_value_not_zero" = "Transaction amount cannot be 0";
+
+//<!--节点直接转移-->
+"transfer_thor_node_pre" = "Instant transfer to another address of your own";
+"transfer_thor_node_title" = "Instant Node Transfer";
+"transfer_thor_node_hide_text" = "Please select the target address for the transfer";
+"transfer_thor_node_red_text_msg" = "Can only be transferred to the addresses in the current wallet App.";
+"transfer_thor_node_first_tip_title" = "Instant Transfer Notice";
+
+"transfer_thor_node_first_tip_msg" = "In this function, the node can be directly transferred to other addresses in this wallet App including observe wallets without the need for the receiving address to accept it. However, the receiving address MUST meet the minimum VET holding requirement corresponding to the node type within approximately 4 hours after the transfer. If you want to transfer the node to Ledger address, please add the Ledger address as observe wallet first.";
+"transfer_thor_node_first_tip_msg_sub" = "within approximately 4 hours after the transfer";
+
+"transfer_thor_node_confirm_tip" = "The system will start monitoring the VET amount on the target address %@ in approximately 4 hours after the instant transfer is successfully done. If the target address VET amount does not meet the corresponding node requirement %@ by then, the node will be dropped or downgraded!";
+"transfer_thor_node_confirm_tip_sub1" = "in approximately 4 hours after the instant transfer is successfully done.";
+
+"transfer_thor_node_confirm_tip_sub" = "the target address (%@) in approximately 4 hours after the instant transfer is successfully done. If the target address VET amount does not meet the corresponding node requirement (%@) by then";
+
+//<!--节点转移选择钱包-->
+"select_wallet_title" = "Select address";
+"select_wallet_already_node" = "Already owned %@";
+"select_wallet_balance_le_node_value" = "This address does not meet the VET holding requirement of %@";
+"select_wallet_dialog_title" = "Confirm the Transfer";
+"select_wallet_dialog_msg" = "The selected address currently has %@ VET, which does not meet the VET holding requirement of %@. After the instant transfer is completed, you will have approximately 4 hours to add %@ VET. Otherwise the node will be dropped or downgraded depending on the node type. Would you like to proceed?";
+"select_wallet_dialog_msg_sub" = "will have approximately 4 hours to add %@ VET";
+
+//<!-- ————————————————————增补 v1.4————————————————————-->
+
+//<!-- ————————————————————通知————————————————————-->
+
+//<!--推送消息详情页面 标题-->
+"message_detail_title" = "Message Details";
+
+//<!--设置页面 隐私采集-->
+"setting_collect_shence_data" = "Collect behavioral data.";
+"setting_delete_shence_data" = "Delete behavioral data.";
+"setting_delete_dialog_title" = "Delete reminder";
+"setting_delete_dialog_msg" = "Once the behavioral data is deleted, it can not be restored. Continue to delete?";
+"setting_delete_success" = "Behavioral data collected by the device has been deleted.";
+"setting_delete_confirm" = "Continue";
+"setting_delete_cancel" = "Cancel";
+"setting_shence_toast_on" = "Data collection is turned on.";
+"setting_shence_toast_off" = "Data collection is turned off.";
+
+//<!--钱包启动 协议页-->
+"app_use_agreement_privacy" = "I have carefully read and agree on <VeChainThor wallet user agreement>, <VeChainThor wallet privacy policy>";
+
+//<!--主页面 隐私弹框-->
+"home_tips_title" = "Warm Reminder";
+"home_tips_shence_msg" = "\"VeChainThor wallet\" will use third-party data analysis software to collect your behavioral data, such as the types of content you view or engage with; the features you use; the actions you take; and the time, frequency and duration of your activities. This data will not be shared with any third party. We give you control through your settings to limit the data we collect from you.";
+"home_tips_agree" = "Agree";
+"home_tips_disagress" = "Disagree";
+
+//<!--主页面 隐私政策更新弹框-->
+//<!--TODO x, x 待替换-->
+"home_tips_agreement_msg" = " has been updated on X, X, 2019. Please click the link to read the policy in full. By clicking agree, you agree to our privacy policy.";
+"home_tips_agreement_disagree" = "You will not be able use the APP if you do not agree with the privacy policy. Confirm to exit?";
+
+//<!--关于页面-->
+"about_user_agreement" = "VeChainThor wallet user agreement";
+"about_user_privacy" = "VeChainThor wallet privacy policy";
+
+//<!--个人中心-dapps入口-->
+"usercenter_dapps" = "Dapps";
+
+//<!--h5与native交互-->
+"h5_select_wallet_title" = "Select Wallet";
+"n5_select_wallet_to" = "The selected wallet is a receiving address.";
+"h5_select_wallet_no_exist" = "The selected wallet is not exist.";
+"h5_params_error" = "Invalid parameter";
+"h5_contract_params_confirm_title" = "Signature confirmation";
+"h5_contract_params_confirm_button" = "I\'ve known the risk, and continue to sign.";
+"h5_contract_params_confirm_msg" = "This is a signature unrecognized by wallet, which may contain some digital currency assets. Please confirm the signature information to avoid asset loss.";
+"h5_observer_data_too_long" = "Signature data is too long, and the observe wallet does not support signature temporarily";
+"usercenter_faq_title" = "FAQ";

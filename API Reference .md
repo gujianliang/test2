@@ -52,8 +52,7 @@
 > 
 
 ```obj-c
-+ (NSString *)recoverAddressFromMessage:(NSData *)message
-                          signatureData:(NSData *)signatureData;
++ (NSString *)recoverAddressFromMessage:(NSData *)message signatureData:(NSData *)signatureData;
 ```
 
 ##  Decrypt keystore
@@ -149,7 +148,7 @@
 
 ##   Inject js into webview   
 >
->  @param webview :Developer generated webview object   
+>  @param webview :Developer generated WKWebView object , Can not be UIWebView
 >
 >
 ```obj-c

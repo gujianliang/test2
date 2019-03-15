@@ -76,13 +76,16 @@
                                      userInfo:userInfo];
     
     if (password.length == 0) {
-        callback(nil,error);
+        NSLog(@"Password can not be blank.");
+        callback(nil, error);
+        return;
     }
     NSMutableArray *trimeList = [NSMutableArray array];
     for (NSString * word in mnemonicWords) {
         if (word.length == 0) {
-            callback(nil,error);
-            break;
+            NSLog(@"Mnemonic words is not available.");
+            callback(nil, error);
+            return;
         }else{
             NSString *trimeWord = [word stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
             [trimeList addObject:trimeWord];
@@ -91,13 +94,20 @@
     
     __block Account *account = [Account accountWithMnemonicPhrase:[trimeList componentsJoinedByString:@" "]];
     
+    if (!account) {
+        NSLog(@"Mnemonic words is not available.");
+        callback(nil, error);
+        return;
+    }
+    
     [account encryptSecretStorageJSON:password callback:^(NSString *json) {
         
         account.keystore = json;
         if (json.length == 0) {
             if (callback) {
-                callback(nil,error);
+                callback(nil, error);
             }
+            
         }else{
             if (callback) {
                 
@@ -107,7 +117,7 @@
                 accountModel.address = account.address.checksumAddress;
                 accountModel.words = [account.mnemonicPhrase componentsSeparatedByString:@" "];
                 
-                callback(accountModel,nil);
+                callback(accountModel, nil);
             }
         }
     }];
@@ -131,8 +141,9 @@
                password:(NSString*)password
                callback:(void(^)(WalletAccountModel *account,NSError *error))callback
 {
-    [Account decryptSecretStorageJSON:keystoreJson password:password callback:^(Account *account, NSError *NSError) {
-        if (NSError == nil) {
+    [Account decryptSecretStorageJSON:keystoreJson password:password callback:^(Account *account, NSError *decryptError) {
+        
+        if (decryptError == nil) {
             WalletAccountModel *accountModel = [[WalletAccountModel alloc]init];
             accountModel.keystore = keystoreJson;
             accountModel.privatekey = [SecureData dataToHexString:account.privateKey];
@@ -140,8 +151,9 @@
             accountModel.words = [account.mnemonicPhrase componentsSeparatedByString:@" "];
             
             callback(accountModel,nil);
+            
         }else{
-            callback(nil,NSError);
+            callback(nil, decryptError);
         }
     }];
 }
@@ -239,8 +251,6 @@
 
 + (void)webView:(WKWebView *)webView defaultText:(NSString *)defaultText completionHandler:(void (^)(NSString * result))completionHandler
 {
-    NSLog(@"defaultText == %@",defaultText);
-    
     WalletDAppHandle *dappHandle = [WalletDAppHandle shareWalletHandle];
     [dappHandle webView:webView defaultText:defaultText completionHandler:completionHandler];
 }

@@ -30,14 +30,35 @@ Vechain wallet SDK provides a series of functional interface can help the iOS de
 
 #### The dependency package should be added to the project, as listed below:
 ```obj-c
+
+1、Support installation with CocoaPods
+ 
+ source 'https://github.com/CocoaPods/Specs.git'
+ platform :ios, '10.0'
+ target 'TargetName' do 
  
     pod 'AFNetworking', '~> 3.0'
-
-    pod 'MBProgressHUD', '1.1.0'
-
+ 
+    pod 'MBProgressHUD', '1.1.0'            
+ 
     pod 'Masonry', '1.1.0'
-
+ 
     pod 'SocketRocket', '~> 0.4.2'
+ 
+ end
+
+2、Support manual install
+
+git clone --recursive https://github.com/AFNetworking/AFNetworking.git
+git clone --recursive https://github.com/jdg/MBProgressHUD.git
+git clone --recursive https://github.com/SnapKit/Masonry.git
+git clone --recursive https://github.com/facebook/SocketRocket.git
+
+Clone or download them and drag them into your project.
+
+**note that: The frameWork 'MBProgressHUD' is just a indicator example in this demo. If you develop your project, 
+you can custom it and this is optional.
+
 ```
 To use the Framework, add the WalletSDK.Framework and WalletSDKBundle.bundle to your project :
 
@@ -63,7 +84,7 @@ callback:^(WalletAccountModel * _Nonnull account, NSError * _Nonnull error)
 ### 2，Support dapp development environment (connex or web3)
 
 #### 2.1 Import keystore to SDK
-
+#####  More information about The keystore structures,  you can see it at the end of article.
 ```obj-c
 [WalletUtils initDappWebViewWithKeystore:walletList];
 
@@ -71,8 +92,11 @@ callback:^(WalletAccountModel * _Nonnull account, NSError * _Nonnull error)
 
 #### 2.2  Inject js bridge into webview
 ##### 
+You must  conform to the WKNavigationDelegate protocol  of  WKWebView,  and   implement the method  webView: didCommitNavigation or webView: didStartProvisionalNavigation: , 
+then you can Inject js bridge into webview.
 
-```obj-c
+```obj-c  
+as example:
 - (void)webView:(WKWebView *)webView didCommitNavigation:(null_unspecified WKNavigation *)navigation;
 {
     [WalletUtils injectJSWithWebView:webView];
@@ -80,6 +104,7 @@ callback:^(WalletAccountModel * _Nonnull account, NSError * _Nonnull error)
 ```
 
 #### 2.3 Analyze data in webview's runJavaScriptTextInputPanelWithPrompt callback method
+##### 
 ```obj-c
 - (void)webView:(WKWebView *)webView runJavaScriptTextInputPanelWithPrompt:(NSString *)prompt defaultText:(nullable NSString *)defaultText initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(NSString * __nullable result))completionHandler
 {
@@ -119,9 +144,9 @@ callback:^(WalletAccountModel * _Nonnull account, NSError * _Nonnull error)
 *  — — — — — — — — — — — — — — — — — — — — — — — — — — ——
 *  Field description:
 *          version: This is a version information, when you decryption, you should use the same version.
-*          id: You can ignore.
+*          id: You can ignore. It is just a UUIDString.
 *          Kdf: This is a encryption function.
-*          mac: This is the mac deveice infomation.
+*          mac: This is the mac device information.
 *          cipher: Describes the encryption algorithm used.
 *          address：The wallet address.
 *          crypto: This section is the main encryption area.

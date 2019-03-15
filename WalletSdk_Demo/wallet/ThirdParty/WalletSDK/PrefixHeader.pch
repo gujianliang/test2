@@ -1,0 +1,110 @@
+//
+//  PrefixHeader.pch
+//  walletSDK
+//
+//  Created by 曾新 on 2019/1/28.
+//  Copyright © 2019年 VeChain. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#import "NSMutableDictionary+Helpers.h"
+#import "UIColor+SNFoundation.h"
+#import "Masonry.h"
+#import "WalletUserDefaultManager.h"
+#import "WalletTools.h"
+#import "WalletApiManageMacro.h"
+#import "WalletAlertShower.h"
+#import "NSStringAdditions.h"
+#import "UIButton+block.h"
+
+
+#define VCNSLocalizedString(key, comment) [WalletTools localeStringWithKey:(key)]
+#define VCNSLocalizedBundleString(key, comment) [WalletTools localStringBundlekey:(key)]
+
+#define SCREEN_WIDTH          ([UIScreen mainScreen].bounds.size.width)
+#define SCREEN_HEIGHT         ([UIScreen mainScreen].bounds.size.height)
+
+#define MAIN_BLUE_COLOR     HEX_RGB(0x2baafa)
+
+#define PLACE_HOLDER_COLOR  RGBACOLOR(150, 150, 150, 0.5)
+
+#define HEX_RGB(V)        [UIColor colorWithRGBHex:V]
+
+#define IOS8 [[[UIDevice currentDevice]systemVersion] floatValue] >= 8.0
+#define IOS7 [[[UIDevice currentDevice]systemVersion] floatValue] == 7.0
+#define IOS10 [[[UIDevice currentDevice]systemVersion] floatValue] >= 10.0
+#define IOS11 [[[UIDevice currentDevice]systemVersion] floatValue] == 11.0
+#define LessiOS11 [[[UIDevice currentDevice]systemVersion] floatValue] < 11.0
+
+#define RGB(r, g, b) [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:1]
+#define RGBA(r, g, b, a) [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:a]
+
+#define SCREEN_SCALE        ([UIScreen mainScreen].scale)
+#define SCREEN_WIDTH_LL     ([UIScreen mainScreen].bounds.size.width) * (SCREEN_SCALE)
+
+#define CGDrawingOnePixelWidth       (1.0f)
+// MARK: -
+// MARK: iPhoneX
+#define iS_iPhoneX ([UIScreen mainScreen].bounds.size.height >= 812)
+#define kStatusBarHeight                (iS_iPhoneX ? (20 + kiPhoneXStatusBarOffset) : 20)
+#define kNavigationBarHeight            (iS_iPhoneX ? 88 : 64)
+#define kiPhoneXStatusBarOffset         24 /*iphonex header*/
+#define kSafeAreaOffset                 34 /*safe area*/
+#define kiPhoneXBottomOffset            (iS_iPhoneX ? kSafeAreaOffset : 0) /*safe area*/
+
+#define KBottomHeight       ((SCREEN_HEIGHT >= 812) ? 34 : 0)     // Y值高度
+#define KNavY               ((SCREEN_HEIGHT >= 812) ? 20 : 0)     // Y值高度
+#define KTabBarH            ((SCREEN_HEIGHT >= 812) ? 83 : 49)    // tabBar值高度
+#define Scale(num)          ((num) * SCREEN_WIDTH / 375.0)          // 缩放值
+#define ScaleH(num)         ((num) * SCREEN_HEIGHT / 667.0)         // 垂直缩放值
+
+
+#define iPhone6 ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone && MAX([UIScreen mainScreen].bounds.size.height,[UIScreen mainScreen].bounds.size.width) == 667)
+
+#define iPhone6Plus ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone && MAX([UIScreen mainScreen].bounds.size.height,[UIScreen mainScreen].bounds.size.width) == 736)
+
+#define iPhone5sORiPhone5 ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone && MAX([UIScreen mainScreen].bounds.size.height,[UIScreen mainScreen].bounds.size.width) == 568)
+
+#define iPhone4SORiPhone4 ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone && MAX([UIScreen mainScreen].bounds.size.height,[UIScreen mainScreen].bounds.size.width) == 480)
+
+// 计算比例
+// x比例 1.293750 在iPhone7的屏幕上
+#define ScaleX SCREEN_WIDTH / iPhone6W
+// y比例 1.295775
+#define ScaleY SCREEN_HEIGHT / iPhone6H
+
+//medium 对应的字号
+#define MediumFont(__font__) [UIFont systemFontOfSize:__font__ weight:UIFontWeightMedium]
+
+#define CommonBlack  HEX_RGB(0x202C56)
+
+#define   Price_MAX_Length    11
+
+#define HEX_RGB(V)        [UIColor colorWithRGBHex:V]
+
+#define CommonBlack  HEX_RGB(0x202C56)
+
+#undef HEX_COLOR
+#define HEX_COLOR(h)  [UIColor colorWithRGBHex:(h)]
+
+//基础钱包功能API(Explorer服务)
+#define  explorer_host_test         @"https://vethor-explorer-test.vechaindev.com/api"      //测试环境
+#define  explorer_host_dev          @"https://vethor-explorer-dev.vechaindev.com/api"       //开发环境
+#define  explorer_host_staging      @"https://vethor-explorer-staging.vechaindev.com/api"   //Staging环境
+#define  explorer_host_release      @"https://vethor-explorer.vechain.com/api"              //正式环境
+
+
+//区块链节点地址
+#define  blockChain_host_test       @"https://vethor-node-test.vechaindev.com"              //测试环境
+#define  blockChain_host_dev        @"https://vethor-node-dev.vechaindev.com"               //开发环境
+#define  blockChain_host_staging    @"https://vethor-node-staging.vechaindev.com"           //Staging环境
+#define  blockChain_host_release    @"https://vethor-node.vechain.com"                      //正式环境
+
+
+
+#endif /* PrefixHeader_pch */

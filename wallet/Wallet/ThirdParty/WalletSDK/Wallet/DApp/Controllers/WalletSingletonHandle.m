@@ -64,9 +64,10 @@ static dispatch_once_t predicate;
          
          walletModel.VETCount = coinAmount;
          
-     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error)
-     {
-         NSLog(@"Get VET balance failure. error: %@", error);
+     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error){
+#if ReleaseVersion
+         NSLog(@"Get VET balance failure.  URL：%@  \n error: %@", urlString, error);
+#endif
      }];
 }
 
@@ -97,7 +98,9 @@ static dispatch_once_t predicate;
         walletModel.vthoModel = vthoModel;
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"Get VTHO balance failure. error: %@", error);
+#if ReleaseVersion
+        NSLog(@"Get VTHO balance failure.  URL：%@  \n error: %@", urlString, error);
+#endif
     }];
 }
 
