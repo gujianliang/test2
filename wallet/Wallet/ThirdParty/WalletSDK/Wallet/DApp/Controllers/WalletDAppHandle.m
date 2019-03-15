@@ -167,6 +167,12 @@ static dispatch_once_t predicate;
                        requestId:requestId
                       callbackId:callbackId
                completionHandler:completionHandler];
+    }else{
+        NSDictionary *dict1 = [WalletTools packageWithRequestId:requestId
+                                                           data:@""
+                                                           code:ERROR_REQUEST_METHOD
+                                                        message:ERROR_REQUEST_METHOD_MSG];
+        completionHandler([dict1 yy_modelToJSONString]);
     }
     completionHandler(@"{}");
 }
@@ -184,7 +190,7 @@ static dispatch_once_t predicate;
      BOOL bCert = NO;
     
     NSString *kind = callbackParams[@"kind"];
-    if (![kind isEqualToString:@"tx"]) {
+    if (![kind isEqualToString:@"tx"] && bConnex) {
         [WalletTools callbackWithrequestId:requestId webView:webView data:@"" callbackId:callbackId code:ERROR_REQUEST_PARAMS];
         return;
     }
@@ -204,10 +210,21 @@ static dispatch_once_t predicate;
     
     if (bConnex) {
         
-        NSDictionary *clausesDict = callbackParams[@"clauses"][0];
-        if (clausesDict == nil) {
-            completionHandler(@"{}");
+        NSDictionary *clausesDict = nil;
+        
+        NSArray *clausesList = callbackParams[@"clauses"];
+        if (clausesList.count == 0) {
+            [self paramsError:requestId webView:webView callbackId:callbackId];
             return;
+        }else if(clausesList.count == 1)
+        {
+            clausesDict = callbackParams[@"clauses"][0];
+            if (clausesDict == nil) {
+                [self paramsError:requestId webView:webView callbackId:callbackId];
+                return;
+            }
+        }else{
+            [WalletTools callbackWithrequestId:requestId webView:webView data:@"" callbackId:callbackId code:ERROR_REQUEST_MULTI_CLAUSE];
         }
         
         to         = clausesDict[@"to"];
