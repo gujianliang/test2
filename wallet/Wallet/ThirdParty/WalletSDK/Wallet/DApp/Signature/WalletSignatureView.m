@@ -45,6 +45,7 @@
     WalletSignatureViewHandle *_signatureHandle;
     WalletSignatureViewSubView *_signatureSubView;
     
+    UILabel *_titleLabel;
 }
 
 @end
@@ -93,28 +94,34 @@
     if (_transferType == WalletVETTransferType) {
         _currentCoinModel.symobl = @"VET";
         _currentCoinModel.decimals = 18;
-        
+        _currentCoinModel.address = _fromAddress;
+
         [self amountOpreation];
         
         [self initView];
     }else if (_transferType == WalletTokenTransferType){
         _currentCoinModel.tokenAddress = _tokenAddress;
-        [_signatureHandle tokenAddressConvetCoinInfo:_tokenAddress
-                                           coinModel:_currentCoinModel
-                                               block:^(BOOL result)
-        {
-            if (result) {
-                [self amountOpreation];
-                [self initView];
-            }else{
-                [self removeFromSuperview];
-            }
-            
+        
+        [WalletTools checkNetwork:^(BOOL t) {
+            [_signatureHandle tokenAddressConvetCoinInfo:_tokenAddress
+                                               coinModel:_currentCoinModel
+                                               superView:self
+                                                   block:^(BOOL result)
+            {
+                if (result) {
+                    [self amountOpreation];
+                    [self initView];
+                }else{
+                    [self removeFromSuperview];
+                }
+                
+            }];
         }];
     }else{ //合约，显示的只能是vet
         _currentCoinModel.symobl = @"VET";
         _currentCoinModel.decimals = 18;
-        
+        _currentCoinModel.address = _fromAddress;
+
         [self amountOpreation];
         [self initView];
     }
@@ -132,21 +139,6 @@
                                   decimals:_currentCoinModel.decimals
                                    options:2];
         }
-        
-        if (_transferType == WalletVETTransferType) {
-            if (_amount.length > 20) {
-                
-                [UIView animateWithDuration:0.3 animations:^{
-                    
-                } completion:^(BOOL finished) {
-                    if (self.transferBlock) {
-                        self.transferBlock(@"",ERROR_REQUEST_PARAMS);
-                        [self removeFromSuperview];
-                    }
-                }];
-            }
-        }
-        
     }else{
         _amount = 0;
     }
@@ -186,17 +178,17 @@
     }];
     
     // 主标题标签
-    UILabel *titleLabel = [[UILabel alloc]init];
+    _titleLabel = [[UILabel alloc]init];
     
     if (_transferType == WalletContranctTransferType) {
-        titleLabel.text = VCNSLocalizedBundleString(@"contract_payment_info_title", nil);
+        _titleLabel.text = VCNSLocalizedBundleString(@"contract_payment_info_title", nil);
     }else{
-        titleLabel.text = VCNSLocalizedBundleString(@"dialog_coin_transfer_description", nil);
+        _titleLabel.text = VCNSLocalizedBundleString(@"dialog_coin_transfer_description", nil);
     }
     
-    titleLabel.textAlignment = NSTextAlignmentCenter;
-    [titleView addSubview:titleLabel];
-    [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+    _titleLabel.textAlignment = NSTextAlignmentCenter;
+    [titleView addSubview:_titleLabel];
+    [_titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.top.mas_equalTo(0);
         make.height.mas_equalTo(40);
     }];
@@ -235,6 +227,7 @@
     [self addSignatureSubView];
 }
 
+#warning 需要多测试
 - (void)backBtnClick
 {
     [self.signatureSubView.pwTextField resignFirstResponder];
@@ -276,7 +269,12 @@
     }];
     
     [_signatureSubView creatRightView:^{
-        [self signTransfer:_transferBlock];
+        
+        [WalletTools checkNetwork:^(BOOL t) {
+             if(t){
+                 [self signTransfer:_transferBlock];
+             }
+         }];
     }];
     
     [_signatureSubView creatLastView:^{
@@ -284,7 +282,7 @@
             self.transferBlock(self.txid,ERROR_CANCEL);
         }
     }removeBlock:^{
-        [self removeFromSuperview];
+//        [self removeFromSuperview];
     } ];
 }
 
@@ -298,20 +296,33 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    NSLog(@"dd");
     if (_scrollView.contentOffset.x == SCREEN_WIDTH) {
-        [_backBtn setImage:[WalletTools localImageWithName:@"icon_back_black"] forState:UIControlStateNormal];
+        [_backBtn setImage:[UIImage imageNamed:@"icon_back_black"] forState:UIControlStateNormal];
+        
+        _titleLabel.text = VCNSLocalizedString(@"dialog_coin_transfer_password", nil);
         
     }else if (_scrollView.contentOffset.x == SCREEN_WIDTH * 2){
-        [_backBtn setImage:[WalletTools localImageWithName:@"icon_close_black"] forState:UIControlStateNormal];
-    }
-    else{
-        [_backBtn setImage:[WalletTools localImageWithName:@"icon_close_black"] forState:UIControlStateNormal];
+        [_backBtn setImage:[UIImage imageNamed:@"icon_close_white-1"] forState:UIControlStateNormal];
+        
+        
+        _titleLabel.text = VCNSLocalizedString(@"token_list_packaging", nil);
+        
+    }else{
+        
+        [_backBtn setImage:[UIImage imageNamed:@"icon_close_white-1"] forState:UIControlStateNormal];
+        if (_transferType == WalletContranctTransferType) {
+            _titleLabel.text = VCNSLocalizedString(@"contract_payment_info_title", nil);
+            
+        }else{
+            _titleLabel.text = VCNSLocalizedString(@"dialog_coin_transfer_description", nil);
+        }
     }
 }
 
+#warning count 的问题
 - (void)timerCountBlock
 {
+    __block NSInteger count = 0;
     _timer = [NSTimer scheduledTimerWithTimeInterval:1
                                              repeats:YES
                                                block:^(NSTimer * _Nonnull timer)
@@ -326,6 +337,13 @@
                   if (time%10 == 0) {
                       [self checkUploadBlock];
                   }
+                  if (count >= 60) {
+                      
+                      [self uploadFail];
+                      [_timer invalidate];
+                      _timer = nil;
+                  }
+                  count ++;
               }];
 }
 

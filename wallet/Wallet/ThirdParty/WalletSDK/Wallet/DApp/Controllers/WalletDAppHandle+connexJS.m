@@ -24,6 +24,7 @@
 #import "WalletSingletonHandle.h"
 #import "WalletSignatureView.h"
 #import "SocketRocketUtility.h"
+#import "WalletGetStorageApi.h"
 
 @implementation WalletDAppHandle (connexJS)
 
@@ -146,6 +147,24 @@
     }
 }
 
+- (void)getStorageApiDictParam:(NSDictionary *)dictParam
+                     requestId:(NSString *)requestId
+                       webView:(WKWebView *)webView
+                    callbackId:(NSString *)callbackId
+{
+    NSString *key = dictParam[@"key"];
+    NSString *address = dictParam[@"address"];
+    
+    WalletGetStorageApi *vetBalanceApi = [[WalletGetStorageApi alloc]initWithkey:key address:address];
+    [vetBalanceApi loadDataAsyncWithSuccess:^(VCBaseApi *finishApi) {
+        
+        [WalletTools callbackWithrequestId:requestId webView:webView data:finishApi.resultDict callbackId:callbackId code:OK];
+        
+    } failure:^(VCBaseApi *finishApi, NSString *errMsg) {
+        
+        [WalletTools callbackWithrequestId:requestId webView:webView data:finishApi.resultDict callbackId:callbackId code:ERROR_SERVER_DATA];
+    }];
+}
 
 - (void)getAccountRequestId:(NSString *)requestId
                     webView:(WKWebView *)webView
@@ -184,13 +203,21 @@
              requestId:(NSString *)requestId
                address:(NSString *)address
 {
+    if (![WalletTools errorAddressAlert:address]) {
+        [WalletTools callbackWithrequestId:requestId
+                                   webView:webView
+                                      data:@""
+                                callbackId:callbackId
+                                      code:ERROR_REQUEST_PARAMS];
+        return;
+    }
+    
     WalletAccountCodeApi *vetBalanceApi = [[WalletAccountCodeApi alloc]initWithAddress:address];
     [vetBalanceApi loadDataAsyncWithSuccess:^(VCBaseApi *finishApi) {
-        NSDictionary *balanceModel = finishApi.resultDict;
         
         [WalletTools callbackWithrequestId:requestId
                                   webView:webView
-                                     data:balanceModel[@"code"]
+                                     data:finishApi.resultDict
                                callbackId:callbackId
                                      code:OK];
         
@@ -294,11 +321,19 @@
     
     WalletTransantionsReceiptApi *vetBalanceApi = [[WalletTransantionsReceiptApi alloc]initWithTxid:txid];
     [vetBalanceApi loadDataAsyncWithSuccess:^(VCBaseApi *finishApi) {
-        [WalletTools callbackWithrequestId:requestId
-                                  webView:webView
-                                     data:finishApi.resultDict
-                               callbackId:callbackId
-                                     code:OK];
+        if (finishApi.resultDict) {
+            [WalletTools callbackWithrequestId:requestId
+                                       webView:webView
+                                          data:finishApi.resultDict
+                                    callbackId:callbackId
+                                          code:OK];
+        }else{
+            [WalletTools callbackWithrequestId:requestId
+                                       webView:webView
+                                          data:@""
+                                    callbackId:callbackId
+                                          code:ERROR_SERVER_DATA];
+        }
         
     } failure:^(VCBaseApi *finishApi, NSString *errMsg) {
         [WalletTools callbackWithrequestId:requestId
@@ -344,6 +379,7 @@
                    requestId:(NSString *)requestId
                      webView:(WKWebView *)webView
                   callbackId:(NSString *)callbackId
+                               connex:(BOOL)bConnex
 
 {
     if (![WalletTools fromISToAddress:paramModel.fromAddress to:paramModel.toAddress]) {
@@ -357,7 +393,7 @@
         return;
     }
     
-    [self showSignView:WalletVETTransferType paramModel:paramModel requestId:requestId webView:webView callbackId:callbackId];
+    [self showSignView:WalletVETTransferType paramModel:paramModel requestId:requestId webView:webView callbackId:callbackId connex:bConnex];
 }
 
 //vtho转账
@@ -365,6 +401,7 @@
                     requestId:(NSString *)requestId
                       webView:(WKWebView *)webView
                    callbackId:(NSString *)callbackId
+                            connex:(BOOL)bConnex
 {
     
     WalletGetSymbolApi *getSymbolApi = [[WalletGetSymbolApi alloc]initWithTokenAddress:paramModel.tokenAddress];
@@ -382,7 +419,7 @@
         }
         symobl = [WalletTools abiDecodeString:symobl];
         
-        [self getTokenDecimalsWithParamModel:paramModel requestId:requestId webView:webView callbackId:callbackId];
+        [self getTokenDecimalsWithParamModel:paramModel requestId:requestId webView:webView callbackId:callbackId connex:bConnex];
         
     } failure:^(VCBaseApi *finishApi, NSString *errMsg) {
         [WalletTools callbackWithrequestId:requestId
@@ -394,7 +431,8 @@
 }
 
 //获得token decimals
-- (void)getTokenDecimalsWithParamModel:(WalletSignParamModel *)paramModel requestId:(NSString *)requestId webView:(WKWebView *)webView callbackId:(NSString *)callbackId
+- (void)getTokenDecimalsWithParamModel:(WalletSignParamModel *)paramModel requestId:(NSString *)requestId webView:(WKWebView *)webView callbackId:(NSString *)callbackId                             connex:(BOOL)bConnex
+
 {
     WalletGetDecimalsApi *getDecimalsApi = [[WalletGetDecimalsApi alloc]initWithTokenAddress:paramModel.tokenAddress];
     [getDecimalsApi loadDataAsyncWithSuccess:^(VCBaseApi *finishApi) {
@@ -419,7 +457,7 @@
             return;
         }
         
-        [self showSignView:WalletTokenTransferType paramModel:paramModel requestId:requestId webView:webView callbackId:callbackId];
+        [self showSignView:WalletTokenTransferType paramModel:paramModel requestId:requestId webView:webView callbackId:callbackId connex:bConnex];
         
         
     } failure:^(VCBaseApi *finishApi, NSString *errMsg) {
@@ -436,6 +474,7 @@
                          requestId:(NSString *)requestId
                            webView:(WKWebView *)webView
                     callbackId:(NSString *)callbackId
+                            connex:(BOOL)bConnex
 {
     if (paramModel.clauseData.length == 0 ||
         paramModel.gas.integerValue  == 0) {
@@ -449,7 +488,7 @@
         return;
     }
     
-    [self showSignView:WalletContranctTransferType paramModel:paramModel requestId:requestId webView:webView callbackId:callbackId];
+    [self showSignView:WalletContranctTransferType paramModel:paramModel requestId:requestId webView:webView callbackId:callbackId connex:bConnex];
 }
 
 //- (void)certTransferParamModel:(WalletSignParamModel *)paramModel
@@ -544,7 +583,7 @@
 }
 
 //调用签名view
-- (void)showSignView:(WalletTransferType)transferType paramModel:(WalletSignParamModel *)paramModel requestId:(NSString *)requestId webView:(WKWebView *)webView callbackId:(NSString *)callbackId
+- (void)showSignView:(WalletTransferType)transferType paramModel:(WalletSignParamModel *)paramModel requestId:(NSString *)requestId webView:(WKWebView *)webView callbackId:(NSString *)callbackId connex:(BOOL)bConnex
 {
     WalletSignatureView *signatureView = [[WalletSignatureView alloc] initWithFrame:[WalletTools getCurrentVC].view.bounds];
     signatureView.tag = SignViewTag;
@@ -558,9 +597,19 @@
         NSLog(@"txid = %@",txid);
 #endif
         if (txid.length != 0) {
+            id data = nil;
+            if (bConnex) {
+                NSMutableDictionary *dictData = [NSMutableDictionary dictionary];
+                [dictData setObject:txid forKey:@"txId"];
+                [dictData setObject:paramModel.fromAddress forKey:@"signer"];
+                
+                data = dictData;
+            }else{
+                data = txid;
+            }
             [WalletTools callbackWithrequestId:requestId
                                        webView:webView
-                                          data:txid
+                                          data:data
                                     callbackId:callbackId
                                           code:OK];
         }else{

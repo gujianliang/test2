@@ -108,7 +108,7 @@
 
 + (BOOL)checkDecimalStr:(NSString *)decimalString;
 
-+ (BOOL)checkClauseDataFormat:(NSString *)clauseStr toAddress:(NSString *)toAddress;
++ (BOOL)checkClauseDataFormat:(NSString *)clauseStr toAddress:(NSString *)toAddress bToken:(BOOL)bToken;
 
 + (NSString *)errorMessageWith:(NSInteger)code;
 

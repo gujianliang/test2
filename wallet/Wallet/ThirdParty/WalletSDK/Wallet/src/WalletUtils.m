@@ -36,6 +36,7 @@
     if (password.length == 0) {
         
         callback(nil,error);
+        return;
 
     }
     __block Account *account = [Account randomMnemonicAccount];
@@ -47,6 +48,7 @@
             if (callback) {
                 
                 callback(nil,error);
+                return ;
             }
         }else{
             if (callback) {
@@ -401,7 +403,7 @@
                 || ![WalletTools errorAddressAlert:*tokenAddress]
                 || ![WalletTools checkDecimalStr:parameter.gas]
                 || ![WalletTools checkHEXStr:parameter.value]
-                || ![WalletTools checkClauseDataFormat:*clauseStr toAddress:parameter.to]) { //
+                || ![WalletTools checkClauseDataFormat:*clauseStr toAddress:parameter.to bToken:YES]) { //
                 
                 [WalletMBProgressShower showTextIn:[WalletTools getCurrentVC].view
                                               Text:ERROR_REQUEST_PARAMS_MSG During:1];
@@ -418,7 +420,7 @@
             if (![WalletTools errorAddressAlert:parameter.from]
                 || ![WalletTools checkHEXStr:*clauseStr]
                 || ![WalletTools checkDecimalStr:parameter.gas]
-                || ![WalletTools checkClauseDataFormat:*clauseStr toAddress:parameter.to]) {
+                || ![WalletTools checkClauseDataFormat:*clauseStr toAddress:parameter.to bToken:NO]) {
                 
                 [WalletMBProgressShower showTextIn:[WalletTools getCurrentVC].view
                                               Text:ERROR_REQUEST_PARAMS_MSG During:1];

@@ -1878,45 +1878,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Wallet/Modules/Creat/WalletCreateVC.m"
-            timestampString = "573962076.919889"
+            timestampString = "574501544.469203"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "105"
             endingLineNumber = "105"
             landmarkName = "-signAndRecover"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[WalletCreateVC signAndRecover]"
-                  moduleName = "WalletSDKDemo"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/cengxin/Documents/VeChain/iOS/ios-wallet-sdk/wallet/Wallet/Modules/Creat/WalletCreateVC.m"
-                  timestampString = "573962077.267675"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "106"
-                  endingLineNumber = "106"
-                  offsetFromSymbolStart = "90">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__32-[WalletCreateVC signAndRecover]_block_invoke"
-                  moduleName = "WalletSDKDemo"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/cengxin/Documents/VeChain/iOS/ios-wallet-sdk/wallet/Wallet/Modules/Creat/WalletCreateVC.m"
-                  timestampString = "573962077.270022"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "109"
-                  endingLineNumber = "109"
-                  offsetFromSymbolStart = "82">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1942,7 +1910,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Wallet/Modules/Creat/WalletCreateVC.m"
-            timestampString = "573962076.921325"
+            timestampString = "574501544.469694"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "109"
@@ -1958,106 +1926,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Wallet/Modules/Creat/WalletCreateVC.m"
-            timestampString = "573962076.922007"
+            timestampString = "574501544.469951"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "115"
             endingLineNumber = "115"
-            landmarkName = "-signAndRecover"
+            landmarkName = "-checkMnemonicWords"
             landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Wallet/ThirdParty/WalletSDK/Wallet/DApp/Signature/WalletSignatureViewHandle.m"
-            timestampString = "573962076.922871"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "151"
-            endingLineNumber = "151"
-            landmarkName = "-getTokenBalance:tokenAddress:gasLimit:block:"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[WalletSignatureViewHandle getTokenBalance:tokenAddress:gasLimit:block:]"
-                  moduleName = "WalletSDKDemo"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/cengxin/Documents/VeChain/iOS/ios-wallet-sdk/wallet/Wallet/ThirdParty/WalletSDK/Wallet/DApp/Signature/WalletSignatureViewHandle.m"
-                  timestampString = "573962077.287544"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "152"
-                  endingLineNumber = "152"
-                  offsetFromSymbolStart = "861">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__73-[WalletSignatureViewHandle getTokenBalance:tokenAddress:gasLimit:block:]_block_invoke"
-                  moduleName = "WalletSDKDemo"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/cengxin/Documents/VeChain/iOS/ios-wallet-sdk/wallet/Wallet/ThirdParty/WalletSDK/Wallet/DApp/Signature/WalletSignatureViewHandle.m"
-                  timestampString = "573962077.2894911"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "152"
-                  endingLineNumber = "152"
-                  offsetFromSymbolStart = "1328">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__copy_helper_block_.137"
-                  moduleName = "WalletSDKDemo"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/cengxin/Documents/VeChain/iOS/ios-wallet-sdk/wallet/Wallet/ThirdParty/WalletSDK/Wallet/DApp/Signature/WalletSignatureViewHandle.m"
-                  timestampString = "573962077.29189"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "152"
-                  endingLineNumber = "152"
-                  offsetFromSymbolStart = "137">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__destroy_helper_block_.138"
-                  moduleName = "WalletSDKDemo"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/cengxin/Documents/VeChain/iOS/ios-wallet-sdk/wallet/Wallet/ThirdParty/WalletSDK/Wallet/DApp/Signature/WalletSignatureViewHandle.m"
-                  timestampString = "573962077.2941591"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "152"
-                  endingLineNumber = "152"
-                  offsetFromSymbolStart = "79">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__73-[WalletSignatureViewHandle getTokenBalance:tokenAddress:gasLimit:block:]_block_invoke.140"
-                  moduleName = "WalletSDKDemo"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/cengxin/Documents/VeChain/iOS/ios-wallet-sdk/wallet/Wallet/ThirdParty/WalletSDK/Wallet/DApp/Signature/WalletSignatureViewHandle.m"
-                  timestampString = "573962077.29617"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "152"
-                  endingLineNumber = "152"
-                  offsetFromSymbolStart = "16">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2067,7 +1942,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Wallet/ThirdParty/WalletSDK/Wallet/DApp/Signature/WalletSignatureViewSubView.m"
-            timestampString = "573649811.869784"
+            timestampString = "574501544.470202"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "129"
@@ -2088,7 +1963,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "225"
             endingLineNumber = "225"
-            landmarkName = "+initDappWebViewWithKeystore:"
+            landmarkName = "+encryptKeystoreWithPassword:account:callback:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -2179,12 +2054,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Wallet/ThirdParty/WalletSDK/Wallet/DApp/Model/WalletTools.m"
-            timestampString = "573962076.925697"
+            timestampString = "574501544.470395"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "548"
             endingLineNumber = "548"
-            landmarkName = "+checkClauseDataFormat:toAddress:"
+            landmarkName = "+getAmountFromClause:to:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -2195,7 +2070,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Wallet/ThirdParty/WalletSDK/Wallet/DApp/Controllers/WalletDAppHandle.m"
-            timestampString = "573962076.9257981"
+            timestampString = "574501544.470446"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "278"

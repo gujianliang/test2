@@ -126,21 +126,44 @@
 
 - (void)leftViewClick:(void(^)(void))enterSignViewBlock
 {
+    NSString *noForamtAmount = [_amount stringByReplacingOccurrencesOfString:@"," withString:@""];
+    NSString *noForamtGasLimit = [_gasLimit stringByReplacingOccurrencesOfString:@"," withString:@""];
     if (_transferType == WalletContranctTransferType) {
         
-        [self enterPreView:enterSignViewBlock];
+#warning test 检查余额
+        
+        [_signatureHandle checkBalcanceFromAddress:_fromAddress
+                                         coinModel:_currentCoinModel
+                                            amount:noForamtAmount
+                                          gasLimit:noForamtGasLimit
+                                         superView:_scrollView.superview.superview
+                                             block:^(BOOL result)
+         {
+             if (result) {
+                 [self enterPreView:enterSignViewBlock];
+
+             }else{
+                 [_scrollView.superview.superview removeFromSuperview];
+             }
+         }];
         
     }else {
         [self checkBalance:enterSignViewBlock];
     }
 }
 
+#warning 整理逻辑
+
 - (void)checkBalance:(void(^)(void))enterSignViewBlock
 {
+    NSString *noForamtAmount = [_amount stringByReplacingOccurrencesOfString:@"," withString:@""];
+    NSString *noForamtGasLimit = [_gasLimit stringByReplacingOccurrencesOfString:@"," withString:@""];
+    
     [_signatureHandle checkBalcanceFromAddress:_fromAddress
                                      coinModel:_currentCoinModel
-                                        amount:_amount
-                                      gasLimit:_gasLimit
+                                        amount:noForamtAmount
+                                      gasLimit:noForamtGasLimit
+                                     superView:_scrollView.superview.superview
                                          block:^(BOOL result)
      {
          if (result) {
@@ -155,6 +178,7 @@
 
 - (void)initCellView:(void(^)(void))enterSignViewBlock
 {
+#warning gas 格式
     NSString *gasFormat = [NSString stringWithFormat:@"%@ VTHO",_gasLimit.length == 0 ? @"0.00" : [WalletTools thousandSeparator:_gasLimit decimals:NO]];
     
     CGFloat jsOffset = 0;
@@ -490,11 +514,8 @@
     @weakify(self);
     _lastBtn.block = ^(UIButton *btn) {
         @strongify(self);
-        if (removeBlock) {
-            removeBlock();
-        }
-        [self removeFromSuperview];
         
+#warning test
         if (transferBlock) {
             transferBlock();
         }

@@ -445,6 +445,10 @@
 
 + (BOOL)checkHEXStr:(NSString *)hex
 {
+    if (![hex isKindOfClass:[NSString class]]) {
+        return NO;
+    }
+    
     if (hex.length == 0) {
         return NO;
     }
@@ -460,6 +464,9 @@
 
 + (BOOL)checkDecimalStr:(NSString *)decimalString
 {
+    if (![decimalString isKindOfClass:[NSString class]]) {
+        return NO;
+    }
     if (decimalString.length == 0) {
         return NO;
     }
@@ -471,6 +478,10 @@
 + (BOOL)errorAddressAlert:(NSString *)toAddress
 {
     if ([toAddress isKindOfClass:[NSNull class]]) {
+        return NO;
+    }
+    
+    if (![toAddress isKindOfClass:[NSString class]]) {
         return NO;
     }
     
@@ -551,8 +562,24 @@
     return [NSString stringWithFormat:@"0x%@",clauseValue];
 }
 
-+ (BOOL)checkClauseDataFormat:(NSString *)clauseStr toAddress:(NSString *)toAddress
++ (BOOL)checkClauseDataFormat:(NSString *)clauseStr toAddress:(NSString *)toAddress bToken:(BOOL)bToken
 {
+    if (![WalletTools checkHEXStr:clauseStr]) {
+        return NO;
+    }
+    
+    if(!bToken){
+        if (toAddress.length > 0) {
+            if (![WalletTools errorAddressAlert:toAddress]) {
+                return NO;
+            }
+            
+            if (![WalletTools checkHEXStr:toAddress]) {
+                return NO;
+            }
+        }
+    }
+    
     if (toAddress.length == 0) {
         return YES;
     }else if (clauseStr.length > 10) {

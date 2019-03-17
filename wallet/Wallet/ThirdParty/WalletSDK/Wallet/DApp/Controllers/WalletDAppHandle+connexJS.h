@@ -32,6 +32,10 @@ NS_ASSUME_NONNULL_BEGIN
              requestId:(NSString *)requestId
                address:(NSString *)address;
 
+- (void)getStorageApiDictParam:(NSDictionary *)dictParam
+                     requestId:(NSString *)requestId
+                       webView:(WKWebView *)webView
+                    callbackId:(NSString *)callbackId;
 
 - (void)getBlock:(NSString *)callbackId
          webView:(WKWebView *)webView
@@ -59,17 +63,20 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)VETTransferDictWithParamModel:(WalletSignParamModel *)paramModel
                             requestId:(NSString *)requestId
                               webView:(WKWebView *)webView
-                           callbackId:(NSString *)callbackId;
+                           callbackId:(NSString *)callbackId
+                               connex:(BOOL)bConnex;
 
 - (void)VTHOTransferWithParamModel:(WalletSignParamModel *)paramModel
                          requestId:(NSString *)requestId
                            webView:(WKWebView *)webView
-                        callbackId:(NSString *)callbackId;
+                        callbackId:(NSString *)callbackId
+                            connex:(BOOL)bConnex;
 
 - (void)contractSignWithParamModel:(WalletSignParamModel *)paramModel
                          requestId:(NSString *)requestId
                            webView:(WKWebView *)webView
-                        callbackId:(NSString *)callbackId;
+                        callbackId:(NSString *)callbackId
+                            connex:(BOOL)bConnex;
 
 - (void)methodAsClauseWithDictP:(NSDictionary *)dictP
                       requestId:(NSString *)requestId
