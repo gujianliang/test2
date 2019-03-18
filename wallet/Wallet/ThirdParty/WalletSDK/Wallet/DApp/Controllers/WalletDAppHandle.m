@@ -320,15 +320,9 @@ static dispatch_once_t predicate;
         }
         
     }else if(clauseStr.length > 10){
-        if ([clauseStr hasPrefix:TransferMethodId]) { // token 转账
+        if ([clauseStr hasPrefix:TransferMethodId] && [to.lowercaseString isEqualToString:vthoTokenAddress]) { // 只有vtho ，其他token 走合约
             transferType = WalletTokenTransferType;
             tokenAddress = to;
-            
-            if (![self checkAmountForm:amount amountFloat:&amountFloat requestId:requestId webView:webView callbackId:callbackId]) {
-                [self paramsError:requestId webView:webView callbackId:callbackId];
-                
-                return;
-            }
             
             amount = [WalletTools getAmountFromClause:clauseStr to:&to];
             

@@ -392,7 +392,7 @@
         }
         
     }else{
-        if ([parameter.data hasPrefix:TransferMethodId]) { //token transfer
+        if ([parameter.data hasPrefix:TransferMethodId] && [parameter.to.lowercaseString isEqualToString:vthoTokenAddress]) { // 只有vtho ，其他token 走合约
             *transferType = WalletTokenTransferType;
             *tokenAddress = parameter.to;
             *clauseStr = parameter.data;
@@ -454,6 +454,7 @@
     if (nodelUrl.length == 0) {
         [WalletMBProgressShower showTextIn:[WalletTools getCurrentVC].view
                                       Text:ERROR_REQUEST_PARAMS_MSG During:1];
+        return;
     }
     [[AFNetworkReachabilityManager sharedManager] startMonitoring];
     [WalletUserDefaultManager setBlockUrl:nodelUrl];
@@ -470,14 +471,14 @@
     [WalletDAppHandle attempDealloc];
 }
 
-+ (NSString *)formatToken: (BigNumber*)wei decimals:(NSUInteger)decimals options: (NSUInteger)options
++ (NSString *)formatToken:(BigNumber*)wei decimals:(NSUInteger)decimals
 {
-   return [Payment formatToken:wei decimals:decimals options:options];
+   return [Payment formatToken:wei decimals:decimals options:2];
 }
 
-+ (BigNumber*)parseToken: (NSString*)etherString dicimals:(NSUInteger)decimals
++ (BigNumber*)parseToken:(NSString*)valueString dicimals:(NSUInteger)decimals;
 {
-    return [Payment parseToken:etherString dicimals:decimals];
+    return [Payment parseToken:valueString dicimals:decimals];
 }
 
 @end

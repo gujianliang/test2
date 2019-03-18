@@ -113,7 +113,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  @abstract
  *  Set node url
  *
- *  @param nodelUrl :node url
+ *  @param nodelUrl : node url
  *
  */
 + (void)setNode:(NSString *)nodelUrl;
@@ -144,9 +144,9 @@ NS_ASSUME_NONNULL_BEGIN
  *  @abstract
  *  Sign and send
  *
- *  @param parameter :Signature parameters
- *  @param keystoreJson :Keystore in json format
- *  @param callback :Callback after the end
+ *  @param parameter : Signature parameters
+ *  @param keystoreJson : Keystore in json format
+ *  @param callback : Callback after the end
  *
  */
 + (void)sendWithKeystore:(NSString *)keystoreJson
@@ -165,9 +165,9 @@ NS_ASSUME_NONNULL_BEGIN
 /*! @abstract
  *  Displays a JavaScript text input panel.
  *
- *  @param webView The web view invoking the delegate method.
- *  @param defaultText The initial text to display in the text entry field.
- *  @param completionHandler The completion handler to call after the text
+ *  @param webView : The web view invoking the delegate method.
+ *  @param defaultText : The initial text to display in the text entry field.
+ *  @param completionHandler : The completion handler to call after the text
 input panel has been dismissed. Pass the entered text if the user chose
 OK, otherwise nil.
 */
@@ -193,11 +193,25 @@ completionHandler:(void (^)(NSString *result))completionHandler;
  */
 + (void)deallocDappSingletion;
 
+/**
+ *  @abstract
+ *  Convert wei to value strings
+ *
+ *  @param wei : The minimum unit of coin
+ *  @param decimals : decimals of coin
+ *
+ */
++ (NSString*)formatToken:(BigNumber*)wei decimals:(NSUInteger)decimals;
 
-+ (NSString*)formatToken: (BigNumber*)wei decimals:(NSUInteger)decimals options: (NSUInteger)options;
-
-
-+ (BigNumber*)parseToken: (NSString*)etherString dicimals:(NSUInteger)decimals;
+/**
+ *  @abstract
+ *  Convert the number of coin to wei
+ *
+ *  @param decimals : decimals of coin
+ *  @param valueString : the number of coin
+ *
+ */
++ (BigNumber*)parseToken:(NSString*)valueString dicimals:(NSUInteger)decimals;
 
 NS_ASSUME_NONNULL_END
 
