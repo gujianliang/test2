@@ -274,8 +274,12 @@
     [dappHandle injectJS:webview];
 }
 
-+ (void)sendWithKeystore:(NSString *)keystoreJson parameter:(TransactionParameter *)parameter callback:(void(^)(NSString *txId,NSString *signer))callback
++ (void)sendWithKeystore:(NSString *)keystoreJson parameter:(TransactionParameter *)parameter callback:(void(^)(NSString *txId,NSString *signer, NSInteger status))callback
 {
+    if ([[WalletTools getCurrentNavVC].view viewWithTag:SignViewTag]) {
+        return;
+    }
+    
     NSString *toAddress     = @"";
     NSString *tokenAddress  = @"";
     NSString *amount        = @"";
@@ -286,7 +290,7 @@
     if(![self transactionCheckParams:&keystoreJson parameter:parameter toAddress:&toAddress amount:&amount transferType:&transferType tokenAddress:&tokenAddress clauseStr:&clauseStr]){
         
         if (callback) {
-            callback(nil,parameter.from);
+            callback(nil,parameter.from,ERROR_REQUEST_PARAMS);
         }
         return;
     }
@@ -313,7 +317,7 @@
             }else{
                 
                 if (callback) {
-                    callback(nil,parameter.from);
+                    callback(nil,parameter.from,ERROR_REQUEST_PARAMS);
                 }
                 return;
             }
@@ -340,24 +344,20 @@
     
     WalletSignatureView *signatureView = [[WalletSignatureView alloc] initWithFrame:[WalletTools getCurrentVC].view.bounds];
     signatureView.transferType = transferType;
-    
+    signatureView.tag = SignViewTag;
     [signatureView updateViewParamModel:signParamModel];
     
-    [[WalletTools getCurrentVC].navigationController.view addSubview:signatureView];
+    [[WalletTools getCurrentNavVC].view addSubview:signatureView];
     
     signatureView.transferBlock = ^(NSString * _Nonnull txid,NSInteger code) {
         
         if (txid.length != 0) {
             if (callback) {
-                callback(txid,parameter.from);
+                callback(txid,parameter.from,code);
             }
         }else{
-            if (code != ERROR_CANCEL) {
-                NSString *message = [WalletTools errorMessageWith:code];
-                [WalletTools jsErrorAlert:message];
-            }
             if (callback) {
-                callback(txid,parameter.from);
+                callback(@"",parameter.from,code);
             }
         }
     };
@@ -480,6 +480,11 @@
 {
     [WalletSingletonHandle attempDealloc];
     [WalletDAppHandle attempDealloc];
+    
+    UIView *signView = [[WalletTools getCurrentNavVC].view viewWithTag:SignViewTag];
+    if (signView) {
+        [signView removeFromSuperview];
+    }
 }
 
 + (NSString *)formatToken:(BigNumber*)wei decimals:(NSUInteger)decimals

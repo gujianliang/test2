@@ -92,7 +92,7 @@
 
     [WalletUtils sendWithKeystore:keystore
                         parameter:paramters
-                         callback:^(NSString *txId, NSString *signer)
+                         callback:^(NSString *txId, NSString *signer,NSInteger status)
      {
 
 
@@ -114,7 +114,7 @@
     
     TransactionParameter *paramters = [[TransactionParameter alloc]init];
     paramters.to = _tokenContractAddress; //contract address
-    paramters.value = @""; //token transfer value value is an empty string
+    paramters.value = @""; //token transfer value is an empty string
     
     paramters.data = [self calculatenTokenTransferClauseData:self.receiveAddressTextView.text value:amountBig.hexString];
     
@@ -123,7 +123,7 @@
     
     [WalletUtils sendWithKeystore:keystore
                         parameter:paramters
-                         callback:^(NSString *txId, NSString *signer)
+                         callback:^(NSString *txId, NSString *signer,NSInteger status)
      {
      }];
 
@@ -169,7 +169,7 @@
     
     [WalletUtils sendWithKeystore:keystore
                         parameter:paramters
-                                callback:^(NSString *txId, NSString *signer)
+                                callback:^(NSString *txId, NSString *signer,NSInteger status)
      {
          NSLog(@"dd");
      }];
@@ -206,6 +206,10 @@
     [self.view endEditing:YES];
 }
 
+- (void)dealloc
+{
+    [WalletUtils deallocDappSingletion];
+}
 
 /**
 *  Just hidden the keyboard.

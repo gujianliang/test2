@@ -151,7 +151,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 + (void)sendWithKeystore:(NSString *)keystoreJson
                parameter:(TransactionParameter *)parameter
-                callback:(void(^)(NSString *txId,NSString *signer))callback;
+                callback:(void(^)(NSString *txId,NSString *signer,NSInteger status))callback;
 
 /**
  *  @abstract

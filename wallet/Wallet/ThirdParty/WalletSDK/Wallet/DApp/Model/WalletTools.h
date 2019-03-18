@@ -52,6 +52,9 @@
 @interface WalletTools : NSObject
 
 + (UIViewController*)getCurrentVC;
+
++ (UIViewController*)getCurrentNavVC;
+
 + (NSString*)localeStringWithKey:(NSString*)key; // 去本地包key
 + (NSString *)localStringBundlekey:(NSString *)key; // 取bundle key
 
