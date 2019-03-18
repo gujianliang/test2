@@ -56,11 +56,8 @@ git clone --recursive https://github.com/AFNetworking/AFNetworking.git
 git clone --recursive https://github.com/jdg/MBProgressHUD.git
 git clone --recursive https://github.com/SnapKit/Masonry.git
 git clone --recursive https://github.com/facebook/SocketRocket.git
-
-
-
-
 ```
+
 To use the Framework, add the WalletSDK.Framework and WalletSDKBundle.bundle to your project :
 
 ```obj-c
