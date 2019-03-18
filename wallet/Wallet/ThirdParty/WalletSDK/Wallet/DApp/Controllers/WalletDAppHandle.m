@@ -194,16 +194,6 @@ static dispatch_once_t predicate;
      BOOL bCert = NO;
     
     NSString *kind = callbackParams[@"kind"];
-    if (![kind isEqualToString:@"tx"] && bConnex) {
-        [WalletTools callbackWithrequestId:requestId webView:webView data:@"" callbackId:callbackId code:ERROR_REQUEST_PARAMS];
-        return;
-    }
-    
-    //    if ([kind isEqualToString:@"cert"]) {
-    //        callbackParams = [NSMutableDictionary dictionaryWithDictionary:callbackParams[@"clauses"]];
-    //        bCert = YES;
-    //
-    //    }else
     
     if (bConnex) {
         if (![kind isKindOfClass:[NSString class]]) {

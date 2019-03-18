@@ -84,10 +84,10 @@
     //vet
     TransactionParameter *paramters = [[TransactionParameter alloc]init];
     paramters.to = self.receiveAddressTextView.text;
-    paramters.value = amountBig.hexString; // hex string or decimal string
+    paramters.value = amountBig.hexString; //Vet transfer amount, hex string or decimal string,
     paramters.data = @""; //vet transfer data value is an empty string
 
-    paramters.from = from;
+    paramters.from = from; //signature address（Hex string）
     paramters.gas = @"21000";  //Set maximum gas allowed for call,
 
     [WalletUtils sendWithKeystore:keystore
@@ -101,7 +101,7 @@
 
 - (void)tokenTransfer:(NSString *)from keystore:(NSString *)keystore{
     if (self.transferAmountTextField.text.length == 0
-        || self.transferAmountTextField.text.integerValue == 0) {
+        || self.transferAmountTextField.text.length == 0) {
         
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         hud.mode = MBProgressHUDModeText;
@@ -113,13 +113,13 @@
     BigNumber *amountBig = [WalletUtils parseToken:self.transferAmountTextField.text dicimals:18];
     
     TransactionParameter *paramters = [[TransactionParameter alloc]init];
-    paramters.to = _tokenContractAddress; //token contract address
+    paramters.to = _tokenContractAddress; //contract address
     paramters.value = @""; //token transfer value value is an empty string
     
     paramters.data = [self calculatenTokenTransferClauseData:self.receiveAddressTextView.text value:amountBig.hexString];
     
-    paramters.from = from;
-    paramters.gas = @"60000";
+    paramters.from = from; //signature address（Hex string）
+    paramters.gas = @"60000"; //Set maximum gas allowed for call,
     
     [WalletUtils sendWithKeystore:keystore
                         parameter:paramters
@@ -150,8 +150,8 @@
 - (void)contractSignture:(NSString *)from keystore:(NSString *)keystore{
     //xnode pending order contract
     TransactionParameter *paramters = [[TransactionParameter alloc]init];
-    paramters.to = @"0xd4dac3a95c741773f093d59256a21ed6fcc768a7"; //token address
-    paramters.value = @"";
+    paramters.to = @"0xd4dac3a95c741773f093d59256a21ed6fcc768a7"; //contract address
+    paramters.value = @""; //Number of VET consumed
     paramters.data = @"0xbae3e19e00000000000000000000000000000000000000000000000000000000000000680000000000000000000000000000000000000000000000000de0b6b3a76400000000000000000000000000000000000000000000000000000de0b6b3a7640000000000000000000000000000000000000000000000000000000000000003f480";
     
     {
@@ -164,8 +164,8 @@
 //        paramters.data = [self contractMethodId:@"0x2ed9b4fd" params:clauseParamList];
     }
     
-    paramters.from = from;
-    paramters.gas = @"600000";
+    paramters.from = from;     //signature address（Hex string）
+    paramters.gas = @"600000"; //Set maximum gas allowed for call,
     
     [WalletUtils sendWithKeystore:keystore
                         parameter:paramters

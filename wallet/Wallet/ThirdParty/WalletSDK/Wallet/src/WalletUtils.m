@@ -35,9 +35,10 @@
     
     if (password.length == 0) {
         
-        callback(nil,error);
+        if (callback) {
+            callback(nil,error);
+        }
         return;
-
     }
     __block Account *account = [Account randomMnemonicAccount];
     
@@ -46,10 +47,9 @@
          account.keystore = json;
         if (json.length == 0) {
             if (callback) {
-                
                 callback(nil,error);
-                return ;
             }
+            return ;
         }else{
             if (callback) {
                 WalletAccountModel *accountModel = [[WalletAccountModel alloc]init];
@@ -79,14 +79,18 @@
     
     if (password.length == 0) {
         NSLog(@"Password can not be blank.");
-        callback(nil, error);
+        if (callback) {
+            callback(nil, error);
+        }
         return;
     }
     NSMutableArray *trimeList = [NSMutableArray array];
     for (NSString * word in mnemonicWords) {
         if (word.length == 0) {
             NSLog(@"Mnemonic words is not available.");
-            callback(nil, error);
+            if (callback) {
+                callback(nil, error);
+            }
             return;
         }else{
             NSString *trimeWord = [word stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
@@ -98,7 +102,10 @@
     
     if (!account) {
         NSLog(@"Mnemonic words is not available.");
-        callback(nil, error);
+        if (callback) {
+
+            callback(nil, error);
+        }
         return;
     }
     
@@ -152,10 +159,14 @@
             accountModel.address = account.address.checksumAddress;
             accountModel.words = [account.mnemonicPhrase componentsSeparatedByString:@" "];
             
-            callback(accountModel,nil);
+            if (callback) {
+                callback(accountModel,nil);
+            }
             
         }else{
-            callback(nil, decryptError);
+            if (callback) {
+                callback(nil, decryptError);
+            }
         }
     }];
 }
@@ -352,7 +363,7 @@
     };
 }
 
-+ (BOOL )transactionCheckParams:(NSString **)keystore  parameter:(TransactionParameter *)parameter toAddress:(NSString **)toAddress amount:(NSString **)amount transferType:(WalletTransferType *)transferType tokenAddress:(NSString **)tokenAddress clauseStr:(NSString **)clauseStr
++ (BOOL)transactionCheckParams:(NSString **)keystore  parameter:(TransactionParameter *)parameter toAddress:(NSString **)toAddress amount:(NSString **)amount transferType:(WalletTransferType *)transferType tokenAddress:(NSString **)tokenAddress clauseStr:(NSString **)clauseStr
 {
     // check keystore format
     if (![WalletTools checkKeystore:*keystore]) {

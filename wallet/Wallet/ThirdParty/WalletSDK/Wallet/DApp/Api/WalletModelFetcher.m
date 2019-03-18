@@ -26,7 +26,7 @@
     NSString *urlString = [NSString stringWithString:aUrl];
     AFHTTPSessionManager *httpManager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:urlString]];
     
-    httpManager.requestSerializer.cachePolicy = NSURLRequestReturnCacheDataElseLoad;
+    httpManager.requestSerializer.cachePolicy = NSURLRequestReloadIgnoringLocalCacheData;
     [httpManager GET:urlString parameters:dict  success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         [WalletModelFetcher debugLog:responseObject andUrl:urlString];
@@ -54,7 +54,7 @@
     NSString *urlString = [NSString stringWithString:aUrl];
     
     AFHTTPSessionManager *httpManager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:urlString]];
-    httpManager.requestSerializer.cachePolicy = NSURLRequestReturnCacheDataElseLoad;
+    httpManager.requestSerializer.cachePolicy = NSURLRequestReloadIgnoringLocalCacheData;
 
     [WalletModelFetcher setHeaderInfo:httpManager useSession:useSession];
     
@@ -81,7 +81,7 @@
 {
     NSString *urlString = [NSString stringWithString:aUrl];
     AFHTTPSessionManager *httpManager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:urlString]];
-    httpManager.requestSerializer.cachePolicy = NSURLRequestReturnCacheDataElseLoad;
+    httpManager.requestSerializer.cachePolicy = NSURLRequestReloadIgnoringLocalCacheData;
     [WalletModelFetcher setHeaderInfo:httpManager useSession:useSession];
     
     [httpManager PUT:urlString parameters:dict success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
@@ -111,7 +111,7 @@
 {
     NSString *urlString = [NSString stringWithString:aUrl];
     AFHTTPSessionManager *httpManager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:urlString]];
-    httpManager.requestSerializer.cachePolicy = NSURLRequestReturnCacheDataElseLoad;
+    httpManager.requestSerializer.cachePolicy = NSURLRequestReloadIgnoringLocalCacheData;
     httpManager.requestSerializer.HTTPMethodsEncodingParametersInURI = [NSSet setWithObjects:@"HEAD",@"GET",nil];
     [WalletModelFetcher setHeaderInfo:httpManager useSession:useSession];
     
@@ -142,7 +142,7 @@
     NSString *urlString = [NSString stringWithString:aUrl];
     
     AFHTTPSessionManager *httpManager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:urlString]];
-    httpManager.requestSerializer.cachePolicy = NSURLRequestReturnCacheDataElseLoad;
+    httpManager.requestSerializer.cachePolicy = NSURLRequestReloadIgnoringLocalCacheData;
 
     [WalletModelFetcher setHeaderInfo:httpManager useSession:useSession];
     

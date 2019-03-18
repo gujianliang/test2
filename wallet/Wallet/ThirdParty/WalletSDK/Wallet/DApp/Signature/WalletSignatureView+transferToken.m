@@ -195,15 +195,8 @@
         [self timerCountBlock];
         
     } failure:^(VCBaseApi *finishApi, NSString *errMsg) {
-        [WalletMBProgressShower hide:self];
-        [WalletAlertShower showAlert:nil
-                                msg:VCNSLocalizedBundleString(@"transfer_wallet_send_fail", nil)
-                              inCtl:[WalletTools getCurrentVC]
-                              items:@[VCNSLocalizedBundleString(@"dialog_yes", nil)]
-                         clickBlock:^(NSInteger index) {
-                         }];
         
-        
+        [self showTransactionFail];
     }];
 }
 
