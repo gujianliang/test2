@@ -188,7 +188,7 @@ static dispatch_once_t predicate;
                 callbackId:(NSString *)callbackId
          completionHandler:(void (^)(NSString * __nullable result))completionHandler
 {
-    if ([[WalletTools getCurrentVC].navigationController.view viewWithTag:SelectWalletTag]) {
+    if ([[WalletTools getCurrentNavVC].view viewWithTag:SelectWalletTag]) {
         return;
     }
      BOOL bCert = NO;
@@ -386,7 +386,7 @@ static dispatch_once_t predicate;
     selectView.tag = SelectWalletTag;
     selectView.toAddress = to;
     selectView.amount = [NSString stringWithFormat:@"%lf",amountFloat];
-    [[WalletTools getCurrentVC].navigationController.view addSubview:selectView];
+    [[WalletTools getCurrentNavVC].view addSubview:selectView];
     selectView.block = ^(NSString *from,WalletDappStoreSelectView *viewSelf){
         
         [viewSelf removeFromSuperview];
@@ -423,7 +423,7 @@ static dispatch_once_t predicate;
                  transferType:(WalletTransferType)transferType
                        connex:(BOOL)bConnex
 {
-    UIView *conventView = [[WalletTools getCurrentVC].navigationController.view viewWithTag:SignViewTag];
+    UIView *conventView = [[WalletTools getCurrentNavVC].view viewWithTag:SignViewTag];
     if (conventView) {
         return;
     }

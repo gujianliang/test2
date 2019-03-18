@@ -590,7 +590,7 @@
     signatureView.transferType = transferType;
     [signatureView updateViewParamModel:paramModel];
     
-    [[WalletTools getCurrentVC].navigationController.view addSubview:signatureView];
+    [[WalletTools getCurrentNavVC].view addSubview:signatureView];
     
     signatureView.transferBlock = ^(NSString * _Nonnull txid ,NSInteger code) {
 #if ReleaseVersion

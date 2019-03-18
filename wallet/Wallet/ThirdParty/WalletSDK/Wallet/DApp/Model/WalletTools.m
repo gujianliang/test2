@@ -27,6 +27,15 @@
     return [self topViewControllerWithRootViewController:[UIApplication sharedApplication].keyWindow.rootViewController];
 }
 
++ (UIViewController*)getCurrentNavVC {
+    UIViewController *currentVC = [self topViewControllerWithRootViewController:[UIApplication sharedApplication].keyWindow.rootViewController];
+    
+    if (currentVC.navigationController == nil) {
+        return currentVC;
+    }
+    return currentVC.navigationController;
+}
+
 + (UIViewController*)topViewControllerWithRootViewController:(UIViewController*)rootViewController {
     if ([rootViewController isKindOfClass:[UITabBarController class]]) {
         UITabBarController* tabBarController = (UITabBarController*)rootViewController;
@@ -315,7 +324,7 @@
     }];
     
     if (code != 1 && code != 500) {
-        [self jsErrorAlert:message];
+//        [self jsErrorAlert:message];
     }
 }
 
