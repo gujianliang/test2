@@ -90,12 +90,12 @@ callback:^(WalletAccountModel * _Nonnull account, NSError * _Nonnull error)
 
 #### 2.2  Inject js bridge into webview
 ##### 
-You must  conform to the WKNavigationDelegate protocol  of  WKWebView,  and   implement the method  webView: didCommitNavigation or webView: didStartProvisionalNavigation: , 
+You must  conform to the WKNavigationDelegate protocol  of  WKWebView,  and   implement the method  webView: didStartProvisionalNavigation: , 
 then you can Inject js bridge into webview.
 
 ```obj-c  
 as example:
-- (void)webView:(WKWebView *)webView didCommitNavigation:(null_unspecified WKNavigation *)navigation;
+- (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(null_unspecified WKNavigation *)navigation;
 {
     [WalletUtils injectJSWithWebView:webView];
 }
