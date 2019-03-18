@@ -38,7 +38,7 @@
     if (nodeName.length == 0 || nodeUrl.length == 0 ){
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         hud.mode = MBProgressHUDModeText;
-        hud.label.text =  @"The input cannot be null.";
+        hud.label.text =  @"The input cannot be blank.";
         [hud hideAnimated:YES afterDelay:2.5];
         return;
     }

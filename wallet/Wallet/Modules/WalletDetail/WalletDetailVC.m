@@ -285,6 +285,8 @@
 *  Enter the transfer ViewControll and do some transactions.
 */
 - (IBAction)enterTransfer:(id)sender {
+    [self.searchBar resignFirstResponder];
+    
     WalletTransferVC *transfer = [[WalletTransferVC alloc] init];
     
     UIButton *btn = (UIButton *)sender;
