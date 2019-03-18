@@ -87,7 +87,7 @@
 
 - (void)getVETBalance:(NSString *)address amount:(NSString *)amount gasLimit:(NSString *)gasLimit block:(void(^)(BOOL result))block
 {
-    [WalletMBProgressShower showLoadData:_superView Text:VCNSLocalizedString(@"list_load_ing", nil)];
+    [WalletMBProgressShower showLoadData:_superView Text:VCNSLocalizedBundleString(@"list_load_ing", nil)];
     
     NSString *blockHost = [WalletUserDefaultManager getBlockUrl];
     
@@ -118,7 +118,7 @@
                  tempAmount = [Payment formatEther:bigNumberCount];
              }
              
-             NSString *msg = [NSString stringWithFormat:VCNSLocalizedString(@"contact_buy_failed_not_enough1", nil),[NSString stringWithFormat:@"%.2f",vetBalance.floatValue],tempAmount];
+             NSString *msg = [NSString stringWithFormat:VCNSLocalizedBundleString(@"contact_buy_failed_not_enough1", nil),[NSString stringWithFormat:@"%.2f",vetBalance.floatValue],tempAmount];
              
              [WalletMBProgressShower showMulLineTextIn:[WalletTools getCurrentVC].navigationController.view Text:msg During:1.5];
          }else{
@@ -140,7 +140,7 @@
                  if ([vthoBalanceNum compare:transferTokenAmount] == NSOrderedAscending) {
                      
                      NSString *vthoBalanceFormat = [Payment formatToken:bigNumberCount decimals:_coinModel.decimals options:2];
-                     NSString *msg = [NSString stringWithFormat: VCNSLocalizedString(@"contact_buy_failed_not_enough3",nil),vthoBalanceFormat,@"VTHO",gasLimit,@"VTHO"];
+                     NSString *msg = [NSString stringWithFormat: VCNSLocalizedBundleString(@"contact_buy_failed_not_enough3",nil),vthoBalanceFormat,@"VTHO",gasLimit,@"VTHO"];
                      
                      [WalletMBProgressShower showMulLineTextIn:[WalletTools getCurrentVC].navigationController.view Text:msg During:1.5];
                  }else{
@@ -192,14 +192,14 @@
         if ([vthoBalanceNum compare:transferTokenAmount] == NSOrderedAscending) {
             
             NSString *vthoBalanceFormat = [Payment formatToken:bigNumberCount decimals:_coinModel.decimals options:2];
-            NSString *msg = [NSString stringWithFormat: VCNSLocalizedString(@"contact_buy_failed_not_enough3",nil),vthoBalanceFormat,_coinModel.symobl,tokenAmount,_coinModel.symobl];
+            NSString *msg = [NSString stringWithFormat: VCNSLocalizedBundleString(@"contact_buy_failed_not_enough3",nil),vthoBalanceFormat,_coinModel.symobl,tokenAmount,_coinModel.symobl];
             
             
             [WalletMBProgressShower showMulLineTextIn:[WalletTools getCurrentVC].navigationController.view Text:msg During:1.5];
             
         }else{
             
-            [WalletMBProgressShower showLoadData:_superView Text:VCNSLocalizedString(@"list_load_ing", nil)];
+            [WalletMBProgressShower showLoadData:_superView Text:VCNSLocalizedBundleString(@"list_load_ing", nil)];
             WalletTokenBalanceApi *vthoApi = [[WalletTokenBalanceApi alloc]initWith:vthoTokenAddress data:[WalletTools tokenBalanceData:address]];
             [vthoApi loadDataAsyncWithSuccess:^(VCBaseApi *finishApi) {
                 
@@ -220,7 +220,7 @@
                 if ([vthoBalanceNum compare:transferTokenAmount] == NSOrderedAscending) {
                     
                     NSString *vthoBalanceFormat = [Payment formatToken:bigNumberCount decimals:_coinModel.decimals options:2];
-                    NSString *msg = [NSString stringWithFormat: VCNSLocalizedString(@"contact_buy_failed_not_enough3",nil),vthoBalanceFormat,@"VTHO",gasLimit,@"VTHO"];
+                    NSString *msg = [NSString stringWithFormat: VCNSLocalizedBundleString(@"contact_buy_failed_not_enough3",nil),vthoBalanceFormat,@"VTHO",gasLimit,@"VTHO"];
                     
                     [WalletMBProgressShower showMulLineTextIn:[WalletTools getCurrentVC].navigationController.view Text:msg During:1.5];
                 }else{
@@ -271,7 +271,7 @@
         if ([vthoBalanceNum compare:transferTokenAmount] == NSOrderedAscending) {
             
             NSString *vthoBalanceFormat = [Payment formatToken:bigNumberCount decimals:_coinModel.decimals options:2];
-            NSString *msg = [NSString stringWithFormat: VCNSLocalizedString(@"contact_buy_failed_not_enough3",nil),vthoBalanceFormat,_coinModel.symobl,total,_coinModel.symobl];
+            NSString *msg = [NSString stringWithFormat: VCNSLocalizedBundleString(@"contact_buy_failed_not_enough3",nil),vthoBalanceFormat,_coinModel.symobl,total,_coinModel.symobl];
             
             [WalletMBProgressShower showMulLineTextIn:[WalletTools getCurrentVC].navigationController.view Text:msg During:1.5];
         }else{
@@ -296,7 +296,7 @@
     _superView = superView;
     _coinModel = coinModel;
     
-    [WalletMBProgressShower showLoadData:_superView Text:VCNSLocalizedString(@"loading...", nil)];
+    [WalletMBProgressShower showLoadData:_superView Text:VCNSLocalizedBundleString(@"loading...", nil)];
     WalletGetSymbolApi *getSymbolApi = [[WalletGetSymbolApi alloc]initWithTokenAddress:tokenAddress];
     [getSymbolApi loadDataAsyncWithSuccess:^(VCBaseApi *finishApi) {
         

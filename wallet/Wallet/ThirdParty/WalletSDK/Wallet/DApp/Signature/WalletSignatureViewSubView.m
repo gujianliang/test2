@@ -38,11 +38,22 @@
     NSData              *_clauseData;
     
     WalletSignatureViewHandle *_signatureHandle;
+    CGFloat _firstWidth;  // 第一个项的宽度，用来保持左对齐
 }
 
-
-- (void)initSignature:(UIScrollView *)scrollView amount:(NSString *)amount currentCoinModel:(WalletCoinModel *)currentCoinModel gasLimit:(NSString *)gasLimit  fromAddress:(NSString *)fromAddress toAddress:(NSString *)toAddress pwTextField:(UITextField *)pwTextField transferType:(WalletTransferType)transferType
-                  gas:(NSNumber *)gas gasPriceCoef:(BigNumber *)gasPriceCoef clauseData:(NSData *)clauseData signatureHandle:(WalletSignatureViewHandle *)signatureHandle additionalMsg:(NSString *)additionalMsg
+- (void)initSignature:(UIScrollView *)scrollView
+               amount:(NSString *)amount
+     currentCoinModel:(WalletCoinModel *)currentCoinModel
+             gasLimit:(NSString *)gasLimit
+          fromAddress:(NSString *)fromAddress
+            toAddress:(NSString *)toAddress
+          pwTextField:(UITextField *)pwTextField
+         transferType:(WalletTransferType)transferType
+                  gas:(NSNumber *)gas
+         gasPriceCoef:(BigNumber *)gasPriceCoef
+           clauseData:(NSData *)clauseData
+      signatureHandle:(WalletSignatureViewHandle *)signatureHandle
+        additionalMsg:(NSString *)additionalMsg
 {
     _scrollView = scrollView;
     _amount     = amount;
@@ -60,6 +71,7 @@
 
 - (void)creatLeftView:(void(^)(void))enterSignViewBlock
 {
+    // 初始化左视图
     if (_leftView == nil) {
         _leftView = [[UIView alloc]init];
         [_scrollView addSubview:_leftView];
@@ -69,6 +81,7 @@
             make.height.mas_equalTo(viewHeight - Scale(40));
         }];
     }
+    
     // 售卖价格
     _valueLabel = [[UILabel alloc]init];
     _valueLabel.textAlignment = NSTextAlignmentCenter;
@@ -179,10 +192,11 @@
 - (void)initCellView:(void(^)(void))enterSignViewBlock
 {
 #warning gas 格式
-    NSString *gasFormat = [NSString stringWithFormat:@"%@ VTHO",_gasLimit.length == 0 ? @"0.00" : [WalletTools thousandSeparator:_gasLimit decimals:NO]];
+    NSString *gasFormat = [NSString stringWithFormat:@"%@ VTHO", _gasLimit.length == 0 ? @"0.00" : [WalletTools thousandSeparator:_gasLimit decimals:NO]];
     
     CGFloat jsOffset = 0;
     
+    // 交易费用项
     [self creatCell:VCNSLocalizedBundleString(@"contract_payment_info_row1_title", nil)
               value:gasFormat
                   Y: Scale(52 + 20)
@@ -194,12 +208,14 @@
         jsOffset = 52;
     }
     
+    // 签名地址
     [self creatCell:VCNSLocalizedBundleString(@"contract_payment_info_row2_title", nil)
               value:[WalletTools checksumAddress:_fromAddress]
                   Y:Scale(52 * 2 + 20 + jsOffset)
           adjustBtn:NO
  enterSignViewBlock:enterSignViewBlock];
     
+    // 目标地址
     [self creatCell:VCNSLocalizedBundleString(@"contract_payment_info_row3_title", nil)
               value:[WalletTools checksumAddress:_toAddress]
                   Y:Scale(52 * 3 + 20 + jsOffset)
@@ -235,35 +251,44 @@
     contentView.backgroundColor = UIColor.whiteColor;
     [_leftView addSubview:contentView];
     
-    // 左名称标签标记
+    // 左边 名称标签
     UILabel *leftLabel = [[UILabel alloc]init];
     leftLabel.text = title;
     leftLabel.textColor = HEX_RGB(0xBDBDBD);
     leftLabel.font = MediumFont(Scale(14.0));
+    leftLabel.textAlignment = NSTextAlignmentCenter;
+    leftLabel.adjustsFontSizeToFitWidth = YES;
+    leftLabel.font = MediumFont(Scale(14.0));
     [leftLabel sizeToFit];
     [contentView addSubview:leftLabel];
+    
+    if (_firstWidth <= 0) {
+        _firstWidth = leftLabel.bounds.size.width + 10.0;
+    }
+    
     [leftLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.bottom.mas_equalTo(0);
         make.left.mas_equalTo(Scale(20.0));
-        make.width.mas_equalTo(leftLabel.mas_width);
+        make.width.mas_equalTo(_firstWidth);
     }];
     
-    // 右值标签
+    // 右边 值标签
     UILabel *rightLabel = [[UILabel alloc]init];
     rightLabel.numberOfLines = 0;
     rightLabel.backgroundColor = UIColor.whiteColor;
     rightLabel.lineBreakMode = NSLineBreakByTruncatingMiddle;
     rightLabel.text = value;
     rightLabel.textColor = CommonBlack;
+    rightLabel.adjustsFontSizeToFitWidth = YES;
     rightLabel.font = MediumFont(Scale(14.0));
     [contentView addSubview:rightLabel];
     
-    if (adjustBtn) {
+    if (adjustBtn) {  // 是否有调整费率Btn
         _minerLabel = rightLabel;
         
         [rightLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.bottom.mas_equalTo(0);
-            make.left.mas_equalTo(leftLabel.mas_right).offset(Scale(20.0));
+            make.left.mas_equalTo(leftLabel.mas_right).offset(Scale(15.0));
         }];
         
         UIButton *btn = [[UIButton alloc]init];
@@ -273,7 +298,6 @@
         [btn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.bottom.mas_equalTo(0);
             make.left.mas_equalTo(rightLabel.mas_right).offset(Scale(10.0));
-            make.height.mas_equalTo(Scale(50));
         }];
         btn.block = ^(UIButton *btn) {
             if (!_needAdjust) {
@@ -283,11 +307,12 @@
                 [self creatLeftView:enterSignViewBlock];
             }
         };
-    }else{
+        
+    }else{ // 是值标签
         [rightLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.bottom.mas_equalTo(0);
             make.right.mas_equalTo(-Scale(20.0));
-            make.left.mas_equalTo(leftLabel.mas_right).offset(Scale(20.0));
+            make.left.mas_equalTo(leftLabel.mas_right).offset(Scale(15.0));
         }];
     }
     
@@ -309,43 +334,48 @@
 {
     UIView *contentView = [[UIView alloc]initWithFrame:CGRectMake(0, Y, SCREEN_WIDTH, 50)];
     [_leftView addSubview:contentView];
+    
+    // 慢 图标
     UILabel *slow = [[UILabel alloc]init];
     slow.text = VCNSLocalizedBundleString(@"transfer_coin_slow", nil);
-    slow.font = [UIFont systemFontOfSize:14];
+    slow.font = [UIFont systemFontOfSize:Scale(14)];
+    slow.textAlignment = NSTextAlignmentLeft;
+    slow.adjustsFontSizeToFitWidth = YES;
     [contentView addSubview:slow];
     [slow mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(20);
+        make.left.mas_equalTo(Scale(20));
         make.top.mas_equalTo(0);
         make.bottom.mas_equalTo(0);
-        make.width.mas_equalTo(Scale(50));
+        make.width.mas_equalTo(Scale(35));
     }];
     
+    // 滑块
     UISlider *slider = [[UISlider alloc]init];
     slider.minimumValue = 0.0;
     slider.maximumValue = 255.0;
     slider.value = 120.0;
-    
     [contentView addSubview:slider];
     [slider mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(70);
-        make.right.mas_equalTo(-70);
+        make.left.mas_equalTo(Scale(60));
+        make.right.mas_equalTo(-Scale(60));
         make.top.bottom.mas_equalTo(0);
     }];
-    
     [slider addTarget:self
                action:@selector(sliderChange:)
      forControlEvents:UIControlEventValueChanged];
     
+    // 快 图标
     UILabel *fast = [[UILabel alloc]init];
     fast.text = VCNSLocalizedBundleString(@"transfer_coin_quick", nil);
-    fast.font = [UIFont systemFontOfSize:14];
-    
+    fast.font = [UIFont systemFontOfSize:Scale(14)];
+    fast.textAlignment = NSTextAlignmentRight;
+    fast.adjustsFontSizeToFitWidth = YES;
     [contentView addSubview:fast];
     [fast mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.mas_equalTo(0);
+        make.right.mas_equalTo(-Scale(20));
         make.top.mas_equalTo(0);
         make.bottom.mas_equalTo(0);
-        make.width.mas_equalTo(Scale(50));
+        make.width.mas_equalTo(Scale(35));
     }];
 }
 
