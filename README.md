@@ -57,8 +57,7 @@ git clone --recursive https://github.com/facebook/SocketRocket.git
 
 Clone or download them and drag them into your project.
 
-**note that: The frameWork 'MBProgressHUD' is just a indicator example in this demo. If you develop your project, 
-you can custom it and this is optional.
+
 
 ```
 To use the Framework, add the WalletSDK.Framework and WalletSDKBundle.bundle to your project :
