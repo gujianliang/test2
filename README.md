@@ -29,10 +29,11 @@ Vechain wallet SDK provides a series of functional interface can help the iOS de
 #### Latest version 1.0.0
 
 #### The dependency package should be added to the project, as listed below:
-```obj-c
+
 
 1、Support installation with CocoaPods
  
+ ```obj-c
  source 'https://github.com/CocoaPods/Specs.git'
  platform :ios, '10.0'
  target 'TargetName' do 
@@ -46,9 +47,9 @@ Vechain wallet SDK provides a series of functional interface can help the iOS de
     pod 'SocketRocket', '~> 0.4.2'
  
  end
-
+```
 2、Support manual install
-
+ ```obj-c
 git clone --recursive https://github.com/AFNetworking/AFNetworking.git
 git clone --recursive https://github.com/jdg/MBProgressHUD.git
 git clone --recursive https://github.com/SnapKit/Masonry.git
