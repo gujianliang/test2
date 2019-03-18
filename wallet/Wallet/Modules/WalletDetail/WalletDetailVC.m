@@ -139,6 +139,8 @@
 */
 - (void)setNodeEnvironmentHost{
     
+    [self.searchBar resignFirstResponder]; /* The searchBar resign the first responder. */
+    
     NSDictionary *dictCurrentNode = [[NSUserDefaults standardUserDefaults] objectForKey:@"currentNode"];
     
     if (dictCurrentNode) { /* Set to the main Node of your choice. */

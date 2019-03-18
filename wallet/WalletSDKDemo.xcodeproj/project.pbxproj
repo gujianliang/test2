@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4126DE79223F50CD00850291 /* WalletSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9773F86722140EFE00DF5972 /* WalletSDK.framework */; };
+		4126DE7C223F9FBB00850291 /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4126DE7B223F9FBB00850291 /* ViewController.xib */; };
 		41A5B18D22266B400025AA1C /* WalletMoreInfoVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41A5B18C22266B400025AA1C /* WalletMoreInfoVC.xib */; };
 		41A5B19E2227EC210025AA1C /* WalletAddVthoNodeVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41A5B19D2227EC210025AA1C /* WalletAddVthoNodeVC.xib */; };
 		971812222227945B008F9639 /* WalletNodeDetailVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9718121D2227945B008F9639 /* WalletNodeDetailVC.xib */; };
@@ -29,7 +30,6 @@
 		971B3E4521E6000B007845F0 /* WalletMnemonicImportVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 971B3E3521E6000B007845F0 /* WalletMnemonicImportVC.m */; };
 		9747227720EDE9F800F9EAB3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9747227620EDE9F800F9EAB3 /* AppDelegate.m */; };
 		9747227A20EDE9F800F9EAB3 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9747227920EDE9F800F9EAB3 /* ViewController.m */; };
-		9747227D20EDE9F800F9EAB3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9747227B20EDE9F800F9EAB3 /* Main.storyboard */; };
 		9747227F20EDE9FA00F9EAB3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9747227E20EDE9FA00F9EAB3 /* Assets.xcassets */; };
 		9747228220EDE9FA00F9EAB3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9747228020EDE9FA00F9EAB3 /* LaunchScreen.storyboard */; };
 		9747228520EDE9FA00F9EAB3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9747228420EDE9FA00F9EAB3 /* main.m */; };
@@ -110,6 +110,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4126DE7B223F9FBB00850291 /* ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ViewController.xib; sourceTree = "<group>"; };
 		41A5B18B222630740025AA1C /* WalletSdkMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WalletSdkMacro.h; sourceTree = "<group>"; };
 		41A5B18C22266B400025AA1C /* WalletMoreInfoVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WalletMoreInfoVC.xib; sourceTree = "<group>"; };
 		41A5B19D2227EC210025AA1C /* WalletAddVthoNodeVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletAddVthoNodeVC.xib; sourceTree = "<group>"; };
@@ -144,7 +145,6 @@
 		9747227620EDE9F800F9EAB3 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		9747227820EDE9F800F9EAB3 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		9747227920EDE9F800F9EAB3 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		9747227C20EDE9F800F9EAB3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9747227E20EDE9FA00F9EAB3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9747228120EDE9FA00F9EAB3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9747228320EDE9FA00F9EAB3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -384,7 +384,7 @@
 				9747227620EDE9F800F9EAB3 /* AppDelegate.m */,
 				9747227820EDE9F800F9EAB3 /* ViewController.h */,
 				9747227920EDE9F800F9EAB3 /* ViewController.m */,
-				9747227B20EDE9F800F9EAB3 /* Main.storyboard */,
+				4126DE7B223F9FBB00850291 /* ViewController.xib */,
 				41A5B18B222630740025AA1C /* WalletSdkMacro.h */,
 				9747227E20EDE9FA00F9EAB3 /* Assets.xcassets */,
 				9747228020EDE9FA00F9EAB3 /* LaunchScreen.storyboard */,
@@ -693,6 +693,7 @@
 			files = (
 				971B3E3A21E6000B007845F0 /* WalletDetailVC.xib in Resources */,
 				9747228220EDE9FA00F9EAB3 /* LaunchScreen.storyboard in Resources */,
+				4126DE7C223F9FBB00850291 /* ViewController.xib in Resources */,
 				971B3E3B21E6000B007845F0 /* WalletChangePWVC.xib in Resources */,
 				971812222227945B008F9639 /* WalletNodeDetailVC.xib in Resources */,
 				9773F8512213B22B00DF5972 /* WalletSDKBundle.bundle in Resources */,
@@ -703,7 +704,6 @@
 				9747227F20EDE9FA00F9EAB3 /* Assets.xcassets in Resources */,
 				971B3E3E21E6000B007845F0 /* WalletTransferVC.xib in Resources */,
 				41A5B18D22266B400025AA1C /* WalletMoreInfoVC.xib in Resources */,
-				9747227D20EDE9F800F9EAB3 /* Main.storyboard in Resources */,
 				975747592200573E0046C8A0 /* WebViewVC.xib in Resources */,
 				971B3E4121E6000B007845F0 /* WalletKeystoreImportVC.xib in Resources */,
 			);
@@ -814,14 +814,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		9747227B20EDE9F800F9EAB3 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				9747227C20EDE9F800F9EAB3 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		9747228020EDE9FA00F9EAB3 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

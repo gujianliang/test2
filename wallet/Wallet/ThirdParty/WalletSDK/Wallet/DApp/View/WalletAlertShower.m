@@ -438,8 +438,12 @@
         }];
     }
     
-    viewY = viewY + Scale(90);
-    
+    if (SCREEN_WIDTH / 375.0 > 2.0) {   // ipad
+        viewY = viewY + 100;
+        
+    }else { // iPhone
+        viewY = viewY + 80;
+    }
     WalletTopSinglePixelLineView *bottomLine = [[WalletTopSinglePixelLineView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(contentView.frame) - 40, contentView.frame.size.width, 1)];
     [contentView addSubview:bottomLine];
     
