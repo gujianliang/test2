@@ -31,7 +31,7 @@ Vechain wallet SDK provides a series of functional interface can help the iOS de
 #### The dependency package should be added to the project, as listed below:
 
 
-#### 1、Support installation with CocoaPods
+#### Support installation with CocoaPods
  
  ```obj-c
  source 'https://github.com/CocoaPods/Specs.git'
@@ -48,7 +48,7 @@ Vechain wallet SDK provides a series of functional interface can help the iOS de
  
  end
 ```
-####  2、Support manual install
+####  Support manual install
 Clone or download them and drag them into your project.
 
  ```obj-c
