@@ -329,19 +329,20 @@
             make.top.mas_equalTo(34);
         }];
         
-        CGFloat msgH = [title boundingRectWithSize:CGSizeMake(contentView.frame.size.width - 40, NSIntegerMax) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:titleLabel.font} context:nil].size.height;
-        viewY = viewY + msgH;
+        CGFloat titleH = [title boundingRectWithSize:CGSizeMake(contentView.frame.size.width - 40, NSIntegerMax) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:titleLabel.font} context:nil].size.height;
+        viewY = viewY + titleH;
     }
+    UIFont *comFont = [UIFont systemFontOfSize:Scale(14.0)];
     UILabel *msgLable = [[UILabel alloc]initWithFrame:CGRectMake(20, 20,  40 ,20)];
     if ([msg isKindOfClass:[NSString class]]) {
         NSString* msgStr = (NSString*)msg;
         if (msgStr.length > 0) {
             
-            CGRect msgRect = [msgStr boundingRectWithSize:CGSizeMake(contentView.frame.size.width - 40, NSIntegerMax) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14]} context:nil];
+            CGRect msgRect = [msgStr boundingRectWithSize:CGSizeMake(contentView.frame.size.width - 40, NSIntegerMax) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:comFont} context:nil];
             
             msgLable = [[UILabel alloc]initWithFrame:CGRectMake(20, (title.length > 0 ? 50 : 30), contentView.frame.size.width - 40 ,ceil(msgRect.size.height) + 2)];
             [msgLable setText:msgStr];
-            [msgLable setFont:[UIFont systemFontOfSize:Scale(13.0)]];
+            [msgLable setFont:comFont];
             [msgLable setNumberOfLines:0];
             [msgLable setTextColor:HEX_RGB(0xBDBDBD)];
             [msgLable setTextAlignment:textAlignment];
@@ -372,11 +373,11 @@
     {
         NSMutableAttributedString* msgStr =(NSMutableAttributedString*)msg;
         NSString *anotherString=[msgStr string];
-        CGRect msgRect = [anotherString boundingRectWithSize:CGSizeMake(contentView.frame.size.width - 40, NSIntegerMax) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14]} context:nil];
+        CGRect msgRect = [anotherString boundingRectWithSize:CGSizeMake(contentView.frame.size.width - 40, NSIntegerMax) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:comFont} context:nil];
         
         msgLable = [[UILabel alloc]initWithFrame:CGRectMake(20, (title.length > 0 ? 50 : 30), contentView.frame.size.width - 40 ,ceil(msgRect.size.height) + 2)];
         msgLable.attributedText = msgStr;
-        [msgLable setFont:[UIFont systemFontOfSize:Scale(13.0)]];
+        [msgLable setFont:comFont];
         [msgLable setNumberOfLines:0];
           [msgLable setTextAlignment:textAlignment];
         [msgLable setBackgroundColor:[UIColor clearColor]];
@@ -437,7 +438,7 @@
         }];
     }
     
-    viewY = viewY + 80;
+    viewY = viewY + Scale(90);
     
     WalletTopSinglePixelLineView *bottomLine = [[WalletTopSinglePixelLineView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(contentView.frame) - 40, contentView.frame.size.width, 1)];
     [contentView addSubview:bottomLine];

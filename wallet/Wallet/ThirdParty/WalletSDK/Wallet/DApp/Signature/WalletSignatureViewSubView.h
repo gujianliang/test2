@@ -31,8 +31,20 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong)UIButton *lastBtn;
 @property (nonatomic, strong)UITextField *pwTextField;
 
-- (void)initSignature:(UIScrollView *)scrollView amount:(NSString *)amount currentCoinModel:(WalletCoinModel *)currentCoinModel gasLimit:(NSString *)gasLimit  fromAddress:(NSString *)fromAddress toAddress:(NSString *)toAddress pwTextField:(UITextField *)pwTextField transferType:(WalletTransferType)transferType
-                  gas:(NSNumber *)gas gasPriceCoef:(BigNumber *)gasPriceCoef clauseData:(NSData *)clauseData signatureHandle:(WalletSignatureViewHandle *)signatureHandle additionalMsg:(NSString *)additionalMsg;
+- (void)initSignature:(UIScrollView *)scrollView
+               amount:(NSString *)amount
+     currentCoinModel:(WalletCoinModel *)currentCoinModel
+             gasLimit:(NSString *)gasLimit
+          fromAddress:(NSString *)fromAddress
+            toAddress:(NSString *)toAddress
+          pwTextField:(UITextField *)pwTextField
+         transferType:(WalletTransferType)transferType
+                  gas:(NSNumber *)gas
+         gasPriceCoef:(BigNumber *)gasPriceCoef
+           clauseData:(NSData *)clauseData
+      signatureHandle:(WalletSignatureViewHandle *)signatureHandle
+        additionalMsg:(NSString *)additionalMsg;
+
 
 - (void)creatLeftView:(void(^)(void))enterSignViewBlock;
 - (void)creatRightView:(void(^)(void))signBlock;

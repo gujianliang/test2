@@ -210,6 +210,7 @@
         [self backBtnClick];
     };
     
+    // 分页滑动容器
     _scrollView = [[UIScrollView alloc]init];
     _scrollView.pagingEnabled = YES;
     _scrollView.scrollEnabled = NO;
@@ -220,10 +221,14 @@
         make.height.mas_equalTo(viewHeight - 40);
     }];
     
+    
+    // 添加隐藏键盘手势点击事件
     UITapGestureRecognizer *myTap = [[UITapGestureRecognizer alloc] initWithTarget:self
                                                                             action:@selector(scrollTap)];
     [_scrollView addGestureRecognizer:myTap];
     
+    
+    // 添加子视图控件【金额，交易费，滑块，签名地址，目标地址，下一步按钮】
     [self addSignatureSubView];
 }
 
@@ -297,24 +302,26 @@
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     if (_scrollView.contentOffset.x == SCREEN_WIDTH) {
-        [_backBtn setImage:[UIImage imageNamed:@"icon_back_black"] forState:UIControlStateNormal];
+        UIImage *iamge = [WalletTools localImageWithName:@"icon_back_black"];
+        [_backBtn setImage:iamge forState:UIControlStateNormal];
         
-        _titleLabel.text = VCNSLocalizedString(@"dialog_coin_transfer_password", nil);
+        _titleLabel.text = VCNSLocalizedBundleString(@"dialog_coin_transfer_password", nil);
         
     }else if (_scrollView.contentOffset.x == SCREEN_WIDTH * 2){
-        [_backBtn setImage:[UIImage imageNamed:@"icon_close_white-1"] forState:UIControlStateNormal];
+        UIImage *iamge = [WalletTools localImageWithName:@"icon_close_black"];
+        [_backBtn setImage:iamge forState:UIControlStateNormal];
         
         
-        _titleLabel.text = VCNSLocalizedString(@"token_list_packaging", nil);
+        _titleLabel.text = VCNSLocalizedBundleString(@"token_list_packaging", nil);
         
     }else{
-        
-        [_backBtn setImage:[UIImage imageNamed:@"icon_close_white-1"] forState:UIControlStateNormal];
+        UIImage *iamge = [WalletTools localImageWithName:@"icon_close_black"];
+        [_backBtn setImage:iamge forState:UIControlStateNormal];
         if (_transferType == WalletContranctTransferType) {
-            _titleLabel.text = VCNSLocalizedString(@"contract_payment_info_title", nil);
+            _titleLabel.text = VCNSLocalizedBundleString(@"contract_payment_info_title", nil);
             
         }else{
-            _titleLabel.text = VCNSLocalizedString(@"dialog_coin_transfer_description", nil);
+            _titleLabel.text = VCNSLocalizedBundleString(@"dialog_coin_transfer_description", nil);
         }
     }
 }
