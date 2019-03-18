@@ -29,10 +29,11 @@ Vechain wallet SDK provides a series of functional interface can help the iOS de
 #### Latest version 1.0.0
 
 #### The dependency package should be added to the project, as listed below:
-```obj-c
 
-1、Support installation with CocoaPods
+
+#### Support installation with CocoaPods
  
+ ```obj-c
  source 'https://github.com/CocoaPods/Specs.git'
  platform :ios, '10.0'
  target 'TargetName' do 
@@ -46,20 +47,17 @@ Vechain wallet SDK provides a series of functional interface can help the iOS de
     pod 'SocketRocket', '~> 0.4.2'
  
  end
+```
+####  Support manual install
+Clone or download them and drag them into your project.
 
-2、Support manual install
-
+ ```obj-c
 git clone --recursive https://github.com/AFNetworking/AFNetworking.git
 git clone --recursive https://github.com/jdg/MBProgressHUD.git
 git clone --recursive https://github.com/SnapKit/Masonry.git
 git clone --recursive https://github.com/facebook/SocketRocket.git
-
-Clone or download them and drag them into your project.
-
-**note that: The frameWork 'MBProgressHUD' is just a indicator example in this demo. If you develop your project, 
-you can custom it and this is optional.
-
 ```
+
 To use the Framework, add the WalletSDK.Framework and WalletSDKBundle.bundle to your project :
 
 ```obj-c
@@ -92,12 +90,12 @@ callback:^(WalletAccountModel * _Nonnull account, NSError * _Nonnull error)
 
 #### 2.2  Inject js bridge into webview
 ##### 
-You must  conform to the WKNavigationDelegate protocol  of  WKWebView,  and   implement the method  webView: didCommitNavigation or webView: didStartProvisionalNavigation: , 
+You must  conform to the WKNavigationDelegate protocol  of  WKWebView,  and   implement the method  webView: didStartProvisionalNavigation: , 
 then you can Inject js bridge into webview.
 
 ```obj-c  
 as example:
-- (void)webView:(WKWebView *)webView didCommitNavigation:(null_unspecified WKNavigation *)navigation;
+- (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(null_unspecified WKNavigation *)navigation;
 {
     [WalletUtils injectJSWithWebView:webView];
 }
