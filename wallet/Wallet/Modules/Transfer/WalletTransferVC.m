@@ -71,7 +71,7 @@
     if (_isVET) {
         [self vetTransfer:from keystore:keystore];
     }else{
-        [self vthoTransfer:from keystore:keystore];
+        [self tokenTransfer:from keystore:keystore];
     }
     
     //sign contract demo
@@ -85,7 +85,7 @@
     TransactionParameter *paramters = [[TransactionParameter alloc]init];
     paramters.to = self.receiveAddressTextView.text;
     paramters.value = amountBig.hexString; // hex string or decimal string
-    paramters.data = @"";
+    paramters.data = @""; //vet transfer data value is an empty string
 
     paramters.from = from;
     paramters.gas = @"21000";  //Set maximum gas allowed for call,
@@ -99,7 +99,7 @@
     }];
 }
 
-- (void)vthoTransfer:(NSString *)from keystore:(NSString *)keystore{
+- (void)tokenTransfer:(NSString *)from keystore:(NSString *)keystore{
     if (self.transferAmountTextField.text.length == 0
         || self.transferAmountTextField.text.integerValue == 0) {
         
@@ -113,8 +113,8 @@
     BigNumber *amountBig = [WalletUtils parseToken:self.transferAmountTextField.text dicimals:18];
     
     TransactionParameter *paramters = [[TransactionParameter alloc]init];
-    paramters.to = _tokenContractAddress; //token address
-    paramters.value = @"";
+    paramters.to = _tokenContractAddress; //token contract address
+    paramters.value = @""; //token transfer value value is an empty string
     
     paramters.data = [self calculatenTokenTransferClauseData:self.receiveAddressTextView.text value:amountBig.hexString];
     

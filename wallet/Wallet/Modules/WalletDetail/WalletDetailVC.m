@@ -187,8 +187,7 @@
          NSString *coinAmount = @"0.00";
          if (!bigNumberCount.isZero) {
              coinAmount = [WalletUtils formatToken:bigNumberCount
-                                      decimals:18  //coin decimals
-                                       options:2]; //Keep 2 decimals
+                                          decimals:18]; //coin decimals]
          }
          self.vetAmountLabel.text = coinAmount;
                  
@@ -226,8 +225,7 @@
         NSString *coinAmount = @"0.00";
         if (!bigNumberCount.isZero) {
             coinAmount = [WalletUtils formatToken:bigNumberCount
-                                     decimals:18
-                                      options:2];
+                                     decimals:18];
         }
         self.vthoAmountLabel.text = coinAmount;
         
