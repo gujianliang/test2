@@ -10,6 +10,8 @@
 #import "WalletDappStoreSelectCell.h"
 #import "UIButton+block.h"
 #import "WalletSingletonHandle.h"
+#import "WalletVETBalanceApi.h"
+#import "Payment.h"
 
 #define viewHeight 411
 
@@ -61,7 +63,7 @@
     
     // 主标题标签
     UILabel *titleLabel = [[UILabel alloc]init];
-    titleLabel.text = VCNSLocalizedBundleString(@"选择钱包", nil);
+    titleLabel.text = VCNSLocalizedBundleString(@"h5_select_wallet_title", nil);
     
     titleLabel.textAlignment = NSTextAlignmentCenter;
     [titleView addSubview:titleLabel];
@@ -88,16 +90,46 @@
         } completion:^(BOOL finished) {
             [self removeFromSuperview];
         }];
+        if (_cancelBlock) {
+            _cancelBlock();
+        }
     };
     
     UITableView *tableView = [[UITableView alloc]init];
     tableView.delegate = self;
     tableView.dataSource = self;
-    
+    [tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     [middleView addSubview:tableView];
     [tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.left.bottom.mas_equalTo(middleView);
         make.top.mas_equalTo(50);
+    }];
+    
+    [WalletTools checkNetwork:^(BOOL t) {
+        if (t) {
+            NSArray *walletList = [[WalletSingletonHandle shareWalletHandle] getAllWallet];
+            
+            __block NSInteger i = 0;
+            for (WalletManageModel *model in walletList) {
+                
+                WalletVETBalanceApi *vetBalanceApi = [[WalletVETBalanceApi alloc]initWith:model.address];
+                [vetBalanceApi loadDataAsyncWithSuccess:^(VCBaseApi *finishApi) {
+                    WalletBalanceModel *balanceModel = finishApi.resultModel;
+                    
+                    model.VETCount = balanceModel.balance;
+                    i ++;
+                    if (i == walletList.count) {
+                        [tableView reloadData];
+                    }
+                    
+                } failure:^(VCBaseApi *finishApi, NSString *errMsg) {
+                    i ++;
+                    if (i == walletList.count) {
+                        [tableView reloadData];
+                    }
+                }];
+            }
+        }
     }];
 }
 
@@ -115,6 +147,7 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     WalletDappStoreSelectCell *cell = [[WalletDappStoreSelectCell alloc] init];
+    cell.bSpecialContract = self.bSpecialContract;
     NSArray *walletList =[[WalletSingletonHandle shareWalletHandle] getAllWallet];
     [cell setModel:walletList[indexPath.row] amount:_amount toAddress:_toAddress];
     return cell;
@@ -136,11 +169,21 @@
     NSArray *walletList = [[WalletSingletonHandle shareWalletHandle] getAllWallet];
     WalletManageModel *model = walletList[indexPath.row];
     
+    BigNumber *bigNumberCount = [BigNumber bigNumberWithHexString:model.VETCount];
+    NSString *coinAmount = @"0.00";
+    if (!bigNumberCount.isZero) {
+        coinAmount = [Payment formatToken:bigNumberCount
+                                 decimals:18
+                                  options:2];
+    }
+    
+    NSString *walletAmount = [coinAmount stringByReplacingOccurrencesOfString:@"," withString:@""];
+    
     [[WalletSingletonHandle shareWalletHandle] setCurrentModel:model.address];
     
     if ([model.address.lowercaseString isEqualToString:_toAddress.lowercaseString]) {
         return;
-    }else if(model.VETCount.doubleValue > _amount.doubleValue)
+    }else if(walletAmount.doubleValue > _amount.doubleValue)
     {
         if (_block) {
             _block(model.address,self);

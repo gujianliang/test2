@@ -107,7 +107,7 @@
 
 
 // 配置调试log是否打印
-#define     ReleaseVersion    0
+#define     ReleaseVersion    1
 
 
 

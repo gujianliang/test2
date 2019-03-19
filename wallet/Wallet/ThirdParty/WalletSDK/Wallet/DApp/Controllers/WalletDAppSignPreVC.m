@@ -21,7 +21,7 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    self.view.backgroundColor = UIColor.whiteColor;
+    
     [self updateData];
 }
 
@@ -37,7 +37,10 @@
     [self.dataArr removeAllObjects];
     
     if (_dictParam) { // 展示新值
-        [self.dataArr addObject:_dictParam];
+        NSString *json = [_dictParam yy_modelToJSONString];
+        if (json.length > 0) {
+            [self.dataArr addObject:json];
+        }
     }
     
     [self.table reloadData];
@@ -45,12 +48,36 @@
 
 - (void)viewDidLoad{
     [super viewDidLoad];
-    
+    self.view.backgroundColor = UIColor.whiteColor;
     self.navigationItem.title = VCNSLocalizedBundleString(@"h5_contract_params_confirm_title", nil);
+//    [self updateNavigationBarStyle:TintAndTitleNoneCloseWhiteOne];
+    
     // 添加子视图
     [self addSubView];
+    [self addBackButtonWithBGImageName:@"icon_close_black"];
 }
 
+- (void)addBackButtonWithBGImageName:(NSString*)imageName
+{
+    UIButton *backBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    if (imageName.length > 0) {
+        [backBtn setImage:[WalletTools localImageWithName:imageName] forState:UIControlStateNormal];
+        [backBtn setImage:[WalletTools localImageWithName:imageName] forState:UIControlStateDisabled];
+        
+    }
+    backBtn.frame = CGRectMake(0, 0, 50, 50);
+    [backBtn setBackgroundColor:[UIColor clearColor]];
+    [backBtn setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
+    [backBtn addTarget:self action:@selector(backBtnClick) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithCustomView:backBtn];
+    self.navigationItem.leftBarButtonItem = backItem;
+}
+
+- (void)backBtnClick
+{
+    [self dismissViewControllerAnimated:true completion:nil];
+
+}
 
 - (void)addSubView{
     
@@ -66,6 +93,7 @@
         make.height.mas_equalTo(Scale(100.0));
     }];
     
+    
     // 备注标签信息
     UILabel *lab = [[UILabel alloc] init];
     lab.text = VCNSLocalizedBundleString(@"h5_contract_params_confirm_msg", nil);
@@ -79,6 +107,7 @@
         make.right.mas_equalTo(-Scale(20));
         make.top.bottom.mas_equalTo(0);
     }];
+    
     
     // 添加继续按钮
     WalletGradientLayerButton *confirmBtn = [[WalletGradientLayerButton alloc] init];
@@ -116,6 +145,7 @@
 }
 
 - (void)continueSign{
+    NSLog(@"click 已知晓风险，继续签名");
     
     [self dismissViewControllerAnimated:YES completion:^{
         if (_block) {
@@ -143,6 +173,10 @@
         textF.editable = NO;
         textF.selectable = NO;
         textF.tag = 100000;
+        textF.backgroundColor = [UIColor colorWithHexString:@"#FDFDFD"];
+        textF.layer.cornerRadius = 5.0;
+        textF.layer.borderWidth = 1.0;
+        textF.layer.borderColor = [[UIColor colorWithHexString:@"#BDDAF7"] CGColor];
         [cell addSubview:textF];
         [textF mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(Scale(20));
