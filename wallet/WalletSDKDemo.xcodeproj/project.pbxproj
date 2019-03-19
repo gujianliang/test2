@@ -19,6 +19,7 @@
 		4126DEC02240D71700850291 /* WalletMoreInfoVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4126DEC22240D71700850291 /* WalletMoreInfoVC.xib */; };
 		4126DEC52240D7C700850291 /* WalletChangePWVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4126DEC72240D7C700850291 /* WalletChangePWVC.xib */; };
 		4126DECC2240DBC600850291 /* WalletTransferVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4126DECE2240DBC600850291 /* WalletTransferVC.xib */; };
+		4126DED42240E28000850291 /* WalletCreateVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4126DED62240E28000850291 /* WalletCreateVC.xib */; };
 		41A5B19E2227EC210025AA1C /* WalletAddVthoNodeVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41A5B19D2227EC210025AA1C /* WalletAddVthoNodeVC.xib */; };
 		971812222227945B008F9639 /* WalletNodeDetailVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9718121D2227945B008F9639 /* WalletNodeDetailVC.xib */; };
 		971812232227945B008F9639 /* WalletNodeDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9718121E2227945B008F9639 /* WalletNodeDetailVC.m */; };
@@ -26,7 +27,6 @@
 		971B3E3721E6000B007845F0 /* WalletDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 971B3E1C21E6000B007845F0 /* WalletDetailVC.m */; };
 		971B3E3821E6000B007845F0 /* WalletMoreInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 971B3E1D21E6000B007845F0 /* WalletMoreInfoVC.m */; };
 		971B3E3C21E6000B007845F0 /* WalletCreateVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 971B3E2521E6000B007845F0 /* WalletCreateVC.m */; };
-		971B3E3D21E6000B007845F0 /* WalletCreateVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 971B3E2621E6000B007845F0 /* WalletCreateVC.xib */; };
 		971B3E3F21E6000B007845F0 /* WalletTransferVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 971B3E2A21E6000B007845F0 /* WalletTransferVC.m */; };
 		971B3E4321E6000B007845F0 /* WalletRecoverMainVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 971B3E3321E6000B007845F0 /* WalletRecoverMainVC.m */; };
 		971B3E4421E6000B007845F0 /* WalletKeystoreImportVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 971B3E3421E6000B007845F0 /* WalletKeystoreImportVC.m */; };
@@ -132,6 +132,8 @@
 		4126DECB2240DB2500850291 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/WalletDetailVC.strings"; sourceTree = "<group>"; };
 		4126DECD2240DBC600850291 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/WalletTransferVC.xib; sourceTree = "<group>"; };
 		4126DED32240DC7600850291 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/WalletTransferVC.strings"; sourceTree = "<group>"; };
+		4126DED52240E28000850291 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/WalletCreateVC.xib; sourceTree = "<group>"; };
+		4126DED82240E28200850291 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/WalletCreateVC.strings"; sourceTree = "<group>"; };
 		41A5B18B222630740025AA1C /* WalletSdkMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WalletSdkMacro.h; sourceTree = "<group>"; };
 		41A5B19D2227EC210025AA1C /* WalletAddVthoNodeVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletAddVthoNodeVC.xib; sourceTree = "<group>"; };
 		9718121A2227945B008F9639 /* WalletNodeDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WalletNodeDetailVC.h; sourceTree = "<group>"; };
@@ -144,7 +146,6 @@
 		971B3E2121E6000B007845F0 /* WalletDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WalletDetailVC.h; sourceTree = "<group>"; };
 		971B3E2221E6000B007845F0 /* WalletChangePWVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WalletChangePWVC.h; sourceTree = "<group>"; };
 		971B3E2521E6000B007845F0 /* WalletCreateVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WalletCreateVC.m; sourceTree = "<group>"; };
-		971B3E2621E6000B007845F0 /* WalletCreateVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WalletCreateVC.xib; sourceTree = "<group>"; };
 		971B3E2721E6000B007845F0 /* WalletCreateVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WalletCreateVC.h; sourceTree = "<group>"; };
 		971B3E2A21E6000B007845F0 /* WalletTransferVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WalletTransferVC.m; sourceTree = "<group>"; };
 		971B3E2B21E6000B007845F0 /* WalletTransferVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WalletTransferVC.h; sourceTree = "<group>"; };
@@ -321,7 +322,7 @@
 			children = (
 				971B3E2721E6000B007845F0 /* WalletCreateVC.h */,
 				971B3E2521E6000B007845F0 /* WalletCreateVC.m */,
-				971B3E2621E6000B007845F0 /* WalletCreateVC.xib */,
+				4126DED62240E28000850291 /* WalletCreateVC.xib */,
 			);
 			path = Creat;
 			sourceTree = "<group>";
@@ -713,7 +714,7 @@
 				971812222227945B008F9639 /* WalletNodeDetailVC.xib in Resources */,
 				9773F8512213B22B00DF5972 /* WalletSDKBundle.bundle in Resources */,
 				4126DEA52240BBCD00850291 /* LaunchScreen.storyboard in Resources */,
-				971B3E3D21E6000B007845F0 /* WalletCreateVC.xib in Resources */,
+				4126DED42240E28000850291 /* WalletCreateVC.xib in Resources */,
 				4126DEB12240CFF300850291 /* WalletRecoverMainVC.xib in Resources */,
 				41A5B19E2227EC210025AA1C /* WalletAddVthoNodeVC.xib in Resources */,
 				4126DEBB2240D30A00850291 /* WalletMnemonicImportVC.xib in Resources */,
@@ -917,6 +918,15 @@
 				4126DED32240DC7600850291 /* zh-Hans */,
 			);
 			name = WalletTransferVC.xib;
+			sourceTree = "<group>";
+		};
+		4126DED62240E28000850291 /* WalletCreateVC.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4126DED52240E28000850291 /* Base */,
+				4126DED82240E28200850291 /* zh-Hans */,
+			);
+			name = WalletCreateVC.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
