@@ -77,6 +77,9 @@
 }
 
 - (void)vetTransfer:(NSString *)from keystore:(NSString *)keystore{
+    if (self.transferAmountTextField.text.length == 0) {
+        return;
+    }
     BigNumber *amountBig = [WalletUtils parseToken:self.transferAmountTextField.text dicimals:18];
 
     //vet
@@ -98,12 +101,12 @@
 }
 
 - (void)tokenTransfer:(NSString *)from keystore:(NSString *)keystore{
-    if (self.transferAmountTextField.text.length == 0
+    if (self.receiveAddressTextView.text.length == 0
         || self.transferAmountTextField.text.length == 0) {
         
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         hud.mode = MBProgressHUDModeText;
-        hud.label.text =  @"Please fill in the amount";
+        hud.label.text =  NSLocalizedString(@"input_empty", nil);
         [hud hideAnimated:YES afterDelay:1.5];
         return;
     }

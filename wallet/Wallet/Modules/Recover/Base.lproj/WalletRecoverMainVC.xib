@@ -26,7 +26,7 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="vlg-QT-Dh6"/>
                     </constraints>
-                    <state key="normal" title="Import Keystore">
+                    <state key="normal" title="Keystore">
                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </state>
                     <connections>
@@ -39,7 +39,7 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="1qv-WY-eQq"/>
                     </constraints>
-                    <state key="normal" title="Import Mnemonic Phrases">
+                    <state key="normal" title="Mnemonic Phrases">
                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </state>
                     <connections>

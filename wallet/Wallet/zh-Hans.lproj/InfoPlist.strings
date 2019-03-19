@@ -1,0 +1,9 @@
+/* 
+  InfoPlist.strings
+  WalletSDKDemo
+
+  Created by  VechainIOS on 2019/3/19.
+  Copyright © 2019 demo. All rights reserved.
+*/
+
+CFBundleName = "钱包Demo";

@@ -113,7 +113,7 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="37" id="r7r-P7-fCJ"/>
                     </constraints>
-                    <state key="normal" title="Del Wallet">
+                    <state key="normal" title="Delete Wallet">
                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </state>
                     <connections>

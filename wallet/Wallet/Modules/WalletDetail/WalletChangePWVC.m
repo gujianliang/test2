@@ -36,7 +36,7 @@
     if (_oldPWTextField.text.length == 0 || _nextPWTextField.text.length == 0 || _makeSureTextField.text.length == 0) {
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         hud.mode = MBProgressHUDModeText;
-        hud.label.text =  @"Password can not be blank.";
+        hud.label.text = NSLocalizedString(@"input_empty", nil);
         [hud hideAnimated:YES afterDelay:2.5];
         return;
     }
@@ -45,7 +45,7 @@
     if (![_nextPWTextField.text isEqualToString:_makeSureTextField.text]) {
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         hud.mode = MBProgressHUDModeText;
-        hud.label.text =  @"The new password is not correct.";
+        hud.label.text = NSLocalizedString(@"modify_password_new_error", nil);
         [hud hideAnimated:YES afterDelay:2.5];
         return;
     }
@@ -53,7 +53,7 @@
     /* show loading state */
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.mode = MBProgressHUDModeText;
-    hud.label.text =  @"Waiting...";
+    hud.label.text = NSLocalizedString(@"wait", nil);
     
     /* Read the keystore and check the old password is vailable. */
     NSDictionary *currentWallet = [[NSUserDefaults standardUserDefaults] objectForKey:@"currentWallet"];
@@ -67,7 +67,7 @@
          if (error) {
              MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
              hud.mode = MBProgressHUDModeText;
-             hud.label.text = @"Wrong old password!";
+             hud.label.text =  NSLocalizedString(@"modify_password_old_error", nil);
              [hud hideAnimated:YES afterDelay:1.5];
              return ;
          }
@@ -87,12 +87,18 @@
                  
                  MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
                  hud.mode = MBProgressHUDModeText;
-                 hud.label.text = @"Change the password success!";
+                 hud.label.text = NSLocalizedString(@"modify_password_success", nil);
                  [hud hideAnimated:YES afterDelay:2.5];
                  
                  dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                      [self.navigationController popViewControllerAnimated:YES];
                  });
+                 
+             }else {
+                 MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+                 hud.mode = MBProgressHUDModeText;
+                 hud.label.text = NSLocalizedString(@"modify_password_failr", nil);
+                 [hud hideAnimated:YES afterDelay:2.5];
              }
          }];
      }];

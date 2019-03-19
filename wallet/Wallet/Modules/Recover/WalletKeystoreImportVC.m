@@ -77,15 +77,15 @@
     if (self.password.text.length == 0 || self.keystoreTextView.text.length == 0) {
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         hud.mode = MBProgressHUDModeText;
-        hud.label.text =  @"The input cannot be blank";
-        [hud hideAnimated:YES afterDelay:3];
+        hud.label.text = NSLocalizedString(@"input_empty", nil);
+        [hud hideAnimated:YES afterDelay:1.5];
         return;
     }
     
     /* show loading state */
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.mode = MBProgressHUDModeText;
-    hud.label.text =  @"Waiting ...";
+    hud.label.text = NSLocalizedString(@"wait", nil);
 
     
     /* Create a wallet with your password and keystore. */
@@ -121,7 +121,7 @@
          }else{
              MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
              hud.mode = MBProgressHUDModeText;
-             hud.label.text = @"Check the input is correct";
+             hud.label.text = NSLocalizedString(@"Check_right", nil);
              [hud hideAnimated:YES afterDelay:3];
          }
      }];

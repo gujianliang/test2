@@ -54,7 +54,7 @@
 - (void)initView {
    
     /* Set right bar buttonItem */
-    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc]initWithTitle:@"Choose Node"
+    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc]initWithTitle:NSLocalizedString(@"host_select_txt", nil)
                                                                  style:UIBarButtonItemStyleDone
                                                                 target:self
                                                                 action:@selector(selectTheMainNodeEnvironment)];
@@ -89,7 +89,7 @@
     
     /* Show the demo version information */
     NSString *version = [[[NSBundle mainBundle] infoDictionary] valueForKey:@"CFBundleVersion"];
-    version = [NSString stringWithFormat:@"Demo Version：(%@)",version];
+    version = [NSString stringWithFormat:NSLocalizedString(@"version", nil), version];
     CGFloat y = ScreenH -  kNavigationBarHeight;
     UILabel *versionLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, y, ScreenW - 40, 30)];
     versionLabel.text = version;
@@ -153,7 +153,7 @@
     
     if (_blockHost.length == 0) {  /* THe default Boloc Host. */
         _blockHost = Test_Node;
-        self.title =  @"Test Node";
+        self.title = NSLocalizedString(@"item0", nil);
         
         NSMutableDictionary *serverDict = [NSMutableDictionary dictionary];
         [serverDict setObject:_blockHost forKey:@"nodeUrl"];

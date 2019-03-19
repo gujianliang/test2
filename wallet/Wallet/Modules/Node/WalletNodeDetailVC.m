@@ -72,7 +72,7 @@
     
     if (isEqual) {
         NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-        [dict setObject:@"Test Node" forKey:@"nodeName"];
+        [dict setObject:NSLocalizedString(@"item1", nil) forKey:@"nodeName"];
         [dict setObject:Test_Node forKey:@"nodeUrl"];
         
         [[NSUserDefaults standardUserDefaults] setObject:newList2 forKey:@"nodeList"];
