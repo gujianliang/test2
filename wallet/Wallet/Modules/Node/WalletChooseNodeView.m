@@ -52,12 +52,12 @@
     _nodeList = [NSMutableArray array];
     
     NSMutableDictionary *dictMain = [NSMutableDictionary dictionary];
-    [dictMain setObject:@"Main Node" forKey:@"nodeName"];
+    [dictMain setObject:NSLocalizedString(@"item0", nil) forKey:@"nodeName"];
     [dictMain setObject:Main_Node forKey:@"nodeUrl"];
     [_nodeList addObject:dictMain];
     
     NSMutableDictionary *dictTest = [NSMutableDictionary dictionary];
-    [dictTest setObject:@"Test Node" forKey:@"nodeName"];
+    [dictTest setObject:NSLocalizedString(@"item1", nil) forKey:@"nodeName"];
     [dictTest setObject:Test_Node forKey:@"nodeUrl"];
     [_nodeList addObject:dictTest];
 
@@ -83,7 +83,7 @@
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeSystem];
     btn.frame = CGRectMake(15, 0, 165, 50);
     btn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-    [btn setTitle:@"Add Node" forState:UIControlStateNormal];
+    [btn setTitle:NSLocalizedString(@"item2", nil) forState:UIControlStateNormal];
     [btn addTarget:self action:@selector(addNode) forControlEvents:UIControlEventTouchUpInside];
     [footV addSubview:btn];
     tableView.tableFooterView = footV;

@@ -59,8 +59,8 @@
     if (self.password.text.length == 0 || mnemonicWords.length == 0){
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         hud.mode = MBProgressHUDModeText;
-        hud.label.text =  @"The input cannot be blank.";
-        [hud hideAnimated:YES afterDelay:3];
+        hud.label.text = NSLocalizedString(@"input_empty", nil);
+        [hud hideAnimated:YES afterDelay:1.5];
         return;
     }
     
@@ -69,15 +69,15 @@
     if (![WalletUtils isValidMnemonicWords:arr]) {
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         hud.mode = MBProgressHUDModeText;
-        hud.label.text =  @"Mnemonic Words is not available.";
-        [hud hideAnimated:YES afterDelay:1];
+        hud.label.text =  NSLocalizedString(@"mnemonic_not_available", nil);
+        [hud hideAnimated:YES afterDelay:1.5];
         return;
     }
     
     /* show loading state */
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.mode = MBProgressHUDModeText;
-    hud.label.text =  @"Waiting...";
+    hud.label.text = NSLocalizedString(@"wait", nil);
     
     
     /* Create a wallet with your password and mnemonic words. */

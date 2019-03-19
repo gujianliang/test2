@@ -42,7 +42,7 @@
     if (self.passwordLabel.text.length  == 0) {
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         hud.mode = MBProgressHUDModeText;
-        hud.label.text =  @"Password can not be blank.";
+        hud.label.text = NSLocalizedString(@"input_empty", nil);
         [hud hideAnimated:YES afterDelay:1.5];
         return;
     }
@@ -51,7 +51,7 @@
     /* show loading state. */
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.mode = MBProgressHUDModeText;
-    hud.label.text =  @"Waiting...";
+    hud.label.text = NSLocalizedString(@"wait", nil);
     
     
     /* Create a wallet with your password. */
