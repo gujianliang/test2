@@ -97,26 +97,18 @@
         _currentCoinModel.address = _fromAddress;
 
         [self amountOpreation];
-        
         [self initView];
+        
     }else if (_transferType == WalletTokenTransferType){
         _currentCoinModel.tokenAddress = _tokenAddress;
         
-        [WalletTools checkNetwork:^(BOOL t) {
-            [_signatureHandle tokenAddressConvetCoinInfo:_tokenAddress
-                                               coinModel:_currentCoinModel
-                                               superView:self
-                                                   block:^(BOOL result)
-            {
-                if (result) {
-                    [self amountOpreation];
-                    [self initView];
-                }else{
-                    [self removeFromSuperview];
-                }
-                
-            }];
-        }];
+        _currentCoinModel.symobl = @"VTHO";
+        _currentCoinModel.decimals = 18;
+        _currentCoinModel.address = vthoTokenAddress;
+        
+        [self amountOpreation];
+        [self initView];
+        
     }else{ //合约，显示的只能是vet
         _currentCoinModel.symobl = @"VET";
         _currentCoinModel.decimals = 18;
@@ -135,7 +127,7 @@
                                   decimals:_currentCoinModel.decimals
                                    options:2];
         }else{
-            _amount = [Payment formatToken:[BigNumber bigNumberWithInteger:_amount.integerValue]
+            _amount = [Payment formatToken:[BigNumber bigNumberWithDecimalString:_amount]
                                   decimals:_currentCoinModel.decimals
                                    options:2];
         }

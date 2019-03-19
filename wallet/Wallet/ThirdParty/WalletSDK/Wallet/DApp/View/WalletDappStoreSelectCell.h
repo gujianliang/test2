@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (strong, nonatomic) WalletManageModel *model;
 
+@property (nonatomic, assign)BOOL bSpecialContract;
 - (void)setModel:(WalletManageModel *)model amount:(NSString *)amount toAddress:(NSString *)toAddress;
 
 - (instancetype)initWithTable:(UITableView *)table;

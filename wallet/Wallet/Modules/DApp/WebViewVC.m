@@ -69,7 +69,7 @@
 /**
 * You must implement this method that is used to inject js to WebView。
 */
-- (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(null_unspecified WKNavigation *)navigation{
+- (void)webView:(WKWebView *)webView didCommitNavigation:(null_unspecified WKNavigation *)navigation{
      [WalletUtils injectJSWithWebView:webView];
 }
 
@@ -112,6 +112,15 @@
      You must call this method. It is used to response web3 or connex operations.
      */
     [WalletUtils webView:webView  defaultText:defaultText completionHandler:completionHandler];
+}
+
+- (void)clickBackBtnClick {
+    if (_webView.canGoBack) {
+        [_webView goBack];
+        
+    }else {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 
 

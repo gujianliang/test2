@@ -171,7 +171,7 @@
                         parameter:paramters
                                 callback:^(NSString *txId, NSString *signer,NSInteger status)
      {
-         NSLog(@"dd");
+        
      }];
 }
 

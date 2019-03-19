@@ -933,3 +933,6 @@
 "h5_contract_params_confirm_msg" = "这是一笔钱包不识别的签名，该签名可能包含某些数字货币资产，请确认签名信息，以免造成资产损失";
 "h5_observer_data_too_long" = "签名数据过长，观察钱包暂不支持签名"; // 3
 "usercenter_faq_title" = "FAQ";
+
+"h5_select_wallet_error" = "不能与目标地址相同";
+

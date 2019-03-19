@@ -36,6 +36,7 @@
 @interface WalletDAppHandle ()<WKNavigationDelegate,WKUIDelegate>
 {
     NSMutableArray *_walletList;
+    WKWebView *_webView;
 }
 @end
 
@@ -59,6 +60,10 @@ static dispatch_once_t predicate;
     
     WalletSingletonHandle *walletSignlet = [WalletSingletonHandle shareWalletHandle];
     [walletSignlet addWallet:_walletList];
+    
+    [[NSNotificationCenter defaultCenter]removeObserver:self];
+    
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(websocket:) name:kWebSocketdidReceiveMessageNote object:nil];
 }
 
 - (void)webView:(WKWebView *)webView defaultText:(nullable NSString *)defaultText completionHandler:(void (^)(NSString * __nullable result))completionHandler
@@ -66,6 +71,7 @@ static dispatch_once_t predicate;
 #if  ReleaseVersion
     NSLog(@"defaultText == %@",defaultText);
 #endif
+    _webView = webView;
     
     NSString *result = [defaultText stringByReplacingOccurrencesOfString:@"wallet://" withString:@""];
     NSDictionary *dict = [NSJSONSerialization dictionaryWithJsonString:result];
@@ -177,6 +183,8 @@ static dispatch_once_t predicate;
                                                            code:ERROR_REQUEST_METHOD
                                                         message:ERROR_REQUEST_METHOD_MSG];
         completionHandler([dict1 yy_modelToJSONString]);
+        
+        return;
     }
     completionHandler(@"{}");
 }
@@ -195,20 +203,8 @@ static dispatch_once_t predicate;
     
     NSString *kind = callbackParams[@"kind"];
     
-    if (bConnex) {
-        if (![kind isKindOfClass:[NSString class]]) {
-            [WalletTools callbackWithrequestId:requestId webView:webView data:@"" callbackId:callbackId code:ERROR_REQUEST_PARAMS];
-            return;
-        }
-        
-        if ([kind isKindOfClass:[NSNull class]]) {
-            [WalletTools callbackWithrequestId:requestId webView:webView data:@"" callbackId:callbackId code:ERROR_REQUEST_PARAMS];
-            return;
-        }
-        if (![kind isEqualToString:@"tx"]) {
-            [WalletTools callbackWithrequestId:requestId webView:webView data:@"" callbackId:callbackId code:ERROR_REQUEST_PARAMS];
-            return;
-        }
+    if (bConnex && ![self checkKind:kind requestId:requestId callbackId:callbackId webView:webView]) {
+        return;
     }
     
     NSString *to            = @"";
@@ -220,49 +216,37 @@ static dispatch_once_t predicate;
     
     if (bConnex) {
         
-        NSDictionary *clausesDict = nil;
-        
-        NSArray *clausesList = callbackParams[@"clauses"];
-        if (clausesList.count == 0) {
-            [self paramsError:requestId webView:webView callbackId:callbackId];
+        if (![self checkCluases:callbackParams requestId:requestId callbackId:callbackId webView:webView]) {
             return;
-        }else if(clausesList.count == 1)
-        {
-            clausesDict = callbackParams[@"clauses"][0];
-            if (clausesDict == nil) {
-                [self paramsError:requestId webView:webView callbackId:callbackId];
-                return;
-            }
-        }else{
-            [WalletTools callbackWithrequestId:requestId webView:webView data:@"" callbackId:callbackId code:ERROR_REQUEST_MULTI_CLAUSE];
         }
+        
+        NSDictionary *clausesDict = nil;
+        clausesDict = callbackParams[@"clauses"][0];
         
         to         = clausesDict[@"to"];
         amount     = clausesDict[@"value"];
         clauseStr  = clausesDict[@"data"];
         gas        = callbackParams[@"options"][@"gas"];
         gasPrice   = callbackParams[@"options"][@"gasPrice"];
+        
+        if (![self checkParamTo:&to data:&clauseStr value:&amount gas:&gas gasPrice:&gasPrice bConnex:YES]) {
+            [self paramsError:requestId webView:webView callbackId:callbackId];
+            return;
+        }
+        
     }else{
         to         = callbackParams[@"to"];
         amount     = callbackParams[@"value"];
         clauseStr  = callbackParams[@"data"];
         gas        = callbackParams[@"gas"];
         gasPrice   = callbackParams[@"gasPrice"];
-    }
-    
-    if (![clauseStr isKindOfClass:[NSString class]]) {
         
-        [self paramsError:requestId webView:webView callbackId:callbackId];
-        
-        return;
-    }else{
-        if (clauseStr.length > 0) {
-            if (![WalletTools checkHEXStr:clauseStr]) {
-                [self paramsError:requestId webView:webView callbackId:callbackId];
-                return;
-            }
+        if (![self checkParamTo:&to data:&clauseStr value:&amount gas:&gas gasPrice:&gasPrice bConnex:NO]) {
+            [self paramsError:requestId webView:webView callbackId:callbackId];
+            return;
         }
     }
+
     
     [self initParamGasPrice:&gasPrice gas:&gas amount:&amount to:&to clauseStr:&clauseStr];
     
@@ -568,10 +552,203 @@ static dispatch_once_t predicate;
     }
 }
 
+- (BOOL)checkKind:(NSString *)kind requestId:(NSString *)requestId callbackId:(NSString *)callbackId webView:(WKWebView *)webView
+{
+    if (![kind isKindOfClass:[NSString class]]) {
+        [WalletTools callbackWithrequestId:requestId webView:webView data:@"" callbackId:callbackId code:ERROR_REQUEST_PARAMS];
+        return NO;
+    }else{
+        if (![kind isEqualToString:@"tx"]) {
+            [WalletTools callbackWithrequestId:requestId webView:webView data:@"" callbackId:callbackId code:ERROR_REQUEST_PARAMS];
+            return NO;
+        }
+    }
+    
+    return YES;
+}
+
+- (BOOL)checkCluases:(NSDictionary *)callbackParams requestId:(NSString *)requestId callbackId:(NSString *)callbackId webView:(WKWebView *)webView
+{
+    NSDictionary *clausesDict = nil;
+    
+    NSArray *clausesList = callbackParams[@"clauses"];
+    if (clausesList.count == 0) {
+        [self paramsError:requestId webView:webView callbackId:callbackId];
+        return NO;
+    }else if(clausesList.count == 1)
+    {
+        clausesDict = callbackParams[@"clauses"][0];
+        if (clausesDict == nil) {
+            [self paramsError:requestId webView:webView callbackId:callbackId];
+            return  NO;
+        }
+    }else{
+        [WalletTools callbackWithrequestId:requestId webView:webView data:@"" callbackId:callbackId code:ERROR_REQUEST_MULTI_CLAUSE];
+        return NO;
+    }
+    return YES;
+}
+
+- (BOOL)checkParamTo:(NSString **)to data:(NSString **)data value:(NSString **)value gas:(NSString **)gas gasPrice:(NSString **)gasPrice bConnex:(BOOL)bConnex
+{
+    if ([*to isKindOfClass:[NSNull class]]) {
+        *to = @"";
+    }
+    
+    if ([*data isKindOfClass:[NSNull class]]) {
+        *data = @"";
+    }
+    
+    if ([*value isKindOfClass:[NSNull class]]) {
+        *value = @"0";
+    }
+    
+    if ([*gas isKindOfClass:[NSNull class]]) {
+        *gas = @"0";
+    }
+    
+    if ([*gasPrice isKindOfClass:[NSNull class]]) {
+        *gasPrice = @"0";
+    }
+    
+    //验证格式
+    //有可能是nil
+    if (![*to isKindOfClass:[NSString class]] && *to != nil) {
+        return NO;
+    }else {
+        if ([*to isKindOfClass:[NSString class]]) {
+            if ((*to).length > 0) {
+                if (![WalletTools checkHEXStr:*to]) {
+                    return NO;
+                }
+            }
+        }
+    }
+    
+    if (![*data isKindOfClass:[NSString class]] && *data != nil) {
+        return NO;
+    }else {
+        
+        //data 可以没写，但是一旦写了，就必须大于10 ，并且 > 0
+        if ([*data isKindOfClass:[NSString class]]) {
+            if((*data).length >= 10){
+                if (![WalletTools checkHEXStr:*data]) {
+                    return NO;
+                }
+            }else if((*data).length != 0){
+                if ([WalletTools checkHEXStr:*data]) {
+                    
+                    NSString *clauseDec = [BigNumber bigNumberWithHexString:*data].decimalString;
+                    if (clauseDec.integerValue != 0) {
+                        return NO;
+                    }
+                }else{
+                    return NO;
+                }
+            }
+        }
+    }
+    
+    BOOL checkValue = YES;
+    BOOL checkGas = YES;
+    if (bConnex) {
+        
+        checkValue = ![*value isKindOfClass:[NSString class]] && ![*value isKindOfClass:[NSNumber class]];
+        
+        checkGas = ![*gas isKindOfClass:[NSString class]] && ![*gas isKindOfClass:[NSNumber class]];
+    }else{
+        checkValue = ![*value isKindOfClass:[NSString class]];
+        
+        checkGas = ![*gas isKindOfClass:[NSString class]];
+    }
+    
+    if (checkValue) {
+        return NO;
+    }//转 10进制
+    else{
+        if ([self originTypeFromNumber:*value]) {
+            *value = [NSString stringWithFormat:@"-1"];
+        }else{
+            *value = [NSString stringWithFormat:@"%@",*value];
+            
+            if (![WalletTools checkDecimalStr:*value] && (*value).length != 0) {
+                
+                if ([WalletTools checkHEXStr:*value]){
+                    
+                    *value = [BigNumber bigNumberWithHexString:*value].decimalString;
+                }else{
+                    return NO;
+                }
+            }else{
+                
+            }
+        }
+    }
+    if (checkGas) {
+        return NO;
+    }else {
+        //转 10进制
+        
+        if ([self originTypeFromNumber:*gas]) {
+            *gas = [NSString stringWithFormat:@"-1"];
+        }else{
+            *gas = [NSString stringWithFormat:@"%@",*gas];
+            
+            if (![WalletTools checkDecimalStr:*gas] && (*gas).length != 0) {
+                
+                if ([WalletTools checkHEXStr:*gas]){
+                    
+                    *gas = [BigNumber bigNumberWithHexString:*gas].decimalString;
+                }else{
+                    return NO;
+                }
+            }else{
+                
+            }
+        }
+    }
+    
+    //    if (!bConnex) {
+    if (![*gasPrice isKindOfClass:[NSString class]] && *gasPrice != nil) {
+        return NO;
+    }else{
+        //转 16进制
+        if ([*gasPrice isKindOfClass:[NSString class]]) {
+            
+            *gasPrice = [NSString stringWithFormat:@"%@",*gasPrice];
+            if (![WalletTools checkHEXStr:*gasPrice]) {
+                
+                if ([WalletTools checkDecimalStr:*gasPrice]){
+                    *gasPrice = [BigNumber bigNumberWithDecimalString:*gasPrice].hexString;
+                    
+                }else{
+                    return NO;
+                }
+            }else if ((*gasPrice).length == 0){
+                *gasPrice = DefaultGasPriceCoef;
+            }
+        }else if(*gasPrice == nil)
+        {
+            *gasPrice = DefaultGasPriceCoef;
+        }
+    }
+    
+    return YES;
+}
 
 - (void)paramsError:(NSString *)requestId webView:(WKWebView *)webView callbackId:(NSString *)callbackId
 {
     [WalletTools callbackWithrequestId:requestId webView:webView data:@"" callbackId:callbackId code:ERROR_REQUEST_PARAMS];
+}
+
+- (void)websocket:(NSNotification *)sender
+{
+#warning requestId 保存
+    NSDictionary *dict = sender.object;
+    NSArray *requestIdList = dict[@"requestId"];
+    for (NSString *requestId in requestIdList) {
+        [WalletTools callbackWithrequestId:requestId webView:_webView data:nil callbackId:dict[@"callbackId"] code:OK];
+    }
 }
 
 +(void)attempDealloc

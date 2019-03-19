@@ -1059,3 +1059,5 @@
 "h5_contract_params_confirm_msg" = "This is a signature unrecognized by wallet, which may contain some digital currency assets. Please confirm the signature information to avoid asset loss.";
 "h5_observer_data_too_long" = "Signature data is too long, and the observe wallet does not support signature temporarily";
 "usercenter_faq_title" = "FAQ";
+
+"h5_select_wallet_error" = "Cannot be the same as the target address";

@@ -7,15 +7,14 @@
 //
 
 #import "WalletDappStoreSelectCell.h"
+#import "Payment.h"
 
 @interface WalletDappStoreSelectCell ()
 {
-    UILabel *_walletNameLabel;        // 钱包名称
     UILabel *_addressLabel;           // 钱包地址
     UILabel *_reasonLabel;            // 描述语
     UIImageView *_imageV;             // 勾选标记
     NSString *_cellIndef;
-    UIImageView *_observeImageV; //观察钱包icon
 }
 @end
 
@@ -43,57 +42,54 @@
     return self;
 }
 
-- (void)setModel:(WalletManageModel *)model
-{
-    _model = model;
-    
-    _walletNameLabel.text = _model.name;
-    
-    _addressLabel.text = _model.address;
-    
-    if(_model.enable){ // 可选中的钱包样式
-        _walletNameLabel.textColor = HEX_RGB(0x202C56); // 黑色
-        
-        _reasonLabel.text = @"";
-        _imageV.hidden = !_model.isSelect;
-        
-    }else { // 不可选中的钱包样式
-        _walletNameLabel.textColor = HEX_RGB(0xBDBDBD); // 置灰
-        
-        _reasonLabel.text = _model.reason;
-        _imageV.hidden = YES;
-    }
-}
 
 - (void)setModel:(WalletManageModel *)model amount:(NSString *)amount toAddress:(NSString *)toAddress
 {
     _model = model;
-    
-    _walletNameLabel.text = _model.name;
-    
+
     _addressLabel.text = _model.address;
     
-    if ([model.address.lowercaseString isEqualToString:toAddress.lowercaseString]){
-        
-        _walletNameLabel.textColor = HEX_RGB(0xBDBDBD); // 置灰
-        _reasonLabel.text = @"不能与目标地址相同";
-        _imageV.hidden = YES;
-        
-        
-        [model.address.lowercaseString isEqualToString:toAddress.lowercaseString];
-        
-    }else if(model.VETCount.doubleValue > amount.doubleValue){ // 可选中的钱包样式
-        _walletNameLabel.textColor = HEX_RGB(0x202C56); // 黑色
-        _reasonLabel.text = @"";
-        _imageV.hidden = !_model.isSelect;
-        
-    }else { // 不可选中的钱包样式
-        _walletNameLabel.textColor = HEX_RGB(0xBDBDBD); // 置灰
-        _reasonLabel.text = @"余额不足";
-        _imageV.hidden = YES;
+    BigNumber *bigNumberCount = [BigNumber bigNumberWithHexString:model.VETCount];
+    NSString *coinAmount = @"0.00";
+    if (!bigNumberCount.isZero) {
+        coinAmount = [Payment formatToken:bigNumberCount
+                                 decimals:18
+                                  options:2];
     }
     
-    _observeImageV.hidden = !model.observer.boolValue;
+    NSString *walletAmount = [coinAmount stringByReplacingOccurrencesOfString:@"," withString:@""];
+
+    if ([model.address.lowercaseString isEqualToString:toAddress.lowercaseString]){
+        
+        _reasonLabel.text = VCNSLocalizedBundleString(@"h5_select_wallet_error", nil);
+        _imageV.hidden = YES;
+        
+        [model.address.lowercaseString isEqualToString:toAddress.lowercaseString];
+        _addressLabel.textColor = HEX_RGB(0xBDBDBD);
+
+        [_addressLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(self).offset(15);
+            make.left.mas_equalTo(20);
+            make.right.mas_equalTo(-20);
+            make.height.mas_equalTo(20);
+        }];
+        
+    }else if(walletAmount.doubleValue >= amount.doubleValue){ // 可选中的钱包样式
+        _reasonLabel.text = @"";
+        
+    }else { // 不可选中的钱包样式
+        _reasonLabel.text = [@"VET " stringByAppendingString: VCNSLocalizedBundleString(@"contact_change_wallet_not_enough", nil)];
+        _imageV.hidden = YES;
+        _addressLabel.textColor = HEX_RGB(0xBDBDBD);
+        
+        [_addressLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(self).offset(15);
+            make.left.mas_equalTo(20);
+            make.right.mas_equalTo(-20);
+            make.height.mas_equalTo(20);
+        }];
+
+    }
 }
 
 
@@ -110,55 +106,34 @@
         make.bottom.mas_equalTo(0);
     }];
     
-    // 钱包名称
-    _walletNameLabel = [[UILabel alloc]init];
-    _walletNameLabel.text = @"";
-    _walletNameLabel.font = MediumFont(15);
-    _walletNameLabel.textColor = HEX_RGB(0x202C56);
-    [contentView addSubview:_walletNameLabel];
-    [_walletNameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(Scale(20.0));
-        make.top.mas_equalTo(Scale(15.0));
-        make.height.mas_equalTo(Scale(22.0));
-    }];
-    
-    // 观察钱包
-    _observeImageV = [[UIImageView alloc]init];
-    _observeImageV.image = [UIImage imageNamed:@"guancha"];
-    [contentView addSubview:_observeImageV];
-    [_observeImageV mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(_walletNameLabel.mas_right).offset(10);
-        make.centerY.equalTo(_walletNameLabel.mas_centerY);
-    }];
-    _observeImageV.hidden = YES;
-    
     // 地址
     _addressLabel = [[UILabel alloc]init];
     _addressLabel.text = @"";
     _addressLabel.numberOfLines = 2;
-    _addressLabel.font = MediumFont(12);
-    _addressLabel.textColor = HEX_RGB(0xBDBDBD);
+    _addressLabel.font = MediumFont(14);
+    _addressLabel.textColor = HEX_RGB(0x333333);
     _addressLabel.lineBreakMode = NSLineBreakByTruncatingMiddle;
     [contentView addSubview:_addressLabel];
     [_addressLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(_walletNameLabel.mas_bottom).offset(3);
-        make.left.mas_equalTo(_walletNameLabel.mas_left);
+        make.centerY.mas_equalTo(self.mas_centerY);
+        make.left.mas_equalTo(20);
         make.right.mas_equalTo(-20);
-        make.height.mas_equalTo(32);
+        make.height.mas_equalTo(20);
     }];
-    
     
     // 描述语
     _reasonLabel = [[UILabel alloc]init];
     [contentView addSubview:_reasonLabel];
     _reasonLabel.textAlignment = NSTextAlignmentRight;
     _reasonLabel.text = @"";
-    _reasonLabel.font = MediumFont(12);
+    _reasonLabel.font = MediumFont(14);
     _reasonLabel.textColor = HEX_RGB(0xBDBDBD);
+    _reasonLabel.textAlignment = NSTextAlignmentLeft;
     [_reasonLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_equalTo(-Scale(20.0));
-        make.left.mas_equalTo(_addressLabel.mas_right).offset(3.0);
-        make.centerY.equalTo(_addressLabel.mas_centerY);
+        make.top.mas_equalTo(_addressLabel.mas_bottom).offset(10);
+        make.left.mas_equalTo(Scale(20.0));
+        make.height.mas_equalTo(Scale(17));
     }];
     
     
@@ -178,7 +153,7 @@
     middleViewLine.backgroundColor = HEX_RGB(0xF6F6F6);
     [contentView addSubview:middleViewLine];
     [middleViewLine mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(_walletNameLabel.mas_left);
+        make.left.mas_equalTo(20);
         make.right.mas_equalTo(-Scale(20.0));
         make.height.mas_equalTo(1);
         make.bottom.mas_equalTo(0);
