@@ -106,10 +106,29 @@
 
 - (void)initMinerLabel
 {
-    if ([_amount isEqualToString:@"0"]) {
-        _valueLabel.text = [NSString stringWithFormat:@"0.00 %@",_currentCoinModel.symobl];
+    NSString *amountFormat = @"";
+    if (_amount.length > 0) {
+        if ([_amount.lowercaseString hasPrefix:@"0x"]) {
+            amountFormat = [Payment formatToken:[BigNumber bigNumberWithHexString:_amount]
+                                       decimals:_currentCoinModel.decimals
+                                        options:2];
+        }else{
+            
+            // 都是放大18 倍的
+            amountFormat = [Payment formatToken:[BigNumber bigNumberWithDecimalString:_amount]
+                                           decimals:_currentCoinModel.decimals
+                                            options:2];
+            
+        }
     }else{
-        _valueLabel.text = [NSString stringWithFormat:@"%@ %@",_amount.length == 0 ? @"0.00" : _amount,_currentCoinModel.symobl] ;
+        amountFormat = @"0";
+    }
+    
+    NSString *coinName = _currentCoinModel.symobl ? _currentCoinModel.symobl: @"VET";
+    if ([amountFormat isEqualToString:@"0"] || amountFormat.length == 0 || [amountFormat isEqualToString:@"0.00"]) {
+        _valueLabel.text = [NSString stringWithFormat:@"0.00 %@",coinName];
+    }else{
+        _valueLabel.text = [NSString stringWithFormat:@"%@ %@",amountFormat,coinName] ;
     }
 }
 
@@ -139,16 +158,12 @@
 
 - (void)leftViewClick:(void(^)(void))enterSignViewBlock
 {
-    NSString *noForamtAmount = [_amount stringByReplacingOccurrencesOfString:@"," withString:@""];
-    NSString *noForamtGasLimit = [_gasLimit stringByReplacingOccurrencesOfString:@"," withString:@""];
     if (_transferType == WalletContranctTransferType) {
-        
-#warning test 检查余额
-        
+                
         [_signatureHandle checkBalcanceFromAddress:_fromAddress
                                          coinModel:_currentCoinModel
-                                            amount:noForamtAmount
-                                          gasLimit:noForamtGasLimit
+                                            amount:_amount
+                                          gasLimit:_gasLimit
                                          superView:_scrollView.superview.superview
                                              block:^(BOOL result)
          {
@@ -165,17 +180,12 @@
     }
 }
 
-#warning 整理逻辑
-
 - (void)checkBalance:(void(^)(void))enterSignViewBlock
 {
-    NSString *noForamtAmount = [_amount stringByReplacingOccurrencesOfString:@"," withString:@""];
-    NSString *noForamtGasLimit = [_gasLimit stringByReplacingOccurrencesOfString:@"," withString:@""];
-    
     [_signatureHandle checkBalcanceFromAddress:_fromAddress
                                      coinModel:_currentCoinModel
-                                        amount:noForamtAmount
-                                      gasLimit:noForamtGasLimit
+                                        amount:_amount
+                                      gasLimit:_gasLimit
                                      superView:_scrollView.superview.superview
                                          block:^(BOOL result)
      {
@@ -191,7 +201,6 @@
 
 - (void)initCellView:(void(^)(void))enterSignViewBlock
 {
-#warning gas 格式
     NSString *gasFormat = [NSString stringWithFormat:@"%@ VTHO", _gasLimit.length == 0 ? @"0.00" : [WalletTools thousandSeparator:_gasLimit decimals:NO]];
     
     CGFloat jsOffset = 0;

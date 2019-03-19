@@ -743,7 +743,6 @@ static dispatch_once_t predicate;
 
 - (void)websocket:(NSNotification *)sender
 {
-#warning requestId 保存
     NSDictionary *dict = sender.object;
     NSArray *requestIdList = dict[@"requestId"];
     for (NSString *requestId in requestIdList) {

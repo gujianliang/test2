@@ -96,7 +96,6 @@
         _currentCoinModel.decimals = 18;
         _currentCoinModel.address = _fromAddress;
 
-        [self amountOpreation];
         [self initView];
         
     }else if (_transferType == WalletTokenTransferType){
@@ -104,7 +103,6 @@
         _currentCoinModel.decimals = 18;
         _currentCoinModel.address = vthoTokenAddress;
         
-        [self amountOpreation];
         [self initView];
         
     }else{ //合约，显示的只能是vet
@@ -112,27 +110,10 @@
         _currentCoinModel.decimals = 18;
         _currentCoinModel.address = _fromAddress;
 
-        [self amountOpreation];
         [self initView];
     }
 }
 
-- (void)amountOpreation{
-    
-    if (_amount.length > 0) {
-        if ([_amount.lowercaseString hasPrefix:@"0x"]) {
-            _amount = [Payment formatToken:[BigNumber bigNumberWithHexString:_amount]
-                                  decimals:_currentCoinModel.decimals
-                                   options:2];
-        }else{
-            _amount = [Payment formatToken:[BigNumber bigNumberWithDecimalString:_amount]
-                                  decimals:_currentCoinModel.decimals
-                                   options:2];
-        }
-    }else{
-        _amount = 0;
-    }
-}
 
 - (void)tokenID:(NSString *)tokenID expiration:(NSString *)expiration
 {

@@ -1915,7 +1915,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "129"
             endingLineNumber = "129"
-            landmarkName = "-addLeftViewBottomBtn:"
+            landmarkName = "-initMinerLabel"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1979,8 +1979,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "212"
             endingLineNumber = "212"
-            landmarkName = "WalletTransferVC"
-            landmarkType = "3">
+            landmarkName = "-dealloc"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2027,7 +2027,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "338"
             endingLineNumber = "338"
-            landmarkName = "-timerCountBlock"
+            landmarkName = "-uploadSuccess"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
