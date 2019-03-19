@@ -78,9 +78,16 @@
 }
 
 - (void)vetTransfer:(NSString *)from keystore:(NSString *)keystore{
-    if (self.transferAmountTextField.text.length == 0) {
+    if (self.receiveAddressTextView.text.length == 0
+        || self.transferAmountTextField.text.length == 0) {
+        
+        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        hud.mode = MBProgressHUDModeText;
+        hud.label.text =  NSLocalizedString(@"input_empty", nil);
+        [hud hideAnimated:YES afterDelay:1.5];
         return;
     }
+    
     BigNumber *amountBig = [WalletUtils parseToken:self.transferAmountTextField.text dicimals:18];
 
     //vet
@@ -94,10 +101,8 @@
 
     [WalletUtils sendWithKeystore:keystore
                         parameter:paramters
-                         callback:^(NSString *txId, NSString *signer,NSInteger status)
-     {
-
-
+                         callback:^(NSString *txId, NSString *signer, NSInteger status){
+                             NSLog(@"\n txId: %@ \n signer: %@ \n status: %ld", txId, signer, (long)status);
     }];
 }
 
@@ -125,8 +130,8 @@
     
     [WalletUtils sendWithKeystore:keystore
                         parameter:paramters
-                         callback:^(NSString *txId, NSString *signer,NSInteger status)
-     {
+                         callback:^(NSString *txId, NSString *signer,NSInteger status){
+                             NSLog(@"\n txId: %@ \n signer: %@ \n status: %ld", txId, signer, (long)status);
      }];
 
 }
@@ -171,9 +176,8 @@
     
     [WalletUtils sendWithKeystore:keystore
                         parameter:paramters
-                                callback:^(NSString *txId, NSString *signer,NSInteger status)
-     {
-        
+                                callback:^(NSString *txId, NSString *signer, NSInteger status){
+                                    NSLog(@"\n txId: %@ \n signer: %@  \n  status: %ld", txId, signer, (long)status);
      }];
 }
 
