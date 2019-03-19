@@ -130,7 +130,6 @@
                  
                  BigNumber *bigNumberCount = [BigNumber bigNumberWithHexString:amount];
                  NSString *vthoBalance = [Payment formatEther:bigNumberCount];
-                 NSLog(@"dd");
                  
                  NSDecimalNumber *vthoBalanceNum = [NSDecimalNumber decimalNumberWithString:vthoBalance];
                  NSString * newAmont = [gasLimit stringByReplacingOccurrencesOfString:@"," withString:@""];
@@ -181,7 +180,6 @@
         
         BigNumber *bigNumberCount = [BigNumber bigNumberWithHexString:amount];
         NSString *vthoBalance = [Payment formatEther:bigNumberCount];
-        NSLog(@"dd");
         
         NSDecimalNumber *vthoBalanceNum = [NSDecimalNumber decimalNumberWithString:vthoBalance];
         NSString * newAmont = [tokenAmount stringByReplacingOccurrencesOfString:@"," withString:@""];
@@ -209,7 +207,6 @@
                 
                 BigNumber *bigNumberCount = [BigNumber bigNumberWithHexString:amount];
                 NSString *vthoBalance = [Payment formatEther:bigNumberCount];
-                NSLog(@"dd");
                 
                 NSDecimalNumber *vthoBalanceNum = [NSDecimalNumber decimalNumberWithString:vthoBalance];
                 NSString * newAmont = [gasLimit stringByReplacingOccurrencesOfString:@"," withString:@""];
