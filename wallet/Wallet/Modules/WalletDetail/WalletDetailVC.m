@@ -139,6 +139,8 @@
 */
 - (void)setNodeEnvironmentHost{
     
+    [self.searchBar resignFirstResponder]; /* The searchBar resign the first responder. */
+    
     NSDictionary *dictCurrentNode = [[NSUserDefaults standardUserDefaults] objectForKey:@"currentNode"];
     
     if (dictCurrentNode) { /* Set to the main Node of your choice. */
@@ -283,6 +285,8 @@
 *  Enter the transfer ViewControll and do some transactions.
 */
 - (IBAction)enterTransfer:(id)sender {
+    [self.searchBar resignFirstResponder];
+    
     WalletTransferVC *transfer = [[WalletTransferVC alloc] init];
     
     UIButton *btn = (UIButton *)sender;

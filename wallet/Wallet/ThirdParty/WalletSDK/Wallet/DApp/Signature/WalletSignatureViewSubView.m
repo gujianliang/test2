@@ -292,6 +292,7 @@
         }];
         
         UIButton *btn = [[UIButton alloc]init];
+        btn.titleLabel.font = [UIFont systemFontOfSize:Scale(14.0)];
         [btn setTitle:VCNSLocalizedBundleString(@"transfer_coin_adjust_cost", nil) forState:UIControlStateNormal];
         [btn setTitleColor:HEX_RGB(0x898CD3) forState:UIControlStateNormal];
         [contentView addSubview:btn];
@@ -478,22 +479,25 @@
         make.width.mas_equalTo(SCREEN_WIDTH);
     }];
     
+    // 20s倒计时
+    CGFloat timeBtnW = Scale(80);
     _timeBtn = [[UIButton alloc]init];
     _timeBtn.backgroundColor = HEX_RGB(0xF9F9F9);
     [_timeBtn setTitle:@"20" forState:UIControlStateNormal];
-    [_timeBtn.titleLabel setFont:[UIFont fontWithName:@"DINAlternate-Bold" size:36]];
+    [_timeBtn.titleLabel setFont:[UIFont fontWithName:@"DINAlternate-Bold" size:Scale(36)]];
     [_timeBtn setUserInteractionEnabled:NO];
-    [_timeBtn.layer setCornerRadius:45];
+    [_timeBtn.layer setCornerRadius: timeBtnW * 0.5];
     [_timeBtn setClipsToBounds:YES];
     _timeBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
     [_timeBtn setTitleColor:HEX_RGB(0x202C56) forState:UIControlStateNormal];
     [_lastView addSubview:_timeBtn];
     [_timeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(50);
+        make.top.mas_equalTo(Scale(45));
         make.centerX.mas_equalTo(_lastView.mas_centerX);
-        make.size.mas_equalTo(CGSizeMake(90, 90));
+        make.size.mas_equalTo(CGSizeMake(timeBtnW, timeBtnW));
     }];
     
+    // "正在等待合约打包上链..."
     UILabel *titleLabel = [[UILabel alloc]init];
     titleLabel.tag = 10;
     titleLabel.textAlignment = NSTextAlignmentCenter;
@@ -506,10 +510,10 @@
     [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(10);
         make.right.mas_equalTo(-10);
-        make.height.mas_equalTo(30);
         make.top.mas_equalTo(_timeBtn.mas_bottom).offset(20);
     }];
     
+    // "打包时间视主网拥堵情况，正常10秒左右会完成打包，请耐心等待";
     UILabel *subTitleLabel = [[UILabel alloc]init];
     subTitleLabel.tag = 11;
     subTitleLabel.textAlignment = NSTextAlignmentCenter;
@@ -517,15 +521,16 @@
     subTitleLabel.textColor = HEX_RGB(0xBDBDBD);
     subTitleLabel.numberOfLines = 0;
     subTitleLabel.font = MediumFont(Scale(12));
+    subTitleLabel.adjustsFontSizeToFitWidth = YES;
     [_lastView addSubview:subTitleLabel];
     [subTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(20);
         make.right.mas_equalTo(-20);
-        make.height.mas_equalTo(50);
         make.top.mas_equalTo(titleLabel.mas_bottom).offset(0);
+        make.height.mas_equalTo(50);
     }];
     
-    // 底部按钮
+    // 底部按钮："不等了，先看看"
     _lastBtn = [[WalletGradientLayerButton alloc]init];
     [_lastBtn setDisableGradientLayer:YES];
     [_lastBtn setTitle:VCNSLocalizedBundleString(@"contract_payment_confirm_wait_button", nil)
@@ -533,13 +538,12 @@
     [_lastView addSubview:_lastBtn];
     [_lastBtn.layer setCornerRadius:4];
     [_lastBtn setClipsToBounds:YES];
-    _lastBtn.titleLabel.font = [UIFont systemFontOfSize:Scale(16.0)];
+    _lastBtn.titleLabel.font = [UIFont systemFontOfSize:17.0];
     [_lastBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        
         make.left.mas_equalTo(20);
         make.right.mas_equalTo(-20);
         make.height.mas_equalTo(44);
-        make.bottom.mas_equalTo(-40);
+        make.bottom.mas_equalTo(-Scale(30));
     }];
     @weakify(self);
     _lastBtn.block = ^(UIButton *btn) {

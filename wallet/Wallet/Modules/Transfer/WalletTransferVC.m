@@ -46,15 +46,13 @@
     }else{
         [self.coinIcon setImage:[UIImage imageNamed:@"VET"]];
         self.symobl.text = @"VET";
-    }
-    
-
-    self.receiveAddressTextView.text = @"0x1231231231231231231231231231231231231231";
+    }        
 
     self.receiveAddressTextView.textContainerInset = UIEdgeInsetsMake(2.5, 2.5, 2.5, 2.5);
     
     self.balanceAmountLabel.text = self.coinAmount;
 }
+
 
 - (IBAction)transfer:(id)sender{
     [self.view endEditing:YES];
@@ -209,6 +207,14 @@
 - (void)dealloc
 {
     [WalletUtils deallocDappSingletion];
+}
+
+/**
+*  Just hidden the keyboard.
+*/
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [self.view endEditing:YES];
 }
 
 @end
