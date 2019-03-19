@@ -51,6 +51,7 @@
     self.receiveAddressTextView.textContainerInset = UIEdgeInsetsMake(2.5, 2.5, 2.5, 2.5);
     
     self.balanceAmountLabel.text = self.coinAmount;
+//    self.receiveAddressTextView.text = @"0x1231231231231231231231231231231231231231";
 }
 
 

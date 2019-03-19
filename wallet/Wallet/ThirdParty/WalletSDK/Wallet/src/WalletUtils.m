@@ -368,16 +368,13 @@
     // check keystore format
     if (![WalletTools checkKeystore:*keystore]) {
         
-        [WalletMBProgressShower showTextIn:[WalletTools getCurrentVC].view
-                                      Text:ERROR_REQUEST_PARAMS_MSG During:1];
         return NO;
     }
     NSDictionary *dictKeystore = [NSJSONSerialization dictionaryWithJsonString:*keystore];
     NSString *keystoreFrom = [@"0x" stringByAppendingString:dictKeystore[@"address"]];
     
     if (![keystoreFrom.lowercaseString isEqualToString:(parameter.from).lowercaseString]) {
-        [WalletMBProgressShower showTextIn:[WalletTools getCurrentVC].view
-                                      Text:ERROR_REQUEST_PARAMS_MSG During:1];
+        
         return NO;
     }
     
@@ -390,14 +387,11 @@
             || ![WalletTools errorAddressAlert:parameter.from]
             || ![WalletTools checkDecimalStr:parameter.gas]) { // vet 可以转账0
             
-            [WalletMBProgressShower showTextIn:[WalletTools getCurrentVC].view
-                                          Text:ERROR_REQUEST_PARAMS_MSG During:1];
             return NO;
         }
         if((*amount).length > 0){
             if(![WalletTools checkHEXStr:*amount] && ![WalletTools checkDecimalStr:*amount]){
-                [WalletMBProgressShower showTextIn:[WalletTools getCurrentVC].view
-                                              Text:ERROR_REQUEST_PARAMS_MSG During:1];
+               
                 return NO;
             }
         }
@@ -416,8 +410,6 @@
                 || ![WalletTools checkHEXStr:parameter.value]
                 || ![WalletTools checkClauseDataFormat:*clauseStr toAddress:parameter.to bToken:YES]) { //
                 
-                [WalletMBProgressShower showTextIn:[WalletTools getCurrentVC].view
-                                              Text:ERROR_REQUEST_PARAMS_MSG During:1];
                 return NO;
             }
             
@@ -433,15 +425,13 @@
                 || ![WalletTools checkDecimalStr:parameter.gas]
                 || ![WalletTools checkClauseDataFormat:*clauseStr toAddress:parameter.to bToken:NO]) {
                 
-                [WalletMBProgressShower showTextIn:[WalletTools getCurrentVC].view
-                                              Text:ERROR_REQUEST_PARAMS_MSG During:1];
+                
                 return NO;
             }
             
             if((*amount).length > 0){
                 if(![WalletTools checkHEXStr:*amount] && ![WalletTools checkDecimalStr:*amount]){
-                    [WalletMBProgressShower showTextIn:[WalletTools getCurrentVC].view
-                                                  Text:ERROR_REQUEST_PARAMS_MSG During:1];
+                
                     return NO;
                 }
             }

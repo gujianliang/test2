@@ -545,13 +545,15 @@
         make.height.mas_equalTo(44);
         make.bottom.mas_equalTo(-Scale(30));
     }];
-    @weakify(self);
+
     _lastBtn.block = ^(UIButton *btn) {
-        @strongify(self);
         
-#warning test
         if (transferBlock) {
             transferBlock();
+        }
+        
+        if (removeBlock) {
+            removeBlock();
         }
     };
 }

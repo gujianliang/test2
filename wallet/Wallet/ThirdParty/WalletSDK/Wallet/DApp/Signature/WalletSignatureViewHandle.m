@@ -42,7 +42,7 @@
     if ([coinModel.symobl.lowercaseString isEqualToString:@"vet"]) {
         // vet检查
         [self getVETBalance:fromAddress
-                     amount:(NSString *)amount
+                     amount:amount
                    gasLimit:gasLimit
                       block:^(BOOL result)
          {
@@ -56,7 +56,7 @@
         // 是vtho
         if ([coinModel.symobl.lowercaseString isEqualToString:@"vtho"]) {
             [self getVthoBalance:fromAddress
-                    tokenAddress:coinModel.tokenAddress
+                    tokenAddress:coinModel.address
                           amount:amount
                         gasLimit:gasLimit
                            block:^(BOOL result)
@@ -68,7 +68,7 @@
         }else{  // 不是vtho
             
             [self getTokenBalance:fromAddress
-                     tokenAddress:coinModel.tokenAddress
+                     tokenAddress:coinModel.address
                            amount:amount
                          gasLimit:gasLimit
                             block:^(BOOL result)
@@ -288,53 +288,6 @@
     }];
 }
 
-
-- (void)tokenAddressConvetCoinInfo:(NSString *)tokenAddress coinModel:(WalletCoinModel *)coinModel superView:(UIView *)superView block:(void(^)(BOOL result))block
-{
-    _superView = superView;
-    _coinModel = coinModel;
-    
-    [WalletMBProgressShower showLoadData:_superView Text:VCNSLocalizedBundleString(@"loading...", nil)];
-    WalletGetSymbolApi *getSymbolApi = [[WalletGetSymbolApi alloc]initWithTokenAddress:tokenAddress];
-    [getSymbolApi loadDataAsyncWithSuccess:^(VCBaseApi *finishApi) {
-        
-        NSDictionary *dictResult = finishApi.resultDict;
-        NSString *symobl = dictResult[@"data"];
-        if (symobl.length < 128) {
-            [WalletMBProgressShower showTextIn:[WalletTools getCurrentVC].view Text:ERROR_REQUEST_PARAMS_MSG During:1];
-            return ;
-        }
-        symobl = [WalletTools abiDecodeString:symobl];
-        coinModel.symobl = symobl;
-        
-        WalletGetDecimalsApi *getDecimalsApi = [[WalletGetDecimalsApi alloc]initWithTokenAddress:tokenAddress];
-        [getDecimalsApi loadDataAsyncWithSuccess:^(VCBaseApi *finishApi) {
-            [WalletMBProgressShower hide:_superView];
-            
-            NSDictionary *dictResult = finishApi.resultDict;
-            NSString *decimalsHex = dictResult[@"data"];
-            NSString *decimals = [BigNumber bigNumberWithHexString:decimalsHex].decimalString;
-            coinModel.decimals = decimals.integerValue;
-            
-            if (block) {
-                block(YES);
-            }
-            
-        }failure:^(VCBaseApi *finishApi, NSString *errMsg) {
-            [WalletMBProgressShower hide:_superView];
-            [WalletMBProgressShower showTextIn:[WalletTools getCurrentVC].view Text:ERROR_REQUEST_PARAMS_MSG During:1];
-            if (block) {
-                block(NO);
-            }
-        }];
-    }failure:^(VCBaseApi *finishApi, NSString *errMsg) {
-        [WalletMBProgressShower hide:_superView];
-        [WalletMBProgressShower showTextIn:[WalletTools getCurrentVC].view Text:ERROR_REQUEST_PARAMS_MSG During:1];
-        if (block) {
-            block(NO);
-        }
-    }];
-}
 
 
 @end

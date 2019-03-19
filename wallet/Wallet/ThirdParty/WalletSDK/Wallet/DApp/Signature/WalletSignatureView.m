@@ -100,8 +100,6 @@
         [self initView];
         
     }else if (_transferType == WalletTokenTransferType){
-        _currentCoinModel.tokenAddress = _tokenAddress;
-        
         _currentCoinModel.symobl = @"VTHO";
         _currentCoinModel.decimals = 18;
         _currentCoinModel.address = vthoTokenAddress;
@@ -279,7 +277,7 @@
             self.transferBlock(self.txid,ERROR_CANCEL);
         }
     }removeBlock:^{
-//        [self removeFromSuperview];
+        [self removeFromSuperview];
     } ];
 }
 
@@ -318,7 +316,6 @@
     }
 }
 
-#warning count 的问题
 - (void)timerCountBlock
 {
     __block NSInteger count = 0;
@@ -328,6 +325,8 @@
               {
                 NSInteger time = _signatureSubView.timeBtn.titleLabel.text.integerValue;
                 time --;
+                count ++;
+                  
                 if (time > 0) {
                     [_signatureSubView.timeBtn setTitle:[NSString stringWithFormat:@"%ld",(long)time] forState:UIControlStateNormal];
                 }else{
@@ -342,7 +341,7 @@
                       [_timer invalidate];
                       _timer = nil;
                   }
-                  count ++;
+                  
               }];
 }
 
