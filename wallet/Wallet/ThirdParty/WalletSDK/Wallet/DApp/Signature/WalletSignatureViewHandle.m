@@ -51,7 +51,7 @@
                  block(result);
              }
          }];
-    }else if(coinModel.tokenAddress.length > 0){
+    }else if(coinModel.address.length > 0){
         
         // 是vtho
         if ([coinModel.symobl.lowercaseString isEqualToString:@"vtho"]) {
@@ -107,7 +107,11 @@
          NSString *vetBalance = [Payment formatEther:bigNumberCount];
          
          NSDecimalNumber *vetBalanceNum = [NSDecimalNumber decimalNumberWithString:vetBalance];
-         NSDecimalNumber *amountNum = [NSDecimalNumber decimalNumberWithString:amount];
+         
+         NSString *amountNarrow = @"";
+         [self convertAmountFormat:amount amountNarrow:&amountNarrow];
+
+         NSDecimalNumber *amountNum = [NSDecimalNumber decimalNumberWithString:amountNarrow];
          
          if ([vetBalanceNum compare:amountNum] == NSOrderedAscending) {
              
@@ -182,8 +186,12 @@
         NSString *vthoBalance = [Payment formatEther:bigNumberCount];
         
         NSDecimalNumber *vthoBalanceNum = [NSDecimalNumber decimalNumberWithString:vthoBalance];
-        NSString * newAmont = [tokenAmount stringByReplacingOccurrencesOfString:@"," withString:@""];
-        NSDecimalNumber *transferTokenAmount = [NSDecimalNumber decimalNumberWithString:newAmont];
+        
+        NSString *amountNarrow = @"";
+        
+        [self convertAmountFormat:tokenAmount amountNarrow:&amountNarrow];
+        
+        NSDecimalNumber *transferTokenAmount = [NSDecimalNumber decimalNumberWithString:amountNarrow];
         
         if ([vthoBalanceNum compare:transferTokenAmount] == NSOrderedAscending) {
             
@@ -257,11 +265,18 @@
         
         BigNumber *bigNumberCount = [BigNumber bigNumberWithHexString:amount];
         NSString *vthoBalance = [Payment formatEther:bigNumberCount];
-        NSString *total = [NSString stringWithFormat:@"%.2lf",tokenAmount.floatValue + gasLimit.floatValue];
         
         NSDecimalNumber *vthoBalanceNum = [NSDecimalNumber decimalNumberWithString:vthoBalance];
+        
+        NSString *amountNarrow = @"";
+        [self convertAmountFormat:tokenAmount amountNarrow:&amountNarrow];
+        
+        NSString *total = [NSString stringWithFormat:@"%.2lf",amountNarrow.floatValue + gasLimit.floatValue];
+        
         NSString * newAmont = [total stringByReplacingOccurrencesOfString:@"," withString:@""];
         NSDecimalNumber *transferTokenAmount = [NSDecimalNumber decimalNumberWithString:newAmont];
+        
+        
         
         if ([vthoBalanceNum compare:transferTokenAmount] == NSOrderedAscending) {
             
@@ -286,5 +301,21 @@
 }
 
 
+- (void)convertAmountFormat:(NSString *)originAmount amountNarrow:(NSString **)amountNarrow
+{
+    if (originAmount.length == 0) {
+        *amountNarrow = @"";
+    }else if ([WalletTools checkDecimalStr:originAmount])
+    {
+        if (originAmount.length > 18) {
+            *amountNarrow = [Payment formatEther:[BigNumber bigNumberWithDecimalString:originAmount]];
+        }else{
+            *amountNarrow = originAmount;
+        }
+        
+    }else if ([WalletTools checkHEXStr:originAmount]) {
+        *amountNarrow = [Payment formatEther:[BigNumber bigNumberWithHexString:originAmount]];
+    }
+}
 
 @end
