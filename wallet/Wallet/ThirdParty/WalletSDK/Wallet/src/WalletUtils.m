@@ -302,7 +302,7 @@
         [clauseList addObject: [SecureData secureDataWithHexString:parameter.to].data];
     }
     
-    if (parameter.value.length == 0) {
+    if (parameter.value.length == 0 || parameter.value.integerValue == 0) {
         [clauseList addObject:[NSData data]];
     }else{
         if (transferType == WalletTokenTransferType) {
@@ -393,6 +393,10 @@
             if(![WalletTools checkHEXStr:*amount] && ![WalletTools checkDecimalStr:*amount]){
                
                 return NO;
+            }
+            NSString *amountDecimal = [BigNumber bigNumberWithHexString:*amount].decimalString;
+            if (amountDecimal.floatValue == 0.00) {
+                *amount = @"";
             }
         }
         

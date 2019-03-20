@@ -183,7 +183,7 @@
     
     if ([model.address.lowercaseString isEqualToString:_toAddress.lowercaseString]) {
         return;
-    }else if(walletAmount.doubleValue > _amount.doubleValue)
+    }else if(walletAmount.doubleValue >= _amount.doubleValue)
     {
         if (_block) {
             _block(model.address,self);

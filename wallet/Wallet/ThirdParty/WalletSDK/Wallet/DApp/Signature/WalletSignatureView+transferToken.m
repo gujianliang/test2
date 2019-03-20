@@ -106,11 +106,21 @@
         }
         [self showTransactionFail];
     }
-    BigNumber *subValue;
+   
     if (self.transferType == WalletVETTransferType) {
         //vet 转账  data 设置空
-        subValue = [Payment parseEther:self.amount];
-        if ([self.amount floatValue] == 0.0
+
+        BigNumber *subValue;
+        CGFloat amountF = 0.0;
+        if ([WalletTools checkDecimalStr:self.amount]) {
+            subValue = [BigNumber bigNumberWithDecimalString:self.amount];
+            amountF = self.amount.floatValue;
+        }else{
+            subValue = [BigNumber bigNumberWithHexString:self.amount];
+            amountF = subValue.decimalString.floatValue;
+        }
+        
+        if (amountF == 0.0
             && [subValue lessThanEqualTo:[BigNumber constantZero]]) {
             NSData *toData = [SecureData hexStringToData:self.toAddress];
             transaction.Clauses = @[@[toData,[NSData data],[NSData data]]];
@@ -121,13 +131,22 @@
         
     } else if(self.transferType == WalletTokenTransferType) {
         //token 转账 value 设置0，data 设置见文档
-        subValue = [Payment parseToken:self.amount dicimals:self.currentCoinModel.decimals];
         
         SecureData *tokenAddress = [SecureData secureDataWithHexString:self.tokenAddress];
         transaction.Clauses = @[@[tokenAddress.data,[NSData data],self.clauseData]];
     }else if(self.transferType == WalletContranctTransferType) { // 合约转账
-        CGFloat amountF = self.amount.floatValue;
-        if (amountF == 0) {
+       
+        CGFloat amountF = 0.00;
+        BigNumber *subValue = nil;
+        if ([WalletTools checkDecimalStr:self.amount]) {
+            subValue = [BigNumber bigNumberWithDecimalString:self.amount];
+            amountF = self.amount.floatValue;
+        }else{
+            subValue = [BigNumber bigNumberWithHexString:self.amount];
+            amountF = subValue.decimalString.floatValue;
+        }
+        
+        if (amountF == 0 && [subValue lessThanEqualTo:[BigNumber constantZero]]) {
             if (self.tokenAddress.length == 0) {
                 transaction.Clauses = @[@[[NSData data],[NSData data], self.clauseData]];
             }else{
@@ -136,10 +155,10 @@
         } else {
             
             if (self.tokenAddress.length == 0) {
-                BigNumber *subValue = [Payment parseEther:self.amount];
+
                 transaction.Clauses = @[@[[NSData data],subValue.data, self.clauseData]];
             }else{
-                BigNumber *subValue = [Payment parseEther:self.amount];
+
                 transaction.Clauses = @[@[[SecureData hexStringToData:self.tokenAddress],subValue.data, self.clauseData]];
             }
         }

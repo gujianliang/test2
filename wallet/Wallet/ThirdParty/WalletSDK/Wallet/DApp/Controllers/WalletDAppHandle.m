@@ -247,9 +247,6 @@ static dispatch_once_t predicate;
         }
     }
 
-    
-    [self initParamGasPrice:&gasPrice gas:&gas amount:&amount to:&to clauseStr:&clauseStr];
-    
     CGFloat amountFloat = 0;
     
     WalletTransferType transferType = WalletVETTransferType;
@@ -270,37 +267,14 @@ static dispatch_once_t predicate;
             return;
         }
         
-        if (![clauseStr isKindOfClass:[NSString class]]) {
-            [self paramsError:requestId webView:webView callbackId:callbackId];
-            
-            return;
-        }else if(clauseStr.length >= 10){
-            if (![WalletTools checkHEXStr:clauseStr]) {
-                [self paramsError:requestId webView:webView callbackId:callbackId];
-                return;
-            }
-        }else if(clauseStr.length != 0){
-            if ([WalletTools checkHEXStr:clauseStr]) {
-                
-                NSString *clauseDec = [BigNumber bigNumberWithHexString:clauseStr].decimalString;
-                if (clauseDec.integerValue != 0) {
-                    [self paramsError:requestId webView:webView callbackId:callbackId];
-                    return;
-                }
-            }else{
-                [self paramsError:requestId webView:webView callbackId:callbackId];
-                return;
-            }
-        }
-        
     }else if(clauseStr.length > 10){
         if ([clauseStr hasPrefix:TransferMethodId] && [to.lowercaseString isEqualToString:vthoTokenAddress]) { // 只有vtho ，其他token 走合约
             transferType = WalletTokenTransferType;
             tokenAddress = to;
             
             amount = [WalletTools getAmountFromClause:clauseStr to:&to];
-            
-            if (![self checkAmountForm:amount amountFloat:&amountFloat requestId:requestId webView:webView callbackId:callbackId]
+            CGFloat amountTokenFloat = 0.0;
+            if (![self checkAmountForm:amount amountFloat:&amountTokenFloat requestId:requestId webView:webView callbackId:callbackId]
                 ||![WalletTools errorAddressAlert:to]
                 || ![WalletTools errorAddressAlert:tokenAddress]
                 || [tokenAddress isKindOfClass:[NSNull class]]
@@ -311,10 +285,6 @@ static dispatch_once_t predicate;
                 
                 [self paramsError:requestId webView:webView callbackId:callbackId];
                 
-                return;
-            }
-            if (![WalletTools checkHEXStr:clauseStr]) {
-                [self paramsError:requestId webView:webView callbackId:callbackId];
                 return;
             }
             
@@ -338,27 +308,6 @@ static dispatch_once_t predicate;
                 [self paramsError:requestId webView:webView callbackId:callbackId];
                 
                 return;
-            }
-            
-            if (![clauseStr isKindOfClass:[NSString class]]) {
-                [self paramsError:requestId webView:webView callbackId:callbackId];
-                
-                return;
-            }else if(clauseStr.length >= 10){
-                if (![WalletTools checkHEXStr:clauseStr]) {
-                    [self paramsError:requestId webView:webView callbackId:callbackId];
-                    return;
-                }
-            }else if(clauseStr.length != 0){
-                [self paramsError:requestId webView:webView callbackId:callbackId];
-                return;
-            }
-            
-            if (to.length > 0) {
-                if(![WalletTools errorAddressAlert:to]){
-                    [self paramsError:requestId webView:webView callbackId:callbackId];
-                    return;
-                }
             }
         }
     }else{ // 小于10 非法参数
@@ -415,7 +364,8 @@ static dispatch_once_t predicate;
         if (t) {
             
             if (bCert) {
-                
+                [self paramsError:requestId webView:webView callbackId:callbackId];
+                return;
             }else if (transferType == WalletVETTransferType) {
                 
                 // VET 转账
@@ -450,62 +400,6 @@ static dispatch_once_t predicate;
         NSLog(@"web3js error == %@",error);
 #endif
     }];
-}
-
-- (void)initParamGasPrice:(NSString **)gasPrice gas:(NSString **)gas amount:(NSString **)amount to:(NSString **)to clauseStr:(NSString **)clauseStr
-{
-    if ([*gasPrice isKindOfClass:[NSNull class]]) {
-        *gasPrice = DefaultGasPriceCoef;
-    }else if ((*gasPrice).integerValue == 0) {
-        //默认120，如果js没有返回，就给默认的
-        *gasPrice = DefaultGasPriceCoef;
-    }else{
-        //转 16进制
-        *gasPrice = [NSString stringWithFormat:@"%@",*gasPrice];
-        if (![WalletTools checkHEXStr:*gasPrice]) {
-           
-            if ([WalletTools checkDecimalStr:*gasPrice]){
-                *gasPrice = [BigNumber bigNumberWithDecimalString:*gasPrice].hexString;
-                
-            }else{
-                *gasPrice = DefaultGasPriceCoef; //如果不符合规则，就给默认的
-            }
-        }
-    }
-    
-    if ([*gas isKindOfClass:[NSNull class]]) {
-        *gas = nil;
-    }else {
-        //转 10进制
-        if ([self originTypeFromNumber:*gas]) {
-            *gas = [NSString stringWithFormat:@"-1"];
-        }else{
-            *gas = [NSString stringWithFormat:@"%@",*gas];
-            
-            if (![WalletTools checkDecimalStr:*gas]) {
-                
-                if ([WalletTools checkHEXStr:*gas]){
-                    
-                    *gas = [BigNumber bigNumberWithHexString:*gas].decimalString;
-                }
-            }
-            if ((*gas).integerValue == 0) {
-                *gas = [NSString stringWithFormat:@"-1"];
-            }
-        }
-    }
-    
-    if ([*amount isKindOfClass:[NSNull class]]) {
-        *amount = @"0";
-    }
-    
-    if ([*clauseStr isKindOfClass:[NSNull class]]) {
-        *clauseStr = nil;
-    }
-    
-    if ([*to isKindOfClass:[NSNull class]]) {
-        *to = nil;
-    }
 }
 
 - (BOOL ) originTypeFromNumber: (id) data {
