@@ -588,8 +588,7 @@ static dispatch_once_t predicate;
         }else{
             *gas = [NSString stringWithFormat:@"%@",*gas];
             
-            if (![WalletTools checkDecimalStr:*gas] && (*gas).length != 0) {
-                
+            if (![WalletTools checkDecimalStr:*gas]) {
                 if ([WalletTools checkHEXStr:*gas]){
                     
                     *gas = [BigNumber bigNumberWithHexString:*gas].decimalString;
@@ -597,7 +596,10 @@ static dispatch_once_t predicate;
                     return NO;
                 }
             }else{
-                
+                if ((*gas).length == 0
+                    || (*gas).integerValue == 0) {
+                    return NO;
+                }
             }
         }
     }

@@ -43,7 +43,7 @@
     
     NSMutableURLRequest *theRequest = [NSMutableURLRequest requestWithURL:_URL
                                                               cachePolicy:NSURLRequestReloadIgnoringCacheData
-                                                          timeoutInterval:1.0];
+                                                          timeoutInterval:30.0];
     [_webView loadRequest:theRequest];
     [self.view addSubview:_webView];
     

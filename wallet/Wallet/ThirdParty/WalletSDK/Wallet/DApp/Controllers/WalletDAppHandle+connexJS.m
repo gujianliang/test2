@@ -81,32 +81,32 @@
             
             NSMutableDictionary *subDict = [NSMutableDictionary dictionary];
             [subDict setValueIfNotNil:blockModel.id         forKey:@"id"];
-            [subDict setValueIfNotNil:blockModel.number     forKey:@"number"];
-            [subDict setValueIfNotNil:blockModel.timestamp  forKey:@"timestamp"];
+            [subDict setValueIfNotNil:@(blockModel.number.integerValue) forKey:@"number"];
+            [subDict setValueIfNotNil:@(blockModel.timestamp.integerValue) forKey:@"timestamp"];
             [subDict setValueIfNotNil:blockModel.parentID    forKey:@"parentID"];
             
             [dictParam setValueIfNotNil:subDict forKey:@"head"];
             
             NSDictionary *resultDict = [WalletTools packageWithRequestId:requestId
-                                                                   data:dictParam
-                                                                   code:OK
-                                                                message:@""];
+                                                                    data:dictParam
+                                                                    code:OK
+                                                                 message:@""];
             completionHandler([resultDict yy_modelToJSONString]);
             
         } failure:^(VCBaseApi *finishApi, NSString *errMsg) {
             NSDictionary *resultDict = [WalletTools packageWithRequestId:requestId
-                                                                   data:@""
-                                                                   code:ERROR_SERVER_DATA
-                                                                message:ERROR_SERVER_DATA_MSG];
+                                                                    data:@""
+                                                                    code:ERROR_SERVER_DATA
+                                                                 message:ERROR_SERVER_DATA_MSG];
             completionHandler([resultDict yy_modelToJSONString]);
             
         }];
     } failure:^(VCBaseApi *finishApi, NSString *errMsg) {
         
         NSDictionary *resultDict = [WalletTools packageWithRequestId:requestId
-                                                               data:@""
-                                                               code:ERROR_SERVER_DATA
-                                                            message:ERROR_SERVER_DATA_MSG];
+                                                                data:@""
+                                                                code:ERROR_SERVER_DATA
+                                                             message:ERROR_SERVER_DATA_MSG];
         completionHandler([resultDict yy_modelToJSONString]);
         
     }];
@@ -290,12 +290,13 @@
     WalletDAppTransferDetailApi *vetBalanceApi = [[WalletDAppTransferDetailApi alloc]initWithTxid:txID];
     [vetBalanceApi loadDataAsyncWithSuccess:^(VCBaseApi *finishApi) {
         NSDictionary *balanceModel = finishApi.resultDict;
-        
+
         [WalletTools callbackWithrequestId:requestId
-                                  webView:webView
-                                     data:balanceModel
-                               callbackId:callbackId
-                                     code:OK];
+                                   webView:webView
+                                      data:balanceModel
+                                callbackId:callbackId
+                                      code:OK];
+        
     } failure:^(VCBaseApi *finishApi, NSString *errMsg) {
         [WalletTools callbackWithrequestId:requestId
                                   webView:webView
@@ -404,69 +405,23 @@
                             connex:(BOOL)bConnex
 {
     
-    WalletGetSymbolApi *getSymbolApi = [[WalletGetSymbolApi alloc]initWithTokenAddress:paramModel.tokenAddress];
-    [getSymbolApi loadDataAsyncWithSuccess:^(VCBaseApi *finishApi) {
+    CGFloat amountF = [BigNumber bigNumberWithHexString:paramModel.amount].decimalString.floatValue/pow(10, 18);
+    
+    if (![WalletTools errorAddressAlert:paramModel.toAddress] ||
+        ![self errorAmount:[NSString stringWithFormat:@"%lf",amountF]]||
+        ![WalletTools fromISToAddress:paramModel.fromAddress to:paramModel.toAddress]||
+        paramModel.gas.integerValue == 0||
+        paramModel.clauseData.length == 0) {
         
-        NSDictionary *dictResult = finishApi.resultDict;
-        NSString *symobl = dictResult[@"data"];
-        if (symobl.length < 128) {
-            [WalletTools callbackWithrequestId:requestId
-                                  webView:webView
-                                         data:@""
-                                   callbackId:callbackId
-                                         code:ERROR_REQUEST_PARAMS];
-            return ;
-        }
-        symobl = [WalletTools abiDecodeString:symobl];
-        
-        [self getTokenDecimalsWithParamModel:paramModel requestId:requestId webView:webView callbackId:callbackId connex:bConnex];
-        
-    } failure:^(VCBaseApi *finishApi, NSString *errMsg) {
-        [WalletTools callbackWithrequestId:requestId
-                                  webView:webView
-                                     data:@""
-                               callbackId:callbackId
-                                     code:ERROR_SERVER_DATA];
-    }];
-}
-
-//获得token decimals
-- (void)getTokenDecimalsWithParamModel:(WalletSignParamModel *)paramModel requestId:(NSString *)requestId webView:(WKWebView *)webView callbackId:(NSString *)callbackId                             connex:(BOOL)bConnex
-
-{
-    WalletGetDecimalsApi *getDecimalsApi = [[WalletGetDecimalsApi alloc]initWithTokenAddress:paramModel.tokenAddress];
-    [getDecimalsApi loadDataAsyncWithSuccess:^(VCBaseApi *finishApi) {
-        
-        NSDictionary *dictResult = finishApi.resultDict;
-        NSString *decimalsHex = dictResult[@"data"];
-        NSString *decimals = [BigNumber bigNumberWithHexString:decimalsHex].decimalString;
-        
-        CGFloat amountF = [BigNumber bigNumberWithHexString:paramModel.amount].decimalString.floatValue/pow(10, decimals.integerValue);
-
-        if (![WalletTools errorAddressAlert:paramModel.toAddress] ||
-            ![self errorAmount:[NSString stringWithFormat:@"%lf",amountF]]||
-            ![WalletTools fromISToAddress:paramModel.fromAddress to:paramModel.toAddress]||
-            paramModel.gas.integerValue == 0||
-            paramModel.clauseData.length == 0) {
-            
-            [WalletTools callbackWithrequestId:requestId
-                                       webView:webView
-                                          data:@""
-                                    callbackId:callbackId
-                                          code:ERROR_REQUEST_PARAMS];
-            return;
-        }
-        
-        [self showSignView:WalletTokenTransferType paramModel:paramModel requestId:requestId webView:webView callbackId:callbackId connex:bConnex];
-        
-        
-    } failure:^(VCBaseApi *finishApi, NSString *errMsg) {
         [WalletTools callbackWithrequestId:requestId
                                    webView:webView
                                       data:@""
                                 callbackId:callbackId
-                                      code:ERROR_SERVER_DATA];
-    }];
+                                      code:ERROR_REQUEST_PARAMS];
+        return;
+    }
+    
+    [self showSignView:WalletTokenTransferType paramModel:paramModel requestId:requestId webView:webView callbackId:callbackId connex:bConnex];
 }
 
 // contranct 签名
