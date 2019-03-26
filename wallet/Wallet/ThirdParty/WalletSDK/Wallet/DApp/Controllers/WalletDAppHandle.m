@@ -247,17 +247,17 @@ static dispatch_once_t predicate;
         }
     }
 
-    CGFloat amountFloat = 0;
+    NSString *amountNoFormat = @"";
     
     WalletTransferType transferType = WalletVETTransferType;
     
     NSString *clauseDecimal = [BigNumber bigNumberWithHexString:clauseStr].decimalString;
 
-    if (clauseStr.length < 10 || clauseDecimal.integerValue == 0 ) { // vet 转账clauseStr == nil,
+    if (clauseStr.length == 0 || clauseDecimal.integerValue == 0 ) { // vet 转账clauseStr == nil,
         
         transferType = WalletVETTransferType;
         
-        if (![self checkAmountForm:amount amountFloat:&amountFloat requestId:requestId webView:webView callbackId:callbackId]
+        if (![self checkAmountForm:amount amountFloat:&amountNoFormat requestId:requestId webView:webView callbackId:callbackId]
             ||![WalletTools errorAddressAlert:to]
             ||![WalletTools checkDecimalStr:gas]
             ||![WalletTools checkHEXStr:gasPrice]) {
@@ -270,11 +270,11 @@ static dispatch_once_t predicate;
     }else if(clauseStr.length > 10){
         if ([clauseStr hasPrefix:TransferMethodId] && [to.lowercaseString isEqualToString:vthoTokenAddress]) { // 只有vtho ，其他token 走合约
             transferType = WalletTokenTransferType;
-            tokenAddress = to;
+            tokenAddress = [[NSString alloc]initWithString:to];
             
             amount = [WalletTools getAmountFromClause:clauseStr to:&to];
-            CGFloat amountTokenFloat = 0.0;
-            if (![self checkAmountForm:amount amountFloat:&amountTokenFloat requestId:requestId webView:webView callbackId:callbackId]
+            NSString *amountToken = @"0";
+            if (![self checkAmountForm:amount amountFloat:&amountToken requestId:requestId webView:webView callbackId:callbackId]
                 ||![WalletTools errorAddressAlert:to]
                 || ![WalletTools errorAddressAlert:tokenAddress]
                 || [tokenAddress isKindOfClass:[NSNull class]]
@@ -304,7 +304,7 @@ static dispatch_once_t predicate;
                 return;
             }
             
-            if (amount.length > 0 && ![self checkAmountForm:amount amountFloat:&amountFloat requestId:requestId webView:webView callbackId:callbackId]) {
+            if (amount.length > 0 && ![self checkAmountForm:amount amountFloat:&amountNoFormat requestId:requestId webView:webView callbackId:callbackId]) {
                 [self paramsError:requestId webView:webView callbackId:callbackId];
                 
                 return;
@@ -318,10 +318,11 @@ static dispatch_once_t predicate;
     WalletDappStoreSelectView *selectView = [[WalletDappStoreSelectView alloc]initWithFrame:[WalletTools getCurrentVC].view.frame ];
     selectView.tag = SelectWalletTag;
     selectView.toAddress = to;
-    selectView.amount = [NSString stringWithFormat:@"%lf",amountFloat];
+    selectView.amount = amountNoFormat;
     [[WalletTools getCurrentNavVC].view addSubview:selectView];
+    @weakify(self);
     selectView.block = ^(NSString *from,WalletDappStoreSelectView *viewSelf){
-        
+        @strongify(self);
         [viewSelf removeFromSuperview];
         
         WalletSignParamModel *signParamModel = [[WalletSignParamModel alloc]init];
@@ -402,7 +403,7 @@ static dispatch_once_t predicate;
     }];
 }
 
-- (BOOL ) originTypeFromNumber: (id) data {
+- (BOOL)checkNumberOriginBool:(id)data {
     
     if ([data isKindOfClass:[NSNumber class]]) {
         const char * pObjCType = [((NSNumber*)data) objCType];
@@ -417,7 +418,7 @@ static dispatch_once_t predicate;
 }
 
 - (BOOL)checkAmountForm:(NSString *)amount
-            amountFloat:(CGFloat *)amountFloat
+            amountFloat:(NSString **)amountNoFormat
               requestId:(NSString *)requestId
                 webView:(WKWebView *)webView
              callbackId:(NSString *)callbackId
@@ -428,7 +429,8 @@ static dispatch_once_t predicate;
     
     if ([amount.lowercaseString hasPrefix:@"0x"]) { // 16进制
         if ([WalletTools checkHEXStr:amount]) {
-            *amountFloat = [BigNumber bigNumberWithHexString:[NSString stringWithFormat:@"%@",amount]].decimalString.doubleValue/pow(10, 18);
+            NSString *tempAmount = [Payment formatEther:[BigNumber bigNumberWithHexString:amount]];
+            *amountNoFormat = [tempAmount stringByReplacingOccurrencesOfString:@"," withString:@""];
             return YES;
         }else{
             [self paramsError:requestId webView:webView callbackId:callbackId];
@@ -437,7 +439,8 @@ static dispatch_once_t predicate;
         }
     }else { // 10进制
         if ([WalletTools checkDecimalStr:amount]) {
-            *amountFloat = [BigNumber bigNumberWithDecimalString:[NSString stringWithFormat:@"%@",amount]].decimalString.doubleValue/pow(10, 18);
+            NSString *tempAmount = [Payment formatEther:[BigNumber bigNumberWithDecimalString:amount]];
+            *amountNoFormat = [tempAmount stringByReplacingOccurrencesOfString:@"," withString:@""];
             return YES;
         }else{
             [self paramsError:requestId webView:webView callbackId:callbackId];
@@ -506,8 +509,10 @@ static dispatch_once_t predicate;
     }
     
     //验证格式
-    //有可能是nil
-    if (![*to isKindOfClass:[NSString class]] && *to != nil) {
+    //to有可能是 空
+    if (*to == nil) {
+        
+    }else if (![*to isKindOfClass:[NSString class]]) {
         return NO;
     }else {
         if ([*to isKindOfClass:[NSString class]]) {
@@ -519,17 +524,20 @@ static dispatch_once_t predicate;
         }
     }
     
-    if (![*data isKindOfClass:[NSString class]] && *data != nil) {
+    //data 有可能是nil
+    if (*data == nil) {
+        
+    }else if (![*data isKindOfClass:[NSString class]] ) {
         return NO;
     }else {
         
         //data 可以没写，但是一旦写了，就必须大于10 ，并且 > 0
         if ([*data isKindOfClass:[NSString class]]) {
-            if((*data).length >= 10){
+            if((*data).length >= 10){//length >= 10
                 if (![WalletTools checkHEXStr:*data]) {
                     return NO;
                 }
-            }else if((*data).length != 0){
+            }else if((*data).length != 0){ //length 1 -- 9
                 if ([WalletTools checkHEXStr:*data]) {
                     
                     NSString *clauseDec = [BigNumber bigNumberWithHexString:*data].decimalString;
@@ -546,13 +554,16 @@ static dispatch_once_t predicate;
     BOOL checkValue = YES;
     BOOL checkGas = YES;
     if (bConnex) {
-        
+        //connex value NSString | NSNumber
         checkValue = ![*value isKindOfClass:[NSString class]] && ![*value isKindOfClass:[NSNumber class]];
         
+        //connex gas NSString | NSNumber
         checkGas = ![*gas isKindOfClass:[NSString class]] && ![*gas isKindOfClass:[NSNumber class]];
     }else{
+        //web3 value NSString
         checkValue = ![*value isKindOfClass:[NSString class]];
         
+        //web3 gas NSString
         checkGas = ![*gas isKindOfClass:[NSString class]];
     }
     
@@ -560,15 +571,16 @@ static dispatch_once_t predicate;
         return NO;
     }//转 10进制
     else{
-        if ([self originTypeFromNumber:*value]) {
-            *value = [NSString stringWithFormat:@"-1"];
+        if ([self checkNumberOriginBool:*value]) {
+            return NO;
         }else{
             *value = [NSString stringWithFormat:@"%@",*value];
             
-            if (![WalletTools checkDecimalStr:*value] && (*value).length != 0) {
+            if ((*value).length == 0) { //value 可能是nil
+                
+            }else if (![WalletTools checkDecimalStr:*value]) {//不是10进制
                 
                 if ([WalletTools checkHEXStr:*value]){
-                    
                     *value = [BigNumber bigNumberWithHexString:*value].decimalString;
                 }else{
                     return NO;
@@ -583,8 +595,8 @@ static dispatch_once_t predicate;
     }else {
         //转 10进制
         
-        if ([self originTypeFromNumber:*gas]) {
-            *gas = [NSString stringWithFormat:@"-1"];
+        if ([self checkNumberOriginBool:*gas]) {
+            return NO;
         }else{
             *gas = [NSString stringWithFormat:@"%@",*gas];
             
@@ -605,7 +617,10 @@ static dispatch_once_t predicate;
     }
     
     //    if (!bConnex) {
-    if (![*gasPrice isKindOfClass:[NSString class]] && *gasPrice != nil) {
+    if(*gasPrice == nil)
+    {
+        *gasPrice = DefaultGasPriceCoef;
+    }else if (![*gasPrice isKindOfClass:[NSString class]]) {
         return NO;
     }else{
         //转 16进制
@@ -650,6 +665,8 @@ static dispatch_once_t predicate;
 {
     predicate = 0;
     singleton = nil;
+    [[NSNotificationCenter defaultCenter]removeObserver:self];
+    [[SocketRocketUtility instance] SRWebSocketClose];
 }
 
 

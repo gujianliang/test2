@@ -37,12 +37,10 @@ NS_ASSUME_NONNULL_BEGIN
              gasLimit:(NSString *)gasLimit
           fromAddress:(NSString *)fromAddress
             toAddress:(NSString *)toAddress
-          pwTextField:(UITextField *)pwTextField
          transferType:(WalletTransferType)transferType
                   gas:(NSNumber *)gas
          gasPriceCoef:(BigNumber *)gasPriceCoef
            clauseData:(NSData *)clauseData
-      signatureHandle:(WalletSignatureViewHandle *)signatureHandle
         additionalMsg:(NSString *)additionalMsg;
 
 

@@ -17,7 +17,7 @@
 
 @implementation WalletSignatureView (transferToken)
 
-- (void)signTransfer:(void(^)(NSString *txid,NSInteger code))transferBlock
+- (void)signTransfer
 {
     // 显示Loading
     [WalletMBProgressShower showCircleIn:self];

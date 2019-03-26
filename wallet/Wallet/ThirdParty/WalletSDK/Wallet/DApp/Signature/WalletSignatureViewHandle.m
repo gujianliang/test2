@@ -30,23 +30,21 @@
 
 @implementation WalletSignatureViewHandle
 {
-    WalletCoinModel *_coinModel;
-    UIView *_superView;
 }
 
-- (void)checkBalcanceFromAddress:(NSString *)fromAddress coinModel:(WalletCoinModel *)coinModel amount:(NSString *)amount gasLimit:(NSString *)gasLimit superView:(UIView *)superView block:(void(^)(BOOL result))block
++ (void)checkBalcanceFromAddress:(NSString *)fromAddress coinModel:(WalletCoinModel *)coinModel amount:(NSString *)amount gasLimit:(NSString *)gasLimit superView:(UIView *)superView block:(void(^)(BOOL result))block
 {
-    _coinModel = coinModel;
-    _superView = superView;
-    
+    [WalletMBProgressShower showCircleIn:superView];
     if ([coinModel.symobl.lowercaseString isEqualToString:@"vet"]) {
         // vet检查
         [self getVETBalance:fromAddress
                      amount:amount
                    gasLimit:gasLimit
+                  superView:superView
+                  coinModel:coinModel
                       block:^(BOOL result)
          {
-             
+             [WalletMBProgressShower hide:superView];
              if (block) {
                  block(result);
              }
@@ -59,8 +57,12 @@
                     tokenAddress:coinModel.address
                           amount:amount
                         gasLimit:gasLimit
+                       superView:superView
+                       coinModel:coinModel
                            block:^(BOOL result)
              {
+                 [WalletMBProgressShower hide:superView];
+
                  if (block) {
                      block(result);
                  }
@@ -71,23 +73,28 @@
                      tokenAddress:coinModel.address
                            amount:amount
                          gasLimit:gasLimit
+                        superView:superView
+                        coinModel:coinModel
                             block:^(BOOL result)
              {
+                 [WalletMBProgressShower hide:superView];
+
                  if (block) {
                      block(result);
                  }
              }];
         }
     }else{
+        [WalletMBProgressShower hide:superView];
+
         if (block) {
             block(NO);
         }
     }
 }
 
-- (void)getVETBalance:(NSString *)address amount:(NSString *)amount gasLimit:(NSString *)gasLimit block:(void(^)(BOOL result))block
++ (void)getVETBalance:(NSString *)address amount:(NSString *)amount gasLimit:(NSString *)gasLimit superView:(UIView *)superView coinModel:(WalletCoinModel *)coinModel block:(void(^)(BOOL result))block
 {
-    [WalletMBProgressShower showLoadData:_superView Text:VCNSLocalizedBundleString(@"list_load_ing", nil)];
     
     NSString *blockHost = [WalletUserDefaultManager getBlockUrl];
     
@@ -98,7 +105,6 @@
           parameters:nil
              success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject)
      {
-         [WalletMBProgressShower hide:_superView];
          
          NSDictionary *dictResponse = (NSDictionary *)responseObject;
          NSString *balance = dictResponse[@"balance"];
@@ -141,7 +147,7 @@
                  
                  if ([vthoBalanceNum compare:transferTokenAmount] == NSOrderedAscending) {
                      
-                     NSString *vthoBalanceFormat = [Payment formatToken:bigNumberCount decimals:_coinModel.decimals options:2];
+                     NSString *vthoBalanceFormat = [Payment formatToken:bigNumberCount decimals:coinModel.decimals options:2];
                      NSString *msg = [NSString stringWithFormat: VCNSLocalizedBundleString(@"contact_buy_failed_not_enough3",nil),vthoBalanceFormat,@"VTHO",gasLimit,@"VTHO"];
                      [WalletMBProgressShower showMulLineTextIn:[WalletTools getCurrentNavVC].view Text:msg During:2.5];
                  }else{
@@ -152,28 +158,26 @@
                  }
                  
              } failure:^(VCBaseApi *finishApi, NSString *errMsg) {
-                 
-                 [WalletMBProgressShower hide:_superView];
-                 [WalletMBProgressShower showTextIn:[WalletTools getCurrentVC].view Text:ERROR_REQUEST_PARAMS_MSG During:1];
                  if (block) {
                      block(NO);
                  }
+                 [WalletMBProgressShower showTextIn:[WalletTools getCurrentVC].view Text:ERROR_REQUEST_PARAMS_MSG During:1];
+                 
              }];
-             
          }
          
      } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error)
      {
-         [WalletMBProgressShower hide:_superView];
-         [WalletMBProgressShower showTextIn:[WalletTools getCurrentVC].view Text:ERROR_REQUEST_PARAMS_MSG During:1.5];
-         
          if (block) {
              block(NO);
          }
+         [WalletMBProgressShower showTextIn:[WalletTools getCurrentVC].view Text:ERROR_REQUEST_PARAMS_MSG During:1.5];
+         
+         
      }];
 }
 
-- (void)getTokenBalance:(NSString *)address tokenAddress:(NSString *)tokenAddress amount:(NSString *)tokenAmount gasLimit:(NSString *)gasLimit block:(void(^)(BOOL result))block
++ (void)getTokenBalance:(NSString *)address tokenAddress:(NSString *)tokenAddress amount:(NSString *)tokenAmount gasLimit:(NSString *)gasLimit superView:(UIView *)superView coinModel:(WalletCoinModel *)coinModel block:(void(^)(BOOL result))block
 {
     
     WalletTokenBalanceApi *tokenApi = [[WalletTokenBalanceApi alloc]initWith:tokenAddress data:[WalletTools tokenBalanceData:address]];
@@ -195,19 +199,16 @@
         
         if ([vthoBalanceNum compare:transferTokenAmount] == NSOrderedAscending) {
             
-            NSString *vthoBalanceFormat = [Payment formatToken:bigNumberCount decimals:_coinModel.decimals options:2];
-            NSString *msg = [NSString stringWithFormat: VCNSLocalizedBundleString(@"contact_buy_failed_not_enough3",nil),vthoBalanceFormat,_coinModel.symobl,tokenAmount,_coinModel.symobl];
+            NSString *vthoBalanceFormat = [Payment formatToken:bigNumberCount decimals:coinModel.decimals options:2];
+            NSString *msg = [NSString stringWithFormat: VCNSLocalizedBundleString(@"contact_buy_failed_not_enough3",nil),vthoBalanceFormat,coinModel.symobl,tokenAmount,coinModel.symobl];
             
             
             [WalletMBProgressShower showMulLineTextIn:[WalletTools getCurrentNavVC].view Text:msg During:1.5];
             
         }else{
             
-            [WalletMBProgressShower showLoadData:_superView Text:VCNSLocalizedBundleString(@"list_load_ing", nil)];
             WalletTokenBalanceApi *vthoApi = [[WalletTokenBalanceApi alloc]initWith:vthoTokenAddress data:[WalletTools tokenBalanceData:address]];
             [vthoApi loadDataAsyncWithSuccess:^(VCBaseApi *finishApi) {
-                
-                [WalletMBProgressShower hide:_superView];
                 
                 
                 WalletBalanceModel *balanceModel = finishApi.resultModel;
@@ -222,7 +223,7 @@
                 
                 if ([vthoBalanceNum compare:transferTokenAmount] == NSOrderedAscending) {
                     
-                    NSString *vthoBalanceFormat = [Payment formatToken:bigNumberCount decimals:_coinModel.decimals options:2];
+                    NSString *vthoBalanceFormat = [Payment formatToken:bigNumberCount decimals:coinModel.decimals options:2];
                     NSString *msg = [NSString stringWithFormat: VCNSLocalizedBundleString(@"contact_buy_failed_not_enough3",nil),vthoBalanceFormat,@"VTHO",gasLimit,@"VTHO"];
                     
                     [WalletMBProgressShower showMulLineTextIn:[WalletTools getCurrentNavVC].view Text:msg During:1.5];
@@ -233,28 +234,25 @@
                 }
                 
             }failure:^(VCBaseApi *finishApi, NSString *errMsg) {
-                [WalletMBProgressShower hide:_superView];
-                [WalletMBProgressShower showTextIn:[WalletTools getCurrentVC].view Text:ERROR_REQUEST_PARAMS_MSG During:1];
-                
                 if (block) {
                     block(NO);
                 }
+                [WalletMBProgressShower showTextIn:[WalletTools getCurrentVC].view Text:ERROR_REQUEST_PARAMS_MSG During:1];
             }];
         }
         
     } failure:^(VCBaseApi *finishApi, NSString *errMsg) {
-        
-        [WalletMBProgressShower hide:_superView];
-        [WalletMBProgressShower showTextIn:[WalletTools getCurrentVC].view Text:ERROR_REQUEST_PARAMS_MSG During:1];
         if (block) {
             block(NO);
         }
+        [WalletMBProgressShower showTextIn:[WalletTools getCurrentVC].view Text:ERROR_REQUEST_PARAMS_MSG During:1];
+        
     }];
     
     
 }
 
-- (void)getVthoBalance:(NSString *)address tokenAddress:(NSString *)tokenAddress amount:(NSString *)tokenAmount gasLimit:(NSString *)gasLimit block:(void(^)(BOOL result))block
++ (void)getVthoBalance:(NSString *)address tokenAddress:(NSString *)tokenAddress amount:(NSString *)tokenAmount gasLimit:(NSString *)gasLimit superView:(UIView *)superView coinModel:(WalletCoinModel *)coinModel block:(void(^)(BOOL result))block
 {
     
     WalletTokenBalanceApi *tokenApi = [[WalletTokenBalanceApi alloc]initWith:tokenAddress data:[WalletTools tokenBalanceData:address]];
@@ -280,8 +278,8 @@
         
         if ([vthoBalanceNum compare:transferTokenAmount] == NSOrderedAscending) {
             
-            NSString *vthoBalanceFormat = [Payment formatToken:bigNumberCount decimals:_coinModel.decimals options:2];
-            NSString *msg = [NSString stringWithFormat: VCNSLocalizedBundleString(@"contact_buy_failed_not_enough3",nil),vthoBalanceFormat,_coinModel.symobl,total,_coinModel.symobl];
+            NSString *vthoBalanceFormat = [Payment formatToken:bigNumberCount decimals:coinModel.decimals options:2];
+            NSString *msg = [NSString stringWithFormat: VCNSLocalizedBundleString(@"contact_buy_failed_not_enough3",nil),vthoBalanceFormat,coinModel.symobl,total,coinModel.symobl];
             
             [WalletMBProgressShower showMulLineTextIn:[WalletTools getCurrentNavVC].view Text:msg During:1.5];
         }else{
@@ -291,17 +289,16 @@
         }
         
     } failure:^(VCBaseApi *finishApi, NSString *errMsg) {
-        [WalletMBProgressShower hide:_superView];
-        [WalletMBProgressShower showTextIn:[WalletTools getCurrentVC].view Text:ERROR_REQUEST_PARAMS_MSG During:1];
-        
         if (block) {
             block(NO);
         }
+        [WalletMBProgressShower showTextIn:[WalletTools getCurrentVC].view Text:ERROR_REQUEST_PARAMS_MSG During:1];
+        
     }];
 }
 
 
-- (void)convertAmountFormat:(NSString *)originAmount amountNarrow:(NSString **)amountNarrow
++ (void)convertAmountFormat:(NSString *)originAmount amountNarrow:(NSString **)amountNarrow
 {
     if (originAmount.length == 0) {
         *amountNarrow = @"";

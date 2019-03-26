@@ -42,7 +42,6 @@
     NSString *_tokenID;
     NSString *_expiration;
     
-    WalletSignatureViewHandle *_signatureHandle;
     WalletSignatureViewSubView *_signatureSubView;
     
     UILabel *_titleLabel;
@@ -60,7 +59,6 @@
         [UIView animateWithDuration:0.2 animations:^{
             self.frame = frame;
         }];
-        _signatureHandle = [[WalletSignatureViewHandle alloc]init];
     }
     return self;
 }
@@ -232,15 +230,14 @@
                             gasLimit:_gasLimit
                          fromAddress:_fromAddress
                            toAddress:_toAddress
-                         pwTextField:self.signatureSubView.pwTextField
                         transferType:_transferType
                                  gas:_gas
                         gasPriceCoef:_gasPriceCoef
                           clauseData:_clauseData
-                     signatureHandle:_signatureHandle
                        additionalMsg:_additionalMsg];
-    
+     @weakify(self);
     [_signatureSubView creatLeftView:^{
+        @strongify(self);
         [self enterSignView];
     }];
     
@@ -248,16 +245,19 @@
         
         [WalletTools checkNetwork:^(BOOL t) {
              if(t){
-                 [self signTransfer:_transferBlock];
+                 @strongify(self);
+                 [self signTransfer];
              }
          }];
     }];
     
     [_signatureSubView creatLastView:^{
+        @strongify(self);
         if (self.transferBlock) {
             self.transferBlock(self.txid,ERROR_CANCEL);
         }
     }removeBlock:^{
+        @strongify(self);
         [self removeFromSuperview];
     } ];
 }
@@ -299,11 +299,13 @@
 
 - (void)timerCountBlock
 {
+    @weakify(self);
     __block NSInteger count = 0;
     _timer = [NSTimer scheduledTimerWithTimeInterval:1
                                              repeats:YES
                                                block:^(NSTimer * _Nonnull timer)
               {
+                @strongify(self);
                 NSInteger time = _signatureSubView.timeBtn.titleLabel.text.integerValue;
                 time --;
                 count ++;

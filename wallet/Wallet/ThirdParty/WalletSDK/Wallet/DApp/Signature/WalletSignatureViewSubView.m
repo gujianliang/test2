@@ -11,8 +11,7 @@
 #import "SecureData.h"
 
 #define viewHeight Scale(411)
-
-@implementation WalletSignatureViewSubView
+@interface WalletSignatureViewSubView()
 {
     BOOL        _needAdjust;
     UILabel     *_minerLabel;
@@ -37,9 +36,17 @@
     BigNumber           *_gasPriceCoef;
     NSData              *_clauseData;
     
-    WalletSignatureViewHandle *_signatureHandle;
     CGFloat _firstWidth;  // 第一个项的宽度，用来保持左对齐
 }
+
+@property (nonatomic,copy)void(^leftBlock)(void);
+@property (nonatomic,copy)void(^rightBlock)(void);
+@property (nonatomic,copy)void(^lastBlock)(void);
+
+@end
+
+@implementation WalletSignatureViewSubView
+
 
 - (void)initSignature:(UIScrollView *)scrollView
                amount:(NSString *)amount
@@ -47,12 +54,10 @@
              gasLimit:(NSString *)gasLimit
           fromAddress:(NSString *)fromAddress
             toAddress:(NSString *)toAddress
-          pwTextField:(UITextField *)pwTextField
          transferType:(WalletTransferType)transferType
                   gas:(NSNumber *)gas
          gasPriceCoef:(BigNumber *)gasPriceCoef
            clauseData:(NSData *)clauseData
-      signatureHandle:(WalletSignatureViewHandle *)signatureHandle
         additionalMsg:(NSString *)additionalMsg
 {
     _scrollView = scrollView;
@@ -64,13 +69,14 @@
     _gas                = gas;
     _gasPriceCoef       = gasPriceCoef;
     _clauseData         = clauseData;
-    _signatureHandle    = signatureHandle;
     _additionalMsg      = additionalMsg;
     _toAddress          = toAddress;
 }
 
 - (void)creatLeftView:(void(^)(void))enterSignViewBlock
 {
+    self.leftBlock = enterSignViewBlock;
+    
     // 初始化左视图
     if (_leftView == nil) {
         _leftView = [[UIView alloc]init];
@@ -99,9 +105,9 @@
         make.top.mas_equalTo(Scale(20.0));
     }];
     
-    [self initCellView:enterSignViewBlock];
+    [self initCellView];
     
-    [self addLeftViewBottomBtn:enterSignViewBlock];
+    [self addLeftViewBottomBtn];
 }
 
 - (void)initMinerLabel
@@ -132,7 +138,7 @@
     }
 }
 
-- (void)addLeftViewBottomBtn:(void(^)(void))enterSignViewBlock
+- (void)addLeftViewBottomBtn
 {
     WalletGradientLayerButton *nextBtn = [[WalletGradientLayerButton alloc]init];
     [nextBtn setDisableGradientLayer:YES];
@@ -146,29 +152,31 @@
         make.height.mas_equalTo(44);
         make.bottom.mas_equalTo(-Scale(30));
     }];
+    @weakify(self);
     nextBtn.block = ^(UIButton *btn) {
         [WalletTools checkNetwork:^(BOOL t) {
             if (t) {
-                
-                [self leftViewClick:enterSignViewBlock];
+                @strongify(self);
+                [self leftViewClick];
             }
         }];
     };
 }
 
-- (void)leftViewClick:(void(^)(void))enterSignViewBlock
+- (void)leftViewClick
 {
     if (_transferType == WalletContranctTransferType) {
-                
-        [_signatureHandle checkBalcanceFromAddress:_fromAddress
+        @weakify(self);
+        [WalletSignatureViewHandle checkBalcanceFromAddress:_fromAddress
                                          coinModel:_currentCoinModel
                                             amount:_amount
                                           gasLimit:_gasLimit
                                          superView:_scrollView.superview.superview
                                              block:^(BOOL result)
          {
+             @strongify(self);
              if (result) {
-                 [self enterPreView:enterSignViewBlock];
+                 [self enterPreView];
 
              }else{
                  [_scrollView.superview.superview removeFromSuperview];
@@ -176,22 +184,24 @@
          }];
         
     }else {
-        [self checkBalance:enterSignViewBlock];
+        [self checkBalance];
     }
 }
 
-- (void)checkBalance:(void(^)(void))enterSignViewBlock
+- (void)checkBalance
 {
-    [_signatureHandle checkBalcanceFromAddress:_fromAddress
+    @weakify(self);
+    [WalletSignatureViewHandle checkBalcanceFromAddress:_fromAddress
                                      coinModel:_currentCoinModel
                                         amount:_amount
                                       gasLimit:_gasLimit
                                      superView:_scrollView.superview.superview
                                          block:^(BOOL result)
      {
+         @strongify(self);
          if (result) {
-             if (enterSignViewBlock) {
-                 enterSignViewBlock();
+             if (self.leftBlock) {
+                 self.leftBlock();
              }
          }else{
              [_scrollView.superview.superview removeFromSuperview];
@@ -199,7 +209,7 @@
      }];
 }
 
-- (void)initCellView:(void(^)(void))enterSignViewBlock
+- (void)initCellView
 {
     NSString *gasFormat = [NSString stringWithFormat:@"%@ VTHO", _gasLimit.length == 0 ? @"0.00" : [WalletTools thousandSeparator:_gasLimit decimals:NO]];
     
@@ -209,8 +219,7 @@
     [self creatCell:VCNSLocalizedBundleString(@"contract_payment_info_row1_title", nil)
               value:gasFormat
                   Y: Scale(52 + 20)
-          adjustBtn: YES
- enterSignViewBlock:enterSignViewBlock];
+          adjustBtn:YES];
     
     if (_needAdjust) {
         [self addAdj_Y:Scale(52 + 20 + 52)];
@@ -221,18 +230,16 @@
     [self creatCell:VCNSLocalizedBundleString(@"contract_payment_info_row2_title", nil)
               value:[WalletTools checksumAddress:_fromAddress]
                   Y:Scale(52 * 2 + 20 + jsOffset)
-          adjustBtn:NO
- enterSignViewBlock:enterSignViewBlock];
+          adjustBtn:NO];
     
     // 目标地址
     [self creatCell:VCNSLocalizedBundleString(@"contract_payment_info_row3_title", nil)
               value:[WalletTools checksumAddress:_toAddress]
                   Y:Scale(52 * 3 + 20 + jsOffset)
-          adjustBtn:NO
- enterSignViewBlock:enterSignViewBlock];
+          adjustBtn:NO];
 }
 
-- (void)enterPreView:(void(^)(void))enterSignViewBlock
+- (void)enterPreView
 {
     NSMutableDictionary *proParamDict = [NSMutableDictionary dictionary];
     [proParamDict setValueIfNotNil:_toAddress forKey:@"to"];
@@ -243,9 +250,11 @@
     
     WalletDAppSignPreVC *signProVC = [[WalletDAppSignPreVC alloc]init];
     signProVC.dictParam = proParamDict;
+    @weakify(self);
     signProVC.block = ^{
-        if (enterSignViewBlock) {
-            enterSignViewBlock();
+        @strongify(self);
+        if (self.leftBlock) {
+            self.leftBlock();
         }
     };
     UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:signProVC];
@@ -254,7 +263,7 @@
     }];
 }
 
-- (UIView *)creatCell:(NSString *)title value:(NSString *)value Y:(CGFloat)Y adjustBtn:(BOOL)adjustBtn enterSignViewBlock:(void(^)(void))enterSignViewBlock
+- (UIView *)creatCell:(NSString *)title value:(NSString *)value Y:(CGFloat)Y adjustBtn:(BOOL)adjustBtn
 {
     UIView *contentView = [[UIView alloc]initWithFrame:CGRectMake(0, Y, SCREEN_WIDTH, Scale(52))];
     contentView.backgroundColor = UIColor.whiteColor;
@@ -309,12 +318,14 @@
             make.top.bottom.mas_equalTo(0);
             make.left.mas_equalTo(rightLabel.mas_right).offset(Scale(10.0));
         }];
+        @weakify(self);
         btn.block = ^(UIButton *btn) {
+            @strongify(self);
             if (!_needAdjust) {
                 _needAdjust = YES;
                 [_leftView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
                 
-                [self creatLeftView:enterSignViewBlock];
+                [self creatLeftView:self.leftBlock];
             }
         };
         
@@ -403,6 +414,7 @@
 
 - (void)creatRightView:(void(^)(void))signBlock
 {
+    self.rightBlock = signBlock;
     _rightView = [[UIView alloc]init];
     [_scrollView addSubview:_rightView];
     [_rightView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -453,11 +465,11 @@
     @weakify(self);
     _middleBtn.block = ^(UIButton *btn) {
         @strongify(self);
-        [self middleViewBtnClick:signBlock];
+        [self middleViewBtnClick];
     };
 }
 
-- (void)middleViewBtnClick:(void(^)(void))signBlock
+- (void)middleViewBtnClick
 {
     if (_pwTextField.text.length == 0) {
         [WalletAlertShower showAlert:nil
@@ -467,11 +479,13 @@
                           clickBlock:^(NSInteger index) {
                           }];
     }else{
+        @weakify(self);
         [WalletTools checkNetwork:^(BOOL t)
          {
              if (t) {
-                 if (signBlock) {
-                     signBlock();
+                 @strongify(self);
+                 if (self.rightBlock) {
+                     self.rightBlock();
                  }
              }
          }];

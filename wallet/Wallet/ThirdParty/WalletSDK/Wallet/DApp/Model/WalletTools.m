@@ -376,12 +376,7 @@
         isSame = YES;
     }
     if (isSame) {
-        [WalletAlertShower showAlert:nil
-                                 msg:VCNSLocalizedBundleString(@"h5_params_error", nil)
-                               inCtl:[WalletTools getCurrentVC]
-                               items:@[VCNSLocalizedBundleString(@"dialog_yes", nil)]
-                          clickBlock:^(NSInteger index) {
-                          }];
+        
         return NO;
     }
     return YES;

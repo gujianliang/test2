@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,copy) void(^transferBlock)(NSString *txid,NSInteger code);
 
-- (void)signTransfer:(void(^)(NSString *txid,NSInteger code))transferBlock;
+- (void)signTransfer;
 
 @end
 
