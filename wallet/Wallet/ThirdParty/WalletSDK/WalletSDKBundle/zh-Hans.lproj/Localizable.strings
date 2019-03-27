@@ -797,7 +797,7 @@
 
 "contact_buy_failed_not_enough2" = "余额不足，无法购买。当前钱包地址：%@, 余额%@VET，无法支付%@VET\n\n请更换未拥有节点且持币量足够的钱包，再尝试购买。";
 
-"contact_buy_failed_not_enough3" = "您当前钱包余额%@%@，不足以支付%@%@";
+"contact_buy_failed_not_enough3" = "您当前钱包余额 %@ %@，不足以支付 %@ %@";
 
 //<!--公开拍卖 - 更换钱包-->
 "contact_change_wallet_title" = "更换钱包";

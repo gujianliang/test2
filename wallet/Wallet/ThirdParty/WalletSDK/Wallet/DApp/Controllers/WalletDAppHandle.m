@@ -493,10 +493,14 @@ static dispatch_once_t predicate;
     }
     
     if ([*data isKindOfClass:[NSNull class]]) {
-        *data = @"";
+        *data = @"0x";
     }
     
     if ([*value isKindOfClass:[NSNull class]]) {
+        *value = @"0";
+    }
+    
+    if ((*value) == nil) {
         *value = @"0";
     }
     
@@ -547,6 +551,8 @@ static dispatch_once_t predicate;
                 }else{
                     return NO;
                 }
+            }else{ // data.length == 0 ,data 是字符串但是一定要长度大于0
+                return NO;
             }
         }
     }
@@ -574,6 +580,14 @@ static dispatch_once_t predicate;
         if ([self checkNumberOriginBool:*value]) {
             return NO;
         }else{
+            
+            if ([(*value) isKindOfClass:[NSString class]]) {
+                if((*value).length == 0){// value 是字符串，但是是‘’；
+                    
+                    return NO;
+                }
+                
+            }
             *value = [NSString stringWithFormat:@"%@",*value];
             
             if ((*value).length == 0) { //value 可能是nil

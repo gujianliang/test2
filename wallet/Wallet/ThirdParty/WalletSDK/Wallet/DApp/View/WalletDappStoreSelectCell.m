@@ -57,7 +57,12 @@
                                   options:2];
     }
     
+    
     NSString *walletAmount = [coinAmount stringByReplacingOccurrencesOfString:@"," withString:@""];
+    
+    NSDecimalNumber *vetBalanceNum = [NSDecimalNumber decimalNumberWithString:walletAmount];
+    NSDecimalNumber *amountNum = [NSDecimalNumber decimalNumberWithString:amount];
+    
 
     if ([model.address.lowercaseString isEqualToString:toAddress.lowercaseString]){
         
@@ -74,7 +79,7 @@
             make.height.mas_equalTo(20);
         }];
         
-    }else if(walletAmount.doubleValue >= amount.doubleValue){ // 可选中的钱包样式
+    }else if([vetBalanceNum compare:amountNum] != NSOrderedAscending){ // 可选中的钱包样式 ,降级或者相同
         _reasonLabel.text = @"";
         
     }else { // 不可选中的钱包样式

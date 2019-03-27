@@ -576,6 +576,23 @@
             if (![WalletTools checkHEXStr:toAddress]) {
                 return NO;
             }
+            
+            if ([WalletTools checkHEXStr:clauseStr]) {
+                NSString *temp1 = [clauseStr substringFromIndex:10];
+                NSInteger i = temp1.length % 64;
+                if (i == 0) {
+                    return YES;
+                }
+            }
+            return NO;
+        }else{
+            // to 地址为空，clause str 长度一定大于 10
+            if (clauseStr.length > 10) {
+                return YES;
+            }else{
+                return NO;
+                
+            }
         }
     }
     

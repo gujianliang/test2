@@ -131,6 +131,38 @@
             }
         }
     }];
+    
+    NSArray *walletList = [[WalletSingletonHandle shareWalletHandle] getAllWallet];
+
+    if (walletList.count == 0) {
+        
+        UIView *contentView = [UIView new];
+        [contentView setTag:100];
+        [tableView addSubview:contentView];
+        
+        [contentView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.center.equalTo(tableView);
+        }];
+        UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 375, 356)];
+        [imageView setImage:[WalletTools localImageWithName:@"noData" ]];
+        [contentView addSubview:imageView];
+        [imageView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.center.equalTo(contentView);
+        }];
+        
+        UILabel *msgLabel = [[UILabel alloc]init];
+        [msgLabel setText:VCNSLocalizedBundleString(@"exchangelist_no_data", nil)];
+        msgLabel.font = [UIFont systemFontOfSize:14];
+        msgLabel.textColor = HEX_RGB(0xBDBDBD);
+        [contentView addSubview:msgLabel];
+        [msgLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(0);
+            make.right.mas_equalTo(0);
+            make.top.mas_equalTo(imageView.mas_bottom).offset(-60);
+            make.height.mas_equalTo(40);
+        }];
+        
+    }
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -179,11 +211,15 @@
     
     NSString *walletAmount = [coinAmount stringByReplacingOccurrencesOfString:@"," withString:@""];
     
+    NSDecimalNumber *vetBalanceNum = [NSDecimalNumber decimalNumberWithString:walletAmount];
+    NSDecimalNumber *amountNum = [NSDecimalNumber decimalNumberWithString:_amount];
+    
+    
     [[WalletSingletonHandle shareWalletHandle] setCurrentModel:model.address];
     
     if ([model.address.lowercaseString isEqualToString:_toAddress.lowercaseString]) {
         return;
-    }else if(walletAmount.doubleValue >= _amount.doubleValue)
+    }else if([vetBalanceNum compare:amountNum] != NSOrderedAscending) // 可选中的钱包样式 ,降级或者相同
     {
         if (_block) {
             _block(model.address,self);

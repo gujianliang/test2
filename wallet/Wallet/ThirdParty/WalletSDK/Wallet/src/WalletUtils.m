@@ -302,6 +302,7 @@
         [clauseList addObject: [SecureData secureDataWithHexString:parameter.to].data];
     }
     
+#warning value 判断 0x0 ，0000 ，0x000000
     if (parameter.value.length == 0 || parameter.value.integerValue == 0) {
         [clauseList addObject:[NSData data]];
     }else{
@@ -323,6 +324,8 @@
             }
         }
     }
+#warning data 判断
+#warning 特殊逻辑判断
     
     if (parameter.data.length == 0) {
         [clauseList addObject:[NSData data]];
