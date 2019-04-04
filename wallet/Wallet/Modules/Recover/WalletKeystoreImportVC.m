@@ -87,45 +87,38 @@
     hud.mode = MBProgressHUDModeText;
     hud.label.text = NSLocalizedString(@"wait", nil);
 
+    /*
+     Please note that this is just a demo that tell you how to recover a wallet by keystore.
+     We save the wallet keystore and addrss in the Sandbox by the class 'NSUserDefaults'. It is not a safety way.
+     We do not recommend it. You can use some more better way to save it, like as Sqlite、CoreData and so on.
+     In general, we recommend that you use some way of secure encryption.
+     */
     
     /* Create a wallet with your password and keystore. */
     
-    
-    [WalletUtils decryptKeystore:self.keystoreTextView.text.lowercaseString password:self.password.text callback:^(NSString * _Nonnull privateKey, NSError * _Nonnull error) {
-        
-         [hud hideAnimated:YES];
-         
-         if (error == nil) {
-             
-             NSLog(@"privateKey = %@ ",privateKey);
-             
-             /*
-              Please note that this is just a demo that tell you how to recover a wallet by keystore.
-              We save the wallet keystore and addrss in the Sandbox by the class 'NSUserDefaults'. It is not a safety way.
-              We do not recommend it. You can use some more better way to save it, like as Sqlite、CoreData and so on.
-              In general, we recommend that you use some way of secure encryption.
-              */
-             
-#warning address privatekey
-             NSMutableDictionary *walletDict = [[NSMutableDictionary alloc]init];
-             [walletDict setObject:privateKey forKey:@"address"];
-             [walletDict setObject:self.keystoreTextView.text forKey:@"keystore"];
-             [[NSUserDefaults standardUserDefaults]setObject:walletDict forKey:@"currentWallet"];
-             
-             
-             
-             [self.navigationController popToRootViewControllerAnimated:NO];
-             
-             WalletDetailVC *detailVC = [[WalletDetailVC alloc]init];
-             [self.navigationController pushViewController:detailVC animated:YES];
-             
-         }else{
-             MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-             hud.mode = MBProgressHUDModeText;
-             hud.label.text = NSLocalizedString(@"Check_right", nil);
-             [hud hideAnimated:YES afterDelay:3];
-         }
-     }];
+    @weakify(self);
+    [WalletUtils verifyKeystorePassword:self.keystoreTextView.text.lowercaseString password:self.password.text callback:^(BOOL result) {
+        @strongify(self);
+        [hud hideAnimated:YES];
+        if (result) {
+            
+            NSString *address = [WalletUtils getAddressWithKeystore:self.keystoreTextView.text];
+            NSMutableDictionary *walletDict = [[NSMutableDictionary alloc]init];
+            [walletDict setObject:address forKey:@"address"];
+            [walletDict setObject:self.keystoreTextView.text forKey:@"keystore"];
+            [[NSUserDefaults standardUserDefaults]setObject:walletDict forKey:@"currentWallet"];
+                        
+            [self.navigationController popToRootViewControllerAnimated:NO];
+            
+            WalletDetailVC *detailVC = [[WalletDetailVC alloc]init];
+            [self.navigationController pushViewController:detailVC animated:YES];
+        }else{
+            MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+            hud.mode = MBProgressHUDModeText;
+            hud.label.text = NSLocalizedString(@"Check_right", nil);
+            [hud hideAnimated:YES afterDelay:3];
+        }
+    }];
 }
 
 

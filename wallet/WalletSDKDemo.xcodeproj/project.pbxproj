@@ -155,6 +155,7 @@
 		971B3E3321E6000B007845F0 /* WalletRecoverMainVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WalletRecoverMainVC.m; sourceTree = "<group>"; };
 		971B3E3421E6000B007845F0 /* WalletKeystoreImportVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WalletKeystoreImportVC.m; sourceTree = "<group>"; };
 		971B3E3521E6000B007845F0 /* WalletMnemonicImportVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WalletMnemonicImportVC.m; sourceTree = "<group>"; };
+		973B7EF92255AC5D0061CA00 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		9747227220EDE9F800F9EAB3 /* WalletSDKDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WalletSDKDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9747227520EDE9F800F9EAB3 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		9747227620EDE9F800F9EAB3 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -403,6 +404,7 @@
 				9747228320EDE9FA00F9EAB3 /* Info.plist */,
 				4126DEA42240BBCD00850291 /* LaunchScreen.storyboard */,
 				9747228420EDE9FA00F9EAB3 /* main.m */,
+				973B7EF92255AC5D0061CA00 /* PrefixHeader.pch */,
 				4126DE9E2240BB0500850291 /* InfoPlist.strings */,
 				4126DEA12240BB0D00850291 /* Localizable.strings */,
 			);
@@ -1057,6 +1059,8 @@
 					"$(PROJECT_DIR)/wallet",
 					"$(PROJECT_DIR)",
 				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(PROJECT_DIR)/Wallet/PrefixHeader.pch";
 				INFOPLIST_FILE = wallet/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1069,6 +1073,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
+				USER_HEADER_SEARCH_PATHS = "";
 				VALID_ARCHS = "armv7s armv7 arm64e arm64";
 			};
 			name = Debug;
@@ -1086,6 +1091,8 @@
 					"$(PROJECT_DIR)/wallet",
 					"$(PROJECT_DIR)",
 				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(PROJECT_DIR)/Wallet/PrefixHeader.pch";
 				INFOPLIST_FILE = wallet/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1098,6 +1105,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
+				USER_HEADER_SEARCH_PATHS = "";
 				VALID_ARCHS = "armv7s armv7 arm64e arm64";
 			};
 			name = Release;

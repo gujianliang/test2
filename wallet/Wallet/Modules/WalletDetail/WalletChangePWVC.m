@@ -60,50 +60,37 @@
     NSString *keystore = currentWallet[@"keystore"];
     NSString *address = currentWallet[@"address"];
     
-    [WalletUtils decryptKeystore:keystore
-                        password:_oldPWTextField.text
-                        callback:^(NSString * _Nonnull privateKey, NSError * _Nonnull error)
+    
+    [WalletUtils modifyKeystorePassword:_oldPWTextField.text
+                                  newPW:self.nextPWTextField.text
+                           keystoreJson:keystore
+                               callback:^(NSString * _Nonnull newKeystore)
     {
         
         [hud hideAnimated:YES];
-         if (error) {
-             MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-             hud.mode = MBProgressHUDModeText;
-             hud.label.text =  NSLocalizedString(@"modify_password_old_error", nil);
-             [hud hideAnimated:YES afterDelay:1.5];
-             return ;
-         }
-         
-         /* Use the new password to encrypt. */
-         [WalletUtils encryptPrivateKeyWithPassword:self.nextPWTextField.text
-                                         privateKey:privateKey
-                                           callback:^(NSString *json) {
-             [hud hideAnimated:YES];
-                                          
-             if (json.length > 0) {
-                 NSMutableDictionary *currentDict = [NSMutableDictionary dictionary];
-                 [currentDict setObject:address forKey:@"address"];
-                 [currentDict setObject:json forKey:@"keystore"];
-                 
-                 [[NSUserDefaults standardUserDefaults]setObject:currentDict forKey:@"currentWallet"];;
-                 
-                 MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-                 hud.mode = MBProgressHUDModeText;
-                 hud.label.text = NSLocalizedString(@"modify_password_success", nil);
-                 [hud hideAnimated:YES afterDelay:2.5];
-                 
-                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                     [self.navigationController popViewControllerAnimated:YES];
-                 });
-                 
-             }else {
-                 MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-                 hud.mode = MBProgressHUDModeText;
-                 hud.label.text = NSLocalizedString(@"modify_password_failr", nil);
-                 [hud hideAnimated:YES afterDelay:2.5];
-             }
-         }];
-     }];
+        if (newKeystore.length > 0) {
+            NSMutableDictionary *currentDict = [NSMutableDictionary dictionary];
+            [currentDict setObject:address forKey:@"address"];
+            [currentDict setObject:newKeystore forKey:@"keystore"];
+            
+            [[NSUserDefaults standardUserDefaults]setObject:currentDict forKey:@"currentWallet"];;
+            
+            MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+            hud.mode = MBProgressHUDModeText;
+            hud.label.text = NSLocalizedString(@"modify_password_success", nil);
+            [hud hideAnimated:YES afterDelay:2.5];
+            
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [self.navigationController popViewControllerAnimated:YES];
+            });
+            
+        }else {
+            MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+            hud.mode = MBProgressHUDModeText;
+            hud.label.text = NSLocalizedString(@"modify_password_failr", nil);
+            [hud hideAnimated:YES afterDelay:2.5];
+        }
+    }];
 }
 
 
