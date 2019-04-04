@@ -123,7 +123,7 @@
             }else{
                 self.title = nodeName;
                 
-                [WalletUtils setNode:nodeUrl];
+                [WalletUtils setNodeUrl:nodeUrl];
                 
                 WalletNodeDetailVC *detailVC = [[WalletNodeDetailVC alloc]init];
                 [detailVC nodeName:nodeName nodeUrl:nodeUrl];
@@ -161,7 +161,7 @@
     }
     
     
-    [WalletUtils setNode:_blockHost];
+    [WalletUtils setNodeUrl:_blockHost];
     
     self.vthoAmountLabel.text = @"0.00";
     self.vetAmountLabel.text = @"0.00";
@@ -187,10 +187,8 @@
          BigNumber *bigNumberCount = [BigNumber bigNumberWithHexString:amount];
          
          NSString *coinAmount = @"0.00";
-         if (!bigNumberCount.isZero) {
-             coinAmount = [WalletUtils formatToken:bigNumberCount
-                                          decimals:18]; //coin decimals]
-         }
+         coinAmount = [self weiConvertAmount:bigNumberCount
+                                          dicimals:18]; //coin decimals]
          self.vetAmountLabel.text = coinAmount;
                  
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error){
@@ -218,17 +216,13 @@
     
     [httpManager POST:urlString
            parameters:dictParm
-              success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        
+              success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject)
+     {
         NSDictionary *dictResponse = (NSDictionary *)responseObject;
         NSString *amount = dictResponse[@"data"];
         BigNumber *bigNumberCount = [BigNumber bigNumberWithHexString:amount];
-        
-        NSString *coinAmount = @"0.00";
-        if (!bigNumberCount.isZero) {
-            coinAmount = [WalletUtils formatToken:bigNumberCount
-                                     decimals:18];
-        }
+
+        NSString *coinAmount = [self weiConvertAmount:bigNumberCount dicimals:18];
         self.vthoAmountLabel.text = coinAmount;
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -308,6 +302,16 @@
 */
 - (void)touchesBegan:(NSSet*)touches withEvent:(UIEvent *)event{
     [self.view endEditing:YES];
+}
+
+
+- (NSString *)weiConvertAmount:(BigNumber *)wei dicimals:(NSInteger )dicimals
+{
+    NSDecimalNumber *number = [NSDecimalNumber decimalNumberWithString:wei.decimalString];
+    NSDecimalNumber *number1 = [NSDecimalNumber decimalNumberWithString:[NSString stringWithFormat:@"%f",pow(10, dicimals)]];
+    NSDecimalNumber *weiNumber = [number decimalNumberByDividingBy:number1];
+    
+    return weiNumber.stringValue;
 }
 
 @end

@@ -14,7 +14,7 @@
 #import "WalletBlockApi.h"
 #import "WalletTransantionsReceiptApi.h"
 #import "WalletManageModel.h"
-#import "WalletSignatureView.h"
+//#import "WalletSignatureView.h"
 #import "WalletGetSymbolApi.h"
 #import "WalletGetDecimalsApi.h"
 #import "WalletDAppPeersApi.h"
@@ -22,7 +22,7 @@
 #import "WalletDAppPeerModel.h"
 #import "WalletDAppTransferDetailApi.h"
 #import "WalletSingletonHandle.h"
-#import "WalletSignatureView.h"
+//#import "WalletSignatureView.h"
 #import "SocketRocketUtility.h"
 #import "WalletGetStorageApi.h"
 
@@ -350,17 +350,27 @@
                      callbackId:(NSString *)callbackId
                         webView:(WKWebView *)webView
 {
-    NSMutableArray *addressList = [NSMutableArray array];
-    WalletSingletonHandle *single = [WalletSingletonHandle shareWalletHandle];
     
-    for (WalletManageModel *model in [single getAllWallet]) {
-        [addressList addObject:model.address];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(onGetWalletAddress:)]) {
+        
+        [self.delegate onGetWalletAddress:^(NSArray * _Nonnull addressList) {
+
+#warning list 为空
+            
+            [WalletTools callbackWithrequestId:requestId
+                                       webView:webView
+                                          data:addressList
+                                    callbackId:callbackId
+                                          code:OK];
+        }];
+       
+    }else{
+        [WalletTools callbackWithrequestId:requestId
+                                   webView:webView
+                                      data:@""
+                                callbackId:callbackId
+                                      code:ERROR_INITDAPP_ERROR];
     }
-    [WalletTools callbackWithrequestId:requestId
-                              webView:webView
-                                 data:addressList
-                           callbackId:callbackId
-                                 code:OK];
 }
 
 - (void)tickerNextRequestId:(NSString *)requestId
@@ -394,7 +404,7 @@
         return;
     }
     
-    [self showSignView:WalletVETTransferType paramModel:paramModel requestId:requestId webView:webView callbackId:callbackId connex:bConnex];
+//    [self showSignView:WalletVETTransferType paramModel:paramModel requestId:requestId webView:webView callbackId:callbackId connex:bConnex];
 }
 
 //vtho转账
@@ -421,7 +431,7 @@
         return;
     }
     
-    [self showSignView:WalletTokenTransferType paramModel:paramModel requestId:requestId webView:webView callbackId:callbackId connex:bConnex];
+//    [self showSignView:WalletTokenTransferType paramModel:paramModel requestId:requestId webView:webView callbackId:callbackId connex:bConnex];
 }
 
 // contranct 签名
@@ -443,7 +453,7 @@
         return;
     }
     
-    [self showSignView:WalletContranctTransferType paramModel:paramModel requestId:requestId webView:webView callbackId:callbackId connex:bConnex];
+//    [self showSignView:WalletContranctTransferType paramModel:paramModel requestId:requestId webView:webView callbackId:callbackId connex:bConnex];
 }
 
 //- (void)certTransferParamModel:(WalletSignParamModel *)paramModel
@@ -537,43 +547,43 @@
                                  code:ERROR_SERVER_DATA];
 }
 
-//调用签名view
-- (void)showSignView:(WalletTransferType)transferType paramModel:(WalletSignParamModel *)paramModel requestId:(NSString *)requestId webView:(WKWebView *)webView callbackId:(NSString *)callbackId connex:(BOOL)bConnex
-{
-    WalletSignatureView *signatureView = [[WalletSignatureView alloc] initWithFrame:[WalletTools getCurrentVC].view.bounds];
-    signatureView.tag = SignViewTag;
-    signatureView.transferType = transferType;
-    [signatureView updateViewParamModel:paramModel];
-    
-    [[WalletTools getCurrentNavVC].view addSubview:signatureView];
-    
-    signatureView.transferBlock = ^(NSString * _Nonnull txid ,NSInteger code) {
-#if ReleaseVersion
-        NSLog(@"txid = %@",txid);
-#endif
-        if (txid.length != 0) {
-            id data = nil;
-            if (bConnex) {
-                NSMutableDictionary *dictData = [NSMutableDictionary dictionary];
-                [dictData setObject:txid forKey:@"txId"];
-                [dictData setObject:paramModel.fromAddress forKey:@"signer"];
-                
-                data = dictData;
-            }else{
-                data = txid;
-            }
-            [WalletTools callbackWithrequestId:requestId
-                                       webView:webView
-                                          data:data
-                                    callbackId:callbackId
-                                          code:OK];
-        }else{
-            [WalletTools callbackWithrequestId:requestId
-                                       webView:webView
-                                          data:@""
-                                    callbackId:callbackId
-                                          code:code];
-        }
-    };
-}
+////调用签名view
+//- (void)showSignView:(WalletTransferType)transferType paramModel:(WalletSignParamModel *)paramModel requestId:(NSString *)requestId webView:(WKWebView *)webView callbackId:(NSString *)callbackId connex:(BOOL)bConnex
+//{
+//    WalletSignatureView *signatureView = [[WalletSignatureView alloc] initWithFrame:[WalletTools getCurrentVC].view.bounds];
+//    signatureView.tag = SignViewTag;
+//    signatureView.transferType = transferType;
+//    [signatureView updateViewParamModel:paramModel];
+//    
+//    [[WalletTools getCurrentNavVC].view addSubview:signatureView];
+//    
+//    signatureView.transferBlock = ^(NSString * _Nonnull txid ,NSInteger code) {
+//#if ReleaseVersion
+//        NSLog(@"txid = %@",txid);
+//#endif
+//        if (txid.length != 0) {
+//            id data = nil;
+//            if (bConnex) {
+//                NSMutableDictionary *dictData = [NSMutableDictionary dictionary];
+//                [dictData setObject:txid forKey:@"txId"];
+//                [dictData setObject:paramModel.fromAddress forKey:@"signer"];
+//                
+//                data = dictData;
+//            }else{
+//                data = txid;
+//            }
+//            [WalletTools callbackWithrequestId:requestId
+//                                       webView:webView
+//                                          data:data
+//                                    callbackId:callbackId
+//                                          code:OK];
+//        }else{
+//            [WalletTools callbackWithrequestId:requestId
+//                                       webView:webView
+//                                          data:@""
+//                                    callbackId:callbackId
+//                                          code:code];
+//        }
+//    };
+//}
 @end

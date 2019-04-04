@@ -93,7 +93,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 + (void)decryptKeystore:(NSString*)keystoreJson
                password:(NSString*)password
-               callback:(void(^)(WalletAccountModel *account,NSError *error))callback;
+               callback:(void(^)(NSString *privateKey,NSError *error))callback;
 
 
 /**
@@ -101,13 +101,13 @@ NS_ASSUME_NONNULL_BEGIN
  *  Change keystore password
  *
  *  @param password : Wallet password
- *  @param account : WalletAccountModel object
+ *  @param privateKey : privateKey
  *  @param callback : Callback after the end. keystoreJson : Keystore in json format
  *
  */
-+ (void)encryptKeystoreWithPassword:(NSString*)password
-                            account:(WalletAccountModel *)account
-                           callback:(void (^)(NSString *keystoreJson))callback;
++ (void)encryptPrivateKeyWithPassword:(NSString*)password
+                           privateKey:(NSString *)privateKey
+                            callback:(void (^)(NSString *keystoreJson))callback;
 
 /**
  *  @abstract
@@ -116,7 +116,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param nodelUrl : node url
  *
  */
-+ (void)setNode:(NSString *)nodelUrl;
++ (void)setNodeUrl:(NSString *)nodelUrl;
 
 /**
  *  @abstract
@@ -129,17 +129,31 @@ NS_ASSUME_NONNULL_BEGIN
  *  @abstract
  *  Sign message
  *
+ *  @param parameter : Prepare the data to be signed
+ *  @param keystoreJson : Keystore in json format
+ *  @param password : Wallet password
+ *  @param callback : Callback after the end
+ *
+ */
++ (void)signWithParameter:(TransactionParameter *)parameter
+                 keystore:(NSString*)keystoreJson
+                 password:(NSString*)password
+                 callback:(void(^)(NSString *raw))callback;
+
+/**
+ *  @abstract
+ *  Sign message
+ *
  *  @param message : Prepare the data to be signed
  *  @param keystoreJson : Keystore in json format
  *  @param password : Wallet password
  *  @param callback : Callback after the end
  *
  */
-+ (void)sign:(NSData*)message
-    keystore:(NSString*)keystoreJson
-    password:(NSString*)password
-    callback:(void (^)(NSData *signatureData,NSError *error))callback;
-
++ (void)signWithMessage:(NSData *)message
+               keystore:(NSString*)keystoreJson
+               password:(NSString*)password
+               callback:(void (^)(NSData *signatureData,NSError *error))callback;
 /**
  *  @abstract
  *  Sign and send
@@ -149,18 +163,19 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param callback : Callback after the end
  *
  */
-+ (void)sendWithKeystore:(NSString *)keystoreJson
-               parameter:(TransactionParameter *)parameter
-                callback:(void(^)(NSString *txId,NSString *signer,NSInteger status))callback;
++ (void)signAndSendTransfer:(NSString *)keystoreJson
+                  parameter:(TransactionParameter *)parameter
+                   password:(NSString *)password
+                   callback:(void(^)(NSString *txId))callback;
 
 /**
  *  @abstract
- *  Set keystore list to SDK
+ *  Set delegate to SDK
  *
- *  @param keystoreList : Array of keystore json
- *
+ *  @param delegate : delegate object
+ *  reture :YES ,set delegate success;NO ,set delegate fail
  */
-+ (void)initDappWebViewWithKeystore:(NSArray *)keystoreList;
++ (BOOL)initDAppWithDelegate:(id)delegate;
 
 /*! @abstract
  *  Displays a JavaScript text input panel.
@@ -195,23 +210,71 @@ completionHandler:(void (^)(NSString *result))completionHandler;
 
 /**
  *  @abstract
- *  Convert wei to value strings
- *
- *  @param wei : The minimum unit of coin
- *  @param decimals : decimals of coin
+ *  Change Wallet password
+ *  @param oldPassword : old password for wallet.
+ *  @param newPassword : new password for wallet.
+ *  @param keystoreJson : Keystore in json format.
+ *  @param callback : Callback after the end
  *
  */
-+ (NSString*)formatToken:(BigNumber*)wei decimals:(NSUInteger)decimals;
++ (void)modifyKeystorePassword:(NSString *)oldPassword
+                         newPW:(NSString *)newPassword
+                  keystoreJson:(NSString *)keystoreJson
+                      callback:(void (^)(NSString *newKeystore))callback;
 
 /**
  *  @abstract
- *  Convert the number of coin to wei
- *
- *  @param decimals : decimals of coin
- *  @param valueString : the number of coin
+ *  Change Verify keystore
+ *  @param keystoreJson : Keystore in json format.
+ *  @param password : password for wallet.
+ *  @param callback : Callback after the end
  *
  */
-+ (BigNumber*)parseToken:(NSString*)valueString dicimals:(NSUInteger)decimals;
++ (void)verifyKeystorePassword:(NSString *)keystoreJson
+                      password:(NSString *)password
+                      callback:(void (^)(BOOL result))callback;
+
+/**
+ *  @abstract
+ *  Change Get chainTag
+ *  @param callback : Callback after the end
+ *
+ */
++ (void)getChainTag:(void (^)(NSString *chainTag))callback;
+
+/**
+ *  @abstract
+ *  Change Get reference of block
+ *  @param callback : Callback after the end
+ *
+ */
++ (void)getBlockReference:(void (^)(NSString *blockReference))callback;
+/**
+ *  @abstract
+ *  Change Get address from keystore
+ *  @param keystoreJson : Keystore in json format.
+ *
+ */
++ (NSString *)getAddressWithKeystore:(NSString *)keystoreJson;
+
+
+#pragma mark setDelegate
+/**
+ *  @abstract
+ *  Change dapp call transfer function ,app developer implementation
+ *  @param clauses : clause list.
+ *  @param gas : Set maximum gas allowed for call.
+ *  @param callback : Callback after the end
+ *
+ */
+- (void)onTransfer:(NSArray *)clauses gas:(NSString *)gas callback:(void(^)(NSString *txid))callback;
+/**
+ *  @abstract
+ *  Change dapp call get address ,app developer implementation
+ *  @param callback : Callback after the end
+ *
+ */
+- (void)onGetWalletAddress:(void(^)(NSArray *addressList))callback;
 
 NS_ASSUME_NONNULL_END
 

@@ -50,6 +50,7 @@ extern NSString * _Nullable chainName(ChainId chainId);
 @property (nonatomic, strong, nullable) Address *toAddress;
 @property (nonatomic, strong, nonnull) BigNumber *value;
 
+@property (nonatomic, strong, nonnull) NSData *dependsOn;
 
 
 @property (nonatomic, strong, nonnull) NSData *data;

@@ -145,10 +145,13 @@ int data_from_mnemonic(const char *mnemonic, uint8_t *data) {
     }
     n++;
     // check number of words
-    if (n != 12 && n != 18 && n != 24) {
+    if (n != 12 && n != 15 && n != 18 && n != 21 && n != 24) {
         return 0;
     }
     
+    if (n % 3 != 0) {
+        return 0;
+    }
     char current_word[10];
     uint32_t j, k, ki, bi;
     //uint8_t bits[32 + 1];

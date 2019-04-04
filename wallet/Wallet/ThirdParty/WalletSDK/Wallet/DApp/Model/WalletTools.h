@@ -115,6 +115,8 @@
 
 + (NSString *)errorMessageWith:(NSInteger)code;
 
++ (BOOL)isEmpty:(id )input;
+
 @end
 
 

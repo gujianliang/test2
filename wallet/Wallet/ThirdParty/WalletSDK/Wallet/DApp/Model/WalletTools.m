@@ -323,9 +323,6 @@
         }
     }];
     
-    if (code != 1 && code != 500) {
-//        [self jsErrorAlert:message];
-    }
 }
 
 + (NSString *)errorMessageWith:(NSInteger)code
@@ -421,31 +418,6 @@
     return nil;
 }
 
-+ (void)checkParamGasPrice:(NSString *)gasPrice gas:(NSString *)gas amount:(NSString *)amount to:(NSString *)to clauseStr:(NSString *)clauseStr
-{
-    if ([gasPrice isKindOfClass:[NSNull class]]) {
-        gasPrice = DefaultGasPriceCoef;
-    }else if (gasPrice.length == 0) {
-        //默认120，如果js没有返回，就给默认的
-        gasPrice = DefaultGasPriceCoef;
-    }
-    
-    if ([gas isKindOfClass:[NSNull class]]) {
-        gas = nil;
-    }
-    
-    if ([amount isKindOfClass:[NSNull class]]) {
-        amount = @"0";
-    }
-    
-    if ([clauseStr isKindOfClass:[NSNull class]]) {
-        clauseStr = nil;
-    }
-    
-    if ([to isKindOfClass:[NSNull class]]) {
-        to = nil;
-    }
-}
 
 + (BOOL)checkHEXStr:(NSString *)hex
 {
@@ -613,4 +585,26 @@
         return NO;
     }
 }
+
++ (BOOL)isEmpty:(id )input
+{
+    if ([input isKindOfClass:[NSNull class]]) {
+        return YES;
+    }
+    
+    if (input == nil) {
+        return YES;
+    }
+    
+    if ([input isKindOfClass:[NSString class]] ) {
+        NSString *tempInput = (NSString *)input;
+        
+        if ([tempInput length] == 0) {
+            return YES;
+        }
+    }
+    
+    return NO;
+}
+
 @end

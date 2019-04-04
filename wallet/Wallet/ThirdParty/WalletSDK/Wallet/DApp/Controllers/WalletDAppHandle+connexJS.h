@@ -8,7 +8,6 @@
 
 #import "WalletDAppHandle.h"
 #import <WebKit/WebKit.h>
-#import "WalletSignatureView.h"
 #import "WalletDAppHead.h"
 
 NS_ASSUME_NONNULL_BEGIN

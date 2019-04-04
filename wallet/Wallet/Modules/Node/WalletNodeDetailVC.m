@@ -79,7 +79,7 @@
         [[NSUserDefaults standardUserDefaults] setObject:dict forKey:@"currentNode"];
         [[NSUserDefaults standardUserDefaults] synchronize];
         
-        [WalletUtils setNode:Test_Node];
+        [WalletUtils setNodeUrl:Test_Node];
         
         [self.navigationController popViewControllerAnimated:YES];
         

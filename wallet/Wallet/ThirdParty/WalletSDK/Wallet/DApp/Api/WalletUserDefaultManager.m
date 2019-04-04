@@ -5,9 +5,9 @@
 //  Created by 曾新 on 18/4/11.
 //  Copyright © VECHAIN. All rights reserved.
 //
-
 #import "WalletUserDefaultManager.h"
 
+#define Main_Node      @"https://vethor-node.digonchain.com"
 
 @implementation WalletUserDefaultManager
 
@@ -17,7 +17,7 @@
     // 如果没有设置block host ，默认是正式环境
     NSString *blockUrl = [[NSUserDefaults standardUserDefaults] objectForKey:@"wallerSDK_BlockUrl"];
     if (blockUrl.length == 0 || blockUrl == nil) {
-        return blockChain_host_release;
+        return Main_Node;
     }else{
         return [[NSUserDefaults standardUserDefaults] objectForKey:@"wallerSDK_BlockUrl"];
     }

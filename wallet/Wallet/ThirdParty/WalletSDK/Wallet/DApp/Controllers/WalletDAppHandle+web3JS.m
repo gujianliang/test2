@@ -15,7 +15,6 @@
 #import "WalletBlockApi.h"
 #import "WalletTransantionsReceiptApi.h"
 #import "WalletManageModel.h"
-#import "WalletSignatureView.h"
 #import "WalletGetSymbolApi.h"
 #import "WalletGetDecimalsApi.h"
 #import "WalletSingletonHandle.h"

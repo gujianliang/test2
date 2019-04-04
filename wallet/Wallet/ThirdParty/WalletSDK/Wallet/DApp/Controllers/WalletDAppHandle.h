@@ -10,11 +10,17 @@
 
 #import <UIKit/UIKit.h>
 
+//#import "WalletDAppHandle+transfer.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface WalletDAppHandle : NSObject
 
 + (instancetype)shareWalletHandle;
+
+@property (nonatomic, strong)id delegate;
+@property (nonatomic, copy)NSString *keystore;
+@property (nonatomic, assign)BOOL isSend;
+@property (nonatomic, copy)NSString *txId;
 
 -(void)initWithWalletDict:(NSMutableArray *)walletList;
 

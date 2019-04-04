@@ -335,14 +335,6 @@ static NSData *NullData = nil;
         [result addObject:NullData];
     }
 
-//    if (self.gasPrice) {
-//        NSData *gasPriceData = stripDataZeros([SecureData hexStringToData:[self.gasPrice hexString]]);
-//        if (gasPriceData.length > 32) { return nil; }
-//        [result addObject:gasPriceData];
-//    } else {
-//        [result addObject:NullData];
-//    }
-
     if (self.gasLimit) {
         NSData *gasLimitData = stripDataZeros([SecureData hexStringToData:[self.gasLimit hexString]]);
         if (gasLimitData.length > 32) { return nil; }
@@ -350,9 +342,8 @@ static NSData *NullData = nil;
     } else {
         [result addObject:NullData];
     }
-
-    NSData *DependsOn = [NSData data];
-    [result addObject:DependsOn];
+    
+    [result addObject:self.dependsOn];
 
     {
         NSData *nonceData = stripDataZeros(convertIntegerToData(self.nonce));

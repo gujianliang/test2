@@ -92,18 +92,6 @@
 #undef HEX_COLOR
 #define HEX_COLOR(h)  [UIColor colorWithRGBHex:(h)]
 
-//基础钱包功能API(Explorer服务)
-#define  explorer_host_test         @"https://vethor-explorer-test.vechaindev.com/api"      //测试环境
-#define  explorer_host_dev          @"https://vethor-explorer-dev.vechaindev.com/api"       //开发环境
-#define  explorer_host_staging      @"https://vethor-explorer-staging.vechaindev.com/api"   //Staging环境
-#define  explorer_host_release      @"https://vethor-explorer.vechain.com/api"              //正式环境
-
-
-//区块链节点地址
-#define  blockChain_host_test       @"https://vethor-node-test.vechaindev.com"              //测试环境
-#define  blockChain_host_dev        @"https://vethor-node-dev.vechaindev.com"               //开发环境
-#define  blockChain_host_staging    @"https://vethor-node-staging.vechaindev.com"           //Staging环境
-#define  blockChain_host_release    @"https://vethor-node.vechain.com"                      //正式环境
 
 
 // 配置调试log是否打印

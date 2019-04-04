@@ -8,7 +8,6 @@
 
 #import "WalletDAppHandle.h"
 #import <WebKit/WebKit.h>
-#import "WalletSignatureView.h"
 #import "WalletDAppHead.h"
 
 NS_ASSUME_NONNULL_BEGIN
@@ -27,7 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 //获得chaintag
 - (void)getChainTag:(NSString *)requestId
-  completionHandler:(void (^)(NSString * __nullable result))completionHandler;
+           callback:(void (^)(NSString * __nullable result))callback;
 
 @end
 

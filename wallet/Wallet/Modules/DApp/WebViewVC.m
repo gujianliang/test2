@@ -61,7 +61,7 @@
     }
     
     // intput wallet list detail to sdk，
-    [WalletUtils initDappWebViewWithKeystore:walletList];
+    [WalletUtils initDAppWithDelegate:self];
 }
 
 
@@ -123,10 +123,89 @@
     }
 }
 
+- (void)onTransfer:(NSArray *)clauses gas:(NSString *)gas callback:(void(^)(NSString *txid))callback
+{
+    
+    NSDictionary *currentWalletDict = [[NSUserDefaults standardUserDefaults]objectForKey:@"currentWallet"];
+    
+    NSMutableArray *walletList = [NSMutableArray array];
+    if (currentWalletDict) {
+        [walletList addObject:currentWalletDict];
+    }
+    
+    NSString *keystore = currentWalletDict[@"keystore"];
+
+    
+    NSMutableData* randomData = [[NSMutableData alloc]initWithCapacity:8];
+    int result = SecRandomCopyBytes(kSecRandomDefault, randomData.length, randomData.mutableBytes);
+    if (result != 0) {
+        return ;
+    }
+    
+    TransactionParameter *paramters = [[TransactionParameter alloc]init];
+
+    paramters.noce = [BigNumber bigNumberWithData:randomData].hexString;
+    
+    paramters.gas = [NSString stringWithFormat:@"%@",gas];  //Set maximum gas allowed for call,
+    
+    paramters.clauses = clauses;
+    
+    [WalletUtils getChainTag:^(NSString * _Nonnull chainTag) {
+        NSLog(@"chainTag == %@",chainTag);
+        paramters.chainTag = chainTag;
+        
+        [WalletUtils getBlockReference:^(NSString * _Nonnull blockReference) {
+            paramters.blockRef = blockReference;
+            
+            [paramters checkParam:^(NSString * _Nonnull error, BOOL result)
+             {
+                 if (!result) {
+                     NSLog(@"error == %@",error);
+                 }else{
+                     
+                     [WalletUtils signAndSendTransfer:keystore
+                                            parameter:paramters
+                                             password:@"12345678Aa"
+                                             callback:^(NSString *txId)
+                      {
+                          NSLog(@"\n txId: %@", txId);
+                          
+                          // txid callback to webview
+                          if (callback) {
+                              callback(txId);
+                          }
+                      }];
+                 }
+             }];
+        }];
+    }];
+}
+
+
+- (BigNumber *)amountConvertWei:(NSString *)amount dicimals:(NSInteger )dicimals
+{
+    NSDecimalNumber *number = [NSDecimalNumber decimalNumberWithString:amount];
+    NSDecimalNumber *number1 = [NSDecimalNumber decimalNumberWithString:[NSString stringWithFormat:@"%f",pow(10, dicimals)]];
+    NSDecimalNumber *weiNumber = [number decimalNumberByMultiplyingBy:number1];
+    
+    return [BigNumber bigNumberWithNumber:weiNumber];
+}
+
+- (void)onGetWalletAddress:(void(^)(NSArray *addressList))callback
+{
+    //get the wallet address from local database or file cache
+    
+    NSDictionary *currentWallet = [[NSUserDefaults standardUserDefaults]objectForKey:@"currentWallet"];
+    
+    NSString *address = [WalletUtils getAddressWithKeystore:currentWallet[@"keystore"]];
+    
+    //callback to webview
+    callback(@[address]);
+}
 
 /**
-* You must implement this method to free memory, otherwise there may be a memory overflow or leak.
-*/
+ * You must implement this method to free memory, otherwise there may be a memory overflow or leak.
+ */
 - (void)dealloc{
     [WalletUtils deallocDappSingletion];
 }
