@@ -15,26 +15,32 @@
 {
     for (ClauseModel * clauseModel in parameterModel.clauses) {
         
-        if (![self checkTo:clauseModel.to]) {
+        NSString *to = clauseModel.to;
+        if (![self checkTo:&to]) {
             if (callback) {
                 callback(@"to inValid",NO);
             }
             return ;
         }
+        clauseModel.to = to;
         
-        if (![self checkValue:clauseModel.value]) {
+        NSString *value = clauseModel.value;
+        if (![self checkValue:&value]) {
             if (callback) {
                 callback(@"value inValid",NO);
             }
             return ;
         }
+        clauseModel.value = value;
         
-        if (![self checkData:clauseModel.data]) {
+        NSString *data = clauseModel.data;
+        if (![self checkData:&data]) {
             if (callback) {
                 callback(@"data inValid",NO);
             }
             return ;
         }
+        clauseModel.data = data;
         
         if (![self isRightClause:clauseModel]) {
             if (callback) {
@@ -159,11 +165,14 @@
 
 + (BOOL)checkExpiration:(NSString **)expiration
 {
-    if ((*expiration).length == 0) {
-        *expiration = @"720";
+    if (![WalletTools checkDecimalStr:(*expiration)]) {
         return NO;
+    }else{
+        if ((*expiration).integerValue == 0) {
+            *expiration = @"720";
+            return YES;
+        }
     }
-    
     return YES;
 }
 
@@ -184,9 +193,8 @@
     }else{ // to 有值
         if (![WalletTools isEmpty:clauseModel.data]) {
             
-            
-            if ([clauseModel.data isEqualToString:@"0x"]) { //0x ok
-                return YES;
+            if ([clauseModel.data isEqualToString:@"0x"]) { //0x， 是null 的情况
+                return NO;
             }
             
             // 被64 整除
@@ -211,17 +219,16 @@
     return YES;
 }
 
-+ (BOOL)checkTo:(NSString *)to
++ (BOOL)checkTo:(NSString **)to
 {
-    if ([WalletTools isEmpty:to]) {
-        to = @"";
+    if ([WalletTools isEmpty:*to]) {
+        *to = @"";
         return YES;
     }
     
-    
-    if ([to isKindOfClass:[NSString class]]) {
+    if ([*to isKindOfClass:[NSString class]]) {
         
-        if (![WalletTools errorAddressAlert:to]) { //校验地址
+        if (![WalletTools errorAddressAlert:*to]) { //校验地址
             return NO;
         }
     }else{
@@ -230,25 +237,25 @@
     return YES;
 }
 
-+ (BOOL)checkValue:(NSString *)value
++ (BOOL)checkValue:(NSString **)value
 {
-    if ([WalletTools isEmpty:value]) {
-        value = @"0";
+    if ([WalletTools isEmpty:*value]) {
+        *value = @"0";
         return YES;
     }
     // value 可以是string 或者 number
-    if ([value isKindOfClass:[NSString class]] || [value isKindOfClass:[NSNumber class]]) {
+    if ([*value isKindOfClass:[NSString class]] || [*value isKindOfClass:[NSNumber class]]) {
         
         //有可能是bool 值
-        if ([self checkNumberOriginBool:value]) {
+        if ([self checkNumberOriginBool:*value]) {
             return NO;
         }
         
-        value = [NSString stringWithFormat:@"%@",value];
-        if ([WalletTools checkDecimalStr:value]) {//是10进制
+        *value = [NSString stringWithFormat:@"%@",*value];
+        if ([WalletTools checkDecimalStr:*value]) {//是10进制
             return YES;
-        }else if ([WalletTools checkHEXStr:value]){// 16进制
-            value = [BigNumber bigNumberWithHexString:value].decimalString;
+        }else if ([WalletTools checkHEXStr:*value]){// 16进制
+            *value = [BigNumber bigNumberWithHexString:*value].decimalString;
             return YES;
         }else{ //既不是10进制，也不是 16进制
             return NO;
@@ -260,24 +267,25 @@
     return YES;
 }
 
-+ (BOOL)checkData:(NSString *)data
++ (BOOL)checkData:(NSString **)data
 {
-    if ([WalletTools isEmpty:data]) {
-        data = @"";
+    if ([WalletTools isEmpty:*data]) {
+        *data = @"";
         return YES;
     }
     
-    if ([data isKindOfClass:[NSString class]] ) {
-        if ([WalletTools checkHEXStr:data]) {
+    if ([*data isKindOfClass:[NSString class]] ) {
+        if ([WalletTools checkHEXStr:*data]) {
             
-            if ((data).length == 0) {
+            if ((*data).length == 0) {
                 return YES; // 长度可以是0
-            }else if ((data).length >= 10) { //长度大于10 ok
-                return YES;
-            }else if ([data isEqualToString:@"0x"]) { //0x, ok
+            }else if ((*data).length >= 10) { //长度大于10 ok
                 return YES;
             }else { //长度 1 - 9
                 
+                if ([*data isEqualToString:@"0x"]) { //0x, ok
+                    return YES;
+                }
                 return NO;
             }
             

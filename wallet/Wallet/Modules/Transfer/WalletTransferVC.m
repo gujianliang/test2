@@ -110,7 +110,7 @@
     [clauseList addObject:clauseModel];
     paramters.clauses = clauseList;
     
-    paramters.expiration = @"720";
+    paramters.expiration = @"";
     paramters.gasPriceCoef = @"0";
     
     [WalletUtils getChainTag:^(NSString * _Nonnull chainTag) {
@@ -119,8 +119,6 @@
         
         [WalletUtils getBlockReference:^(NSString * _Nonnull blockReference) {
             paramters.blockRef = blockReference;
-            
-            
             
             [paramters checkParam:^(NSString * _Nonnull error, BOOL result)
              {
@@ -154,6 +152,7 @@
     }
     
     NSMutableData* randomData = [[NSMutableData alloc]initWithCapacity:8];
+    randomData.length = 8;
     int result = SecRandomCopyBytes(kSecRandomDefault, randomData.length, randomData.mutableBytes);
     if (result != 0) {
         return ;
@@ -236,6 +235,7 @@
     paramters.gas = @"60000"; //Set maximum gas allowed for call,
     
     NSMutableData* randomData = [[NSMutableData alloc]initWithCapacity:8];
+    randomData.length = 8;
     int result = SecRandomCopyBytes(kSecRandomDefault, randomData.length, randomData.mutableBytes);
     if (result != 0) {
         return ;
