@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -21,6 +21,7 @@
 		4126DECC2240DBC600850291 /* WalletTransferVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4126DECE2240DBC600850291 /* WalletTransferVC.xib */; };
 		4126DED42240E28000850291 /* WalletCreateVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4126DED62240E28000850291 /* WalletCreateVC.xib */; };
 		41A5B19E2227EC210025AA1C /* WalletAddVthoNodeVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41A5B19D2227EC210025AA1C /* WalletAddVthoNodeVC.xib */; };
+		529D316924A818FF6A0C091F /* Pods_WalletSDKDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5242752BBF7641B53D096BC /* Pods_WalletSDKDemo.framework */; };
 		971812222227945B008F9639 /* WalletNodeDetailVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9718121D2227945B008F9639 /* WalletNodeDetailVC.xib */; };
 		971812232227945B008F9639 /* WalletNodeDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9718121E2227945B008F9639 /* WalletNodeDetailVC.m */; };
 		971B3E3621E6000B007845F0 /* WalletChangePWVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 971B3E1B21E6000B007845F0 /* WalletChangePWVC.m */; };
@@ -111,6 +112,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2C4951FECCA546601CC40CB5 /* Pods-WalletSDKDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WalletSDKDemo.release.xcconfig"; path = "Target Support Files/Pods-WalletSDKDemo/Pods-WalletSDKDemo.release.xcconfig"; sourceTree = "<group>"; };
 		4126DE9D2240BB0500850291 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		4126DEA02240BB0D00850291 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		4126DEA22240BB3000850291 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
@@ -246,6 +248,8 @@
 		9793CE4E22320ACD00E26D61 /* AFNetworkReachabilityManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFNetworkReachabilityManager.m; sourceTree = "<group>"; };
 		9793CE4F22320ACD00E26D61 /* AFSecurityPolicy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFSecurityPolicy.m; sourceTree = "<group>"; };
 		9793CE5022320ACD00E26D61 /* AFHTTPSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPSessionManager.h; sourceTree = "<group>"; };
+		A5242752BBF7641B53D096BC /* Pods_WalletSDKDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WalletSDKDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EF7DF18F8233A45C9A4727A1 /* Pods-WalletSDKDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WalletSDKDemo.debug.xcconfig"; path = "Target Support Files/Pods-WalletSDKDemo/Pods-WalletSDKDemo.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -254,6 +258,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4126DE79223F50CD00850291 /* WalletSDK.framework in Frameworks */,
+				529D316924A818FF6A0C091F /* Pods_WalletSDKDemo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -375,6 +380,7 @@
 				9747227320EDE9F800F9EAB3 /* Products */,
 				975DAE27212159340094D6F8 /* Frameworks */,
 				9781275D2227DA1800BDCC5F /* Recovered References */,
+				FF78A34FBE0E536F95EB99B4 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -493,6 +499,7 @@
 			isa = PBXGroup;
 			children = (
 				9757474F220054D90046C8A0 /* walletSDK.framework */,
+				A5242752BBF7641B53D096BC /* Pods_WalletSDKDemo.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -574,6 +581,15 @@
 			path = AFNetworking;
 			sourceTree = "<group>";
 		};
+		FF78A34FBE0E536F95EB99B4 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				EF7DF18F8233A45C9A4727A1 /* Pods-WalletSDKDemo.debug.xcconfig */,
+				2C4951FECCA546601CC40CB5 /* Pods-WalletSDKDemo.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -581,9 +597,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9747229E20EDE9FA00F9EAB3 /* Build configuration list for PBXNativeTarget "WalletSDKDemo" */;
 			buildPhases = (
+				B5E2827EB1C4D80A4BD7BB62 /* [CP] Check Pods Manifest.lock */,
 				9747226E20EDE9F800F9EAB3 /* Sources */,
 				9747226F20EDE9F800F9EAB3 /* Frameworks */,
 				9747227020EDE9F800F9EAB3 /* Resources */,
+				184ED5874D5FF08A7DB18662 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -742,6 +760,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		184ED5874D5FF08A7DB18662 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-WalletSDKDemo/Pods-WalletSDKDemo-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-WalletSDKDemo/Pods-WalletSDKDemo-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-WalletSDKDemo/Pods-WalletSDKDemo-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B5E2827EB1C4D80A4BD7BB62 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-WalletSDKDemo-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		9747226E20EDE9F800F9EAB3 /* Sources */ = {
@@ -1048,6 +1108,7 @@
 		};
 		9747229F20EDE9FA00F9EAB3 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = EF7DF18F8233A45C9A4727A1 /* Pods-WalletSDKDemo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -1067,11 +1128,12 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				ONLY_ACTIVE_ARCH = NO;
-				OTHER_LDFLAGS = "-ObjC";
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.vechain.walletSDKDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "";
 				VALID_ARCHS = "armv7s armv7 arm64e arm64";
@@ -1080,6 +1142,7 @@
 		};
 		974722A020EDE9FA00F9EAB3 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2C4951FECCA546601CC40CB5 /* Pods-WalletSDKDemo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -1099,11 +1162,12 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				ONLY_ACTIVE_ARCH = NO;
-				OTHER_LDFLAGS = "-ObjC";
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.vechain.walletSDKDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "";
 				VALID_ARCHS = "armv7s armv7 arm64e arm64";
