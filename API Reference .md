@@ -12,7 +12,7 @@
 
 ## Create wallet with mnemonic words   
 >
->    @param mnemonicList :mnemonic Words
+>    @param mnemonicList :mnemonic Words   
 >    @param password :Wallet password    
 >    @param callback : Callback after the end；The attributes of a class has mnemonicPhras , address, privateKey and keystore    
 > 
