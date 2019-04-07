@@ -5,7 +5,7 @@
 > 
 
 ```obj-c
-+ (void)creatWalletWithPassword:(NSString *)password
++ (void)creatWalletWithPassword:(NSString *)password  
                        callback:(void(^)(WalletAccountModel *account,NSError *error))callback;
 
 ```
@@ -46,7 +46,7 @@
 
 ##  Recover address
 >
->  @param message : Data before signature
+>  @param message : Data before signature  
 >  @param signatureData : Data after signature  
 >  @return  address  
 > 
@@ -129,10 +129,10 @@
 
 ##   Sign transfer message
 >
->  @param parameter: signature parameters   
->  @param keystoreJson: Keystore in json format   
->   @param password :  Wallet password   
->  @param callback: Callback after the end. raw: txid and signature
+>  @param parameter: signature parameters     
+>  @param keystoreJson: Keystore in json format     
+>   @param password :  Wallet password     
+>  @param callback: Callback after the end. raw: txid and signature  
 >
 >
 ```obj-c
@@ -198,11 +198,11 @@
 + (void)deallocDappSingletion;
 ```
 
- ## Change Wallet password
->  @param oldPassword : Old password
->  @param newPassword : New password
->  @param keystoreJson : Keystore in json format   
->  @param callback : Callback after the end. newKeystore: new keystore 
+ ## Change Wallet password  
+>  @param oldPassword : Old password  
+>  @param newPassword : New password   
+>  @param keystoreJson : Keystore in json format     
+>  @param callback : Callback after the end. newKeystore: new keystore   
  >
  >
  ```obj-c
@@ -212,10 +212,10 @@
                       callback:(void (^)(NSString *newKeystore))callback;
 ```
 
- ## Verify the keystore with a password
- >  @param password : Wallet password
- >  @param keystoreJson : Keystore in json format  
- >  @param callback : Callback after the end. 
+ ## Verify the keystore with a password   
+ >  @param password : Wallet password  
+ >  @param keystoreJson : Keystore in json format    
+ >  @param callback : Callback after the end.   
 
  ```obj-c
 + (void)verifyKeystorePassword:(NSString *)keystoreJson
@@ -230,16 +230,16 @@
  ```obj-c
 + (void)getChainTag:(void (^)(NSString *chainTag))callback;
 ```
- ## Get reference of block
- >  @param callback : Callback after the end. 
+ ## Get reference of block   
+ >  @param callback : Callback after the end.    
  >
  >
  ```obj-c
 + (void)getBlockReference:(void (^)(NSString *blockReference))callback;
 ```
- ##  Get address from keystore
- >  @param keystoreJson : Keystore in json format.
- >  retuen : address
+ ##  Get address from keystore   
+ >  @param keystoreJson : Keystore in json format.   
+ >  retuen : address   
  >
  >
  ```obj-c
@@ -247,10 +247,10 @@
 ```
 
 
- ##  Dapp call transfer function ,app developer implementation
- >  @param clauses : clause list
- >  @param gas :  Set maximum gas allowed for call
- >  @param callback : Callback after the end. txid:Transaction identifier
+ ##  Dapp call transfer function ,app developer implementation   
+ >  @param clauses : clause list   
+ >  @param gas :  Set maximum gas allowed for call   
+ >  @param callback : Callback after the end. txid:Transaction identifier   
  >
  >
  ```obj-c
@@ -260,8 +260,8 @@
 
 
 
- ##  Dapp call get address ,app developer implementation
- >  @param callback : Callback after the end. addressList :address list
+ ##  Dapp call get address ,app developer implementation   
+ >  @param callback : Callback after the end. addressList :address list   
  >
  >
  ```obj-c
