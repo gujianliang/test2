@@ -114,10 +114,10 @@
 
 ##   Sign and send
 >
->  @param parameter: signature parameters   
+>  @param parameter: Transaction parameters   
 >  @param keystoreJson: Keystore in json format   
->   @param password :  Wallet password   
->  @param callback: Callback after the end. txId: Transaction identifier ; signer:  signer address   
+>  @param password :  Wallet password   
+>  @param callback: Callback after the end. txId: Transaction identifier
 >
 >
 ```obj-c
@@ -127,9 +127,9 @@
                    callback:(void(^)(NSString *txId))callback;
 ```
 
-##   Sign transfer message
+##   Signed transaction parameters
 >
->  @param parameter: signature parameters     
+>  @param parameter: Transaction parameters     
 >  @param keystoreJson: Keystore in json format     
 >   @param password :  Wallet password     
 >  @param callback: Callback after the end. raw: txid and signature  
@@ -222,7 +222,7 @@
                       password:(NSString *)password
                       callback:(void (^)(BOOL result))callback;
 ```
- ##  Get chainTag
+ ##  Get chainTag of block chain 
  >  
  >  @param callback : Callback after the end. 
  >
@@ -230,7 +230,7 @@
  ```obj-c
 + (void)getChainTag:(void (^)(NSString *chainTag))callback;
 ```
- ## Get reference of block   
+ ## Get reference of block chain   
  >  @param callback : Callback after the end.    
  >
  >
