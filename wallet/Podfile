@@ -4,8 +4,8 @@ use_frameworks!
 target 'WalletSDKDemo' do
     
 #  pod 'PromiseKit', '~> 1.7.4'
-  pod 'ReactiveObjC', '~> 3.0.0’
-  
-  pod 'PromiseKit', '~> 4.0'
+#  pod 'ReactiveObjC', '~> 3.0.0’
+
+  pod 'PromiseKit', '~> 6.8'
 end
 

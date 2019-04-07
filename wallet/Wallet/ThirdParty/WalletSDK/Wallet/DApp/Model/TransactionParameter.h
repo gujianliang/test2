@@ -2,12 +2,12 @@
 //  TransactionParameter.h
 //  WalletSDK
 //
-//  Created by 曾新 on 2019/2/27.
-//  Copyright © 2019年 VeChain. All rights reserved.
+//  Created by 曾新 on 2019/4/7.
+//  Copyright © 2019年 Ethers. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-
+#import "YYModel.h"
+#import <PromiseKit/PromiseKit.h>
 NS_ASSUME_NONNULL_BEGIN
 
 @interface TransactionParameter : NSObject
@@ -31,7 +31,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy)NSArray<NSData *> *reserveds;
 
 
-- (void)checkParam:(void(^)(NSString *error,BOOL result))block; //check param invild
+- (void)checkParameter:(void(^)(NSString *error,BOOL result))block; //check param invild
+
+- (AnyPromise *)getChainTag;
+- (AnyPromise *)getBlockRef;
 
 @end
 
@@ -41,5 +44,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy)NSString *value; //The second argument of the clause ，Cost vet；If you don’t spend vet, value = [NSData data]
 @property (nonatomic, copy)NSString *data;  //The third argument of the clause ，If it is VET transfer, data = [NSData data]；If it is a contract, data is the signature parameter.
 @end
+
 
 NS_ASSUME_NONNULL_END

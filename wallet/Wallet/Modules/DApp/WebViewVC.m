@@ -157,7 +157,7 @@
         [WalletUtils getBlockReference:^(NSString * _Nonnull blockReference) {
             paramters.blockRef = blockReference;
             
-            [paramters checkParam:^(NSString * _Nonnull error, BOOL result)
+            [paramters checkParameter:^(NSString * _Nonnull error, BOOL result)
              {
                  if (!result) {
                      NSLog(@"error == %@",error);

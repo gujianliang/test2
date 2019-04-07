@@ -38,6 +38,11 @@
 		9747228520EDE9FA00F9EAB3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9747228420EDE9FA00F9EAB3 /* main.m */; };
 		9747228F20EDE9FA00F9EAB3 /* walletTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9747228E20EDE9FA00F9EAB3 /* walletTests.m */; };
 		9747229A20EDE9FA00F9EAB3 /* walletUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9747229920EDE9FA00F9EAB3 /* walletUITests.m */; };
+		974EA4DA2259F90A009C021B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 974EA4D92259F909009C021B /* UIKit.framework */; };
+		974EA4DC2259F910009C021B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 974EA4DB2259F910009C021B /* CoreGraphics.framework */; };
+		974EA5CF225A22E5009C021B /* PromiseKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 974EA5CE225A22E5009C021B /* PromiseKit.framework */; };
+		974EA5F5225A35B6009C021B /* NSObject+YYModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 974EA5EF225A35B6009C021B /* NSObject+YYModel.m */; };
+		974EA5F6225A35B6009C021B /* YYClassInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 974EA5F0225A35B6009C021B /* YYClassInfo.m */; };
 		9754E3AD222F6A390054439C /* NSLayoutConstraint+MASDebugAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 9754E395222F6A390054439C /* NSLayoutConstraint+MASDebugAdditions.m */; };
 		9754E3AE222F6A390054439C /* ViewController+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 9754E39E222F6A390054439C /* ViewController+MASAdditions.m */; };
 		9754E3AF222F6A390054439C /* MASCompositeConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 9754E3A2222F6A390054439C /* MASCompositeConstraint.m */; };
@@ -172,6 +177,14 @@
 		9747229520EDE9FA00F9EAB3 /* WalletSDKDemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WalletSDKDemoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9747229920EDE9FA00F9EAB3 /* walletUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = walletUITests.m; sourceTree = "<group>"; };
 		9747229B20EDE9FA00F9EAB3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		974EA4D92259F909009C021B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		974EA4DB2259F910009C021B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		974EA5CE225A22E5009C021B /* PromiseKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = PromiseKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		974EA5ED225A35B6009C021B /* YYClassInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYClassInfo.h; sourceTree = "<group>"; };
+		974EA5EE225A35B6009C021B /* YYModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYModel.h; sourceTree = "<group>"; };
+		974EA5EF225A35B6009C021B /* NSObject+YYModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+YYModel.m"; sourceTree = "<group>"; };
+		974EA5F0225A35B6009C021B /* YYClassInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYClassInfo.m; sourceTree = "<group>"; };
+		974EA5F1225A35B6009C021B /* NSObject+YYModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+YYModel.h"; sourceTree = "<group>"; };
 		9754E394222F6A390054439C /* MASCompositeConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASCompositeConstraint.h; sourceTree = "<group>"; };
 		9754E395222F6A390054439C /* NSLayoutConstraint+MASDebugAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSLayoutConstraint+MASDebugAdditions.m"; sourceTree = "<group>"; };
 		9754E396222F6A390054439C /* MASConstraint+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MASConstraint+Private.h"; sourceTree = "<group>"; };
@@ -257,6 +270,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				974EA5CF225A22E5009C021B /* PromiseKit.framework in Frameworks */,
+				974EA4DC2259F910009C021B /* CoreGraphics.framework in Frameworks */,
+				974EA4DA2259F90A009C021B /* UIKit.framework in Frameworks */,
 				4126DE79223F50CD00850291 /* WalletSDK.framework in Frameworks */,
 				529D316924A818FF6A0C091F /* Pods_WalletSDKDemo.framework in Frameworks */,
 			);
@@ -362,6 +378,7 @@
 		971B3E4621E60044007845F0 /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				974EA5EC225A35B6009C021B /* YYModel */,
 				9793CE2922320ACD00E26D61 /* AFNetworking */,
 				9754E3DA222F6ADA0054439C /* HUD */,
 				9754E3D1222F6A5F0054439C /* SocketRocket */,
@@ -435,6 +452,18 @@
 			path = WalletUITests;
 			sourceTree = "<group>";
 		};
+		974EA5EC225A35B6009C021B /* YYModel */ = {
+			isa = PBXGroup;
+			children = (
+				974EA5ED225A35B6009C021B /* YYClassInfo.h */,
+				974EA5EE225A35B6009C021B /* YYModel.h */,
+				974EA5EF225A35B6009C021B /* NSObject+YYModel.m */,
+				974EA5F0225A35B6009C021B /* YYClassInfo.m */,
+				974EA5F1225A35B6009C021B /* NSObject+YYModel.h */,
+			);
+			path = YYModel;
+			sourceTree = "<group>";
+		};
 		9754E393222F6A390054439C /* Masonry */ = {
 			isa = PBXGroup;
 			children = (
@@ -498,6 +527,9 @@
 		975DAE27212159340094D6F8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				974EA5CE225A22E5009C021B /* PromiseKit.framework */,
+				974EA4DB2259F910009C021B /* CoreGraphics.framework */,
+				974EA4D92259F909009C021B /* UIKit.framework */,
 				9757474F220054D90046C8A0 /* walletSDK.framework */,
 				A5242752BBF7641B53D096BC /* Pods_WalletSDKDemo.framework */,
 			);
@@ -601,7 +633,7 @@
 				9747226E20EDE9F800F9EAB3 /* Sources */,
 				9747226F20EDE9F800F9EAB3 /* Frameworks */,
 				9747227020EDE9F800F9EAB3 /* Resources */,
-				184ED5874D5FF08A7DB18662 /* [CP] Embed Pods Frameworks */,
+				7E711842955A42FEE9490C50 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -762,7 +794,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		184ED5874D5FF08A7DB18662 /* [CP] Embed Pods Frameworks */ = {
+		7E711842955A42FEE9490C50 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -819,10 +851,12 @@
 				9793CE5422320ACD00E26D61 /* AFNetworkActivityIndicatorManager.m in Sources */,
 				9793CE5222320ACD00E26D61 /* UIProgressView+AFNetworking.m in Sources */,
 				9793CE5B22320ACD00E26D61 /* AFURLConnectionOperation.m in Sources */,
+				974EA5F5225A35B6009C021B /* NSObject+YYModel.m in Sources */,
 				9793CE5622320ACD00E26D61 /* UIButton+AFNetworking.m in Sources */,
 				9754E3B0222F6A390054439C /* MASConstraintMaker.m in Sources */,
 				9793CE5F22320ACD00E26D61 /* AFHTTPRequestOperation.m in Sources */,
 				9793CE5822320ACD00E26D61 /* UIWebView+AFNetworking.m in Sources */,
+				974EA5F6225A35B6009C021B /* YYClassInfo.m in Sources */,
 				9793CE5722320ACD00E26D61 /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				9747227A20EDE9F800F9EAB3 /* ViewController.m in Sources */,
 				9793CE5522320ACD00E26D61 /* UIImageView+AFNetworking.m in Sources */,
@@ -1162,7 +1196,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.vechain.walletSDKDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";

@@ -1,0 +1,11 @@
+source 'https://github.com/CocoaPods/Specs.git'
+
+use_frameworks!
+target 'WalletSDK' do
+    
+#  pod 'PromiseKit', '~> 1.7.4'
+#  pod 'ReactiveObjC', '~> 3.0.0’
+
+  pod 'PromiseKit', '~> 6.8'
+end
+
