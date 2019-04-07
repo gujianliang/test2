@@ -81,10 +81,10 @@ callback:^(WalletAccountModel * _Nonnull account, NSError * _Nonnull error)
 ```
 ### 2，Support dapp development environment (connex or web3)
 
-#### 2.1 Import keystore to SDK
-#####  More information about The keystore structures,  you can see it at the end of article.
+#### 2.1 Set delegate
+#####  Sdk can send a delegate signal to the developer to implement the corresponding method.
 ```obj-c
-[WalletUtils initDappWebViewWithKeystore:walletList];
+[WalletUtils initDAppWithDelegate:self];
 
 ````
 
