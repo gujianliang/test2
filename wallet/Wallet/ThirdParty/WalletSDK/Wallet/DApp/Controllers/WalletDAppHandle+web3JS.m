@@ -17,7 +17,6 @@
 #import "WalletManageModel.h"
 #import "WalletGetSymbolApi.h"
 #import "WalletGetDecimalsApi.h"
-#import "WalletSingletonHandle.h"
 #import "WalletDAppHandle+connexJS.h"
 
 
@@ -46,23 +45,6 @@
                                callbackId:callbackId
                                      code:ERROR_SERVER_DATA];
     }];
-}
-
-//获得wallet 地址
-- (void)getAddress:(WKWebView *)webView requestId:(NSString *)requestId callbackId:(NSString *)callbackId
-{
-    NSMutableArray *addressList = [NSMutableArray array];
-    WalletSingletonHandle *single = [WalletSingletonHandle shareWalletHandle];
-    
-    for (WalletManageModel *model in [single getAllWallet]) {
-        [addressList addObject:model.address];
-    }
-    
-    [WalletTools callbackWithrequestId:requestId
-                               webView:webView
-                                  data:addressList
-                            callbackId:callbackId
-                                  code:OK];
 }
 
 //获得NodeUrl

@@ -6,11 +6,9 @@
 //  Copyright © 2019年 VeChain. All rights reserved.
 //
 
-//#import "VCBaseVC.h"
 
 #import <UIKit/UIKit.h>
 
-//#import "WalletDAppHandle+transfer.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface WalletDAppHandle : NSObject
@@ -21,8 +19,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy)NSString *keystore;
 @property (nonatomic, assign)BOOL isSend;
 @property (nonatomic, copy)NSString *txId;
-
--(void)initWithWalletDict:(NSMutableArray *)walletList;
 
 - (void)webView:(WKWebView *)webView defaultText:(nullable NSString *)defaultText completionHandler:(void (^)(NSString * __nullable result))completionHandler;
 

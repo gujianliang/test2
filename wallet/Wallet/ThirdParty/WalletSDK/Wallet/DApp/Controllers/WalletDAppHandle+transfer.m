@@ -18,14 +18,12 @@
 #import "WalletAccountCodeApi.h"
 #import "WalletBlockApi.h"
 #import "WalletTransantionsReceiptApi.h"
-#import "WalletDappStoreSelectView.h"
 #import "WalletDAppHead.h"
 #import "WalletDAppHandle+web3JS.h"
 #import "WalletDAppHandle+connexJS.h"
 #import "NSJSONSerialization+NilDataParameter.h"
 #import "WalletDAppPeersApi.h"
 #import "WalletDAppTransferDetailApi.h"
-#import "WalletSingletonHandle.h"
 #import "WalletJSCallbackModel.h"
 #import "WalletGetBaseGasPriceApi.h"
 #import "SocketRocketUtility.h"
@@ -47,18 +45,6 @@
     
     Transaction *transaction = [[Transaction alloc] init];
     
-    // 生成随机 nonce
-    SecureData* randomData = [SecureData secureDataWithLength:8];
-    int result = SecRandomCopyBytes(kSecRandomDefault, randomData.length, randomData.mutableBytes);
-    if (result != 0) {
-        [WalletAlertShower showAlert:nil
-                                 msg:VCNSLocalizedBundleString(@"transfer_wallet_send_fail", nil)
-                               inCtl:[WalletTools getCurrentVC]
-                               items:@[VCNSLocalizedBundleString(@"dialog_yes", nil)]
-                          clickBlock:^(NSInteger index) {
-                          }];
-    }
-    
     NSString *decimalNoce = [BigNumber bigNumberWithHexString:paramModel.noce].decimalString;
     transaction.nonce = decimalNoce.integerValue;
     
@@ -75,7 +61,7 @@
     
     transaction.ChainTag = [BigNumber bigNumberWithHexString:paramModel.chainTag];
     
-    transaction.BlockRef = [BigNumber bigNumberWithHexString:paramModel.blockRef];
+    transaction.BlockRef = [BigNumber bigNumberWithHexString:paramModel.blockReference];
     
     [self packageClausesData:transaction paramModel:paramModel];
    

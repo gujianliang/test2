@@ -6,26 +6,24 @@
 //  Copyright © 2019年 Ethers. All rights reserved.
 //
 
-#import "YYModel.h"
-#import <PromiseKit/PromiseKit.h>
+//#import <PromiseKit/PromiseKit.h>
 NS_ASSUME_NONNULL_BEGIN
 
 @interface TransactionParameter : NSObject
 
 @property (nonatomic, copy)NSString *gas;   //Set maximum gas allowed for call(10 hex string)
 
-@property (nonatomic, copy)NSString *chainTag; //block chain tag
+@property (nonatomic, copy)NSString *chainTag;  //Get the chain tag of the block chain
 
-@property (nonatomic, copy)NSString *blockRef; //best block reference
+@property (nonatomic, copy)NSString *blockReference;  //Get the reference of the block chain
 
-@property (nonatomic, copy)NSString *noce;// 8 btye
+@property (nonatomic, copy)NSString *noce;// 8 bytes of random number,hex string
 
 @property (nonatomic, copy)NSString *dependsOn; // txid depends other transfer
 
-@property (nonatomic, copy)NSString *gasPriceCoef; //
+@property (nonatomic, copy)NSString *gasPriceCoef; //Coefficient used to calculate the final gas price
 
-@property (nonatomic, copy)NSString *expiration; // expiration time s
-
+@property (nonatomic, copy)NSString *expiration; //  Expiration relative to blockRef
 @property (nonatomic, copy)NSArray *clauses; //clause list
 
 @property (nonatomic, copy)NSArray<NSData *> *reserveds;
@@ -33,8 +31,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)checkParameter:(void(^)(NSString *error,BOOL result))block; //check param invild
 
-- (AnyPromise *)getChainTag;
-- (AnyPromise *)getBlockRef;
 
 @end
 

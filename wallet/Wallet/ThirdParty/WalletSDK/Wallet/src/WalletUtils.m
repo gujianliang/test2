@@ -9,7 +9,6 @@
 #import "WalletDAppHandle.h"
 #import "WalletTools.h"
 #import "WalletDAppHead.h"
-#import "WalletSingletonHandle.h"
 #import "WalletMBProgressShower.h"
 #import "WalletGetDecimalsApi.h"
 #import "WalletGetSymbolApi.h"
@@ -236,13 +235,7 @@
         }
         return;
     }
-    [WalletDappCheckParamsHandle checkParamClause:parameter callback:^(NSString * _Nonnull error, bool result) {
-        if (result) {
-            if (callback) {
-                
-            }
-        }
-    }];
+    
     [WalletDappCheckParamsHandle checkParamClause:parameter
                                          callback:^(NSString * _Nonnull error, bool result)
     {
@@ -354,14 +347,13 @@
     [WalletUserDefaultManager setBlockUrl:nodelUrl];
 }
 
-+ (NSString *)getNode
++ (NSString *)getNodeUrl
 {
     return [WalletUserDefaultManager getBlockUrl];
 }
 
 + (void)deallocDappSingletion
 {
-    [WalletSingletonHandle attempDealloc];
     [WalletDAppHandle attempDealloc];
     
     UIView *signView = [[WalletTools getCurrentNavVC].view viewWithTag:SignViewTag];

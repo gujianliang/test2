@@ -32,7 +32,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  @abstract
  *  Create wallet with mnemonic words
  *
- *  @param mnemonicWords :12 words
+ *  @param mnemonicWords :Mnemonic Words
  *  @param password : Wallet password
  *  @param callback : Callback after the end;The attributes of a class has mnemonicPhras , address, privateKey, keystore
  */
@@ -45,10 +45,20 @@ NS_ASSUME_NONNULL_BEGIN
  *  @abstract
  *  Verify mnemonic words
  *
- *  @param mnemonicWords : 12 words
+ *  @param mnemonicWords : Words
  *  @return result
  */
 + (BOOL)isValidMnemonicWords:(NSArray *)mnemonicWords;
+
+/**
+ *  @abstract
+ *  Get checksum address
+ *
+ *  @param address :Wallet address
+ *
+ *  @return checksum address
+ */
++ (NSString *)getChecksumAddress:(NSString *)address;
 
 /**
  *  @abstract
@@ -64,22 +74,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  *  @abstract
- *  Verify the mnemonic word is legal
+ *  Check if the keystore format is correct
  *  @param keystoreJson :Keystore in json format
  *
  *  @return verification result
  */
 + (BOOL)isValidKeystore:(NSString *)keystoreJson;
-
-/**
- *  @abstract
- *  Get checksum address
- *
- *  @param address :Wallet address
- *
- *  @return checksum address
- */
-+ (NSString *)getChecksumAddress:(NSString *)address;
 
 
 /**
@@ -123,11 +123,11 @@ NS_ASSUME_NONNULL_BEGIN
  *  Get node url
  *
  */
-+ (NSString *)getNode;
++ (NSString *)getNodeUrl;
 
 /**
  *  @abstract
- *  Sign message
+ *  Sign transfer message
  *
  *  @param parameter : Prepare the data to be signed
  *  @param keystoreJson : Keystore in json format
@@ -224,7 +224,7 @@ completionHandler:(void (^)(NSString *result))completionHandler;
 
 /**
  *  @abstract
- *  Change Verify keystore
+ *  Verify the keystore with a password
  *  @param keystoreJson : Keystore in json format.
  *  @param password : password for wallet.
  *  @param callback : Callback after the end
@@ -236,7 +236,7 @@ completionHandler:(void (^)(NSString *result))completionHandler;
 
 /**
  *  @abstract
- *  Change Get chainTag
+ *   Get chainTag
  *  @param callback : Callback after the end
  *
  */
@@ -244,14 +244,14 @@ completionHandler:(void (^)(NSString *result))completionHandler;
 
 /**
  *  @abstract
- *  Change Get reference of block
+ *   Get reference of block
  *  @param callback : Callback after the end
  *
  */
 + (void)getBlockReference:(void (^)(NSString *blockReference))callback;
 /**
  *  @abstract
- *  Change Get address from keystore
+ *  Get address from keystore
  *  @param keystoreJson : Keystore in json format.
  *
  */
@@ -261,7 +261,7 @@ completionHandler:(void (^)(NSString *result))completionHandler;
 #pragma mark setDelegate
 /**
  *  @abstract
- *  Change dapp call transfer function ,app developer implementation
+ *  Dapp call transfer function ,app developer implementation
  *  @param clauses : clause list.
  *  @param gas : Set maximum gas allowed for call.
  *  @param callback : Callback after the end
@@ -270,7 +270,7 @@ completionHandler:(void (^)(NSString *result))completionHandler;
 - (void)onTransfer:(NSArray *)clauses gas:(NSString *)gas callback:(void(^)(NSString *txid))callback;
 /**
  *  @abstract
- *  Change dapp call get address ,app developer implementation
+ *   Dapp call get address ,app developer implementation
  *  @param callback : Callback after the end
  *
  */

@@ -134,51 +134,109 @@
     }
     
     NSString *keystore = currentWalletDict[@"keystore"];
-
     
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil
+                                                                             message:@"Please enter the wallet password"
+                                                                      preferredStyle:UIAlertControllerStyleAlert];
+    
+    @weakify(self);
+    [alertController addAction:([UIAlertAction actionWithTitle: @"Confirm"
+                                                         style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action)
+     {
+         
+         UITextField *textF =  alertController.textFields.lastObject;
+         
+         NSString *password = textF.text;
+         
+         [WalletUtils verifyKeystorePassword:keystore password:password callback:^(BOOL result) {
+             @strongify(self);
+             if (result) {
+                 
+                 [self packageParameter:clauses gas:gas keystore:keystore];
+             }
+         }];
+         
+     }])];
+    [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+    }];
+    
+    [self presentViewController:alertController animated:YES completion:nil];
+}
+
+- (void)packageParameter:(NSArray *)clauses gas:(NSString *)gas keystore:(NSString *)keystore
+{
+    //The random number is 8 bytes
     NSMutableData* randomData = [[NSMutableData alloc]initWithCapacity:8];
+    randomData.length = 8;
     int result = SecRandomCopyBytes(kSecRandomDefault, randomData.length, randomData.mutableBytes);
     if (result != 0) {
         return ;
     }
     
-    TransactionParameter *paramters = [[TransactionParameter alloc]init];
+    TransactionParameter *transactionModel = [[TransactionParameter alloc]init];
+    //noce: hex string
+    transactionModel.noce = [BigNumber bigNumberWithData:randomData].hexString;
+    
+    transactionModel.gas = [NSString stringWithFormat:@"%@",gas];  //Set maximum gas allowed for call,
+    
+    transactionModel.clauses = clauses;
+    transactionModel.gas = gas;
+    transactionModel.expiration = @"720";//Expiration relative to blockRef
+    transactionModel.gasPriceCoef = @"0";// Coefficient used to calculate the final gas price (0 - 255)
+    
+    //Get the chain tag of the block
+    [self getChainTagAndBlockReference:transactionModel keystore:keystore password:@"12345678Aa"];
+}
 
-    paramters.noce = [BigNumber bigNumberWithData:randomData].hexString;
-    
-    paramters.gas = [NSString stringWithFormat:@"%@",gas];  //Set maximum gas allowed for call,
-    
-    paramters.clauses = clauses;
-    
+- (void)getChainTagAndBlockReference:(TransactionParameter *)transactionModel
+                            keystore:(NSString *)keystore
+                            password:(NSString *)password
+{
+    @weakify(self);
+    //Get the chain tag of the block chain
     [WalletUtils getChainTag:^(NSString * _Nonnull chainTag) {
         NSLog(@"chainTag == %@",chainTag);
-        paramters.chainTag = chainTag;
+        //If the chainTag is nil, then the acquisition fails, you can prompt alert
+        transactionModel.chainTag = chainTag;
         
+        //Get the reference of the block chain
         [WalletUtils getBlockReference:^(NSString * _Nonnull blockReference) {
-            paramters.blockRef = blockReference;
             
-            [paramters checkParameter:^(NSString * _Nonnull error, BOOL result)
-             {
-                 if (!result) {
-                     NSLog(@"error == %@",error);
-                 }else{
-                     
-                     [WalletUtils signAndSendTransfer:keystore
-                                            parameter:paramters
-                                             password:@"12345678Aa"
-                                             callback:^(NSString *txId)
-                      {
-                          NSLog(@"\n txId: %@", txId);
-                          
-                          // txid callback to webview
-                          if (callback) {
-                              callback(txId);
-                          }
-                      }];
-                 }
-             }];
+            NSLog(@"blockReference == %@",blockReference);
+            //If the blockReference is nil, then the acquisition fails, you can prompt alert
+            
+            transactionModel.blockReference = blockReference;
+            @strongify(self);
+            [self checkModelAndSendTransfer:transactionModel
+                                   keystore:keystore
+                                   password:password];
         }];
     }];
+    
+}
+
+- (void)checkModelAndSendTransfer:(TransactionParameter *)transactionModel
+                         keystore:(NSString *)keystore
+                         password:(NSString *)password
+{
+    // Check if the signature parameters are correct
+    [transactionModel checkParameter:^(NSString * _Nonnull error, BOOL result)
+     {
+         if (!result) {
+             NSLog(@"error == %@",error);
+         }else
+         {
+             [WalletUtils signAndSendTransfer:keystore
+                                    parameter:transactionModel
+                                     password:password
+                                     callback:^(NSString *txId)
+              {
+                  //Developers can use txid to query the status of data packaged on the chain
+                  
+                  NSLog(@"\n txId: %@", txId);
+              }];
+         }
+     }];
 }
 
 

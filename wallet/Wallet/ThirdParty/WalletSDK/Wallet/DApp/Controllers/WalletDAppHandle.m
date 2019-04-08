@@ -12,31 +12,30 @@
 #import "YYModel.h"
 #import "WalletBlockInfoApi.h"
 #import "WalletVETBalanceApi.h"
-//#import "WalletSignatureView.h"
 #import "WalletGetSymbolApi.h"
 #import "WalletGetDecimalsApi.h"
 #import "WalletGenesisBlockInfoApi.h"
 #import "WalletAccountCodeApi.h"
 #import "WalletBlockApi.h"
 #import "WalletTransantionsReceiptApi.h"
-#import "WalletDappStoreSelectView.h"
 #import "WalletDAppHead.h"
 #import "WalletDAppHandle+web3JS.h"
 #import "WalletDAppHandle+connexJS.h"
 #import "NSJSONSerialization+NilDataParameter.h"
 #import "WalletDAppPeersApi.h"
 #import "WalletDAppTransferDetailApi.h"
-#import "WalletSingletonHandle.h"
 #import "WalletJSCallbackModel.h"
 #import "WalletGetBaseGasPriceApi.h"
-//#import "WalletSignatureView.h"
 #import "SocketRocketUtility.h"
 #import "WalletTransactionApi.h"
 #import "WalletDappCheckParamsHandle.H"
 
+#import "NSJSONSerialization+NilDataParameter.h"
+
+#import "NSJSONSerialization+NilDataParameter.h"
+
 @interface WalletDAppHandle ()<WKNavigationDelegate,WKUIDelegate>
 {
-    NSMutableArray *_walletList;
     WKWebView *_webView;
 }
 @end
@@ -55,16 +54,16 @@ static dispatch_once_t predicate;
     return singleton;
 }
 
--(void)initWithWalletDict:(NSMutableArray *)walletList
+-(instancetype)init
 {
-    _walletList = walletList;
+    self = [super init];
+    if (self ) {
+        [[NSNotificationCenter defaultCenter]removeObserver:self];
+        
+        [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(websocket:) name:kWebSocketdidReceiveMessageNote object:nil];
+    }
+    return self;
     
-    WalletSingletonHandle *walletSignlet = [WalletSingletonHandle shareWalletHandle];
-    [walletSignlet addWallet:_walletList];
-    
-    [[NSNotificationCenter defaultCenter]removeObserver:self];
-    
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(websocket:) name:kWebSocketdidReceiveMessageNote object:nil];
 }
 
 - (void)webView:(WKWebView *)webView defaultText:(nullable NSString *)defaultText completionHandler:(void (^)(NSString * __nullable result))completionHandler
@@ -154,10 +153,6 @@ static dispatch_once_t predicate;
                            requestId:requestId
                           callbackId:callbackId
                    completionHandler:completionHandler];
-        
-    }else if ([method isEqualToString:@"getAddress"] ) {
-        
-        [self getAddress:webView requestId:requestId callbackId:callbackId];
         
     }else if ([method isEqualToString:@"getBalance"]){
         

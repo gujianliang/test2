@@ -14,15 +14,12 @@
 #import "WalletBlockApi.h"
 #import "WalletTransantionsReceiptApi.h"
 #import "WalletManageModel.h"
-//#import "WalletSignatureView.h"
 #import "WalletGetSymbolApi.h"
 #import "WalletGetDecimalsApi.h"
 #import "WalletDAppPeersApi.h"
 #import "WalletBlockInfoApi.h"
 #import "WalletDAppPeerModel.h"
 #import "WalletDAppTransferDetailApi.h"
-#import "WalletSingletonHandle.h"
-//#import "WalletSignatureView.h"
 #import "SocketRocketUtility.h"
 #import "WalletGetStorageApi.h"
 
@@ -354,8 +351,6 @@
     if (self.delegate && [self.delegate respondsToSelector:@selector(onGetWalletAddress:)]) {
         
         [self.delegate onGetWalletAddress:^(NSArray * _Nonnull addressList) {
-
-#warning list 为空
             
             [WalletTools callbackWithrequestId:requestId
                                        webView:webView

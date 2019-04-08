@@ -35,7 +35,7 @@
     
     self.transferAmountTextField.keyboardType = UIKeyboardTypeDecimalPad;
     
-    _blockHost = [WalletUtils getNode];
+    _blockHost = [WalletUtils getNodeUrl];
     
     if (!_isVET) {
         // vtho contract address
@@ -67,17 +67,50 @@
     }
     
     NSString *keystore = currentWalletDict[@"keystore"];
-    if (_isVET) {
-        [self vetTransfer:from keystore:keystore];
-    }else{
-        [self tokenTransfer:from keystore:keystore];
-    }
     
-    //sign contract demo
-//    [self contractSignture:from keystore:keystore];
+    
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil
+                                                                             message:@"Please enter the wallet password"
+                                                                      preferredStyle:UIAlertControllerStyleAlert];
+    
+    @weakify(self);
+    [alertController addAction:([UIAlertAction actionWithTitle: @"Confirm"
+                                                         style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action)
+    {
+                                     
+        UITextField *textF =  alertController.textFields.lastObject;
+        
+        NSString *password = textF.text;
+        
+        [WalletUtils verifyKeystorePassword:keystore password:password callback:^(BOOL result) {
+            @strongify(self);
+                 if (result) {
+                     
+                     if (self.isVET) {
+                         [self vetTransfer:from keystore:keystore password:password];
+                     }else{
+                         [self tokenTransfer:from keystore:keystore password:password];
+                     }
+                     
+                     //sign contract demo
+                     //    [self contractSignture:from keystore:keystore password:password];
+                 }else{
+                     NSLog(@"The password is wrong");
+                 }
+        }];
+        
+    }])];
+    [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+        
+        
+    }];
+    
+    [self presentViewController:alertController animated:YES completion:nil];
+    
 }
 
-- (void)vetTransfer:(NSString *)from keystore:(NSString *)keystore{
+- (void)vetTransfer:(NSString *)from keystore:(NSString *)keystore  password:(NSString *)password{
+    
     if (self.receiveAddressTextView.text.length == 0
         || self.transferAmountTextField.text.length == 0) {
         
@@ -112,15 +145,15 @@
     [clauseList addObject:clauseModel];
     transactionModel.clauses = clauseList; //Clauses is an array
     
-    transactionModel.expiration = @"720"; //Transfer expiration time
-    transactionModel.gasPriceCoef = @"0";// Control transaction prioritization by gasPriceCoef (0 - 255)
+    transactionModel.expiration = @"720"; //Expiration relative to blockRef
+    transactionModel.gasPriceCoef = @"0";// Coefficient used to calculate the final gas price (0 - 255)
 
     //Get the chain tag of the block
-    [self getChainTagAndBlockReference:transactionModel keystore:keystore password:@"12345678Aa"];
+    [self getChainTagAndBlockReference:transactionModel keystore:keystore password:password];
 }
 
 
-- (void)tokenTransfer:(NSString *)from keystore:(NSString *)keystore{
+- (void)tokenTransfer:(NSString *)from keystore:(NSString *)keystore  password:(NSString *)password{
     if (self.receiveAddressTextView.text.length == 0
         || self.transferAmountTextField.text.length == 0) {
         
@@ -149,18 +182,18 @@
 
     NSMutableArray *clauseList = [NSMutableArray array];
     ClauseModel *clauseModel = [[ClauseModel alloc]init];
-    clauseModel.to    = self->_tokenContractAddress;//Contract address of token
+    clauseModel.to    = _tokenContractAddress;//Contract address of token
     clauseModel.value = @""; //Vip 180 transaction token, value is an empty string
     
     //
     clauseModel.data  = [self calculatenTokenTransferClauseData:self.receiveAddressTextView.text value:amountBig.hexString];
     [clauseList addObject:clauseModel];
     transactionModel.clauses = clauseList;//Clauses is an array
-    transactionModel.expiration = @"720";//Transfer expiration time
-    transactionModel.gasPriceCoef = @"0";// Control transaction prioritization by gasPriceCoef (0 - 255)
+    transactionModel.expiration = @"720";//Expiration relative to blockRef
+    transactionModel.gasPriceCoef = @"0";// Coefficient used to calculate the final gas price (0 - 255)
 
     //Get the chain tag of the block
-    [self getChainTagAndBlockReference:transactionModel keystore:keystore password:@"12345678Aa"];
+    [self getChainTagAndBlockReference:transactionModel keystore:keystore password:password];
 }
 
 /**
@@ -181,18 +214,20 @@
     return  result;
 }
 
-- (void)contractSignture:(NSString *)from keystore:(NSString *)keystore{
+- (void)contractSignture:(NSString *)from keystore:(NSString *)keystore  password:(NSString *)password{
     //xnode pending order contract
    
     TransactionParameter *transactionModel = [[TransactionParameter alloc]init];
     transactionModel.gas = @"60000"; //Set maximum gas allowed for call, decimalstring
     
+    //The random number is 8 bytes
     NSMutableData* randomData = [[NSMutableData alloc]initWithCapacity:8];
     randomData.length = 8;
     int result = SecRandomCopyBytes(kSecRandomDefault, randomData.length, randomData.mutableBytes);
     if (result != 0) {
         return ;
     }
+     //noce: hex string
     transactionModel.noce = [BigNumber bigNumberWithData:randomData].hexString;
     
     NSMutableArray *clauseList = [NSMutableArray array];
@@ -215,14 +250,14 @@
     
     [clauseList addObject:clauseModel];
     transactionModel.clauses = clauseList;//Clauses is an array
-    transactionModel.expiration = @"720";//Transfer expiration time
-    transactionModel.gasPriceCoef = @"0";// Control transaction prioritization by gasPriceCoef (0 - 255)
+    transactionModel.expiration = @"720";//Expiration relative to blockRef
+    transactionModel.gasPriceCoef = @"0";// Coefficient used to calculate the final gas price (0 - 255)
 
     
     transactionModel.gas = @"600000"; //Set maximum gas allowed for call,
     
      //Get the chain tag of the block
-    [self getChainTagAndBlockReference:transactionModel keystore:keystore password:@"12345678Aa"];
+    [self getChainTagAndBlockReference:transactionModel keystore:keystore password:password];
 }
 
 - (void)getChainTagAndBlockReference:(TransactionParameter *)transactionModel
@@ -230,25 +265,26 @@
                             password:(NSString *)password
 {
     @weakify(self);
-    //Get the chain tag of the block
+    //Get the chain tag of the block chain
     [WalletUtils getChainTag:^(NSString * _Nonnull chainTag) {
         NSLog(@"chainTag == %@",chainTag);
         //If the chainTag is nil, then the acquisition fails, you can prompt alert
         transactionModel.chainTag = chainTag;
         
-        //Get the reference of the block
+        //Get the reference of the block chain
         [WalletUtils getBlockReference:^(NSString * _Nonnull blockReference) {
             
             NSLog(@"blockReference == %@",blockReference);
             //If the blockReference is nil, then the acquisition fails, you can prompt alert
             
-            transactionModel.blockRef = blockReference;
+            transactionModel.blockReference = blockReference;
             @strongify(self);
             [self checkModelAndSendTransfer:transactionModel
                                    keystore:keystore
                                    password:password];
         }];
     }];
+    
 }
 
 - (void)checkModelAndSendTransfer:(TransactionParameter *)transactionModel
@@ -268,7 +304,7 @@
                                      callback:^(NSString *txId)
               {
                   //Developers can use txid to query the status of data packaged on the chain
-                  //
+        
                   NSLog(@"\n txId: %@", txId);
               }];
          }

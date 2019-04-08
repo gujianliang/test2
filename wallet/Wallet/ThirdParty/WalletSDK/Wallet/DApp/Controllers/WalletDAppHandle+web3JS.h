@@ -19,7 +19,6 @@ NS_ASSUME_NONNULL_BEGIN
          requestId:(NSString *)requestId
            address:(NSString *)address;
 
-- (void)getAddress:(WKWebView *)webView requestId:(NSString *)requestId callbackId:(NSString *)callbackId;
 
 - (void)getNodeUrl:(NSString *)requestId
   completionHandler:(void (^)(NSString * __nullable result))completionHandler;
