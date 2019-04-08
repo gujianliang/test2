@@ -29,7 +29,7 @@
                        callback:(void(^)(WalletAccountModel *accountModel,NSError *error))callback
 {
     NSString *domain = @"com.wallet.ErrorDomain";
-    NSString *desc = @"Generate keystore fail";
+    NSString *desc = @"password is invaild";
     NSDictionary *userInfo = @{ NSLocalizedDescriptionKey : desc };
     
     NSError *error = [NSError errorWithDomain:domain
@@ -49,6 +49,13 @@
         
          account.keystore = json;
         if (json.length == 0) {
+            NSString *domain = @"com.wallet.ErrorDomain";
+            NSString *desc = @"Failed to generate keystore";
+            NSDictionary *userInfo = @{ NSLocalizedDescriptionKey : desc };
+            
+            NSError *error = [NSError errorWithDomain:domain
+                                                 code:-102
+                                             userInfo:userInfo];
             if (callback) {
                 callback(nil,error);
             }
@@ -67,30 +74,33 @@
     }];
 }
 
+// mnemonicWords count 12,15,18,21,24
 + (void)creatWalletWithMnemonicWords:(NSArray *)mnemonicWords
                             password:(NSString *)password
                             callback:(void(^)(WalletAccountModel *account,NSError *error))callback
 {
     
     NSString *domain = @"com.wallet.ErrorDomain";
-    NSString *desc = @"Generate keystore fail";
+    NSString *desc = @"mnemonicWords is invaild";
     NSDictionary *userInfo = @{ NSLocalizedDescriptionKey : desc };
     
     NSError *error = [NSError errorWithDomain:domain
                                          code:-101
                                      userInfo:userInfo];
     
-    if (password.length == 0) {
-        NSLog(@"Password can not be blank.");
+    
+    if (![WalletUtils  isValidMnemonicWords:mnemonicWords]) {
+        
+        NSLog(@"mnemonicWords is invaild");
         if (callback) {
             callback(nil, error);
         }
         return;
     }
+    
     NSMutableArray *trimeList = [NSMutableArray array];
     for (NSString * word in mnemonicWords) {
         if (word.length == 0) {
-            NSLog(@"Mnemonic words is not available.");
             if (callback) {
                 callback(nil, error);
             }
@@ -104,7 +114,6 @@
     __block Account *account = [Account accountWithMnemonicPhrase:[trimeList componentsJoinedByString:@" "]];
     
     if (!account) {
-        NSLog(@"Mnemonic words is not available.");
         if (callback) {
 
             callback(nil, error);
@@ -137,6 +146,10 @@
 
 + (BOOL)isValidMnemonicWords:(NSArray*)mnemonicWords;
 {
+    if (mnemonicWords.count < 12 || mnemonicWords.count > 24) {
+        return NO;
+    }
+    
     NSMutableArray *trimeList = [NSMutableArray array];
     for (NSString * word in mnemonicWords) {
         if (word.length == 0) {
@@ -363,7 +376,7 @@
     }
 }
 
-+ (void)modifyKeystorePassword:(NSString *)oldPassword
++ (void)modifyKeystoreWithPassword:(NSString *)oldPassword
                          newPW:(NSString *)newPassword
                   keystoreJson:(NSString *)keystoreJson
                       callback:(void (^)(NSString *newKeystore))callback
@@ -378,7 +391,7 @@
     }];
 }
 
-+ (void)verifyKeystorePassword:(NSString *)keystore
++ (void)verifyKeystoreWithPassword:(NSString *)keystore
                       password:(NSString *)password
                       callback:(void (^)(BOOL result))callback
 {
@@ -438,7 +451,18 @@
         return @"";
     }
     NSDictionary *dictKeystore = [NSJSONSerialization dictionaryWithJsonString:keystore];
-    return dictKeystore[@"address"];
+    NSString *address = dictKeystore[@"address"];
+    if (![address hasPrefix:@"0x"]) {
+        if (address.length > 0) {
+            address = [@"0x" stringByAppendingString:address];
+            return [WalletUtils getChecksumAddress:address];
+            
+        } else {
+            return @"";
+        }
+    }else{
+        return [WalletUtils getChecksumAddress:address];
+    }
 }
 
 

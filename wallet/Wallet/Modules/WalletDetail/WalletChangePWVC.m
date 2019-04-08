@@ -61,10 +61,10 @@
     NSString *address = currentWallet[@"address"];
     
     
-    [WalletUtils modifyKeystorePassword:_oldPWTextField.text
-                                  newPW:self.nextPWTextField.text
-                           keystoreJson:keystore
-                               callback:^(NSString * _Nonnull newKeystore)
+    [WalletUtils modifyKeystoreWithPassword:_oldPWTextField.text
+                                      newPW:self.nextPWTextField.text
+                               keystoreJson:keystore
+                                   callback:^(NSString * _Nonnull newKeystore)
     {
         
         [hud hideAnimated:YES];

@@ -86,7 +86,7 @@
         return ;
     }
     
-    if (![self checkNoce:parameterModel.noce errorMsg:&errorMsg]) {
+    if (![self checkNoce:parameterModel.nonce errorMsg:&errorMsg]) {
         if (callback) {
             callback(errorMsg,NO);
         }
@@ -136,7 +136,6 @@
         }else
         {
             *errorMsg = @"dependsOn should be hex string";
-
             return NO;
         }
     }
@@ -172,15 +171,15 @@
     return YES;
 }
 
-+ (BOOL)checkNoce:(NSString *)noce errorMsg:(NSString **)errorMsg
++ (BOOL)checkNoce:(NSString *)nonce errorMsg:(NSString **)errorMsg
 {
-    if (noce.length != 18) {
-        *errorMsg = @"noce is not the right length";
+    if (nonce.length != 18) {
+        *errorMsg = @"nonce is not the right length";
 
         return NO;
     }
-    if (![WalletTools checkHEXStr:noce] ) {
-        *errorMsg = @"noce should be hex string";
+    if (![WalletTools checkHEXStr:nonce] ) {
+        *errorMsg = @"nonce should be hex string";
 
         return NO;
     }
@@ -215,18 +214,19 @@
 
 + (BOOL)checkExpiration:(NSString **)expiration errorMsg:(NSString **)errorMsg
 {
+    
     //强转 string
     *expiration = [NSString stringWithFormat:@"%@",*expiration];
+    
+    if ([WalletTools isEmpty:*expiration]) {
+        *expiration = @"720";
+        return YES;
+    }
+    
     if (![WalletTools checkDecimalStr:(*expiration)]) {
         *errorMsg = @"expiration should be decimal string";
 
         return NO;
-    }else{
-        
-        if ([WalletTools isEmpty:*expiration]) {
-            *expiration = @"720";
-             return YES;
-        }
     }
     return YES;
 }
@@ -239,12 +239,13 @@
             *errorMsg = @"clause is invalid";
             return NO;
         }else{
-            //全是0 不给过
-            NSString *datadecimal = [BigNumber bigNumberWithHexString:clauseModel.data].decimalString;
-            if (datadecimal.integerValue == 0) {
-                *errorMsg = @"clause is invalid";
-                return NO;
-            }
+#warning method id == 0x00000000
+//            //全是0 不给过
+//            NSString *datadecimal = [BigNumber bigNumberWithHexString:clauseModel.data].decimalString;
+//            if (datadecimal.integerValue == 0) {
+//                *errorMsg = @"clause is invalid";
+//                return NO;
+//            }
         }
         
     }else{ // to 有值，需要判断 data 的被64 整除
@@ -268,7 +269,7 @@
             }
             
         }else{
-            //to != nil data = nil value != nil
+            //to != nil data = nil value == nil
             if ([WalletTools isEmpty:clauseModel.value]) {
                 *errorMsg = @"clause is invalid";
                 return NO;
@@ -358,12 +359,11 @@
                     *data = @"";
                     
                     return YES;
+                }else{
+                    *errorMsg = @"data is inValid";
+                    return NO;
                 }
-                *errorMsg = @"data is inValid";
-
-                return NO;
             }
-            
         }else{
             *errorMsg = @"data should be hex string";
             return NO;
@@ -392,7 +392,14 @@
             return NO;
         }
         
+        // gas 不能为0 ，打于0
         *gas = [NSString stringWithFormat:@"%@",*gas];
+        
+        if((*gas).integerValue == 0)
+        {
+            *errorMsg = @"gas can't be 0";
+            return NO;
+        }
         if ([WalletTools checkDecimalStr:*gas]) {//是10进制
             
             return YES;

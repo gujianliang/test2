@@ -20,10 +20,10 @@
  *  Dapp call transfer function ,app developer implementation
  *  @param clauses : clause list.
  *  @param gas : Set maximum gas allowed for call.
- *  @param callback : Callback after the end
+ *  @param callback : Callback after the end. txId:Transaction identifier; address:Signer address
  *
  */
-- (void)onTransfer:(NSArray *)clauses gas:(NSString *)gas callback:(void(^)(NSString *txid))callback;
+- (void)onTransfer:(NSArray *)clauses gas:(NSString *)gas callback:(void(^)(NSString *txId ,NSString *address))callback;
 /**
  *  @abstract
  *   Dapp call get address ,app developer implementation
@@ -31,10 +31,13 @@
  *
  */
 - (void)onGetWalletAddress:(void(^)(NSArray *addressList))callback;
+
 @end
 
 @interface WalletUtils : NSObject
+
 @property(nonatomic, weak) id<WalletUtilsDelegate> delegate;
+
 NS_ASSUME_NONNULL_BEGIN
 
 /**
@@ -121,7 +124,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  Change keystore password
  *
  *  @param password : Wallet password
- *  @param privateKey : privateKey
+ *  @param privateKey : PrivateKey
  *  @param callback : Callback after the end. keystoreJson : Keystore in json format
  *
  */
@@ -237,7 +240,7 @@ completionHandler:(void (^)(NSString *result))completionHandler;
  *  @param callback : Callback after the end
  *
  */
-+ (void)modifyKeystorePassword:(NSString *)oldPassword
++ (void)modifyKeystoreWithPassword:(NSString *)oldPassword
                          newPW:(NSString *)newPassword
                   keystoreJson:(NSString *)keystoreJson
                       callback:(void (^)(NSString *newKeystore))callback;
@@ -250,7 +253,7 @@ completionHandler:(void (^)(NSString *result))completionHandler;
  *  @param callback : Callback after the end
  *
  */
-+ (void)verifyKeystorePassword:(NSString *)keystoreJson
++ (void)verifyKeystoreWithPassword:(NSString *)keystoreJson
                       password:(NSString *)password
                       callback:(void (^)(BOOL result))callback;
 

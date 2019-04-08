@@ -11,13 +11,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface TransactionParameter : NSObject
 
-@property (nonatomic, copy)NSString *gas;   //Set maximum gas allowed for call(10 hex string)
+#warning decimal
+@property (nonatomic, copy)NSString *gas;   //Set maximum gas allowed for call(deciaml or hex string)
 
 @property (nonatomic, copy)NSString *chainTag;  //Get the chain tag of the block chain
 
 @property (nonatomic, copy)NSString *blockReference;  //Get the reference of the block chain
 
-@property (nonatomic, copy)NSString *noce;// 8 bytes of random number,hex string
+@property (nonatomic, copy)NSString *nonce;// 8 bytes of random number,hex string
 
 @property (nonatomic, copy)NSString *dependsOn; // txid depends other transfer
 
@@ -36,9 +37,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 @interface ClauseModel : NSObject
-@property (nonatomic, copy)NSString *to;    //The first argument of the clause，If it is VET transfer, it is the to address; otherwise it is the token address.
+@property (nonatomic, copy)NSString *to;    //The first argument of the clause，If it is VET transfer, it is the to address; otherwise it is the contract address.
 @property (nonatomic, copy)NSString *value; //The second argument of the clause ，Cost vet；If you don’t spend vet, value = [NSData data]
 @property (nonatomic, copy)NSString *data;  //The third argument of the clause ，If it is VET transfer, data = [NSData data]；If it is a contract, data is the signature parameter.
+#warning 方法参数
 @end
 
 

@@ -82,7 +82,7 @@
         
         NSString *password = textF.text;
         
-        [WalletUtils verifyKeystorePassword:keystore password:password callback:^(BOOL result) {
+        [WalletUtils verifyKeystoreWithPassword:keystore password:password callback:^(BOOL result) {
             @strongify(self);
                  if (result) {
                      
@@ -134,8 +134,8 @@
     if (result != 0) {
         return ;
     }
-    //noce: hex string
-    transactionModel.noce = [BigNumber bigNumberWithData:randomData].hexString;
+    //nonce: hex string
+    transactionModel.nonce = [BigNumber bigNumberWithData:randomData].hexString;
     
     NSMutableArray *clauseList = [NSMutableArray array];
     ClauseModel *clauseModel = [[ClauseModel alloc]init];
@@ -177,8 +177,8 @@
     TransactionParameter *transactionModel = [[TransactionParameter alloc]init];
     transactionModel.gas = @"60000"; //Set maximum gas allowed for call,
     
-    //noce: hex string
-    transactionModel.noce = [BigNumber bigNumberWithData:randomData].hexString;
+    //nonce: hex string
+    transactionModel.nonce = [BigNumber bigNumberWithData:randomData].hexString;
 
     NSMutableArray *clauseList = [NSMutableArray array];
     ClauseModel *clauseModel = [[ClauseModel alloc]init];
@@ -227,8 +227,8 @@
     if (result != 0) {
         return ;
     }
-     //noce: hex string
-    transactionModel.noce = [BigNumber bigNumberWithData:randomData].hexString;
+     //nonce: hex string
+    transactionModel.nonce = [BigNumber bigNumberWithData:randomData].hexString;
     
     NSMutableArray *clauseList = [NSMutableArray array];
     ClauseModel *clauseModel = [[ClauseModel alloc]init];

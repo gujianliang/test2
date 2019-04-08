@@ -97,7 +97,7 @@
     /* Create a wallet with your password and keystore. */
     
     @weakify(self);
-    [WalletUtils verifyKeystorePassword:self.keystoreTextView.text.lowercaseString password:self.password.text callback:^(BOOL result) {
+    [WalletUtils verifyKeystoreWithPassword:self.keystoreTextView.text.lowercaseString password:self.password.text callback:^(BOOL result) {
         @strongify(self);
         [hud hideAnimated:YES];
         if (result) {

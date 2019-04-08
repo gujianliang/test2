@@ -237,10 +237,14 @@ static dispatch_once_t predicate;
     if (delegate) {
         if ([delegate respondsToSelector:@selector(onTransfer: gas: callback:)]) {
             
-            [delegate onTransfer:clauseModelList gas:gas callback:^(NSString * _Nonnull txid)
+            [delegate onTransfer:clauseModelList gas:gas callback:^(NSString * _Nonnull txid,NSString *address)
              {
-                
-                 [self callbackToWebView:txid bConnex:bConnex webView:webView callbackId:callbackId requestId:requestId];
+                 [self callbackToWebView:txid
+                                 address:address
+                                 bConnex:bConnex
+                                 webView:webView
+                              callbackId:callbackId
+                               requestId:requestId];
                 
             }];
         }else{
@@ -253,17 +257,15 @@ static dispatch_once_t predicate;
     }
 }
 
-- (void)callbackToWebView:(NSString *)txid bConnex:(BOOL)bConnex  webView:(WKWebView *)webView callbackId:(NSString *)callbackId requestId:(NSString *)requestId
+- (void)callbackToWebView:(NSString *)txid address:(NSString *)address bConnex:(BOOL)bConnex  webView:(WKWebView *)webView callbackId:(NSString *)callbackId requestId:(NSString *)requestId
 {
     if (txid.length != 0) {
         id data = nil;
         if (bConnex) {
             
-            NSDictionary *dicKeystore = [NSJSONSerialization dictionaryWithJsonString:self.keystore];
-            
             NSMutableDictionary *dictData = [NSMutableDictionary dictionary];
-            [dictData setObject:txid forKey:@"txId"];
-            [dictData setObject:dicKeystore[@"address"] forKey:@"signer"];
+            [dictData setValueIfNotNil:txid forKey:@"txId"];
+            [dictData setValueIfNotNil:address forKey:@"signer"];
             
             data = dictData;
         }else{

@@ -45,7 +45,7 @@
     
     Transaction *transaction = [[Transaction alloc] init];
     
-    NSString *decimalNoce = [BigNumber bigNumberWithHexString:paramModel.noce].decimalString;
+    NSString *decimalNoce = [BigNumber bigNumberWithHexString:paramModel.nonce].decimalString;
     transaction.nonce = decimalNoce.integerValue;
     
     transaction.Expiration = paramModel.expiration.integerValue;

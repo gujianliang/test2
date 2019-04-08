@@ -123,7 +123,7 @@
     }
 }
 
-- (void)onTransfer:(NSArray *)clauses gas:(NSString *)gas callback:(void(^)(NSString *txid))callback
+- (void)onTransfer:(NSArray *)clauses gas:(NSString *)gas callback:(void(^)(NSString *txId ,NSString *address))callback
 {
     
     NSDictionary *currentWalletDict = [[NSUserDefaults standardUserDefaults]objectForKey:@"currentWallet"];
@@ -148,11 +148,11 @@
          
          NSString *password = textF.text;
          
-         [WalletUtils verifyKeystorePassword:keystore password:password callback:^(BOOL result) {
+         [WalletUtils verifyKeystoreWithPassword:keystore password:password callback:^(BOOL result) {
              @strongify(self);
              if (result) {
                  
-                 [self packageParameter:clauses gas:gas keystore:keystore];
+                 [self packageParameter:clauses gas:gas keystore:keystore password:password callback:callback] ;
              }
          }];
          
@@ -163,7 +163,7 @@
     [self presentViewController:alertController animated:YES completion:nil];
 }
 
-- (void)packageParameter:(NSArray *)clauses gas:(NSString *)gas keystore:(NSString *)keystore
+- (void)packageParameter:(NSArray *)clauses gas:(NSString *)gas keystore:(NSString *)keystore password:(NSString *)password callback:(void(^)(NSString *txid ,NSString *address))callback
 {
     //The random number is 8 bytes
     NSMutableData* randomData = [[NSMutableData alloc]initWithCapacity:8];
@@ -174,23 +174,23 @@
     }
     
     TransactionParameter *transactionModel = [[TransactionParameter alloc]init];
-    //noce: hex string
-    transactionModel.noce = [BigNumber bigNumberWithData:randomData].hexString;
+    //nonce: hex string
+    transactionModel.nonce = [BigNumber bigNumberWithData:randomData].hexString;
     
     transactionModel.gas = [NSString stringWithFormat:@"%@",gas];  //Set maximum gas allowed for call,
     
     transactionModel.clauses = clauses;
-    transactionModel.gas = gas;
     transactionModel.expiration = @"720";//Expiration relative to blockRef
     transactionModel.gasPriceCoef = @"0";// Coefficient used to calculate the final gas price (0 - 255)
     
     //Get the chain tag of the block
-    [self getChainTagAndBlockReference:transactionModel keystore:keystore password:@"12345678Aa"];
+    [self getChainTagAndBlockReference:transactionModel keystore:keystore password:password callback:callback];
 }
 
 - (void)getChainTagAndBlockReference:(TransactionParameter *)transactionModel
                             keystore:(NSString *)keystore
                             password:(NSString *)password
+                            callback:(void(^)(NSString *txid ,NSString *address))callback
 {
     @weakify(self);
     //Get the chain tag of the block chain
@@ -209,15 +209,16 @@
             @strongify(self);
             [self checkModelAndSendTransfer:transactionModel
                                    keystore:keystore
-                                   password:password];
+                                   password:password
+                                   callback:callback];
         }];
     }];
-    
 }
 
 - (void)checkModelAndSendTransfer:(TransactionParameter *)transactionModel
                          keystore:(NSString *)keystore
                          password:(NSString *)password
+                         callback:(void(^)(NSString *txid ,NSString *address))callback
 {
     // Check if the signature parameters are correct
     [transactionModel checkParameter:^(NSString * _Nonnull error, BOOL result)
@@ -234,6 +235,9 @@
                   //Developers can use txid to query the status of data packaged on the chain
                   
                   NSLog(@"\n txId: %@", txId);
+                  //callback to sdk
+                  NSString *address = [WalletUtils getAddressWithKeystore:keystore];
+                  callback(txId,address);
               }];
          }
      }];
