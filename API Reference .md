@@ -5,14 +5,14 @@
 > 
 
 ```obj-c
-+ (void)creatWalletWithPassword:(NSString *)password
++ (void)creatWalletWithPassword:(NSString *)password  
                        callback:(void(^)(WalletAccountModel *account,NSError *error))callback;
 
 ```
 
 ## Create wallet with mnemonic words   
 >
->    @param mnemonicList :12 words
+>    @param mnemonicList :mnemonic Words   
 >    @param password :Wallet password    
 >    @param callback : Callback after the end；The attributes of a class has mnemonicPhras , address, privateKey and keystore    
 > 
@@ -26,7 +26,7 @@
 
 ##  Verify the mnemonic words    
 >
->   @param mnemonicList :12 words   
+>   @param mnemonicList : words   
 >   @return result   
 > 
 ```obj-c
@@ -46,7 +46,7 @@
 
 ##  Recover address
 >
->  @param message : Data before signature
+>  @param message : Data before signature  
 >  @param signatureData : Data after signature  
 >  @return  address  
 > 
@@ -70,14 +70,14 @@
 ##  Change wallet password
 >
 >   @param password :Wallet password   
->   @param account :WalletAccountModel object   
+>   @param privateKey : privateKey
 >   @param callback :Callback after the end . keystore :Keystore in json format   
 > 
 > 
 ```obj-c
-+ (void)encryptKeystoreWithPassword:(NSString *)password
-                            account:(WalletAccountModel *)account
-                           callback:(void (^)(NSString *keystoreJson))callback;
++ (void)encryptPrivateKeyWithPassword:(NSString *)password
+                              privateKey:(NSString *)privateKey
+                             callback:(void (^)(NSString *keystoreJson))callback;
 ```
 ##  Set node url   
 >
@@ -85,14 +85,14 @@
 >
 >
 ```obj-c
-+ (void)setNode:(NSString *)nodelUrl;
++ (void)setNodeUrl:(NSString *)nodelUrl;
 ```
 
 
 
 ##  Get node url   
 ```obj-c
-+ (NSString *)getNode;
++ (NSString *)getNodeUrl;
 ```
 
 
@@ -105,25 +105,46 @@
 >
 
 ```obj-c
-+ (void)sign:(NSData *)message
-    keystore:(NSString *)keystoreJson
-    password:(NSString *)password
-    callback:(void (^)(NSData *signatureData,NSError *error))callback;
++ (void)signWithMessage:(NSData *)message
+               keystore:(NSString*)keystoreJson
+               password:(NSString*)password
+               callback:(void (^)(NSData *signatureData,NSError *error))callback;
 
 ```
 
 ##   Sign and send
 >
->  @param parameter: signature parameters   
+>  @param parameter: Transaction parameters   
 >  @param keystoreJson: Keystore in json format   
->  @param callback: Callback after the end. txId: Transaction identifier ; signer:  signer address   
+>  @param password :  Wallet password   
+>  @param callback: Callback after the end. txId: Transaction identifier
 >
 >
 ```obj-c
-+ (void)sendWithKeystore:(NSString *)keystoreJson parameter:(TransactionParameter *)parameter callback:(void(^)(NSString *txId,NSString *signer))callback;
++ (void)signAndSendTransfer:(NSString *)keystoreJson
+                  parameter:(TransactionParameter *)parameter
+                   password:(NSString *)password
+                   callback:(void(^)(NSString *txId))callback;
 ```
 
-##   Verify keystore format  
+##   Signed transaction parameters
+>
+>  @param parameter: Transaction parameters     
+>  @param keystoreJson: Keystore in json format     
+>   @param password :  Wallet password     
+>  @param callback: Callback after the end. raw: txid and signature  
+>
+>
+```obj-c
++ (void)signWithParameter:(TransactionParameter *)parameter
+                 keystore:(NSString*)keystoreJson
+                 password:(NSString*)password
+                 callback:(void(^)(NSString *raw))callback;
+```
+
+
+##  Check if the keystore format is correct
+
 >
 >  @param keystoreJson : Keystore in json format   
 >  @return result  
@@ -134,14 +155,14 @@
 ```
 
 
-##  Set keystore list to SDK
+##  Set delegate to SDK
 >
->  @param keystoreList :Array of keystore json
->
+>  @param delegate : delegate object
+>   reture :YES ,set delegate success;NO ,set delegate fail
 >
 
 ```obj-c
-+ (void)initDappWebViewWithKeystore:(NSArray *)keystoreList;  
++ (BOOL)initDAppWithDelegate:(id)delegate;
 
 ```
 
@@ -175,6 +196,76 @@
  >
  ```obj-c
 + (void)deallocDappSingletion;
+```
+
+ ## Change Wallet password  
+>  @param oldPassword : Old password  
+>  @param newPassword : New password   
+>  @param keystoreJson : Keystore in json format     
+>  @param callback : Callback after the end. newKeystore: new keystore   
+ >
+ >
+ ```obj-c
++ (void)modifyKeystorePassword:(NSString *)oldPassword
+                         newPW:(NSString *)newPassword
+                  keystoreJson:(NSString *)keystoreJson
+                      callback:(void (^)(NSString *newKeystore))callback;
+```
+
+ ## Verify the keystore with a password   
+ >  @param password : Wallet password  
+ >  @param keystoreJson : Keystore in json format    
+ >  @param callback : Callback after the end.   
+
+ ```obj-c
++ (void)verifyKeystorePassword:(NSString *)keystoreJson
+                      password:(NSString *)password
+                      callback:(void (^)(BOOL result))callback;
+```
+ ##  Get chainTag of block chain 
+ >  
+ >  @param callback : Callback after the end. 
+ >
+ >
+ ```obj-c
++ (void)getChainTag:(void (^)(NSString *chainTag))callback;
+```
+ ## Get reference of block chain   
+ >  @param callback : Callback after the end.    
+ >
+ >
+ ```obj-c
++ (void)getBlockReference:(void (^)(NSString *blockReference))callback;
+```
+ ##  Get address from keystore   
+ >  @param keystoreJson : Keystore in json format.   
+ >  retuen : address   
+ >
+ >
+ ```obj-c
++ (NSString *)getAddressWithKeystore:(NSString *)keystoreJson;
+```
+
+
+ ##  Dapp call transfer function ,app developer implementation   
+ >  @param clauses : clause list   
+ >  @param gas :  Set maximum gas allowed for call   
+ >  @param callback : Callback after the end. txid:Transaction identifier   
+ >
+ >
+ ```obj-c
+- (void)onTransfer:(NSArray *)clauses gas:(NSString *)gas callback:(void(^)(NSString *txid))callback;
+
+ ```
+
+
+
+ ##  Dapp call get address ,app developer implementation   
+ >  @param callback : Callback after the end. addressList :address list   
+ >
+ >
+ ```obj-c
+- (void)onGetWalletAddress:(void(^)(NSArray *addressList))callback;
 ```
 
 
