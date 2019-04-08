@@ -83,7 +83,11 @@ callback:^(WalletAccountModel * _Nonnull account, NSError * _Nonnull error)
 
 #### 2.1 Set delegate
 #####  Sdk can send a delegate signal to the developer to implement the corresponding method.
+#####  Set the delegate <WalletUtilsDelegate> in @interface
+
 ```obj-c
+@interface ViewContrller ()<WalletUtilsDelegate>
+
 [WalletUtils initDAppWithDelegate:self];
 
 ````
@@ -94,7 +98,7 @@ You must  conform to the WKNavigationDelegate protocol  of  WKWebView,  and   im
 then you can Inject js bridge into webview.
 
 ```obj-c  
-as example:
+
 - (void)webView:(WKWebView *)webView didCommitNavigation:(null_unspecified WKNavigation *)navigation;
 {
     [WalletUtils injectJSWithWebView:webView];
