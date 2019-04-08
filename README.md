@@ -98,7 +98,7 @@ You must  conform to the WKNavigationDelegate protocol  of  WKWebView,  and   im
 then you can Inject js bridge into webview.
 
 ```obj-c  
-as example:
+
 - (void)webView:(WKWebView *)webView didCommitNavigation:(null_unspecified WKNavigation *)navigation;
 {
     [WalletUtils injectJSWithWebView:webView];
