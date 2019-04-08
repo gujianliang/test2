@@ -30,10 +30,6 @@
 #import "WalletTransactionApi.h"
 #import "WalletDappCheckParamsHandle.H"
 
-#import "NSJSONSerialization+NilDataParameter.h"
-
-#import "NSJSONSerialization+NilDataParameter.h"
-
 @interface WalletDAppHandle ()<WKNavigationDelegate,WKUIDelegate>
 {
     WKWebView *_webView;

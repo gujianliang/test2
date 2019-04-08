@@ -11,7 +11,7 @@
 #import <WalletSDK/WalletUtils.h>
 #import "WalletSdkMacro.h"
 
-@interface WebViewVC ()<WKNavigationDelegate,WKUIDelegate>
+@interface WebViewVC ()<WKNavigationDelegate,WKUIDelegate,WalletUtilsDelegate>
 {
     NSURL *_URL;
     WKWebView *_webView;  /* It is a 'WKWebView' object that used to interact with dapp. */
@@ -60,7 +60,7 @@
         [walletList addObject:currentWallet[@"keystore"]];
     }
     
-    // intput wallet list detail to sdk，
+    // set deleget
     [WalletUtils initDAppWithDelegate:self];
 }
 

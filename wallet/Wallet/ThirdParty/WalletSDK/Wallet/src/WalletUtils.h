@@ -13,8 +13,28 @@
 #import "MBProgressHUD.h"
 #import "BigNumber.h"
 
-@interface WalletUtils : NSObject
+@protocol WalletUtilsDelegate <NSObject>
+#pragma mark setDelegate
+/**
+ *  @abstract
+ *  Dapp call transfer function ,app developer implementation
+ *  @param clauses : clause list.
+ *  @param gas : Set maximum gas allowed for call.
+ *  @param callback : Callback after the end
+ *
+ */
+- (void)onTransfer:(NSArray *)clauses gas:(NSString *)gas callback:(void(^)(NSString *txid))callback;
+/**
+ *  @abstract
+ *   Dapp call get address ,app developer implementation
+ *  @param callback : Callback after the end
+ *
+ */
+- (void)onGetWalletAddress:(void(^)(NSArray *addressList))callback;
+@end
 
+@interface WalletUtils : NSObject
+@property(nonatomic, weak) id<WalletUtilsDelegate> delegate;
 NS_ASSUME_NONNULL_BEGIN
 
 /**
@@ -258,23 +278,7 @@ completionHandler:(void (^)(NSString *result))completionHandler;
 + (NSString *)getAddressWithKeystore:(NSString *)keystoreJson;
 
 
-#pragma mark setDelegate
-/**
- *  @abstract
- *  Dapp call transfer function ,app developer implementation
- *  @param clauses : clause list.
- *  @param gas : Set maximum gas allowed for call.
- *  @param callback : Callback after the end
- *
- */
-- (void)onTransfer:(NSArray *)clauses gas:(NSString *)gas callback:(void(^)(NSString *txid))callback;
-/**
- *  @abstract
- *   Dapp call get address ,app developer implementation
- *  @param callback : Callback after the end
- *
- */
-- (void)onGetWalletAddress:(void(^)(NSArray *addressList))callback;
+
 
 NS_ASSUME_NONNULL_END
 

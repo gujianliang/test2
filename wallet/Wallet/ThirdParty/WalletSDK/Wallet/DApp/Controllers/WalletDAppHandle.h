@@ -8,6 +8,7 @@
 
 
 #import <UIKit/UIKit.h>
+#import "WalletUtils.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -15,7 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (instancetype)shareWalletHandle;
 
-@property (nonatomic, strong)id delegate;
+@property(nonatomic, weak) id<WalletUtilsDelegate> delegate;
+
 @property (nonatomic, copy)NSString *keystore;
 @property (nonatomic, assign)BOOL isSend;
 @property (nonatomic, copy)NSString *txId;

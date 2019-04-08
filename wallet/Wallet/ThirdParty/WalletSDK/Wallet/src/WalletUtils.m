@@ -201,7 +201,8 @@
 
 + (BOOL)initDAppWithDelegate:(id)delegate
 {
-    [WalletDAppHandle shareWalletHandle].delegate = delegate;
+    WalletDAppHandle *dappHandle = [WalletDAppHandle shareWalletHandle];
+    dappHandle.delegate = delegate;
     
     if (![delegate respondsToSelector:@selector(onTransfer: gas: callback:)] ||
         ![delegate respondsToSelector:@selector(onGetWalletAddress:)]) {
