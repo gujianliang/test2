@@ -83,7 +83,11 @@ callback:^(WalletAccountModel * _Nonnull account, NSError * _Nonnull error)
 
 #### 2.1 Set delegate
 #####  Sdk can send a delegate signal to the developer to implement the corresponding method.
+#####  Set the delegate <WalletUtilsDelegate> in @interface
+
 ```obj-c
+@interface ViewContrller ()<WalletUtilsDelegate>
+
 [WalletUtils initDAppWithDelegate:self];
 
 ````
