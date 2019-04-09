@@ -1,25 +1,10 @@
 
 
 #import <Foundation/Foundation.h>
-
 #import "Address.h"
 #import "BigNumber.h"
 #import "Hash.h"
 #import "Signature.h"
-
-
-/**
- *  Chain ID
- *
- *  As of EIP155, the chain ID can be used when signing requests to protect from
- *  replay attacks on other networks. This alters the internal structure of the
- *  payload that is hashed before signing the digest, so ChainIdAny is provided
- *  to continue using the legacy method of signing, but this also means the
- *  transaction is not safe against replays.
- *
- *  Note: ChainIdAny is NOT recommended
- *
- */
 
 typedef NS_OPTIONS(unsigned char, ChainId)  {
     ChianIdAny          = 0x00,

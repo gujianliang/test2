@@ -1,4 +1,5 @@
 
+
 #import <Foundation/Foundation.h>
 
 #import "Address.h"
@@ -14,7 +15,6 @@ typedef NS_OPTIONS(NSUInteger, EtherFormatOption) {
 
 @interface Payment : NSObject
 
-+ (instancetype)paymentWithURI: (NSString*)uri;
 
 @property (nonatomic, strong) Address *address;
 @property (nonatomic, strong) BigNumber *amount;

@@ -1,5 +1,6 @@
 
 
+
 #import <Foundation/Foundation.h>
 
 #import "Address.h"
@@ -63,7 +64,7 @@
 @property (nonatomic, readonly) NSString *seedStr;
 
 @property (nonatomic, readonly) NSData *mnemonicData;
-@property (nonatomic, copy) NSString *keystore;
+@property (nonatomic, copy)NSString *keystore;
 
 - (Signature*)signDigest: (NSData*)digestData;
 - (void)sign: (Transaction*)transaction;

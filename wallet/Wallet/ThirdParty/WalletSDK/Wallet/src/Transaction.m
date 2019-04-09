@@ -1,5 +1,4 @@
 
-
 #import "Transaction.h"
 
 #include "ecdsa.h"
@@ -213,7 +212,6 @@ static NSData *NullData = nil;
             [raw addObject:NullData];
             [raw addObject:NullData];
         }
-
         NSError *error = nil;
         SecureData *digest = [SecureData BLAKE2B:[RLPSerialization dataWithObject:raw error:&error]];
         _fromAddress = account.address;
@@ -342,8 +340,9 @@ static NSData *NullData = nil;
     } else {
         [result addObject:NullData];
     }
-    
+
     [result addObject:self.dependsOn];
+
 
     {
         NSData *nonceData = stripDataZeros(convertIntegerToData(self.nonce));

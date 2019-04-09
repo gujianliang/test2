@@ -1,3 +1,10 @@
+//
+//  Utilities.m
+//  ethers
+//
+//  Created by Richard Moore on 2017-02-01.
+//  Copyright © 2017 Ethers. All rights reserved.
+//
 
 #import "Utilities.h"
 

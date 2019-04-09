@@ -12,6 +12,7 @@
 #import "WalletAccountModel.h"
 #import "MBProgressHUD.h"
 #import "BigNumber.h"
+NS_ASSUME_NONNULL_BEGIN
 
 @protocol WalletUtilsDelegate <NSObject>
 #pragma mark setDelegate
@@ -38,7 +39,6 @@
 
 @property(nonatomic, weak) id<WalletUtilsDelegate> delegate;
 
-NS_ASSUME_NONNULL_BEGIN
 
 /**
  *  @abstract

@@ -58,6 +58,15 @@
 - (IBAction)transfer:(id)sender{
     [self.view endEditing:YES];
 
+     if (![self checkEnoughCoinBalance:self.coinAmount transferAmount:self.transferAmountTextField.text]) {
+         NSLog(@"The balance is not enough to pay");
+         
+         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+         hud.mode = MBProgressHUDModeText;
+         hud.label.text =  @"The balance is not enough to pay";
+         [hud hideAnimated:YES afterDelay:1.5];
+         return;
+     }
     NSDictionary *currentWalletDict = [[NSUserDefaults standardUserDefaults]objectForKey:@"currentWallet"];
     NSString *from = currentWalletDict[@"address"];
     
@@ -357,6 +366,17 @@
     NSDecimalNumber *weiNumber = [number decimalNumberByMultiplyingBy:number1];
     
     return [BigNumber bigNumberWithNumber:weiNumber];
+}
+
+- (BOOL)checkEnoughCoinBalance:(NSString *)coinBalance transferAmount:(NSString *)transferAmount
+{
+    NSDecimalNumber *coinBalanceNumber = [NSDecimalNumber decimalNumberWithString:coinBalance];
+    NSDecimalNumber *transferAmounttnumber = [NSDecimalNumber decimalNumberWithString:transferAmount];
+    
+    if ([coinBalanceNumber compare:transferAmounttnumber] == NSOrderedAscending) {
+        return NO;
+    }
+    return YES;
 }
 
 - (void)dealloc

@@ -162,7 +162,7 @@ static NSDateFormatter *TimeFormatter = nil;
     
     //vechain M/44‘/818’/0‘/0/0
     hdnode_private_ckd(&node, (0x80000000 | (44)));   // 44' - BIP 44 (purpose field)
-    hdnode_private_ckd(&node, (0x80000000 | (818)));   // 60' - vechain (see SLIP 44)
+    hdnode_private_ckd(&node, (0x80000000 | (818)));  // 818' - vechain (see SLIP 44)
     hdnode_private_ckd(&node, (0x80000000 | (0)));    // 0'  - Account 0
     hdnode_private_ckd(&node, 0);                     // 0   - External
     hdnode_private_ckd(&node, 0);                     // 0   - Slot #0
@@ -253,7 +253,6 @@ static NSDateFormatter *TimeFormatter = nil;
                                                            error:&error];
     
     if (error) {
-        NSLog(@"The Keystore format is incorrect.");
         sendError(kAccountErrorJSONInvalid, [error description]);
         return nil;
     }
@@ -390,7 +389,6 @@ static NSDateFormatter *TimeFormatter = nil;
             sendError(kAccountErrorJSONInvalidParameter, @"Address mismatch");
             return;
         }
-
         
         dispatch_async(dispatch_get_main_queue(), ^() {
             // Cancelled after derfivation completed but before we responded (on the main thread)
@@ -446,9 +444,6 @@ static NSDateFormatter *TimeFormatter = nil;
     [json setObject:[uuid UUIDString] forKey:@"id"];
     [json setObject:@(3) forKey:@"version"];
     
-    NSMutableDictionary *ethers = [NSMutableDictionary dictionary];
-    //[json setObject:ethers forKey:@"x-ethers"];
-    
     NSMutableDictionary *crypto = [NSMutableDictionary dictionary];
     [json setObject:crypto forKey:@"crypto"];
 
@@ -468,16 +463,6 @@ static NSDateFormatter *TimeFormatter = nil;
                forKey:@"cipherparams"];
     [crypto setObject:@"aes-128-ctr" forKey:@"cipher"];
     
-    // Set ethers parameters
-    NSDate *now = [NSDate date];
-    NSString *gethFilename = [NSString stringWithFormat:@"UTC--%@T%@.0Z--%@",
-                              [DateFormatter stringFromDate:now],
-                              [TimeFormatter stringFromDate:now],
-                              [[self.address.checksumAddress substringFromIndex:2] lowercaseString]];
-    [ethers setObject:gethFilename forKey:@"gethFilename"];
-    [ethers setObject:@"ethers/iOS" forKey:@"client"];
-    [ethers setObject:@"0.1" forKey:@"version"];
-
     __block char stop = 0;
     
     Cancellable *cancellable = [[Cancellable alloc] initWithCancelCallback:^() {
@@ -551,9 +536,6 @@ static NSDateFormatter *TimeFormatter = nil;
                 sendResult(nil);
                 return;
             }
-            
-            [ethers setObject:[[mnemonicCounter hexString] substringFromIndex:2] forKey:@"mnemonicCounter"];
-            [ethers setObject:[[mnemonicCiphertext hexString] substringFromIndex:2] forKey:@"mnemonicCiphertext"];
         }
 
         
@@ -573,6 +555,7 @@ static NSDateFormatter *TimeFormatter = nil;
             return;
         }
         
+        
         sendResult([[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding]);
     });
 
@@ -590,7 +573,7 @@ static NSDateFormatter *TimeFormatter = nil;
     return [Signature signatureWithData:signatureData.data v:pby];
 }
 
-static NSString *MessagePrefix = @"vechain Signed Message:\n%d";
+static NSString *MessagePrefix = @"Vechain Signed Message:\n%d";
 
 + (NSData*)messageDigest: (NSData*)message {
     NSString *prefix = [NSString stringWithFormat:MessagePrefix, (int)message.length];

@@ -171,16 +171,16 @@
 		97F719BB225B653700786D79 /* ecdsa.c in Sources */ = {isa = PBXBuildFile; fileRef = 97F71980225B653600786D79 /* ecdsa.c */; };
 		97F719BC225B653700786D79 /* pbkdf2.c in Sources */ = {isa = PBXBuildFile; fileRef = 97F71981225B653600786D79 /* pbkdf2.c */; };
 		97F719BD225B653700786D79 /* secp256k1.h in Headers */ = {isa = PBXBuildFile; fileRef = 97F71982225B653600786D79 /* secp256k1.h */; };
-		97F719BE225B653700786D79 /* blake2s-ref.c in Sources */ = {isa = PBXBuildFile; fileRef = 97F71984225B653600786D79 /* blake2s-ref.c */; };
-		97F719BF225B653700786D79 /* blake2xb-ref.c in Sources */ = {isa = PBXBuildFile; fileRef = 97F71985225B653600786D79 /* blake2xb-ref.c */; };
-		97F719C0225B653700786D79 /* blake2sp-ref.c in Sources */ = {isa = PBXBuildFile; fileRef = 97F71986225B653600786D79 /* blake2sp-ref.c */; };
-		97F719C1225B653700786D79 /* genkat-c.c in Sources */ = {isa = PBXBuildFile; fileRef = 97F71987225B653600786D79 /* genkat-c.c */; };
-		97F719C2225B653700786D79 /* blake2.h in Headers */ = {isa = PBXBuildFile; fileRef = 97F71988225B653600786D79 /* blake2.h */; };
-		97F719C3225B653700786D79 /* blake2bp-ref.c in Sources */ = {isa = PBXBuildFile; fileRef = 97F71989225B653600786D79 /* blake2bp-ref.c */; };
-		97F719C4225B653700786D79 /* genkat-json.c in Sources */ = {isa = PBXBuildFile; fileRef = 97F7198A225B653600786D79 /* genkat-json.c */; };
-		97F719C5225B653700786D79 /* blake2b-ref.c in Sources */ = {isa = PBXBuildFile; fileRef = 97F7198B225B653600786D79 /* blake2b-ref.c */; };
-		97F719C6225B653700786D79 /* blake2-impl.h in Headers */ = {isa = PBXBuildFile; fileRef = 97F7198C225B653600786D79 /* blake2-impl.h */; };
-		97F719C7225B653700786D79 /* blake2xs-ref.c in Sources */ = {isa = PBXBuildFile; fileRef = 97F7198D225B653600786D79 /* blake2xs-ref.c */; };
+		97F71A1D225B682800786D79 /* blake2s-ref.c in Sources */ = {isa = PBXBuildFile; fileRef = 97F71A13225B682800786D79 /* blake2s-ref.c */; };
+		97F71A1E225B682800786D79 /* blake2xb-ref.c in Sources */ = {isa = PBXBuildFile; fileRef = 97F71A14225B682800786D79 /* blake2xb-ref.c */; };
+		97F71A1F225B682800786D79 /* blake2sp-ref.c in Sources */ = {isa = PBXBuildFile; fileRef = 97F71A15225B682800786D79 /* blake2sp-ref.c */; };
+		97F71A20225B682800786D79 /* genkat-c.c in Sources */ = {isa = PBXBuildFile; fileRef = 97F71A16225B682800786D79 /* genkat-c.c */; };
+		97F71A21225B682800786D79 /* blake2.h in Headers */ = {isa = PBXBuildFile; fileRef = 97F71A17225B682800786D79 /* blake2.h */; };
+		97F71A22225B682800786D79 /* blake2bp-ref.c in Sources */ = {isa = PBXBuildFile; fileRef = 97F71A18225B682800786D79 /* blake2bp-ref.c */; };
+		97F71A23225B682800786D79 /* genkat-json.c in Sources */ = {isa = PBXBuildFile; fileRef = 97F71A19225B682800786D79 /* genkat-json.c */; };
+		97F71A24225B682800786D79 /* blake2b-ref.c in Sources */ = {isa = PBXBuildFile; fileRef = 97F71A1A225B682800786D79 /* blake2b-ref.c */; };
+		97F71A25225B682800786D79 /* blake2-impl.h in Headers */ = {isa = PBXBuildFile; fileRef = 97F71A1B225B682800786D79 /* blake2-impl.h */; };
+		97F71A26225B682800786D79 /* blake2xs-ref.c in Sources */ = {isa = PBXBuildFile; fileRef = 97F71A1C225B682800786D79 /* blake2xs-ref.c */; };
 		E2317E6D1E3191AC00DBE3E4 /* WalletSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2317E631E3191AC00DBE3E4 /* WalletSDK.framework */; };
 		E2317E931E31970900DBE3E4 /* Payment.h in Headers */ = {isa = PBXBuildFile; fileRef = E2317E7D1E31970900DBE3E4 /* Payment.h */; };
 		E2317E941E31970900DBE3E4 /* Payment.m in Sources */ = {isa = PBXBuildFile; fileRef = E2317E7E1E31970900DBE3E4 /* Payment.m */; };
@@ -452,16 +452,16 @@
 		97F71980225B653600786D79 /* ecdsa.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.objc; fileEncoding = 4; path = ecdsa.c; sourceTree = "<group>"; };
 		97F71981225B653600786D79 /* pbkdf2.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.objc; fileEncoding = 4; path = pbkdf2.c; sourceTree = "<group>"; };
 		97F71982225B653600786D79 /* secp256k1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = secp256k1.h; sourceTree = "<group>"; };
-		97F71984225B653600786D79 /* blake2s-ref.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.objc; fileEncoding = 4; path = "blake2s-ref.c"; sourceTree = "<group>"; };
-		97F71985225B653600786D79 /* blake2xb-ref.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.objc; fileEncoding = 4; path = "blake2xb-ref.c"; sourceTree = "<group>"; };
-		97F71986225B653600786D79 /* blake2sp-ref.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.objc; fileEncoding = 4; path = "blake2sp-ref.c"; sourceTree = "<group>"; };
-		97F71987225B653600786D79 /* genkat-c.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.objc; fileEncoding = 4; path = "genkat-c.c"; sourceTree = "<group>"; };
-		97F71988225B653600786D79 /* blake2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blake2.h; sourceTree = "<group>"; };
-		97F71989225B653600786D79 /* blake2bp-ref.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.objc; fileEncoding = 4; path = "blake2bp-ref.c"; sourceTree = "<group>"; };
-		97F7198A225B653600786D79 /* genkat-json.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.objc; fileEncoding = 4; path = "genkat-json.c"; sourceTree = "<group>"; };
-		97F7198B225B653600786D79 /* blake2b-ref.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.objc; fileEncoding = 4; path = "blake2b-ref.c"; sourceTree = "<group>"; };
-		97F7198C225B653600786D79 /* blake2-impl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "blake2-impl.h"; sourceTree = "<group>"; };
-		97F7198D225B653600786D79 /* blake2xs-ref.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.objc; fileEncoding = 4; path = "blake2xs-ref.c"; sourceTree = "<group>"; };
+		97F71A13225B682800786D79 /* blake2s-ref.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.objc; fileEncoding = 4; path = "blake2s-ref.c"; sourceTree = "<group>"; };
+		97F71A14225B682800786D79 /* blake2xb-ref.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.objc; fileEncoding = 4; path = "blake2xb-ref.c"; sourceTree = "<group>"; };
+		97F71A15225B682800786D79 /* blake2sp-ref.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.objc; fileEncoding = 4; path = "blake2sp-ref.c"; sourceTree = "<group>"; };
+		97F71A16225B682800786D79 /* genkat-c.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.objc; fileEncoding = 4; path = "genkat-c.c"; sourceTree = "<group>"; };
+		97F71A17225B682800786D79 /* blake2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blake2.h; sourceTree = "<group>"; };
+		97F71A18225B682800786D79 /* blake2bp-ref.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.objc; fileEncoding = 4; path = "blake2bp-ref.c"; sourceTree = "<group>"; };
+		97F71A19225B682800786D79 /* genkat-json.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.objc; fileEncoding = 4; path = "genkat-json.c"; sourceTree = "<group>"; };
+		97F71A1A225B682800786D79 /* blake2b-ref.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.objc; fileEncoding = 4; path = "blake2b-ref.c"; sourceTree = "<group>"; };
+		97F71A1B225B682800786D79 /* blake2-impl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "blake2-impl.h"; sourceTree = "<group>"; };
+		97F71A1C225B682800786D79 /* blake2xs-ref.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.objc; fileEncoding = 4; path = "blake2xs-ref.c"; sourceTree = "<group>"; };
 		B0788C213B0E96A6AFCB6EA1 /* Pods_WalletSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WalletSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2317E631E3191AC00DBE3E4 /* WalletSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WalletSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2317E6C1E3191AC00DBE3E4 /* WalletSDKTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WalletSDKTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -924,19 +924,19 @@
 			path = "ThirdParty/trezor-crypto";
 			sourceTree = "<group>";
 		};
-		97F71983225B653600786D79 /* Blake2 */ = {
+		97F71A12225B682800786D79 /* Blake2 */ = {
 			isa = PBXGroup;
 			children = (
-				97F71984225B653600786D79 /* blake2s-ref.c */,
-				97F71985225B653600786D79 /* blake2xb-ref.c */,
-				97F71986225B653600786D79 /* blake2sp-ref.c */,
-				97F71987225B653600786D79 /* genkat-c.c */,
-				97F71988225B653600786D79 /* blake2.h */,
-				97F71989225B653600786D79 /* blake2bp-ref.c */,
-				97F7198A225B653600786D79 /* genkat-json.c */,
-				97F7198B225B653600786D79 /* blake2b-ref.c */,
-				97F7198C225B653600786D79 /* blake2-impl.h */,
-				97F7198D225B653600786D79 /* blake2xs-ref.c */,
+				97F71A13225B682800786D79 /* blake2s-ref.c */,
+				97F71A14225B682800786D79 /* blake2xb-ref.c */,
+				97F71A15225B682800786D79 /* blake2sp-ref.c */,
+				97F71A16225B682800786D79 /* genkat-c.c */,
+				97F71A17225B682800786D79 /* blake2.h */,
+				97F71A18225B682800786D79 /* blake2bp-ref.c */,
+				97F71A19225B682800786D79 /* genkat-json.c */,
+				97F71A1A225B682800786D79 /* blake2b-ref.c */,
+				97F71A1B225B682800786D79 /* blake2-impl.h */,
+				97F71A1C225B682800786D79 /* blake2xs-ref.c */,
 			);
 			name = Blake2;
 			path = ThirdParty/Blake2;
@@ -1002,7 +1002,7 @@
 		E2317EE01E3198D100DBE3E4 /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
-				97F71983225B653600786D79 /* Blake2 */,
+				97F71A12225B682800786D79 /* Blake2 */,
 				97F7194F225B653600786D79 /* BreadWallet */,
 				97F71957225B653600786D79 /* libtommath-1.0 */,
 				97F71951225B653600786D79 /* scrypt-1.1.6 */,
@@ -1060,7 +1060,7 @@
 				E2317E931E31970900DBE3E4 /* Payment.h in Headers */,
 				9773F9D8221412D200DF5972 /* WalletDAppHandle.h in Headers */,
 				9773F9D9221412D200DF5972 /* WalletDAppHead.h in Headers */,
-				97F719C2225B653700786D79 /* blake2.h in Headers */,
+				97F71A21225B682800786D79 /* blake2.h in Headers */,
 				97F719A2225B653700786D79 /* aesopt.h in Headers */,
 				97F71994225B653700786D79 /* tommath_private.h in Headers */,
 				974EA62D225B00B4009C021B /* NSJSONSerialization+NilDataParameter.h in Headers */,
@@ -1096,7 +1096,7 @@
 				9773F985221412D200DF5972 /* WalletTransantionsReceiptModel.h in Headers */,
 				97EC5C802200AC25001E6B68 /* NSMutableDictionary+Helpers.h in Headers */,
 				9773F9BB221412D200DF5972 /* WalletBlockInfoApi.h in Headers */,
-				97F719C6225B653700786D79 /* blake2-impl.h in Headers */,
+				97F71A25225B682800786D79 /* blake2-impl.h in Headers */,
 				9773F9BA221412D200DF5972 /* WalletBlockApi.h in Headers */,
 				97F71996225B653700786D79 /* tommath_superclass.h in Headers */,
 				9773F9DD221412D200DF5972 /* WalletDAppSignPreVC.h in Headers */,
@@ -1289,8 +1289,8 @@
 				97EC5C812200AC25001E6B68 /* NSMutableDictionary+Helpers.m in Sources */,
 				974EA62E225B00B4009C021B /* NSJSONSerialization+NilDataParameter.m in Sources */,
 				97478229223E323300AB6937 /* WalletTokenBalanceApi.m in Sources */,
-				97F719C3225B653700786D79 /* blake2bp-ref.c in Sources */,
-				97F719C7225B653700786D79 /* blake2xs-ref.c in Sources */,
+				97F71A22225B682800786D79 /* blake2bp-ref.c in Sources */,
+				97F71A26225B682800786D79 /* blake2xs-ref.c in Sources */,
 				E2317EB51E31981D00DBE3E4 /* RegEx.m in Sources */,
 				E2317EB71E31981D00DBE3E4 /* RLPSerialization.m in Sources */,
 				E2FA04871E42A5660013E5A7 /* SecureData.m in Sources */,
@@ -1309,7 +1309,7 @@
 				9773F9E3221412D200DF5972 /* WalletDAppSignPreVC.m in Sources */,
 				97F71998225B653700786D79 /* mpi.c in Sources */,
 				9773F9DE221412D200DF5972 /* WalletDAppHandle+web3JS.m in Sources */,
-				97F719C5225B653700786D79 /* blake2b-ref.c in Sources */,
+				97F71A24225B682800786D79 /* blake2b-ref.c in Sources */,
 				E2317EA61E31970900DBE3E4 /* Account.m in Sources */,
 				97F719A4225B653700786D79 /* curves.c in Sources */,
 				97F719B8225B653700786D79 /* sha3.c in Sources */,
@@ -1341,7 +1341,7 @@
 				9719BEC22229200F00DA3F74 /* SocketRocketUtility.m in Sources */,
 				9773F9A5221412D200DF5972 /* NSStringAdditions.m in Sources */,
 				9773F978221412D200DF5972 /* WalletVerticalSingleLineView.m in Sources */,
-				97F719BF225B653700786D79 /* blake2xb-ref.c in Sources */,
+				97F71A1E225B682800786D79 /* blake2xb-ref.c in Sources */,
 				971811FD2224DBD1008F9639 /* WalletGetBaseGasPriceApi.m in Sources */,
 				9773F9A1221412D200DF5972 /* WalletBlockInfoApi.m in Sources */,
 				9773F9AC221412D200DF5972 /* NSBundle+Localizable.m in Sources */,
@@ -1349,7 +1349,7 @@
 				9718121122267FE5008F9639 /* WalletSignParamModel.m in Sources */,
 				9773F9AA221412D200DF5972 /* WalletGenesisBlockInfoApi.m in Sources */,
 				97F7199A225B653700786D79 /* aeskey.c in Sources */,
-				97F719C0225B653700786D79 /* blake2sp-ref.c in Sources */,
+				97F71A1F225B682800786D79 /* blake2sp-ref.c in Sources */,
 				9773F992221412D200DF5972 /* WalletManageModel.m in Sources */,
 				9773F9A2221412D200DF5972 /* WalletBlockApi.m in Sources */,
 				97F7199D225B653700786D79 /* sha2.c in Sources */,
@@ -1368,15 +1368,15 @@
 				9757452D21FFFBB20046C8A0 /* UIColor+SNFoundation.m in Sources */,
 				9773F9BE221412D200DF5972 /* WalletDAppPeersApi.m in Sources */,
 				9773F991221412D200DF5972 /* WalletTransantionsReceiptModel.m in Sources */,
-				97F719C1225B653700786D79 /* genkat-c.c in Sources */,
+				97F71A20225B682800786D79 /* genkat-c.c in Sources */,
 				9773F981221412D200DF5972 /* WalletTopSinglePixelLineView.m in Sources */,
 				97F71993225B653700786D79 /* crypto_scrypt-nosse.c in Sources */,
 				97F719A6225B653700786D79 /* secp256k1.c in Sources */,
-				97F719C4225B653700786D79 /* genkat-json.c in Sources */,
+				97F71A23225B682800786D79 /* genkat-json.c in Sources */,
 				9757450B21FFEE400046C8A0 /* UIView+Sizes.m in Sources */,
 				9773F9B9221412D200DF5972 /* WalletModelFetcher.m in Sources */,
 				97F719AE225B653700786D79 /* ripemd160.c in Sources */,
-				97F719BE225B653700786D79 /* blake2s-ref.c in Sources */,
+				97F71A1D225B682800786D79 /* blake2s-ref.c in Sources */,
 				E2317E9C1E31970900DBE3E4 /* Address.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

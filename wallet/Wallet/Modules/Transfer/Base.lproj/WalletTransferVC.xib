@@ -81,7 +81,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EJG-yY-D6p">
-                            <rect key="frame" x="84" y="77" width="35" height="21"/>
+                            <rect key="frame" x="84" y="77" width="34.5" height="21"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="21" id="Jgr-Gs-Urx"/>
                             </constraints>
@@ -93,6 +93,7 @@
                             <rect key="frame" x="10" y="77" width="66" height="17"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="17" id="02e-oA-qDu"/>
+                                <constraint firstAttribute="width" constant="66" id="dWh-Za-acg"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <nil key="textColor"/>
@@ -136,6 +137,7 @@
                         <constraint firstItem="aX1-fR-mib" firstAttribute="leading" secondItem="534-sa-her" secondAttribute="trailing" constant="12" id="BIc-xr-13w"/>
                         <constraint firstItem="f7b-tm-NAd" firstAttribute="leading" secondItem="aX1-fR-mib" secondAttribute="trailing" constant="-39" id="BdF-2t-b5l"/>
                         <constraint firstItem="EJG-yY-D6p" firstAttribute="top" secondItem="534-sa-her" secondAttribute="bottom" constant="10" id="Dzv-1P-i2T"/>
+                        <constraint firstItem="f7b-tm-NAd" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="EJG-yY-D6p" secondAttribute="trailing" constant="2" id="EK9-tL-pRL"/>
                         <constraint firstItem="EJG-yY-D6p" firstAttribute="leading" secondItem="zae-lf-mHl" secondAttribute="trailing" constant="8" id="J6d-hh-ni7"/>
                         <constraint firstItem="aX1-fR-mib" firstAttribute="centerY" secondItem="534-sa-her" secondAttribute="centerY" id="TS6-z7-nhL"/>
                         <constraint firstItem="534-sa-her" firstAttribute="top" secondItem="AqB-TW-gGW" secondAttribute="bottom" constant="10" id="VGP-cR-gqa"/>

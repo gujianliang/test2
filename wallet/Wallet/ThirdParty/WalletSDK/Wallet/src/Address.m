@@ -1,6 +1,6 @@
 
-#import "Address.h"
 
+#import "Address.h"
 #import "BigNumber.h"
 #import "RegEx.h"
 #import "SecureData.h"
@@ -26,10 +26,9 @@ int ibanChecksum(NSString *address) {
         }
     });
     
-    // See: https://en.wikipedia.org/wiki/International_Bank_Account_Number
     
     // Prepare the address
-    address = [[[address uppercaseString] substringFromIndex:4] stringByAppendingString:@"VX00"];
+    address = [[[address uppercaseString] substringFromIndex:4] stringByAppendingString:@"0X00"];
     
     NSUInteger length = [address lengthOfBytesUsingEncoding:NSASCIIStringEncoding];
     const unsigned char* addressBytes = (const unsigned char*)[address cStringUsingEncoding:NSASCIIStringEncoding];
@@ -58,7 +57,7 @@ static RegEx *MixedCaseAddressRegex = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         HexAddressRegex = [RegEx regExWithPattern:@"^(0x)?[0-9A-Fa-f]{40}$"];
-        IcapAddressRegex = [RegEx regExWithPattern:@"^VX[0-9]{2}[0-9A-Za-z]{30,31}$"];
+        IcapAddressRegex = [RegEx regExWithPattern:@"^0X[0-9]{2}[0-9A-Za-z]{30,31}$"];
         MixedCaseAddressRegex = [RegEx regExWithPattern:@"^.*(([A-F].*[a-f])|([a-f].*[A-F])).*$"];
 
         unsigned char nullBytes[20];
@@ -147,7 +146,7 @@ static RegEx *MixedCaseAddressRegex = nil;
     if (result && icapFormat) {
         NSString *icap = [[[BigNumber bigNumberWithHexString:result] base36String] uppercaseString];
         while (icap.length < 30) { icap = [@"0" stringByAppendingString:icap]; }
-        result = [NSString stringWithFormat:@"VX%02d%@", ibanChecksum([@"VX00" stringByAppendingString:icap]), icap];
+        result = [NSString stringWithFormat:@"0X%02d%@", ibanChecksum([@"0X00" stringByAppendingString:icap]), icap];
     }
     
     return result;;
@@ -159,14 +158,6 @@ static RegEx *MixedCaseAddressRegex = nil;
 - (instancetype)initWithString: (NSString*)addressString {
     self = [super init];
     if (self) {
-
-//        if ([[addressString uppercaseString] hasPrefix:@"VX"] && addressString.length == 42) {
-//            // 去掉checksum address的VX，iban不变
-//            addressString = [addressString substringFromIndex:2];
-//        }
-//        if (![[addressString lowercaseString] hasPrefix:@"0x"] && ![addressString hasPrefix:@"VX"]) {
-//            addressString = [@"0x" stringByAppendingString:addressString];
-//        }
         if ([addressString hasPrefix:@"0X"]) {
             addressString = [@"0x" stringByAppendingString:[addressString substringFromIndex:2]];
         }
