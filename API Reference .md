@@ -250,11 +250,11 @@
  ##  Dapp call transfer function ,app developer implementation   
  >  @param clauses : clause list   
  >  @param gas :  Set maximum gas allowed for call   
- >  @param callback : Callback after the end. txid:Transaction identifier   
+ >  @param callback : Callback after the end. txid:Transaction identifier ;address:Signer address  
  >
  >
  ```obj-c
-- (void)onTransfer:(NSArray *)clauses gas:(NSString *)gas callback:(void(^)(NSString *txid))callback;
+- (void)onTransfer:(NSArray *)clauses gas:(NSString *)gas callback:(void(^)(NSString *txid,NSString *address))callback;
 
  ```
 

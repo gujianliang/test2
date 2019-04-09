@@ -17,6 +17,7 @@ Vechain wallet SDK provides a series of functional interface can help the iOS de
 - Verify keystore
 - Recover address
 - Sign message
+- Sign transfer message
 - Sign and send
 - Inject js into webview
 - Support dapp development environment
@@ -84,11 +85,16 @@ callback:^(WalletAccountModel * _Nonnull account, NSError * _Nonnull error)
 #### 2.1 Set delegate
 #####  Sdk can send a delegate signal to the developer to implement the corresponding method.
 #####  Set the delegate <WalletUtilsDelegate> in @interface
-
 ```obj-c
+
 @interface ViewContrller ()<WalletUtilsDelegate>
 
 [WalletUtils initDAppWithDelegate:self];
+
+- (void)onTransfer:(NSArray *)clauses gas:(NSString *)gas callback:(void(^)(NSString *txId ,NSString *address))callback;
+
+- (void)onGetWalletAddress:(void(^)(NSArray *addressList))callback;
+
 
 ````
 
@@ -157,7 +163,9 @@ then you can Inject js bridge into webview.
 *
 */
 ```
+#### 2，Hexadecimal must start with 0x.
 
+#### 3，Address : 20 bytes hex string and starts with 0x.
 
 ## API Reference：
 
