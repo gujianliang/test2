@@ -163,7 +163,9 @@ then you can Inject js bridge into webview.
 *
 */
 ```
+#### 2，Hexadecimal must start with 0x.
 
+#### 3，Address : 20 bytes hex string and starts with 0x.
 
 ## API Reference：
 
