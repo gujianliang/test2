@@ -87,13 +87,14 @@ callback:^(WalletAccountModel * _Nonnull account, NSError * _Nonnull error)
 #####  Set the delegate <WalletUtilsDelegate> in @interface
 ```obj-c
 
+@interface ViewContrller ()<WalletUtilsDelegate>
+
+[WalletUtils initDAppWithDelegate:self];
+
 - (void)onTransfer:(NSArray *)clauses gas:(NSString *)gas callback:(void(^)(NSString *txId ,NSString *address))callback;
 
 - (void)onGetWalletAddress:(void(^)(NSArray *addressList))callback;
 
-@interface ViewContrller ()<WalletUtilsDelegate>
-
-[WalletUtils initDAppWithDelegate:self];
 
 ````
 
