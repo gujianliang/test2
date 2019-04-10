@@ -49,15 +49,17 @@
             }
             return ;
         }
-        
         // 如果是vtho 转账，amount不能有值
-        if ([clauseModel.to isEqualToString:vthoTokenAddress]) {
+        if ([clauseModel.to isEqualToString:vthoTokenAddress] && [clauseModel.data.lowercaseString hasPrefix:TransferMethodId]) {
             
             if (![WalletTools isEmpty:clauseModel.value]) {
-                if (callback) {
-                    callback(errorMsg,NO);
+                //排除value == 0x
+                if (![clauseModel.value isEqualToString:@"0x"]) {
+                    if (callback) {
+                        callback(errorMsg,NO);
+                    }
+                    return ;
                 }
-                return ;
             }
         }
     }

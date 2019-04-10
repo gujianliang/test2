@@ -25,7 +25,7 @@
 @implementation WalletUtils
 
 
-+ (void)creatWalletWithPassword:(NSString *)password
++ (void)createWalletWithPassword:(NSString *)password
                        callback:(void(^)(WalletAccountModel *accountModel,NSError *error))callback
 {
     NSString *domain = @"com.wallet.ErrorDomain";
@@ -75,7 +75,7 @@
 }
 
 // mnemonicWords count 12,15,18,21,24
-+ (void)creatWalletWithMnemonicWords:(NSArray *)mnemonicWords
++ (void)createWalletWithMnemonicWords:(NSArray<NSString *> *)mnemonicWords
                             password:(NSString *)password
                             callback:(void(^)(WalletAccountModel *account,NSError *error))callback
 {
@@ -144,7 +144,7 @@
     }];
 }
 
-+ (BOOL)isValidMnemonicWords:(NSArray*)mnemonicWords;
++ (BOOL)isValidMnemonicWords:(NSArray<NSString *> *)mnemonicWords;
 {
     if (mnemonicWords.count < 12 || mnemonicWords.count > 24) {
         return NO;
@@ -236,10 +236,10 @@
     [dappHandle injectJS:webview];
 }
 
-+ (void)signAndSendTransfer:(NSString *)keystoreJson
-               parameter:(TransactionParameter *)parameter
-                password:(NSString *)password
-                callback:(void(^)(NSString *txId))callback
++ (void)signAndSendTransferWithParameter:(TransactionParameter *)parameter
+                            keystore:(NSString*)keystoreJson
+                            password:(NSString *)password
+                            callback:(void(^)(NSString *txId))callback
 {
     // check keystore format
     if (![WalletTools checkKeystore:keystoreJson]) {
@@ -366,7 +366,7 @@
     return [WalletUserDefaultManager getBlockUrl];
 }
 
-+ (void)deallocDappSingletion
++ (void)deallocDApp
 {
     [WalletDAppHandle attempDealloc];
     
@@ -376,22 +376,27 @@
     }
 }
 
-+ (void)modifyKeystoreWithPassword:(NSString *)oldPassword
-                         newPW:(NSString *)newPassword
-                  keystoreJson:(NSString *)keystoreJson
-                      callback:(void (^)(NSString *newKeystore))callback
++ (void)modifyKeystore:(NSString *)keystoreJson
+           newPassword:(NSString *)newPassword
+           oldPassword:(NSString *)oldPassword
+              callback:(void (^)(NSString *newKeystore))callback;
 {
     [WalletUtils decryptKeystore:keystoreJson password:oldPassword callback:^(NSString * _Nonnull privatekey, NSError * _Nonnull error) {
         
-        [WalletUtils encryptPrivateKeyWithPassword:newPassword privateKey:privatekey callback:^(NSString * _Nonnull keystoreJson) {
-            
-            callback(keystoreJson);
-            
-        }];
+        if (error) {
+            callback(nil);
+            return ;
+        }else{
+            [WalletUtils encryptPrivateKeyWithPassword:newPassword privateKey:privatekey callback:^(NSString * _Nonnull keystoreJson) {
+                
+                callback(keystoreJson);
+                
+            }];
+        }
     }];
 }
 
-+ (void)verifyKeystoreWithPassword:(NSString *)keystore
++ (void)verifyKeystore:(NSString *)keystore
                       password:(NSString *)password
                       callback:(void (^)(BOOL result))callback
 {

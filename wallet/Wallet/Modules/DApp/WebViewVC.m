@@ -148,7 +148,7 @@
          
          NSString *password = textF.text;
          
-         [WalletUtils verifyKeystoreWithPassword:keystore password:password callback:^(BOOL result) {
+         [WalletUtils verifyKeystore:keystore password:password callback:^(BOOL result) {
              @strongify(self);
              if (result) {
                  
@@ -227,10 +227,10 @@
              NSLog(@"error == %@",error);
          }else
          {
-             [WalletUtils signAndSendTransfer:keystore
-                                    parameter:transactionModel
-                                     password:password
-                                     callback:^(NSString *txId)
+             [WalletUtils signAndSendTransferWithParameter:transactionModel
+                                              keystore:keystore
+                                              password:password
+                                              callback:^(NSString * _Nonnull txId)
               {
                   //Developers can use txid to query the status of data packaged on the chain
                   
@@ -269,7 +269,7 @@
  * You must implement this method to free memory, otherwise there may be a memory overflow or leak.
  */
 - (void)dealloc{
-    [WalletUtils deallocDappSingletion];
+    [WalletUtils deallocDApp];
 }
 
 @end

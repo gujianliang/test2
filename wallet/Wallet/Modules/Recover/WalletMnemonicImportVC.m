@@ -81,7 +81,7 @@
     
     
     /* Create a wallet with your password and mnemonic words. */
-    [WalletUtils creatWalletWithMnemonicWords:arr
+    [WalletUtils createWalletWithMnemonicWords:arr
                                 password:self.password.text
                                 callback:^(WalletAccountModel * _Nonnull account, NSError * _Nonnull error)
      {

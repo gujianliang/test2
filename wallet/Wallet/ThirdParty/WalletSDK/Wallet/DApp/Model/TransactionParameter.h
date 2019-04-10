@@ -11,8 +11,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface TransactionParameter : NSObject
 
-#warning decimal
-@property (nonatomic, copy)NSString *gas;   //Set maximum gas allowed for call(deciaml or hex string)
+
+@property (nonatomic, copy)NSString *gas;   //Set maximum gas allowed for call(deciaml string)
 
 @property (nonatomic, copy)NSString *chainTag;  //Get the chain tag of the block chain
 
@@ -30,7 +30,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy)NSArray<NSData *> *reserveds;
 
 
-- (void)checkParameter:(void(^)(NSString *error,BOOL result))block; //check param invild
+- (void)checkParameter:(void(^)(NSString *error,BOOL result))block; //check param
 
 
 @end

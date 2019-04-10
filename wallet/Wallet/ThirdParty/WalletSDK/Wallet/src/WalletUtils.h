@@ -18,119 +18,27 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark setDelegate
 /**
  *  @abstract
- *  Dapp call transfer function ,app developer implementation
+ *  App developer implementation when dapp calls transaction function
  *  @param clauses : clause list.
  *  @param gas : Set maximum gas allowed for call.
  *  @param callback : Callback after the end. txId:Transaction identifier; address:Signer address
  *
  */
-- (void)onTransfer:(NSArray *)clauses gas:(NSString *)gas callback:(void(^)(NSString *txId ,NSString *address))callback;
+- (void)onTransfer:(NSArray<ClauseModel *> *)clauses gas:(NSString *)gas callback:(void(^)(NSString *txId ,NSString *address))callback;
+
 /**
  *  @abstract
- *   Dapp call get address ,app developer implementation
+ *   App developer implementation when dapp calls get address function
  *  @param callback : Callback after the end
  *
  */
-- (void)onGetWalletAddress:(void(^)(NSArray *addressList))callback;
+- (void)onGetWalletAddress:(void(^)(NSArray<NSString *> *addressList))callback;
 
 @end
 
 @interface WalletUtils : NSObject
 
 @property(nonatomic, weak) id<WalletUtilsDelegate> delegate;
-
-
-/**
- *  @abstract
- *  Create wallet
- *
- *  @param password : Wallet password
- *  @param callback : Callback after the end;The attributes of a class has mnemonicPhras , address, privateKey, keystore
- *
- */
-+ (void)creatWalletWithPassword:(NSString *)password
-                       callback:(void(^)(WalletAccountModel *account,NSError *error))callback;
-
-/**
- *  @abstract
- *  Create wallet with mnemonic words
- *
- *  @param mnemonicWords :Mnemonic Words
- *  @param password : Wallet password
- *  @param callback : Callback after the end;The attributes of a class has mnemonicPhras , address, privateKey, keystore
- */
-
-+ (void)creatWalletWithMnemonicWords:(NSArray *)mnemonicWords
-                            password:(NSString *)password
-                            callback:(void(^)(WalletAccountModel *account,NSError *error))callback;
-
-/**
- *  @abstract
- *  Verify mnemonic words
- *
- *  @param mnemonicWords : Words
- *  @return result
- */
-+ (BOOL)isValidMnemonicWords:(NSArray *)mnemonicWords;
-
-/**
- *  @abstract
- *  Get checksum address
- *
- *  @param address :Wallet address
- *
- *  @return checksum address
- */
-+ (NSString *)getChecksumAddress:(NSString *)address;
-
-/**
- *  @abstract
- *  Recover address
- *
- *  @param message : Data before signature
- *  @param signatureData : Data after signature
- *
- *  @return address
- */
-+ (NSString *)recoverAddressFromMessage:(NSData*)message
-                          signatureData:(NSData*)signatureData;
-
-/**
- *  @abstract
- *  Check if the keystore format is correct
- *  @param keystoreJson :Keystore in json format
- *
- *  @return verification result
- */
-+ (BOOL)isValidKeystore:(NSString *)keystoreJson;
-
-
-/**
- *  @abstract
- *  Decrypt keystore
- *
- *  @param keystoreJson : Keystore in json format
- *  @param password : Wallet password
- *  @param callback : Callback after the end. Callback after the end;The attributes of a class has mnemonicPhras , address, privateKey, keystore
- *
- */
-+ (void)decryptKeystore:(NSString*)keystoreJson
-               password:(NSString*)password
-               callback:(void(^)(NSString *privateKey,NSError *error))callback;
-
-
-/**
- *  @abstract
- *  Change keystore password
- *
- *  @param password : Wallet password
- *  @param privateKey : PrivateKey
- *  @param callback : Callback after the end. keystoreJson : Keystore in json format
- *
- */
-+ (void)encryptPrivateKeyWithPassword:(NSString*)password
-                           privateKey:(NSString *)privateKey
-                            callback:(void (^)(NSString *keystoreJson))callback;
 
 /**
  *  @abstract
@@ -150,12 +58,154 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  *  @abstract
- *  Sign transfer message
+ *  Create wallet
  *
- *  @param parameter : Prepare the data to be signed
- *  @param keystoreJson : Keystore in json format
  *  @param password : Wallet password
+ *  @param callback : Callback after the end;The attributes of a class has mnemonicPhras , address, privateKey, keystore
+ *
+ */
++ (void)createWalletWithPassword:(NSString *)password
+                       callback:(void(^)(WalletAccountModel *account,NSError *error))callback;
+
+/**
+ *  @abstract
+ *  Create wallet with mnemonic words
+ *
+ *  @param mnemonicWords :Mnemonic Words
+ *  @param password : Wallet password
+ *  @param callback : Callback after the end;The attributes of a class has mnemonicPhras , address, privateKey, keystore
+ */
+
++ (void)createWalletWithMnemonicWords:(NSArray<NSString *> *)mnemonicWords
+                            password:(NSString *)password
+                            callback:(void(^)(WalletAccountModel *account,NSError *error))callback;
+
+/**
+ *  @abstract
+ *  Verify mnemonic words
+ *
+ *  @param mnemonicWords : Mnemonic words
+ *  @return result
+ */
++ (BOOL)isValidMnemonicWords:(NSArray<NSString *> *)mnemonicWords;
+
+/**
+ *  @abstract
+ *  Get checksum address
+ *
+ *  @param address :Wallet address
+ *
+ *  @return checksum address
+ */
++ (NSString *)getChecksumAddress:(NSString *)address;
+
+/**
+ *  @abstract
+ *  Recover address
+ *
+ *  @param message : Data to be signed
+ *  @param signatureData : Signature is 65 bytes
+ *
+ *  @return address
+ */
++ (NSString *)recoverAddressFromMessage:(NSData*)message
+                          signatureData:(NSData*)signatureData;
+
+/**
+ *  @abstract
+ *  Verify keystore format
+ *  @param keystoreJson :Keystore JSON encryption format for user wallet private key
+ *
+ *  @return verification result
+ */
++ (BOOL)isValidKeystore:(NSString *)keystoreJson;
+
+
+/**
+ *  @abstract
+ *  Get address from keystore
+ *  @param keystoreJson :  Keystore JSON encryption format for user wallet private key
+ *
+ */
++ (NSString *)getAddressWithKeystore:(NSString *)keystoreJson;
+
+/**
+ *  @abstract
+ *  Change Wallet password
+ *  @param oldPassword : old password for wallet.
+ *  @param newPassword : new password for wallet.
+ *  @param keystoreJson :  Keystore JSON encryption format for user wallet private key
  *  @param callback : Callback after the end
+ *
+ */
++ (void)modifyKeystore:(NSString *)keystoreJson
+           newPassword:(NSString *)newPassword
+           oldPassword:(NSString *)oldPassword
+              callback:(void (^)(NSString *newKeystore))callback;;
+
+/**
+ *  @abstract
+ *  Verify the keystore with a password
+ *  @param keystoreJson :  Keystore JSON encryption format for user wallet private key
+ *  @param password :  Wallet password
+ *  @param callback : Callback after the end
+ *
+ */
++ (void)verifyKeystore:(NSString *)keystoreJson
+              password:(NSString *)password
+              callback:(void (^)(BOOL result))callback;
+/**
+ *  @abstract
+ *  Decrypt keystore
+ *
+ *  @param keystoreJson : Keystore JSON encryption format for user wallet private key
+ *  @param password : Wallet password
+ *  @param callback : Callback after the end. Callback after the end;The attributes of a class has mnemonicPhras , address, privateKey, keystore
+ *
+ */
++ (void)decryptKeystore:(NSString*)keystoreJson
+               password:(NSString*)password
+               callback:(void(^)(NSString *privateKey,NSError *error))callback;
+
+
+/**
+ *  @abstract
+ *  Encrypted private key
+ *
+ *  @param password : Wallet password
+ *  @param privateKey : PrivateKey
+ *  @param callback : Callback after the end. keystoreJson : Keystore in json format
+ *
+ */
++ (void)encryptPrivateKeyWithPassword:(NSString*)password
+                           privateKey:(NSString *)privateKey
+                            callback:(void (^)(NSString *keystoreJson))callback;
+
+/**
+ *  @abstract
+ *   Get chainTag of block chain
+ *  @param callback : Callback after the end
+ *
+ */
++ (void)getChainTag:(void (^)(NSString *chainTag))callback;
+
+/**
+ *  @abstract
+ *   Get reference of block chain
+ *  @param callback : Callback after the end
+ *
+ */
++ (void)getBlockReference:(void (^)(NSString *blockReference))callback;
+
+
+/**
+ *  @abstract
+ *   Signed transaction
+ *
+ *  @param parameter : Transaction parameters
+ *  @param keystoreJson :  Keystore JSON encryption format for user wallet private key
+ *  @param password : Wallet password
+ *  @param callback :  Callback after the end. raw: RLP encode data and signature
  *
  */
 + (void)signWithParameter:(TransactionParameter *)parameter
@@ -168,7 +218,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  Sign message
  *
  *  @param message : Prepare the data to be signed
- *  @param keystoreJson : Keystore in json format
+ *  @param keystoreJson :  Keystore JSON encryption format for user wallet private key
  *  @param password : Wallet password
  *  @param callback : Callback after the end
  *
@@ -182,14 +232,15 @@ NS_ASSUME_NONNULL_BEGIN
  *  Sign and send
  *
  *  @param parameter : Signature parameters
- *  @param keystoreJson : Keystore in json format
+ *  @param keystoreJson :  Keystore JSON encryption format for user wallet private key
+ *  @param password : Wallet password
  *  @param callback : Callback after the end
  *
  */
-+ (void)signAndSendTransfer:(NSString *)keystoreJson
-                  parameter:(TransactionParameter *)parameter
-                   password:(NSString *)password
-                   callback:(void(^)(NSString *txId))callback;
++ (void)signAndSendTransferWithParameter:(TransactionParameter *)parameter
+                            keystore:(NSString*)keystoreJson
+                            password:(NSString *)password
+                            callback:(void(^)(NSString *txId))callback;
 
 /**
  *  @abstract
@@ -229,56 +280,10 @@ completionHandler:(void (^)(NSString *result))completionHandler;
  *  Call this method when exiting the contrller where dapp is located
  *
  */
-+ (void)deallocDappSingletion;
++ (void)deallocDApp;
 
-/**
- *  @abstract
- *  Change Wallet password
- *  @param oldPassword : old password for wallet.
- *  @param newPassword : new password for wallet.
- *  @param keystoreJson : Keystore in json format.
- *  @param callback : Callback after the end
- *
- */
-+ (void)modifyKeystoreWithPassword:(NSString *)oldPassword
-                         newPW:(NSString *)newPassword
-                  keystoreJson:(NSString *)keystoreJson
-                      callback:(void (^)(NSString *newKeystore))callback;
 
-/**
- *  @abstract
- *  Verify the keystore with a password
- *  @param keystoreJson : Keystore in json format.
- *  @param password : password for wallet.
- *  @param callback : Callback after the end
- *
- */
-+ (void)verifyKeystoreWithPassword:(NSString *)keystoreJson
-                      password:(NSString *)password
-                      callback:(void (^)(BOOL result))callback;
 
-/**
- *  @abstract
- *   Get chainTag
- *  @param callback : Callback after the end
- *
- */
-+ (void)getChainTag:(void (^)(NSString *chainTag))callback;
-
-/**
- *  @abstract
- *   Get reference of block
- *  @param callback : Callback after the end
- *
- */
-+ (void)getBlockReference:(void (^)(NSString *blockReference))callback;
-/**
- *  @abstract
- *  Get address from keystore
- *  @param keystoreJson : Keystore in json format.
- *
- */
-+ (NSString *)getAddressWithKeystore:(NSString *)keystoreJson;
 
 
 
