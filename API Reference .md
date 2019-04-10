@@ -38,7 +38,7 @@
 > 
 ```obj-c
 
-+ (void)createWalletWithMnemonicWords:(NSArray *)mnemonicWords
++ (void)createWalletWithMnemonicWords:(NSArray<NSString *> *)mnemonicWords
                             password:(NSString *)password
                             callback:(void(^)(WalletAccountModel *account,NSError *error))callback;
 
@@ -50,7 +50,7 @@
 >   @return result   
 > 
 ```obj-c
-+ (BOOL)isValidMnemonicWords:(NSArray *)mnemonicWords;
++ (BOOL)isValidMnemonicWords:(NSArray<NSString *> *)mnemonicWords;
 ```
 ##  Verify keystore format   
 
@@ -291,7 +291,7 @@ TransactionParameter attribute description：
  >
  >
  ```obj-c
-- (void)onTransfer:(NSArray *)clauses gas:(NSString *)gas callback:(void(^)(NSString *txid,NSString *address))callback;
+- (void)onTransfer:(NSArray<ClauseModel *> *)clauses gas:(NSString *)gas callback:(void(^)(NSString *txid,NSString *address))callback;
 
  ```
 
@@ -301,7 +301,7 @@ TransactionParameter attribute description：
  >
  >
  ```obj-c
-- (void)onGetWalletAddress:(void(^)(NSArray *addressList))callback;
+- (void)onGetWalletAddress:(void(^)(NSArray<NSString *> *addressList))callback;
 ```
 
 
