@@ -90,7 +90,7 @@
     /* Show the demo version information */
     NSString *version = [[[NSBundle mainBundle] infoDictionary] valueForKey:@"CFBundleVersion"];
     version = [NSString stringWithFormat:NSLocalizedString(@"version", nil), version];
-    CGFloat y = ScreenH -  kNavigationBarHeight;
+    CGFloat y = self.view.frame.size.height -  100;
     UILabel *versionLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, y, ScreenW - 40, 30)];
     versionLabel.text = version;
     versionLabel.font = [UIFont systemFontOfSize:15.0];
