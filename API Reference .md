@@ -192,10 +192,10 @@
 >
 >
 ```obj-c
-+ (void)signAndSendTransferParameter:(TransactionParameter *)parameter
-                            keystore:(NSString*)keystoreJson
-                            password:(NSString *)password
-                            callback:(void(^)(NSString *txId))callback;
++ (void)signAndSendTransferWithParameter:(TransactionParameter *)parameter
+                                keystore:(NSString*)keystoreJson
+                                password:(NSString *)password
+                                callback:(void(^)(NSString *txId))callback;
 ```
 TransactionParameter attribute description：
 
