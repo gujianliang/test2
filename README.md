@@ -68,10 +68,10 @@ To use the Framework, add the WalletSDK.Framework and WalletSDKBundle.bundle to 
 ###  1，Basic wallet development
 
 #### 1.1 Set node url
-##### Set up the node environment. (Test_node environment , Main_node environment and custom node environment in demo)
+##### Set up the node environment. (Test_Node environment , Main_Node environment and custom node environment in demo)
 
 ```obj-c
-[WalletUtils setNode:Test_Node];
+[WalletUtils setNode:Main_Node];
 ````
 #### 1.2 Create wallet
 
@@ -165,7 +165,7 @@ then you can Inject js bridge into webview.
 ```
 #### 2，Hexadecimal must start with 0x.
 
-#### 3，Address : 20 bytes hex string and starts with 0x.
+#### 3，Address : 20 bytes hex string and start with 0x.
 
 ## API Reference：
 
