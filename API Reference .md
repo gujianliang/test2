@@ -288,11 +288,11 @@ TransactionParameter attribute description：
  >  @param clauses : clause list   
  >  @param gas :  Set maximum gas allowed for call   
  >  @param signer :  Specify the signature address, which may be nil   
- >  @param callback : Callback after the end. txid:Transaction identifier ;address:Signer address  
+ >  @param callback : Callback after the end. txid:Transaction identifier ;signer:Signer address  
  >
  >
  ```obj-c
-- (void)onTransfer:(NSArray<ClauseModel *> *)clauses gas:(NSString *)gas signer:(NSString *)signer callback:(void(^)(NSString *txid,NSString *address))callback;
+- (void)onTransfer:(NSArray<ClauseModel *> *)clauses gas:(NSString *)gas signer:(NSString *)signer callback:(void(^)(NSString *txid,NSString *signer))callback;
 
  ```
 
