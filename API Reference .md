@@ -305,3 +305,22 @@ TransactionParameter attribute description：
 ```
 
 
+
+ ##   App developer implementation when dapp calls cert sign function
+ >  @param message : Data to be signed,form dapp
+ >  @param callback : Callback after the end
+ >
+  ```obj-c
+- (void)onCertificate:(NSString *)message callback:(void(^)(NSString *signature))callback;
+```
+
+
+
+
+ ##    App developer implementation when dapp calls checkOwn address function
+ >  @param address : Address from dapp
+ >  @param callback : Callback after the end
+ >
+  ```obj-c
+- (void)onCheckOwnAddress:(NSString *)address callback:(void(^)(BOOL result))callback;
+```
