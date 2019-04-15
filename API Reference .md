@@ -287,11 +287,12 @@ TransactionParameter attribute description：
  ##  App developer implementation when DApp calls transaction function  
  >  @param clauses : clause list   
  >  @param gas :  Set maximum gas allowed for call   
- >  @param callback : Callback after the end. txid:Transaction identifier ;address:Signer address  
+ >  @param signer :  Specify the signature address, which may be nil   
+ >  @param callback : Callback after the end. txid:Transaction identifier ;signer:Signer address  
  >
  >
  ```obj-c
-- (void)onTransfer:(NSArray<ClauseModel *> *)clauses gas:(NSString *)gas callback:(void(^)(NSString *txid,NSString *address))callback;
+- (void)onTransfer:(NSArray<ClauseModel *> *)clauses gas:(NSString *)gas signer:(NSString *)signer callback:(void(^)(NSString *txid,NSString *signer))callback;
 
  ```
 
@@ -305,3 +306,22 @@ TransactionParameter attribute description：
 ```
 
 
+
+ ##   App developer implementation when dapp calls cert sign function  
+ >  @param message : Data to be signed,form dapp  
+ >  @param callback : Callback after the end  
+ >
+  ```obj-c
+- (void)onCertificate:(NSString *)message callback:(void(^)(NSString *signature))callback;
+```
+
+
+
+
+ ##    App developer implementation when dapp calls checkOwn address function
+ >  @param address : Address from dapp  
+ >  @param callback : Callback after the end  
+ >
+  ```obj-c
+- (void)onCheckOwnAddress:(NSString *)address callback:(void(^)(BOOL result))callback;
+```
