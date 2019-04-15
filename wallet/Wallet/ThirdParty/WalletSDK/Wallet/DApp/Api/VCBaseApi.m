@@ -271,55 +271,84 @@
         
         if ((errCode != nil && [errCode integerValue] == 1) || (errCode.integerValue == 0)) {
             
-            id objDict = nil;
-            NSDictionary *dictEntity = [dict objectForKey:@"data"];
-            NSDictionary *dictPage = [dict objectForKey:@"page"];
-            if (_specialRequest) {
-                objDict = responseData;
-            }else if(dictEntity != nil && dictEntity != (NSDictionary *)[NSNull null]) {
-                objDict = dictEntity;
-            }else if(dictPage != nil && dictPage != (NSDictionary *)[NSNull null]){
-                objDict = dictPage;
-            }else{
-                objDict = responseData;
-            }
-            
-            if(objDict && [objDict isKindOfClass:[NSDictionary class]]){  // 返回的有可能不是dict
-                if ([objDict objectForKey:@"pageNo"] != [NSNull null]
-                    && [objDict objectForKey:@"pageNo"] !=  nil) {
-                    
-                    self.pageNo = [NSString stringWithFormat:@"%d",([[objDict objectForKey:@"pageNo"] integerValue] + 1)];
-                    
-                }else if ([objDict objectForKey:@"page"] != [NSNull null]
-                          && [objDict objectForKey:@"page"] != nil) {
-                    
-                    self.pageNo = [NSString stringWithFormat:@"%d",([[objDict objectForKey:@"page"] integerValue] + 1)];
-                    
-                }
-                self.status = RequestSuccess;
-                [self convertJsonResultToModel:objDict];
-                if(self.resultModel){
-                    [self storeRespondStringToLocal:self.resultModel];
-                }
-            }else if(objDict && [objDict isKindOfClass:[NSArray class]]){
-                self.status = RequestSuccess;
+            if ([responseData isKindOfClass:[NSString class]]) { // 说明是 3840 返回格式不符
                 
-                //entity 最外层直接为数组的情况
-                self.resultModel = [NSArray yy_modelArrayWithClass:[self expectedInnerArrayClass] json:objDict];
-            }else{
+                [self convertJsonResultToModel:nil];
+                self.resultModel = nil;
+                
+                if (self.supportOtherDataFormat) { // 支持其他数据模型
+                    self.resultDict = nil;
+                    self.status = RequestSuccess;
+                    _successBlock(self);
+                    return;
+                    
+                }else { // 不支持
+                    errCode = @(3840);
+                    
+                     // 注释代码，暂且不用，下面的方法中有引用到error 对象
+//                    error = [NSError errorWithDomain:NSCocoaErrorDomain
+//                                                code:errCode.integerValue
+//                                            userInfo:@{NSLocalizedDescriptionKey: @"不支持非json数据结构"}];
+                    self.status = RequestFailed;
+                }
+                
+            }else { //说明是其他数据模型
+                
+                id objDict = nil;
+                NSDictionary *dictEntity = [dict objectForKey:@"data"];
+                NSDictionary *dictPage = [dict objectForKey:@"page"];
+                if (_specialRequest) {
+                    objDict = responseData;
+                }else if(dictEntity != nil && dictEntity != (NSDictionary *)[NSNull null]) {
+                    objDict = dictEntity;
+                }else if(dictPage != nil && dictPage != (NSDictionary *)[NSNull null]){
+                    objDict = dictPage;
+                }else{
+                    objDict = responseData;
+                }
+                
+                if(objDict && [objDict isKindOfClass:[NSDictionary class]]){  // 返回的有可能不是dict
+                    if ([objDict objectForKey:@"pageNo"] != [NSNull null]
+                        && [objDict objectForKey:@"pageNo"] !=  nil) {
+                        
+                        self.pageNo = [NSString stringWithFormat:@"%ld",([[objDict objectForKey:@"pageNo"] integerValue] + 1)];
+                        
+                    }else if ([objDict objectForKey:@"page"] != [NSNull null]
+                              && [objDict objectForKey:@"page"] != nil) {
+                        
+                        self.pageNo = [NSString stringWithFormat:@"%ld",([[objDict objectForKey:@"page"] integerValue] + 1)];
+                        
+                    }
+                    
+                    self.status = RequestSuccess;
+                    [self convertJsonResultToModel:objDict];
+                    if(self.resultModel){
+                        [self storeRespondStringToLocal:self.resultModel];
+                    }
+                }else if(objDict && [objDict isKindOfClass:[NSArray class]]){
+                    self.status = RequestSuccess;
+                    
+                    //entity 最外层直接为数组的情况
+                    self.resultModel = [NSArray yy_modelArrayWithClass:[self expectedInnerArrayClass] json:objDict];
+                }else{
+                    self.status = RequestSuccess;
+                    self.resultModel = objDict;
+                }
                 self.status = RequestSuccess;
-                self.resultModel = objDict;
+                _successBlock(self);
+                return;
             }
-            self.status = RequestSuccess;
-            _successBlock(self);
             
         } else {
             self.status = RequestFailed;
         }
+        
     } else {
         if ([httpAddress containsString:@"transactions"] && [httpAddress hasSuffix:@"receipt"]) {
             self.status = RequestSuccess;
             _successBlock(self);
+            return;
+            
         }else{
             self.status = RequestFailed;
         }

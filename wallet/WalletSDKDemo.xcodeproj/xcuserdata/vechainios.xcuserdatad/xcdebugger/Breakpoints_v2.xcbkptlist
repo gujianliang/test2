@@ -51,7 +51,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "103"
             endingLineNumber = "103"
-            landmarkName = "+creatWalletWithMnemonicWords:password:callback:"
+            landmarkName = "+createWalletWithMnemonicWords:password:callback:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -83,7 +83,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "357"
             endingLineNumber = "357"
-            landmarkName = "-injectJS:"
+            landmarkName = "-callbackToWebView:address:bConnex:webView:callbackId:requestId:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -99,7 +99,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "355"
             endingLineNumber = "355"
-            landmarkName = "-injectJS:"
+            landmarkName = "-callbackToWebView:address:bConnex:webView:callbackId:requestId:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -115,7 +115,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "256"
             endingLineNumber = "256"
-            landmarkName = "+initDappWebViewWithKeystore:"
+            landmarkName = "+signAndSendTransferWithParameter:keystore:password:callback:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -131,7 +131,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "97"
             endingLineNumber = "97"
-            landmarkName = "+creatWalletWithMnemonicWords:password:callback:"
+            landmarkName = "+createWalletWithMnemonicWords:password:callback:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -330,7 +330,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "562"
             endingLineNumber = "562"
-            landmarkName = "-errorAmount:"
+            landmarkName = "-filterDictParam:requestId:webView:callbackId:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
