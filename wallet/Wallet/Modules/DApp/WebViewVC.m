@@ -265,6 +265,23 @@
     callback(@[address]);
 }
 
+- (void)onCheckOwnAddress:(NSString *)address callback:(void(^)(BOOL result))callback
+{
+    NSDictionary *currentWallet = [[NSUserDefaults standardUserDefaults]objectForKey:@"currentWallet"];
+    
+    NSString *localAddrss = [WalletUtils getAddressWithKeystore:currentWallet[@"keystore"]];
+    if ([localAddrss.lowercaseString isEqualToString:address.lowercaseString]) {
+        callback(YES);
+    }else{
+        callback(NO);
+    }
+}
+
+- (void)onCertificate:(NSString *)message callback:(void(^)(NSString *signStr))callback
+{
+    
+}
+
 /**
  * You must implement this method to free memory, otherwise there may be a memory overflow or leak.
  */

@@ -22,6 +22,9 @@
 #import "WalletDAppTransferDetailApi.h"
 #import "SocketRocketUtility.h"
 #import "WalletGetStorageApi.h"
+#import "WalletDappLogEventApi.h"
+#import "WalletDappSimulateMultiAccountApi.h"
+#import "WalletDappSimulateAccountApi.h"
 
 @implementation WalletDAppHandle (connexJS)
 
@@ -112,36 +115,27 @@
 
 - (void)methodAsClauseWithDictP:(NSDictionary *)dictP
                       requestId:(NSString *)requestId
-              completionHandler:(void (^)(NSString * __nullable result))completionHandler
+                        webView:(WKWebView *)webView
+                     callbackId:(NSString *)callbackId
 {
-    NSDictionary *abi = dictP[@"abi"];
-    NSString *methodName = abi[@"name"];
-    NSArray *paramList = abi[@"inputs"];
-    NSMutableArray *subInput = [NSMutableArray array];
-    for (NSDictionary *subInputDict in paramList) {
-        NSString *type = subInputDict[@"type"];
-        if (type.length > 0) {
-            [subInput addObject:type];
-        }
-    }
-    NSString *incodeStr = @"";
-    if (subInput.count > 0) {
-        
-        incodeStr = [NSString stringWithFormat:@"%@(%@)",methodName,[subInput componentsJoinedByString:@","]];
-    }else{
-        incodeStr = [NSString stringWithFormat:@"%@()",methodName];
-    };
+    NSDictionary *dictclause = dictP[@"clause"];
+    NSDictionary *dictOpts = dictP[@"opts"];
+    NSString *revision = dictP[@"revision"];
     
-    NSData *incodeData =[incodeStr dataUsingEncoding:NSUTF8StringEncoding];
-    NSData *decodeData = [SecureData KECCAK256:incodeData];
-    NSString *decodeStr = [SecureData dataToHexString:decodeData];
-    if (decodeStr.length >= 10) {
-        NSDictionary *resultDict = [WalletTools packageWithRequestId:requestId
-                                                               data:[decodeStr substringToIndex:10]
-                                                               code:OK
-                                                            message:@""];
-        completionHandler([resultDict yy_modelToJSONString]);
-    }
+    WalletDappSimulateAccountApi *accountApi = [[WalletDappSimulateAccountApi alloc]initClause:dictclause opts:dictOpts revision:revision];
+    
+    [accountApi loadDataAsyncWithSuccess:^(VCBaseApi *finishApi) {
+        NSLog(@"ddd");
+        [WalletTools callbackWithrequestId:requestId
+                                   webView:webView
+                                      data:finishApi.resultDict
+                                callbackId:callbackId
+                                      code:OK];
+        
+    } failure:^(VCBaseApi *finishApi, NSString *errMsg) {
+        NSLog(@"ddd");
+        [WalletTools callbackWithrequestId:requestId webView:webView data:finishApi.resultDict callbackId:callbackId code:ERROR_SERVER_DATA];
+    }];
 }
 
 - (void)getStorageApiDictParam:(NSDictionary *)dictParam
@@ -398,8 +392,6 @@
         
         return;
     }
-    
-//    [self showSignView:WalletVETTransferType paramModel:paramModel requestId:requestId webView:webView callbackId:callbackId connex:bConnex];
 }
 
 //vtho转账
@@ -425,8 +417,6 @@
                                       code:ERROR_REQUEST_PARAMS];
         return;
     }
-    
-//    [self showSignView:WalletTokenTransferType paramModel:paramModel requestId:requestId webView:webView callbackId:callbackId connex:bConnex];
 }
 
 // contranct 签名
@@ -447,53 +437,128 @@
         
         return;
     }
-    
-//    [self showSignView:WalletContranctTransferType paramModel:paramModel requestId:requestId webView:webView callbackId:callbackId connex:bConnex];
 }
 
-//- (void)certTransferParamModel:(WalletSignParamModel *)paramModel
-//                    requestId:(NSString *)requestId
-//                      webView:(WKWebView *)webView
-//                   callbackId:(NSString *)callbackId
-//{
-////#warning
+- (void)certTransferParamModel:(NSDictionary *)callbackParams
+                     requestId:(NSString *)requestId
+                       webView:(WKWebView *)webView
+                    callbackId:(NSString *)callbackId
+{
+    
+#warning 数据初始化
+    NSString *purpose = @"";
+    NSString *payload = @"";
+    NSString *content = @"";
+    
+    //    if (purpose.length == 0 ||
+    //        payload.length == 0 ||
+    //        content.length == 0 ) {
+    //
+    //        [WalletTools callbackWithrequestId:requestId webView:webView data:@"" callbackId:callbackId code:ERROR_REQUEST_PARAMS];
+    //
+    //        return;
+    //    }
+    
+    
+//    WalletCertDetailView *certView = [[WalletCertDetailView alloc]init];
+//    [certView initView:^(bool result) {
 //
-////    NSString *purpose = dictParam[@"purpose"];
-////    NSString *payload = dictParam[@"payload"][@"type"];
-////    NSString *content = dictParam[@"payload"][@"content"];
-////
-////    if (purpose.length == 0 ||
-////        payload.length == 0 ||
-////        content.length == 0 ) {
-////
-////        [WalletTools callbackWithrequestId:requestId webView:webView data:@"" callbackId:callbackId code:ERROR_REQUEST_PARAMS];
-////
-////        return;
-////    }
-////    WalletSignatureView *signaVC = [[WalletSignatureView alloc] initWithFrame:[UIScreen mainScreen].bounds];
-////    signaVC.tag = SignViewTag;
-////    signaVC.transferType = WalletVETTransferType;
-////
-////#warning
-//////    signaVC.jsUse = YES;
-//////    signaVC.bCert = YES;
-////    [signaVC updateView:from
-////              toAddress:@""
-////                 amount:[NSString stringWithFormat:@"%.2d",0]
-////                 params:@[dictParam]];
-////    [[WalletTools getCurrentVC].view addSubview:signaVC];
-////
-////    signaVC.transferBlock = ^(NSString * _Nonnull txid) {
-////        NSLog(@"txid = %@",txid);
-////        if (txid.length == 0) {
-////
-////            [WalletTools callbackWithrequestId:requestId webView:webView data:@"" callbackId:callbackId code:ERROR_CANCEL];
-////        }else{
-////
-////            [WalletTools callbackWithrequestId:requestId webView:webView data:txid callbackId:callbackId code:OK];
-////        }
-////    };
-//}
+//        if (!result) {
+//            [WalletTools callbackWithrequestId:requestId
+//                                       webView:webView
+//                                          data:@""
+//                                    callbackId:callbackId
+//                                          code:ERROR_CANCEL];
+//            return ;
+//        }
+//
+//        WalletDappStoreSelectView *selectView = [[WalletDappStoreSelectView alloc]initWithFrame:[WalletTools getCurrentVC].view.frame ];
+//        selectView.tag = SelectWalletTag;
+//        selectView.toAddress = @"";
+//
+//        //发token合约，没有to地址，但是是合约签名
+//        selectView.bSpecialContract = YES;
+//
+//        //token 不比较amount，设置为0
+//        selectView.amount = @"0";
+//
+//        [[WalletTools getCurrentVC].navigationController.view addSubview:selectView];
+//        @weakify(self);
+//        selectView.block = ^(NSString *from,WalletDappStoreSelectView *viewSelf){
+//            @strongify(self);
+//            [viewSelf removeFromSuperview];
+//
+//            UIView *bgView = [[UIView alloc]initWithFrame:CGRectMake(0, 0 , SCREEN_WIDTH, SCREEN_HEIGHT)];
+//            bgView.alpha = 0.4;
+//            bgView.backgroundColor = UIColor.blackColor;
+//            [[WalletTools getCurrentVC].navigationController.view addSubview:bgView];
+//
+//
+//            PaymentPasswordView *passwordContentView = [[PaymentPasswordView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT - 410 , SCREEN_WIDTH, 410)];
+//            passwordContentView.backgroundColor = UIColor.redColor;
+//            passwordContentView.passwordTextField.secureTextEntry = YES;
+//            passwordContentView.passwordTextField.delegate = self;
+//
+//            UIButton *backBtn = [passwordContentView viewWithTag:110];
+//            [backBtn setImage:[UIImage imageNamed:@"icon_close_white-1"] forState:UIControlStateNormal];
+//
+//            [[WalletTools getCurrentVC].navigationController.view addSubview:passwordContentView];
+//
+//            __weak PaymentPasswordView *weakPView = passwordContentView;
+//
+//            passwordContentView.didClickCloseButton = ^{
+//
+//                [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
+//                [bgView removeFromSuperview];
+//                [passwordContentView removeFromSuperview];
+//
+//                [WalletTools callbackWithrequestId:requestId
+//                                           webView:webView
+//                                              data:@""
+//                                        callbackId:callbackId
+//                                              code:ERROR_CANCEL];
+//            };
+//            passwordContentView.didClickEnterButton = ^{
+//
+//                [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
+//
+//
+//                NSString *keystoreJson = @"";
+//                NSString *password = weakPView.passwordTextField.text;
+//                [Account decryptSecretStorageJSON:keystoreJson
+//                                         password:password
+//                                         callback:^(Account *account, NSError *error)
+//                 {
+//                     NSDate* dat = [NSDate dateWithTimeIntervalSinceNow:0];
+//
+//                     NSTimeInterval timestamp = [NSDate  date].timeIntervalSince1970;
+//                     NSString *time = [NSString stringWithFormat:@"%.0lf",timestamp];
+//                     NSString *domain  = webView.URL.absoluteString;
+//                     // Signature trading
+//                     if (error == nil) {
+//                         [self signMessage:content account:account requestId:requestId webView:webView callbackId:callbackId];
+//                     }else{
+//                         [WalletTools callbackWithrequestId:requestId
+//                                                    webView:webView
+//                                                       data:@""
+//                                                 callbackId:callbackId
+//                                                       code:ERROR_REQUEST_PARAMS];
+//                     }
+//
+//                     [bgView removeFromSuperview];
+//                     [passwordContentView removeFromSuperview];
+//                 }];
+//            };
+//        };
+//
+//    }];
+//    [[WalletTools getCurrentVC].navigationController.view addSubview:certView];
+//
+    return;
+    
+    
+    
+}
 
 - (BOOL)errorAmount:(NSString *)amount
 {
@@ -542,43 +607,98 @@
                                  code:ERROR_SERVER_DATA];
 }
 
-////调用签名view
-//- (void)showSignView:(WalletTransferType)transferType paramModel:(WalletSignParamModel *)paramModel requestId:(NSString *)requestId webView:(WKWebView *)webView callbackId:(NSString *)callbackId connex:(BOOL)bConnex
-//{
-//    WalletSignatureView *signatureView = [[WalletSignatureView alloc] initWithFrame:[WalletTools getCurrentVC].view.bounds];
-//    signatureView.tag = SignViewTag;
-//    signatureView.transferType = transferType;
-//    [signatureView updateViewParamModel:paramModel];
-//    
-//    [[WalletTools getCurrentNavVC].view addSubview:signatureView];
-//    
-//    signatureView.transferBlock = ^(NSString * _Nonnull txid ,NSInteger code) {
-//#if ReleaseVersion
-//        NSLog(@"txid = %@",txid);
-//#endif
-//        if (txid.length != 0) {
-//            id data = nil;
-//            if (bConnex) {
-//                NSMutableDictionary *dictData = [NSMutableDictionary dictionary];
-//                [dictData setObject:txid forKey:@"txId"];
-//                [dictData setObject:paramModel.fromAddress forKey:@"signer"];
-//                
-//                data = dictData;
-//            }else{
-//                data = txid;
-//            }
-//            [WalletTools callbackWithrequestId:requestId
-//                                       webView:webView
-//                                          data:data
-//                                    callbackId:callbackId
-//                                          code:OK];
-//        }else{
-//            [WalletTools callbackWithrequestId:requestId
-//                                       webView:webView
-//                                          data:@""
-//                                    callbackId:callbackId
-//                                          code:code];
-//        }
-//    };
-//}
+
+- (void)filterDictParam:(NSDictionary *)dictParam
+              requestId:(NSString *)requestId
+                webView:(WKWebView *)webView
+             callbackId:(NSString *)callbackId
+{
+    WalletDappLogEventApi *eventApi = [[WalletDappLogEventApi alloc]initWithKind:dictParam[@"kind"]];
+    eventApi.dictRange = dictParam[@"filterBody"][@"range"];;
+    eventApi.dictOptions = dictParam[@"filterBody"][@"options"];
+    eventApi.dictCriteriaSet = dictParam[@"filterBody"][@"criteriaSet"];
+    eventApi.order = dictParam[@"filterBody"][@"order"];
+    
+    [eventApi loadDataAsyncWithSuccess:^(VCBaseApi *finishApi) {
+        [WalletTools callbackWithrequestId:requestId
+                                   webView:webView
+                                      data:finishApi.resultDict
+                                callbackId:callbackId
+                                      code:OK];
+    } failure:^(VCBaseApi *finishApi, NSString *errMsg) {
+        [WalletTools callbackWithrequestId:requestId
+                                   webView:webView
+                                      data:@""
+                                callbackId:callbackId
+                                      code:ERROR_REQUEST_PARAMS];
+    }];
+}
+
+- (void)explainDictParam:(NSDictionary *)dictParam
+               requestId:(NSString *)requestId
+                 webView:(WKWebView *)webView
+              callbackId:(NSString *)callbackId
+{
+    NSLog(@"dd");
+    NSArray *clauses = dictParam[@"clauses"];
+    NSDictionary *options = dictParam[@"options"];
+    NSString *rev = dictParam[@"rev"];
+    WalletDappSimulateMultiAccountApi *multiApi = [[WalletDappSimulateMultiAccountApi alloc]initClause:clauses opts:options revision:rev];
+    [multiApi loadDataAsyncWithSuccess:^(VCBaseApi *finishApi) {
+        [WalletTools callbackWithrequestId:requestId
+                                   webView:webView
+                                      data:finishApi.resultDict
+                                callbackId:callbackId
+                                      code:OK];
+    } failure:^(VCBaseApi *finishApi, NSString *errMsg) {
+        [WalletTools callbackWithrequestId:requestId
+                                   webView:webView
+                                      data:@""
+                                callbackId:callbackId
+                                      code:ERROR_REQUEST_PARAMS];
+    }];
+    
+}
+
+- (void)checkAddressOwn:(NSString *)address
+              requestId:(NSString *)requestId
+             callbackId:(NSString *)callbackId
+      completionHandler:(void (^)(NSString * __nullable result))completionHandler
+
+{
+    
+    if (self.delegate
+        &&[self.delegate respondsToSelector:@selector(onCheckOwnAddress:callback:)]) {
+        [self.delegate onCheckOwnAddress:address callback:^(BOOL result) {
+            
+            if (result) {
+               
+                NSDictionary *resultDict = [WalletTools packageWithRequestId:requestId
+                                                                        data:@"true"
+                                                                        code:OK
+                                                                     message:@""];
+                NSString *injectJS = [resultDict yy_modelToJSONString];
+                
+                injectJS = [injectJS stringByReplacingOccurrencesOfString:@"\"true\"" withString:@"true"];
+                completionHandler(injectJS);
+                
+            }else{
+               
+                NSDictionary *resultDict = [WalletTools packageWithRequestId:requestId
+                                                                        data:@"false"
+                                                                        code:OK
+                                                                     message:@""];
+                NSString *injectJS = [resultDict yy_modelToJSONString];
+                
+                injectJS = [injectJS stringByReplacingOccurrencesOfString:@"\"false\"" withString:@"false"];
+                
+                completionHandler(injectJS);
+                
+            }
+            
+        }];
+    }
+    
+}
+
 @end

@@ -79,7 +79,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)methodAsClauseWithDictP:(NSDictionary *)dictP
                       requestId:(NSString *)requestId
-              completionHandler:(void (^)(NSString * __nullable result))completionHandler;
+                        webView:(WKWebView *)webView
+                     callbackId:(NSString *)callbackId;
 
 
 - (void)certTransferDictParam:(NSMutableDictionary *)dictParam
@@ -88,7 +89,20 @@ NS_ASSUME_NONNULL_BEGIN
                       webView:(WKWebView *)webView
                    callbackId:(NSString *)callbackId;
 
+- (void)filterDictParam:(NSDictionary *)dictParam
+              requestId:(NSString *)requestId
+                webView:(WKWebView *)webView
+             callbackId:(NSString *)callbackId;
 
+- (void)explainDictParam:(NSDictionary *)dictParam
+               requestId:(NSString *)requestId
+                 webView:(WKWebView *)webView
+              callbackId:(NSString *)callbackId;
+
+- (void)checkAddressOwn:(NSString *)address
+              requestId:(NSString *)requestId
+             callbackId:(NSString *)callbackId
+      completionHandler:(void (^)(NSString * __nullable result))completionHandler;
 
 @end
 

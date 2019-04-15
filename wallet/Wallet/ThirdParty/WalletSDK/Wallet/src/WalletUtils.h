@@ -34,6 +34,25 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)onGetWalletAddress:(void(^)(NSArray<NSString *> *addressList))callback;
 
+/**
+ *  @abstract
+ *   App developer implementation when dapp calls cert sign function
+ *  @param message : Data to be signed,form dapp
+ *  @param callback : Callback after the end
+ *
+ */
+- (void)onCertificate:(NSString *)message callback:(void(^)(NSString *signature))callback;
+
+
+/**
+ *  @abstract
+ *   App developer implementation when dapp calls checkOwn address function
+ *  @param address : Address from dapp
+ *  @param callback : Callback after the end
+ *
+ */
+- (void)onCheckOwnAddress:(NSString *)address callback:(void(^)(BOOL result))callback;
+
 @end
 
 @interface WalletUtils : NSObject

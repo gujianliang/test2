@@ -397,13 +397,12 @@
         // gas 不能为0 ，打于0
         *gas = [NSString stringWithFormat:@"%@",*gas];
         
-        if((*gas).integerValue == 0)
-        {
-            *errorMsg = @"gas can't be 0";
-            return NO;
-        }
         if ([WalletTools checkDecimalStr:*gas]) {//是10进制
-            
+            if((*gas).integerValue == 0)
+            {
+                *errorMsg = @"gas can't be 0";
+                return NO;
+            }
             return YES;
         }else{ //不是10进制
             *errorMsg = @"gas should be decimal string";

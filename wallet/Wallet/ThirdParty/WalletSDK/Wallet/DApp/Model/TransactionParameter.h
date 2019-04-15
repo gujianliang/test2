@@ -37,10 +37,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 @interface ClauseModel : NSObject
-@property (nonatomic, copy)NSString *to;    //The first argument of the clause，If it is VET transfer, it is the to address; otherwise it is the contract address.
-@property (nonatomic, copy)NSString *value; //The second argument of the clause ，Cost vet；If you don’t spend vet, value = [NSData data]
-@property (nonatomic, copy)NSString *data;  //The third argument of the clause ，If it is VET transfer, data = [NSData data]；If it is a contract, data is the signature parameter.
-#warning 方法参数
+@property (nonatomic, copy)NSString *to;    //The destination address of the message, null for a contract-creation transaction
+@property (nonatomic, copy)NSString *value; //The value, with a unit of wei, transferred through the transaction. Specifically, it plays the role of endowment when the transaction is contract-creation type
+@property (nonatomic, copy)NSString *data;  //Either the ABI byte string containing the data of the function call on a contract or the initialization code of a contract-creation transaction
 @end
 
 

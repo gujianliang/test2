@@ -325,6 +325,38 @@
     
 }
 
++ (void)callbackWithrequestId:(NSString *)requestId
+                      webView:(WKWebView *)webView
+                     boolData:(id)boolData
+                   callbackId:(NSString *)callbackId
+                         code:(NSInteger)code
+{
+    
+    NSString *message = [self errorMessageWith:code];
+    NSDictionary *packageDict = [WalletTools packageWithRequestId:requestId
+                                                             data:boolData
+                                                             code:code
+                                                          message:message];
+    NSString *injectJS = [NSString stringWithFormat:@"%@('%@')",callbackId,[packageDict yy_modelToJSONString]];
+    
+    injectJS = [injectJS stringByReplacingOccurrencesOfString:@"\"false\"" withString:@"false"];
+    injectJS = [injectJS stringByReplacingOccurrencesOfString:@"\"true\"" withString:@"true"];
+    
+    NSLog(@"inject == %@",injectJS);
+    [webView evaluateJavaScript:injectJS completionHandler:^(id _Nullable item, NSError * _Nullable error) {
+        if (error) {
+            NSLog(@"injectJS error == %@",error);
+        }else {
+            NSLog(@"injectJS success");
+        }
+    }];
+    
+    if (code != 1 && code != 500) {
+        //        [self jsErrorAlert:message];
+    }
+}
+
+
 + (NSString *)errorMessageWith:(NSInteger)code
 {
     switch (code) {

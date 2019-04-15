@@ -80,32 +80,36 @@ static dispatch_once_t predicate;
     NSDictionary *callbackParams  = callbackModel.params;
     
     if ([method isEqualToString:@"getStatus"]) {
-
+        
         [self getStatusWithRequestId:requestId completionHandler:completionHandler];
+        
+        //打开ticker
+        [self tickerNextRequestId:requestId callbackId:callbackId];
+        
         return;
-
+        
     }else if ([method isEqualToString:@"getGenesisBlock"])
     {
         [self getGenesisBlockWithRequestId:requestId completionHandler:completionHandler];
         return;
     }else if ([method isEqualToString:@"getAccount"]){
-
+        
         [self getAccountRequestId:requestId webView:webView address:callbackParams[@"address"] callbackId:callbackId];
-
+        
     }else if([method isEqualToString:@"getAccountCode"])
     {
         [self getAccountCode:callbackId
                      webView:webView
                    requestId:requestId
                      address:callbackParams[@"address"]];
-
+        
     }else if([method isEqualToString:@"getBlock"])
     {
         [self getBlock:callbackId
                webView:webView
              requestId:requestId
               revision:callbackParams[@"revision"]];
-
+        
     }else if([method isEqualToString:@"getTransaction"])
     {
         [self getTransaction:callbackId
@@ -120,12 +124,9 @@ static dispatch_once_t predicate;
                           requestId:requestId
                                txid:callbackParams[@"id"]];
     }
-    else if([method isEqualToString:@"methodAsClause"])
+    else if([method isEqualToString:@"methodAsCall"])
     {
-        [self methodAsClauseWithDictP:callbackParams
-                            requestId:requestId
-                    completionHandler:completionHandler];
-        return;
+        [self methodAsClauseWithDictP:callbackParams requestId:requestId webView:webView callbackId:callbackId];
         
     }else if ([method isEqualToString:@"getAccounts"])
     {
@@ -139,7 +140,7 @@ static dispatch_once_t predicate;
     }else if ([method isEqualToString:@"tickerNext"])
     {
         [self tickerNextRequestId:requestId callbackId:callbackId];
-
+        
     }
     else if([method isEqualToString:@"sign"])
     {
@@ -158,25 +159,39 @@ static dispatch_once_t predicate;
                  address:callbackParams[@"address"]];
         
     }else if([method isEqualToString:@"getNodeUrl"]){
-      
+        
         [self getNodeUrl:requestId completionHandler:completionHandler];
         return;
     }else if ([method isEqualToString:@"send"]){
         
         [self transferCallbackParams:callbackParams
                              webView:webView
-                          connex:NO
-                       requestId:requestId
-                      callbackId:callbackId
-               completionHandler:completionHandler];
-    }else{
+                              connex:NO
+                           requestId:requestId
+                          callbackId:callbackId
+                   completionHandler:completionHandler];
+    }else if ([method isEqualToString:@"filterApply"])
+    {
+        [self filterDictParam:callbackParams requestId:requestId webView:webView callbackId:callbackId];
+    }else if ([method isEqualToString:@"explain"])
+    {
+        [self explainDictParam:callbackParams requestId:requestId webView:webView callbackId:callbackId];
+    }else if ([method isEqualToString:@"owned"])
+    {
+        NSString *address = callbackParams[@"address"];
+        
+        [self checkAddressOwn:address requestId:requestId callbackId:callbackId completionHandler:completionHandler];
+        return;
+    }
+    else{
+        
         NSDictionary *dict1 = [WalletTools packageWithRequestId:requestId
                                                            data:@""
                                                            code:ERROR_REQUEST_METHOD
                                                         message:ERROR_REQUEST_METHOD_MSG];
         completionHandler([dict1 yy_modelToJSONString]);
         
-        return;
+        return ;
     }
     completionHandler(@"{}");
 }

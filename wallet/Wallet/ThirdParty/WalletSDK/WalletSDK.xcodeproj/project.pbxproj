@@ -121,6 +121,14 @@
 		9773F9EA22150C5F00DF5972 /* WalletJSCallbackModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9773F9E822150C5F00DF5972 /* WalletJSCallbackModel.m */; };
 		97A0C003223BC09800327B89 /* WalletGetStorageApi.h in Headers */ = {isa = PBXBuildFile; fileRef = 97A0C001223BC09700327B89 /* WalletGetStorageApi.h */; };
 		97A0C004223BC09800327B89 /* WalletGetStorageApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 97A0C002223BC09700327B89 /* WalletGetStorageApi.m */; };
+		97D9DF5522602777007E5D99 /* WalletDappLogEventApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 97D9DF4D22602776007E5D99 /* WalletDappLogEventApi.m */; };
+		97D9DF5622602777007E5D99 /* WalletDappSimulateMultiAccountApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 97D9DF4E22602776007E5D99 /* WalletDappSimulateMultiAccountApi.m */; };
+		97D9DF5722602777007E5D99 /* WalletDappLogTransferApi.h in Headers */ = {isa = PBXBuildFile; fileRef = 97D9DF4F22602777007E5D99 /* WalletDappLogTransferApi.h */; };
+		97D9DF5822602777007E5D99 /* WalletDappSimulateAccountApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 97D9DF5022602777007E5D99 /* WalletDappSimulateAccountApi.m */; };
+		97D9DF5922602777007E5D99 /* WalletDappLogTransferApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 97D9DF5122602777007E5D99 /* WalletDappLogTransferApi.m */; };
+		97D9DF5A22602777007E5D99 /* WalletDappLogEventApi.h in Headers */ = {isa = PBXBuildFile; fileRef = 97D9DF5222602777007E5D99 /* WalletDappLogEventApi.h */; };
+		97D9DF5B22602777007E5D99 /* WalletDappSimulateAccountApi.h in Headers */ = {isa = PBXBuildFile; fileRef = 97D9DF5322602777007E5D99 /* WalletDappSimulateAccountApi.h */; };
+		97D9DF5C22602777007E5D99 /* WalletDappSimulateMultiAccountApi.h in Headers */ = {isa = PBXBuildFile; fileRef = 97D9DF5422602777007E5D99 /* WalletDappSimulateMultiAccountApi.h */; };
 		97EC5C802200AC25001E6B68 /* NSMutableDictionary+Helpers.h in Headers */ = {isa = PBXBuildFile; fileRef = 97EC5C7E2200AC25001E6B68 /* NSMutableDictionary+Helpers.h */; };
 		97EC5C812200AC25001E6B68 /* NSMutableDictionary+Helpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 97EC5C7F2200AC25001E6B68 /* NSMutableDictionary+Helpers.m */; };
 		97F7198E225B653700786D79 /* ccMemory.h in Headers */ = {isa = PBXBuildFile; fileRef = 97F71950225B653600786D79 /* ccMemory.h */; };
@@ -365,6 +373,14 @@
 		9773F9E822150C5F00DF5972 /* WalletJSCallbackModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WalletJSCallbackModel.m; sourceTree = "<group>"; };
 		97A0C001223BC09700327B89 /* WalletGetStorageApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WalletGetStorageApi.h; sourceTree = "<group>"; };
 		97A0C002223BC09700327B89 /* WalletGetStorageApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WalletGetStorageApi.m; sourceTree = "<group>"; };
+		97D9DF4D22602776007E5D99 /* WalletDappLogEventApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WalletDappLogEventApi.m; sourceTree = "<group>"; };
+		97D9DF4E22602776007E5D99 /* WalletDappSimulateMultiAccountApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WalletDappSimulateMultiAccountApi.m; sourceTree = "<group>"; };
+		97D9DF4F22602777007E5D99 /* WalletDappLogTransferApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WalletDappLogTransferApi.h; sourceTree = "<group>"; };
+		97D9DF5022602777007E5D99 /* WalletDappSimulateAccountApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WalletDappSimulateAccountApi.m; sourceTree = "<group>"; };
+		97D9DF5122602777007E5D99 /* WalletDappLogTransferApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WalletDappLogTransferApi.m; sourceTree = "<group>"; };
+		97D9DF5222602777007E5D99 /* WalletDappLogEventApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WalletDappLogEventApi.h; sourceTree = "<group>"; };
+		97D9DF5322602777007E5D99 /* WalletDappSimulateAccountApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WalletDappSimulateAccountApi.h; sourceTree = "<group>"; };
+		97D9DF5422602777007E5D99 /* WalletDappSimulateMultiAccountApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WalletDappSimulateMultiAccountApi.h; sourceTree = "<group>"; };
 		97EC5C7E2200AC25001E6B68 /* NSMutableDictionary+Helpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableDictionary+Helpers.h"; sourceTree = "<group>"; };
 		97EC5C7F2200AC25001E6B68 /* NSMutableDictionary+Helpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableDictionary+Helpers.m"; sourceTree = "<group>"; };
 		97F7184B225B51E500786D79 /* UIAlertView+AFNetworking.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIAlertView+AFNetworking.m"; sourceTree = "<group>"; };
@@ -718,6 +734,14 @@
 		9773F924221412D200DF5972 /* Api */ = {
 			isa = PBXGroup;
 			children = (
+				97D9DF5222602777007E5D99 /* WalletDappLogEventApi.h */,
+				97D9DF4D22602776007E5D99 /* WalletDappLogEventApi.m */,
+				97D9DF4F22602777007E5D99 /* WalletDappLogTransferApi.h */,
+				97D9DF5122602777007E5D99 /* WalletDappLogTransferApi.m */,
+				97D9DF5322602777007E5D99 /* WalletDappSimulateAccountApi.h */,
+				97D9DF5022602777007E5D99 /* WalletDappSimulateAccountApi.m */,
+				97D9DF5422602777007E5D99 /* WalletDappSimulateMultiAccountApi.h */,
+				97D9DF4E22602776007E5D99 /* WalletDappSimulateMultiAccountApi.m */,
 				97478226223E323300AB6937 /* WalletTokenBalanceApi.h */,
 				97478227223E323300AB6937 /* WalletTokenBalanceApi.m */,
 				97A0C001223BC09700327B89 /* WalletGetStorageApi.h */,
@@ -1062,6 +1086,7 @@
 				9773F9D9221412D200DF5972 /* WalletDAppHead.h in Headers */,
 				97F71A21225B682800786D79 /* blake2.h in Headers */,
 				97F719A2225B653700786D79 /* aesopt.h in Headers */,
+				97D9DF5C22602777007E5D99 /* WalletDappSimulateMultiAccountApi.h in Headers */,
 				97F71994225B653700786D79 /* tommath_private.h in Headers */,
 				974EA62D225B00B4009C021B /* NSJSONSerialization+NilDataParameter.h in Headers */,
 				E2317EA31E31970900DBE3E4 /* Transaction.h in Headers */,
@@ -1106,6 +1131,7 @@
 				9773F9AD221412D200DF5972 /* WalletAccountCodeApi.h in Headers */,
 				9773F9B0221412D200DF5972 /* WalletTransantionsReceiptApi.h in Headers */,
 				97F71990225B653700786D79 /* crypto_scrypt.h in Headers */,
+				97D9DF5722602777007E5D99 /* WalletDappLogTransferApi.h in Headers */,
 				9757450821FFED530046C8A0 /* UIButton+block.h in Headers */,
 				9773F99C221412D200DF5972 /* VCBaseModel.h in Headers */,
 				9773F980221412D200DF5972 /* WalletMBProgressShower.h in Headers */,
@@ -1117,6 +1143,7 @@
 				9773F9A6221412D200DF5972 /* WalletGetDecimalsApi.h in Headers */,
 				9773F9AE221412D200DF5972 /* WalletGetSymbolApi.h in Headers */,
 				9773F984221412D200DF5972 /* WalletManageModel.h in Headers */,
+				97D9DF5B22602777007E5D99 /* WalletDappSimulateAccountApi.h in Headers */,
 				97F719B3225B653700786D79 /* macros.h in Headers */,
 				9773F99B221412D200DF5972 /* WalletTools.h in Headers */,
 				9773F9A9221412D200DF5972 /* WalletVETBalanceApi.h in Headers */,
@@ -1139,6 +1166,7 @@
 				9773F9B7221412D200DF5972 /* NSStringAdditions.h in Headers */,
 				9773F9C5221412D200DF5972 /* WalletGenesisBlockInfoApi.h in Headers */,
 				9773F9E922150C5F00DF5972 /* WalletJSCallbackModel.h in Headers */,
+				97D9DF5A22602777007E5D99 /* WalletDappLogEventApi.h in Headers */,
 				974EA74C225B2092009C021B /* NSObject+YYModel.h in Headers */,
 				9773F9C4221412D200DF5972 /* VCBaseApi.h in Headers */,
 				9773F9B8221412D200DF5972 /* NSDataAdditions.h in Headers */,
@@ -1306,6 +1334,7 @@
 				97F71992225B653700786D79 /* scrypt_sha256.c in Sources */,
 				97F7199B225B653700786D79 /* hmac.c in Sources */,
 				9773F97D221412D200DF5972 /* WalletTextView.m in Sources */,
+				97D9DF5622602777007E5D99 /* WalletDappSimulateMultiAccountApi.m in Sources */,
 				9773F9E3221412D200DF5972 /* WalletDAppSignPreVC.m in Sources */,
 				97F71998225B653700786D79 /* mpi.c in Sources */,
 				9773F9DE221412D200DF5972 /* WalletDAppHandle+web3JS.m in Sources */,
@@ -1334,7 +1363,10 @@
 				9773F9C1221412D200DF5972 /* WalletGetSymbolApi.m in Sources */,
 				974EA5E0225A3383009C021B /* TransactionParameter.m in Sources */,
 				97F719B5225B653700786D79 /* aestab.c in Sources */,
+				97D9DF5822602777007E5D99 /* WalletDappSimulateAccountApi.m in Sources */,
+				97D9DF5922602777007E5D99 /* WalletDappLogTransferApi.m in Sources */,
 				9773F9B3221412D200DF5972 /* WalletDAppTransferDetailApi.m in Sources */,
+				97D9DF5522602777007E5D99 /* WalletDappLogEventApi.m in Sources */,
 				9773F988221412D200DF5972 /* WalletAddressAuthModel.m in Sources */,
 				974EA74B225B2092009C021B /* YYClassInfo.m in Sources */,
 				97F71999225B653700786D79 /* bip39.c in Sources */,

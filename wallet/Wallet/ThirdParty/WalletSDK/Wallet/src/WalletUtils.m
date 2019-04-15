@@ -470,5 +470,10 @@
     }
 }
 
+//- (void)onCertificate:(NSString *)message callback:(void(^)(void))callback
+//{
+//
+//}
+
 
 @end
