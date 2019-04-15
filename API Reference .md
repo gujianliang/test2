@@ -312,7 +312,7 @@ TransactionParameter attribute description：
  >  @param callback : Callback after the end  
  >
   ```obj-c
-- (void)onCertificate:(NSString *)message callback:(void(^)(NSString *signature))callback;
+- (void)onCertificate:(NSData *)message signer:(NSString *)signer callback:(void(^)(NSData *signatureData))callback
 ```
 
 
