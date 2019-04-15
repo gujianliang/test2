@@ -123,18 +123,32 @@
     NSString *revision = dictP[@"revision"];
     
     WalletDappSimulateAccountApi *accountApi = [[WalletDappSimulateAccountApi alloc]initClause:dictclause opts:dictOpts revision:revision];
-    
+    accountApi.supportOtherDataFormat = YES;
     [accountApi loadDataAsyncWithSuccess:^(VCBaseApi *finishApi) {
         NSLog(@"ddd");
-        [WalletTools callbackWithrequestId:requestId
-                                   webView:webView
-                                      data:finishApi.resultDict
-                                callbackId:callbackId
-                                      code:OK];
+        
+        if (finishApi.resultDict) {
+            [WalletTools callbackWithrequestId:requestId
+                                       webView:webView
+                                          data:finishApi.resultDict
+                                    callbackId:callbackId
+                                          code:OK];
+        }else{
+            [WalletTools callbackWithrequestId:requestId
+                                       webView:webView
+                                          data:@"nu&*ll"
+                                    callbackId:callbackId
+                                          code:OK];
+        }
+        
         
     } failure:^(VCBaseApi *finishApi, NSString *errMsg) {
         NSLog(@"ddd");
-        [WalletTools callbackWithrequestId:requestId webView:webView data:finishApi.resultDict callbackId:callbackId code:ERROR_SERVER_DATA];
+        [WalletTools callbackWithrequestId:requestId
+                                   webView:webView
+                                      data:@""
+                                callbackId:callbackId
+                                      code:ERROR_NETWORK];
     }];
 }
 
@@ -147,13 +161,30 @@
     NSString *address = dictParam[@"address"];
     
     WalletGetStorageApi *vetBalanceApi = [[WalletGetStorageApi alloc]initWithkey:key address:address];
+    vetBalanceApi.supportOtherDataFormat = YES;
     [vetBalanceApi loadDataAsyncWithSuccess:^(VCBaseApi *finishApi) {
         
-        [WalletTools callbackWithrequestId:requestId webView:webView data:finishApi.resultDict callbackId:callbackId code:OK];
+        if (finishApi.resultDict) {
+            [WalletTools callbackWithrequestId:requestId
+                                       webView:webView
+                                          data:finishApi.resultDict
+                                    callbackId:callbackId
+                                          code:OK];
+        }else{
+            [WalletTools callbackWithrequestId:requestId
+                                       webView:webView
+                                          data:@"nu&*ll"
+                                    callbackId:callbackId
+                                          code:OK];
+        }
         
     } failure:^(VCBaseApi *finishApi, NSString *errMsg) {
         
-        [WalletTools callbackWithrequestId:requestId webView:webView data:finishApi.resultDict callbackId:callbackId code:ERROR_SERVER_DATA];
+        [WalletTools callbackWithrequestId:requestId
+                                   webView:webView
+                                      data:@""
+                                callbackId:callbackId
+                                      code:ERROR_NETWORK];
     }];
 }
 
@@ -172,20 +203,30 @@
     }
     
     WalletVETBalanceApi *vetBalanceApi = [[WalletVETBalanceApi alloc]initWith:address];
+    vetBalanceApi.supportOtherDataFormat = YES;
     [vetBalanceApi loadDataAsyncWithSuccess:^(VCBaseApi *finishApi) {
-        [WalletTools callbackWithrequestId:requestId
-                                  webView:webView
-                                     data:finishApi.resultDict
-                               callbackId:callbackId
-                                     code:OK];
+        
+        if (finishApi.resultDict) {
+            [WalletTools callbackWithrequestId:requestId
+                                       webView:webView
+                                          data:finishApi.resultDict
+                                    callbackId:callbackId
+                                          code:OK];
+        }else{
+            [WalletTools callbackWithrequestId:requestId
+                                       webView:webView
+                                          data:@"nu&*ll"
+                                    callbackId:callbackId
+                                          code:OK];
+        }
         
     } failure:^(VCBaseApi *finishApi, NSString *errMsg) {
         
         [WalletTools callbackWithrequestId:requestId
-                                  webView:webView
-                                     data:@""
-                               callbackId:callbackId
-                                     code:ERROR_SERVER_DATA];
+                                   webView:webView
+                                      data:@""
+                                callbackId:callbackId
+                                      code:ERROR_NETWORK];
     }];
 }
 
@@ -206,18 +247,26 @@
     WalletAccountCodeApi *vetBalanceApi = [[WalletAccountCodeApi alloc]initWithAddress:address];
     [vetBalanceApi loadDataAsyncWithSuccess:^(VCBaseApi *finishApi) {
         
-        [WalletTools callbackWithrequestId:requestId
-                                  webView:webView
-                                     data:finishApi.resultDict
-                               callbackId:callbackId
-                                     code:OK];
+        if (finishApi.resultDict) {
+            [WalletTools callbackWithrequestId:requestId
+                                       webView:webView
+                                          data:finishApi.resultDict
+                                    callbackId:callbackId
+                                          code:OK];
+        }else{
+            [WalletTools callbackWithrequestId:requestId
+                                       webView:webView
+                                          data:@"nu&*ll"
+                                    callbackId:callbackId
+                                          code:OK];
+        }
         
     } failure:^(VCBaseApi *finishApi, NSString *errMsg) {
         [WalletTools callbackWithrequestId:requestId
-                                  webView:webView
-                                     data:@""
-                               callbackId:callbackId
-                                     code:ERROR_SERVER_DATA];
+                                   webView:webView
+                                      data:@""
+                                callbackId:callbackId
+                                      code:ERROR_NETWORK];
     }];
 }
 
@@ -249,18 +298,30 @@
     }
     
     WalletBlockApi *vetBalanceApi = [[WalletBlockApi alloc]initWithRevision:revision];
+    vetBalanceApi.supportOtherDataFormat = YES;
     [vetBalanceApi loadDataAsyncWithSuccess:^(VCBaseApi *finishApi) {
-        [WalletTools callbackWithrequestId:requestId
-                                  webView:webView
-                                     data:finishApi.resultDict
-                               callbackId:callbackId
-                                     code:OK];
+        
+        if (finishApi.resultDict) {
+            [WalletTools callbackWithrequestId:requestId
+                                       webView:webView
+                                          data:finishApi.resultDict
+                                    callbackId:callbackId
+                                          code:OK];
+            
+        }else {
+            [WalletTools callbackWithrequestId:requestId
+                                       webView:webView
+                                          data:@"nu&*ll"
+                                    callbackId:callbackId
+                                          code:OK];
+        }
+        
     } failure:^(VCBaseApi *finishApi, NSString *errMsg) {
         [WalletTools callbackWithrequestId:requestId
-                                  webView:webView
-                                     data:@""
-                               callbackId:callbackId
-                                     code:ERROR_SERVER_DATA];
+                                   webView:webView
+                                      data:@""
+                                callbackId:callbackId
+                                      code:ERROR_NETWORK];
     }];
 }
 
@@ -279,21 +340,31 @@
     }
     
     WalletDAppTransferDetailApi *vetBalanceApi = [[WalletDAppTransferDetailApi alloc]initWithTxid:txID];
+    vetBalanceApi.supportOtherDataFormat = YES;
     [vetBalanceApi loadDataAsyncWithSuccess:^(VCBaseApi *finishApi) {
-        NSDictionary *balanceModel = finishApi.resultDict;
-
-        [WalletTools callbackWithrequestId:requestId
-                                   webView:webView
-                                      data:balanceModel
-                                callbackId:callbackId
-                                      code:OK];
+        
+        if (finishApi.resultDict) {
+            NSDictionary *balanceModel = finishApi.resultDict;
+            
+            [WalletTools callbackWithrequestId:requestId
+                                       webView:webView
+                                          data:balanceModel
+                                    callbackId:callbackId
+                                          code:OK];
+        }else{
+            [WalletTools callbackWithrequestId:requestId
+                                       webView:webView
+                                          data:@"nu&*ll"
+                                    callbackId:callbackId
+                                          code:OK];
+        }
         
     } failure:^(VCBaseApi *finishApi, NSString *errMsg) {
         [WalletTools callbackWithrequestId:requestId
-                                  webView:webView
-                                     data:@""
-                               callbackId:callbackId
-                                     code:ERROR_SERVER_DATA];
+                                   webView:webView
+                                      data:@""
+                                callbackId:callbackId
+                                      code:ERROR_NETWORK];
     }];
 }
 
@@ -312,7 +383,9 @@
     }
     
     WalletTransantionsReceiptApi *vetBalanceApi = [[WalletTransantionsReceiptApi alloc]initWithTxid:txid];
+    vetBalanceApi.supportOtherDataFormat = YES;
     [vetBalanceApi loadDataAsyncWithSuccess:^(VCBaseApi *finishApi) {
+        
         if (finishApi.resultDict) {
             [WalletTools callbackWithrequestId:requestId
                                        webView:webView
@@ -322,17 +395,18 @@
         }else{
             [WalletTools callbackWithrequestId:requestId
                                        webView:webView
-                                          data:@""
+                                          data:@"nu&*ll"
                                     callbackId:callbackId
-                                          code:ERROR_SERVER_DATA];
+                                          code:OK];
         }
+        
         
     } failure:^(VCBaseApi *finishApi, NSString *errMsg) {
         [WalletTools callbackWithrequestId:requestId
-                                  webView:webView
-                                     data:@""
-                               callbackId:callbackId
-                                     code:ERROR_SERVER_DATA];
+                                   webView:webView
+                                      data:@""
+                                callbackId:callbackId
+                                      code:ERROR_NETWORK];
     }];
 }
 
@@ -374,71 +448,6 @@
     [socket SRWebSocketOpenWithURLString:url];
 }
 
-//vet 转账
-- (void)VETTransferDictWithParamModel:(WalletSignParamModel *)paramModel
-                   requestId:(NSString *)requestId
-                     webView:(WKWebView *)webView
-                  callbackId:(NSString *)callbackId
-                               connex:(BOOL)bConnex
-
-{
-    if (![WalletTools fromISToAddress:paramModel.fromAddress to:paramModel.toAddress]) {
-        
-        [WalletTools callbackWithrequestId:requestId
-                                  webView:webView
-                                     data:@""
-                               callbackId:callbackId
-                                     code:ERROR_REQUEST_PARAMS];
-        
-        return;
-    }
-}
-
-//vtho转账
-- (void)VTHOTransferWithParamModel:(WalletSignParamModel *)paramModel
-                    requestId:(NSString *)requestId
-                      webView:(WKWebView *)webView
-                   callbackId:(NSString *)callbackId
-                            connex:(BOOL)bConnex
-{
-    
-    CGFloat amountF = [BigNumber bigNumberWithHexString:paramModel.amount].decimalString.floatValue/pow(10, 18);
-    
-    if (![WalletTools errorAddressAlert:paramModel.toAddress] ||
-        ![self errorAmount:[NSString stringWithFormat:@"%lf",amountF]]||
-        ![WalletTools fromISToAddress:paramModel.fromAddress to:paramModel.toAddress]||
-        paramModel.gas.integerValue == 0||
-        paramModel.clauseData.length == 0) {
-        
-        [WalletTools callbackWithrequestId:requestId
-                                   webView:webView
-                                      data:@""
-                                callbackId:callbackId
-                                      code:ERROR_REQUEST_PARAMS];
-        return;
-    }
-}
-
-// contranct 签名
-- (void)contractSignWithParamModel:(WalletSignParamModel *)paramModel
-                         requestId:(NSString *)requestId
-                           webView:(WKWebView *)webView
-                    callbackId:(NSString *)callbackId
-                            connex:(BOOL)bConnex
-{
-    if (paramModel.clauseData.length == 0 ||
-        paramModel.gas.integerValue  == 0) {
-        
-        [WalletTools callbackWithrequestId:requestId
-                                  webView:webView
-                                     data:@""
-                               callbackId:callbackId
-                                     code:ERROR_REQUEST_PARAMS];
-        
-        return;
-    }
-}
-
 - (void)certTransferParamModel:(NSDictionary *)callbackParams
                           from:(NSString *)from
                      requestId:(NSString *)requestId
@@ -446,6 +455,16 @@
                     callbackId:(NSString *)callbackId
 {    
     NSDictionary *clauses = callbackParams[@"clauses"];
+    
+    if (![clauses isKindOfClass:[NSDictionary class]]) {
+        [WalletTools callbackWithrequestId:requestId
+                                   webView:webView
+                                      data:@""
+                                callbackId:callbackId
+                                      code:ERROR_CANCEL];
+        return;
+    }
+    
     WalletBlockInfoApi *bestApi = [[WalletBlockInfoApi alloc]init];
     [bestApi loadDataAsyncWithSuccess:^(VCBaseApi *finishApi) {
         
@@ -520,12 +539,7 @@
         bAmount = YES;
     }
     if (!bAmount) {
-//        [WalletAlertShower showAlert:nil
-//                                msg:VCNSLocalizedBundleString(@"h5_params_error", nil)
-//                              inCtl:[WalletTools getCurrentVC]
-//                              items:@[VCNSLocalizedBundleString(@"dialog_yes", nil)]
-//                         clickBlock:^(NSInteger index) {
-//                         }];
+
         return NO;
     }
     return YES;
@@ -565,7 +579,7 @@
                                    webView:webView
                                       data:@""
                                 callbackId:callbackId
-                                      code:ERROR_REQUEST_PARAMS];
+                                      code:ERROR_NETWORK];
     }];
 }
 
@@ -578,6 +592,17 @@
     NSArray *clauses = dictParam[@"clauses"];
     NSDictionary *options = dictParam[@"options"];
     NSString *rev = dictParam[@"rev"];
+    
+    if ([WalletTools isEmpty:clauses] ) {
+        
+        [WalletTools callbackWithrequestId:requestId
+                                   webView:webView
+                                      data:@""
+                                callbackId:callbackId
+                                      code:ERROR_CANCEL];
+        return;
+    }
+    
     WalletDappSimulateMultiAccountApi *multiApi = [[WalletDappSimulateMultiAccountApi alloc]initClause:clauses opts:options revision:rev];
     [multiApi loadDataAsyncWithSuccess:^(VCBaseApi *finishApi) {
         [WalletTools callbackWithrequestId:requestId
@@ -590,7 +615,7 @@
                                    webView:webView
                                       data:@""
                                 callbackId:callbackId
-                                      code:ERROR_REQUEST_PARAMS];
+                                      code:ERROR_NETWORK];
     }];
     
 }

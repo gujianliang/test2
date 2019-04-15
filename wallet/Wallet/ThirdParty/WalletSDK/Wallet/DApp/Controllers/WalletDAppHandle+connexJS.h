@@ -59,23 +59,6 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)tickerNextRequestId:(NSString *)requestId
                  callbackId:(NSString *)callbackId;
 
-- (void)VETTransferDictWithParamModel:(WalletSignParamModel *)paramModel
-                            requestId:(NSString *)requestId
-                              webView:(WKWebView *)webView
-                           callbackId:(NSString *)callbackId
-                               connex:(BOOL)bConnex;
-
-- (void)VTHOTransferWithParamModel:(WalletSignParamModel *)paramModel
-                         requestId:(NSString *)requestId
-                           webView:(WKWebView *)webView
-                        callbackId:(NSString *)callbackId
-                            connex:(BOOL)bConnex;
-
-- (void)contractSignWithParamModel:(WalletSignParamModel *)paramModel
-                         requestId:(NSString *)requestId
-                           webView:(WKWebView *)webView
-                        callbackId:(NSString *)callbackId
-                            connex:(BOOL)bConnex;
 
 - (void)methodAsClauseWithDictP:(NSDictionary *)dictP
                       requestId:(NSString *)requestId

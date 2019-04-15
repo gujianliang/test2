@@ -64,6 +64,11 @@ typedef void (^requestBlock)(NSDictionary *requestDict,NSError *error);
  */
 @property (strong, nonatomic) NSDictionary *resultDict;
 
+/**
+ *  请求是否支持其他数据类型，默认值 NO 表示是不支持，只支持 JSON
+ */
+@property (assign, nonatomic) BOOL supportOtherDataFormat;
+
 @property (strong, nonatomic) NSDictionary *responseHeaderFields;
 /**
  *  merge 返回的数据
