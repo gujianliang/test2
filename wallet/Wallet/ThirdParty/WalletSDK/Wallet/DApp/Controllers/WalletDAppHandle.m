@@ -29,6 +29,7 @@
 #import "SocketRocketUtility.h"
 #import "WalletTransactionApi.h"
 #import "WalletDappCheckParamsHandle.H"
+#import "WalletDappSimulateMultiAccountApi.h"
 
 @interface WalletDAppHandle ()<WKNavigationDelegate,WKUIDelegate>
 {
@@ -206,13 +207,25 @@ static dispatch_once_t predicate;
 
     NSString *kind = callbackParams[@"kind"];
     
+    if ([kind isEqualToString:@"cert"]) { // cert 类型签名
+        
+        NSString *from = callbackParams[@"options"][@"signer"];
+        
+        
+        
+        [self certTransferParamModel:callbackParams from:from requestId:requestId webView:webView callbackId:callbackId];
+       
+        return ;
+    }
+    
     if (bConnex && ![self checkKind:kind requestId:requestId callbackId:callbackId webView:webView]) {
         return;
     }
    
-    NSString *gas           = @"";
-    NSString *gasPrice      = @"";
-    
+    __block NSString *gas           = @"";
+    __block NSString *gasPrice      = @"";
+    __block NSString *from          = @"";
+
     NSMutableArray *clauseModelList = [[NSMutableArray alloc]init];
 
     if (bConnex) {
@@ -235,6 +248,10 @@ static dispatch_once_t predicate;
             [clauseModelList addObject:clauseModel];
         }
         
+        gasPrice   = @"120"; //connex js 没有传 gaspPrice 写默认值
+        
+        from       = callbackParams[@"options"][@"signer"];
+        
     }else{
         
         ClauseModel *clauseModel = [[ClauseModel alloc]init];
@@ -247,7 +264,49 @@ static dispatch_once_t predicate;
         
         [clauseModelList addObject:clauseModel];
     }
+    ClauseModel *clauseModel = [clauseModelList firstObject];
+    if (gas.integerValue == 0) {
+        
+        NSMutableDictionary *dictClause = [NSMutableDictionary dictionary];
+        [dictClause setValueIfNotNil:clauseModel.to forKey:@"to"];
+        [dictClause setValueIfNotNil:clauseModel.value forKey:@"value"];
+        [dictClause setValueIfNotNil:clauseModel.data forKey:@"data"];
+        
+        NSLog(@"dictClause == %@",dictClause);
+        
+        NSString *to = clauseModel.to;
+        NSString *amount = clauseModel.value;
+        NSString *clauseStr = clauseModel.data;
+        
+        gas = [NSString stringWithFormat:@"%d",[self getGasTo:&to value:&amount data:&clauseStr]];
+        
+        WalletDappSimulateMultiAccountApi *simulateApi = [[WalletDappSimulateMultiAccountApi alloc]initClause:@[dictClause] opts:@{} revision:@""];
+        [simulateApi loadDataAsyncWithSuccess:^(VCBaseApi *finishApi) {
+            
+            NSArray *list = (NSArray *)finishApi.resultDict;
+            NSString *gasUsed = [list firstObject][@"gasUsed"];
+            if (gasUsed.integerValue != 0) {
+                gas = [NSString stringWithFormat:@"%ld",gas.integerValue + gasUsed.integerValue + 15000];
+            }
+            
+            [self callbackClauseList:clauseModelList gas:gas from:from bConnex:bConnex webView:webView callbackId:callbackId requestId:requestId];
+
+            
+            
+        }failure:^(VCBaseApi *finishApi, NSString *errMsg) {
+            
+            [self paramsError:requestId webView:webView callbackId:callbackId];
+
+        }];
+    }else{
+        [self callbackClauseList:clauseModelList gas:gas from:from bConnex:bConnex webView:webView callbackId:callbackId requestId:requestId];
+    }
     
+    
+}
+
+- (void)callbackClauseList:(NSArray *)clauseModelList gas:(NSString *)gas from:(NSString *)from bConnex:(BOOL)bConnex  webView:(WKWebView *)webView callbackId:(NSString *)callbackId requestId:(NSString *)requestId
+{
     id delegate = [WalletDAppHandle shareWalletHandle].delegate;
     if (delegate) {
         if ([delegate respondsToSelector:@selector(onTransfer: gas: callback:)]) {
@@ -260,8 +319,8 @@ static dispatch_once_t predicate;
                                  webView:webView
                               callbackId:callbackId
                                requestId:requestId];
-                
-            }];
+                 
+             }];
         }else{
             [WalletTools callbackWithrequestId:requestId
                                        webView:webView
@@ -303,8 +362,15 @@ static dispatch_once_t predicate;
 - (void)injectJS:(WKWebView *)webview 
 {
     //connex
-    NSString *js = connex_js;
-    [webview evaluateJavaScript:js completionHandler:^(id _Nullable item, NSError * _Nullable error) {
+    NSString *bundlePath = [[NSBundle mainBundle] pathForResource:@"WalletSDKBundle" ofType:@"bundle"];
+    if(!bundlePath){
+        return ;
+    }
+    NSString *path = [bundlePath stringByAppendingString:@"/connex_js.js"];
+    NSString *connex_js = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:nil];
+    connex_js = [connex_js stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+    NSLog(@"dd");
+    [webview evaluateJavaScript:connex_js completionHandler:^(id _Nullable item, NSError * _Nullable error) {
 #if ReleaseVersion
         NSLog(@"inject error == %@",error);
 #endif
@@ -325,8 +391,9 @@ static dispatch_once_t predicate;
         [WalletTools callbackWithrequestId:requestId webView:webView data:@"" callbackId:callbackId code:ERROR_REQUEST_PARAMS];
         return NO;
     }else{
-        if (![kind isEqualToString:@"tx"]) {
-            [WalletTools callbackWithrequestId:requestId webView:webView data:@"" callbackId:callbackId code:ERROR_REQUEST_PARAMS];
+        //既不登tx ，也不是 cert
+        if (![kind isEqualToString:@"tx"] && ![kind isEqualToString:@"cert"]) {
+            [WalletTools callbackWithrequestId:requestId webView:_webView data:@"" callbackId:callbackId code:ERROR_NETWORK];
             return NO;
         }
     }
@@ -369,6 +436,57 @@ static dispatch_once_t predicate;
         [WalletTools callbackWithrequestId:requestId webView:_webView data:nil callbackId:dict[@"callbackId"] code:OK];
     }
 }
+
+- (int)getGasTo:(NSString **)to value:(NSString **)value data:(NSString **)data
+{
+    
+    if ([WalletTools isEmpty:*to]) {
+        *to = @"";
+    }
+    
+    if ([WalletTools isEmpty:*value]) {
+        *value = @"";
+    }
+    
+    if ([WalletTools isEmpty:*data]) {
+        *data = @"";
+    }
+    
+    int txGas = 5000;
+    int clauseGas = 16000;
+    int clauseGasContractCreation = 48000;
+    
+    if ((*data).length == 0 ) {
+        return txGas + clauseGas;
+    }
+    int sum = txGas;
+    
+    if ((*to).length > 0) {
+        sum += clauseGas;
+    } else {
+        sum += clauseGasContractCreation;
+    }
+    
+    sum += [self dataGas:(*data)];
+    return sum ;
+}
+
+- (int)dataGas:(NSString *)data {
+    int zgas = 4;
+    int nzgas = 68;
+    
+    int sum = 0;
+    for (int i = 2; i < data.length; i += 2) {
+        NSString *subStr = [data substringWithRange:NSMakeRange(i, 2)];
+        if ([subStr isEqualToString: @"00"]) {
+            sum += zgas;
+        } else {
+            sum += nzgas;
+        }
+    }
+    return sum;
+}
+
 
 +(void)attempDealloc
 {

@@ -282,6 +282,34 @@
     
 }
 
+- (void)onCertificate:(NSData *)message signer:(NSString *)signer callback:(void(^)(NSData *signatureData))callback
+{
+    NSDictionary *currentWalletDict = [[NSUserDefaults standardUserDefaults]objectForKey:@"currentWallet"];
+    NSString *keystore = currentWalletDict[@"keystore"];
+    
+    if (signer) { //检查是否有指定签名的地址，也有可能没有指定，返回是nil
+        NSString *address = [WalletUtils getAddressWithKeystore:keystore];
+        if ([address.lowercaseString isEqualToString:signer.lowercaseString]) {
+            
+            [self signCert:message keystore:keystore callback:callback];
+        }else{
+            //alert error
+        }
+    }else{
+        [self signCert:message keystore:keystore callback:callback];
+    }
+}
+
+- (void)signCert:(NSData *) message keystore:(NSString *)keystore callback:(void(^)(NSData *signatureData))callback
+{
+    [WalletUtils signWithMessage:message keystore:keystore password:@"123456" callback:^(NSData * _Nonnull signatureData, NSError * _Nonnull error) {
+        
+        if (!error) {
+            callback(signatureData);
+        }
+    }];
+}
+
 /**
  * You must implement this method to free memory, otherwise there may be a memory overflow or leak.
  */

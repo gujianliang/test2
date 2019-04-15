@@ -21,10 +21,10 @@ NS_ASSUME_NONNULL_BEGIN
  *  App developer implementation when dapp calls transaction function
  *  @param clauses : clause list.
  *  @param gas : Set maximum gas allowed for call.
- *  @param callback : Callback after the end. txId:Transaction identifier; address:Signer address
+ *  @param callback : Callback after the end. txId:Transaction identifier; signer:Signer address
  *
  */
-- (void)onTransfer:(NSArray<ClauseModel *> *)clauses gas:(NSString *)gas callback:(void(^)(NSString *txId ,NSString *address))callback;
+- (void)onTransfer:(NSArray<ClauseModel *> *)clauses gas:(NSString *)gas callback:(void(^)(NSString *txId ,NSString *signer))callback;
 
 /**
  *  @abstract
@@ -38,10 +38,11 @@ NS_ASSUME_NONNULL_BEGIN
  *  @abstract
  *   App developer implementation when dapp calls cert sign function
  *  @param message : Data to be signed,form dapp
+ *  @param signer : Signer address
  *  @param callback : Callback after the end
  *
  */
-- (void)onCertificate:(NSString *)message callback:(void(^)(NSString *signature))callback;
+- (void)onCertificate:(NSData *)message signer:(NSString *)signer callback:(void(^)(NSData *signature))callback;
 
 
 /**

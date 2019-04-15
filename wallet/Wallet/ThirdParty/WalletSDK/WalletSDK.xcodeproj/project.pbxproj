@@ -21,6 +21,7 @@
 		9736C127214B8671003DE935 /* WalletUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 9736C125214B8671003DE935 /* WalletUtils.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		97478228223E323300AB6937 /* WalletTokenBalanceApi.h in Headers */ = {isa = PBXBuildFile; fileRef = 97478226223E323300AB6937 /* WalletTokenBalanceApi.h */; };
 		97478229223E323300AB6937 /* WalletTokenBalanceApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 97478227223E323300AB6937 /* WalletTokenBalanceApi.m */; };
+		974B4DBF22646D3C00213E1A /* connex_js.js in Resources */ = {isa = PBXBuildFile; fileRef = 974B4DBE22646D3C00213E1A /* connex_js.js */; };
 		974EA4DF2259F9D6009C021B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 974EA4DE2259F9D6009C021B /* UIKit.framework */; };
 		974EA4E12259F9DF009C021B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 974EA4E02259F9DF009C021B /* CoreGraphics.framework */; };
 		974EA5DA225A30DC009C021B /* PromiseKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 974EA5D9225A30DC009C021B /* PromiseKit.framework */; };
@@ -242,6 +243,7 @@
 		9743A62221FEE67C0079C582 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		97478226223E323300AB6937 /* WalletTokenBalanceApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WalletTokenBalanceApi.h; sourceTree = "<group>"; };
 		97478227223E323300AB6937 /* WalletTokenBalanceApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WalletTokenBalanceApi.m; sourceTree = "<group>"; };
+		974B4DBE22646D3C00213E1A /* connex_js.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = connex_js.js; sourceTree = "<group>"; };
 		974EA4DE2259F9D6009C021B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		974EA4E02259F9DF009C021B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		974EA5D3225A22F6009C021B /* PromiseKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = PromiseKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -538,6 +540,7 @@
 		4143ED9F22019AC60056C08A /* WalletSDKBundle */ = {
 			isa = PBXGroup;
 			children = (
+				974B4DBE22646D3C00213E1A /* connex_js.js */,
 				4143EE6A2202E7C30056C08A /* zh-Hans.lproj */,
 				4143EE6E2202E7C30056C08A /* en.lproj */,
 				4143EDA022019AC60056C08A /* Info.plist */,
@@ -1281,6 +1284,7 @@
 			files = (
 				4143EE7B2202E7C40056C08A /* Localizable.strings in Resources */,
 				4143EE792202E7C40056C08A /* Localizable.strings in Resources */,
+				974B4DBF22646D3C00213E1A /* connex_js.js in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

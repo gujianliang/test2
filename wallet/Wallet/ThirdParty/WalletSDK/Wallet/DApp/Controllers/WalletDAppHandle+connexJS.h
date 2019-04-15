@@ -104,6 +104,13 @@ NS_ASSUME_NONNULL_BEGIN
              callbackId:(NSString *)callbackId
       completionHandler:(void (^)(NSString * __nullable result))completionHandler;
 
+
+- (void)certTransferParamModel:(NSDictionary *)callbackParams
+                          from:(NSString *)from
+                     requestId:(NSString *)requestId
+                       webView:(WKWebView *)webView
+                    callbackId:(NSString *)callbackId;
+
 @end
 
 NS_ASSUME_NONNULL_END

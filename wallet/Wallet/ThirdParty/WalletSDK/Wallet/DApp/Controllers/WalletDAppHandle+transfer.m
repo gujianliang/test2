@@ -28,6 +28,7 @@
 #import "WalletGetBaseGasPriceApi.h"
 #import "SocketRocketUtility.h"
 #import "WalletTransactionApi.h"
+#import "WalletMBProgressShower.h"
 
 @implementation WalletDAppHandle (transfer)
 
@@ -190,5 +191,85 @@ callback:(void(^)(NSString *txId))callback
     callback(self.txId);
 }
 
+- (NSString *)packParam:(NSDictionary *)param
+{
+    NSMutableDictionary *dictOrigin = [NSMutableDictionary dictionaryWithDictionary:param];
+    
+    NSArray *keys = [dictOrigin allKeys];
+    NSArray *sortedArray = [keys sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2){
+        return [obj1 compare:obj2 options:NSNumericSearch];
+    }];
+    
+    NSMutableArray *keyAndValueList = [NSMutableArray array];
+    for (NSString *key in sortedArray) {
+        NSString *value = dictOrigin[key];
+        NSString *keyValue = nil;
+        if ([value isKindOfClass:[NSNumber class]]) {
+            NSNumber *num = (NSNumber *)value;
+            value = ((NSNumber *)num).stringValue;
+            
+            keyValue = [NSString stringWithFormat:@"\"%@\":%@",key,value];
+        }else if([value isKindOfClass:[NSDictionary class]])
+        {
+            keyValue = [NSString stringWithFormat:@"\"%@\":%@",key, [self packParam:(NSDictionary *)value]];
+        }else{
+            keyValue = [NSString stringWithFormat:@"\"%@\":\"%@\"",key,value];
+        }
+        
+        [keyAndValueList addObject:keyValue];
+        
+    }
+    return [NSString stringWithFormat:@"{%@}",[keyAndValueList componentsJoinedByString:@","]];
+}
+
+- (void)signCertFrom:(NSString *)from  account:(Account *)account content:(NSString *)content requestId:(NSString *)requestId
+             webView:(WKWebView *)webView
+          callbackId:(NSString *)callbackId
+               param:(NSDictionary *)param
+{
+    
+    NSString *packSign = [self packParam:param];
+    
+    NSData *totalData1 = [packSign dataUsingEncoding:NSUTF8StringEncoding];
+    SecureData *data = [SecureData BLAKE2B:totalData1];
+    Signature *signature = [account signDigest:data.data];
+    
+    SecureData *vData = [[SecureData alloc]init];
+    [vData appendByte:signature.v];
+    
+    NSString *s = [SecureData dataToHexString:signature.s];
+    NSString *r = [SecureData dataToHexString:signature.r];
+    
+    NSString *hashStr = [NSString stringWithFormat:@"0x%@%@%@",
+                         [r substringFromIndex:2],
+                         [s substringFromIndex:2],
+                         [vData.hexString substringFromIndex:2]];
+    
+    if (signature.v == 2
+        || signature.v == 3) {
+        // fail
+        [WalletTools callbackWithrequestId:requestId
+                                   webView:webView
+                                      data:@""
+                                callbackId:callbackId
+                                      code:ERROR_NETWORK];
+    }else{
+        NSMutableDictionary *dictSub = [NSMutableDictionary dictionary];
+        
+        [dictSub setValueIfNotNil:param[@"domain"] forKey:@"domain"];
+        [dictSub setValueIfNotNil:from.lowercaseString forKey:@"signer"];
+        [dictSub setValueIfNotNil:param[@"timestamp"] forKey:@"timestamp"];
+        
+        NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+        [dict setObject:dictSub forKey:@"annex"];
+        [dict setObject:hashStr forKey:@"signature"];
+        
+        [WalletTools callbackWithrequestId:requestId
+                                   webView:webView
+                                      data:dict
+                                callbackId:callbackId
+                                      code:OK];
+    }
+}
 
 @end
