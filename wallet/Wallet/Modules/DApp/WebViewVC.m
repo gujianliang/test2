@@ -287,7 +287,7 @@
     NSDictionary *currentWalletDict = [[NSUserDefaults standardUserDefaults]objectForKey:@"currentWallet"];
     NSString *keystore = currentWalletDict[@"keystore"];
     
-    if (signer) { //检查是否有指定签名的地址，也有可能没有指定，返回是nil
+    if ([signer.lowercaseString isEqualToString:[WalletUtils getAddressWithKeystore:keystore].lowercaseString]) { //检查是否有指定签名的地址，也有可能没有指定，返回是nil
         NSString *address = [WalletUtils getAddressWithKeystore:keystore];
         if ([address.lowercaseString isEqualToString:signer.lowercaseString]) {
             
@@ -302,12 +302,29 @@
 
 - (void)signCert:(NSData *) message keystore:(NSString *)keystore callback:(void(^)(NSData *signatureData))callback
 {
-    [WalletUtils signWithMessage:message keystore:keystore password:@"123456" callback:^(NSData * _Nonnull signatureData, NSError * _Nonnull error) {
-        
-        if (!error) {
-            callback(signatureData);
-        }
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil
+                                                                             message:@"Please enter the wallet password"
+                                                                      preferredStyle:UIAlertControllerStyleAlert];
+    
+
+    [alertController addAction:([UIAlertAction actionWithTitle: @"Confirm"
+                                                         style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action)
+                                 {
+                                     
+                                     UITextField *textF =  alertController.textFields.lastObject;
+                                     
+                                     [WalletUtils signWithMessage:message keystore:keystore password:textF.text callback:^(NSData * _Nonnull signatureData, NSError * _Nonnull error) {
+                                         
+                                         if (!error) {
+                                             callback(signatureData);
+                                         }
+                                     }];
+                                     
+                                 }])];
+    [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
     }];
+    
+    [self presentViewController:alertController animated:YES completion:nil];
 }
 
 /**

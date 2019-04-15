@@ -444,9 +444,7 @@
                      requestId:(NSString *)requestId
                        webView:(WKWebView *)webView
                     callbackId:(NSString *)callbackId
-{
-    
-    
+{    
     NSDictionary *clauses = callbackParams[@"clauses"];
     WalletBlockInfoApi *bestApi = [[WalletBlockInfoApi alloc]init];
     [bestApi loadDataAsyncWithSuccess:^(VCBaseApi *finishApi) {
@@ -471,7 +469,7 @@
             
             [self.delegate onCertificate:data signer:from callback:^(NSData * _Nonnull signature) {
                 
-                NSString *hashSignture = [[NSString alloc]initWithData:signature encoding:NSUTF8StringEncoding];
+                NSString *hashSignture = [SecureData dataToHexString:signature];
                 
                 NSMutableDictionary *dictSub = [NSMutableDictionary dictionary];
                 
@@ -516,9 +514,6 @@
         bAmount = NO;
     }
     
-    if (amount.length > 20) {
-        bAmount = NO;
-    }
     
     if ([amount floatValue] == 0
         && [[Payment parseEther:amount] lessThanEqualTo:[BigNumber constantZero]]){

@@ -211,8 +211,6 @@ static dispatch_once_t predicate;
         
         NSString *from = callbackParams[@"options"][@"signer"];
         
-        
-        
         [self certTransferParamModel:callbackParams from:from requestId:requestId webView:webView callbackId:callbackId];
        
         return ;
