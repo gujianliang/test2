@@ -309,6 +309,7 @@ TransactionParameter attribute description：
 
  ##   App developer implementation when dapp calls cert sign function  
  >  @param message : Data to be signed,form dapp  
+ >  @param signer : Signer address     
  >  @param callback : Callback after the end  
  >
   ```obj-c
