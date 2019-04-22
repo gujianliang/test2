@@ -46,18 +46,23 @@ Vechain wallet SDK provides a series of functional interface can help the iOS de
     pod 'Masonry', '1.1.0'
  
     pod 'SocketRocket', '~> 0.4.2'
+    
+    pod 'YYModel', '~>  1.0.4'
  
  end
 ```
-####  Support manual install
-Clone or download them and drag them into your project.
+####  Other libraries need to be added manually
+These libraries can be found in the demo
 
  ```obj-c
-git clone --recursive https://github.com/AFNetworking/AFNetworking.git
-git clone --recursive https://github.com/jdg/MBProgressHUD.git
-git clone --recursive https://github.com/SnapKit/Masonry.git
-git clone --recursive https://github.com/facebook/SocketRocket.git
+ Blake2
+ trezor-crypto
+ BreadWallet
+ libtommath-1.0
+ scrypt-1.1.6
+ 
 ```
+
 
 To use the Framework, add the WalletSDK.Framework and WalletSDKBundle.bundle to your project :
 
