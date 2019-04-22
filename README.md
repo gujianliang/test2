@@ -47,12 +47,12 @@ Vechain wallet SDK provides a series of functional interface can help the iOS de
  
     pod 'SocketRocket', '~> 0.4.2'
     
-    pod YYModel, '~>  1.0.4'
+    pod 'YYModel', '~>  1.0.4'
  
  end
 ```
-####  Support manual install
-Clone or download them and drag them into your project.
+####  Other lib need manual install
+The libs you can fine from demo
 
  ```obj-c
  Blake2
@@ -61,10 +61,6 @@ Clone or download them and drag them into your project.
  libtommath-1.0
  scrypt-1.1.6
  
-git clone --recursive https://github.com/AFNetworking/AFNetworking.git
-git clone --recursive https://github.com/jdg/MBProgressHUD.git
-git clone --recursive https://github.com/SnapKit/Masonry.git
-git clone --recursive https://github.com/facebook/SocketRocket.git
 ```
 
 
