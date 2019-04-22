@@ -51,8 +51,8 @@ Vechain wallet SDK provides a series of functional interface can help the iOS de
  
  end
 ```
-####  Other lib need manual install
-The libs you can fine from demo
+####  Other libraries need to be added manually
+These libraries can be found in the demo
 
  ```obj-c
  Blake2
