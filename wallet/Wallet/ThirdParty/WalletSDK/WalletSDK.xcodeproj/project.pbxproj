@@ -236,6 +236,14 @@
 		975AA986226D988800C1034D /* NSObject+YYModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSObject+YYModel.m"; sourceTree = "<group>"; };
 		975AA987226D988800C1034D /* YYClassInfo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YYClassInfo.m; sourceTree = "<group>"; };
 		975AA988226D988800C1034D /* NSObject+YYModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSObject+YYModel.h"; sourceTree = "<group>"; };
+		975AAA9A226DC17E00C1034D /* blake2s-ref.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = "blake2s-ref.c"; sourceTree = "<group>"; };
+		975AAA9B226DC17E00C1034D /* blake2xb-ref.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = "blake2xb-ref.c"; sourceTree = "<group>"; };
+		975AAA9C226DC17E00C1034D /* blake2sp-ref.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = "blake2sp-ref.c"; sourceTree = "<group>"; };
+		975AAA9E226DC17E00C1034D /* blake2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = blake2.h; sourceTree = "<group>"; };
+		975AAA9F226DC17E00C1034D /* blake2bp-ref.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = "blake2bp-ref.c"; sourceTree = "<group>"; };
+		975AAAA1226DC17E00C1034D /* blake2b-ref.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = "blake2b-ref.c"; sourceTree = "<group>"; };
+		975AAAA2226DC17E00C1034D /* blake2-impl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "blake2-impl.h"; sourceTree = "<group>"; };
+		975AAAA3226DC17E00C1034D /* blake2xs-ref.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = "blake2xs-ref.c"; sourceTree = "<group>"; };
 		97655EB122530CA300ECEEA9 /* WalletDAppHandle+transfer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WalletDAppHandle+transfer.h"; sourceTree = "<group>"; };
 		97655EB222530CA300ECEEA9 /* WalletDAppHandle+transfer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "WalletDAppHandle+transfer.m"; sourceTree = "<group>"; };
 		97655EB522533DA200ECEEA9 /* WalletDappCheckParamsHandle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WalletDappCheckParamsHandle.h; sourceTree = "<group>"; };
@@ -288,16 +296,6 @@
 		97686A9B22648760007EDBF1 /* ecdsa.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.objc; path = ecdsa.c; sourceTree = "<group>"; };
 		97686A9C22648760007EDBF1 /* pbkdf2.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.objc; path = pbkdf2.c; sourceTree = "<group>"; };
 		97686A9D22648760007EDBF1 /* secp256k1.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = secp256k1.h; sourceTree = "<group>"; };
-		97686AB22264888B007EDBF1 /* blake2s-ref.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.objc; path = "blake2s-ref.c"; sourceTree = "<group>"; };
-		97686AB32264888B007EDBF1 /* blake2xb-ref.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.objc; path = "blake2xb-ref.c"; sourceTree = "<group>"; };
-		97686AB42264888B007EDBF1 /* blake2sp-ref.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.objc; path = "blake2sp-ref.c"; sourceTree = "<group>"; };
-		97686AB52264888B007EDBF1 /* genkat-c.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.objc; path = "genkat-c.c"; sourceTree = "<group>"; };
-		97686AB62264888B007EDBF1 /* blake2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = blake2.h; sourceTree = "<group>"; };
-		97686AB72264888B007EDBF1 /* blake2bp-ref.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.objc; path = "blake2bp-ref.c"; sourceTree = "<group>"; };
-		97686AB82264888B007EDBF1 /* genkat-json.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.objc; path = "genkat-json.c"; sourceTree = "<group>"; };
-		97686AB92264888B007EDBF1 /* blake2b-ref.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.objc; path = "blake2b-ref.c"; sourceTree = "<group>"; };
-		97686ABA2264888B007EDBF1 /* blake2-impl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "blake2-impl.h"; sourceTree = "<group>"; };
-		97686ABB2264888B007EDBF1 /* blake2xs-ref.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.objc; path = "blake2xs-ref.c"; sourceTree = "<group>"; };
 		9773F8F7221412D200DF5972 /* WalletDappStoreSelectCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WalletDappStoreSelectCell.h; sourceTree = "<group>"; };
 		9773F8F9221412D200DF5972 /* WalletTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WalletTextView.h; sourceTree = "<group>"; };
 		9773F8FA221412D200DF5972 /* WalletAlertShower.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WalletAlertShower.h; sourceTree = "<group>"; };
@@ -608,6 +606,22 @@
 			path = ../../YYModel;
 			sourceTree = "<group>";
 		};
+		975AAA99226DC17E00C1034D /* Blake2 */ = {
+			isa = PBXGroup;
+			children = (
+				975AAA9A226DC17E00C1034D /* blake2s-ref.c */,
+				975AAA9B226DC17E00C1034D /* blake2xb-ref.c */,
+				975AAA9C226DC17E00C1034D /* blake2sp-ref.c */,
+				975AAA9E226DC17E00C1034D /* blake2.h */,
+				975AAA9F226DC17E00C1034D /* blake2bp-ref.c */,
+				975AAAA1226DC17E00C1034D /* blake2b-ref.c */,
+				975AAAA2226DC17E00C1034D /* blake2-impl.h */,
+				975AAAA3226DC17E00C1034D /* blake2xs-ref.c */,
+			);
+			name = Blake2;
+			path = ../../Blake2;
+			sourceTree = "<group>";
+		};
 		9768699022647CF9007EDBF1 /* scrypt-1.1.6 */ = {
 			isa = PBXGroup;
 			children = (
@@ -686,24 +700,6 @@
 			);
 			name = "trezor-crypto";
 			path = "../../trezor-crypto";
-			sourceTree = "<group>";
-		};
-		97686AB12264888B007EDBF1 /* Blake2 */ = {
-			isa = PBXGroup;
-			children = (
-				97686AB22264888B007EDBF1 /* blake2s-ref.c */,
-				97686AB32264888B007EDBF1 /* blake2xb-ref.c */,
-				97686AB42264888B007EDBF1 /* blake2sp-ref.c */,
-				97686AB52264888B007EDBF1 /* genkat-c.c */,
-				97686AB62264888B007EDBF1 /* blake2.h */,
-				97686AB72264888B007EDBF1 /* blake2bp-ref.c */,
-				97686AB82264888B007EDBF1 /* genkat-json.c */,
-				97686AB92264888B007EDBF1 /* blake2b-ref.c */,
-				97686ABA2264888B007EDBF1 /* blake2-impl.h */,
-				97686ABB2264888B007EDBF1 /* blake2xs-ref.c */,
-			);
-			name = Blake2;
-			path = ../../Blake2;
 			sourceTree = "<group>";
 		};
 		9773F8522213F14900DF5972 /* Category */ = {
@@ -972,8 +968,8 @@
 		E2317EE01E3198D100DBE3E4 /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				975AAA99226DC17E00C1034D /* Blake2 */,
 				975AA983226D988800C1034D /* YYModel */,
-				97686AB12264888B007EDBF1 /* Blake2 */,
 				97686A7822648760007EDBF1 /* trezor-crypto */,
 				976869F222648431007EDBF1 /* BreadWallet */,
 				976869E522648323007EDBF1 /* libtommath-1.0 */,
