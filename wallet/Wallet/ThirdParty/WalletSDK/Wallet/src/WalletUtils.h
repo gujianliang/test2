@@ -15,12 +15,15 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @protocol WalletUtilsDelegate <NSObject>
+
 #pragma mark setDelegate
+
 /**
  *  @abstract
  *  App developer implementation when dapp calls transaction function
- *  @param clauses : clause list.
- *  @param gas : Set maximum gas allowed for call.
+ *
+ *  @param clauses : Clause model list
+ *  @param gas : Set maximum gas allowed for call
  *  @param callback : Callback after the end. txId:Transaction identifier; signer:Signer address
  *
  */
@@ -36,18 +39,20 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  *  @abstract
- *   App developer implementation when dapp calls cert sign function
+ *   App developer implementation when dapp calls authentication function
+ *
  *  @param message : Data to be signed,form dapp
- *  @param signer : Signer address
- *  @param callback : Callback after the end
+ *  @param signer : Enforces the specified address to sign the certificate
+ *  @param callback : Callback after the end.signer: Signer address; signatureData : Signature is 65 bytes
  *
  */
-- (void)onCertificate:(NSData *)message signer:(NSString *)signer callback:(void(^)(NSString *signer, NSData *signature))callback;
+- (void)onCertificate:(NSData *)message signer:(NSString *)signer callback:(void(^)(NSString *signer, NSData *signatureData))callback;
 
 
 /**
  *  @abstract
  *   App developer implementation when dapp calls checkOwn address function
+ *
  *  @param address : Address from dapp
  *  @param callback : Callback after the end
  *
@@ -134,6 +139,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  *  @abstract
  *  Verify keystore format
+ *
  *  @param keystoreJson :Keystore JSON encryption format for user wallet private key
  *
  *  @return verification result
@@ -144,6 +150,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  *  @abstract
  *  Get address from keystore
+ *
  *  @param keystoreJson :  Keystore JSON encryption format for user wallet private key
  *
  */
@@ -152,6 +159,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  *  @abstract
  *  Change Wallet password
+ *
  *  @param oldPassword : old password for wallet.
  *  @param newPassword : new password for wallet.
  *  @param keystoreJson :  Keystore JSON encryption format for user wallet private key
@@ -166,6 +174,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  *  @abstract
  *  Verify the keystore with a password
+ *
  *  @param keystoreJson :  Keystore JSON encryption format for user wallet private key
  *  @param password :  Wallet password
  *  @param callback : Callback after the end
@@ -204,6 +213,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  *  @abstract
  *   Get chainTag of block chain
+ *
  *  @param callback : Callback after the end
  *
  */
@@ -267,9 +277,8 @@ NS_ASSUME_NONNULL_BEGIN
  *  Set delegate to SDK
  *
  *  @param delegate : delegate object
- *  reture :YES ,set delegate success;NO ,set delegate fail
  */
-+ (BOOL)initDAppWithDelegate:(id)delegate;
++ (void)initDAppWithDelegate:(id)delegate;
 
 /*! @abstract
  *  Displays a JavaScript text input panel.
@@ -309,5 +318,8 @@ completionHandler:(void (^)(NSString *result))completionHandler;
 
 
 NS_ASSUME_NONNULL_END
+
+
+
 
 @end

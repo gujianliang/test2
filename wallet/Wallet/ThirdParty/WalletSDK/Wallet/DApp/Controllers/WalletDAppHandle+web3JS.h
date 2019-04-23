@@ -25,7 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 //获得chaintag
 - (void)getChainTag:(NSString *)requestId
-           callback:(void (^)(NSString * __nullable result))callback;
+  completionHandler:(void (^)(NSString * __nullable result))completionHandler;
 
 @end
 

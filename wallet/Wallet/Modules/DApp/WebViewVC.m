@@ -57,7 +57,7 @@
     
     /*
      CurrentWallet has two key; addres and ketstore
-                Address: 0 x hex 20 bytes
+                Address: wallet address
                 Keystore: NSDictionary, specific format, please read the readme
      */
     NSDictionary *currentWallet = [[NSUserDefaults standardUserDefaults]objectForKey:@"currentWallet"];
@@ -67,7 +67,7 @@
         [walletList addObject:currentWallet[@"keystore"]];
     }
     
-    // set deleget
+    // set delegate
     [WalletUtils initDAppWithDelegate:self];
 }
 
@@ -282,7 +282,7 @@
     
     NSString *address = [WalletUtils getAddressWithKeystore:keystore];
     
-    if (signer.length > 0) { //有指定的签名地址
+    if (signer.length > 0) { //Specified signature address
        
         if ([address.lowercaseString isEqualToString:signer.lowercaseString]) {
             

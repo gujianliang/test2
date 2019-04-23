@@ -506,6 +506,12 @@
                                         callbackId:callbackId
                                               code:OK];
             }];
+        }else{
+            [WalletTools callbackWithrequestId:requestId
+                                       webView:webView
+                                          data:@""
+                                    callbackId:callbackId
+                                          code:ERROR_INITDAPP_ERROR];
         }
         
     }failure:^(VCBaseApi *finishApi, NSString *errMsg) {
@@ -588,7 +594,6 @@
                  webView:(WKWebView *)webView
               callbackId:(NSString *)callbackId
 {
-    NSLog(@"dd");
     NSArray *clauses = dictParam[@"clauses"];
     NSDictionary *options = dictParam[@"options"];
     NSString *rev = dictParam[@"rev"];
@@ -651,10 +656,10 @@
                 injectJS = [injectJS stringByReplacingOccurrencesOfString:@"\"false\"" withString:@"false"];
                 
                 completionHandler(injectJS);
-                
             }
-            
         }];
+    }else{
+        completionHandler(@"{}");
     }
 }
 

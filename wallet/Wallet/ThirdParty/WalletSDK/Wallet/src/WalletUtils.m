@@ -212,16 +212,10 @@
 }
 
 
-+ (BOOL)initDAppWithDelegate:(id)delegate
++ (void)initDAppWithDelegate:(id)delegate
 {
     WalletDAppHandle *dappHandle = [WalletDAppHandle shareWalletHandle];
     dappHandle.delegate = delegate;
-    
-    if (![delegate respondsToSelector:@selector(onTransfer: gas: callback:)] ||
-        ![delegate respondsToSelector:@selector(onGetWalletAddress:)]) {
-        return NO;
-    }
-    return YES;
 }
 
 + (void)webView:(WKWebView *)webView defaultText:(NSString *)defaultText completionHandler:(void (^)(NSString * result))completionHandler
