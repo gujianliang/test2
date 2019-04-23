@@ -42,7 +42,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param callback : Callback after the end
  *
  */
-- (void)onCertificate:(NSData *)message signer:(NSString *)signer callback:(void(^)(NSData *signature))callback;
+- (void)onCertificate:(NSData *)message signer:(NSString *)signer callback:(void(^)(NSString *signer, NSData *signature))callback;
 
 
 /**

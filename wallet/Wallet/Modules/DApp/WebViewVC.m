@@ -275,25 +275,30 @@
     }
 }
 
-- (void)onCertificate:(NSData *)message signer:(NSString *)signer callback:(void(^)(NSData *signatureData))callback
+- (void)onCertificate:(NSData *)message signer:(NSString *)signer callback:(void (^)(NSString * _Nonnull signer, NSData * _Nonnull signatureData))callback
 {
     NSDictionary *currentWalletDict = [[NSUserDefaults standardUserDefaults]objectForKey:@"currentWallet"];
     NSString *keystore = currentWalletDict[@"keystore"];
     
-    if ([signer.lowercaseString isEqualToString:[WalletUtils getAddressWithKeystore:keystore].lowercaseString]) { //检查是否有指定签名的地址，也有可能没有指定，返回是nil
-        NSString *address = [WalletUtils getAddressWithKeystore:keystore];
+    NSString *address = [WalletUtils getAddressWithKeystore:keystore];
+    
+    if (signer.length > 0) { //有指定的签名地址
+       
         if ([address.lowercaseString isEqualToString:signer.lowercaseString]) {
             
-            [self signCert:message keystore:keystore callback:callback];
+            [self signCert:message signer:address keystore:keystore callback:callback];
         }else{
             //alert error
         }
     }else{
-        [self signCert:message keystore:keystore callback:callback];
+        [self signCert:message signer:address keystore:keystore callback:callback];
     }
 }
 
-- (void)signCert:(NSData *) message keystore:(NSString *)keystore callback:(void(^)(NSData *signatureData))callback
+- (void)signCert:(NSData *) message
+          signer:(NSString *)signer
+        keystore:(NSString *)keystore
+        callback:(void (^)(NSString * _Nonnull signer, NSData * _Nonnull signatureData))callback
 {
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil
                                                                              message:@"Please enter the wallet password"
@@ -309,7 +314,7 @@
                                      [WalletUtils signWithMessage:message keystore:keystore password:textF.text callback:^(NSData * _Nonnull signatureData, NSError * _Nonnull error) {
                                          
                                          if (!error) {
-                                             callback(signatureData);
+                                             callback(signer,signatureData);
                                          }
                                      }];
                                      

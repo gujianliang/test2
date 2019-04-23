@@ -321,7 +321,7 @@ static dispatch_once_t predicate;
             
             NSMutableDictionary *dictData = [NSMutableDictionary dictionary];
             [dictData setValueIfNotNil:txid forKey:@"txid"];
-            [dictData setValueIfNotNil:address forKey:@"signer"];
+            [dictData setValueIfNotNil:address.lowercaseString forKey:@"signer"];
             
             data = dictData;
         }else{

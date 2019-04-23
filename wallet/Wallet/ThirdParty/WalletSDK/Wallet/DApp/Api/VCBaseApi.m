@@ -11,6 +11,8 @@
 #import "WalletModelFetcher.h"
 #import "NSStringAdditions.h"
 
+#import "NSObject+LKModel.h"
+
 @implementation VCBaseApi
 {
 
@@ -350,7 +352,19 @@
             return;
             
         }else{
-            self.status = RequestFailed;
+            
+            if (self.supportOtherDataFormat) {
+                if (error.code == 3840) {
+                    self.resultDict = nil;
+                    self.status = RequestSuccess;
+                    _successBlock(self);
+                    return;
+                }else{
+                    self.status = RequestFailed;
+                }
+            }else{
+                self.status = RequestFailed;
+            }
         }
     }
     

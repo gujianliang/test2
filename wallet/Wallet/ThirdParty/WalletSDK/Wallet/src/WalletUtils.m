@@ -379,7 +379,7 @@
 + (void)modifyKeystore:(NSString *)keystoreJson
            newPassword:(NSString *)newPassword
            oldPassword:(NSString *)oldPassword
-              callback:(void (^)(NSString *newKeystore))callback;
+              callback:(void (^)(NSString *newKeystore))callback
 {
     [WalletUtils decryptKeystore:keystoreJson password:oldPassword callback:^(NSString * _Nonnull privatekey, NSError * _Nonnull error) {
         
@@ -469,11 +469,5 @@
         return [WalletUtils getChecksumAddress:address];
     }
 }
-
-//- (void)onCertificate:(NSString *)message callback:(void(^)(void))callback
-//{
-//
-//}
-
 
 @end

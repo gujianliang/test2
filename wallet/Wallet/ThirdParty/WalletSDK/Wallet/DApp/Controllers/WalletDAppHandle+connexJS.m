@@ -486,14 +486,14 @@
         
         if (self.delegate && [self.delegate respondsToSelector:@selector(onCertificate:signer:callback:)]) {
             
-            [self.delegate onCertificate:data signer:from callback:^(NSData * _Nonnull signature) {
+            [self.delegate onCertificate:data signer:from callback:^(NSString * _Nonnull signer, NSData * _Nonnull signature) {
                 
                 NSString *hashSignture = [SecureData dataToHexString:signature];
                 
                 NSMutableDictionary *dictSub = [NSMutableDictionary dictionary];
                 
                 [dictSub setValueIfNotNil:dictSignParam[@"domain"] forKey:@"domain"];
-                [dictSub setValueIfNotNil:from.lowercaseString forKey:@"signer"];
+                [dictSub setValueIfNotNil:signer.lowercaseString forKey:@"signer"];
                 [dictSub setValueIfNotNil:dictSignParam[@"timestamp"] forKey:@"timestamp"];
                 
                 NSMutableDictionary *dict = [NSMutableDictionary dictionary];
@@ -688,5 +688,7 @@
     }
     return [NSString stringWithFormat:@"{%@}",[keyAndValueList componentsJoinedByString:@","]];
 }
+
+
 
 @end

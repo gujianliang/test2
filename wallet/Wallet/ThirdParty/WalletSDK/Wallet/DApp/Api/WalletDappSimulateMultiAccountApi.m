@@ -35,9 +35,24 @@
 -(NSMutableDictionary*)buildRequestDict
 {
     //增加参数
-#warning 多clause test
     NSMutableDictionary* dict = [super buildRequestDict];
-    [dict setValueIfNotNil:_clauseList forKey:@"clauses"];
+    
+    NSMutableArray *clauseList = [NSMutableArray array];
+    if (_clauseList.count > 0) {
+        
+        for (id clause in _clauseList) {
+            if ([clause isKindOfClass:[ClauseModel class]]) {
+                
+                NSString *strClause = [clause yy_modelToJSONString];
+                NSDictionary *dictClause = [NSJSONSerialization dictionaryWithJsonString:strClause];
+                [clauseList addObject:dictClause];
+            }else{
+                [clauseList addObject:clause];
+            }
+        }
+    }
+    
+    [dict setValueIfNotNil:clauseList forKey:@"clauses"];
     [dict setValueIfNotNil:_opts[@"gas"] forKey:@"gas"];
     [dict setValueIfNotNil:_opts[@"gasPrice"] forKey:@"gasPrice"];
     [dict setValueIfNotNil:_opts[@"caller"] forKey:@"caller"];

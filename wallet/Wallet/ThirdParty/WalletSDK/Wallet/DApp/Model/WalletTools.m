@@ -311,6 +311,7 @@
                                                          message:message];
     NSString *injectJS = [NSString stringWithFormat:@"%@('%@')",callbackId,[packageDict yy_modelToJSONString]];
 
+    injectJS = [injectJS stringByReplacingOccurrencesOfString:@"\"nu&*ll\"" withString:@"null"];
 #if ReleaseVersion
     NSLog(@"injectJS == %@",injectJS);
 #endif

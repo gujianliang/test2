@@ -244,23 +244,9 @@
     __block NSURLSessionDataTask *dataTask = nil;
     dataTask = [self dataTaskWithRequest:request completionHandler:^(NSURLResponse * __unused response, id __nullable responseObject, NSError *error) {
         if (error) {
-            if (error.code == 3840) {
-                
-                if (success) {
-                    NSString *responString = @"";   // 初始值，不允许为空，后面的回调结果会引用到这个值。
-                    if (responseObject) {   // 后端返回有一堆结果
-                        responString = [NSString stringWithFormat:@"%@", responseObject];
-                    }
-                    
-                    NSLog(@"\n 发生 3840 非 json 现象：URL: %@  DATA: %@", request.URL, responString);
-                    
-                    success(dataTask, responString);
-                }
-                
-            }else {
-                if (failure) {
-                    failure(dataTask, error);
-                }
+            
+            if (failure) {
+                failure(dataTask, error);
             }
             
         } else {

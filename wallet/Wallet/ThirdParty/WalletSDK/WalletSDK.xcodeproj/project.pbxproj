@@ -36,6 +36,7 @@
 		9757452D21FFFBB20046C8A0 /* UIColor+SNFoundation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9757452B21FFFBB20046C8A0 /* UIColor+SNFoundation.m */; };
 		9757452E21FFFBB20046C8A0 /* UIColor+SNFoundation.h in Headers */ = {isa = PBXBuildFile; fileRef = 9757452C21FFFBB20046C8A0 /* UIColor+SNFoundation.h */; };
 		975AAAA8226EC13C00C1034D /* web3.js in Resources */ = {isa = PBXBuildFile; fileRef = 975AAAA7226EC13C00C1034D /* web3.js */; };
+		975AAAAD226EF1E300C1034D /* NSObject+LKModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 975AAAAC226EF1E200C1034D /* NSObject+LKModel.m */; };
 		97655EB322530CA300ECEEA9 /* WalletDAppHandle+transfer.h in Headers */ = {isa = PBXBuildFile; fileRef = 97655EB122530CA300ECEEA9 /* WalletDAppHandle+transfer.h */; };
 		97655EB422530CA300ECEEA9 /* WalletDAppHandle+transfer.m in Sources */ = {isa = PBXBuildFile; fileRef = 97655EB222530CA300ECEEA9 /* WalletDAppHandle+transfer.m */; };
 		97655EB722533DA200ECEEA9 /* WalletDappCheckParamsHandle.h in Headers */ = {isa = PBXBuildFile; fileRef = 97655EB522533DA200ECEEA9 /* WalletDappCheckParamsHandle.h */; };
@@ -246,6 +247,8 @@
 		975AAAA2226DC17E00C1034D /* blake2-impl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "blake2-impl.h"; sourceTree = "<group>"; };
 		975AAAA3226DC17E00C1034D /* blake2xs-ref.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = "blake2xs-ref.c"; sourceTree = "<group>"; };
 		975AAAA7226EC13C00C1034D /* web3.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = web3.js; sourceTree = "<group>"; };
+		975AAAAB226EF1E200C1034D /* NSObject+LKModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+LKModel.h"; sourceTree = "<group>"; };
+		975AAAAC226EF1E200C1034D /* NSObject+LKModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+LKModel.m"; sourceTree = "<group>"; };
 		97655EB122530CA300ECEEA9 /* WalletDAppHandle+transfer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WalletDAppHandle+transfer.h"; sourceTree = "<group>"; };
 		97655EB222530CA300ECEEA9 /* WalletDAppHandle+transfer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "WalletDAppHandle+transfer.m"; sourceTree = "<group>"; };
 		97655EB522533DA200ECEEA9 /* WalletDappCheckParamsHandle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WalletDappCheckParamsHandle.h; sourceTree = "<group>"; };
@@ -748,6 +751,8 @@
 		9773F909221412D200DF5972 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				975AAAAB226EF1E200C1034D /* NSObject+LKModel.h */,
+				975AAAAC226EF1E200C1034D /* NSObject+LKModel.m */,
 				9773F90D221412D200DF5972 /* WalletTransantionsReceiptModel.h */,
 				9773F919221412D200DF5972 /* WalletTransantionsReceiptModel.m */,
 				9773F90C221412D200DF5972 /* WalletManageModel.h */,
@@ -1225,6 +1230,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				975AAAAD226EF1E300C1034D /* NSObject+LKModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

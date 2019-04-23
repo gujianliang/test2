@@ -1829,22 +1829,6 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Wallet/ThirdParty/WalletSDK/Wallet/DApp/Controllers/WalletDAppHandle+connexJS.m"
-            timestampString = "577694217.22192"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "450"
-            endingLineNumber = "450"
-            landmarkName = "WalletDAppHandle(connexJS)"
-            landmarkType = "3">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "Wallet/ThirdParty/WalletSDK/Wallet/ThirdParty/trezor-crypto/bip39.c"
             timestampString = "576557462.23492"
             startingColumnNumber = "9223372036854775807"
@@ -1878,7 +1862,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Wallet/ThirdParty/WalletSDK/Wallet/src/WalletUtils.m"
-            timestampString = "577694217.22205"
+            timestampString = "577704763.807489"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "274"
@@ -1900,54 +1884,6 @@
             startingLineNumber = "96"
             endingLineNumber = "96"
             landmarkName = "-transfer:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Wallet/Modules/DApp/WebViewVC.m"
-            timestampString = "577694217.2221349"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "153"
-            endingLineNumber = "153"
-            landmarkName = "-onTransfer:gas:callback:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Wallet/Modules/DApp/WebViewVC.m"
-            timestampString = "577694217.222185"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "235"
-            endingLineNumber = "235"
-            landmarkName = "WebViewVC"
-            landmarkType = "3">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Wallet/Modules/DApp/WebViewVC.m"
-            timestampString = "577694217.2222281"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "238"
-            endingLineNumber = "238"
-            landmarkName = "-amountConvertWei:dicimals:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -2005,56 +1941,8 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Wallet/ThirdParty/WalletSDK/Wallet/DApp/Controllers/WalletDAppHandle.m"
-            timestampString = "577694217.222352"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "278"
-            endingLineNumber = "278"
-            landmarkName = "-transferCallbackParams:webView:connex:requestId:callbackId:completionHandler:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Wallet/Modules/DApp/WebViewVC.m"
-            timestampString = "577694217.222789"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "283"
-            endingLineNumber = "283"
-            landmarkName = "-onCertificate:signer:callback:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Wallet/ThirdParty/WalletSDK/Wallet/DApp/Controllers/WalletDAppHandle.m"
-            timestampString = "577694217.222844"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "479"
-            endingLineNumber = "479"
-            landmarkName = "-injectJS:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "Wallet/ThirdParty/WalletSDK/Wallet/src/WalletUtils.m"
-            timestampString = "577694217.223107"
+            timestampString = "577704763.8076431"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "283"
@@ -2066,16 +1954,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Wallet/ThirdParty/WalletSDK/Wallet/DApp/Api/WalletDappSimulateMultiAccountApi.m"
-            timestampString = "577694217.223171"
+            filePath = "Wallet/ThirdParty/WalletSDK/Wallet/DApp/Api/VCBaseApi.m"
+            timestampString = "577700358.2601399"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "45"
-            endingLineNumber = "45"
-            landmarkName = "-buildRequestDict"
+            startingLineNumber = "382"
+            endingLineNumber = "382"
+            landmarkName = "-buildErrorInfoWithRequestError:responseErrorCode:responseErrorMsg:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -2085,13 +1973,109 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Wallet/ThirdParty/WalletSDK/Wallet/DApp/Api/VCBaseApi.m"
-            timestampString = "577694217.223219"
+            filePath = "Wallet/Modules/DApp/WebViewVC.m"
+            timestampString = "577703507.3070869"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "368"
-            endingLineNumber = "368"
-            landmarkName = "-buildErrorInfoWithRequestError:responseErrorCode:responseErrorMsg:"
+            startingLineNumber = "312"
+            endingLineNumber = "312"
+            landmarkName = "-signCert:signer:keystore:callback:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Wallet/Modules/DApp/WebViewVC.m"
+            timestampString = "577703507.307685"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "264"
+            endingLineNumber = "264"
+            landmarkName = "-onGetWalletAddress:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Wallet/ThirdParty/WalletSDK/Wallet/DApp/Controllers/WalletDAppHandle+transfer.m"
+            timestampString = "577699522.976725"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "177"
+            endingLineNumber = "177"
+            landmarkName = "-sendRaw:callback:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Wallet/ThirdParty/WalletSDK/Wallet/DApp/Controllers/WalletDAppHandle+transfer.m"
+            timestampString = "577699522.9767849"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "131"
+            endingLineNumber = "131"
+            landmarkName = "-sign:paramModel:keystore:password:callback:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Wallet/ThirdParty/WalletSDK/Wallet/DApp/Controllers/WalletDAppHandle+connexJS.m"
+            timestampString = "577700358.261274"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "503"
+            endingLineNumber = "503"
+            landmarkName = "-certTransferParamModel:from:requestId:webView:callbackId:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Wallet/ThirdParty/WalletSDK/Wallet/DApp/Controllers/WalletDAppHandle+connexJS.m"
+            timestampString = "577700358.261351"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "485"
+            endingLineNumber = "485"
+            landmarkName = "-certTransferParamModel:from:requestId:webView:callbackId:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Wallet/ThirdParty/WalletSDK/Wallet/DApp/Controllers/WalletDAppHandle+connexJS.m"
+            timestampString = "577700506.353987"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "500"
+            endingLineNumber = "500"
+            landmarkName = "-certTransferParamModel:from:requestId:webView:callbackId:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
