@@ -35,6 +35,7 @@
 -(NSMutableDictionary*)buildRequestDict
 {
     //增加参数
+#warning 多clause test
     NSMutableDictionary* dict = [super buildRequestDict];
     [dict setValueIfNotNil:_clauseList forKey:@"clauses"];
     [dict setValueIfNotNil:_opts[@"gas"] forKey:@"gas"];

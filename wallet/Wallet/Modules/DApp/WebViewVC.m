@@ -36,7 +36,14 @@
     /*
      Please note that, This is a 'WKWebView' object, does not support a "UIWebView" object.
      */
-    _webView = [[WKWebView alloc]initWithFrame:CGRectMake(0, 0, ScreenW, ScreenH)];
+    
+    WKWebViewConfiguration* config = [[WKWebViewConfiguration alloc] init];
+    config.userContentController = [[WKUserContentController alloc] init];
+    
+    //inject js to wkwebview
+    [WalletUtils injectJSWithWebView:config];
+    
+    _webView = [[WKWebView alloc]initWithFrame:CGRectMake(0, 0, ScreenW, ScreenH) configuration:config];
     _webView.UIDelegate = self;             /* set UIDelegate */
     _webView.navigationDelegate = self;     /* set navigationDelegate */
     
@@ -62,15 +69,6 @@
     
     // set deleget
     [WalletUtils initDAppWithDelegate:self];
-}
-
-
-#pragma mark -- WKNavigationDelegate
-/**
-* You must implement this method that is used to inject js to WebView。
-*/
-- (void)webView:(WKWebView *)webView didCommitNavigation:(null_unspecified WKNavigation *)navigation{
-     [WalletUtils injectJSWithWebView:webView];
 }
 
 
@@ -253,7 +251,7 @@
     return [BigNumber bigNumberWithNumber:weiNumber];
 }
 
-- (void)onGetWalletAddress:(void(^)(NSArray *addressList))callback
+- (void)onGetWalletAddress:(void (^)(NSArray<NSString *> * _Nonnull))callback
 {
     //get the wallet address from local database or file cache
     
@@ -275,11 +273,6 @@
     }else{
         callback(NO);
     }
-}
-
-- (void)onCertificate:(NSString *)message callback:(void(^)(NSString *signStr))callback
-{
-    
 }
 
 - (void)onCertificate:(NSData *)message signer:(NSString *)signer callback:(void(^)(NSData *signatureData))callback

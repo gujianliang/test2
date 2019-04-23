@@ -65,13 +65,6 @@ NS_ASSUME_NONNULL_BEGIN
                         webView:(WKWebView *)webView
                      callbackId:(NSString *)callbackId;
 
-
-- (void)certTransferDictParam:(NSMutableDictionary *)dictParam
-                         from:(NSString *)from
-                    requestId:(NSString *)requestId
-                      webView:(WKWebView *)webView
-                   callbackId:(NSString *)callbackId;
-
 - (void)filterDictParam:(NSDictionary *)dictParam
               requestId:(NSString *)requestId
                 webView:(WKWebView *)webView

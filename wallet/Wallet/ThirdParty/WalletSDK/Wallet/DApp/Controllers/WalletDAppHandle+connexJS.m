@@ -77,7 +77,7 @@
             CGFloat progress = peerNum.decimalString.floatValue/blockModel.number.floatValue;
             
             NSMutableDictionary *dictParam = [NSMutableDictionary dictionary];
-            [dictParam setObject:@(progress) forKey:@"progress"];
+            [dictParam setValueIfNotNil:@(progress) forKey:@"progress"];
             
             NSMutableDictionary *subDict = [NSMutableDictionary dictionary];
             [subDict setValueIfNotNil:blockModel.id         forKey:@"id"];
@@ -497,8 +497,8 @@
                 [dictSub setValueIfNotNil:dictSignParam[@"timestamp"] forKey:@"timestamp"];
                 
                 NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-                [dict setObject:dictSub forKey:@"annex"];
-                [dict setObject:hashSignture forKey:@"signature"];
+                [dict setValueIfNotNil:dictSub forKey:@"annex"];
+                [dict setValueIfNotNil:hashSignture forKey:@"signature"];
                 
                 [WalletTools callbackWithrequestId:requestId
                                            webView:webView
@@ -624,9 +624,7 @@
               requestId:(NSString *)requestId
              callbackId:(NSString *)callbackId
       completionHandler:(void (^)(NSString * __nullable result))completionHandler
-
 {
-    
     if (self.delegate
         &&[self.delegate respondsToSelector:@selector(onCheckOwnAddress:callback:)]) {
         [self.delegate onCheckOwnAddress:address callback:^(BOOL result) {

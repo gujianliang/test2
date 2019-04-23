@@ -288,10 +288,10 @@ completionHandler:(void (^)(NSString *result))completionHandler;
  *  @abstract
  *  Inject js into webview
  *
- *  @param webview : Developer generated webview object
+ *  @param config : Developer generated WKWebViewConfiguration object
  *
  */
-+ (void)injectJSWithWebView:(WKWebView *)webview;
++ (void)injectJSWithWebView:(WKWebViewConfiguration *)config;
 
 /**
  *  @abstract

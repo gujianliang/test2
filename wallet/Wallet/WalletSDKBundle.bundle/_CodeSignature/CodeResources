@@ -21,6 +21,10 @@
 			<key>optional</key>
 			<true/>
 		</dict>
+		<key>web3.js</key>
+		<data>
+		icUkY51pXjSXryJmz48ck1Y2Ay4=
+		</data>
 		<key>zh-Hans.lproj/Localizable.strings</key>
 		<dict>
 			<key>hash</key>
@@ -56,6 +60,17 @@
 			</data>
 			<key>optional</key>
 			<true/>
+		</dict>
+		<key>web3.js</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			icUkY51pXjSXryJmz48ck1Y2Ay4=
+			</data>
+			<key>hash2</key>
+			<data>
+			MJTILeZ+G9pcAaxwdv5W4IoAKY2D3xmuP9zEQOu5GaE=
+			</data>
 		</dict>
 		<key>zh-Hans.lproj/Localizable.strings</key>
 		<dict>

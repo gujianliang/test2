@@ -262,23 +262,11 @@ static dispatch_once_t predicate;
         
         [clauseModelList addObject:clauseModel];
     }
-    ClauseModel *clauseModel = [clauseModelList firstObject];
     if (gas.integerValue == 0) {
         
-        NSMutableDictionary *dictClause = [NSMutableDictionary dictionary];
-        [dictClause setValueIfNotNil:clauseModel.to forKey:@"to"];
-        [dictClause setValueIfNotNil:clauseModel.value forKey:@"value"];
-        [dictClause setValueIfNotNil:clauseModel.data forKey:@"data"];
+        gas = [NSString stringWithFormat:@"%d",[self getGas:clauseModelList]];
         
-        NSLog(@"dictClause == %@",dictClause);
-        
-        NSString *to = clauseModel.to;
-        NSString *amount = clauseModel.value;
-        NSString *clauseStr = clauseModel.data;
-        
-        gas = [NSString stringWithFormat:@"%d",[self getGasTo:&to value:&amount data:&clauseStr]];
-        
-        WalletDappSimulateMultiAccountApi *simulateApi = [[WalletDappSimulateMultiAccountApi alloc]initClause:@[dictClause] opts:@{} revision:@""];
+        WalletDappSimulateMultiAccountApi *simulateApi = [[WalletDappSimulateMultiAccountApi alloc]initClause:clauseModelList opts:@{} revision:@""];
         [simulateApi loadDataAsyncWithSuccess:^(VCBaseApi *finishApi) {
             
             NSArray *list = (NSArray *)finishApi.resultDict;
@@ -289,8 +277,6 @@ static dispatch_once_t predicate;
             
             [self callbackClauseList:clauseModelList gas:gas from:from bConnex:bConnex webView:webView callbackId:callbackId requestId:requestId];
 
-            
-            
         }failure:^(VCBaseApi *finishApi, NSString *errMsg) {
             
             [self paramsError:requestId webView:webView callbackId:callbackId];
@@ -299,8 +285,6 @@ static dispatch_once_t predicate;
     }else{
         [self callbackClauseList:clauseModelList gas:gas from:from bConnex:bConnex webView:webView callbackId:callbackId requestId:requestId];
     }
-    
-    
 }
 
 - (void)callbackClauseList:(NSArray *)clauseModelList gas:(NSString *)gas from:(NSString *)from bConnex:(BOOL)bConnex  webView:(WKWebView *)webView callbackId:(NSString *)callbackId requestId:(NSString *)requestId
@@ -336,7 +320,7 @@ static dispatch_once_t predicate;
         if (bConnex) {
             
             NSMutableDictionary *dictData = [NSMutableDictionary dictionary];
-            [dictData setValueIfNotNil:txid forKey:@"txId"];
+            [dictData setValueIfNotNil:txid forKey:@"txid"];
             [dictData setValueIfNotNil:address forKey:@"signer"];
             
             data = dictData;
@@ -355,32 +339,6 @@ static dispatch_once_t predicate;
                                 callbackId:callbackId
                                       code:ERROR_REQUEST_PARAMS];
     }
-}
-
-- (void)injectJS:(WKWebView *)webview 
-{
-    //connex
-    NSString *bundlePath = [[NSBundle mainBundle] pathForResource:@"WalletSDKBundle" ofType:@"bundle"];
-    if(!bundlePath){
-        return ;
-    }
-    NSString *path = [bundlePath stringByAppendingString:@"/connex_js.js"];
-    NSString *connex_js = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:nil];
-    connex_js = [connex_js stringByReplacingOccurrencesOfString:@"\n" withString:@""];
-    NSLog(@"dd");
-    [webview evaluateJavaScript:connex_js completionHandler:^(id _Nullable item, NSError * _Nullable error) {
-#if ReleaseVersion
-        NSLog(@"inject error == %@",error);
-#endif
-    }];
-    
-    //web3
-    NSString *web3js = web3_js;
-    [webview evaluateJavaScript:web3js completionHandler:^(id _Nullable item, NSError * _Nullable error) {
-#if ReleaseVersion
-        NSLog(@"web3js error == %@",error);
-#endif
-    }];
 }
 
 - (BOOL)checkKind:(NSString *)kind requestId:(NSString *)requestId callbackId:(NSString *)callbackId webView:(WKWebView *)webView
@@ -414,9 +372,6 @@ static dispatch_once_t predicate;
             [self paramsError:requestId webView:webView callbackId:callbackId];
             return  NO;
         }
-    }else{
-        [WalletTools callbackWithrequestId:requestId webView:webView data:@"" callbackId:callbackId code:ERROR_REQUEST_MULTI_CLAUSE];
-        return NO;
     }
     return YES;
 }
@@ -435,9 +390,22 @@ static dispatch_once_t predicate;
     }
 }
 
-- (int)getGasTo:(NSString **)to value:(NSString **)value data:(NSString **)data
+- (int)getGas:(NSArray *)clauseList
 {
-    
+    int gas = 0;
+    for (ClauseModel *model in clauseList) {
+       
+        NSString *to     = model.to;
+        NSString *value  = model.value;
+        NSString *data   = model.data;
+        
+       gas = gas + [self calculateSingleGasTo:&to value:&value data:&data];
+    }
+    return gas;
+}
+
+- (int)calculateSingleGasTo:(NSString **)to value:(NSString **)value data:(NSString **)data
+{
     if ([WalletTools isEmpty:*to]) {
         *to = @"";
     }
@@ -485,6 +453,31 @@ static dispatch_once_t predicate;
     return sum;
 }
 
+- (void)injectJS:(WKWebViewConfiguration *)config
+{
+    //connex
+    NSString *bundlePath = [[NSBundle mainBundle] pathForResource:@"WalletSDKBundle" ofType:@"bundle"];
+    if(!bundlePath){
+        return ;
+    }
+    NSString *path = [bundlePath stringByAppendingString:@"/connex_js.js"];
+    NSString *connex_js = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:nil];
+    connex_js = [connex_js stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+    
+    WKUserScript* userScriptConnex = [[WKUserScript alloc] initWithSource:connex_js
+                                                            injectionTime:WKUserScriptInjectionTimeAtDocumentStart
+                                                         forMainFrameOnly:YES];
+    [config.userContentController addUserScript:userScriptConnex];
+    
+    
+    NSString *web3Path = [bundlePath stringByAppendingString:@"/web3.js"];
+    NSString *web3js = [NSString stringWithContentsOfFile:web3Path encoding:NSUTF8StringEncoding error:nil];
+    web3js = [web3js stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+    WKUserScript* userScriptWeb3 = [[WKUserScript alloc] initWithSource:web3js
+                                                          injectionTime:WKUserScriptInjectionTimeAtDocumentStart
+                                                       forMainFrameOnly:YES];
+    [config.userContentController addUserScript:userScriptWeb3];
+}
 
 +(void)attempDealloc
 {

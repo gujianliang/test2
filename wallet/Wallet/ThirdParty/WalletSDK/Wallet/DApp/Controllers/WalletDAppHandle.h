@@ -24,7 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)webView:(WKWebView *)webView defaultText:(nullable NSString *)defaultText completionHandler:(void (^)(NSString * __nullable result))completionHandler;
 
-- (void)injectJS:(WKWebView *)webview;
+- (void)injectJS:(WKWebViewConfiguration *)config;
 
 + (void)attempDealloc;
 

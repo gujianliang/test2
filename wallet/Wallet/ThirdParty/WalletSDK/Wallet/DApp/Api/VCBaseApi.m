@@ -258,7 +258,7 @@
     if (responseData != nil) {
         NSDictionary *dict = responseData;
         errCode = [dict valueForKey:@"code"];
-        errMsg = [dict valueForKey:@"detail"];
+        errMsg = [dict valueForKey:@"message"];
         self.resultDict = dict;
         
         if ([responseData isKindOfClass:[NSArray class]]) {

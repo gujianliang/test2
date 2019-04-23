@@ -230,10 +230,10 @@
     [dappHandle webView:webView defaultText:defaultText completionHandler:completionHandler];
 }
 
-+ (void)injectJSWithWebView:(WKWebView *)webview
++ (void)injectJSWithWebView:(WKWebViewConfiguration *)config
 {
     WalletDAppHandle *dappHandle = [WalletDAppHandle shareWalletHandle];
-    [dappHandle injectJS:webview];
+    [dappHandle injectJS:config];
 }
 
 + (void)signAndSendTransferWithParameter:(TransactionParameter *)parameter
