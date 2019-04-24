@@ -64,7 +64,7 @@ These libraries can be found in the demo
 ```
 
 
-To use the Framework, add the WalletSDK.Framework and WalletSDKBundle.bundle to your project :
+To use the Framework, add the ```WalletSDK.Framework``` and ```WalletSDKBundle.bundle``` to your project :
 
 ```obj-c
 #import <WalletSDK/WalletUtils.h>
@@ -73,7 +73,7 @@ To use the Framework, add the WalletSDK.Framework and WalletSDKBundle.bundle to 
 ###  1，Basic wallet development
 
 #### 1.1 Set node url
-##### Set up the node environment. (Test_Node environment , Main_Node environment and custom node environment in demo)
+##### Set up the node environment. (```Test_Node environment``` , ```Main_Node environment``` and custom node environment in demo)
 
 ```obj-c
 [WalletUtils setNode:Main_Node];
