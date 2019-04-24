@@ -217,7 +217,26 @@ TransactionParameter attribute description：
 
 - reserveds: List  -  Currently empty, reserve fields. Reserved fields for backward compatibility,The default value is null
 
-
+```
+    TransactionParameter *transactionModel = [[TransactionParameter alloc]init];
+    //nonce: hex string
+    transactionModel.nonce = [BigNumber bigNumberWithData:randomData].hexString;
+    
+    transactionModel.gas = [NSString stringWithFormat:@"%@",gas];  //Set maximum gas allowed for call,
+    
+    transactionModel.clauses = clauses;
+    transactionModel.expiration = @"720";//Expiration relative to blockRef
+    transactionModel.gasPriceCoef = @"0";
+    transactionModel.chainTag = chainTag;
+    transactionModel.blockReference = blockReference;
+    
+     // Check if the signature parameters are correct
+    [transactionModel checkParameter:^(NSString * _Nonnull error, BOOL result)
+     {
+     
+     }];
+    
+    ```
 
 ##   Signed transaction
 >
