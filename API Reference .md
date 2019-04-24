@@ -188,14 +188,14 @@
 >  @param parameter: Transaction parameters   
 >  @param keystoreJson: Keystore JSON encryption format for user wallet private key   
 >  @param password :  Wallet password   
->  @param callback: Callback after the end. txId: Transaction identifier
+>  @param callback: Callback after the end. txid: Transaction identifier
 >
 >
 ```obj-c
 + (void)signAndSendTransferWithParameter:(TransactionParameter *)parameter
                                 keystore:(NSString*)keystoreJson
                                 password:(NSString *)password
-                                callback:(void(^)(NSString *txId))callback;
+                                callback:(void(^)(NSString *txid))callback;
 ```
 TransactionParameter attribute description：
 
@@ -241,22 +241,22 @@ TransactionParameter attribute description：
 ###  Set delegate to SDK
 >
 >  @param delegate : Delegate object  
->   @return :YES ,set delegate success; NO ,set delegate fail  
 >
 
 ```obj-c
-+ (BOOL)initDAppWithDelegate:(id)delegate;
++ (void)initDAppWithDelegate:(id)delegate;
 
 ```
 
 
 ##   Inject js into webview   
 >
->  @param webview :Developer generated WKWebView object , Can not be UIWebView
+>  @param config :Developer generated WKWebViewConfiguration object
 >
 >
 ```obj-c
-+ (void)injectJSWithWebView:(WKWebView *)webview;
++ (void)injectJSWithWebView:(WKWebViewConfiguration *)config;
++ 
 ```
 
 ##  Analyze data in webview's runJavaScriptTextInputPanelWithPrompt callback method
@@ -268,7 +268,10 @@ TransactionParameter attribute description：
   OK, otherwise nil
 >
 ```obj-c
-+ (void)webView:(WKWebView *)webView defaultText:(NSString *)defaultText completionHandler:(void (^)(NSString *result))completionHandler;
++ (void)webView:(WKWebView *)webView 
+    defaultText:(NSString *)defaultText 
+completionHandler:(void (^)(NSString *result))completionHandler;
+
 ```
 
 
@@ -287,12 +290,15 @@ TransactionParameter attribute description：
  ##  App developer implementation when DApp calls transaction function  
  >  @param clauses : clause list   
  >  @param gas :  Set maximum gas allowed for call   
- >  @param signer :  Specify the signature address, which may be nil   
- >  @param callback : Callback after the end. txid:Transaction identifier ;signer:Signer address  
+ >  @param signer :   Enforces the specified address to sign the certificate    
+ >  @param callback : Callback after the end. txid:Transaction identifier ; signer:Signer address  
  >
  >
  ```obj-c
-- (void)onTransfer:(NSArray<ClauseModel *> *)clauses gas:(NSString *)gas signer:(NSString *)signer callback:(void(^)(NSString *txid,NSString *signer))callback;
+- (void)onTransfer:(NSArray<ClauseModel *> *)clauses 
+               gas:(NSString *)gas 
+            signer:(NSString *)signer 
+          callback:(void(^)(NSString *txid,NSString *signer))callback;
 
  ```
 
@@ -309,12 +315,16 @@ TransactionParameter attribute description：
 
  ##   App developer implementation when dapp calls cert sign function  
  >  @param message : Data to be signed,form dapp  
- >  @param signer : Signer address     
- >  @param callback : Callback after the end  
+ >  @param signer : Enforces the specified address to sign the certificate    
+ >  @param callback : Callback after the end.signer: Signer address; signatureData : Signature is 65 bytes   
  >
+  
   ```obj-c
-- (void)onCertificate:(NSData *)message signer:(NSString *)signer callback:(void(^)(NSData *signatureData))callback
-```
+- (void)onCertificate:(NSData *)message 
+               signer:(NSString *)signer 
+             callback:(void(^)(NSString *signer, NSData *signatureData))callback;
+
+ ```
 
 
 
@@ -326,3 +336,6 @@ TransactionParameter attribute description：
   ```obj-c
 - (void)onCheckOwnAddress:(NSString *)address callback:(void(^)(BOOL result))callback;
 ```
+
+
+
