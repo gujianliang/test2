@@ -154,10 +154,10 @@
 
 
 
-##  Add the signature address to the authentication signature data
+##  Add the signature address to the authentication signature data  
 >
->  @param signer : Enforces the specified address to sign the certificate
->  @param message : Authentication signature data
+>  @param signer : Enforces the specified address to sign the certificate   
+>  @param message : Authentication signature data   
 >
 
 ```obj-c
