@@ -98,10 +98,10 @@ To use the Framework, add the ```WalletSDK.Framework``` and ```WalletSDKBundle.b
 
 - (void)onTransfer:(NSArray<ClauseModel *> *)clauses 
                gas:(NSString *)gas 
-          callback:(void(^)(NSString *txId ,NSString *signer))callback;
+          callback:(void(^)(NSString *txid ,NSString *signer))callback;
           
 
-- (void)onGetWalletAddress:(void(^)(NSArray *addressList))callback;
+- (void)onGetWalletAddress:(void(^)(NSArray<NSString *> *addressList))callback;
 
 
 - (void)onCertificate:(NSData *)message 
