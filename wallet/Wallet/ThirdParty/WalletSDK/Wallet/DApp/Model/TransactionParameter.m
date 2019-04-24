@@ -18,6 +18,7 @@
      {
          if (!result) {
              block(error,result);
+             NSLog(@"error == %@",error);
          }else{
              block(nil,YES);
          }

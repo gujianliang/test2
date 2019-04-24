@@ -358,20 +358,11 @@ static dispatch_once_t predicate;
 }
 
 - (BOOL)checkCluases:(NSDictionary *)callbackParams requestId:(NSString *)requestId callbackId:(NSString *)callbackId webView:(WKWebView *)webView
-{
-    NSDictionary *clausesDict = nil;
-    
+{    
     NSArray *clausesList = callbackParams[@"clauses"];
     if (clausesList.count == 0) {
         [self paramsError:requestId webView:webView callbackId:callbackId];
         return NO;
-    }else if(clausesList.count == 1)
-    {
-        clausesDict = clausesList[0];
-        if (clausesDict == nil) {
-            [self paramsError:requestId webView:webView callbackId:callbackId];
-            return  NO;
-        }
     }
     return YES;
 }

@@ -206,7 +206,7 @@
             
             transactionModel.blockReference = blockReference;
             @strongify(self);
-            [self checkModelAndSendTransfer:transactionModel
+            [self checkModelAndSendtransaction:transactionModel
                                    keystore:keystore
                                    password:password
                                    callback:callback];
@@ -214,7 +214,7 @@
     }];
 }
 
-- (void)checkModelAndSendTransfer:(TransactionParameter *)transactionModel
+- (void)checkModelAndSendtransaction:(TransactionParameter *)transactionModel
                          keystore:(NSString *)keystore
                          password:(NSString *)password
                          callback:(void(^)(NSString *txid ,NSString *address))callback
@@ -276,7 +276,7 @@
     }
 }
 
-- (void)onCertificate:(NSData *)message signer:(NSString *)signer callback:(void (^)(NSString * _Nonnull signer, NSData * _Nonnull signatureData))callback
+- (void)onCertificate:(NSDictionary *)message signer:(NSString *)signer callback:(void (^)(NSString * _Nonnull signer, NSData * _Nonnull signatureData))callback
 {
     NSDictionary *currentWalletDict = [[NSUserDefaults standardUserDefaults]objectForKey:@"currentWallet"];
     NSString *keystore = currentWalletDict[@"keystore"];
@@ -287,12 +287,16 @@
        
         if ([address.lowercaseString isEqualToString:signer.lowercaseString]) {
             
-            [self signCert:message signer:address keystore:keystore callback:callback];
+            NSString *strMessage = [WalletUtils addSignerToCert:signer message:message];
+            NSData *dataMessage = [strMessage dataUsingEncoding:NSUTF8StringEncoding];
+            [self signCert:dataMessage signer:address keystore:keystore callback:callback];
         }else{
             //alert error
         }
     }else{
-        [self signCert:message signer:address keystore:keystore callback:callback];
+        NSString *strMessage = [WalletUtils addSignerToCert:@"" message:message];
+        NSData *dataMessage = [strMessage dataUsingEncoding:NSUTF8StringEncoding];
+        [self signCert:dataMessage signer:address keystore:keystore callback:callback];
     }
 }
 

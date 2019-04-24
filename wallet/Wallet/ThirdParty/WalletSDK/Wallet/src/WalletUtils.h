@@ -50,7 +50,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param callback : Callback after the end.signer: Signer address; signatureData : Signature is 65 bytes
  *
  */
-- (void)onCertificate:(NSData *)message signer:(NSString *)signer callback:(void(^)(NSString *signer, NSData *signatureData))callback;
+- (void)onCertificate:(NSDictionary *)message signer:(NSString *)signer callback:(void(^)(NSString *signer, NSData *signatureData))callback;
 
 
 /**
@@ -114,7 +114,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  @abstract
  *  Verify mnemonic words
  *
- *  @param mnemonicWords : Mnemonic words
+ *  @param mnemonicWords : Mnemonic words,Number of mnemonic words : 12, 15, 18, 21 and 24.
  *  @return result
  */
 + (BOOL)isValidMnemonicWords:(NSArray<NSString *> *)mnemonicWords;
@@ -262,6 +262,16 @@ NS_ASSUME_NONNULL_BEGIN
                keystore:(NSString*)keystoreJson
                password:(NSString*)password
                callback:(void (^)(NSData *signatureData,NSError *error))callback;
+
+/**
+ *  @abstract
+ *  Add the signature address to the authentication signature data
+ *
+ *  @param signer : Enforces the specified address to sign the certificate
+ *  @param message : Authentication signature data
+ */
++ (NSString *)addSignerToCert:(NSString *)signer message:(NSDictionary *)message;
+
 /**
  *  @abstract
  *  Sign and send
@@ -315,7 +325,6 @@ completionHandler:(void (^)(NSString *result))completionHandler;
  *
  */
 + (void)deallocDApp;
-
 
 
 

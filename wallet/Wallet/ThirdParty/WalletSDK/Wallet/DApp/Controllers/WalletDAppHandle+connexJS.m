@@ -486,7 +486,7 @@
         
         if (self.delegate && [self.delegate respondsToSelector:@selector(onCertificate:signer:callback:)]) {
             
-            [self.delegate onCertificate:data signer:from callback:^(NSString * _Nonnull signer, NSData * _Nonnull signature) {
+            [self.delegate onCertificate:dictSignParam signer:from callback:^(NSString * _Nonnull signer, NSData * _Nonnull signature) {
                 
                 NSString *hashSignture = [SecureData dataToHexString:signature];
                 
