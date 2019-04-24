@@ -217,7 +217,7 @@ TransactionParameter attribute description：
 
 - reserveds: List  -  Currently empty, reserve fields. Reserved fields for backward compatibility,The default value is null
 
-```
+```obj-c
     TransactionParameter *transactionModel = [[TransactionParameter alloc]init];
     //nonce: hex string
     transactionModel.nonce = [BigNumber bigNumberWithData:randomData].hexString;
@@ -236,7 +236,7 @@ TransactionParameter attribute description：
      
      }];
     
-    ```
+```
 
 ##   Signed transaction
 >
