@@ -145,11 +145,23 @@
 >
 
 ```obj-c
-+ (void)signWithMessage:(NSData *)message
++ (void)signWithMessage:(NSDictionary *)message
                keystore:(NSString*)keystoreJson
                password:(NSString*)password
                callback:(void (^)(NSData *signatureData,NSError *error))callback;
 
+```
+
+
+
+##  Add the signature address to the authentication signature data
+>
+>  @param signer : Enforces the specified address to sign the certificate
+>  @param message : Authentication signature data
+>
+
+```obj-c
++ (NSString *)addSignerToCert:(NSString *)signer message:(NSDictionary *)message;
 ```
 
 ##  Recover address
@@ -217,9 +229,26 @@ TransactionParameter attribute description：
 
 - reserveds: List  -  Currently empty, reserve fields. Reserved fields for backward compatibility,The default value is null
 
+```obj-c
+    TransactionParameter *transactionModel = [[TransactionParameter alloc]init];
+    //nonce: hex string
+    transactionModel.nonce          = nonce;
+    transactionModel.gas            = gas;
+    transactionModel.clauses        = clauses;
+    transactionModel.expiration     = expiration;
+    transactionModel.gasPriceCoef   = gasPriceCoef;
+    transactionModel.chainTag       = chainTag;
+    transactionModel.blockReference = blockReference;
+    
+    // Check if the signature parameters are correct
+    [transactionModel checkParameter:^(NSString * _Nonnull error, BOOL result)
+    {
+     
+    }];
+    
+```
 
-
-##   Signed transaction
+##   Signe transaction
 >
 >  @param parameter: Transaction parameters     
 >  @param keystoreJson: Keystore JSON encryption format for user wallet private key   
