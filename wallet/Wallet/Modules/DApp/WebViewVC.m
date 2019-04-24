@@ -37,13 +37,13 @@
      Please note that, This is a 'WKWebView' object, does not support a "UIWebView" object.
      */
     
-    WKWebViewConfiguration* config = [[WKWebViewConfiguration alloc] init];
-    config.userContentController = [[WKUserContentController alloc] init];
+    WKWebViewConfiguration* configuration = [[WKWebViewConfiguration alloc] init];
+    configuration.userContentController = [[WKUserContentController alloc] init];
     
     //inject js to wkwebview
-    [WalletUtils injectJSWithWebView:config];
+    [WalletUtils injectJSWithWebView:configuration];
     
-    _webView = [[WKWebView alloc]initWithFrame:CGRectMake(0, 0, ScreenW, ScreenH) configuration:config];
+    _webView = [[WKWebView alloc]initWithFrame:CGRectMake(0, 0, ScreenW, ScreenH) configuration:configuration];
     _webView.UIDelegate = self;             /* set UIDelegate */
     _webView.navigationDelegate = self;     /* set navigationDelegate */
     
@@ -133,6 +133,7 @@
     
     NSString *keystore = currentWalletDict[@"keystore"];
     
+    //Custom password input box
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil
                                                                              message:@"Please enter the wallet password"
                                                                       preferredStyle:UIAlertControllerStyleAlert];
@@ -300,6 +301,7 @@
         keystore:(NSString *)keystore
         callback:(void (^)(NSString * _Nonnull signer, NSData * _Nonnull signatureData))callback
 {
+    //Custom password input box
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil
                                                                              message:@"Please enter the wallet password"
                                                                       preferredStyle:UIAlertControllerStyleAlert];

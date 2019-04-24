@@ -21,17 +21,20 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  *  @abstract
  *  App developer implementation when dapp calls transaction function
+ *  delegate function that must be implemented to support the DApp environment
  *
  *  @param clauses : Clause model list
  *  @param gas : Set maximum gas allowed for call
- *  @param callback : Callback after the end. txId:Transaction identifier; signer:Signer address
+ *  @param callback : Callback after the end. txid:Transaction identifier; signer:Signer address
  *
  */
-- (void)onTransfer:(NSArray<ClauseModel *> *)clauses gas:(NSString *)gas callback:(void(^)(NSString *txId ,NSString *signer))callback;
+- (void)onTransfer:(NSArray<ClauseModel *> *)clauses gas:(NSString *)gas callback:(void(^)(NSString *txid ,NSString *signer))callback;
 
 /**
  *  @abstract
  *   App developer implementation when dapp calls get address function
+ *   delegate function that must be implemented to support the DApp environment
+ *
  *  @param callback : Callback after the end
  *
  */
@@ -40,6 +43,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  *  @abstract
  *   App developer implementation when dapp calls authentication function
+ *   delegate function that must be implemented to support the DApp environment
  *
  *  @param message : Data to be signed,form dapp
  *  @param signer : Enforces the specified address to sign the certificate
@@ -52,6 +56,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  *  @abstract
  *   App developer implementation when dapp calls checkOwn address function
+ *   delegate function that must be implemented to support the DApp environment
  *
  *  @param address : Address from dapp
  *  @param callback : Callback after the end
@@ -270,7 +275,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (void)signAndSendTransferWithParameter:(TransactionParameter *)parameter
                             keystore:(NSString*)keystoreJson
                             password:(NSString *)password
-                            callback:(void(^)(NSString *txId))callback;
+                            callback:(void(^)(NSString *txid))callback;
 
 /**
  *  @abstract

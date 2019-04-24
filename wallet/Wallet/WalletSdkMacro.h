@@ -12,8 +12,6 @@
 #define     ScreenW     [UIScreen mainScreen].bounds.size.width
 #define     ScreenH     [UIScreen mainScreen].bounds.size.height
 
-#define     Test_Html           @"https://appwallet.oss-cn-shanghai.aliyuncs.com/testJS/test.html"                 /* Contract shortcut page */
-#define     Test_Main_Page      @"https://appwallet.oss-cn-shanghai.aliyuncs.com/testJS/dist/index.html#/test"     /* Contract shortcut page */
 
 #define     Test_Node      @"https://vethor-node-test.digonchain.com"      /* The test Node environment of block chain */
 #define     Main_Node      @"https://vethor-node.digonchain.com"           /* The main Node environment of block chain*/

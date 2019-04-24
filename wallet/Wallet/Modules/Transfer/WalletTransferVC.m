@@ -78,6 +78,7 @@
     NSString *keystore = currentWalletDict[@"keystore"];
     
     
+    //Custom password input box
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil
                                                                              message:@"Please enter the wallet password"
                                                                       preferredStyle:UIAlertControllerStyleAlert];
@@ -192,7 +193,7 @@
     NSMutableArray *clauseList = [NSMutableArray array];
     ClauseModel *clauseModel = [[ClauseModel alloc]init];
     clauseModel.to    = _tokenContractAddress;//Contract address of token
-    clauseModel.value = @""; //Vip 180 transaction token, value is an empty string
+    clauseModel.value = @""; //vip 180 transaction token, value is an empty string
     
     //
     clauseModel.data  = [self calculatenTokenTransferClauseData:self.receiveAddressTextView.text value:amountBig.hexString];
