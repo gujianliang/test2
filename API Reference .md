@@ -355,7 +355,7 @@ completionHandler:(void (^)(NSString *result))completionHandler;
  >
   
  ```obj-c
-- (void)onCertificate:(NSData *)message 
+- (void)onCertificate:(NSDictionary *)message 
                signer:(NSString *)signer 
              callback:(void(^)(NSString *signer, NSData *signatureData))callback;
 
