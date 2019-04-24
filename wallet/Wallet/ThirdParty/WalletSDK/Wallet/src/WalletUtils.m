@@ -464,7 +464,7 @@
     }
 }
 
-+ (NSString *)addSignerToCert:(NSString *)signer message:(NSDictionary *)message
++ (NSString *)addSignerToCertMessage:(NSString *)signer message:(NSDictionary *)message
 {
     NSMutableDictionary *newMessage = [NSMutableDictionary dictionaryWithDictionary:message];
     [newMessage setValueIfNotNil:signer forKey:@"signer"];

@@ -215,10 +215,6 @@ static dispatch_once_t predicate;
        
         return ;
     }
-    
-    if (bConnex && ![self checkKind:kind requestId:requestId callbackId:callbackId webView:webView]) {
-        return;
-    }
    
     __block NSString *gas           = @"";
     __block NSString *gasPrice      = @"";
@@ -227,10 +223,6 @@ static dispatch_once_t predicate;
     NSMutableArray *clauseModelList = [[NSMutableArray alloc]init];
 
     if (bConnex) {
-        
-        if (![self checkCluases:callbackParams requestId:requestId callbackId:callbackId webView:webView]) {
-            return;
-        }
         
         NSArray *clauseList = callbackParams[@"clauses"];
         for (NSDictionary *clauseDict in clauseList) {
@@ -272,7 +264,7 @@ static dispatch_once_t predicate;
             NSArray *list = (NSArray *)finishApi.resultDict;
             NSString *gasUsed = [list firstObject][@"gasUsed"];
             if (gasUsed.integerValue != 0) {
-                gas = [NSString stringWithFormat:@"%ld",gas.integerValue + gasUsed.integerValue + 15000];
+                gas = [NSString stringWithFormat:@"%d",gas.integerValue + gasUsed.integerValue + 15000];
             }
             
             [self callbackClauseList:clauseModelList gas:gas from:from bConnex:bConnex webView:webView callbackId:callbackId requestId:requestId];
@@ -339,32 +331,6 @@ static dispatch_once_t predicate;
                                 callbackId:callbackId
                                       code:ERROR_REQUEST_PARAMS];
     }
-}
-
-- (BOOL)checkKind:(NSString *)kind requestId:(NSString *)requestId callbackId:(NSString *)callbackId webView:(WKWebView *)webView
-{
-    if (![kind isKindOfClass:[NSString class]]) {
-        [WalletTools callbackWithrequestId:requestId webView:webView data:@"" callbackId:callbackId code:ERROR_REQUEST_PARAMS];
-        return NO;
-    }else{
-        //既不登tx ，也不是 cert
-        if (![kind isEqualToString:@"tx"] && ![kind isEqualToString:@"cert"]) {
-            [WalletTools callbackWithrequestId:requestId webView:_webView data:@"" callbackId:callbackId code:ERROR_NETWORK];
-            return NO;
-        }
-    }
-    
-    return YES;
-}
-
-- (BOOL)checkCluases:(NSDictionary *)callbackParams requestId:(NSString *)requestId callbackId:(NSString *)callbackId webView:(WKWebView *)webView
-{    
-    NSArray *clausesList = callbackParams[@"clauses"];
-    if (clausesList.count == 0) {
-        [self paramsError:requestId webView:webView callbackId:callbackId];
-        return NO;
-    }
-    return YES;
 }
 
 - (void)paramsError:(NSString *)requestId webView:(WKWebView *)webView callbackId:(NSString *)callbackId

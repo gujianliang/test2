@@ -24,6 +24,7 @@
 - (instancetype)initWithURL:(NSURL *)URL{
     self = [super init];
     if (self) {
+        URL = [NSURL URLWithString:@"https://connex-impl-test.vecha.in"];
         _URL = URL;
     }
     return self;
@@ -287,16 +288,16 @@
        
         if ([address.lowercaseString isEqualToString:signer.lowercaseString]) {
             
-            NSString *strMessage = [WalletUtils addSignerToCert:signer message:message];
+            NSString *strMessage = [WalletUtils addSignerToCertMessage:signer.lowercaseString message:message];
             NSData *dataMessage = [strMessage dataUsingEncoding:NSUTF8StringEncoding];
-            [self signCert:dataMessage signer:address keystore:keystore callback:callback];
+            [self signCert:dataMessage signer:address.lowercaseString keystore:keystore callback:callback];
         }else{
             //alert error
         }
     }else{
-        NSString *strMessage = [WalletUtils addSignerToCert:@"" message:message];
+        NSString *strMessage = [WalletUtils addSignerToCertMessage:address.lowercaseString message:message];
         NSData *dataMessage = [strMessage dataUsingEncoding:NSUTF8StringEncoding];
-        [self signCert:dataMessage signer:address keystore:keystore callback:callback];
+        [self signCert:dataMessage signer:address.lowercaseString keystore:keystore callback:callback];
     }
 }
 

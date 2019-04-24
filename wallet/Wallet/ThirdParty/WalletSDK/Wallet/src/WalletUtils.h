@@ -270,7 +270,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param signer : Enforces the specified address to sign the certificate
  *  @param message : Authentication signature data
  */
-+ (NSString *)addSignerToCert:(NSString *)signer message:(NSDictionary *)message;
++ (NSString *)addSignerToCertMessage:(NSString *)signer message:(NSDictionary *)message;
 
 /**
  *  @abstract

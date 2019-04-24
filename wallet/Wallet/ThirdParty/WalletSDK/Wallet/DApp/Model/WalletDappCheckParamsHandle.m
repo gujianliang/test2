@@ -240,14 +240,6 @@
         if ([WalletTools isEmpty:clauseModel.data]) {
             *errorMsg = @"clause is invalid";
             return NO;
-        }else{
-#warning method id == 0x00000000
-//            //全是0 不给过
-//            NSString *datadecimal = [BigNumber bigNumberWithHexString:clauseModel.data].decimalString;
-//            if (datadecimal.integerValue == 0) {
-//                *errorMsg = @"clause is invalid";
-//                return NO;
-//            }
         }
         
     }else{ // to 有值，需要判断 data 的被64 整除
