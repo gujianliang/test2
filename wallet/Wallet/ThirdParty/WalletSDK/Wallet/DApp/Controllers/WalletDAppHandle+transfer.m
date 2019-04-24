@@ -191,36 +191,6 @@ callback:(void(^)(NSString *txId))callback
     callback(self.txId);
 }
 
-- (NSString *)packParam:(NSDictionary *)param
-{
-    NSMutableDictionary *dictOrigin = [NSMutableDictionary dictionaryWithDictionary:param];
-    
-    NSArray *keys = [dictOrigin allKeys];
-    NSArray *sortedArray = [keys sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2){
-        return [obj1 compare:obj2 options:NSNumericSearch];
-    }];
-    
-    NSMutableArray *keyAndValueList = [NSMutableArray array];
-    for (NSString *key in sortedArray) {
-        NSString *value = dictOrigin[key];
-        NSString *keyValue = nil;
-        if ([value isKindOfClass:[NSNumber class]]) {
-            NSNumber *num = (NSNumber *)value;
-            value = ((NSNumber *)num).stringValue;
-            
-            keyValue = [NSString stringWithFormat:@"\"%@\":%@",key,value];
-        }else if([value isKindOfClass:[NSDictionary class]])
-        {
-            keyValue = [NSString stringWithFormat:@"\"%@\":%@",key, [self packParam:(NSDictionary *)value]];
-        }else{
-            keyValue = [NSString stringWithFormat:@"\"%@\":\"%@\"",key,value];
-        }
-        
-        [keyAndValueList addObject:keyValue];
-        
-    }
-    return [NSString stringWithFormat:@"{%@}",[keyAndValueList componentsJoinedByString:@","]];
-}
 
 - (void)signCertFrom:(NSString *)from  account:(Account *)account content:(NSString *)content requestId:(NSString *)requestId
              webView:(WKWebView *)webView
@@ -228,7 +198,7 @@ callback:(void(^)(NSString *txId))callback
                param:(NSDictionary *)param
 {
     
-    NSString *packSign = [self packParam:param];
+    NSString *packSign = [WalletTools packCertParam:param];
     
     NSData *totalData1 = [packSign dataUsingEncoding:NSUTF8StringEncoding];
     SecureData *data = [SecureData BLAKE2B:totalData1];

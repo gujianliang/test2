@@ -35,7 +35,7 @@ static int ERROR_NETWORK = 500;
 static int ERROR_SERVER_DATA = 500;
 static int ERROR_CANCEL = 400 ;//User cancelled
 
-static int ERROR_INITDAPP_ERROR = 204;
+static int ERROR_INITDAPP_ERROR = 500;
 
 static NSString *ERROR_REQUEST_PARAMS_MSG = @"request params error";
 static NSString *ERROR_REQUEST_METHOD_MSG = @"method not exist error";

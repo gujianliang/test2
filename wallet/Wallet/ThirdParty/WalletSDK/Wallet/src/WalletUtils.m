@@ -469,40 +469,11 @@
     NSMutableDictionary *newMessage = [NSMutableDictionary dictionaryWithDictionary:message];
     [newMessage setValueIfNotNil:signer forKey:@"signer"];
     
-   return  [self packParam:newMessage];
+   return  [WalletTools packCertParam:newMessage];
 }
 
 
-+ (NSString *)packParam:(NSDictionary *)param
-{
-    NSMutableDictionary *dictOrigin = [NSMutableDictionary dictionaryWithDictionary:param];
-    
-    NSArray *keys = [dictOrigin allKeys];
-    NSArray *sortedArray = [keys sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2){
-        return [obj1 compare:obj2 options:NSNumericSearch];
-    }];
-    
-    NSMutableArray *keyAndValueList = [NSMutableArray array];
-    for (NSString *key in sortedArray) {
-        NSString *value = dictOrigin[key];
-        NSString *keyValue = nil;
-        if ([value isKindOfClass:[NSNumber class]]) {
-            NSNumber *num = (NSNumber *)value;
-            value = ((NSNumber *)num).stringValue;
-            
-            keyValue = [NSString stringWithFormat:@"\"%@\":%@",key,value];
-        }else if([value isKindOfClass:[NSDictionary class]])
-        {
-            keyValue = [NSString stringWithFormat:@"\"%@\":%@",key, [self packParam:(NSDictionary *)value]];
-        }else{
-            keyValue = [NSString stringWithFormat:@"\"%@\":\"%@\"",key,value];
-        }
-        
-        [keyAndValueList addObject:keyValue];
-        
-    }
-    return [NSString stringWithFormat:@"{%@}",[keyAndValueList componentsJoinedByString:@","]];
-}
+
 
 
 @end

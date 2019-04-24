@@ -122,6 +122,9 @@
                      boolData:(id)boolData
                    callbackId:(NSString *)callbackId
                          code:(NSInteger)code;
+
++ (NSString *)packCertParam:(NSDictionary *)param;
+
 @end
 
 

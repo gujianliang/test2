@@ -481,8 +481,8 @@
         [dictSignParam setValueIfNotNil:domain forKey:@"domain"];
         [dictSignParam setValueIfNotNil:from.lowercaseString forKey:@"signer"];
 
-        NSString *packSign = [self packParam:dictSignParam];
-        NSData *data = [packSign dataUsingEncoding:NSUTF8StringEncoding];
+//        NSString *packSign = [WalletTools packCertParam:dictSignParam];
+//        NSData *data = [packSign dataUsingEncoding:NSUTF8StringEncoding];
         
         if (self.delegate && [self.delegate respondsToSelector:@selector(onCertificate:signer:callback:)]) {
             
@@ -569,10 +569,10 @@
              callbackId:(NSString *)callbackId
 {
     WalletDappLogEventApi *eventApi = [[WalletDappLogEventApi alloc]initWithKind:dictParam[@"kind"]];
-    eventApi.dictRange = dictParam[@"filterBody"][@"range"];;
-    eventApi.dictOptions = dictParam[@"filterBody"][@"options"];
-    eventApi.dictCriteriaSet = dictParam[@"filterBody"][@"criteriaSet"];
-    eventApi.order = dictParam[@"filterBody"][@"order"];
+    eventApi.dictRange          = dictParam[@"filterBody"][@"range"];;
+    eventApi.dictOptions        = dictParam[@"filterBody"][@"options"];
+    eventApi.dictCriteriaSet    = dictParam[@"filterBody"][@"criteriaSet"];
+    eventApi.order              = dictParam[@"filterBody"][@"order"];
     
     [eventApi loadDataAsyncWithSuccess:^(VCBaseApi *finishApi) {
         [WalletTools callbackWithrequestId:requestId
@@ -663,36 +663,6 @@
     }
 }
 
-- (NSString *)packParam:(NSDictionary *)param
-{
-    NSMutableDictionary *dictOrigin = [NSMutableDictionary dictionaryWithDictionary:param];
-    
-    NSArray *keys = [dictOrigin allKeys];
-    NSArray *sortedArray = [keys sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2){
-        return [obj1 compare:obj2 options:NSNumericSearch];
-    }];
-    
-    NSMutableArray *keyAndValueList = [NSMutableArray array];
-    for (NSString *key in sortedArray) {
-        NSString *value = dictOrigin[key];
-        NSString *keyValue = nil;
-        if ([value isKindOfClass:[NSNumber class]]) {
-            NSNumber *num = (NSNumber *)value;
-            value = ((NSNumber *)num).stringValue;
-            
-            keyValue = [NSString stringWithFormat:@"\"%@\":%@",key,value];
-        }else if([value isKindOfClass:[NSDictionary class]])
-        {
-            keyValue = [NSString stringWithFormat:@"\"%@\":%@",key, [self packParam:(NSDictionary *)value]];
-        }else{
-            keyValue = [NSString stringWithFormat:@"\"%@\":\"%@\"",key,value];
-        }
-        
-        [keyAndValueList addObject:keyValue];
-        
-    }
-    return [NSString stringWithFormat:@"{%@}",[keyAndValueList componentsJoinedByString:@","]];
-}
 
 
 
