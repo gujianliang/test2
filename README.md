@@ -82,14 +82,14 @@ To use the Framework, add the WalletSDK.Framework and WalletSDKBundle.bundle to 
 
 ```obj-c
 [WalletUtils createWalletWithPassword:Password
-callback:^(WalletAccountModel * _Nonnull account, NSError * _Nonnull error)
+                             callback:^(WalletAccountModel * _Nonnull account, NSError * _Nonnull error)
 {}];
 ```
 ### 2，Support dapp development environment (connex or web3)
 
 #### 2.1 Set delegate
-#####  Sdk can send a delegate signal to the developer to implement the corresponding method.
-#####  Set the delegate <WalletUtilsDelegate> in @interface
+#####  SDK can send a delegate signal to the developer to implement the corresponding method.
+
 ```obj-c
 
 @interface ViewContrller ()<WalletUtilsDelegate>
@@ -117,7 +117,7 @@ callback:^(WalletAccountModel * _Nonnull account, NSError * _Nonnull error)
 
 #### 2.2  Inject js bridge into webview
 ##### 
-When declaring wkwebview, pass the WKWebViewConfiguration object to [WalletUtils injectJSWithWebView:configuration].
+When declaring wkwebview, pass the WKWebViewConfiguration object to [WalletUtils injectJSWithWebView:configuration].   
 The injectJSWithWebView method injects connex bridge js and web3 bridge js into wkwebview
 
 
