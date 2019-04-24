@@ -88,7 +88,7 @@ To use the Framework, add the ```WalletSDK.Framework``` and ```WalletSDKBundle.b
 ### 2，Support dapp development environment (connex or web3)
 
 #### 2.1 Set delegate
-#####  SDK can send a delegate signal to the developer to implement the corresponding method.
+#####  Set the delegate, and the developer needs to implement several delegate methods
 
 ```obj-c
 
@@ -134,7 +134,7 @@ The injectJSWithWebView method injects connex bridge js and web3 bridge js into 
 
 ```
 
-#### 2.3 Analyze data in webview's runJavaScriptTextInputPanelWithPrompt callback method
+#### 2.3 Parsing data in webview's callback method runJavaScriptTextInputPanelWithPrompt
 ##### 
 ```obj-c
 - (void)webView:(WKWebView *)webView runJavaScriptTextInputPanelWithPrompt:(NSString *)prompt defaultText:(nullable NSString *)defaultText initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(NSString * __nullable result))completionHandler
