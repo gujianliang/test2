@@ -220,21 +220,19 @@ TransactionParameter attribute description：
 ```obj-c
     TransactionParameter *transactionModel = [[TransactionParameter alloc]init];
     //nonce: hex string
-    transactionModel.nonce = [BigNumber bigNumberWithData:randomData].hexString;
-    
-    transactionModel.gas = [NSString stringWithFormat:@"%@",gas];  //Set maximum gas allowed for call,
-    
-    transactionModel.clauses = clauses;
-    transactionModel.expiration = @"720";//Expiration relative to blockRef
-    transactionModel.gasPriceCoef = @"0";
-    transactionModel.chainTag = chainTag;
+    transactionModel.nonce          = nonce;
+    transactionModel.gas            = gas;
+    transactionModel.clauses        = clauses;
+    transactionModel.expiration     = expiration;
+    transactionModel.gasPriceCoef   = gasPriceCoef;
+    transactionModel.chainTag       = chainTag;
     transactionModel.blockReference = blockReference;
     
-     // Check if the signature parameters are correct
+    // Check if the signature parameters are correct
     [transactionModel checkParameter:^(NSString * _Nonnull error, BOOL result)
-     {
+    {
      
-     }];
+    }];
     
 ```
 
