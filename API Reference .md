@@ -1,6 +1,6 @@
 ##  Set node url   
 >
->  @param nodelUrl :Node url   
+>  @param nodelUrl : Node url   
 >
 >
 ```obj-c
@@ -18,13 +18,13 @@
 
 ##  Create wallet   
 >
->    @param password :Wallet password  
+>    @param password : Wallet password  
 >    @param callback : Callback after the end; The attributes of a class has mnemonicPhras , address, privateKey and keystore    
 > 
 
 ```obj-c
 + (void)createWalletWithPassword:(NSString *)password  
-                       callback:(void(^)(WalletAccountModel *account,NSError *error))callback;
+                        callback:(void(^)(WalletAccountModel *account,NSError *error))callback;
 
 ```
 
@@ -32,8 +32,8 @@
 
 ## Create wallet with mnemonic words   
 >
->    @param mnemonicList :Mnemonic Words   
->    @param password :Wallet password    
+>    @param mnemonicList : Mnemonic Words   
+>    @param password : Wallet password    
 >    @param callback : Callback after the end；The attributes of a class has mnemonicPhras , address, privateKey and keystore    
 > 
 ```obj-c
@@ -109,9 +109,9 @@
 ```
 ## Encrypted private key
 >
->   @param password :Wallet password   
+>   @param password : Wallet password   
 >   @param privateKey : Private Key   
->   @param callback :Callback after the end . keystore :Keystore in json format     
+>   @param callback : Callback after the end . keystore :Keystore in json format     
 > 
 > 
 ```obj-c
@@ -122,15 +122,15 @@
 
 ##  Get checksum address    
 >
->  @param address :Wallet address   
+>  @param address : Wallet address   
 >  @return checksum address   
 >
 ```obj-c
 + (NSString *)getChecksumAddress:(NSString *)address;
 ```
 ##  Get address from keystore   
- >  @param keystoreJson :Keystore JSON encryption format for user wallet private key   
- >  retuen : address   
+ >  @param keystoreJson : Keystore JSON encryption format for user wallet private key   
+ >  retuen : Wallet address   
  >
  >
  ```obj-c
@@ -139,9 +139,9 @@
 ##   Sign message  
 >
 >   @param message : Prepare the data to be signed   
->   @param keystoreJson :Keystore JSON encryption format for user wallet private key   
+>   @param keystoreJson : Keystore JSON encryption format for user wallet private key   
 >   @param password :  Wallet password   
->   @param callback :Callback after the end .   
+>   @param callback : Callback after the end .   
 >
 
 ```obj-c
@@ -251,7 +251,7 @@ TransactionParameter attribute description：
 
 ##   Inject js into webview   
 >
->  @param config :Developer generated WKWebViewConfiguration object
+>  @param config : Developer generated WKWebViewConfiguration object
 >
 >
 ```obj-c
@@ -259,7 +259,7 @@ TransactionParameter attribute description：
 + 
 ```
 
-##  Analyze data in webview's runJavaScriptTextInputPanelWithPrompt callback method
+##  Parsing data in webview's callback method runJavaScriptTextInputPanelWithPrompt
 >
 > @param webView :The web view invoking the delegate method.   
 > @param defaultText: The initial text to display in the text entry field.   
