@@ -255,8 +255,8 @@ TransactionParameter attribute description：
 >
 >
 ```obj-c
-+ (void)injectJSWithWebView:(WKWebViewConfiguration *)config;
-+ 
++ (void)injectJSWithWebView:(WKWebViewConfiguration *)config;  
+
 ```
 
 ##  Parsing data in webview's callback method runJavaScriptTextInputPanelWithPrompt
@@ -285,11 +285,11 @@ completionHandler:(void (^)(NSString *result))completionHandler;
 ```
 
  
- 
 
  ##  App developer implementation when DApp calls transaction function  
+ 
  >  delegate function that must be implemented to support the DApp environment   
- >  @param clauses : clause list   
+ >  @param clauses : Clause list   
  >  @param gas :  Set maximum gas allowed for call   
  >  @param signer :   Enforces the specified address to sign the certificate    
  >  @param callback : Callback after the end. txid:Transaction identifier ; signer:Signer address  
@@ -305,12 +305,13 @@ completionHandler:(void (^)(NSString *result))completionHandler;
 
 
  ##  App developer implementation when DApp calls get address function    
->  delegate function that must be implemented to support the DApp environment   
-
+ 
+ >  delegate function that must be implemented to support the DApp environment   
  >  @param callback : Callback after the end. addressList :address list   
  >
  >
- ```obj-c
+ 
+```obj-c
 - (void)onGetWalletAddress:(void(^)(NSArray<NSString *> *addressList))callback;
 ```
 
@@ -324,7 +325,7 @@ completionHandler:(void (^)(NSString *result))completionHandler;
  >  @param callback : Callback after the end.signer: Signer address; signatureData : Signature is 65 bytes   
  >
   
-  ```obj-c
+ ```obj-c
 - (void)onCertificate:(NSData *)message 
                signer:(NSString *)signer 
              callback:(void(^)(NSString *signer, NSData *signatureData))callback;
@@ -333,13 +334,14 @@ completionHandler:(void (^)(NSString *result))completionHandler;
 
 
 
-
  ##    App developer implementation when dapp calls checkOwn address function   
+ 
  >  delegate function that must be implemented to support the DApp environment   
  >  @param address : Address from dapp  
  >  @param callback : Callback after the end  
  >
-  ```obj-c
+  
+```obj-c
 - (void)onCheckOwnAddress:(NSString *)address callback:(void(^)(BOOL result))callback;
 ```
 
