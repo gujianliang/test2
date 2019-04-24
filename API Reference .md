@@ -145,7 +145,7 @@
 >
 
 ```obj-c
-+ (void)signWithMessage:(NSDictionary *)message
++ (void)signWithMessage:(NSData *)message
                keystore:(NSString*)keystoreJson
                password:(NSString*)password
                callback:(void (^)(NSData *signatureData,NSError *error))callback;
