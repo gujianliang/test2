@@ -145,11 +145,23 @@
 >
 
 ```obj-c
-+ (void)signWithMessage:(NSData *)message
++ (void)signWithMessage:(NSDictionary *)message
                keystore:(NSString*)keystoreJson
                password:(NSString*)password
                callback:(void (^)(NSData *signatureData,NSError *error))callback;
 
+```
+
+
+
+##  Add the signature address to the authentication signature data
+>
+>  @param signer : Enforces the specified address to sign the certificate
+>  @param message : Authentication signature data
+>
+
+```obj-c
++ (NSString *)addSignerToCert:(NSString *)signer message:(NSDictionary *)message;
 ```
 
 ##  Recover address
@@ -236,7 +248,7 @@ TransactionParameter attribute description：
     
 ```
 
-##   Signed transaction
+##   Signe transaction
 >
 >  @param parameter: Transaction parameters     
 >  @param keystoreJson: Keystore JSON encryption format for user wallet private key   
