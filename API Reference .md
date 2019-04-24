@@ -161,7 +161,7 @@
 >
 
 ```obj-c
-+ (NSString *)addSignerToCert:(NSString *)signer message:(NSDictionary *)message;
++ (NSString *)addSignerToCertMessessage:(NSString *)signer message:(NSDictionary *)message;
 ```
 
 ##  Recover address
