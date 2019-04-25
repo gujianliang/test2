@@ -230,20 +230,19 @@ TransactionParameter attribute description：
 - reserveds: List  -  Currently empty, reserve fields. Reserved fields for backward compatibility,The default value is null
 
 ```obj-c
-    TransactionParameter *transactionModel = [[TransactionParameter alloc]init];
-    //nonce: hex string
-    transactionModel.nonce          = nonce;
-    transactionModel.gas            = gas;
-    transactionModel.clauses        = clauses;
-    transactionModel.expiration     = expiration;
-    transactionModel.gasPriceCoef   = gasPriceCoef;
-    transactionModel.chainTag       = chainTag;
-    transactionModel.blockReference = blockReference;
-    
-    // Check if the signature parameters are correct
-    [transactionModel checkParameter:^(NSString * _Nonnull error, BOOL result)
-    {
-     
+    TransactionParameter *transactionModel = [TransactionParameterBuiler creatTransactionParameter:^(TransactionParameterBuiler * _Nonnull builder) {
+                
+                builder.chainTag        = chainTag;
+                builder.blockReference  = blockReference;
+                builder.nonce           = nonce;
+                builder.clauses         = clauseList;
+                builder.gas             = gas;
+                builder.expiration      = expiration;
+                builder.gasPriceCoef    = gasPriceCoef;
+                
+            } checkParams:^(NSString * _Nonnull errorMsg) {
+               
+            }];
     }];
     
 ```
