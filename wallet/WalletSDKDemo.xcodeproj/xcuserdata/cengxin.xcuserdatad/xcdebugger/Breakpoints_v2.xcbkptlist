@@ -2043,8 +2043,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "312"
             endingLineNumber = "312"
-            landmarkName = "-packageTranstionModelClauseList:nonce:gas:expiration:gasPriceCoef:keystore:password:"
-            landmarkType = "7">
+            landmarkName = "WalletTransferVC"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2123,7 +2123,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "303"
             endingLineNumber = "303"
-            landmarkName = "-packageTranstionModelClauseList:nonce:gas:expiration:gasPriceCoef:keystore:password:"
+            landmarkName = "-touchesBegan:withEvent:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

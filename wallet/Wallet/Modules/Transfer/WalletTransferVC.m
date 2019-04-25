@@ -102,8 +102,6 @@
                          [self tokenTransfer:from keystore:keystore password:password];
                      }
                      
-                     //sign contract demo
-                     //    [self contractSignture:from keystore:keystore password:password];
                  }else{
                      NSLog(@"The password is wrong");
                  }
@@ -221,50 +219,6 @@
     return  result;
 }
 
-//xnode pending order contract
-- (void)contractSignture:(NSString *)from keystore:(NSString *)keystore  password:(NSString *)password{
-   
-    //The random number is 8 bytes
-    NSMutableData* randomData = [[NSMutableData alloc]initWithCapacity:8];
-    randomData.length = 8;
-    int result = SecRandomCopyBytes(kSecRandomDefault, randomData.length, randomData.mutableBytes);
-    if (result != 0) {
-        return ;
-    }
-     //nonce: hex string
-    NSString *nonce = [BigNumber bigNumberWithData:randomData].hexString;
-    
-    NSMutableArray *clauseList = [NSMutableArray array];
-    ClauseModel *clauseModel = [[ClauseModel alloc]init];
-    clauseModel.to    = @"0xd4dac3a95c741773f093d59256a21ed6fcc768a7"; //contract address
-    clauseModel.value = @"";//Contract signature requires the number of trade vets, if you don't need to trade vet, this value is your empty string
-    
-    //Contract signature parameters
-    clauseModel.data  = @"0xbae3e19e00000000000000000000000000000000000000000000000000000000000000680000000000000000000000000000000000000000000000000de0b6b3a76400000000000000000000000000000000000000000000000000000de0b6b3a7640000000000000000000000000000000000000000000000000000000000000003f480";
-    
-    {
-        // Method of splicing data
-        //        NSMutableArray *clauseParamList = [NSMutableArray array];
-        //        [clauseParamList addObject:@"0x68"];
-        //        [clauseParamList addObject:@"0x0DE0B6B3A7640000"];
-        //        [clauseParamList addObject:@"0x3840"];
-        //        [clauseParamList addObject:@"0x1231231231231231231231231231231231231231"];
-        //        clauseModel.data = [self contractMethodId:@"0x2ed9b4fd" params:clauseParamList];
-    }
-    
-    [clauseList addObject:clauseModel];
-
-     //Get the chain tag of the block
-    [self packageTranstionModelClauseList:clauseList //Clauses is an array
-                                    nonce:nonce      //nonce: hex string
-                                      gas:@"600000"  //Set maximum gas allowed for call, decimalstring
-                               expiration:@"720"     //Expiration relative to blockRef
-                             gasPriceCoef:@"0"       // Coefficient used to calculate the final gas price (0 - 255)
-
-                                 keystore:keystore
-                                 password:password];
-}
-
 - (void)packageTranstionModelClauseList:(NSArray *)clauseList
                                nonce:(NSString *)nonce
                                  gas:(NSString *)gas
@@ -316,7 +270,6 @@
     }];
     
 }
-
 
 /**
 * splice clause data
