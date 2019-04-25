@@ -635,6 +635,10 @@
         if ([tempInput length] == 0) {
             return YES;
         }
+        
+        if ([tempInput isEqualToString:@"(null)"]) {
+            return YES;
+        }
     }
     
     return NO;

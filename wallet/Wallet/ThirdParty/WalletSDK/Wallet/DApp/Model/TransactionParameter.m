@@ -178,7 +178,7 @@
 - (BOOL)checkGasPriceCoef:(NSString **)gasPriceCoef errorMsg:(NSString **)errorMsg
 {
     if ([WalletTools isEmpty:*gasPriceCoef]) {
-        *gasPriceCoef = 0;
+        *gasPriceCoef = @"0";
         return YES;
     }else{
         *gasPriceCoef = [NSString stringWithFormat:@"%@",*gasPriceCoef];
@@ -284,7 +284,7 @@
 - (BOOL)checkValue:(NSString **)value errorMsg:(NSString **)errorMsg
 {
     if ([WalletTools isEmpty:*value]) {
-        *value = @"";
+        *value = @"0";
         return YES;
     }
     // value 可以是string 或者 number
