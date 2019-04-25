@@ -18,8 +18,6 @@
 #import "RLPSerialization.h"
 #import "WalletGenesisBlockInfoApi.h"
 #import "WalletBlockInfoApi.h"
-#import "WalletDappCheckParamsHandle.h"
-
 #import "WalletDAppHandle+transfer.h"
 
 @implementation WalletUtils
@@ -244,20 +242,8 @@
         return;
     }
     
-    [WalletDappCheckParamsHandle checkParamClause:parameter
-                                         callback:^(NSString * _Nonnull error, bool result)
-    {
-        if (!result) {
-            if (callback) {
-                callback(nil);
-            }
-            return;
-        }else{
-            
-            [WalletUtils signTransfer:parameter keystore:keystoreJson password:password isSend:YES  completionHandler:callback];
-        }
-    }];
-     
+    [WalletUtils signTransfer:parameter keystore:keystoreJson password:password isSend:YES  completionHandler:callback];
+    
 }
 
 + (void)signWithParameter:(TransactionParameter *)parameter
@@ -274,18 +260,7 @@
         return;
     }
     
-    [WalletDappCheckParamsHandle checkParamClause:parameter
-                                         callback:^(NSString * _Nonnull error, bool result)
-     {
-         if (!result) {
-             if (callback) {
-                 callback(nil);
-             }
-             return;
-         }else{
-             [WalletUtils signTransfer:parameter keystore:keystoreJson password:password isSend:NO completionHandler:callback];
-         }
-     }];
+    [WalletUtils signTransfer:parameter keystore:keystoreJson password:password isSend:NO completionHandler:callback];
     
 }
 

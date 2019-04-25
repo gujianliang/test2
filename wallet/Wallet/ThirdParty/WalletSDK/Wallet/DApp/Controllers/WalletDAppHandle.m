@@ -28,7 +28,6 @@
 #import "WalletGetBaseGasPriceApi.h"
 #import "SocketRocketUtility.h"
 #import "WalletTransactionApi.h"
-#import "WalletDappCheckParamsHandle.H"
 #import "WalletDappSimulateMultiAccountApi.h"
 
 @interface WalletDAppHandle ()<WKNavigationDelegate,WKUIDelegate>

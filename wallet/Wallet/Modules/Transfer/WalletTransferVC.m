@@ -133,9 +133,6 @@
     
     //The amount of the transaction needs to be multiplied by the disimals of the coin
     BigNumber *amountBig = [self amountConvertWei:self.transferAmountTextField.text dicimals:18];
-
-    TransactionParameter *transactionModel = [[TransactionParameter alloc]init];
-    transactionModel.gas = @"21000";  //Set maximum gas allowed for call,
     
     //The random number is 8 bytes
     NSMutableData* randomData = [[NSMutableData alloc]initWithCapacity:8];
@@ -145,7 +142,7 @@
         return ;
     }
     //nonce: hex string
-    transactionModel.nonce = [BigNumber bigNumberWithData:randomData].hexString;
+    NSString *nonce = [BigNumber bigNumberWithData:randomData].hexString;
     
     NSMutableArray *clauseList = [NSMutableArray array];
     ClauseModel *clauseModel = [[ClauseModel alloc]init];
@@ -153,13 +150,15 @@
     clauseModel.value = amountBig.hexString;//Payment amount,hex string
     clauseModel.data  = @"";
     [clauseList addObject:clauseModel];
-    transactionModel.clauses = clauseList; //Clauses is an array
-    
-    transactionModel.expiration = @"720"; //Expiration relative to blockRef
-    transactionModel.gasPriceCoef = @"0";// Coefficient used to calculate the final gas price (0 - 255)
 
-    //Get the chain tag of the block
-    [self getChainTagAndBlockReference:transactionModel keystore:keystore password:password];
+    [self packageTranstionModelClauseList:clauseList    //Clauses is an array
+                                    nonce:nonce         //nonce: hex string
+                                      gas:@"21000"      //Set maximum gas allowed for call, decimalstring
+                               expiration:@"720"        //Expiration relative to blockRef
+                             gasPriceCoef:@"0"          // Coefficient used to calculate the final gas price (0 - 255)
+     
+                                 keystore:keystore
+                                 password:password];
 }
 
 
@@ -183,27 +182,25 @@
     }
     //The amount of the transaction needs to be multiplied by the disimals of the coin
     BigNumber *amountBig = [self amountConvertWei:self.transferAmountTextField.text dicimals:18];
-    
-    TransactionParameter *transactionModel = [[TransactionParameter alloc]init];
-    transactionModel.gas = @"60000"; //Set maximum gas allowed for call,
-    
     //nonce: hex string
-    transactionModel.nonce = [BigNumber bigNumberWithData:randomData].hexString;
+    NSString *nonce = [BigNumber bigNumberWithData:randomData].hexString;
 
     NSMutableArray *clauseList = [NSMutableArray array];
     ClauseModel *clauseModel = [[ClauseModel alloc]init];
     clauseModel.to    = _tokenContractAddress;//Contract address of token
     clauseModel.value = @""; //vip 180 transaction token, value is an empty string
-    
-    //
     clauseModel.data  = [self calculatenTokenTransferClauseData:self.receiveAddressTextView.text value:amountBig.hexString];
     [clauseList addObject:clauseModel];
-    transactionModel.clauses = clauseList;//Clauses is an array
-    transactionModel.expiration = @"720";//Expiration relative to blockRef
-    transactionModel.gasPriceCoef = @"0";// Coefficient used to calculate the final gas price (0 - 255)
 
-    //Get the chain tag of the block
-    [self getChainTagAndBlockReference:transactionModel keystore:keystore password:password];
+    
+    [self packageTranstionModelClauseList:clauseList
+                                    nonce:nonce     //nonce: hex string
+                                      gas:@"600000" //Set maximum gas allowed for call, decimalstring
+                               expiration:@"720"    //Expiration relative to blockRef
+                             gasPriceCoef:@"0"      // Coefficient used to calculate the final gas price (0 - 255)
+     
+                                 keystore:keystore
+                                 password:password];
 }
 
 /**
@@ -224,12 +221,9 @@
     return  result;
 }
 
+//xnode pending order contract
 - (void)contractSignture:(NSString *)from keystore:(NSString *)keystore  password:(NSString *)password{
-    //xnode pending order contract
    
-    TransactionParameter *transactionModel = [[TransactionParameter alloc]init];
-    transactionModel.gas = @"60000"; //Set maximum gas allowed for call, decimalstring
-    
     //The random number is 8 bytes
     NSMutableData* randomData = [[NSMutableData alloc]initWithCapacity:8];
     randomData.length = 8;
@@ -238,7 +232,7 @@
         return ;
     }
      //nonce: hex string
-    transactionModel.nonce = [BigNumber bigNumberWithData:randomData].hexString;
+    NSString *nonce = [BigNumber bigNumberWithData:randomData].hexString;
     
     NSMutableArray *clauseList = [NSMutableArray array];
     ClauseModel *clauseModel = [[ClauseModel alloc]init];
@@ -259,27 +253,30 @@
     }
     
     [clauseList addObject:clauseModel];
-    transactionModel.clauses = clauseList;//Clauses is an array
-    transactionModel.expiration = @"720";//Expiration relative to blockRef
-    transactionModel.gasPriceCoef = @"0";// Coefficient used to calculate the final gas price (0 - 255)
 
-    
-    transactionModel.gas = @"600000"; //Set maximum gas allowed for call,
-    
      //Get the chain tag of the block
-    [self getChainTagAndBlockReference:transactionModel keystore:keystore password:password];
+    [self packageTranstionModelClauseList:clauseList //Clauses is an array
+                                    nonce:nonce      //nonce: hex string
+                                      gas:@"600000"  //Set maximum gas allowed for call, decimalstring
+                               expiration:@"720"     //Expiration relative to blockRef
+                             gasPriceCoef:@"0"       // Coefficient used to calculate the final gas price (0 - 255)
+
+                                 keystore:keystore
+                                 password:password];
 }
 
-- (void)getChainTagAndBlockReference:(TransactionParameter *)transactionModel
+- (void)packageTranstionModelClauseList:(NSArray *)clauseList
+                               nonce:(NSString *)nonce
+                                 gas:(NSString *)gas
+                          expiration:(NSString *)expiration
+                        gasPriceCoef:(NSString *)gasPriceCoef
                             keystore:(NSString *)keystore
                             password:(NSString *)password
 {
-    @weakify(self);
     //Get the chain tag of the block chain
     [WalletUtils getChainTag:^(NSString * _Nonnull chainTag) {
         NSLog(@"chainTag == %@",chainTag);
         //If the chainTag is nil, then the acquisition fails, you can prompt alert
-        transactionModel.chainTag = chainTag;
         
         //Get the reference of the block chain
         [WalletUtils getBlockReference:^(NSString * _Nonnull blockReference) {
@@ -287,40 +284,39 @@
             NSLog(@"blockReference == %@",blockReference);
             //If the blockReference is nil, then the acquisition fails, you can prompt alert
             
-            transactionModel.blockReference = blockReference;
-            @strongify(self);
-            [self checkModelAndSendTransfer:transactionModel
-                                   keystore:keystore
-                                   password:password];
+            TransactionParameter *transactionModel = [TransactionParameter creatTransactionParameter:^(TransactionParameterBuiler * _Nonnull builder) {
+                
+                builder.chainTag = chainTag;
+                builder.blockReference = blockReference;
+                builder.nonce = nonce;
+                builder.clauses = clauseList;
+                builder.gas = gas;
+                builder.expiration = expiration;
+                builder.gasPriceCoef = gasPriceCoef;
+                
+                
+            } checkParams:^(NSString * _Nonnull errorMsg) {
+                NSLog(@"errorMsg == %@",errorMsg);
+            }];
+            
+            
+            if (transactionModel != nil) {
+                
+                [WalletUtils signAndSendTransferWithParameter:transactionModel
+                                                     keystore:keystore
+                                                     password:password
+                                                     callback:^(NSString * _Nonnull txid)
+                {
+                       //Developers can use txid to query the status of data packaged on the chain
+     
+                       NSLog(@"\n txId: %@", txid);
+                }];
+            }
         }];
     }];
     
 }
 
-- (void)checkModelAndSendTransfer:(TransactionParameter *)transactionModel
-                         keystore:(NSString *)keystore
-                         password:(NSString *)password
-{
-    // Check if the signature parameters are correct
-    [transactionModel checkParameter:^(NSString * _Nonnull error, BOOL result)
-     {
-         if (!result) {
-             NSLog(@"error == %@",error);
-         }else
-         {
-             [WalletUtils signAndSendTransferWithParameter:transactionModel
-                                              keystore:keystore
-                                              password:password
-                                              callback:^(NSString * _Nonnull txId)
-             {
-                  //Developers can use txid to query the status of data packaged on the chain
-                 
-                  NSLog(@"\n txId: %@", txId);
-             }];
-             
-         }
-     }];
-}
 
 /**
 * splice clause data

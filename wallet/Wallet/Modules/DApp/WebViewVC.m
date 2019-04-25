@@ -173,31 +173,32 @@
         return ;
     }
     
-    TransactionParameter *transactionModel = [[TransactionParameter alloc]init];
     //nonce: hex string
-    transactionModel.nonce = [BigNumber bigNumberWithData:randomData].hexString;
-    
-    transactionModel.gas = [NSString stringWithFormat:@"%@",gas];  //Set maximum gas allowed for call,
-    
-    transactionModel.clauses = clauses;
-    transactionModel.expiration = @"720";//Expiration relative to blockRef
-    transactionModel.gasPriceCoef = @"0";// Coefficient used to calculate the final gas price (0 - 255)
-    
-    //Get the chain tag of the block
-    [self getChainTagAndBlockReference:transactionModel keystore:keystore password:password callback:callback];
+    NSString *nonce = [BigNumber bigNumberWithData:randomData].hexString;
+
+    [self packageTranstionModelClauseList:clauses
+                                    nonce:nonce  //nonce: hex string
+                                      gas:[NSString stringWithFormat:@"%@",gas]
+                               expiration:@"720" //Expiration relative to blockRef
+                             gasPriceCoef:@"0"   // Coefficient used to calculate the final gas price (0 - 255)
+                                 keystore:keystore
+                                 password:password
+                                 callback:callback];
 }
 
-- (void)getChainTagAndBlockReference:(TransactionParameter *)transactionModel
-                            keystore:(NSString *)keystore
-                            password:(NSString *)password
+- (void)packageTranstionModelClauseList:(NSArray *)clauseList
+                                  nonce:(NSString *)nonce
+                                    gas:(NSString *)gas
+                             expiration:(NSString *)expiration
+                           gasPriceCoef:(NSString *)gasPriceCoef
+                               keystore:(NSString *)keystore
+                               password:(NSString *)password
                             callback:(void(^)(NSString *txid ,NSString *address))callback
 {
-    @weakify(self);
     //Get the chain tag of the block chain
     [WalletUtils getChainTag:^(NSString * _Nonnull chainTag) {
         NSLog(@"chainTag == %@",chainTag);
         //If the chainTag is nil, then the acquisition fails, you can prompt alert
-        transactionModel.chainTag = chainTag;
         
         //Get the reference of the block chain
         [WalletUtils getBlockReference:^(NSString * _Nonnull blockReference) {
@@ -205,44 +206,36 @@
             NSLog(@"blockReference == %@",blockReference);
             //If the blockReference is nil, then the acquisition fails, you can prompt alert
             
-            transactionModel.blockReference = blockReference;
-            @strongify(self);
-            [self checkModelAndSendtransaction:transactionModel
-                                   keystore:keystore
-                                   password:password
-                                   callback:callback];
+                TransactionParameter *transactionModel = [TransactionParameter creatTransactionParameter:^(TransactionParameterBuiler * _Nonnull builder) {
+
+                    builder.chainTag = chainTag;
+                    builder.blockReference = blockReference;
+                    builder.nonce = nonce;
+                    builder.clauses = clauseList;
+                    builder.gas = gas;
+                    builder.expiration = expiration;
+                    builder.gasPriceCoef = gasPriceCoef;
+
+                } checkParams:^(NSString * _Nonnull errorMsg) {
+                    NSLog(@"errorMsg == %@",errorMsg);
+                }];
+            
+                if (transactionModel != nil) {
+
+                    [WalletUtils signAndSendTransferWithParameter:transactionModel
+                                                         keystore:keystore
+                                                         password:password
+                                                         callback:^(NSString * _Nonnull txid)
+                     {
+                         //Developers can use txid to query the status of data packaged on the chain
+
+                         NSLog(@"\n txId: %@", txid);
+                     }];
+                }
+
         }];
     }];
 }
-
-- (void)checkModelAndSendtransaction:(TransactionParameter *)transactionModel
-                         keystore:(NSString *)keystore
-                         password:(NSString *)password
-                         callback:(void(^)(NSString *txid ,NSString *address))callback
-{
-    // Check if the signature parameters are correct
-    [transactionModel checkParameter:^(NSString * _Nonnull error, BOOL result)
-     {
-         if (!result) {
-             NSLog(@"error == %@",error);
-         }else
-         {
-             [WalletUtils signAndSendTransferWithParameter:transactionModel
-                                              keystore:keystore
-                                              password:password
-                                              callback:^(NSString * _Nonnull txId)
-              {
-                  //Developers can use txid to query the status of data packaged on the chain
-                  
-                  NSLog(@"\n txId: %@", txId);
-                  //callback to sdk
-                  NSString *address = [WalletUtils getAddressWithKeystore:keystore];
-                  callback(txId,address);
-              }];
-         }
-     }];
-}
-
 
 - (BigNumber *)amountConvertWei:(NSString *)amount dicimals:(NSInteger )dicimals
 {

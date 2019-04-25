@@ -39,8 +39,6 @@
 		975AAAAD226EF1E300C1034D /* NSObject+LKModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 975AAAAC226EF1E200C1034D /* NSObject+LKModel.m */; };
 		97655EB322530CA300ECEEA9 /* WalletDAppHandle+transfer.h in Headers */ = {isa = PBXBuildFile; fileRef = 97655EB122530CA300ECEEA9 /* WalletDAppHandle+transfer.h */; };
 		97655EB422530CA300ECEEA9 /* WalletDAppHandle+transfer.m in Sources */ = {isa = PBXBuildFile; fileRef = 97655EB222530CA300ECEEA9 /* WalletDAppHandle+transfer.m */; };
-		97655EB722533DA200ECEEA9 /* WalletDappCheckParamsHandle.h in Headers */ = {isa = PBXBuildFile; fileRef = 97655EB522533DA200ECEEA9 /* WalletDappCheckParamsHandle.h */; };
-		97655EB822533DA200ECEEA9 /* WalletDappCheckParamsHandle.m in Sources */ = {isa = PBXBuildFile; fileRef = 97655EB622533DA200ECEEA9 /* WalletDappCheckParamsHandle.m */; };
 		976869EB22648323007EDBF1 /* tommath_private.h in Headers */ = {isa = PBXBuildFile; fileRef = 976869E622648323007EDBF1 /* tommath_private.h */; };
 		976869EC22648323007EDBF1 /* tommath_class.h in Headers */ = {isa = PBXBuildFile; fileRef = 976869E722648323007EDBF1 /* tommath_class.h */; };
 		976869ED22648323007EDBF1 /* tommath_superclass.h in Headers */ = {isa = PBXBuildFile; fileRef = 976869E822648323007EDBF1 /* tommath_superclass.h */; };
@@ -251,8 +249,6 @@
 		975AAAAC226EF1E200C1034D /* NSObject+LKModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+LKModel.m"; sourceTree = "<group>"; };
 		97655EB122530CA300ECEEA9 /* WalletDAppHandle+transfer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WalletDAppHandle+transfer.h"; sourceTree = "<group>"; };
 		97655EB222530CA300ECEEA9 /* WalletDAppHandle+transfer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "WalletDAppHandle+transfer.m"; sourceTree = "<group>"; };
-		97655EB522533DA200ECEEA9 /* WalletDappCheckParamsHandle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WalletDappCheckParamsHandle.h; sourceTree = "<group>"; };
-		97655EB622533DA200ECEEA9 /* WalletDappCheckParamsHandle.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WalletDappCheckParamsHandle.m; sourceTree = "<group>"; };
 		9768699122647CF9007EDBF1 /* scrypt_sha256.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = scrypt_sha256.h; sourceTree = "<group>"; };
 		9768699222647CF9007EDBF1 /* crypto_scrypt.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = crypto_scrypt.h; sourceTree = "<group>"; };
 		9768699322647CF9007EDBF1 /* sysendian.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = sysendian.h; sourceTree = "<group>"; };
@@ -771,8 +767,6 @@
 				9718120F22267FE5008F9639 /* WalletSignParamModel.m */,
 				9719BEAE2228085200DA3F74 /* WalletAccountModel.h */,
 				9719BEAF2228085200DA3F74 /* WalletAccountModel.m */,
-				97655EB522533DA200ECEEA9 /* WalletDappCheckParamsHandle.h */,
-				97655EB622533DA200ECEEA9 /* WalletDappCheckParamsHandle.m */,
 				974EA5DD225A3383009C021B /* TransactionParameter.h */,
 				974EA5DE225A3383009C021B /* TransactionParameter.m */,
 			);
@@ -1035,7 +1029,6 @@
 				974EA62D225B00B4009C021B /* NSJSONSerialization+NilDataParameter.h in Headers */,
 				976869EC22648323007EDBF1 /* tommath_class.h in Headers */,
 				E2317EA31E31970900DBE3E4 /* Transaction.h in Headers */,
-				97655EB722533DA200ECEEA9 /* WalletDappCheckParamsHandle.h in Headers */,
 				E2FA03D21E406FB30013E5A7 /* Signature.h in Headers */,
 				9719BEC32229200F00DA3F74 /* SocketRocketUtility.h in Headers */,
 				E2317E9F1E31970900DBE3E4 /* Hash.h in Headers */,
@@ -1269,7 +1262,6 @@
 				9773F9DA221412D200DF5972 /* WalletDAppHandle+connexJS.m in Sources */,
 				9773F9AB221412D200DF5972 /* VCBaseApi.m in Sources */,
 				E2317EB91E31981D00DBE3E4 /* BigNumber.m in Sources */,
-				97655EB822533DA200ECEEA9 /* WalletDappCheckParamsHandle.m in Sources */,
 				9773F9EA22150C5F00DF5972 /* WalletJSCallbackModel.m in Sources */,
 				9773F9C1221412D200DF5972 /* WalletGetSymbolApi.m in Sources */,
 				974EA5E0225A3383009C021B /* TransactionParameter.m in Sources */,
