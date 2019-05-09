@@ -31,6 +31,8 @@
 #import "WalletDappSimulateMultiAccountApi.h"
 #import "WalletCheckVersionApi.h"
 
+#define sdkVersion  @"1.0.0"
+
 @interface WalletDAppHandle ()<WKNavigationDelegate,WKUIDelegate>
 {
     WKWebView *_webView;
@@ -412,11 +414,12 @@ static dispatch_once_t predicate;
 
 - (void)injectJS:(WKWebViewConfiguration *)config
 {
-    NSString *currentVersion = @"1.0.0";
+    NSString *currentVersion = sdkVersion;
     WalletCheckVersionApi *checkApi = [[WalletCheckVersionApi alloc]initWithVersion:currentVersion language:[self getLanuage]];
     [checkApi loadDataAsyncWithSuccess:^(VCBaseApi *finishApi) {
         
         NSDictionary *dictData  = finishApi.resultDict[@"data"];
+        
         NSString *update        = dictData[@"update"];
         NSString *latestVersion = dictData[@"latestVersion"];
         NSString *description   = dictData[@"description"];
