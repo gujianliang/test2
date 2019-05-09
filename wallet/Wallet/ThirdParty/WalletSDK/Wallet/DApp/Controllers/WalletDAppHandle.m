@@ -413,7 +413,7 @@ static dispatch_once_t predicate;
 - (void)injectJS:(WKWebViewConfiguration *)config
 {
     NSString *currentVersion = @"1.0.0";
-    WalletCheckVersionApi *checkApi = [[WalletCheckVersionApi alloc]initWithVersion:currentVersion language:@"zh_Hans"];
+    WalletCheckVersionApi *checkApi = [[WalletCheckVersionApi alloc]initWithVersion:currentVersion language:[self getLanuage]];
     [checkApi loadDataAsyncWithSuccess:^(VCBaseApi *finishApi) {
         
         NSDictionary *dictData  = finishApi.resultDict[@"data"];
@@ -460,6 +460,23 @@ static dispatch_once_t predicate;
                                                           injectionTime:WKUserScriptInjectionTimeAtDocumentStart
                                                        forMainFrameOnly:YES];
     [config.userContentController addUserScript:userScriptWeb3];
+}
+
+
+-(NSString *)getLanuage
+{
+    NSString *language = @"";
+    NSArray *appLanguages = [[NSUserDefaults standardUserDefaults] objectForKey:@"AppleLanguages"];
+    NSString *localeLanguageCode = [appLanguages objectAtIndex:0];
+    
+    if ([localeLanguageCode containsString:@"zh"]) {
+        language = @"zh-Hans";
+        
+    }else{
+        language = @"en";
+    }
+   
+    return language;
 }
 
 +(void)attempDealloc
