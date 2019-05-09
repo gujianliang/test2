@@ -29,6 +29,7 @@
 #import "SocketRocketUtility.h"
 #import "WalletTransactionApi.h"
 #import "WalletDappSimulateMultiAccountApi.h"
+#import "WalletCheckVersionApi.h"
 
 @interface WalletDAppHandle ()<WKNavigationDelegate,WKUIDelegate>
 {
@@ -410,6 +411,32 @@ static dispatch_once_t predicate;
 }
 
 - (void)injectJS:(WKWebViewConfiguration *)config
+{
+    NSString *currentVersion = @"1.0.0";
+    WalletCheckVersionApi *checkApi = [[WalletCheckVersionApi alloc]initWithVersion:currentVersion language:@"zh_Hans"];
+    [checkApi loadDataAsyncWithSuccess:^(VCBaseApi *finishApi) {
+        
+        NSDictionary *dictData = finishApi.resultDict[@"data"];
+        NSString *update = dictData[@"update"];
+        NSString *latestVersion = dictData[@"latestVersion"];
+        NSString *description = dictData[@"description"];
+
+        if (!update.boolValue) {
+            [self inject:config];
+            NSLog(@"%@",description);
+        }else{
+            //当前sdk 版本和服务器返回的版本不同，提示
+            if (![currentVersion isEqualToString:latestVersion]) {
+                NSLog(@"%@",description);
+            }
+        }
+        
+    } failure:^(VCBaseApi *finishApi, NSString *errMsg) {
+        
+    }];
+}
+
+- (void)inject:(WKWebViewConfiguration *)config
 {
     //connex
     NSString *bundlePath = [[NSBundle mainBundle] pathForResource:@"WalletSDKBundle" ofType:@"bundle"];

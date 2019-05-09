@@ -131,7 +131,6 @@ static NSDateFormatter *TimeFormatter = nil;
         TimeFormatter = [[NSDateFormatter alloc] init];
         [TimeFormatter setDateFormat:@"HH-mm-ss"];
         
-        NSLog(@"BIP39 World List: %d words", (int)Wordlist.count);
     });
 }
 

@@ -187,13 +187,13 @@
 
 + (void)debugLog:(id)responseObject andUrl:(id)url{
 #if ReleaseVersion
-    NSLog(@"\n\n请求地址：%@  decode -- >%@  \n\n", url, responseObject);
+//    NSLog(@"\n\n请求地址：%@  decode -- >%@  \n\n", url, responseObject);
 #endif
 }
 
 + (void)debugError:(id)responseObject andUrl:(id)url{
 #if ReleaseVersion
-    NSLog(@"\n\n请求地址：%@  error -- >%@  \n\n", url, responseObject);
+//    NSLog(@"\n\n请求地址：%@  error -- >%@  \n\n", url, responseObject);
 #endif
 }
 

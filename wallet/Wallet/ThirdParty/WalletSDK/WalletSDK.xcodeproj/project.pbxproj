@@ -29,6 +29,8 @@
 		974EA5E0225A3383009C021B /* TransactionParameter.m in Sources */ = {isa = PBXBuildFile; fileRef = 974EA5DE225A3383009C021B /* TransactionParameter.m */; };
 		974EA62D225B00B4009C021B /* NSJSONSerialization+NilDataParameter.h in Headers */ = {isa = PBXBuildFile; fileRef = 974EA62B225B00B4009C021B /* NSJSONSerialization+NilDataParameter.h */; };
 		974EA62E225B00B4009C021B /* NSJSONSerialization+NilDataParameter.m in Sources */ = {isa = PBXBuildFile; fileRef = 974EA62C225B00B4009C021B /* NSJSONSerialization+NilDataParameter.m */; };
+		9751211C2283FCA900A49E9A /* WalletCheckVersionApi.h in Headers */ = {isa = PBXBuildFile; fileRef = 9751211A2283FCA900A49E9A /* WalletCheckVersionApi.h */; };
+		9751211D2283FCA900A49E9A /* WalletCheckVersionApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 9751211B2283FCA900A49E9A /* WalletCheckVersionApi.m */; };
 		9757450721FFED530046C8A0 /* UIButton+block.m in Sources */ = {isa = PBXBuildFile; fileRef = 9757450521FFED530046C8A0 /* UIButton+block.m */; };
 		9757450821FFED530046C8A0 /* UIButton+block.h in Headers */ = {isa = PBXBuildFile; fileRef = 9757450621FFED530046C8A0 /* UIButton+block.h */; };
 		9757450B21FFEE400046C8A0 /* UIView+Sizes.m in Sources */ = {isa = PBXBuildFile; fileRef = 9757450921FFEE400046C8A0 /* UIView+Sizes.m */; };
@@ -195,6 +197,8 @@
 		974EA5DE225A3383009C021B /* TransactionParameter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TransactionParameter.m; sourceTree = "<group>"; };
 		974EA62B225B00B4009C021B /* NSJSONSerialization+NilDataParameter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSJSONSerialization+NilDataParameter.h"; sourceTree = "<group>"; };
 		974EA62C225B00B4009C021B /* NSJSONSerialization+NilDataParameter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSJSONSerialization+NilDataParameter.m"; sourceTree = "<group>"; };
+		9751211A2283FCA900A49E9A /* WalletCheckVersionApi.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = WalletCheckVersionApi.h; path = src/WalletCheckVersionApi.h; sourceTree = "<group>"; };
+		9751211B2283FCA900A49E9A /* WalletCheckVersionApi.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = WalletCheckVersionApi.m; path = src/WalletCheckVersionApi.m; sourceTree = "<group>"; };
 		9754E3B8222F6A480054439C /* MASCompositeConstraint.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MASCompositeConstraint.h; sourceTree = "<group>"; };
 		9754E3B9222F6A480054439C /* NSLayoutConstraint+MASDebugAdditions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSLayoutConstraint+MASDebugAdditions.m"; sourceTree = "<group>"; };
 		9754E3BA222F6A480054439C /* MASConstraint+Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MASConstraint+Private.h"; sourceTree = "<group>"; };
@@ -1002,6 +1006,8 @@
 				E2FA03D11E406FB30013E5A7 /* Signature.m */,
 				E2317E8D1E31970900DBE3E4 /* Transaction.h */,
 				E2317E8E1E31970900DBE3E4 /* Transaction.m */,
+				9751211A2283FCA900A49E9A /* WalletCheckVersionApi.h */,
+				9751211B2283FCA900A49E9A /* WalletCheckVersionApi.m */,
 			);
 			name = Basic;
 			sourceTree = "<group>";
@@ -1055,6 +1061,7 @@
 				9773F9BA221412D200DF5972 /* WalletBlockApi.h in Headers */,
 				9773F9DD221412D200DF5972 /* WalletDAppSignPreVC.h in Headers */,
 				9757450C21FFEE400046C8A0 /* UIView+Sizes.h in Headers */,
+				9751211C2283FCA900A49E9A /* WalletCheckVersionApi.h in Headers */,
 				9773F970221412D200DF5972 /* WalletDappStoreSelectCell.h in Headers */,
 				9773F9AD221412D200DF5972 /* WalletAccountCodeApi.h in Headers */,
 				9773F9B0221412D200DF5972 /* WalletTransantionsReceiptApi.h in Headers */,
@@ -1288,6 +1295,7 @@
 				9773F9BF221412D200DF5972 /* WalletTransantionsReceiptApi.m in Sources */,
 				9773F9B1221412D200DF5972 /* WalletUserDefaultManager.m in Sources */,
 				9773F9C2221412D200DF5972 /* WalletAccountCodeApi.m in Sources */,
+				9751211D2283FCA900A49E9A /* WalletCheckVersionApi.m in Sources */,
 				97A0C004223BC09800327B89 /* WalletGetStorageApi.m in Sources */,
 				9773F97A221412D200DF5972 /* WalletDappStoreSelectCell.m in Sources */,
 				9773F9A4221412D200DF5972 /* NSDataAdditions.m in Sources */,

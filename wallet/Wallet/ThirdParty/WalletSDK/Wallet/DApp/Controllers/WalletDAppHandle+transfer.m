@@ -171,7 +171,6 @@ callback:(void(^)(NSString *txId))callback
 
 - (void)sendRaw:(NSString *)raw callback:(void(^)(NSString *txId))callback
 {
-    NSLog(@"raw ==%@",raw);
     // 发送交易
     @weakify(self)
     WalletTransactionApi *transationApi1 = [[WalletTransactionApi alloc]initWithRaw:raw];
