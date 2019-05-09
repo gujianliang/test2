@@ -416,12 +416,12 @@ static dispatch_once_t predicate;
     WalletCheckVersionApi *checkApi = [[WalletCheckVersionApi alloc]initWithVersion:currentVersion language:@"zh_Hans"];
     [checkApi loadDataAsyncWithSuccess:^(VCBaseApi *finishApi) {
         
-        NSDictionary *dictData = finishApi.resultDict[@"data"];
-        NSString *update = dictData[@"update"];
+        NSDictionary *dictData  = finishApi.resultDict[@"data"];
+        NSString *update        = dictData[@"update"];
         NSString *latestVersion = dictData[@"latestVersion"];
-        NSString *description = dictData[@"description"];
+        NSString *description   = dictData[@"description"];
 
-        if (!update.boolValue) {
+        if (update.boolValue) {
             [self inject:config];
             NSLog(@"%@",description);
         }else{
