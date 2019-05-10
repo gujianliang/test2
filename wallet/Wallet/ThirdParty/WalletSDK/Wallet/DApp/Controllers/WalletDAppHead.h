@@ -24,7 +24,7 @@
 
 #define vthoTokenAddress        @"0x0000000000000000000000000000456e65726779"
 
-
+#define sdkVersion  @"1.0.0"
 
 static int OK = 1;
 static int ERROR_REQUEST_PARAMS = 200;

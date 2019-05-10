@@ -327,7 +327,14 @@ completionHandler:(void (^)(NSString *result))completionHandler;
 + (void)deallocDApp;
 
 
-
+/**
+ *  @abstract
+ *  Get SDK Version
+ *
+ *
+ *
+ */
++ (NSString *)getVersion;
 
 
 

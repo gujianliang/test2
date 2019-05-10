@@ -448,7 +448,10 @@
 }
 
 
-
++ (NSString *)getVersion
+{
+    return sdkVersion;
+}
 
 
 @end

@@ -31,7 +31,7 @@
 #import "WalletDappSimulateMultiAccountApi.h"
 #import "WalletCheckVersionApi.h"
 
-#define sdkVersion  @"1.0.0"
+
 
 @interface WalletDAppHandle ()<WKNavigationDelegate,WKUIDelegate>
 {
