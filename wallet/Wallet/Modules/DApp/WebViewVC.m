@@ -24,7 +24,7 @@
 - (instancetype)initWithURL:(NSURL *)URL{
     self = [super init];
     if (self) {
-        URL = [NSURL URLWithString:@"https://connex-impl-test.vecha.in"];
+        URL = [NSURL URLWithString:@"https://bc66.github.io/lucky-airdrop/#/"];
         _URL = URL;
     }
     return self;
@@ -230,6 +230,11 @@
                          //Developers can use txid to query the status of data packaged on the chain
 
                          NSLog(@"\n txId: %@", txid);
+                         
+                         // Pass txid and signature address back to dapp webview
+                         NSString *singerAddress = [WalletUtils getAddressWithKeystore:keystore];
+                         callback(txid,singerAddress.lowercaseString);
+                         
                      }];
                 }
 
@@ -315,6 +320,8 @@
                                          
                                          if (!error) {
                                              callback(signer,signatureData);
+                                         }else{
+                                             NSLog(@"error == %@",error.userInfo);
                                          }
                                      }];
                                      

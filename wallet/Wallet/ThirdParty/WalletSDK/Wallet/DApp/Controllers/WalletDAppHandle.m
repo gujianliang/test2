@@ -425,13 +425,15 @@ static dispatch_once_t predicate;
         NSString *description   = dictData[@"description"];
 
         if (update.boolValue) {
-            [self inject:config];
+           
             NSLog(@"%@",description);
         }else{
             //当前sdk 版本和服务器返回的版本不同，提示
             if (![currentVersion isEqualToString:latestVersion]) {
                 NSLog(@"%@",description);
             }
+            
+            [self inject:config];
         }
         
     } failure:^(VCBaseApi *finishApi, NSString *errMsg) {
