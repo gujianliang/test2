@@ -145,7 +145,6 @@
 }
 
 - (void)continueSign{
-    NSLog(@"click 已知晓风险，继续签名");
     
     [self dismissViewControllerAnimated:YES completion:^{
         if (_block) {

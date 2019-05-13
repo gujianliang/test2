@@ -125,7 +125,6 @@
     WalletDappSimulateAccountApi *accountApi = [[WalletDappSimulateAccountApi alloc]initClause:dictclause opts:dictOpts revision:revision];
     accountApi.supportOtherDataFormat = YES;
     [accountApi loadDataAsyncWithSuccess:^(VCBaseApi *finishApi) {
-        NSLog(@"ddd");
         
         if (finishApi.resultDict) {
             [WalletTools callbackWithrequestId:requestId
@@ -143,7 +142,6 @@
         
         
     } failure:^(VCBaseApi *finishApi, NSString *errMsg) {
-        NSLog(@"ddd");
         [WalletTools callbackWithrequestId:requestId
                                    webView:webView
                                       data:@""

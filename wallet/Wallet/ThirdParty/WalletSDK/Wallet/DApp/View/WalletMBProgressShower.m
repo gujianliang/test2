@@ -59,7 +59,6 @@ const NSInteger kWalletHudTag = 12345;
 
 +(void)showTextIn:(UIView*)view Text:(NSString*)text During:(NSTimeInterval)time{
     if (text.length == 0) {
-        NSLog(@"网络请求失败，不做弹框");
         MBProgressHUD *org_hud = [view viewWithTag:kWalletHudTag];
         if(org_hud){
             [org_hud hideAnimated:YES];
@@ -84,7 +83,6 @@ const NSInteger kWalletHudTag = 12345;
 
 +(void)showMulLineTextIn:(UIView*)view Text:(NSString*)text During:(NSTimeInterval)time{
     if (text.length == 0) {
-        NSLog(@"网络请求失败，不做弹框");
         MBProgressHUD *org_hud = [view viewWithTag:kWalletHudTag];
         if(org_hud){
             [org_hud hideAnimated:YES];

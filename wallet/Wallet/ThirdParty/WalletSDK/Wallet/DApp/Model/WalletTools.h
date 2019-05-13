@@ -117,11 +117,6 @@
 
 + (BOOL)isEmpty:(id )input;
 
-+ (void)callbackWithrequestId:(NSString *)requestId
-                      webView:(WKWebView *)webView
-                     boolData:(id)boolData
-                   callbackId:(NSString *)callbackId
-                         code:(NSInteger)code;
 
 + (NSString *)packCertParam:(NSDictionary *)param;
 
