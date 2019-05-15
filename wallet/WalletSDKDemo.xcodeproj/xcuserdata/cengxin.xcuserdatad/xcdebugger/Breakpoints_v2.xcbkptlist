@@ -1930,9 +1930,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "382"
-            endingLineNumber = "382"
-            landmarkName = "-buildErrorInfoWithRequestError:responseErrorCode:responseErrorMsg:"
-            landmarkType = "7">
+            endingLineNumber = "382">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1963,7 +1961,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "177"
             endingLineNumber = "177"
-            landmarkName = "-sendRaw:callback:"
+            landmarkName = "-showTransactionFail:"
             landmarkType = "7">
             <Locations>
                <Location
@@ -2058,7 +2056,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "162"
             endingLineNumber = "162"
-            landmarkName = "-sign:paramModel:keystore:password:callback:"
+            landmarkName = "-sendRaw:callback:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -2074,7 +2072,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "181"
             endingLineNumber = "181"
-            landmarkName = "-sendRaw:callback:"
+            landmarkName = "-signCertFrom:account:content:requestId:webView:callbackId:param:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -2137,9 +2135,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "624"
-            endingLineNumber = "624"
-            landmarkName = "+packCertParam:"
-            landmarkType = "7">
+            endingLineNumber = "624">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2155,6 +2151,22 @@
             startingLineNumber = "502"
             endingLineNumber = "502"
             landmarkName = "-build"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Wallet/ThirdParty/WalletSDK/Wallet/DApp/Api/VCBaseApi.m"
+            timestampString = "579582708.373498"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "90"
+            endingLineNumber = "90"
+            landmarkName = "-loadDataAsyncWithSuccess:failure:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

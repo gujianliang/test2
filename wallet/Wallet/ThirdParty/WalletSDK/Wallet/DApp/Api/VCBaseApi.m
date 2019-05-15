@@ -10,39 +10,20 @@
 #import "VCBaseApi.h"
 #import "WalletModelFetcher.h"
 #import "NSStringAdditions.h"
-
 #import "NSObject+LKModel.h"
 
 @implementation VCBaseApi
-{
 
-}
-
--(NSString *)stubUrlString {
-    return self->httpAddress;
-}
 
 - (id)init
 {
     if (self  = [super init]) {
-        _needToken = NO;
-        _needEncrypt = NO;
         httpAddress = @"";
         self.requestMethod = RequestGetMethod;
     }
     return self;
 }
 
-
-+(instancetype)modelWithRequestAbsoluteURLString:(NSString *)absoluteString
-                                          method:(RequestMethod)method
-                                           parms:(NSDictionary *)parms {
-    VCBaseApi *instance = [[self alloc] init];
-    instance->httpAddress = absoluteString;
-    instance.requestMethod = method;
-    [instance buildRequestDictWithDepedency:parms];
-    return instance;
-}
 
 /**
  *  obj 属性返回类型
@@ -79,33 +60,6 @@
     }
 }
 
-+ (NSArray *)mergeOriginalArray:(NSArray *)orgArr withOtherArray:(NSArray *)otherArr;
-{
-    if (otherArr.count == 0) {
-        return orgArr;
-    }
-    
-    NSMutableArray *array = [NSMutableArray arrayWithArray:orgArr];
-    for (int i = 0; i < otherArr.count; i++) {
-        id object = [otherArr objectAtIndex:i];
-        if (!orgArr || [orgArr indexOfObject:object] == NSNotFound) {
-            [array addObject:object];
-        }
-    }
-    
-    return array;
-}
-
-- (NSString *)getLocalJsonStrKey
-{
-    return [NSStringFromClass([self class]) stringByAppendingString:@"ModelJsonKey"];
-}
-
--(void)checkNetwork
-{
-    self.status = RequestSuccess;//always return ok, skip the network check step
-}
-
 - (NSMutableDictionary *)buildRequestDict
 {
     if (!_requestParmas) {
@@ -124,56 +78,32 @@
 {
 }
 
-- (void)loadLocalDataAsync
-{
-    NSData *localJsonData = [self getLocalRespondString];
-    
-    if ([localJsonData length]) {
-        NSDictionary *dict = [NSJSONSerialization JSONObjectWithDataMayBeNil:localJsonData
-                                                                     options:kNilOptions
-                                                                       error:nil];
-        
-        if (!dict || [dict isKindOfClass:[self expectedJsonObjClass]]) {
-            self.status = RequestLocalData;
-            [self convertJsonResultToModel:dict];
-        } else {
-            self.status = RequestFailed;
-            [self removeLocalRespondString];
-        }
-    } else {
-        self.status = RequestFailed;
-    }
-}
-
 -(void)loadDataAsyncWithSuccess:(WalletLoadSuccessBlock)success
                         failure:(WalletLoadFailBlock)failure
 {
     _successBlock = success;
     _failBlock = failure;
-    [self checkNetwork];
-    if (self.status == NotAvailable || httpAddress == nil) {
+    if ( httpAddress == nil) {
+        _failBlock(self,@"");
         return;
     }
     
-    self.isLoading = YES;
-    
     NSMutableDictionary *postDict = [self buildRequestDict];
     NSError *error = nil;
-    
+    @weakify(self)
     switch (_requestMethod) {
         case RequestGetMethod:
         {
             [WalletModelFetcher requestGetWithUrl:httpAddress
                                           params:postDict
-                                      useSession:_needToken
-                                     needEncrypt:_needEncrypt
                                            error:&error
-                                   responseBlock:^(NSDictionary *responseDict, NSDictionary *responseHeaderFields, NSError *error) {
-                                       
-                                       [self analyseResponseInfo:responseDict
-                                                    headerFileds:responseHeaderFields
-                                                           error:error];
-                                   }];
+                                   responseBlock:^(NSDictionary *responseDict, NSDictionary *responseHeaderFields, NSError *error)
+            {
+               @strongify(self)
+               [self analyseResponseInfo:responseDict
+                            headerFileds:responseHeaderFields
+                                   error:error];
+            }];
         }
             break;
         
@@ -181,73 +111,21 @@
         {
             [WalletModelFetcher requestPostWithUrl:httpAddress
                                            params:postDict
-                                       useSession:_needToken
-                                      needEncrypt:_needEncrypt
                                             error:&error
-                                    responseBlock:^(NSDictionary *responseDict, NSDictionary *responseHeaderFields, NSError *error) {
-                                        
-                                        [self analyseResponseInfo:responseDict
-                                                     headerFileds:responseHeaderFields
-                                                            error:error];
-                                    }];
+                                    responseBlock:^(NSDictionary *responseDict, NSDictionary *responseHeaderFields, NSError *error)
+            {
+                @strongify(self)
+                [self analyseResponseInfo:responseDict
+                             headerFileds:responseHeaderFields
+                                    error:error];
+                
+            }];
         }
             break;
-        case RequestPutMethod:
-        {
-            [WalletModelFetcher requestPutWithUrl:httpAddress
-                                           params:postDict
-                                       useSession:_needToken
-                                     needEncrypt:_needEncrypt
-                                            error:&error
-                                    responseBlock:^(NSDictionary *responseDict, NSDictionary *responseHeaderFields, NSError *error) {
-                                       
-                                       [self analyseResponseInfo:responseDict
-                                                    headerFileds:responseHeaderFields
-                                                           error:error];
-                                   }];
-        }
-            break;
-        case RequestDelMethod:
-        {
-            [WalletModelFetcher requestDelWithUrl:httpAddress
-                                          params:postDict
-                                      useSession:_needToken
-                                     needEncrypt:_needEncrypt
-                                           error:&error
-                                   responseBlock:^(NSDictionary *responseDict, NSDictionary *responseHeaderFields, NSError *error) {
-                                        
-                                        [self analyseResponseInfo:responseDict
-                                                     headerFileds:responseHeaderFields
-                                                            error:error];
-                                    }];
-        }
-        break;
-        
-        case RequestRAWMethod:
-        {
-            [WalletModelFetcher requestRAWWithUrl:httpAddress
-                                          params:postDict
-                                      useSession:_needToken
-                                           error:&error
-                                   responseBlock:^(NSDictionary *responseDict, NSDictionary *responseHeaderFields, NSError *error) {
-                                       
-                                       [self analyseResponseInfo:responseDict
-                                                    headerFileds:responseHeaderFields
-                                                           error:error];
-                                   }];
-        }
-            break;
-            
+                    
         default:
             break;
     }
-}
-
-- (void)analyseResponseInfo:(NSDictionary *)responseData error:(NSError *)error
-{
-    [self analyseResponseInfo:responseData
-                 headerFileds:nil
-                        error:error];
 }
 
 - (void)analyseResponseInfo:(NSDictionary *)responseData
@@ -310,23 +188,10 @@
                 }
                 
                 if(objDict && [objDict isKindOfClass:[NSDictionary class]]){  // 返回的有可能不是dict
-                    if ([objDict objectForKey:@"pageNo"] != [NSNull null]
-                        && [objDict objectForKey:@"pageNo"] !=  nil) {
-                        
-                        self.pageNo = [NSString stringWithFormat:@"%ld",([[objDict objectForKey:@"pageNo"] integerValue] + 1)];
-                        
-                    }else if ([objDict objectForKey:@"page"] != [NSNull null]
-                              && [objDict objectForKey:@"page"] != nil) {
-                        
-                        self.pageNo = [NSString stringWithFormat:@"%ld",([[objDict objectForKey:@"page"] integerValue] + 1)];
-                        
-                    }
                     
                     self.status = RequestSuccess;
                     [self convertJsonResultToModel:objDict];
-                    if(self.resultModel){
-                        [self storeRespondStringToLocal:self.resultModel];
-                    }
+                    
                 }else if(objDict && [objDict isKindOfClass:[NSArray class]]){
                     self.status = RequestSuccess;
                     
@@ -372,7 +237,6 @@
                        responseErrorCode:errCode
                         responseErrorMsg:errMsg];
     
-    self.isLoading = NO;
 }
 
 - (void)buildErrorInfoWithRequestError:(NSError *)error
@@ -416,32 +280,5 @@
     }
 }
 
-- (void)storeRespondStringToLocal:(NSData *)respondStr
-{}
-
-- (void)removeLocalRespondString
-{}
-
-- (NSData *)getLocalRespondString
-{
-    return nil;
-}
-
-
-- (void)loadLocalDataAsyncWithSuccess:(WalletLoadSuccessBlock)success
-                              failure:(WalletLoadFailBlock)failure
-{
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        [self loadLocalDataAsync];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            if (self.status == RequestLocalData && success) {
-                success(self);
-            }
-            else if (self.status != RequestLocalData && failure) {
-                failure(self, [self.lastError localizedFailureReason]);
-            }
-        });
-    });
-}
 
 @end

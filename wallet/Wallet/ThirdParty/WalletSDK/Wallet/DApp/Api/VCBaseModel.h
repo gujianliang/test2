@@ -8,7 +8,6 @@
 
 #import <Foundation/Foundation.h>
 #import "YYModel.h"
-//#import "NSObject+YYModel.h"
 
 @interface VCBaseModel : NSObject <NSCoding,NSCopying>
 

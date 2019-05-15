@@ -18,7 +18,6 @@
 #import "WalletUserDefaultManager.h"
 #import "WalletTools.h"
 #import "WalletApiManageMacro.h"
-#import "WalletAlertShower.h"
 #import "NSStringAdditions.h"
 #import "UIButton+block.h"
 

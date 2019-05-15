@@ -105,33 +105,6 @@
     return image;
 }
 
-//查询thor 余额
-+ (NSString *)tokenBalanceData:(NSString *)toAddress
-{
-    if ([[toAddress lowercaseString] hasPrefix:@"0x"]) {
-        toAddress = [toAddress stringByReplacingOccurrencesOfString:@"0x" withString:@""];
-    }
-    NSString *head = @"0x70a08231000000000000000000000000";
-    NSString *data = [NSString stringWithFormat:@"%@%@",head,toAddress];
-    return data;
-}
-
-//转账 thor data 的值
-+ (NSString *)signData:(NSString *)address
-                 value:(NSString *)value
-{
-    NSString *head = @"0xa9059cbb";
-    NSString *newAddrss = [NSString stringWithFormat:@"000000000000000000000000%@",[address substringFromIndex:2]];
-    NSInteger t = 64 - [value substringFromIndex:2].length;
-    NSMutableString *zero = [NSMutableString new];
-    for (int i = 0; i < t; i++) {
-         [zero appendString:@"0"];
-    }
-    NSString *newValue = [NSString stringWithFormat:@"%@%@",zero,[value substringFromIndex:2]];
-    NSString *result = [NSString stringWithFormat:@"%@%@%@",head,newAddrss,newValue];
-    return  result;
-}
-
 + (NSString *)checksumAddress:(NSString *)inputAddress
 {
     Address *a = [Address addressWithString:inputAddress.lowercaseString];
@@ -139,15 +112,6 @@
         return a.checksumAddress;
     }
     return inputAddress;
-}
-
-// 大小写
-+ (BOOL)InputCapitalAndLowercaseLetter:(NSString*)string
-{
-    NSString *regex =@"[a-zA-Z]*";
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",regex];
-    BOOL  inputString = [predicate evaluateWithObject:string];
-    return inputString;
 }
 
 + (void)checkNetwork:(void(^)(BOOL t))block
@@ -171,64 +135,6 @@
     }
 }
 
-+ (BOOL)checkEthAddress:(NSString *)address
-{
-    NSString *regex =@"[0-9a-fA-F]*";
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",regex];
-    return [predicate evaluateWithObject:address];
-}
-
-
-//合约签名，data 数据准备
-+ (NSString *)contractMethodId:(NSString *)methodId params:(NSArray *)params
-{
-    NSString *totalData = methodId;
-    for (NSString *param in params) {
-        NSInteger t = 64 - [param substringFromIndex:2].length;
-        NSMutableString *zero = [NSMutableString new];
-        for (int i = 0; i < t; i++) {
-            [zero appendString:@"0"];
-        }
-        NSString *newValue = [NSString stringWithFormat:@"%@%@",zero,[param substringFromIndex:2]];
-
-        totalData = [totalData stringByAppendingString:newValue];
-    }
-    return totalData;
-}
-
-+ (NSString *)thousandSeparator:(NSString *)inputStr decimals:(BOOL)decimals
-{
-    if (inputStr.length == 0) {
-        return @"";
-    }
-    NSArray *comSep = [inputStr componentsSeparatedByString:@"."];
-    if (comSep.count > 1) { // 有小数部分
-        if (decimals) { // 需要小数
-            NSString *tempDecimals = comSep[1];
-            if (tempDecimals.length < 2) {
-                return [NSString stringWithFormat:@"%@.%@0",[self splitLongStr:comSep[0]],comSep[1]];
-            }else if (tempDecimals.length == 2)
-            {
-                return [NSString stringWithFormat:@"%@.%@",[self splitLongStr:comSep[0]],comSep[1]];
-
-            }else{
-                tempDecimals = [tempDecimals substringToIndex:2];
-                return [NSString stringWithFormat:@"%@.%@",[self splitLongStr:comSep[0]],tempDecimals];
-            }
-            
-        }else{
-            return [NSString stringWithFormat:@"%@.%@",[self splitLongStr:comSep[0]],comSep[1]];
-        }
-        
-    }else{  // 无小数部分
-        if (decimals) {
-            return [[self splitLongStr:inputStr] stringByAppendingString:@".00"];
-        }else{
-            return [self splitLongStr:inputStr];
-        }
-    }
-    return @"";
-}
 
 + (NSString *)splitLongStr:(NSString *)inputStr
 {
@@ -261,42 +167,6 @@
     return paramDict;
 }
 
-
-// 十六进制转换为普通字符串的。
-+ (NSString *)stringFromHexString:(NSString *)hexString
-{
-    char *myBuffer = (char *)malloc((int)[hexString length] / 2 + 1);
-    bzero(myBuffer, [hexString length] / 2 + 1);
-    for (int i = 0; i < [hexString length] - 1; i += 2) {
-        unsigned int anInt;
-        NSString * hexCharStr = [hexString substringWithRange:NSMakeRange(i, 2)];
-        NSScanner * scanner = [[NSScanner alloc] initWithString:hexCharStr];
-        [scanner scanHexInt:&anInt];
-        myBuffer[i / 2] = (char)anInt;
-    }
-    NSString *unicodeString = [NSString stringWithCString:myBuffer encoding:4];
-    return unicodeString;
-}
-
-+ (NSString *)abiDecodeString:(NSString *)input
-{
-    input = [input stringByReplacingOccurrencesOfString:@"0x" withString:@""];
-    NSString *first = [input substringWithRange:NSMakeRange(0, 64)];
-    first = [NSString stringWithFormat:@"0x%@",first];
-    //16进制转10
-    NSString *strLength = [BigNumber bigNumberWithHexString:first].decimalString;
-    NSString *last = [input substringWithRange:NSMakeRange(64, input.length - 64)];
-    
-    NSString *second = [last substringWithRange:NSMakeRange(0, strLength.integerValue * 2)];
-    NSInteger secondLength = [BigNumber bigNumberWithHexString:[NSString stringWithFormat:@"0x%@",second]].decimalString.integerValue;
-    
-    NSString *result = [last substringWithRange:NSMakeRange(strLength.integerValue * 2, last.length - strLength.integerValue * 2)];
-    
-    NSString *realText = [result substringWithRange:NSMakeRange(0, secondLength * 2)];
-    
-    NSString *rr = [WalletTools stringFromHexString:realText];
-    return rr;
-}
 
 + (void)callbackWithrequestId:(NSString *)requestId
                       webView:(WKWebView *)webView
@@ -361,69 +231,6 @@
     }
    return @"";
 }
-
-+ (void)jsErrorAlert:(NSString *)message
-{
-    [WalletAlertShower showAlert:nil
-                            msg:message
-                          inCtl:[WalletTools getCurrentVC]
-                          items:@[VCNSLocalizedBundleString(@"dialog_yes", nil)]
-                     clickBlock:^(NSInteger index) {
-                     }];
-}
-
-+ (BOOL)fromISToAddress:(NSString *)from to:(NSString *)to
-{
-    bool isSame = NO;
-    if ([from.lowercaseString isEqualToString:to.lowercaseString]) {
-        isSame = YES;
-    }
-    if (isSame) {
-        
-        return NO;
-    }
-    return YES;
-}
-
-+ (BigNumber *)calcThorNeeded:(float)gasPriceCoef gas:(NSNumber *)gas
-{
-    if (![gas isKindOfClass:[NSNumber class]]) {
-        NSString *gasStr = [NSString stringWithFormat:@"%@",gas];
-        gas = [NSNumber numberWithInteger:gasStr.integerValue];
-    }
-    NSMutableDictionary* dictParameters = [NSMutableDictionary dictionary];
-    [dictParameters setValueIfNotNil:@"0x8eaa6ac0000000000000000000000000000000000000626173652d6761732d7072696365" forKey:@"data"];
-    [dictParameters setValueIfNotNil:@"0x0" forKey:@"value"];
-    
-    NSString *httpAddress =  [NSString stringWithFormat:@"%@/accounts/%@",[WalletUserDefaultManager getBlockUrl],@"0x0000000000000000000000000000506172616D73"];
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:httpAddress]];
-    request.timeoutInterval = 30;
-    [request setHTTPMethod:@"POST"];
-    [request setHTTPBody:[dictParameters yy_modelToJSONData]];
-    NSData *responseObject = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
-    NSError *error;
-    if (responseObject){
-        NSString *responseStr = [[NSString alloc]initWithData:responseObject
-                                                       encoding:NSUTF8StringEncoding];
-        NSDictionary *json = [NSJSONSerialization JSONObjectWithData:[responseStr
-                                                                      dataUsingEncoding:NSUTF8StringEncoding] options:kNilOptions error:&error]  ;
-        NSString *baseGasPriceHex = json[@"data"];
-        if (baseGasPriceHex.length > 3) {
-            NSString *baseGasPrice = [BigNumber bigNumberWithHexString:baseGasPriceHex].decimalString;
-            
-            BigNumber *gasBigNumber = [BigNumber bigNumberWithNumber:gas];
-            
-            BigNumber *baseGasPriceBig = [BigNumber bigNumberWithDecimalString:baseGasPrice];
-            BigNumber *currentGasPrice = [BigNumber bigNumberWithInteger:(1 + gasPriceCoef/255.0)*1000000];
-            BigNumber *removeOffset = [BigNumber bigNumberWithInteger:1000000];
-            
-            BigNumber *gasCanUse = [[[baseGasPriceBig mul:currentGasPrice] mul:gasBigNumber] div:removeOffset];
-            return gasCanUse;
-        }
-    }
-    return nil;
-}
-
 
 + (BOOL)checkHEXStr:(NSString *)hex
 {
@@ -523,73 +330,6 @@
         }
     }
     return isOK;
-}
-
-+ (NSString *)getAmountFromClause:(NSString *)clauseStr to:(NSString **)to
-{
-    NSString *clauseTemp =  [clauseStr stringByReplacingOccurrencesOfString:@"0xa9059cbb000000000000000000000000" withString:@""];
-    *to = [@"0x" stringByAppendingString:[clauseTemp substringToIndex:40]];
-    
-    NSString *clauseStrTemp = [clauseStr stringByReplacingOccurrencesOfString:TransferMethodId withString:@""];
-    NSString *clauseValue = @"";
-    
-    if (clauseStrTemp.length >= 128) {
-        clauseValue = [clauseStrTemp substringWithRange:NSMakeRange(64, 64)];
-    }
-    return [NSString stringWithFormat:@"0x%@",clauseValue];
-}
-
-+ (BOOL)checkClauseDataFormat:(NSString *)clauseStr toAddress:(NSString *)toAddress bToken:(BOOL)bToken
-{
-    if (![WalletTools checkHEXStr:clauseStr]) {
-        return NO;
-    }
-    
-    if(!bToken){
-        if (toAddress.length > 0) {
-            if (![WalletTools errorAddressAlert:toAddress]) {
-                return NO;
-            }
-            
-            if (![WalletTools checkHEXStr:toAddress]) {
-                return NO;
-            }
-            
-            if ([WalletTools checkHEXStr:clauseStr]) {
-                NSString *temp1 = [clauseStr substringFromIndex:10];
-                NSInteger i = temp1.length % 64;
-                if (i == 0) {
-                    return YES;
-                }
-            }
-            return NO;
-        }else{
-            // to 地址为空，clause str 长度一定大于 10
-            if (clauseStr.length > 10) {
-                return YES;
-            }else{
-                return NO;
-                
-            }
-        }
-    }
-    
-    if (toAddress.length == 0) {
-        return YES;
-    }else if (clauseStr.length > 10) {
-        
-        if ([WalletTools checkHEXStr:clauseStr]) {
-            NSString *temp1 = [clauseStr substringFromIndex:10];
-            NSInteger i = temp1.length % 64;
-            if (i == 0) {
-                return YES;
-            }
-        }
-        return NO;
-        
-    }else{
-        return NO;
-    }
 }
 
 + (BOOL)isEmpty:(id )input

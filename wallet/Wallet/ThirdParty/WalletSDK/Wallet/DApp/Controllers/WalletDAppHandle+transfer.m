@@ -8,25 +8,8 @@
 
 #import "WalletDAppHandle+transfer.h"
 #import <WebKit/WebKit.h>
-#import "NSJSONSerialization+NilDataParameter.h"
 #import "YYModel.h"
-#import "WalletBlockInfoApi.h"
-#import "WalletVETBalanceApi.h"
-#import "WalletGetSymbolApi.h"
-#import "WalletGetDecimalsApi.h"
-#import "WalletGenesisBlockInfoApi.h"
-#import "WalletAccountCodeApi.h"
-#import "WalletBlockApi.h"
-#import "WalletTransantionsReceiptApi.h"
 #import "WalletDAppHead.h"
-#import "WalletDAppHandle+web3JS.h"
-#import "WalletDAppHandle+connexJS.h"
-#import "NSJSONSerialization+NilDataParameter.h"
-#import "WalletDAppPeersApi.h"
-#import "WalletDAppTransferDetailApi.h"
-#import "WalletJSCallbackModel.h"
-#import "WalletGetBaseGasPriceApi.h"
-#import "SocketRocketUtility.h"
 #import "WalletTransactionApi.h"
 #import "WalletMBProgressShower.h"
 
@@ -65,12 +48,12 @@
     transaction.BlockRef = [BigNumber bigNumberWithHexString:paramModel.blockReference];
     
     [self packageClausesData:transaction paramModel:paramModel];
-   
     
     [self sign:transaction paramModel:paramModel keystore:keystore password:password callback:callback];
 }
 
-- (void)packageClausesData:(Transaction *)transaction paramModel:(TransactionParameter *)paramModel
+- (void)packageClausesData:(Transaction *)transaction
+                paramModel:(TransactionParameter *)paramModel
 {
     NSMutableArray *clauseList = [NSMutableArray array];
     
@@ -136,14 +119,10 @@ callback:(void(^)(NSString *txId))callback
     {
          @strongify(self)
          if (!account) {
-             [WalletAlertShower showAlert:nil
-                                      msg:VCNSLocalizedBundleString(@"transfer_wallet_password_error", nil)
-                                    inCtl:[WalletTools getCurrentVC]
-                                    items:@[VCNSLocalizedBundleString(@"重试", nil)]
-                               clickBlock:^(NSInteger index)
-              {
-
-              }];
+             
+             [WalletMBProgressShower showTextIn:[WalletTools getCurrentVC].view
+                                           Text:VCNSLocalizedBundleString(@"transfer_wallet_password_error", nil) During:1];
+             
              return;
          }
 
@@ -186,7 +165,8 @@ callback:(void(^)(NSString *txId))callback
 }
 
 - (void)showTransactionFail:(void(^)(NSString *txId ))callback
-{    
+{
+#warning 处理方式
     callback(self.txId);
 }
 
