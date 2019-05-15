@@ -50,7 +50,6 @@
     [super viewDidLoad];
     self.view.backgroundColor = UIColor.whiteColor;
     self.navigationItem.title = VCNSLocalizedBundleString(@"h5_contract_params_confirm_title", nil);
-//    [self updateNavigationBarStyle:TintAndTitleNoneCloseWhiteOne];
     
     // 添加子视图
     [self addSubView];

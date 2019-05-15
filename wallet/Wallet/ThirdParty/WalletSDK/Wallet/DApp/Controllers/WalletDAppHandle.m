@@ -188,11 +188,11 @@ static dispatch_once_t predicate;
     }
     else{
         
-        NSDictionary *dict1 = [WalletTools packageWithRequestId:requestId
+        NSDictionary *noMethodDict = [WalletTools packageWithRequestId:requestId
                                                            data:@""
                                                            code:ERROR_REQUEST_METHOD
                                                         message:ERROR_REQUEST_METHOD_MSG];
-        completionHandler([dict1 yy_modelToJSONString]);
+        completionHandler([noMethodDict yy_modelToJSONString]);
         
         return ;
     }

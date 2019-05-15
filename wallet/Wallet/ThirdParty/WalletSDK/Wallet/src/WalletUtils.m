@@ -338,11 +338,6 @@
 + (void)deallocDApp
 {
     [WalletDAppHandle attempDealloc];
-    
-    UIView *signView = [[WalletTools getCurrentNavVC].view viewWithTag:SignViewTag];
-    if (signView) {
-        [signView removeFromSuperview];
-    }
 }
 
 + (void)modifyKeystore:(NSString *)keystoreJson

@@ -118,9 +118,9 @@
                         webView:(WKWebView *)webView
                      callbackId:(NSString *)callbackId
 {
-    NSDictionary *dictclause = dictP[@"clause"];
-    NSDictionary *dictOpts = dictP[@"opts"];
-    NSString *revision = dictP[@"revision"];
+    NSDictionary *dictclause    = dictP[@"clause"];
+    NSDictionary *dictOpts      = dictP[@"opts"];
+    NSString *revision          = dictP[@"revision"];
     
     WalletDappSimulateAccountApi *accountApi = [[WalletDappSimulateAccountApi alloc]initClause:dictclause opts:dictOpts revision:revision];
     accountApi.supportOtherDataFormat = YES;

@@ -180,7 +180,7 @@ callback:(void(^)(NSString *txId))callback
         self.txId = finishApi.resultDict[@"id"];
         callback(self.txId);
     } failure:^(VCBaseApi *finishApi, NSString *errMsg) {
-        
+        @strongify(self);
         [self showTransactionFail:callback];
     }];
 }
@@ -191,7 +191,10 @@ callback:(void(^)(NSString *txId))callback
 }
 
 
-- (void)signCertFrom:(NSString *)from  account:(Account *)account content:(NSString *)content requestId:(NSString *)requestId
+- (void)signCertFrom:(NSString *)from
+             account:(Account *)account
+             content:(NSString *)content
+           requestId:(NSString *)requestId
              webView:(WKWebView *)webView
           callbackId:(NSString *)callbackId
                param:(NSDictionary *)param
@@ -225,9 +228,9 @@ callback:(void(^)(NSString *txId))callback
     }else{
         NSMutableDictionary *dictSub = [NSMutableDictionary dictionary];
         
-        [dictSub setValueIfNotNil:param[@"domain"] forKey:@"domain"];
-        [dictSub setValueIfNotNil:from.lowercaseString forKey:@"signer"];
-        [dictSub setValueIfNotNil:param[@"timestamp"] forKey:@"timestamp"];
+        [dictSub setValueIfNotNil:param[@"domain"]      forKey:@"domain"];
+        [dictSub setValueIfNotNil:from.lowercaseString  forKey:@"signer"];
+        [dictSub setValueIfNotNil:param[@"timestamp"]   forKey:@"timestamp"];
         
         NSMutableDictionary *dict = [NSMutableDictionary dictionary];
         [dict setObject:dictSub forKey:@"annex"];

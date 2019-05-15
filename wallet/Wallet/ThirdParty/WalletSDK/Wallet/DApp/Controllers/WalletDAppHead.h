@@ -16,11 +16,6 @@
 #import "Transaction.h"
 
 #define TransferMethodId        @"0xa9059cbb"
-#define VETGasLimit             @"21000"
-#define SignViewTag             11001
-#define SelectWalletTag         11002
-#define DefaultGasPriceCoef     @"0x78"
-#define DefaultExpiration       720
 
 #define vthoTokenAddress        @"0x0000000000000000000000000000456e65726779"
 
