@@ -2,7 +2,7 @@
 //  WalletGetBaseGasPriceApi.m
 //  WalletSDK
 //
-//  Created by 曾新 on 2019/2/26.
+//  Created by Tom on 2019/2/26.
 //  Copyright © 2019年 VeChain. All rights reserved.
 //
 

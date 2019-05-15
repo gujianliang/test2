@@ -2,7 +2,7 @@
 //  WalletAddressAuthModel.m
 //  VeWallet
 //
-//  Created by 曾新 on 2018/7/17.
+//  Created by Tom on 2018/7/17.
 //  Copyright © 2018年 VeChain. All rights reserved.
 //
 

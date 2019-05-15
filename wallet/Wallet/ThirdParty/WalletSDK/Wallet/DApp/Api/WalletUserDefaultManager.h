@@ -2,7 +2,7 @@
 //  WalletUserDefaultManager.h
 //  Wallet
 //
-//  Created by 曾新 on 18/4/11.
+//  Created by Tom on 18/4/11.
 //  Copyright © VECHAIN. All rights reserved.
 
 #import <Foundation/Foundation.h>

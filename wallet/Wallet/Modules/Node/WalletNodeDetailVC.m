@@ -2,7 +2,7 @@
 //  WalletNodeDetailVC.m
 //  walletSDKDemo
 //
-//  Created by 曾新 on 2019/1/30.
+//  Created by Tom on 2019/1/30.
 //  Copyright © 2019年 demo. All rights reserved.
 //
 

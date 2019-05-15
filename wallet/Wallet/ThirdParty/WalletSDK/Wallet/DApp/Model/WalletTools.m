@@ -2,7 +2,7 @@
 //  WalletTools.m
 //  Wallet
 //
-//  Created by 曾新 on 18/4/26.
+//  Created by Tom on 18/4/26.
 //  Copyright © VECHAIN. All rights reserved.
 //
 

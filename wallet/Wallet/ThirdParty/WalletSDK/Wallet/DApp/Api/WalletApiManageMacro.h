@@ -2,7 +2,7 @@
 //  WalletApiManageMacro.h
 //  VeWallet
 //
-//  Created by 曾新 on 2018/9/20.
+//  Created by Tom on 2018/9/20.
 //  Copyright © 2018年 VeChain. All rights reserved.
 //
 

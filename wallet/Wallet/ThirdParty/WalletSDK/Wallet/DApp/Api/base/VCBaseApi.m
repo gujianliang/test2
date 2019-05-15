@@ -2,7 +2,7 @@
 //  VCBaseApi.m
 //  Wallet
 //
-//  Created by 曾新 on 18/4/7.
+//  Created by Tom on 18/4/7.
 //  Copyright © VECHAIN. All rights reserved.
 //
 
@@ -176,13 +176,10 @@
                 
                 id objDict = nil;
                 NSDictionary *dictEntity = [dict objectForKey:@"data"];
-                NSDictionary *dictPage = [dict objectForKey:@"page"];
                 if (_specialRequest) {
                     objDict = responseData;
                 }else if(dictEntity != nil && dictEntity != (NSDictionary *)[NSNull null]) {
                     objDict = dictEntity;
-                }else if(dictPage != nil && dictPage != (NSDictionary *)[NSNull null]){
-                    objDict = dictPage;
                 }else{
                     objDict = responseData;
                 }
@@ -245,7 +242,7 @@
 {
     if (error) {
         // ASIHttpRequest发送请求时发生错误，现在都统一默认为网络不可用。
-        NSData *errorData = error.userInfo[@"com.alamofire.serialization.response.error.data"];
+        NSData *errorData = error.userInfo[@"response.error.data"];
         NSString *errorInfo = [[NSString alloc]initWithData:errorData encoding:NSUTF8StringEncoding];
         
         NSDictionary *dictError = [NSJSONSerialization dictionaryWithJsonString:errorInfo];

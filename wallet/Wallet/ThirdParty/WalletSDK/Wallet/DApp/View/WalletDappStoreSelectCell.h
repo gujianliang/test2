@@ -2,7 +2,7 @@
 //  WalletExchangeStatusCell.h
 //  VeWallet
 //
-//  Created by 曾新 on 2018/10/8.
+//  Created by Tom on 2018/10/8.
 //  Copyright © 2018年 VeChain. All rights reserved.
 //
 

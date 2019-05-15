@@ -505,6 +505,17 @@
 			path = WebSocket;
 			sourceTree = "<group>";
 		};
+		9724836F228BFA5B00B2FC9C /* base */ = {
+			isa = PBXGroup;
+			children = (
+				9773F94D221412D200DF5972 /* VCBaseApi.h */,
+				9773F934221412D200DF5972 /* VCBaseApi.m */,
+				9773F92C221412D200DF5972 /* WalletModelFetcher.h */,
+				9773F942221412D200DF5972 /* WalletModelFetcher.m */,
+			);
+			path = base;
+			sourceTree = "<group>";
+		};
 		9743A4F121FEB36F0079C582 /* DApp */ = {
 			isa = PBXGroup;
 			children = (
@@ -756,6 +767,7 @@
 		9773F924221412D200DF5972 /* Api */ = {
 			isa = PBXGroup;
 			children = (
+				9724836F228BFA5B00B2FC9C /* base */,
 				97D9DF5222602777007E5D99 /* WalletDappLogEventApi.h */,
 				97D9DF4D22602776007E5D99 /* WalletDappLogEventApi.m */,
 				97D9DF4F22602777007E5D99 /* WalletDappLogTransferApi.h */,
@@ -780,8 +792,6 @@
 				9773F92A221412D200DF5972 /* WalletBlockInfoApi.m */,
 				9773F943221412D200DF5972 /* WalletBlockApi.h */,
 				9773F92B221412D200DF5972 /* WalletBlockApi.m */,
-				9773F92C221412D200DF5972 /* WalletModelFetcher.h */,
-				9773F942221412D200DF5972 /* WalletModelFetcher.m */,
 				9773F941221412D200DF5972 /* NSDataAdditions.h */,
 				9773F92D221412D200DF5972 /* NSDataAdditions.m */,
 				9773F940221412D200DF5972 /* NSStringAdditions.h */,
@@ -794,8 +804,6 @@
 				9773F946221412D200DF5972 /* WalletVETBalanceApi.m */,
 				9773F94E221412D200DF5972 /* WalletGenesisBlockInfoApi.h */,
 				9773F933221412D200DF5972 /* WalletGenesisBlockInfoApi.m */,
-				9773F94D221412D200DF5972 /* VCBaseApi.h */,
-				9773F934221412D200DF5972 /* VCBaseApi.m */,
 				9773F94B221412D200DF5972 /* WalletAccountCodeApi.m */,
 				9773F936221412D200DF5972 /* WalletAccountCodeApi.h */,
 				9773F937221412D200DF5972 /* WalletGetSymbolApi.h */,

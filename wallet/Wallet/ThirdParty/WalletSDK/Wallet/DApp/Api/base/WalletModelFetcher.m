@@ -2,7 +2,7 @@
 //  WalletModelFetcher.m
 //  Wallet
 //
-//  Created by 曾新 on 18/4/7.
+//  Created by Tom on 18/4/7.
 //  Copyright © VECHAIN. All rights reserved.
 //
 
@@ -28,14 +28,11 @@
     httpManager.requestSerializer.cachePolicy = NSURLRequestReloadIgnoringLocalCacheData;
     [httpManager GET:urlString parameters:dict  success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
-        [WalletModelFetcher debugLog:responseObject andUrl:urlString];
-        
         NSDictionary *headerFields = [(NSHTTPURLResponse *)task.response allHeaderFields];
 
         block(responseObject,headerFields,nil);
 
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        [WalletModelFetcher debugError:error andUrl:urlString];
         
         NSDictionary *headerFields = [(NSHTTPURLResponse *)task.response allHeaderFields];
         block(nil,headerFields,error);
@@ -57,13 +54,9 @@
     
     [httpManager POST:urlString parameters:dict  success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
-        [WalletModelFetcher debugLog:responseObject andUrl:urlString];
-        
         NSDictionary *headerFields = [(NSHTTPURLResponse *)task.response allHeaderFields];
         block(responseObject,headerFields,nil);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        [WalletModelFetcher debugError:error andUrl:urlString];
-        
         NSDictionary *headerFields = [(NSHTTPURLResponse *)task.response allHeaderFields];
         block(nil,headerFields,error);
     }];
@@ -78,14 +71,5 @@
     httpManager.requestSerializer = [AFJSONRequestSerializer serializer];
 }
 
-+ (void)debugLog:(id)responseObject andUrl:(id)url{
-#if ReleaseVersion
-#endif
-}
-
-+ (void)debugError:(id)responseObject andUrl:(id)url{
-#if ReleaseVersion
-#endif
-}
 
 @end

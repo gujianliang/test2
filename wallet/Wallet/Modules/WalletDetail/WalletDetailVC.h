@@ -2,7 +2,7 @@
 //  WalletDetailVC.h
 //  walletSDKDemo
 //
-//  Created by 曾新 on 2018/12/26.
+//  Created by Tom on 2018/12/26.
 //  Copyright © 2018年 demo. All rights reserved.
 //
 

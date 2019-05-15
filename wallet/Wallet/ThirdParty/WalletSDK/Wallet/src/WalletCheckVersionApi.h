@@ -2,7 +2,7 @@
 //  WalletCheckVersionApi.h
 //  WalletSDK
 //
-//  Created by 曾新 on 2019/5/9.
+//  Created by Tom on 2019/5/9.
 //  Copyright © 2019年 Ethers. All rights reserved.
 //
 

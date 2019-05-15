@@ -2,7 +2,7 @@
 //  TransferVC.m
 //  walletSDKDemo
 //
-//  Created by 曾新 on 2018/12/27.
+//  Created by Tom on 2018/12/27.
 //  Copyright © 2018年 demo. All rights reserved.
 //
 

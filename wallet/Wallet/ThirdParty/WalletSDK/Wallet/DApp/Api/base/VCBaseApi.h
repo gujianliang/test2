@@ -2,7 +2,7 @@
 //  VCBaseApi.h
 //  Wallet
 //
-//  Created by 曾新 on 18/4/7.
+//  Created by Tom on 18/4/7.
 //  Copyright © VECHAIN. All rights reserved.
 //
 
