@@ -48,17 +48,11 @@
 		976869EF22648323007EDBF1 /* mpi.c in Sources */ = {isa = PBXBuildFile; fileRef = 976869EA22648323007EDBF1 /* mpi.c */; };
 		976869F422648431007EDBF1 /* ccMemory.h in Headers */ = {isa = PBXBuildFile; fileRef = 976869F322648431007EDBF1 /* ccMemory.h */; };
 		9773F970221412D200DF5972 /* WalletDappStoreSelectCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 9773F8F7221412D200DF5972 /* WalletDappStoreSelectCell.h */; };
-		9773F972221412D200DF5972 /* WalletTextView.h in Headers */ = {isa = PBXBuildFile; fileRef = 9773F8F9221412D200DF5972 /* WalletTextView.h */; };
 		9773F975221412D200DF5972 /* WalletMBProgressShower.m in Sources */ = {isa = PBXBuildFile; fileRef = 9773F8FC221412D200DF5972 /* WalletMBProgressShower.m */; };
-		9773F976221412D200DF5972 /* WalletTopSinglePixelLineView.h in Headers */ = {isa = PBXBuildFile; fileRef = 9773F8FD221412D200DF5972 /* WalletTopSinglePixelLineView.h */; };
 		9773F977221412D200DF5972 /* WalletGradientLayerButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 9773F8FE221412D200DF5972 /* WalletGradientLayerButton.m */; };
-		9773F978221412D200DF5972 /* WalletVerticalSingleLineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9773F8FF221412D200DF5972 /* WalletVerticalSingleLineView.m */; };
 		9773F97A221412D200DF5972 /* WalletDappStoreSelectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9773F901221412D200DF5972 /* WalletDappStoreSelectCell.m */; };
-		9773F97D221412D200DF5972 /* WalletTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9773F904221412D200DF5972 /* WalletTextView.m */; };
 		9773F97E221412D200DF5972 /* WalletGradientLayerButton.h in Headers */ = {isa = PBXBuildFile; fileRef = 9773F905221412D200DF5972 /* WalletGradientLayerButton.h */; };
-		9773F97F221412D200DF5972 /* WalletVerticalSingleLineView.h in Headers */ = {isa = PBXBuildFile; fileRef = 9773F906221412D200DF5972 /* WalletVerticalSingleLineView.h */; };
 		9773F980221412D200DF5972 /* WalletMBProgressShower.h in Headers */ = {isa = PBXBuildFile; fileRef = 9773F907221412D200DF5972 /* WalletMBProgressShower.h */; };
-		9773F981221412D200DF5972 /* WalletTopSinglePixelLineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9773F908221412D200DF5972 /* WalletTopSinglePixelLineView.m */; };
 		9773F984221412D200DF5972 /* WalletManageModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 9773F90C221412D200DF5972 /* WalletManageModel.h */; };
 		9773F985221412D200DF5972 /* WalletTransantionsReceiptModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 9773F90D221412D200DF5972 /* WalletTransantionsReceiptModel.h */; };
 		9773F988221412D200DF5972 /* WalletAddressAuthModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9773F910221412D200DF5972 /* WalletAddressAuthModel.m */; };
@@ -300,17 +294,11 @@
 		97686A9C22648760007EDBF1 /* pbkdf2.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.objc; path = pbkdf2.c; sourceTree = "<group>"; };
 		97686A9D22648760007EDBF1 /* secp256k1.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = secp256k1.h; sourceTree = "<group>"; };
 		9773F8F7221412D200DF5972 /* WalletDappStoreSelectCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WalletDappStoreSelectCell.h; sourceTree = "<group>"; };
-		9773F8F9221412D200DF5972 /* WalletTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WalletTextView.h; sourceTree = "<group>"; };
 		9773F8FC221412D200DF5972 /* WalletMBProgressShower.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WalletMBProgressShower.m; sourceTree = "<group>"; };
-		9773F8FD221412D200DF5972 /* WalletTopSinglePixelLineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WalletTopSinglePixelLineView.h; sourceTree = "<group>"; };
 		9773F8FE221412D200DF5972 /* WalletGradientLayerButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WalletGradientLayerButton.m; sourceTree = "<group>"; };
-		9773F8FF221412D200DF5972 /* WalletVerticalSingleLineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WalletVerticalSingleLineView.m; sourceTree = "<group>"; };
 		9773F901221412D200DF5972 /* WalletDappStoreSelectCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WalletDappStoreSelectCell.m; sourceTree = "<group>"; };
-		9773F904221412D200DF5972 /* WalletTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WalletTextView.m; sourceTree = "<group>"; };
 		9773F905221412D200DF5972 /* WalletGradientLayerButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WalletGradientLayerButton.h; sourceTree = "<group>"; };
-		9773F906221412D200DF5972 /* WalletVerticalSingleLineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WalletVerticalSingleLineView.h; sourceTree = "<group>"; };
 		9773F907221412D200DF5972 /* WalletMBProgressShower.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WalletMBProgressShower.h; sourceTree = "<group>"; };
-		9773F908221412D200DF5972 /* WalletTopSinglePixelLineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WalletTopSinglePixelLineView.m; sourceTree = "<group>"; };
 		9773F90C221412D200DF5972 /* WalletManageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WalletManageModel.h; sourceTree = "<group>"; };
 		9773F90D221412D200DF5972 /* WalletTransantionsReceiptModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WalletTransantionsReceiptModel.h; sourceTree = "<group>"; };
 		9773F910221412D200DF5972 /* WalletAddressAuthModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WalletAddressAuthModel.m; sourceTree = "<group>"; };
@@ -726,16 +714,10 @@
 		9773F8F6221412D200DF5972 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				9773F8F9221412D200DF5972 /* WalletTextView.h */,
-				9773F904221412D200DF5972 /* WalletTextView.m */,
-				9773F8FD221412D200DF5972 /* WalletTopSinglePixelLineView.h */,
-				9773F908221412D200DF5972 /* WalletTopSinglePixelLineView.m */,
 				9773F8F7221412D200DF5972 /* WalletDappStoreSelectCell.h */,
 				9773F901221412D200DF5972 /* WalletDappStoreSelectCell.m */,
 				9773F905221412D200DF5972 /* WalletGradientLayerButton.h */,
 				9773F8FE221412D200DF5972 /* WalletGradientLayerButton.m */,
-				9773F906221412D200DF5972 /* WalletVerticalSingleLineView.h */,
-				9773F8FF221412D200DF5972 /* WalletVerticalSingleLineView.m */,
 				9773F907221412D200DF5972 /* WalletMBProgressShower.h */,
 				9773F8FC221412D200DF5972 /* WalletMBProgressShower.m */,
 			);
@@ -1046,7 +1028,6 @@
 				9773F9C0221412D200DF5972 /* WalletTransactionApi.h in Headers */,
 				E2317EB61E31981D00DBE3E4 /* RLPSerialization.h in Headers */,
 				9773F995221412D200DF5972 /* WalletAddressAuthModel.h in Headers */,
-				9773F976221412D200DF5972 /* WalletTopSinglePixelLineView.h in Headers */,
 				E2FA04821E42A0300013E5A7 /* Utilities.h in Headers */,
 				9773F999221412D200DF5972 /* WalletDAppPeerModel.h in Headers */,
 				9773F985221412D200DF5972 /* WalletTransantionsReceiptModel.h in Headers */,
@@ -1078,8 +1059,6 @@
 				9773F9C3221412D200DF5972 /* NSBundle+Localizable.h in Headers */,
 				97478228223E323300AB6937 /* WalletTokenBalanceApi.h in Headers */,
 				9773F9A3221412D200DF5972 /* WalletModelFetcher.h in Headers */,
-				9773F97F221412D200DF5972 /* WalletVerticalSingleLineView.h in Headers */,
-				9773F972221412D200DF5972 /* WalletTextView.h in Headers */,
 				9773F9B7221412D200DF5972 /* NSStringAdditions.h in Headers */,
 				9773F9C5221412D200DF5972 /* WalletGenesisBlockInfoApi.h in Headers */,
 				9773F9E922150C5F00DF5972 /* WalletJSCallbackModel.h in Headers */,
@@ -1246,7 +1225,6 @@
 				E2FA04831E42A0300013E5A7 /* Utilities.m in Sources */,
 				E2317EA41E31970900DBE3E4 /* Transaction.m in Sources */,
 				976869EF22648323007EDBF1 /* mpi.c in Sources */,
-				9773F97D221412D200DF5972 /* WalletTextView.m in Sources */,
 				97D9DF5622602777007E5D99 /* WalletDappSimulateMultiAccountApi.m in Sources */,
 				9773F9E3221412D200DF5972 /* WalletDAppSignPreVC.m in Sources */,
 				9773F9DE221412D200DF5972 /* WalletDAppHandle+web3JS.m in Sources */,
@@ -1273,7 +1251,6 @@
 				9773F988221412D200DF5972 /* WalletAddressAuthModel.m in Sources */,
 				9719BEC22229200F00DA3F74 /* SocketRocketUtility.m in Sources */,
 				9773F9A5221412D200DF5972 /* NSStringAdditions.m in Sources */,
-				9773F978221412D200DF5972 /* WalletVerticalSingleLineView.m in Sources */,
 				971811FD2224DBD1008F9639 /* WalletGetBaseGasPriceApi.m in Sources */,
 				9773F9A1221412D200DF5972 /* WalletBlockInfoApi.m in Sources */,
 				9773F9AC221412D200DF5972 /* NSBundle+Localizable.m in Sources */,
@@ -1295,7 +1272,6 @@
 				9757452D21FFFBB20046C8A0 /* UIColor+SNFoundation.m in Sources */,
 				9773F9BE221412D200DF5972 /* WalletDAppPeersApi.m in Sources */,
 				9773F991221412D200DF5972 /* WalletTransantionsReceiptModel.m in Sources */,
-				9773F981221412D200DF5972 /* WalletTopSinglePixelLineView.m in Sources */,
 				9757450B21FFEE400046C8A0 /* UIView+Sizes.m in Sources */,
 				9773F9B9221412D200DF5972 /* WalletModelFetcher.m in Sources */,
 				E2317E9C1E31970900DBE3E4 /* Address.m in Sources */,

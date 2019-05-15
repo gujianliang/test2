@@ -1961,7 +1961,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "177"
             endingLineNumber = "177"
-            landmarkName = "-showTransactionFail:"
+            landmarkName = "-signCertFrom:account:content:requestId:webView:callbackId:param:"
             landmarkType = "7">
             <Locations>
                <Location
