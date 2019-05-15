@@ -87,8 +87,6 @@
 
 + (BOOL)checkDecimalStr:(NSString *)decimalString;
 
-+ (NSString *)errorMessageWith:(NSInteger)code;
-
 + (BOOL)isEmpty:(id )input;
 
 + (NSString *)packCertParam:(NSDictionary *)param;

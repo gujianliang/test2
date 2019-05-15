@@ -10,16 +10,8 @@
 
 @implementation WalletDappSimulateAccountApi
 {
-//    NSString *_data;
-//    NSString *_to;
-//    NSString *_value;
-//    NSString *_gas;
-//    NSString *_gasPrice;
-//    NSString *_caller;
-    
     NSDictionary *_clause;
     NSDictionary *_opts;
-
 }
 
 -(instancetype)initClause:(NSDictionary *)clause opts:(NSDictionary *)opts  revision:(NSString *)revision
