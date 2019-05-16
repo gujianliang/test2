@@ -6,9 +6,9 @@
 //  Copyright © 2018年 VeChain. All rights reserved.
 //
 
-#import "VCBaseApi.h"
+#import "WalletBaseApi.h"
 #import "WalletTransantionsReceiptModel.h"
-@interface WalletTransantionsReceiptApi : VCBaseApi
+@interface WalletTransantionsReceiptApi : WalletBaseApi
 
 -(instancetype)initWithTxid:(NSString *)txid;
 

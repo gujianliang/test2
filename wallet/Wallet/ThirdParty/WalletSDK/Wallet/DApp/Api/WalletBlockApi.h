@@ -6,11 +6,11 @@
 //  Copyright © 2019年 VeChain. All rights reserved.
 //
 
-#import "VCBaseApi.h"
+#import "WalletBaseApi.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface WalletBlockApi : VCBaseApi
+@interface WalletBlockApi : WalletBaseApi
 
 -(instancetype)initWithRevision:(NSString *)revision;
 

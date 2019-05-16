@@ -90,7 +90,6 @@
     
     NSMutableDictionary *postDict = [self buildRequestDict];
     NSError *error = nil;
-    @weakify(self)
     switch (_requestMethod) {
         case RequestGetMethod:
         {
@@ -99,7 +98,6 @@
                                            error:&error
                                    responseBlock:^(NSDictionary *responseDict, NSDictionary *responseHeaderFields, NSError *error)
             {
-               @strongify(self)
                [self analyseResponseInfo:responseDict
                             headerFileds:responseHeaderFields
                                    error:error];
@@ -113,8 +111,7 @@
                                            params:postDict
                                             error:&error
                                     responseBlock:^(NSDictionary *responseDict, NSDictionary *responseHeaderFields, NSError *error)
-            {
-                @strongify(self)
+            {                
                 [self analyseResponseInfo:responseDict
                              headerFileds:responseHeaderFields
                                     error:error];

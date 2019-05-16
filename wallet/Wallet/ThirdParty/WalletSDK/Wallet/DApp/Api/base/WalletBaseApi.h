@@ -1,5 +1,5 @@
 //
-//  VCBaseApi.h
+//  WalletBaseApi.h
 //  Wallet
 //
 //  Created by Tom on 18/4/7.
@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "VCBaseApi.h"
+#import "WalletBaseApi.h"
 #import "NSMutableDictionary+Helpers.h"
 #import "YYModel.h"
 #import "NSJSONSerialization+NilDataParameter.h"
@@ -25,13 +25,13 @@ typedef NS_ENUM(NSInteger,RequestMethod)
     RequestGetMethod = 2,       //get 请求
 };
 
-@class VCBaseApi;
-typedef void(^WalletLoadSuccessBlock) (VCBaseApi *finishApi);
-typedef void(^WalletLoadFailBlock) (VCBaseApi *finishApi,NSString *errMsg);
+@class WalletBaseApi;
+typedef void(^WalletLoadSuccessBlock) (WalletBaseApi *finishApi);
+typedef void(^WalletLoadFailBlock) (WalletBaseApi *finishApi,NSString *errMsg);
 
 typedef void (^requestBlock)(NSDictionary *requestDict,NSError *error);
 
-@interface VCBaseApi : NSObject
+@interface WalletBaseApi : NSObject
 {
 @protected
     NSString *httpAddress;          // 请求接口地址

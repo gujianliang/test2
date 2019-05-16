@@ -6,9 +6,9 @@
 //  Copyright © 2018年 VeChain. All rights reserved.
 //
 
-#import "VCBaseModel.h"
+#import "WalletBaseModel.h"
 
-@interface WalletBalanceModel : VCBaseModel
+@interface WalletBalanceModel : WalletBaseModel
 
 //Token 余额
 

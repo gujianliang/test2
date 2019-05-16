@@ -1,5 +1,5 @@
 //
-//  VCBaseModel.h
+//  WalletBaseModel.h
 //  Wallet
 //
 //  Created by Tom on 18/4/7.
@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "YYModel.h"
 
-@interface VCBaseModel : NSObject <NSCoding,NSCopying>
+@interface WalletBaseModel : NSObject <NSCoding,NSCopying>
 
 //custom key mapper
 +(NSDictionary *)modelCustomPropertyMapper;

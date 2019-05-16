@@ -6,11 +6,11 @@
 //  Copyright © 2019年 VeChain. All rights reserved.
 //
 
-#import "VCBaseApi.h"
+#import "WalletBaseApi.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface WalletDappSimulateMultiAccountApi : VCBaseApi
+@interface WalletDappSimulateMultiAccountApi : WalletBaseApi
 
 -(instancetype)initClause:(NSArray *)clauseList
                      opts:(NSDictionary *)opts

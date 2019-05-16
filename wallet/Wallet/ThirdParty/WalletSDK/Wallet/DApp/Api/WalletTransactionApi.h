@@ -6,9 +6,9 @@
 //  Copyright © 2018年 VeChain. All rights reserved.
 //
 
-#import "VCBaseApi.h"
+#import "WalletBaseApi.h"
 
-@interface WalletTransactionApi : VCBaseApi
+@interface WalletTransactionApi : WalletBaseApi
 -(instancetype)initWithRaw:(NSString *)raw;
 
 @end

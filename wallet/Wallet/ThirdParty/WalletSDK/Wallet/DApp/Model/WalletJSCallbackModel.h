@@ -6,11 +6,11 @@
 //  Copyright © 2019年 VeChain. All rights reserved.
 //
 
-#import "VCBaseModel.h"
+#import "WalletBaseModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface WalletJSCallbackModel : VCBaseModel
+@interface WalletJSCallbackModel : WalletBaseModel
 
 @property (nonatomic, copy)NSString *callbackId;
 @property (nonatomic, copy)NSString *requestId;

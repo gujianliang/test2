@@ -258,7 +258,7 @@ static dispatch_once_t predicate;
         gas = [NSString stringWithFormat:@"%d",[self getGas:clauseModelList]];
         
         WalletDappSimulateMultiAccountApi *simulateApi = [[WalletDappSimulateMultiAccountApi alloc]initClause:clauseModelList opts:@{} revision:@""];
-        [simulateApi loadDataAsyncWithSuccess:^(VCBaseApi *finishApi) {
+        [simulateApi loadDataAsyncWithSuccess:^(WalletBaseApi *finishApi) {
             
             NSArray *list = (NSArray *)finishApi.resultDict;
             NSString *gasUsed = [list firstObject][@"gasUsed"];
@@ -268,7 +268,7 @@ static dispatch_once_t predicate;
             
             [self callbackClauseList:clauseModelList gas:gas from:from bConnex:bConnex webView:webView callbackId:callbackId requestId:requestId];
 
-        }failure:^(VCBaseApi *finishApi, NSString *errMsg) {
+        }failure:^(WalletBaseApi *finishApi, NSString *errMsg) {
             
             [self paramsError:requestId webView:webView callbackId:callbackId];
 
@@ -413,7 +413,7 @@ static dispatch_once_t predicate;
 {
     NSString *currentVersion = sdkVersion;
     WalletCheckVersionApi *checkApi = [[WalletCheckVersionApi alloc]initWithVersion:currentVersion language:[self getLanuage]];
-    [checkApi loadDataAsyncWithSuccess:^(VCBaseApi *finishApi) {
+    [checkApi loadDataAsyncWithSuccess:^(WalletBaseApi *finishApi) {
         
         NSDictionary *dictData  = finishApi.resultDict[@"data"];
         
@@ -433,7 +433,7 @@ static dispatch_once_t predicate;
             [self inject:config];
         }
         
-    } failure:^(VCBaseApi *finishApi, NSString *errMsg) {
+    } failure:^(WalletBaseApi *finishApi, NSString *errMsg) {
         
     }];
 }
@@ -445,7 +445,7 @@ static dispatch_once_t predicate;
     if(!bundlePath){
         return ;
     }
-    NSString *path = [bundlePath stringByAppendingString:@"/connex_js.js"];
+    NSString *path = [bundlePath stringByAppendingString:@"/connex.js"];
     NSString *connex_js = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:nil];
     connex_js = [connex_js stringByReplacingOccurrencesOfString:@"\n" withString:@""];
     

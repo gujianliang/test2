@@ -6,13 +6,13 @@
 //  Copyright © 2018年 VeChain. All rights reserved.
 //
 
-#import "VCBaseModel.h"
+#import "WalletBaseModel.h"
 @class blockModel;
 @class outputsModel;
 @class eventsModel;
 
 
-@interface WalletTransantionsReceiptModel : VCBaseModel
+@interface WalletTransantionsReceiptModel : WalletBaseModel
 
 @property (nonatomic, copy)NSString *paid;
 @property (nonatomic, assign)BOOL reverted;
@@ -23,7 +23,7 @@
 
 @end
 
-@interface blockModel : VCBaseModel
+@interface blockModel : WalletBaseModel
 
 @property (nonatomic, copy)NSString *blockID;
 @property (nonatomic, copy)NSString *blockNumber;
@@ -32,14 +32,14 @@
 
 @end
 
-@interface outputsModel : VCBaseModel
+@interface outputsModel : WalletBaseModel
 
 @property (nonatomic, copy)NSArray<eventsModel *> *events;
 
 
 @end
 
-@interface eventsModel : VCBaseModel
+@interface eventsModel : WalletBaseModel
 
 @property (nonatomic, copy)NSString *address;
 

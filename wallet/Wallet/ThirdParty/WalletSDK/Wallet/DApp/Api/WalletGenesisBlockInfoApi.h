@@ -6,9 +6,9 @@
 //  Copyright © 2018年 VeChain. All rights reserved.
 //
 
-#import "VCBaseApi.h"
+#import "WalletBaseApi.h"
 #import "WalletBlockInfoModel.h"
 
-@interface WalletGenesisBlockInfoApi : VCBaseApi
+@interface WalletGenesisBlockInfoApi : WalletBaseApi
 
 @end

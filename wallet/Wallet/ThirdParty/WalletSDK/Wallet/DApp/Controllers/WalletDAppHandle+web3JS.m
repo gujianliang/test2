@@ -27,7 +27,7 @@
            address:(NSString *)address
 {
     WalletVETBalanceApi *vetBalanceApi = [[WalletVETBalanceApi alloc]initWith:address];
-    [vetBalanceApi loadDataAsyncWithSuccess:^(VCBaseApi *finishApi) {
+    [vetBalanceApi loadDataAsyncWithSuccess:^(WalletBaseApi *finishApi) {
         WalletBalanceModel *balanceModel = finishApi.resultModel;
         
         [WalletTools callbackWithrequestId:requestId
@@ -36,7 +36,7 @@
                                callbackId:callbackId
                                      code:OK];
         
-    } failure:^(VCBaseApi *finishApi, NSString *errMsg) {
+    } failure:^(WalletBaseApi *finishApi, NSString *errMsg) {
         [WalletTools callbackWithrequestId:requestId
                                   webView:webView 
                                      data:@""
@@ -64,7 +64,7 @@
 {
     // 拉创世区块id做chainTag
     WalletGenesisBlockInfoApi *genesisBlock = [WalletGenesisBlockInfoApi new];
-    [genesisBlock loadDataAsyncWithSuccess:^(VCBaseApi *finishApi) {
+    [genesisBlock loadDataAsyncWithSuccess:^(WalletBaseApi *finishApi) {
         WalletBlockInfoModel *genesisblockModel = finishApi.resultModel;
         NSString *blockID = genesisblockModel.id;
         NSString *chainTag = [NSString stringWithFormat:@"0x%@", [blockID substringFromIndex:blockID.length-2]];
@@ -75,7 +75,7 @@
                                                         message:@""];
         completionHandler([dict1 yy_modelToJSONString]);
         
-    } failure:^(VCBaseApi *finishApi, NSString *errMsg) {
+    } failure:^(WalletBaseApi *finishApi, NSString *errMsg) {
         completionHandler(@"{}");
     }];
 }

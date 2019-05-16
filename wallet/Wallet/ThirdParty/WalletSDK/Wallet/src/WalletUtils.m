@@ -374,7 +374,7 @@
 + (void)getChainTag:(void (^)(NSString *chainTag))callback
 {
     WalletGenesisBlockInfoApi *genesisBlock = [WalletGenesisBlockInfoApi new];
-    [genesisBlock loadDataAsyncWithSuccess:^(VCBaseApi *finishApi) {
+    [genesisBlock loadDataAsyncWithSuccess:^(WalletBaseApi *finishApi) {
         WalletBlockInfoModel *genesisblockModel = finishApi.resultModel;
         NSString *blockID = genesisblockModel.id;
         NSString *chainTag = [NSString stringWithFormat:@"0x%@", [blockID substringFromIndex:blockID.length-2]];
@@ -383,7 +383,7 @@
             callback(chainTag);
         }
         
-    } failure:^(VCBaseApi *finishApi, NSString *errMsg) {
+    } failure:^(WalletBaseApi *finishApi, NSString *errMsg) {
         if (callback) {
             callback(nil);
         }
@@ -394,13 +394,13 @@
 {
     // 获取最新区块ID前8bytes作为blockRef
     WalletBestBlockInfoApi *bestBlockApi = [[WalletBestBlockInfoApi alloc] init];
-    [bestBlockApi loadDataAsyncWithSuccess:^(VCBaseApi *finishApi) {
+    [bestBlockApi loadDataAsyncWithSuccess:^(WalletBaseApi *finishApi) {
         WalletBlockInfoModel *blockModel = finishApi.resultModel;
         
         NSString *blockRef = [[blockModel.id substringFromIndex:2] substringToIndex:16];
         callback ([@"0x" stringByAppendingString:blockRef]);
         
-    } failure:^(VCBaseApi *finishApi, NSString *errMsg) {
+    } failure:^(WalletBaseApi *finishApi, NSString *errMsg) {
         callback(nil);
     }];
 }

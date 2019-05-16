@@ -6,9 +6,9 @@
 //  Copyright © 2018年 VeChain. All rights reserved.
 //
 
-#import "VCBaseModel.h"
+#import "WalletBaseModel.h"
 
-@interface WalletCoinModel : VCBaseModel
+@interface WalletCoinModel : WalletBaseModel
 
 @property (nonatomic, copy)NSString *symobl;
 @property (nonatomic, copy)NSString *coinCount;
@@ -20,7 +20,7 @@
 
 @end
 
-@interface WalletManageModel : VCBaseModel
+@interface WalletManageModel : WalletBaseModel
 
 @property (nonatomic, copy)NSString *name; //钱包名
 @property (nonatomic, copy)NSString *address; //vet 地址

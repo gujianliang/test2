@@ -30,7 +30,7 @@
                   completionHandler:(void (^)(NSString * __nullable result))completionHandler
 {
     WalletGenesisBlockInfoApi *genesisBlock = [WalletGenesisBlockInfoApi new];
-    [genesisBlock loadDataAsyncWithSuccess:^(VCBaseApi *finishApi) {
+    [genesisBlock loadDataAsyncWithSuccess:^(WalletBaseApi *finishApi) {
         
         NSDictionary *resultDict = [WalletTools packageWithRequestId:requestId
                                                                data:finishApi.resultDict
@@ -38,7 +38,7 @@
                                                             message:@""];
         completionHandler([resultDict yy_modelToJSONString]);
         return;
-    }failure:^(VCBaseApi *finishApi, NSString *errMsg) {
+    }failure:^(WalletBaseApi *finishApi, NSString *errMsg) {
         NSDictionary *resultDict = [WalletTools packageWithRequestId:requestId
                                                                data:@""
                                                                code:ERROR_SERVER_DATA
@@ -52,7 +52,7 @@
 {
     WalletDAppPeersApi *peersApi = [[WalletDAppPeersApi alloc]init];
     
-    [peersApi loadDataAsyncWithSuccess:^(VCBaseApi *finishApi) {
+    [peersApi loadDataAsyncWithSuccess:^(WalletBaseApi *finishApi) {
         
         NSString *blockNum = @"";
         NSArray *list = (NSArray *)finishApi.resultDict;
@@ -68,7 +68,7 @@
         }
         
         WalletBestBlockInfoApi *bestApi = [[WalletBestBlockInfoApi alloc]init];
-        [bestApi loadDataAsyncWithSuccess:^(VCBaseApi *finishApi) {
+        [bestApi loadDataAsyncWithSuccess:^(WalletBaseApi *finishApi) {
             
             WalletBlockInfoModel *blockModel = finishApi.resultModel;
             BigNumber *peerNum = [BigNumber bigNumberWithHexString:blockNum];
@@ -91,7 +91,7 @@
                                                                  message:@""];
             completionHandler([resultDict yy_modelToJSONString]);
             
-        } failure:^(VCBaseApi *finishApi, NSString *errMsg) {
+        } failure:^(WalletBaseApi *finishApi, NSString *errMsg) {
             NSDictionary *resultDict = [WalletTools packageWithRequestId:requestId
                                                                     data:@""
                                                                     code:ERROR_SERVER_DATA
@@ -99,7 +99,7 @@
             completionHandler([resultDict yy_modelToJSONString]);
             
         }];
-    } failure:^(VCBaseApi *finishApi, NSString *errMsg) {
+    } failure:^(WalletBaseApi *finishApi, NSString *errMsg) {
         
         NSDictionary *resultDict = [WalletTools packageWithRequestId:requestId
                                                                 data:@""
@@ -122,7 +122,7 @@
     
     WalletDappSimulateAccountApi *accountApi = [[WalletDappSimulateAccountApi alloc]initClause:dictclause opts:dictOpts revision:revision];
     accountApi.supportOtherDataFormat = YES;
-    [accountApi loadDataAsyncWithSuccess:^(VCBaseApi *finishApi) {
+    [accountApi loadDataAsyncWithSuccess:^(WalletBaseApi *finishApi) {
         
         if (finishApi.resultDict) {
             [WalletTools callbackWithrequestId:requestId
@@ -139,7 +139,7 @@
         }
         
         
-    } failure:^(VCBaseApi *finishApi, NSString *errMsg) {
+    } failure:^(WalletBaseApi *finishApi, NSString *errMsg) {
         [WalletTools callbackWithrequestId:requestId
                                    webView:webView
                                       data:@""
@@ -158,7 +158,7 @@
     
     WalletGetStorageApi *vetBalanceApi = [[WalletGetStorageApi alloc]initWithkey:key address:address];
     vetBalanceApi.supportOtherDataFormat = YES;
-    [vetBalanceApi loadDataAsyncWithSuccess:^(VCBaseApi *finishApi) {
+    [vetBalanceApi loadDataAsyncWithSuccess:^(WalletBaseApi *finishApi) {
         
         if (finishApi.resultDict) {
             [WalletTools callbackWithrequestId:requestId
@@ -174,7 +174,7 @@
                                           code:OK];
         }
         
-    } failure:^(VCBaseApi *finishApi, NSString *errMsg) {
+    } failure:^(WalletBaseApi *finishApi, NSString *errMsg) {
         
         [WalletTools callbackWithrequestId:requestId
                                    webView:webView
@@ -200,7 +200,7 @@
     
     WalletVETBalanceApi *vetBalanceApi = [[WalletVETBalanceApi alloc]initWith:address];
     vetBalanceApi.supportOtherDataFormat = YES;
-    [vetBalanceApi loadDataAsyncWithSuccess:^(VCBaseApi *finishApi) {
+    [vetBalanceApi loadDataAsyncWithSuccess:^(WalletBaseApi *finishApi) {
         
         if (finishApi.resultDict) {
             [WalletTools callbackWithrequestId:requestId
@@ -216,7 +216,7 @@
                                           code:OK];
         }
         
-    } failure:^(VCBaseApi *finishApi, NSString *errMsg) {
+    } failure:^(WalletBaseApi *finishApi, NSString *errMsg) {
         
         [WalletTools callbackWithrequestId:requestId
                                    webView:webView
@@ -241,7 +241,7 @@
     }
     
     WalletAccountCodeApi *vetBalanceApi = [[WalletAccountCodeApi alloc]initWithAddress:address];
-    [vetBalanceApi loadDataAsyncWithSuccess:^(VCBaseApi *finishApi) {
+    [vetBalanceApi loadDataAsyncWithSuccess:^(WalletBaseApi *finishApi) {
         
         if (finishApi.resultDict) {
             [WalletTools callbackWithrequestId:requestId
@@ -257,7 +257,7 @@
                                           code:OK];
         }
         
-    } failure:^(VCBaseApi *finishApi, NSString *errMsg) {
+    } failure:^(WalletBaseApi *finishApi, NSString *errMsg) {
         [WalletTools callbackWithrequestId:requestId
                                    webView:webView
                                       data:@""
@@ -295,7 +295,7 @@
     
     WalletBlockApi *vetBalanceApi = [[WalletBlockApi alloc]initWithRevision:revision];
     vetBalanceApi.supportOtherDataFormat = YES;
-    [vetBalanceApi loadDataAsyncWithSuccess:^(VCBaseApi *finishApi) {
+    [vetBalanceApi loadDataAsyncWithSuccess:^(WalletBaseApi *finishApi) {
         
         if (finishApi.resultDict) {
             [WalletTools callbackWithrequestId:requestId
@@ -312,7 +312,7 @@
                                           code:OK];
         }
         
-    } failure:^(VCBaseApi *finishApi, NSString *errMsg) {
+    } failure:^(WalletBaseApi *finishApi, NSString *errMsg) {
         [WalletTools callbackWithrequestId:requestId
                                    webView:webView
                                       data:@""
@@ -337,7 +337,7 @@
     
     WalletDAppTransferDetailApi *vetBalanceApi = [[WalletDAppTransferDetailApi alloc]initWithTxid:txID];
     vetBalanceApi.supportOtherDataFormat = YES;
-    [vetBalanceApi loadDataAsyncWithSuccess:^(VCBaseApi *finishApi) {
+    [vetBalanceApi loadDataAsyncWithSuccess:^(WalletBaseApi *finishApi) {
         
         if (finishApi.resultDict) {
             NSDictionary *balanceModel = finishApi.resultDict;
@@ -355,7 +355,7 @@
                                           code:OK];
         }
         
-    } failure:^(VCBaseApi *finishApi, NSString *errMsg) {
+    } failure:^(WalletBaseApi *finishApi, NSString *errMsg) {
         [WalletTools callbackWithrequestId:requestId
                                    webView:webView
                                       data:@""
@@ -380,7 +380,7 @@
     
     WalletTransantionsReceiptApi *vetBalanceApi = [[WalletTransantionsReceiptApi alloc]initWithTxid:txid];
     vetBalanceApi.supportOtherDataFormat = YES;
-    [vetBalanceApi loadDataAsyncWithSuccess:^(VCBaseApi *finishApi) {
+    [vetBalanceApi loadDataAsyncWithSuccess:^(WalletBaseApi *finishApi) {
         
         if (finishApi.resultDict) {
             [WalletTools callbackWithrequestId:requestId
@@ -397,7 +397,7 @@
         }
         
         
-    } failure:^(VCBaseApi *finishApi, NSString *errMsg) {
+    } failure:^(WalletBaseApi *finishApi, NSString *errMsg) {
         [WalletTools callbackWithrequestId:requestId
                                    webView:webView
                                       data:@""
@@ -462,7 +462,7 @@
     }
     
     WalletBestBlockInfoApi *bestApi = [[WalletBestBlockInfoApi alloc]init];
-    [bestApi loadDataAsyncWithSuccess:^(VCBaseApi *finishApi) {
+    [bestApi loadDataAsyncWithSuccess:^(WalletBaseApi *finishApi) {
         
         WalletBlockInfoModel *blockModel = finishApi.resultModel;
         NSNumber *timestamp = (NSNumber *)blockModel.timestamp;
@@ -510,7 +510,7 @@
                                           code:ERROR_INITDAPP_ERROR];
         }
         
-    }failure:^(VCBaseApi *finishApi, NSString *errMsg) {
+    }failure:^(WalletBaseApi *finishApi, NSString *errMsg) {
         [WalletTools callbackWithrequestId:requestId
                                    webView:webView
                                       data:@""
@@ -570,13 +570,13 @@
     eventApi.dictCriteriaSet    = dictParam[@"filterBody"][@"criteriaSet"];
     eventApi.order              = dictParam[@"filterBody"][@"order"];
     
-    [eventApi loadDataAsyncWithSuccess:^(VCBaseApi *finishApi) {
+    [eventApi loadDataAsyncWithSuccess:^(WalletBaseApi *finishApi) {
         [WalletTools callbackWithrequestId:requestId
                                    webView:webView
                                       data:finishApi.resultDict
                                 callbackId:callbackId
                                       code:OK];
-    } failure:^(VCBaseApi *finishApi, NSString *errMsg) {
+    } failure:^(WalletBaseApi *finishApi, NSString *errMsg) {
         [WalletTools callbackWithrequestId:requestId
                                    webView:webView
                                       data:@""
@@ -605,13 +605,13 @@
     }
     
     WalletDappSimulateMultiAccountApi *multiApi = [[WalletDappSimulateMultiAccountApi alloc]initClause:clauses opts:options revision:rev];
-    [multiApi loadDataAsyncWithSuccess:^(VCBaseApi *finishApi) {
+    [multiApi loadDataAsyncWithSuccess:^(WalletBaseApi *finishApi) {
         [WalletTools callbackWithrequestId:requestId
                                    webView:webView
                                       data:finishApi.resultDict
                                 callbackId:callbackId
                                       code:OK];
-    } failure:^(VCBaseApi *finishApi, NSString *errMsg) {
+    } failure:^(WalletBaseApi *finishApi, NSString *errMsg) {
         [WalletTools callbackWithrequestId:requestId
                                    webView:webView
                                       data:@""

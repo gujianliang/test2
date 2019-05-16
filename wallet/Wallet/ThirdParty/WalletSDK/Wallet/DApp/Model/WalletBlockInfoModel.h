@@ -6,9 +6,9 @@
 //  Copyright © 2018年 VeChain. All rights reserved.
 //
 
-#import "VCBaseModel.h"
+#import "WalletBaseModel.h"
 
-@interface WalletBlockInfoModel : VCBaseModel
+@interface WalletBlockInfoModel : WalletBaseModel
 
 @property (nonatomic, copy)NSString *number;
 @property (nonatomic, copy)NSString *id;

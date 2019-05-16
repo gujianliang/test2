@@ -6,11 +6,11 @@
 //  Copyright © 2019年 VeChain. All rights reserved.
 //
 
-#import "VCBaseApi.h"
+#import "WalletBaseApi.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface WalletGetStorageApi : VCBaseApi
+@interface WalletGetStorageApi : WalletBaseApi
 
 -(instancetype)initWithkey:(NSString *)key address:(NSString *)address;
 

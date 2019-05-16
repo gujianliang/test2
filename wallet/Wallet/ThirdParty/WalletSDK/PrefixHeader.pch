@@ -15,7 +15,7 @@
 #import "Masonry.h"
 #import "WalletTools.h"
 #import "YYmodel.h"
-#import "UIButton+block.h"
+#import "UIButton+Block.h"
 #import "WalletApiManageMacro.h"
 #import "NSStringAdditions.h"
 #import "UIColor+SNFoundation.h"

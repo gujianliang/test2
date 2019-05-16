@@ -6,10 +6,10 @@
 //  Copyright © 2018年 VeChain. All rights reserved.
 //
 
-#import "VCBaseApi.h"
+#import "WalletBaseApi.h"
 #import "WalletBalanceModel.h"
 
-@interface WalletVETBalanceApi : VCBaseApi
+@interface WalletVETBalanceApi : WalletBaseApi
 
 -(instancetype)initWith:(NSString *)address;
 

@@ -153,12 +153,12 @@ callback:(void(^)(NSString *txId))callback
     // 发送交易
     @weakify(self)
     WalletTransactionApi *transationApi = [[WalletTransactionApi alloc]initWithRaw:raw];
-    [transationApi loadDataAsyncWithSuccess:^(VCBaseApi *finishApi) {
+    [transationApi loadDataAsyncWithSuccess:^(WalletBaseApi *finishApi) {
         @strongify(self);
         
         self.txId = finishApi.resultDict[@"id"];
         callback(self.txId);
-    } failure:^(VCBaseApi *finishApi, NSString *errMsg) {
+    } failure:^(WalletBaseApi *finishApi, NSString *errMsg) {
         @strongify(self);
         [self showTransactionFail:callback];
     }];
