@@ -23,7 +23,7 @@
 
 -(NSMutableDictionary*)buildRequestDict
 {
-    //add params
+    // increase the parameter
     NSMutableDictionary* dict = [super buildRequestDict];
     [dict setValueIfNotNil:_dictRange   forKey:@"range"];
     [dict setValueIfNotNil:_dictOptions forKey:@"options"];

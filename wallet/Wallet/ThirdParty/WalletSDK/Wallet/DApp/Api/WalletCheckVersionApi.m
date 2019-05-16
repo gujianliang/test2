@@ -29,7 +29,7 @@
 
 -(NSMutableDictionary*)buildRequestDict
 {
-    //增加参数
+    // increase the parameter
     NSMutableDictionary* dict = [super buildRequestDict];
     [dict setValueIfNotNil:@"iOS" forKey:@"platformType"];
     [dict setValueIfNotNil:_version forKey:@"softwareVersion"];

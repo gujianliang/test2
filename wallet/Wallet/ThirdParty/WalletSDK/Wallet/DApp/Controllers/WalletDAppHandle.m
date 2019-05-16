@@ -8,26 +8,13 @@
 
 #import "WalletDAppHandle.h"
 #import <WebKit/WebKit.h>
-#import "NSJSONSerialization+NilDataParameter.h"
-#import "YYModel.h"
-#import "WalletBestBlockInfoApi.h"
-#import "WalletVETBalanceApi.h"
-#import "WalletGenesisBlockInfoApi.h"
-#import "WalletAccountCodeApi.h"
-#import "WalletBlockApi.h"
-#import "WalletTransantionsReceiptApi.h"
 #import "WalletDAppHead.h"
 #import "WalletDAppHandle+web3JS.h"
 #import "WalletDAppHandle+connexJS.h"
-#import "NSJSONSerialization+NilDataParameter.h"
-#import "WalletDAppPeersApi.h"
-#import "WalletDAppTransferDetailApi.h"
 #import "WalletJSCallbackModel.h"
 #import "SocketRocketUtility.h"
-#import "WalletTransactionApi.h"
-#import "WalletDappSimulateMultiAccountApi.h"
 #import "WalletCheckVersionApi.h"
-
+#import "WalletDappSimulateMultiAccountApi.h"
 
 
 @interface WalletDAppHandle ()<WKNavigationDelegate,WKUIDelegate>
@@ -206,7 +193,7 @@ static dispatch_once_t predicate;
 
     NSString *kind = callbackParams[@"kind"];
     
-    if ([kind isEqualToString:@"cert"]) { // cert 类型签名
+    if ([kind isEqualToString:@"cert"]) { // Cert type signature
         
         NSString *from = callbackParams[@"options"][@"signer"];
         
@@ -237,7 +224,7 @@ static dispatch_once_t predicate;
             [clauseModelList addObject:clauseModel];
         }
         
-        gasPrice   = @"120"; //connex js 没有传 gaspPrice 写默认值
+        gasPrice   = @"120"; //connex js No pass gaspPrice write default
         
         from       = callbackParams[@"options"][@"signer"];
         
@@ -425,7 +412,7 @@ static dispatch_once_t predicate;
            
             NSLog(@"%@",description);
         }else{
-            //当前sdk 版本和服务器返回的版本不同，提示
+           //The current sdk version is different from the version returned by the server.
             if (![currentVersion isEqualToString:latestVersion]) {
                 NSLog(@"%@",description);
             }

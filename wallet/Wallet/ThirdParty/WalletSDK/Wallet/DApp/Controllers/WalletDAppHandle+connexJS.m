@@ -477,9 +477,6 @@
         [dictSignParam setValueIfNotNil:domain forKey:@"domain"];
         [dictSignParam setValueIfNotNil:from.lowercaseString forKey:@"signer"];
 
-//        NSString *packSign = [WalletTools packCertParam:dictSignParam];
-//        NSData *data = [packSign dataUsingEncoding:NSUTF8StringEncoding];
-        
         if (self.delegate && [self.delegate respondsToSelector:@selector(onCertificate:signer:callback:)]) {
             
             [self.delegate onCertificate:dictSignParam signer:from callback:^(NSString * _Nonnull signer, NSData * _Nonnull signature) {
@@ -521,10 +518,10 @@
 
 - (BOOL)errorAmount:(NSString *)amount
 {
-    // 例外情况 - VET 转账0
+    // Exception - VET Transfer 0
     BOOL bAmount = YES;
     
-    // 金额逻辑校验
+    // Amount logic check
     if ([amount floatValue] <= 0
         || [Payment parseEther:amount] == nil
         || amount.length == 0) {

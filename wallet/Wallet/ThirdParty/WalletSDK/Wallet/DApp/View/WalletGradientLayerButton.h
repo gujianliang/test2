@@ -9,29 +9,29 @@
 #import <UIKit/UIKit.h>
 
 typedef enum {
-    lowBlueType = 0,         // 深灰--》淡灰
+    lowBlueType = 0,         // Dark gray--light gray
     
-    highBlueType = 1,        // 蓝色--》紫色
+    highBlueType = 1,        // Blue -- Purple
     
-    lowYellowType = 2,       // 浅黄--》浅黄
+    lowYellowType = 2,       // Light yellow -- light yellow
     
-    highYellowType = 3,      // 深黄--》浅黄
+    highYellowType = 3,      // Dark yellow -- light yellow
     
-    PurpleType = 4,          // 浅紫--》深紫
+    PurpleType = 4,          // Light purple -- deep purple
     
-    cyanType = 5,            // 青色--》青色
+    cyanType = 5,            // Cyan -- Cyan
     
-    bgBlueType = 6,          // 彩蓝--》彩紫
+    bgBlueType = 6,          // Color blue -- Color purple
     
-    bgWhiteType = 7,          // 白色--》白色
+    bgWhiteType = 7,          // White -- white
     
 }GradientLayerType;
 
 @interface WalletGradientLayerButton : UIButton
 
 /* isEnable
-YES: 蓝色---紫色
-NO: 浅灰色---浅白色
+YES: Blue -- Purple
+NO: Light gray---light white
  */
 - (void)setGrayGradientLayerType:(GradientLayerType)type;
 - (void)setDisableGradientLayer:(BOOL)isEnable;

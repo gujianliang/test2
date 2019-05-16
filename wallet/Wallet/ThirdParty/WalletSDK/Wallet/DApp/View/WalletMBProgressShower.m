@@ -33,9 +33,6 @@ const NSInteger kWalletHudTag = 12345;
     hud.tag = kWalletHudTag;
     hud.mode = MBProgressHUDModeText;
     hud.label.text = text;
-    //hud.label.text = text;
-//    hud.xOffset = 0.f;
-//    hud.yOffset = 0.f;
     hud.offset = CGPointMake(0.f, 0.f);
     return hud;
 }
@@ -50,9 +47,6 @@ const NSInteger kWalletHudTag = 12345;
     hud.tag = kWalletHudTag;
     hud.mode = MBProgressHUDModeText;
     hud.detailsLabel.text =  text;
-
-//    hud.xOffset = 0.f;
-//    hud.yOffset = 0.f;
      hud.offset = CGPointMake(0.f, 0.f);
     return hud;
 }
@@ -75,8 +69,6 @@ const NSInteger kWalletHudTag = 12345;
     hud.tag = kWalletHudTag;
     hud.mode = MBProgressHUDModeText;
     hud.detailsLabel.text =  VCNSLocalizedBundleString(text, nil);
-//    hud.xOffset = 0.f;
-//    hud.yOffset = 0.f;
     hud.offset = CGPointMake(0.f, 0.f);
     [hud hideAnimated:YES afterDelay:time];
 }
@@ -99,9 +91,6 @@ const NSInteger kWalletHudTag = 12345;
     hud.tag = kWalletHudTag;
     hud.mode = MBProgressHUDModeText;
     hud.detailsLabel.text =  text;
-    //hud.label.text = text;
-//    hud.xOffset = 0.f;
-//    hud.yOffset = 0.f;
     hud.offset = CGPointMake(0.f, 0.f);
     [hud hideAnimated:YES afterDelay:time];
 }
@@ -112,7 +101,6 @@ const NSInteger kWalletHudTag = 12345;
     if(org_hud){
         [org_hud hideAnimated:YES];
         [org_hud removeFromSuperview];
-//        return nil;
     }
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:view animated:YES];
     hud.tag = kWalletHudTag;

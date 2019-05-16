@@ -50,113 +50,113 @@
     
     _type = type;
     
-    // 移除旧的渐变色
+    // Remove old gradients
     [self.gradientLayer removeFromSuperlayer];
     
-    // 添加新的渐变色
+    // Add a new gradient
     NSArray *colorsArr = nil;
     switch (type) {
-        case lowBlueType:    // 深灰--》淡灰
+        case lowBlueType:    // Dark gray--light gray
             
             [self setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
             
             colorsArr = @[
-                          (__bridge id)[UIColor colorWithHexString:@"#BDCEFC"].CGColor,  // 深灰
-                          (__bridge id)[UIColor colorWithHexString:@"#CBC3FD"].CGColor,  // 浅灰
+                          (__bridge id)[UIColor colorWithHexString:@"#BDCEFC"].CGColor,  // Dark gray
+                          (__bridge id)[UIColor colorWithHexString:@"#CBC3FD"].CGColor,  // Light gray
                           ];
             break;
             
-        case highBlueType:  // 蓝色--》紫色
+        case highBlueType:  //Blue -- Purple
             
             [self setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
             
             colorsArr = @[
-                          (__bridge id)[UIColor colorWithHexString:@"#618BFD"].CGColor,  // 蓝色
-                          (__bridge id)[UIColor colorWithHexString:@"#8570FE"].CGColor,  // 紫色
+                          (__bridge id)[UIColor colorWithHexString:@"#618BFD"].CGColor,  // blue
+                          (__bridge id)[UIColor colorWithHexString:@"#8570FE"].CGColor,  // purple
                           ];
             break;
             
-        case lowYellowType:  // 浅黄--》浅黄
+        case lowYellowType:  // Light yellow -- light yellow
             
             [self setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
             
             colorsArr = @[
-                          (__bridge id)[UIColor colorWithHexString:@"#F7DA9B"].CGColor,  // 浅黄
-                          (__bridge id)[UIColor colorWithHexString:@"#F7DA9B"].CGColor,  // 浅黄
+                          (__bridge id)[UIColor colorWithHexString:@"#F7DA9B"].CGColor,  //  Light yellow
+                          (__bridge id)[UIColor colorWithHexString:@"#F7DA9B"].CGColor,  //  Light yellow
                           ];
             break;
             
-        case highYellowType: // 深黄--》浅黄
+        case highYellowType: // Dark yellow -- light yellow
             
             [self setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
             
             colorsArr = @[
-                          (__bridge id)[UIColor colorWithHexString:@"#FFAE03"].CGColor,  // 深灰
-                          (__bridge id)[UIColor colorWithHexString:@"#FFC240"].CGColor,  // 浅灰
+                          (__bridge id)[UIColor colorWithHexString:@"#FFAE03"].CGColor,  // Dark gray
+                          (__bridge id)[UIColor colorWithHexString:@"#FFC240"].CGColor,  // Light gray
                           ];
             break;
           
-        case PurpleType:    // 浅紫--》深紫
+        case PurpleType:    // Light purple -- deep purple
             
             [self setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
             
             colorsArr = @[
-                          (__bridge id)[UIColor colorWithHexString:@"#7374A6"].CGColor,  // 浅紫色
-                          (__bridge id)[UIColor colorWithHexString:@"#3F406D"].CGColor,  // 深紫色
+                          (__bridge id)[UIColor colorWithHexString:@"#7374A6"].CGColor,  // Light purple
+                          (__bridge id)[UIColor colorWithHexString:@"#3F406D"].CGColor,  // Dark purple
                           ];
             break;
             
-        case cyanType:    // 青色--》青色
+        case cyanType:    // Cyan -- Cyan
             
             [self setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
             
             colorsArr = @[
-                          (__bridge id)[UIColor colorWithHexString:@"#6BDBF3"].CGColor,  // 青色
-                          (__bridge id)[UIColor colorWithHexString:@"#6BDBF3"].CGColor,  // 青色
+                          (__bridge id)[UIColor colorWithHexString:@"#6BDBF3"].CGColor,  // blue
+                          (__bridge id)[UIColor colorWithHexString:@"#6BDBF3"].CGColor,  // blue
                           ];
             break;
             
-        case bgBlueType:    // 彩蓝--》彩紫
+        case bgBlueType:    // Color blue -- Color purple
             
             [self setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
             
             colorsArr = @[
-                          (__bridge id)[UIColor colorWithHexString:@"#53A6EE"].CGColor,  // 青色
-                          (__bridge id)[UIColor colorWithHexString:@"#AC6BCA"].CGColor,  // 青色
+                          (__bridge id)[UIColor colorWithHexString:@"#53A6EE"].CGColor,  // blue
+                          (__bridge id)[UIColor colorWithHexString:@"#AC6BCA"].CGColor,  // blue
                           ];
             break;
             
-        case bgWhiteType:    // 白色--》白色
+        case bgWhiteType:    // white
             colorsArr = @[
-                          (__bridge id)[UIColor whiteColor].CGColor,  // 白色
-                          (__bridge id)[UIColor whiteColor].CGColor,  // 白色
+                          (__bridge id)[UIColor whiteColor].CGColor,  // white
+                          (__bridge id)[UIColor whiteColor].CGColor,  // white
                           ];
             break;
             
-        default:        // 深灰--》淡灰
+        default:        // Dark gray -- light gray
             
             [self setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
             
             colorsArr = @[
-                          (__bridge id)[UIColor colorWithHexString:@"#BDCEFC"].CGColor,  // 深灰
-                          (__bridge id)[UIColor colorWithHexString:@"#CBC3FD"].CGColor,  // 浅灰
+                          (__bridge id)[UIColor colorWithHexString:@"#BDCEFC"].CGColor,  // Dark gray
+                          (__bridge id)[UIColor colorWithHexString:@"#CBC3FD"].CGColor,  // light gray
                           ];
             break;
     }
     
-    //初始化渐变层
+    // Initialize the gradient layer
     CAGradientLayer *gradientLayer = [CAGradientLayer layer];
     [self.layer insertSublayer:gradientLayer atIndex:0];
     self.gradientLayer = gradientLayer;
     
-    //设置渐变颜色方向:从左往右---》
+    //Set the gradient color direction: from left to right
     gradientLayer.startPoint = CGPointMake(0, 1);
     gradientLayer.endPoint = CGPointMake(1, 1);
     
-    //设定颜色组
+    //Set color group
     gradientLayer.colors = colorsArr;
     
-    //设定颜色分割点
+    //Set color split point
     gradientLayer.locations = @[@(0.3f), @(1.0f)];
 }
 

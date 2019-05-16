@@ -10,14 +10,14 @@
 
 @interface WalletBalanceModel : WalletBaseModel
 
-//Token 余额
+//Token balance
 
 @property (nonatomic, copy)NSString *data;
 @property (nonatomic, copy)NSString *gasUsed;
 @property (nonatomic, copy)NSString *reverted;
 @property (nonatomic, copy)NSString *vmError;
 
-//VET 余额
+//VET balaance
 @property (nonatomic, copy)NSString *balance;
 @property (nonatomic, copy)NSString *energy;
 @property (nonatomic, copy)NSString *hasCode;

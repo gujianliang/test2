@@ -6,7 +6,6 @@
 //  Copyright © VECHAIN. All rights reserved.
 //
 
-#import "NSJSONSerialization+NilDataParameter.h"
 #import "WalletBaseApi.h"
 #import "WalletModelFetcher.h"
 #import "NSStringAdditions.h"
@@ -26,7 +25,7 @@
 
 
 /**
- *  obj 属性返回类型
+ *  Obj attribute return type
  */
 - (Class)expectedJsonObjClass
 {
@@ -34,7 +33,7 @@
 }
 
 /**
- * 如果 entity 直接是数组类型，提供数组内的对象类
+ * If the entity is directly an array type, provide an object class within the array
  *
  */
 
@@ -43,7 +42,7 @@
 }
 
 /**
- *  obj 属性值类型
+ *  Obj attribute value type
  */
 - (Class)expectedModelClass
 {
@@ -69,14 +68,6 @@
     return _requestParmas;
 }
 
-- (NSMutableDictionary *)buildRequestDictWithDepedency:(NSDictionary *)dict {
-    _requestParmas = dict.mutableCopy;
-    return _requestParmas;
-}
-
-- (void)buildModelWithObjDict:(NSDictionary *)dict;
-{
-}
 
 -(void)loadDataAsyncWithSuccess:(WalletLoadSuccessBlock)success
                         failure:(WalletLoadFailBlock)failure
@@ -131,7 +122,7 @@
     self.responseHeaderFields = headerFields;
     NSNumber *errCode = nil;
     NSString *errMsg = nil;
-    self.resultModel = responseData; //先给，后面覆盖
+    self.resultModel = responseData;
     if (responseData != nil) {
         NSDictionary *dict = responseData;
         errCode = [dict valueForKey:@"code"];
@@ -148,24 +139,20 @@
         
         if ((errCode != nil && [errCode integerValue] == 1) || (errCode.integerValue == 0)) {
             
-            if ([responseData isKindOfClass:[NSString class]]) { // 说明是 3840 返回格式不符
+            if ([responseData isKindOfClass:[NSString class]]) { //  3840 Return format does not match
                 
                 [self convertJsonResultToModel:nil];
                 self.resultModel = nil;
                 
-                if (self.supportOtherDataFormat) { // 支持其他数据模型
+                if (self.supportOtherDataFormat) { // support other data models
                     self.resultDict = nil;
                     self.status = RequestSuccess;
                     _successBlock(self);
                     return;
                     
-                }else { // 不支持
+                }else { // not support
                     errCode = @(3840);
                     
-                     // 注释代码，暂且不用，下面的方法中有引用到error 对象
-//                    error = [NSError errorWithDomain:NSCocoaErrorDomain
-//                                                code:errCode.integerValue
-//                                            userInfo:@{NSLocalizedDescriptionKey: @"不支持非json数据结构"}];
                     self.status = RequestFailed;
                 }
                 
@@ -181,7 +168,7 @@
                     objDict = responseData;
                 }
                 
-                if(objDict && [objDict isKindOfClass:[NSDictionary class]]){  // 返回的有可能不是dict
+                if(objDict && [objDict isKindOfClass:[NSDictionary class]]){  // The return may not be dict
                     
                     self.status = RequestSuccess;
                     [self convertJsonResultToModel:objDict];
@@ -189,7 +176,7 @@
                 }else if(objDict && [objDict isKindOfClass:[NSArray class]]){
                     self.status = RequestSuccess;
                     
-                    //entity 最外层直接为数组的情况
+                    //The case where the outermost layer of the entity is directly an array
                     self.resultModel = [NSArray yy_modelArrayWithClass:[self expectedInnerArrayClass] json:objDict];
                 }else{
                     self.status = RequestSuccess;
@@ -238,7 +225,7 @@
                       responseErrorMsg:(NSString *)errMsg
 {
     if (error) {
-        // ASIHttpRequest发送请求时发生错误，现在都统一默认为网络不可用。
+        // An error occurred while sending the request, and now the default is that the network is unavailable.
         NSData *errorData = error.userInfo[@"response.error.data"];
         NSString *errorInfo = [[NSString alloc]initWithData:errorData encoding:NSUTF8StringEncoding];
         

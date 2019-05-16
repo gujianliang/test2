@@ -20,7 +20,7 @@
 
 @implementation WalletDAppHandle (web3JS)
 
-//获取vet 金额
+// Get vet amount
 - (void)getBalance:(NSString *)callbackId
            webView:(WKWebView *)webView
          requestId:(NSString *)requestId
@@ -45,7 +45,7 @@
     }];
 }
 
-//获得NodeUrl
+//Get NodeUrl
 - (void)getNodeUrl:(NSString *)requestId
   completionHandler:(void (^)(NSString * __nullable result))completionHandler
 {
@@ -58,11 +58,11 @@
 }
 
 
-//获得chaintag
+//Get chaintag
 - (void)getChainTag:(NSString *)requestId
   completionHandler:(void (^)(NSString * __nullable result))completionHandler
 {
-    // 拉创世区块id做chainTag
+    // Get the creation block id to do chainTag
     WalletGenesisBlockInfoApi *genesisBlock = [WalletGenesisBlockInfoApi new];
     [genesisBlock loadDataAsyncWithSuccess:^(WalletBaseApi *finishApi) {
         WalletBlockInfoModel *genesisblockModel = finishApi.resultModel;

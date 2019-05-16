@@ -25,7 +25,7 @@
 
 -(NSMutableDictionary*)buildRequestDict
 {
-    //增加参数
+    // increase the parameter
     NSMutableDictionary* dict = [super buildRequestDict];
     [dict setValue:_raw forKey:@"raw"];
     return dict;

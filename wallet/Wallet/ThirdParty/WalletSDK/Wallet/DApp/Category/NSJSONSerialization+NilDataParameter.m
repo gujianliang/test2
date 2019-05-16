@@ -35,7 +35,7 @@
                                                         options:NSJSONReadingMutableContainers
                                                           error:&err];
     if(err) {
-        NSLog(@"json：%@  解析失败：%@",jsonString, err);
+        NSLog(@"json：%@  Parsing failure：%@",jsonString, err);
         return nil;
     }
     return dic;

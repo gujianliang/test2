@@ -22,8 +22,8 @@
 
 @interface WalletManageModel : WalletBaseModel
 
-@property (nonatomic, copy)NSString *name; //钱包名
-@property (nonatomic, copy)NSString *address; //vet 地址
+@property (nonatomic, copy)NSString *name; //wallet name
+@property (nonatomic, copy)NSString *address; //vet address
 @property (nonatomic, copy)NSString *VETCount;
 
 @property (nonatomic, strong)WalletCoinModel *vthoModel;

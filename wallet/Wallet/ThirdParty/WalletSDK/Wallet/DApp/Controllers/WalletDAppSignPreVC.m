@@ -36,7 +36,7 @@
     
     [self.dataArr removeAllObjects];
     
-    if (_dictParam) { // 展示新值
+    if (_dictParam) { // show new value
         NSString *json = [_dictParam yy_modelToJSONString];
         if (json.length > 0) {
             [self.dataArr addObject:json];
@@ -51,7 +51,7 @@
     self.view.backgroundColor = UIColor.whiteColor;
     self.navigationItem.title = VCNSLocalizedBundleString(@"h5_contract_params_confirm_title", nil);
     
-    // 添加子视图
+    // Add a subview
     [self addSubView];
     [self addBackButtonWithBGImageName:@"icon_close_black"];
 }
@@ -80,7 +80,7 @@
 
 - (void)addSubView{
     
-    // 头部容器视图
+    // head container view
     UIView *headV = [[UIView alloc] init];
     headV.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:headV];
@@ -93,7 +93,7 @@
     }];
     
     
-    // 备注标签信息
+    // Remarks information
     UILabel *lab = [[UILabel alloc] init];
     lab.text = VCNSLocalizedBundleString(@"h5_contract_params_confirm_msg", nil);
     lab.textColor = HEX_COLOR(0xEF6F6F);
@@ -108,7 +108,7 @@
     }];
     
     
-    // 添加继续按钮
+    // Add a continue button
     WalletGradientLayerButton *confirmBtn = [[WalletGradientLayerButton alloc] init];
     [confirmBtn.layer setCornerRadius:4];
     [confirmBtn setClipsToBounds:YES];
@@ -125,7 +125,7 @@
     }];
     
     
-    // 表视图
+    // table view
     UITableView *table = [[UITableView alloc] init];
     table.delegate = self;
     table.dataSource = self;

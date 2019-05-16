@@ -14,35 +14,35 @@
 @interface WalletMBProgressShower : NSObject
 
 /**
- *  展示菊花轮
+ *  Show daisy wheel
  *
- *  @param view 需要显示菊花轮的视图
+ *  @param view Need to display the view of the daisy wheel
  *
- *  @return HUD实例
+ *  @return HUD
  */
 +(MBProgressHUD*)showCircleIn:(UIView*)view;
 
 /**
  *  展示文本
  *
- *  @param view 展示文本的view
- *  @param text 展示文本内容
+ *  @param view View of the text
+ *  @param text Display text content
  *
- *  @return HUD实例
+ *  @return HUD
  */
 +(MBProgressHUD*)showTextIn:(UIView*)view
                        Text:(NSString*)text;
 
 /**
- *  固定时间消失的text
+ *  Text that disappears at a fixed time
  *
- *  @param view 展示文本的view
- *  @param text 展示文本内容
- *  @param time 显示时间
+ *  @param view View of the text
+ *  @param text Display text content
+ *  @param time display time
  */
 +(void)showTextIn:(UIView*)view Text:(NSString*)text During:(NSTimeInterval)time;
 /**
- *  隐藏HUD
+ *  hide HUD
  */
 
 + (MBProgressHUD*)showLoadData:(UIView*)view Text:(NSString*)text ;

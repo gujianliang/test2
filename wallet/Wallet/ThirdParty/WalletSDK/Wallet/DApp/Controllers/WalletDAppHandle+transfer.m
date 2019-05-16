@@ -22,7 +22,6 @@
               isSend:(BOOL)isSend
             callback:(void(^)(NSString *txId))callback
 {
-    // 显示Loading
     self.keystore = keystore;
     
     self.isSend = isSend;
@@ -110,7 +109,7 @@
 callback:(void(^)(NSString *txId))callback
 
 {
-    // 尝试用户密码解密keystore
+    // Try user password to decrypt keystore
     @weakify(self)
 
     [Account decryptSecretStorageJSON:keystore
@@ -150,7 +149,7 @@ callback:(void(^)(NSString *txId))callback
 
 - (void)sendRaw:(NSString *)raw callback:(void(^)(NSString *txId))callback
 {
-    // 发送交易
+    // Send transaction
     @weakify(self)
     WalletTransactionApi *transationApi = [[WalletTransactionApi alloc]initWithRaw:raw];
     [transationApi loadDataAsyncWithSuccess:^(WalletBaseApi *finishApi) {

@@ -73,13 +73,13 @@
         
     NSBundle *resourceBundle = [NSBundle bundleWithPath:pathString1];
     
-    // 获取当前设备语言
+    // Get current device language
     NSArray *appLanguages = [[NSUserDefaults standardUserDefaults] objectForKey:@"AppleLanguages"];
     NSString *languageName = [appLanguages objectAtIndex:0];
     
-    NSString *languageCode = @"en"; // 英文
+    NSString *languageCode = @"en";
     if([languageName containsString:@"zh"]){
-        languageCode = @"zh-Hans"; // 中文
+        languageCode = @"zh-Hans"; 
     }
     NSString *bundlePath = [resourceBundle pathForResource:languageCode ofType:@"lproj"];
     NSBundle *languageBundle = [NSBundle bundleWithPath:bundlePath];
