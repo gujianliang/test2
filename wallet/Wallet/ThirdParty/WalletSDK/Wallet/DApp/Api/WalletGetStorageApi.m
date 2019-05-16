@@ -15,7 +15,7 @@
     self = [super init];
     if (self){
         
-        httpAddress =  [NSString stringWithFormat:@"%@/accounts/%@/storage/%@",[WalletUserDefaultManager getBlockUrl],address,key];
+        self.httpAddress =  [NSString stringWithFormat:@"%@/accounts/%@/storage/%@",[WalletUserDefaultManager getBlockUrl],address,key];
     }
     return self;
 }

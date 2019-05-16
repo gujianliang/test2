@@ -22,7 +22,7 @@
         
         self.requestMethod = RequestPostMethod;
         
-        httpAddress = @"https://version-management-test.vechaindev.com/api/v1/version/";
+        self.httpAddress = @"https://version-management-test.vechaindev.com/api/v1/version/";
     }
     return self;
 }

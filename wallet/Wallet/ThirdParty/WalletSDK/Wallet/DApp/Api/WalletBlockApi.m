@@ -16,7 +16,7 @@
     if (self){
         self.requestMethod = RequestGetMethod;
         self.specialRequest = YES;
-        httpAddress =  [NSString stringWithFormat:@"%@/blocks/%@",[WalletUserDefaultManager getBlockUrl],revision];
+        self.httpAddress =  [NSString stringWithFormat:@"%@/blocks/%@",[WalletUserDefaultManager getBlockUrl],revision];
     }
     return self;
 }

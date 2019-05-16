@@ -18,7 +18,7 @@
 - (id)init
 {
     if (self  = [super init]) {
-        httpAddress = @"";
+        self.httpAddress = @"";
         self.requestMethod = RequestGetMethod;
     }
     return self;
@@ -83,7 +83,7 @@
 {
     _successBlock = success;
     _failBlock = failure;
-    if ( httpAddress == nil) {
+    if ( _httpAddress == nil) {
         _failBlock(self,@"");
         return;
     }
@@ -93,7 +93,7 @@
     switch (_requestMethod) {
         case RequestGetMethod:
         {
-            [WalletModelFetcher requestGetWithUrl:httpAddress
+            [WalletModelFetcher requestGetWithUrl:_httpAddress
                                           params:postDict
                                            error:&error
                                    responseBlock:^(NSDictionary *responseDict, NSDictionary *responseHeaderFields, NSError *error)
@@ -107,11 +107,11 @@
         
         case RequestPostMethod:
         {
-            [WalletModelFetcher requestPostWithUrl:httpAddress
+            [WalletModelFetcher requestPostWithUrl:_httpAddress
                                            params:postDict
                                             error:&error
                                     responseBlock:^(NSDictionary *responseDict, NSDictionary *responseHeaderFields, NSError *error)
-            {                
+            {
                 [self analyseResponseInfo:responseDict
                              headerFileds:responseHeaderFields
                                     error:error];
@@ -205,7 +205,7 @@
         }
         
     } else {
-        if ([httpAddress containsString:@"transactions"] && [httpAddress hasSuffix:@"receipt"]) {
+        if ([_httpAddress containsString:@"transactions"] && [_httpAddress hasSuffix:@"receipt"]) {
             self.status = RequestSuccess;
             _successBlock(self);
             return;

@@ -22,10 +22,10 @@
         _clauseList = clauseList;
         _opts = opts;
         
-         httpAddress =  [NSString stringWithFormat:@"%@/accounts/*",[WalletUserDefaultManager getBlockUrl]];
+         self.httpAddress =  [NSString stringWithFormat:@"%@/accounts/*",[WalletUserDefaultManager getBlockUrl]];
         if (revision.length > 0) {
             NSString *temp = [NSString stringWithFormat:@"?revision=%@",revision];
-            httpAddress = [httpAddress stringByAppendingString:temp];
+            self.httpAddress = [self.httpAddress stringByAppendingString:temp];
         }
     }
     

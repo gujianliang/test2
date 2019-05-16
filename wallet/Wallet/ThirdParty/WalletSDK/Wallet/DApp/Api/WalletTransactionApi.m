@@ -18,7 +18,7 @@
     if (self){
         _raw = raw;
         self.requestMethod = RequestPostMethod;
-        httpAddress =  [NSString stringWithFormat:@"%@%@",[WalletUserDefaultManager getBlockUrl],SendTransactionUrl];
+        self.httpAddress =  [NSString stringWithFormat:@"%@%@",[WalletUserDefaultManager getBlockUrl],SendTransactionUrl];
     }
     return self;
 }

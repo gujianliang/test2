@@ -16,7 +16,7 @@
     if (self){
         self.requestMethod = RequestGetMethod;
         self.specialRequest = YES;
-        httpAddress =  [NSString stringWithFormat:@"%@/node/network/peers",[WalletUserDefaultManager getBlockUrl]];
+        self.httpAddress =  [NSString stringWithFormat:@"%@/node/network/peers",[WalletUserDefaultManager getBlockUrl]];
     }
     return self;
 }

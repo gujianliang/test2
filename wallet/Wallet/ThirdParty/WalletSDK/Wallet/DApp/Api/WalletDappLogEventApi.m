@@ -16,7 +16,7 @@
     if (self){
         self.requestMethod = RequestPostMethod;
 
-        httpAddress =  [NSString stringWithFormat:@"%@/logs/%@",[WalletUserDefaultManager getBlockUrl],kind];
+        self.httpAddress =  [NSString stringWithFormat:@"%@/logs/%@",[WalletUserDefaultManager getBlockUrl],kind];
     }
     return self;
 }

@@ -8,21 +8,19 @@
 
 #import <Foundation/Foundation.h>
 #import "WalletBaseApi.h"
-#import "NSMutableDictionary+Helpers.h"
 #import "YYModel.h"
-#import "NSJSONSerialization+NilDataParameter.h"
 #import "AFNetworking.h"
 
 typedef NS_ENUM(NSInteger, WalletRequestStatus){
-    NotAvailable = 1,           //不可用
-    RequestSuccess = 2,         //请求成功
-    RequestFailed = 4,          //请求失败
+    NotAvailable = 1,
+    RequestSuccess = 2,
+    RequestFailed = 4,
 };
 
 typedef NS_ENUM(NSInteger,RequestMethod)
 {
-    RequestPostMethod = 1,      //post  请求
-    RequestGetMethod = 2,       //get 请求
+    RequestPostMethod = 1,      //post
+    RequestGetMethod = 2,       //get
 };
 
 @class WalletBaseApi;
@@ -33,17 +31,18 @@ typedef void (^requestBlock)(NSDictionary *requestDict,NSError *error);
 
 @interface WalletBaseApi : NSObject
 {
-@protected
-    NSString *httpAddress;          // 请求接口地址
-    NSMutableDictionary *_requestParmas;    // 请求入参
+    
+    
 }
-@property (nonatomic, assign) WalletRequestStatus status;
-@property (nonatomic, strong) NSError *lastError;
-@property (nonatomic, assign) RequestMethod requestMethod;
-@property (nonatomic, copy)WalletLoadSuccessBlock successBlock;
-@property (nonatomic, copy)WalletLoadFailBlock failBlock;
-@property (nonatomic, assign) BOOL specialRequest;// 特殊请求返回处理
 
+@property (nonatomic, copy) WalletLoadSuccessBlock successBlock;
+@property (nonatomic, copy) WalletLoadFailBlock failBlock;
+@property (nonatomic, copy) NSString *httpAddress; // 请求接口地址
+@property (nonatomic, copy) NSMutableDictionary *requestParmas;  // 请求入参
+@property (nonatomic, strong) NSError *lastError;
+@property (nonatomic, assign) BOOL specialRequest; // Special request return processing
+@property (nonatomic, assign) WalletRequestStatus status;
+@property (nonatomic, assign) RequestMethod requestMethod;
 /**
  *  请求得到的最终数据模型
  */
