@@ -14,8 +14,6 @@
 
 + (void)setBlockUrl:(NSString *)blockUrl;
 
-+ (void)setLanuage:(NSString *)lanuage;
 
-+ (NSString *)getLanuage;
 
 @end

@@ -8,7 +8,7 @@
 
 #import "WalletMBProgressShower.h"
 
-const NSInteger kWalletHudTag = 12345;
+const NSInteger kWalletHudTag = 9090;
 
 @implementation WalletMBProgressShower
 

@@ -50,21 +50,6 @@
     }
 }
 
-+ (NSString*)localeStringWithKey:(NSString*)key{
-
-    NSString *languageCode = [WalletUserDefaultManager getLanuage];
-    
-    NSString *bundlePath = [[NSBundle mainBundle] pathForResource:languageCode ofType:@"lproj"];
-    NSBundle *languageBundle = [NSBundle bundleWithPath:bundlePath];
-    NSString *translatedString = [languageBundle localizedStringForKey:key value:@"" table:nil];
-    
-    if (translatedString.length < 1) {
-        
-        translatedString = NSLocalizedStringWithDefaultValue(key, nil, [NSBundle mainBundle], key, key);
-    }
-    return translatedString;
-}
-
 + (NSString *)localStringBundlekey:(NSString *)key{
     NSString *pathString1 = [[NSBundle mainBundle] pathForResource:@"WalletSDKBundle" ofType:@"bundle"];
     if(!pathString1){

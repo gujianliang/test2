@@ -19,7 +19,6 @@
 		974B4DBF22646D3C00213E1A /* connex.js in Resources */ = {isa = PBXBuildFile; fileRef = 974B4DBE22646D3C00213E1A /* connex.js */; };
 		974EA4DF2259F9D6009C021B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 974EA4DE2259F9D6009C021B /* UIKit.framework */; };
 		974EA4E12259F9DF009C021B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 974EA4E02259F9DF009C021B /* CoreGraphics.framework */; };
-		974EA5DA225A30DC009C021B /* PromiseKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 974EA5D9225A30DC009C021B /* PromiseKit.framework */; };
 		974EA5DF225A3383009C021B /* TransactionParameter.h in Headers */ = {isa = PBXBuildFile; fileRef = 974EA5DD225A3383009C021B /* TransactionParameter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		974EA5E0225A3383009C021B /* TransactionParameter.m in Sources */ = {isa = PBXBuildFile; fileRef = 974EA5DE225A3383009C021B /* TransactionParameter.m */; };
 		974EA62D225B00B4009C021B /* NSJSONSerialization+NilDataParameter.h in Headers */ = {isa = PBXBuildFile; fileRef = 974EA62B225B00B4009C021B /* NSJSONSerialization+NilDataParameter.h */; };
@@ -418,7 +417,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				974EA5DA225A30DC009C021B /* PromiseKit.framework in Frameworks */,
 				974EA4E12259F9DF009C021B /* CoreGraphics.framework in Frameworks */,
 				974EA4DF2259F9D6009C021B /* UIKit.framework in Frameworks */,
 			);
