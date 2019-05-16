@@ -1,14 +1,14 @@
 //
-//  VCBaseModel.m
+//  WalletBaseModel.m
 //  Wallet
 //
 //  Created by Tom on 18/4/7.
 //  Copyright © VECHAIN. All rights reserved.
 //
 
-#import "VCBaseModel.h"
+#import "WalletBaseModel.h"
 
-@implementation VCBaseModel
+@implementation WalletBaseModel
 
 #pragma mark -
 #pragma mark NSCoding

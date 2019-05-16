@@ -1,5 +1,5 @@
 //
-//  VCBaseApi.m
+//  WalletBaseApi.m
 //  Wallet
 //
 //  Created by Tom on 18/4/7.
@@ -7,12 +7,12 @@
 //
 
 #import "NSJSONSerialization+NilDataParameter.h"
-#import "VCBaseApi.h"
+#import "WalletBaseApi.h"
 #import "WalletModelFetcher.h"
 #import "NSStringAdditions.h"
 #import "NSObject+LKModel.h"
 
-@implementation VCBaseApi
+@implementation WalletBaseApi
 
 
 - (id)init

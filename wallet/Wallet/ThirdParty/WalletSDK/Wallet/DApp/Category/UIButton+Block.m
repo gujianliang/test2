@@ -1,12 +1,12 @@
 //
-//  UIButton+block.m
+//  UIButton+Block.m
 //  VCBMW
 //
 //  Created by Tom on 2018/3/14.
 //  Copyright © 2018年 Tom. All rights reserved.
 //
 
-#import "UIButton+block.h"
+#import "UIButton+Block.h"
 
 @implementation UIButton (block)
 

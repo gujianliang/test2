@@ -6,11 +6,11 @@
 //  Copyright © 2019年 Ethers. All rights reserved.
 //
 
-#import "VCBaseApi.h"
+#import "WalletBaseApi.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface WalletCheckVersionApi : VCBaseApi
+@interface WalletCheckVersionApi : WalletBaseApi
 
 -(instancetype)initWithVersion:(NSString *)version language:(NSString *)language;
 
