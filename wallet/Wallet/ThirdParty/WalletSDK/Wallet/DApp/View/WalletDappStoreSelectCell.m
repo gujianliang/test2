@@ -9,6 +9,9 @@
 #import "WalletDappStoreSelectCell.h"
 #import "Payment.h"
 
+#define MediumFont(__font__) [UIFont systemFontOfSize:__font__ weight:UIFontWeightMedium]
+
+
 @interface WalletDappStoreSelectCell ()
 {
     UILabel *_addressLabel;           // 钱包地址

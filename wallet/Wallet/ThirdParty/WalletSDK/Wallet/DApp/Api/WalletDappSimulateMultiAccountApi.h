@@ -12,7 +12,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface WalletDappSimulateMultiAccountApi : VCBaseApi
 
--(instancetype)initClause:(NSArray *)clauseList opts:(NSDictionary *)opts  revision:(NSString *)revision;
+-(instancetype)initClause:(NSArray *)clauseList
+                     opts:(NSDictionary *)opts
+                 revision:(NSString *)revision;
 
 @end
 

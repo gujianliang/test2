@@ -34,7 +34,7 @@
 
 -(NSMutableDictionary*)buildRequestDict
 {
-    //增加参数
+    //add params
     NSMutableDictionary* dict = [super buildRequestDict];
     
     NSMutableArray *clauseList = [NSMutableArray array];
@@ -52,10 +52,10 @@
         }
     }
     
-    [dict setValueIfNotNil:clauseList forKey:@"clauses"];
-    [dict setValueIfNotNil:_opts[@"gas"] forKey:@"gas"];
-    [dict setValueIfNotNil:_opts[@"gasPrice"] forKey:@"gasPrice"];
-    [dict setValueIfNotNil:_opts[@"caller"] forKey:@"caller"];
+    [dict setValueIfNotNil:clauseList           forKey:@"clauses"];
+    [dict setValueIfNotNil:_opts[@"gas"]        forKey:@"gas"];
+    [dict setValueIfNotNil:_opts[@"gasPrice"]   forKey:@"gasPrice"];
+    [dict setValueIfNotNil:_opts[@"caller"]     forKey:@"caller"];
     
     return dict;
 }

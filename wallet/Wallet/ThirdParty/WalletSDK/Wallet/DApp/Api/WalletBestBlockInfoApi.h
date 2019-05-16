@@ -1,5 +1,5 @@
 //
-//  WalletBlockInfoApi.h
+//  WalletBestBlockInfoApi.h
 //  VCWallet
 //
 //  Created by Tom on 2018/4/28.
@@ -9,6 +9,6 @@
 #import "VCBaseApi.h"
 #import "WalletBlockInfoModel.h"
 
-@interface WalletBlockInfoApi : VCBaseApi
+@interface WalletBestBlockInfoApi : VCBaseApi
 
 @end

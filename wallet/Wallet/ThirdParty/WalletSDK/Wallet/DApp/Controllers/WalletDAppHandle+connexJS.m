@@ -14,10 +14,8 @@
 #import "WalletBlockApi.h"
 #import "WalletTransantionsReceiptApi.h"
 #import "WalletManageModel.h"
-#import "WalletGetSymbolApi.h"
-#import "WalletGetDecimalsApi.h"
 #import "WalletDAppPeersApi.h"
-#import "WalletBlockInfoApi.h"
+#import "WalletBestBlockInfoApi.h"
 #import "WalletDAppPeerModel.h"
 #import "WalletDAppTransferDetailApi.h"
 #import "SocketRocketUtility.h"
@@ -69,7 +67,7 @@
             }
         }
         
-        WalletBlockInfoApi *bestApi = [[WalletBlockInfoApi alloc]init];
+        WalletBestBlockInfoApi *bestApi = [[WalletBestBlockInfoApi alloc]init];
         [bestApi loadDataAsyncWithSuccess:^(VCBaseApi *finishApi) {
             
             WalletBlockInfoModel *blockModel = finishApi.resultModel;
@@ -463,7 +461,7 @@
         return;
     }
     
-    WalletBlockInfoApi *bestApi = [[WalletBlockInfoApi alloc]init];
+    WalletBestBlockInfoApi *bestApi = [[WalletBestBlockInfoApi alloc]init];
     [bestApi loadDataAsyncWithSuccess:^(VCBaseApi *finishApi) {
         
         WalletBlockInfoModel *blockModel = finishApi.resultModel;

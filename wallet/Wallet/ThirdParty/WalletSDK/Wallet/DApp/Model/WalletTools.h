@@ -8,7 +8,6 @@
 
 #import <Foundation/Foundation.h>
 #import "WalletUtils.h"
-#import "WalletAddressAuthModel.h"
 #import <AVFoundation/AVCaptureDevice.h>
 #import <AVFoundation/AVMediaFormat.h>
 #import <AssetsLibrary/AssetsLibrary.h>

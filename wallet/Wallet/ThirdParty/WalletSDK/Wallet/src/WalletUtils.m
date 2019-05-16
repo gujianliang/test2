@@ -10,14 +10,11 @@
 #import "WalletTools.h"
 #import "WalletDAppHead.h"
 #import "WalletMBProgressShower.h"
-#import "WalletGetDecimalsApi.h"
-#import "WalletGetSymbolApi.h"
-#import "WalletSignParamModel.h"
 #import "SecureData.h"
 #import "Account.h"
 #import "RLPSerialization.h"
 #import "WalletGenesisBlockInfoApi.h"
-#import "WalletBlockInfoApi.h"
+#import "WalletBestBlockInfoApi.h"
 #import "WalletDAppHandle+transfer.h"
 
 @implementation WalletUtils
@@ -396,7 +393,7 @@
 + (void)getBlockReference:(void (^)(NSString *blockReference))callback
 {
     // 获取最新区块ID前8bytes作为blockRef
-    WalletBlockInfoApi *bestBlockApi = [[WalletBlockInfoApi alloc] init];
+    WalletBestBlockInfoApi *bestBlockApi = [[WalletBestBlockInfoApi alloc] init];
     [bestBlockApi loadDataAsyncWithSuccess:^(VCBaseApi *finishApi) {
         WalletBlockInfoModel *blockModel = finishApi.resultModel;
         

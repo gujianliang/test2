@@ -23,9 +23,8 @@
 
 -(NSMutableDictionary*)buildRequestDict
 {
-    //增加参数
+    //add params
     NSMutableDictionary* dict = [super buildRequestDict];
-    
     return dict;
 }
 
@@ -34,4 +33,5 @@
 {
     return [NSDictionary class];
 }
+
 @end

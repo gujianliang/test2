@@ -1915,8 +1915,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "264"
             endingLineNumber = "264"
-            landmarkName = "+signWithParameter:keystore:password:callback:"
-            landmarkType = "7">
+            landmarkName = "@implementation WalletUtils"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy

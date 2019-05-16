@@ -18,7 +18,6 @@
 #import "AFNetworkReachabilityManager.h"
 #import "WalletMBProgressShower.h"
 #import "WalletDAppHead.h"
-#import "WalletGetBaseGasPriceApi.h"
 
 @implementation WalletTools
 

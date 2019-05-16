@@ -1,14 +1,14 @@
 //
-//  WalletBlockInfoApi.m
+//  WalletBestBlockInfoApi.m
 //  VCWallet
 //
 //  Created by Tom on 2018/4/28.
 //  Copyright © 2018年 VeChain. All rights reserved.
 //
 
-#import "WalletBlockInfoApi.h"
+#import "WalletBestBlockInfoApi.h"
 
-@implementation WalletBlockInfoApi
+@implementation WalletBestBlockInfoApi
 -(instancetype)init
 {
     self = [super init];
@@ -21,7 +21,7 @@
 
 -(NSMutableDictionary*)buildRequestDict
 {
-    //增加参数
+    //add params
     NSMutableDictionary* dict = [super buildRequestDict];
     return dict;
 }

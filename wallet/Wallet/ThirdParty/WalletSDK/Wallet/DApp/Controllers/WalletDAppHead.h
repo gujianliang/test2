@@ -9,7 +9,6 @@
 #ifndef WalletDAppHead_h
 #define WalletDAppHead_h
 
-#import "WalletSignParamModel.h"
 #import "Payment.h"
 #import "SecureData.h"
 #import "Account.h"

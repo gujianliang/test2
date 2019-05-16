@@ -23,12 +23,12 @@
 
 -(NSMutableDictionary*)buildRequestDict
 {
-    //增加参数
+    //add params
     NSMutableDictionary* dict = [super buildRequestDict];
-    [dict setValueIfNotNil:_dictRange forKey:@"range"];
+    [dict setValueIfNotNil:_dictRange   forKey:@"range"];
     [dict setValueIfNotNil:_dictOptions forKey:@"options"];
     [dict setValueIfNotNil:_dictCriteriaSet forKey:@"criteriaSet"];
-    [dict setValueIfNotNil:_order forKey:@"order"];
+    [dict setValueIfNotNil:_order           forKey:@"order"];
 
     return dict;
 }
