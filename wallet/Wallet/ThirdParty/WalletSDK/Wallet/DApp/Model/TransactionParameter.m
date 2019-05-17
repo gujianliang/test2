@@ -204,7 +204,6 @@
 - (BOOL)checkExpiration:(NSString **)expiration errorMsg:(NSString **)errorMsg
 {
     
-    //强转 string
     *expiration = [NSString stringWithFormat:@"%@",*expiration];
     
     if ([WalletTools isEmpty:*expiration]) {
@@ -229,10 +228,10 @@
             return NO;
         }
         
-    }else{ // to 有值，需要判断 data 的被64 整除
+    }else{ // To has a value, need to judge the data is divisible by 64
         if (![WalletTools isEmpty:clauseModel.data]) {
             
-            // 被64 整除
+            // Divided by 64
             if (clauseModel.data.length >= 10) {
                 NSInteger i = (clauseModel.data.length - 10) % 64;
                 if (i != 0) {
@@ -241,7 +240,7 @@
                 }
             }
             else{
-                if ([clauseModel.data isEqualToString:@"0x"]) { //0x， 是null 的情况
+                if ([clauseModel.data isEqualToString:@"0x"]) {
                     return YES;
                 }else{
                     *errorMsg = @"clause is invalid";
@@ -270,7 +269,7 @@
     
     if ([*to isKindOfClass:[NSString class]]) {
         
-        if (![WalletTools errorAddressAlert:*to]) { //校验地址
+        if (![WalletTools errorAddressAlert:*to]) { //check address
             *errorMsg = @"to is invild";
             return NO;
         }
@@ -287,10 +286,10 @@
         *value = @"0";
         return YES;
     }
-    // value 可以是string 或者 number
+    // value maybe string or number
     if ([*value isKindOfClass:[NSString class]] || [*value isKindOfClass:[NSNumber class]]) {
         
-        //有可能是bool 值
+        //maybe bool
         if ([self checkNumberOriginBool:*value]) {
             *errorMsg = @"value should be NSString or NSNumber";
             return NO;
@@ -298,17 +297,17 @@
         
         *value = [NSString stringWithFormat:@"%@",*value];
         
-        if ([(*value) isEqualToString:@"0x"]) { // 0x 设置为空
+        if ([(*value) isEqualToString:@"0x"]) { // 0x
             *value = @"";
             return YES;
         }
         
-        if ([WalletTools checkDecimalStr:*value]) {//是10进制
+        if ([WalletTools checkDecimalStr:*value]) {//Is a decimal
             return YES;
-        }else if ([WalletTools checkHEXStr:*value]){// 16进制
+        }else if ([WalletTools checkHEXStr:*value]){// Hex
             *value = [BigNumber bigNumberWithHexString:*value].decimalString;
             return YES;
-        }else{ //既不是10进制，也不是 16进制
+        }else{ //Neither decimal nor hexadecimal
             *errorMsg = @"value should be NSString or NSNumber";
             return NO;
         }
@@ -331,10 +330,10 @@
         if ([WalletTools checkHEXStr:*data]) {
             
             if ((*data).length == 0) {
-                return YES; // 长度可以是0
-            }else if ((*data).length >= 10) { //长度大于10 ok
                 return YES;
-            }else { //长度 1 - 9
+            }else if ((*data).length >= 10) { //Length greater than 10
+                return YES;
+            }else { //Length 1 - 9
                 
                 if ([*data isEqualToString:@"0x"]) { //0x, ok
                     *data = @"";
@@ -363,27 +362,26 @@
         
         return NO;
     }
-    // gas 可以是string 或者 number
+    // gas maybe string or number
     if ([*gas isKindOfClass:[NSString class]]
         || [*gas isKindOfClass:[NSNumber class]]) {
         
-        //有可能是bool 值
+        //maybe bool 
         if ([self checkNumberOriginBool:*gas]) {
             *errorMsg = @"gas should be NSString or NSNumber";
             return NO;
         }
         
-        // gas 不能为0 ，打于0
         *gas = [NSString stringWithFormat:@"%@",*gas];
         
-        if ([WalletTools checkDecimalStr:*gas]) {//是10进制
+        if ([WalletTools checkDecimalStr:*gas]) {//Is a decimal
             if((*gas).integerValue == 0)
             {
                 *errorMsg = @"gas can't be 0";
                 return NO;
             }
             return YES;
-        }else{ //不是10进制
+        }else{ //Not decimal
             *errorMsg = @"gas should be decimal string";
             return NO;
         }
@@ -495,7 +493,7 @@
      transactionModel.expiration        = self.expiration;
      transactionModel.gasPriceCoef      = self.gasPriceCoef;
      
-     //不强制
+     // not mandatory
      transactionModel.dependsOn = self.dependsOn;
      transactionModel.reserveds = self.reserveds;
      

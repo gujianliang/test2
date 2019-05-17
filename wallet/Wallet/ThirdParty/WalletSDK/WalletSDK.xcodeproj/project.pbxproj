@@ -471,7 +471,7 @@
 			path = WebSocket;
 			sourceTree = "<group>";
 		};
-		9724836F228BFA5B00B2FC9C /* base */ = {
+		9724836F228BFA5B00B2FC9C /* Base */ = {
 			isa = PBXGroup;
 			children = (
 				9773F941221412D200DF5972 /* NSDataAdditions.h */,
@@ -483,7 +483,7 @@
 				9773F92C221412D200DF5972 /* WalletModelFetcher.h */,
 				9773F942221412D200DF5972 /* WalletModelFetcher.m */,
 			);
-			path = base;
+			path = Base;
 			sourceTree = "<group>";
 		};
 		97248371228D4A7900B2FC9C /* Ethers */ = {
@@ -753,7 +753,7 @@
 		9773F924221412D200DF5972 /* Api */ = {
 			isa = PBXGroup;
 			children = (
-				9724836F228BFA5B00B2FC9C /* base */,
+				9724836F228BFA5B00B2FC9C /* Base */,
 				97D9DF5222602777007E5D99 /* WalletDappLogEventApi.h */,
 				97D9DF4D22602776007E5D99 /* WalletDappLogEventApi.m */,
 				97D9DF4F22602777007E5D99 /* WalletDappLogTransferApi.h */,

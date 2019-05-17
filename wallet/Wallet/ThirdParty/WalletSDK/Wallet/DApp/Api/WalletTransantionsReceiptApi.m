@@ -15,7 +15,7 @@
     self = [super init];
     if (self){
         
-        self.httpAddress =  [NSString stringWithFormat:@"%@%@",[WalletUserDefaultManager getBlockUrl],StringWithParam(ReceiptInfoWithAddress, txid)];
+        self.httpAddress =  [NSString stringWithFormat:@"%@/transactions/%@/receipt",[WalletUserDefaultManager getBlockUrl], txid];
     }
     return self;
 }
