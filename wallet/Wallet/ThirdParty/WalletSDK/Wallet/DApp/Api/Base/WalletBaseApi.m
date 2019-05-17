@@ -33,15 +33,6 @@
 }
 
 /**
- * If the entity is directly an array type, provide an object class within the array
- *
- */
-
--(Class)expectedInnerArrayClass{
-    return [NSDictionary class];
-}
-
-/**
  *  Obj attribute value type
  */
 - (Class)expectedModelClass
@@ -119,7 +110,7 @@
 - (void)analyseResponseInfo:(NSDictionary *)responseData
                headerFileds:(NSDictionary *)headerFields
                       error:(NSError *)error {
-    self.responseHeaderFields = headerFields;
+
     NSNumber *errCode = nil;
     NSString *errMsg = nil;
     self.resultModel = responseData;
@@ -156,7 +147,7 @@
                     self.status = RequestFailed;
                 }
                 
-            }else { //说明是其他数据模型
+            }else { //Other data models
                 
                 id objDict = nil;
                 NSDictionary *dictEntity = [dict objectForKey:@"data"];
@@ -173,11 +164,6 @@
                     self.status = RequestSuccess;
                     [self convertJsonResultToModel:objDict];
                     
-                }else if(objDict && [objDict isKindOfClass:[NSArray class]]){
-                    self.status = RequestSuccess;
-                    
-                    //The case where the outermost layer of the entity is directly an array
-                    self.resultModel = [NSArray yy_modelArrayWithClass:[self expectedInnerArrayClass] json:objDict];
                 }else{
                     self.status = RequestSuccess;
                     self.resultModel = objDict;
@@ -192,6 +178,7 @@
         }
         
     } else {
+#warning test
         if ([_httpAddress containsString:@"transactions"] && [_httpAddress hasSuffix:@"receipt"]) {
             self.status = RequestSuccess;
             _successBlock(self);

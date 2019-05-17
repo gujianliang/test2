@@ -57,7 +57,6 @@ typedef void (^requestBlock)(NSDictionary *requestDict,NSError *error);
  */
 @property (assign, nonatomic) BOOL supportOtherDataFormat;
 
-@property (strong, nonatomic) NSDictionary *responseHeaderFields;
 
 /**
 
@@ -78,12 +77,6 @@ typedef void (^requestBlock)(NSDictionary *requestDict,NSError *error);
                       responseErrorMsg:(NSString *)errMsg;
 
 
-/**
- * If the entity is directly an array type, provide the expected object class within the array
- *
- */
-
--(Class)expectedInnerArrayClass;
 
 /**
  *  Expected obj data type

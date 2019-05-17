@@ -24,8 +24,11 @@
 #import "WalletDappSimulateMultiAccountApi.h"
 #import "WalletDappSimulateAccountApi.h"
 
+#define nullString @"nu&*ll"
+
 @implementation WalletDAppHandle (connexJS)
 
+//Get the genesis block information
 -(void)getGenesisBlockWithRequestId:(NSString *)requestId
                   completionHandler:(void (^)(NSString * __nullable result))completionHandler
 {
@@ -47,26 +50,27 @@
     }];
 }
 
+//Get block status
 -(void)getStatusWithRequestId:(NSString *)requestId
             completionHandler:(void (^)(NSString * __nullable result))completionHandler
 {
     WalletDAppPeersApi *peersApi = [[WalletDAppPeersApi alloc]init];
-    
     [peersApi loadDataAsyncWithSuccess:^(WalletBaseApi *finishApi) {
         
         NSString *blockNum = @"";
         NSArray *list = (NSArray *)finishApi.resultDict;
         
         for (NSDictionary *dict in list) {
-            NSString *temp = dict[@"bestBlockID"];
-            temp = [temp substringToIndex:10];
-            BigNumber *new = [BigNumber bigNumberWithHexString:temp];
+            NSString *bestBlockID = dict[@"bestBlockID"];
+            bestBlockID = [bestBlockID substringToIndex:10];
+            BigNumber *new = [BigNumber bigNumberWithHexString:bestBlockID];
             BigNumber *old = [BigNumber bigNumberWithHexString:blockNum];
             if (new.decimalString.floatValue > old.decimalString.floatValue) {
-                blockNum = temp;
+                blockNum = bestBlockID;
             }
         }
         
+        // Get best block info
         WalletBestBlockInfoApi *bestApi = [[WalletBestBlockInfoApi alloc]init];
         [bestApi loadDataAsyncWithSuccess:^(WalletBaseApi *finishApi) {
             
@@ -131,9 +135,10 @@
                                     callbackId:callbackId
                                           code:OK];
         }else{
+            // The server returns an empty payment and needs to be changed to null.
             [WalletTools callbackWithrequestId:requestId
                                        webView:webView
-                                          data:@"nu&*ll"
+                                          data:nullString
                                     callbackId:callbackId
                                           code:OK];
         }
@@ -167,9 +172,10 @@
                                     callbackId:callbackId
                                           code:OK];
         }else{
+            // The server returns an empty payment and needs to be changed to null.
             [WalletTools callbackWithrequestId:requestId
                                        webView:webView
-                                          data:@"nu&*ll"
+                                          data:nullString
                                     callbackId:callbackId
                                           code:OK];
         }
@@ -209,9 +215,10 @@
                                     callbackId:callbackId
                                           code:OK];
         }else{
+            // The server returns an empty payment and needs to be changed to null.
             [WalletTools callbackWithrequestId:requestId
                                        webView:webView
-                                          data:@"nu&*ll"
+                                          data:nullString
                                     callbackId:callbackId
                                           code:OK];
         }
@@ -250,9 +257,10 @@
                                     callbackId:callbackId
                                           code:OK];
         }else{
+            // The server returns an empty payment and needs to be changed to null.
             [WalletTools callbackWithrequestId:requestId
                                        webView:webView
-                                          data:@"nu&*ll"
+                                          data:nullString
                                     callbackId:callbackId
                                           code:OK];
         }
@@ -273,6 +281,7 @@
 {
     BOOL revisionOK = NO;
     
+    //Revision : "best" or decimal
     if (revision != nil ) {
         revisionOK = YES;
     }else if ([revision isEqualToString:@"best"]) {
@@ -305,9 +314,10 @@
                                           code:OK];
             
         }else {
+            // The server returns an empty payment and needs to be changed to null.
             [WalletTools callbackWithrequestId:requestId
                                        webView:webView
-                                          data:@"nu&*ll"
+                                          data:nullString
                                     callbackId:callbackId
                                           code:OK];
         }
@@ -348,9 +358,10 @@
                                     callbackId:callbackId
                                           code:OK];
         }else{
+            // The server returns an empty payment and needs to be changed to null.
             [WalletTools callbackWithrequestId:requestId
                                        webView:webView
-                                          data:@"nu&*ll"
+                                          data:nullString
                                     callbackId:callbackId
                                           code:OK];
         }
@@ -389,9 +400,10 @@
                                     callbackId:callbackId
                                           code:OK];
         }else{
+            // The server returns an empty payment and needs to be changed to null.
             [WalletTools callbackWithrequestId:requestId
                                        webView:webView
-                                          data:@"nu&*ll"
+                                          data:nullString
                                     callbackId:callbackId
                                           code:OK];
         }
@@ -406,7 +418,7 @@
     }];
 }
 
-//获取本地wallet地址
+//Get the local wallet address
 -(void)getAccountsWithRequestId:(NSString *)requestId
                      callbackId:(NSString *)callbackId
                         webView:(WKWebView *)webView
@@ -437,6 +449,7 @@
 {
     NSString *url = [[WalletUserDefaultManager getBlockUrl] stringByAppendingString:@"/subscriptions/block"];
     
+    // open web socket
     SocketRocketUtility *socket = [SocketRocketUtility instance];
     
     socket.requestIdList = @[requestId];
@@ -460,7 +473,7 @@
                                       code:ERROR_CANCEL];
         return;
     }
-    
+    // Get the timestamp on the block
     WalletBestBlockInfoApi *bestApi = [[WalletBestBlockInfoApi alloc]init];
     [bestApi loadDataAsyncWithSuccess:^(WalletBaseApi *finishApi) {
         
@@ -531,7 +544,6 @@
     if (amount.length == 0) {
         bAmount = NO;
     }
-    
     
     if ([amount floatValue] == 0
         && [[Payment parseEther:amount] lessThanEqualTo:[BigNumber constantZero]]){
@@ -635,6 +647,7 @@
                                                                      message:@""];
                 NSString *injectJS = [resultDict yy_modelToJSONString];
                 
+                //Remove "
                 injectJS = [injectJS stringByReplacingOccurrencesOfString:@"\"true\"" withString:@"true"];
                 completionHandler(injectJS);
                 
@@ -646,6 +659,7 @@
                                                                      message:@""];
                 NSString *injectJS = [resultDict yy_modelToJSONString];
                 
+                //Remove "
                 injectJS = [injectJS stringByReplacingOccurrencesOfString:@"\"false\"" withString:@"false"];
                 
                 completionHandler(injectJS);

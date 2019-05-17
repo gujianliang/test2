@@ -49,7 +49,6 @@
 - (void)getNodeUrl:(NSString *)requestId
   completionHandler:(void (^)(NSString * __nullable result))completionHandler
 {
-//返回当前的 block url
     NSDictionary *dict1 = [WalletTools packageWithRequestId:requestId
                                                        data:[WalletUserDefaultManager getBlockUrl]
                                                        code:OK

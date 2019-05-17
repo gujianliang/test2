@@ -52,7 +52,6 @@
 
 + (UIViewController*)getCurrentVC;
 
-+ (UIViewController*)getCurrentNavVC;
 
 + (NSString *)localStringBundlekey:(NSString *)key; // get bundle key
 

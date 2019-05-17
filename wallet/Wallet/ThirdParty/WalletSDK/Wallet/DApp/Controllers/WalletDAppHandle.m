@@ -70,7 +70,7 @@ static dispatch_once_t predicate;
         
         [self getStatusWithRequestId:requestId completionHandler:completionHandler];
         
-        //打开ticker
+        //open ticker
         [self tickerNextRequestId:requestId callbackId:callbackId];
         
         return;
@@ -250,7 +250,8 @@ static dispatch_once_t predicate;
             NSArray *list = (NSArray *)finishApi.resultDict;
             NSString *gasUsed = [list firstObject][@"gasUsed"];
             if (gasUsed.integerValue != 0) {
-                gas = [NSString stringWithFormat:@"%d",gas.integerValue + gasUsed.integerValue + 15000];
+                //Gasused If it is not 0,  need to add 15000
+                gas = [NSString stringWithFormat:@"%ld",gas.integerValue + gasUsed.integerValue + 15000];
             }
             
             [self callbackClauseList:clauseModelList gas:gas from:from bConnex:bConnex webView:webView callbackId:callbackId requestId:requestId];
@@ -324,6 +325,7 @@ static dispatch_once_t predicate;
     [WalletTools callbackWithrequestId:requestId webView:webView data:@"" callbackId:callbackId code:ERROR_REQUEST_PARAMS];
 }
 
+//websocket notification
 - (void)websocket:(NSNotification *)sender
 {
     NSDictionary *dict = sender.object;
@@ -399,6 +401,8 @@ static dispatch_once_t predicate;
 - (void)injectJS:(WKWebViewConfiguration *)config
 {
     NSString *currentVersion = sdkVersion;
+    
+    // check sdk version
     WalletCheckVersionApi *checkApi = [[WalletCheckVersionApi alloc]initWithVersion:currentVersion language:[self getLanuage]];
     [checkApi loadDataAsyncWithSuccess:^(WalletBaseApi *finishApi) {
         
@@ -408,7 +412,7 @@ static dispatch_once_t predicate;
         NSString *latestVersion = dictData[@"latestVersion"];
         NSString *description   = dictData[@"description"];
 
-        if (update.boolValue) {
+        if (update.boolValue) { //If update is 1, do not inject js
            
             NSLog(@"%@",description);
         }else{
@@ -427,7 +431,7 @@ static dispatch_once_t predicate;
 
 - (void)inject:(WKWebViewConfiguration *)config
 {
-    //connex
+    //inject connex js
     NSString *bundlePath = [[NSBundle mainBundle] pathForResource:@"WalletSDKBundle" ofType:@"bundle"];
     if(!bundlePath){
         return ;
@@ -442,6 +446,7 @@ static dispatch_once_t predicate;
     [config.userContentController addUserScript:userScriptConnex];
     
     
+    //inject web3 js
     NSString *web3Path = [bundlePath stringByAppendingString:@"/web3.js"];
     NSString *web3js = [NSString stringWithContentsOfFile:web3Path encoding:NSUTF8StringEncoding error:nil];
     web3js = [web3js stringByReplacingOccurrencesOfString:@"\n" withString:@""];
@@ -451,7 +456,7 @@ static dispatch_once_t predicate;
     [config.userContentController addUserScript:userScriptWeb3];
 }
 
-
+// Get phone language
 -(NSString *)getLanuage
 {
     NSString *language = @"";
@@ -473,6 +478,8 @@ static dispatch_once_t predicate;
     predicate = 0;
     singleton = nil;
     [[NSNotificationCenter defaultCenter]removeObserver:self];
+    
+    // close websocket
     [[SocketRocketUtility instance] SRWebSocketClose];
 }
 

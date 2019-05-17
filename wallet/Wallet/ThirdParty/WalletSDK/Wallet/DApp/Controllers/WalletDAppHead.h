@@ -14,9 +14,6 @@
 #import "Account.h"
 #import "Transaction.h"
 
-#define TransferMethodId        @"0xa9059cbb"
-
-#define vthoTokenAddress        @"0x0000000000000000000000000000456e65726779"
 
 #define sdkVersion  @"1.0.0"
 
