@@ -11,23 +11,23 @@
 
 #define StringWithParam(__host__,__param__)  [NSString stringWithFormat:__host__,__param__]
 
-//Transaction Details
-#define ReceiptInfoWithAddress          @"/transactions/%@/receipt"
+////Transaction Details
+//#define ReceiptInfoWithAddress          @"/transactions/%@/receipt"
 
-//Initial block information
-#define GenesisBlocKInfo                @"/blocks/0"
+////Initial block information
+//#define GenesisBlocKInfo                @"/blocks/0"
 
-//Balance
-#define BalanceWithAddress              @"/accounts/%@"
+////Balance
+//#define BalanceWithAddress              @"/accounts/%@"
+//
+////Send transaction
+//#define SendTransactionUrl              @"/transactions"
 
-//Send transaction
-#define SendTransactionUrl              @"/transactions"
+////Latest block informati
+//#define NewBlockInfoUrl                 @"/blocks/best"
 
-//Latest block informati
-#define NewBlockInfoUrl                 @"/blocks/best"
-
-//app version 
-#define AppVersionUrl                   @"/v1/app/version"
+////app version
+//#define AppVersionUrl                   @"/v1/app/version"
 
 
 #endif /* WalletApiManageMacro_h */
