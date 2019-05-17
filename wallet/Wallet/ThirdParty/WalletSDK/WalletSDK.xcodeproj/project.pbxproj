@@ -1484,7 +1484,7 @@
 				DEVELOPMENT_TEAM = 7GS2C8FTGM;
 				INFOPLIST_FILE = ethersTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = io.ethers.ethersTests;
+				PRODUCT_BUNDLE_IDENTIFIER = WalletSDKDemoTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -1495,7 +1495,7 @@
 				DEVELOPMENT_TEAM = 7GS2C8FTGM;
 				INFOPLIST_FILE = ethersTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = io.ethers.ethersTests;
+				PRODUCT_BUNDLE_IDENTIFIER = WalletSDKDemoTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

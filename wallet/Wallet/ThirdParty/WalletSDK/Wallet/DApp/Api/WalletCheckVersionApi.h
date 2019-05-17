@@ -3,7 +3,7 @@
 //  WalletSDK
 //
 //  Created by Tom on 2019/5/9.
-//  Copyright © 2019年 Ethers. All rights reserved.
+//  Copyright © 2019年 VeChain. All rights reserved.
 //
 
 #import "WalletBaseApi.h"

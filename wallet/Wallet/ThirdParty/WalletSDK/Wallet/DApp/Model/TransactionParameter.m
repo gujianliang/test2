@@ -3,7 +3,7 @@
 //  WalletSDK
 //
 //  Created by Tom on 2019/4/7.
-//  Copyright © 2019年 Ethers. All rights reserved.
+//  Copyright © 2019年 VeChain. All rights reserved.
 //
 
 #import "TransactionParameter.h"
