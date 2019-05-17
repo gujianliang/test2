@@ -174,8 +174,8 @@ static dispatch_once_t predicate;
         
         NSDictionary *noMethodDict = [WalletTools packageWithRequestId:requestId
                                                            data:@""
-                                                           code:ERROR_REQUEST_METHOD
-                                                        message:ERROR_REQUEST_METHOD_MSG];
+                                                           code:ERROR_CANCEL
+                                                        message:ERROR_CANCEL_MSG];
         completionHandler([noMethodDict yy_modelToJSONString]);
         
         return ;
@@ -287,7 +287,7 @@ static dispatch_once_t predicate;
                                        webView:webView
                                           data:@""
                                     callbackId:callbackId
-                                          code:ERROR_INITDAPP_ERROR];
+                                          code:ERROR_CANCEL];
         }
     }
 }
@@ -316,13 +316,13 @@ static dispatch_once_t predicate;
                                    webView:webView
                                       data:@""
                                 callbackId:callbackId
-                                      code:ERROR_REQUEST_PARAMS];
+                                      code:ERROR_CANCEL];
     }
 }
 
 - (void)paramsError:(NSString *)requestId webView:(WKWebView *)webView callbackId:(NSString *)callbackId
 {
-    [WalletTools callbackWithrequestId:requestId webView:webView data:@"" callbackId:callbackId code:ERROR_REQUEST_PARAMS];
+    [WalletTools callbackWithrequestId:requestId webView:webView data:@"" callbackId:callbackId code:ERROR_CANCEL];
 }
 
 //websocket notification

@@ -180,22 +180,22 @@
 {
     switch (code) {
         case 200:
-           return ERROR_REQUEST_PARAMS_MSG;
+           return ERROR_CANCEL_MSG;
             break;
         case 201:
-           return ERROR_REQUEST_METHOD_MSG;
+           return ERROR_CANCEL_MSG;
             break;
         case 202:
-           return ERROR_REQUEST_MULTI_CLAUSE_MSG;
+           return ERROR_CANCEL_MSG;
             break;
         case 203:
-            return ERROR_REQUEST_QR_TOO_LONG_MSG;
+            return ERROR_CANCEL_MSG;
             break;
         case 300:
             return ERROR_NETWORK_MSG;
             break;
         case 400:
-            return ERROR_SERVER_DATA_MSG;
+            return ERROR_NETWORK_MSG;
             break;
         case 500:
             return ERROR_CANCEL_MSG;

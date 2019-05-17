@@ -27,7 +27,7 @@
 {
     // increase the parameter
     NSMutableDictionary* dict = [super buildRequestDict];
-    [dict setValue:_raw forKey:@"raw"];
+    [dict setValueIfNotNil:_raw forKey:@"raw"];
     return dict;
 }
 

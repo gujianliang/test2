@@ -44,8 +44,8 @@
     }failure:^(WalletBaseApi *finishApi, NSString *errMsg) {
         NSDictionary *resultDict = [WalletTools packageWithRequestId:requestId
                                                                data:@""
-                                                               code:ERROR_SERVER_DATA
-                                                            message:ERROR_SERVER_DATA_MSG];
+                                                               code:ERROR_NETWORK
+                                                            message:ERROR_NETWORK_MSG];
         completionHandler([resultDict yy_modelToJSONString]);
     }];
 }
@@ -98,8 +98,8 @@
         } failure:^(WalletBaseApi *finishApi, NSString *errMsg) {
             NSDictionary *resultDict = [WalletTools packageWithRequestId:requestId
                                                                     data:@""
-                                                                    code:ERROR_SERVER_DATA
-                                                                 message:ERROR_SERVER_DATA_MSG];
+                                                                    code:ERROR_NETWORK
+                                                                 message:ERROR_NETWORK_MSG];
             completionHandler([resultDict yy_modelToJSONString]);
             
         }];
@@ -107,8 +107,8 @@
         
         NSDictionary *resultDict = [WalletTools packageWithRequestId:requestId
                                                                 data:@""
-                                                                code:ERROR_SERVER_DATA
-                                                             message:ERROR_SERVER_DATA_MSG];
+                                                                code:ERROR_NETWORK
+                                                             message:ERROR_NETWORK_MSG];
         completionHandler([resultDict yy_modelToJSONString]);
         
     }];
@@ -200,7 +200,7 @@
                                    webView:webView
                                       data:@""
                                 callbackId:callbackId
-                                      code:ERROR_REQUEST_PARAMS];
+                                      code:ERROR_CANCEL];
         return;
     }
     
@@ -243,7 +243,7 @@
                                    webView:webView
                                       data:@""
                                 callbackId:callbackId
-                                      code:ERROR_REQUEST_PARAMS];
+                                      code:ERROR_CANCEL];
         return;
     }
     
@@ -298,7 +298,7 @@
                                    webView:webView
                                       data:@""
                                 callbackId:callbackId
-                                      code:ERROR_REQUEST_PARAMS];
+                                      code:ERROR_CANCEL];
         return;
     }
     
@@ -341,7 +341,7 @@
                                    webView:webView
                                       data:@""
                                 callbackId:callbackId
-                                      code:ERROR_REQUEST_PARAMS];
+                                      code:ERROR_CANCEL];
         return;
     }
     
@@ -385,7 +385,7 @@
                                    webView:webView
                                       data:@""
                                 callbackId:callbackId
-                                      code:ERROR_REQUEST_PARAMS];
+                                      code:ERROR_CANCEL];
         return;
     }
     
@@ -440,7 +440,7 @@
                                    webView:webView
                                       data:@""
                                 callbackId:callbackId
-                                      code:ERROR_INITDAPP_ERROR];
+                                      code:ERROR_CANCEL];
     }
 }
 
@@ -517,7 +517,7 @@
                                        webView:webView
                                           data:@""
                                     callbackId:callbackId
-                                          code:ERROR_INITDAPP_ERROR];
+                                          code:ERROR_CANCEL];
         }
         
     }failure:^(WalletBaseApi *finishApi, NSString *errMsg) {
@@ -564,7 +564,7 @@
                                webView:webView
                                  data:@""
                            callbackId:callbackId
-                                 code:ERROR_SERVER_DATA];
+                                 code:ERROR_NETWORK];
 }
 
 

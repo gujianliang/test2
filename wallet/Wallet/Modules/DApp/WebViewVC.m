@@ -24,7 +24,7 @@
 - (instancetype)initWithURL:(NSURL *)URL{
     self = [super init];
     if (self) {
-        URL = [NSURL URLWithString:@"https://bc66.github.io/lucky-airdrop/#/"];
+        URL = [NSURL URLWithString:@"http://192.168.50.207:8080"];
         _URL = URL;
     }
     return self;

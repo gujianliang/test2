@@ -41,7 +41,7 @@
                                   webView:webView 
                                      data:@""
                                callbackId:callbackId
-                                     code:ERROR_SERVER_DATA];
+                                     code:ERROR_NETWORK];
     }];
 }
 

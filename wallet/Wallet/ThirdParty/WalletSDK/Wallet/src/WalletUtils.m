@@ -318,7 +318,7 @@
 {
     if (nodelUrl.length == 0) {
         [WalletMBProgressShower showTextIn:[WalletTools getCurrentVC].view
-                                      Text:ERROR_REQUEST_PARAMS_MSG During:1];
+                                      Text:ERROR_CANCEL_MSG During:1];
         return;
     }
     [[AFNetworkReachabilityManager sharedManager] startMonitoring];

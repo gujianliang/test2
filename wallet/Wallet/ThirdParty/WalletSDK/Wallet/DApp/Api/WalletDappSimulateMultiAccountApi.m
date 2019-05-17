@@ -38,17 +38,15 @@
     NSMutableDictionary* dict = [super buildRequestDict];
     
     NSMutableArray *clauseList = [NSMutableArray array];
-    if (_clauseList.count > 0) {
-        
-        for (id clause in _clauseList) {
-            if ([clause isKindOfClass:[ClauseModel class]]) {
-                
-                NSString *strClause = [clause yy_modelToJSONString];
-                NSDictionary *dictClause = [NSJSONSerialization dictionaryWithJsonString:strClause];
-                [clauseList addObject:dictClause];
-            }else{
-                [clauseList addObject:clause];
-            }
+    
+    for (id clause in _clauseList) {
+        if ([clause isKindOfClass:[ClauseModel class]]) {
+            
+            NSString *strClause = [clause yy_modelToJSONString];
+            NSDictionary *dictClause = [NSJSONSerialization dictionaryWithJsonString:strClause];
+            [clauseList addObject:dictClause];
+        }else{
+            [clauseList addObject:clause];
         }
     }
     
