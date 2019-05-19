@@ -1,17 +1,17 @@
 //
-//  WebViewVC.m
+//  DAppWebViewVC.m
 //  walletSDKDemo
 //
 //  Created by Tom on 2019/1/29.
 //  Copyright © 2019年 demo. All rights reserved.
 //
 
-#import "WebViewVC.h"
+#import "DAppWebViewVC.h"
 #import <WebKit/WebKit.h>
 #import <WalletSDK/WalletUtils.h>
 #import "WalletSdkMacro.h"
 
-@interface WebViewVC ()<WKNavigationDelegate,WKUIDelegate,WalletUtilsDelegate>
+@interface DAppWebViewVC ()<WKNavigationDelegate,WKUIDelegate,WalletUtilsDelegate>
 {
     NSURL *_URL;
     WKWebView *_webView;  /* It is a 'WKWebView' object that used to interact with dapp. */
@@ -19,7 +19,7 @@
 
 @end
 
-@implementation WebViewVC
+@implementation DAppWebViewVC
 
 - (instancetype)initWithURL:(NSURL *)URL{
     self = [super init];
@@ -56,6 +56,7 @@
     [self.view addSubview:_webView];
     
     
+#warning check
     /*
      CurrentWallet has two key; addres and ketstore
                 Address: wallet address
@@ -68,7 +69,7 @@
         [walletList addObject:currentWallet[@"keystore"]];
     }
     
-    // set delegate
+    // Set delegate
     [WalletUtils initDAppWithDelegate:self];
 }
 

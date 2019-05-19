@@ -525,7 +525,7 @@
                                    webView:webView
                                       data:@""
                                 callbackId:callbackId
-                                      code:ERROR_CANCEL];
+                                      code:ERROR_NETWORK];
     }];
 }
 

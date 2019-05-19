@@ -1,5 +1,5 @@
 //
-//  WebViewVC.h
+//  DAppWebViewVC.h
 //  walletSDKDemo
 //
 //  Created by Tom on 2019/1/29.
@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface WebViewVC : UIViewController
+@interface DAppWebViewVC : UIViewController
 
 - (instancetype)initWithURL:(NSURL *)URL;
 

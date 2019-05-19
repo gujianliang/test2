@@ -10,7 +10,7 @@
 #import "AFNetworking.h"
 #import "WalletTransferVC.h"
 #import "WalletMoreInfoVC.h"
-#import "WebViewVC.h"
+#import "DAppWebViewVC.h"
 #import "WalletChooseNodeView.h"
 #import "WalletNodeDetailVC.h"
 #import "WalletAddVthoNodeVC.h"
@@ -254,7 +254,7 @@
     
     if([[UIApplication sharedApplication] canOpenURL:URL]){
         
-        WebViewVC *webVC = [[WebViewVC alloc] initWithURL:URL];
+        DAppWebViewVC *webVC = [[DAppWebViewVC alloc] initWithURL:URL];
         [self.navigationController pushViewController:webVC animated:YES];
         
     }else {

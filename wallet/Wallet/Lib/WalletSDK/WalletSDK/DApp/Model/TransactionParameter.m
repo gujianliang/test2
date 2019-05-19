@@ -298,7 +298,7 @@
         *value = [NSString stringWithFormat:@"%@",*value];
         
         if ([(*value) isEqualToString:@"0x"]) { // 0x
-            *value = @"";
+            *value = @"0";
             return YES;
         }
         
@@ -329,21 +329,7 @@
     if ([*data isKindOfClass:[NSString class]] ) {
         if ([WalletTools checkHEXStr:*data]) {
             
-            if ((*data).length == 0) {
-                return YES;
-            }else if ((*data).length >= 10) { //Length greater than 10
-                return YES;
-            }else { //Length 1 - 9
-                
-                if ([*data isEqualToString:@"0x"]) { //0x, ok
-                    *data = @"";
-                    
-                    return YES;
-                }else{
-                    *errorMsg = @"data is inValid";
-                    return NO;
-                }
-            }
+             return YES;
         }else{
             *errorMsg = @"data should be hex string";
             return NO;

@@ -208,9 +208,10 @@ static dispatch_once_t predicate;
 
     NSMutableArray *clauseModelList = [[NSMutableArray alloc]init];
 
-    if (bConnex) {
+    if (bConnex) { // connex
         
         NSArray *clauseList = callbackParams[@"clauses"];
+        
         for (NSDictionary *clauseDict in clauseList) {
             
             ClauseModel *clauseModel = [[ClauseModel alloc]init];
@@ -218,17 +219,17 @@ static dispatch_once_t predicate;
             clauseModel.value = clauseDict[@"value"];
             clauseModel.data  = clauseDict[@"data"];
             
-            gas        = callbackParams[@"options"][@"gas"];
-            gasPrice   = callbackParams[@"options"][@"gasPrice"];
-            
             [clauseModelList addObject:clauseModel];
         }
+        
+        gas        = callbackParams[@"options"][@"gas"];
+        gasPrice   = callbackParams[@"options"][@"gasPrice"];
         
         gasPrice   = @"120"; //connex js No pass gaspPrice write default
         
         from       = callbackParams[@"options"][@"signer"];
         
-    }else{
+    }else{ // web3
         
         ClauseModel *clauseModel = [[ClauseModel alloc]init];
         clauseModel.to    = callbackParams[@"to"];
@@ -412,7 +413,7 @@ static dispatch_once_t predicate;
         NSString *latestVersion = dictData[@"latestVersion"];
         NSString *description   = dictData[@"description"];
 
-        if (update.boolValue) { //If update is 1, do not inject js
+        if (update.boolValue) { //If update is YES, do not inject js
            
             NSLog(@"%@",description);
         }else{
