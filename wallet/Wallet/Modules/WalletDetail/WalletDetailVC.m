@@ -300,10 +300,10 @@
 
 - (NSString *)weiConvertAmount:(BigNumber *)wei dicimals:(NSInteger )dicimals
 {
-    NSDecimalNumber *number = [NSDecimalNumber decimalNumberWithString:wei.decimalString];
-    NSDecimalNumber *number1 = [NSDecimalNumber decimalNumberWithString:[NSString stringWithFormat:@"%f",pow(10, dicimals)]];
-    NSDecimalNumber *weiNumber = [number decimalNumberByDividingBy:number1];
-    
+    NSDecimalNumber *amountNumber = [NSDecimalNumber decimalNumberWithString:wei.decimalString];
+    NSDecimalNumber *dicimalNumber = [NSDecimalNumber decimalNumberWithString:[NSString stringWithFormat:@"%f",pow(10, dicimals)]];
+    NSDecimalNumber *weiNumber = [amountNumber decimalNumberByMultiplyingBy:dicimalNumber];
+        
     return weiNumber.stringValue;
 }
 

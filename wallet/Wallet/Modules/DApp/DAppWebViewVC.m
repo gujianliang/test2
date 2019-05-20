@@ -238,9 +238,9 @@
 
 - (BigNumber *)amountConvertWei:(NSString *)amount dicimals:(NSInteger )dicimals
 {
-    NSDecimalNumber *number = [NSDecimalNumber decimalNumberWithString:amount];
-    NSDecimalNumber *number1 = [NSDecimalNumber decimalNumberWithString:[NSString stringWithFormat:@"%f",pow(10, dicimals)]];
-    NSDecimalNumber *weiNumber = [number decimalNumberByMultiplyingBy:number1];
+    NSDecimalNumber *amountNumber = [NSDecimalNumber decimalNumberWithString:amount];
+    NSDecimalNumber *dicimalNumber = [NSDecimalNumber decimalNumberWithString:[NSString stringWithFormat:@"%f",pow(10, dicimals)]];
+    NSDecimalNumber *weiNumber = [amountNumber decimalNumberByMultiplyingBy:dicimalNumber];
     
     return [BigNumber bigNumberWithNumber:weiNumber];
 }

@@ -183,8 +183,8 @@ callback:(void(^)(NSString *txId))callback
     
     NSString *packSign = [WalletTools packageCertParam:param];
     
-    NSData *totalData1 = [packSign dataUsingEncoding:NSUTF8StringEncoding];
-    SecureData *data = [SecureData BLAKE2B:totalData1];
+    NSData *totalData = [packSign dataUsingEncoding:NSUTF8StringEncoding];
+    SecureData *data = [SecureData BLAKE2B:totalData];
     Signature *signature = [account signDigest:data.data];
     
     SecureData *vData = [[SecureData alloc]init];

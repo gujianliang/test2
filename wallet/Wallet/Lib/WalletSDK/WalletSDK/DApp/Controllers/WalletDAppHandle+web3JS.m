@@ -49,11 +49,11 @@
 - (void)getNodeUrl:(NSString *)requestId
   completionHandler:(void (^)(NSString * __nullable result))completionHandler
 {
-    NSDictionary *dict1 = [WalletTools packageWithRequestId:requestId
+    NSDictionary *dict = [WalletTools packageWithRequestId:requestId
                                                        data:[WalletUserDefaultManager getBlockUrl]
                                                        code:OK
                                                     message:@""];
-    completionHandler([dict1 yy_modelToJSONString]);
+    completionHandler([dict yy_modelToJSONString]);
 }
 
 
@@ -68,11 +68,11 @@
         NSString *blockID = genesisblockModel.id;
         NSString *chainTag = [NSString stringWithFormat:@"0x%@", [blockID substringFromIndex:blockID.length-2]];
         
-        NSDictionary *dict1 = [WalletTools packageWithRequestId:requestId
+        NSDictionary *dict = [WalletTools packageWithRequestId:requestId
                                                            data:chainTag
                                                            code:OK
                                                         message:@""];
-        completionHandler([dict1 yy_modelToJSONString]);
+        completionHandler([dict yy_modelToJSONString]);
         
     } failure:^(WalletBaseApi *finishApi, NSString *errMsg) {
         completionHandler(@"{}");
