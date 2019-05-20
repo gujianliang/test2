@@ -148,7 +148,7 @@
             return ERROR_NETWORK_MSG;
             break;
         case 500:
-            return ERROR_CANCEL_MSG;
+            return ERROR_REJECTED_MSG;
             break;
             
         default:

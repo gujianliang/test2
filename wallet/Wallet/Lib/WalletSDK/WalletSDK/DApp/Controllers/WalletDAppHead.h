@@ -19,10 +19,10 @@
 
 static int OK = 1;
 static int ERROR_NETWORK = 500;
-static int ERROR_CANCEL  = 400;//User cancelled
+static int ERROR_REJECTED  = 400;//User cancelled
 
-static NSString *ERROR_NETWORK_MSG = @"network error";
-static NSString *ERROR_CANCEL_MSG  = @"User cancelled";
+static NSString *ERROR_NETWORK_MSG = @"NetError";
+static NSString *ERROR_REJECTED_MSG  = @"Rejected";
 
 
 #endif /* WalletDAppHead_h */

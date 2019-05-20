@@ -201,7 +201,7 @@
                                    webView:webView
                                       data:@""
                                 callbackId:callbackId
-                                      code:ERROR_CANCEL];
+                                      code:ERROR_REJECTED];
         return;
     }
     
@@ -244,7 +244,7 @@
                                    webView:webView
                                       data:@""
                                 callbackId:callbackId
-                                      code:ERROR_CANCEL];
+                                      code:ERROR_REJECTED];
         return;
     }
     
@@ -299,7 +299,7 @@
                                    webView:webView
                                       data:@""
                                 callbackId:callbackId
-                                      code:ERROR_CANCEL];
+                                      code:ERROR_REJECTED];
         return;
     }
     
@@ -342,7 +342,7 @@
                                    webView:webView
                                       data:@""
                                 callbackId:callbackId
-                                      code:ERROR_CANCEL];
+                                      code:ERROR_REJECTED];
         return;
     }
     
@@ -386,7 +386,7 @@
                                    webView:webView
                                       data:@""
                                 callbackId:callbackId
-                                      code:ERROR_CANCEL];
+                                      code:ERROR_REJECTED];
         return;
     }
     
@@ -434,7 +434,7 @@
     [socket SRWebSocketOpenWithURLString:url];
 }
 
-// Cert sign
+// Certification signature
 - (void)certTransferParamModel:(NSDictionary *)callbackParams
                           from:(NSString *)from
                      requestId:(NSString *)requestId
@@ -448,10 +448,10 @@
                                    webView:webView
                                       data:@""
                                 callbackId:callbackId
-                                      code:ERROR_CANCEL];
+                                      code:ERROR_REJECTED];
         return;
     }
-    // Get the timestamp on the block
+    // Get the timestamp of the block
     WalletBestBlockInfoApi *bestApi = [[WalletBestBlockInfoApi alloc]init];
     [bestApi loadDataAsyncWithSuccess:^(WalletBaseApi *finishApi) {
         
@@ -495,7 +495,7 @@
                                        webView:webView
                                           data:@""
                                     callbackId:callbackId
-                                          code:ERROR_CANCEL];
+                                          code:ERROR_REJECTED];
         }
         
     }failure:^(WalletBaseApi *finishApi, NSString *errMsg) {
@@ -587,7 +587,7 @@
                                    webView:webView
                                       data:@""
                                 callbackId:callbackId
-                                      code:ERROR_CANCEL];
+                                      code:ERROR_REJECTED];
         return;
     }
     

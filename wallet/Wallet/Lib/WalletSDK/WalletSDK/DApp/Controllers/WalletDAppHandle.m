@@ -49,10 +49,9 @@ static dispatch_once_t predicate;
         [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(websocket:) name:kWebSocketdidReceiveMessageNote object:nil];
     }
     return self;
-    
 }
 
-//Analyze data from webview
+//Analyze data from Dapp
 - (void)webView:(WKWebView *)webView defaultText:(nullable NSString *)defaultText completionHandler:(void (^)(NSString * __nullable result))completionHandler
 {
     //Check if the version is forced to upgrade
@@ -183,8 +182,8 @@ static dispatch_once_t predicate;
         //No matching methodId found
         NSDictionary *noMethodDict = [WalletTools packageWithRequestId:requestId
                                                            data:@""
-                                                           code:ERROR_CANCEL
-                                                        message:ERROR_CANCEL_MSG];
+                                                           code:ERROR_REJECTED
+                                                        message:ERROR_REJECTED_MSG];
         completionHandler([noMethodDict yy_modelToJSONString]);
         
         return ;
@@ -297,7 +296,7 @@ static dispatch_once_t predicate;
                                        webView:webView
                                           data:@""
                                     callbackId:callbackId
-                                          code:ERROR_CANCEL];
+                                          code:ERROR_REJECTED];
         }
     }
 }
