@@ -14,13 +14,14 @@
 #import "WalletJSCallbackModel.h"
 #import "SocketRocketUtility.h"
 #import "WalletCheckVersionApi.h"
+#import "WalletVersionModel.h"
 #import "WalletDappSimulateMultiAccountApi.h"
 
 
 @interface WalletDAppHandle ()<WKNavigationDelegate,WKUIDelegate>
 {
     WKWebView *_webView;
-    NSDictionary *_versionData;
+    WalletVersionModel *_versionModel;
 }
 @end
 
@@ -55,7 +56,7 @@ static dispatch_once_t predicate;
 - (void)webView:(WKWebView *)webView defaultText:(nullable NSString *)defaultText completionHandler:(void (^)(NSString * __nullable result))completionHandler
 {
     //Check if the version is forced to upgrade
-    [self analyzeVersion:_versionData];
+    [self analyzeVersion:_versionModel];
     
 #if  ReleaseVersion
     NSLog(@"defaultText == %@",defaultText);
@@ -414,9 +415,9 @@ static dispatch_once_t predicate;
     WalletCheckVersionApi *checkApi = [[WalletCheckVersionApi alloc]initWithLanguage:[self getLanuage]];
     [checkApi loadDataAsyncWithSuccess:^(WalletBaseApi *finishApi) {
         
-        _versionData = finishApi.resultDict[@"data"];
-        
-        BOOL forceUpdate = [self analyzeVersion:_versionData];
+        NSDictionary *dataDict = finishApi.resultDict[@"data"];
+        _versionModel = [WalletVersionModel yy_modelWithDictionary:dataDict];
+        BOOL forceUpdate = [self analyzeVersion:_versionModel];
         if (!forceUpdate) {
             [self inject:config];
         }
@@ -426,11 +427,11 @@ static dispatch_once_t predicate;
     }];
 }
 
-- (BOOL)analyzeVersion:(NSDictionary *)dictData
+- (BOOL)analyzeVersion:(WalletVersionModel *)versionModel
 {
-    NSString *update        = dictData[@"update"];
-    NSString *latestVersion = dictData[@"latestVersion"];
-    NSString * description  = dictData[@"description"];
+    NSString *update        = versionModel.update;
+    NSString *latestVersion = versionModel.latestVersion;
+    NSString *description   = versionModel.pdescription;
     
     if (update.boolValue) { //If update is YES, do not inject js
         NSLog(@"%@",description);
