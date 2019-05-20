@@ -179,21 +179,6 @@
 + (NSString *)errorMessageWith:(NSInteger)code
 {
     switch (code) {
-        case 200:
-           return ERROR_CANCEL_MSG;
-            break;
-        case 201:
-           return ERROR_CANCEL_MSG;
-            break;
-        case 202:
-           return ERROR_CANCEL_MSG;
-            break;
-        case 203:
-            return ERROR_CANCEL_MSG;
-            break;
-        case 300:
-            return ERROR_NETWORK_MSG;
-            break;
         case 400:
             return ERROR_NETWORK_MSG;
             break;

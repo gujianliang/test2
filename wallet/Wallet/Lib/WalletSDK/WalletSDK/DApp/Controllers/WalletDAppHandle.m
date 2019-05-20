@@ -178,7 +178,7 @@ static dispatch_once_t predicate;
         return;
     }
     else{
-        
+        //No matching methodId found
         NSDictionary *noMethodDict = [WalletTools packageWithRequestId:requestId
                                                            data:@""
                                                            code:ERROR_CANCEL
@@ -300,6 +300,7 @@ static dispatch_once_t predicate;
     }
 }
 
+//Call back to dapp webview
 - (void)callbackToWebView:(NSString *)txid address:(NSString *)address bConnex:(BOOL)bConnex  webView:(WKWebView *)webView callbackId:(NSString *)callbackId requestId:(NSString *)requestId
 {
     if (txid.length != 0) {
