@@ -324,10 +324,10 @@ completionHandler:(void (^)(NSString *result))completionHandler;
  >
  >
  ```obj-c
-- (void)onTransfer:(NSArray<ClauseModel *> *)clauses 
-               gas:(NSString *)gas 
-            signer:(NSString *)signer 
-          callback:(void(^)(NSString *txid,NSString *signer))callback;
+- (void)onTransfer:(NSArray<ClauseModel *> *)clauses
+            signer:(NSString *)signer
+               gas:(NSString *)gas
+          callback:(void(^)(NSString *txid ,NSString *signer))callback;
 
  ```
 
