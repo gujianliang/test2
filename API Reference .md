@@ -319,15 +319,15 @@ completionHandler:(void (^)(NSString *result))completionHandler;
  >  delegate function that must be implemented to support the DApp environment   
  >  @param clauses : Clause list   
  >  @param gas :  Set maximum gas allowed for call   
- >  @param signer :   Enforces the specified address to sign the certificate    
+ >  @param signer :   Enforces the specified address to sign the transaction    
  >  @param callback : Callback after the end. txid:Transaction identifier ; signer:Signer address  
  >
  >
  ```obj-c
-- (void)onTransfer:(NSArray<ClauseModel *> *)clauses 
-               gas:(NSString *)gas 
-            signer:(NSString *)signer 
-          callback:(void(^)(NSString *txid,NSString *signer))callback;
+- (void)onTransfer:(NSArray<ClauseModel *> *)clauses
+            signer:(NSString *)signer
+               gas:(NSString *)gas
+          callback:(void(^)(NSString *txid ,NSString *signer))callback;
 
  ```
 

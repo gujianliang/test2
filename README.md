@@ -97,7 +97,8 @@ To use the Framework, add the ```WalletSDK.Framework``` and ```WalletSDKBundle.b
 [WalletUtils initDAppWithDelegate:self];
 
 - (void)onTransfer:(NSArray<ClauseModel *> *)clauses 
-               gas:(NSString *)gas 
+            signer:(NSString *)signer 
+               gas:(NSString *)gas
           callback:(void(^)(NSString *txid ,NSString *signer))callback;
           
 
