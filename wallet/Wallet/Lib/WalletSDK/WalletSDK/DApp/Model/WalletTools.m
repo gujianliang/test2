@@ -145,10 +145,10 @@
 {
     switch (code) {
         case 400:
-            return ERROR_NETWORK_MSG;
+            return ERROR_REJECTED_MSG;
             break;
         case 500:
-            return ERROR_REJECTED_MSG;
+            return ERROR_NETWORK_MSG;
             break;
             
         default:

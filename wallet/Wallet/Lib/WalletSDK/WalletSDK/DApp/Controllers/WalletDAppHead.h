@@ -15,11 +15,9 @@
 #import "Transaction.h"
 #import "WalletSDKMacro.h"
 
-
-
 static int OK = 1;
 static int ERROR_NETWORK = 500;
-static int ERROR_REJECTED  = 400;//User cancelled
+static int ERROR_REJECTED  = 400;
 
 static NSString *ERROR_NETWORK_MSG = @"NetError";
 static NSString *ERROR_REJECTED_MSG  = @"Rejected";
