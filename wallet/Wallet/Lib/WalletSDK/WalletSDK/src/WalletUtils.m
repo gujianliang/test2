@@ -390,7 +390,7 @@
 
 + (void)getBlockReference:(void (^)(NSString *blockReference))callback
 {
-    // 获取最新区块ID前8bytes作为blockRef
+    // Get the latest block ID first 8bytes as blockRef
     WalletBestBlockInfoApi *bestBlockApi = [[WalletBestBlockInfoApi alloc] init];
     [bestBlockApi loadDataAsyncWithSuccess:^(WalletBaseApi *finishApi) {
         WalletBlockInfoModel *blockModel = finishApi.resultModel;

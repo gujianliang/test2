@@ -20,6 +20,7 @@
 @interface WalletDAppHandle ()<WKNavigationDelegate,WKUIDelegate>
 {
     WKWebView *_webView;
+    NSDictionary *_versionData;
 }
 @end
 
@@ -49,13 +50,18 @@ static dispatch_once_t predicate;
     
 }
 
+//Analyze data from webview
 - (void)webView:(WKWebView *)webView defaultText:(nullable NSString *)defaultText completionHandler:(void (^)(NSString * __nullable result))completionHandler
 {
+    //Check if the version is forced to upgrade
+    [self analyzeVersion:_versionData];
+    
 #if  ReleaseVersion
     NSLog(@"defaultText == %@",defaultText);
 #endif
     _webView = webView;
     
+    //Whether the scheme conforms to the dapp response
     NSString *result = [defaultText stringByReplacingOccurrencesOfString:@"wallet://" withString:@""];
     NSDictionary *dict = [NSJSONSerialization dictionaryWithJsonString:result];
     
@@ -66,6 +72,7 @@ static dispatch_once_t predicate;
     NSString *method     = callbackModel.method;
     NSDictionary *callbackParams  = callbackModel.params;
     
+    //Match methodId
     if ([method isEqualToString:@"getStatus"]) {
         
         [self getStatusWithRequestId:requestId completionHandler:completionHandler];
@@ -407,27 +414,33 @@ static dispatch_once_t predicate;
     WalletCheckVersionApi *checkApi = [[WalletCheckVersionApi alloc]initWithVersion:currentVersion language:[self getLanuage]];
     [checkApi loadDataAsyncWithSuccess:^(WalletBaseApi *finishApi) {
         
-        NSDictionary *dictData  = finishApi.resultDict[@"data"];
+        _versionData = finishApi.resultDict[@"data"];
         
-        NSString *update        = dictData[@"update"];
-        NSString *latestVersion = dictData[@"latestVersion"];
-        NSString *description   = dictData[@"description"];
-
-        if (update.boolValue) { //If update is YES, do not inject js
-           
-            NSLog(@"%@",description);
-        }else{
-           //The current sdk version is different from the version returned by the server.
-            if (![currentVersion isEqualToString:latestVersion]) {
-                NSLog(@"%@",description);
-            }
-            
+        BOOL needInject = [self analyzeVersion:_versionData];
+        if (needInject) {
             [self inject:config];
         }
         
     } failure:^(WalletBaseApi *finishApi, NSString *errMsg) {
         
     }];
+}
+
+- (BOOL)analyzeVersion:(NSDictionary *)dictData
+{
+    NSString *update        = dictData[@"update"];
+    NSString *latestVersion = dictData[@"latestVersion"];
+    NSString * description  = dictData[@"description"];
+    
+    if (update.boolValue) { //If update is YES, do not inject js
+        NSLog(@"%@",description);
+    }else{
+        //The current sdk version is different from the version returned by the server.
+        if (![sdkVersion isEqualToString:latestVersion]) {
+            NSLog(@"%@",description);
+        }
+    }
+    return update.boolValue;
 }
 
 - (void)inject:(WKWebViewConfiguration *)config
