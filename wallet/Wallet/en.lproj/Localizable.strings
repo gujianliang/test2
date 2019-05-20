@@ -6,7 +6,98 @@
   Copyright © 2019 demo. All rights reserved.
 */
 
+"no_wallet_create" = "Create Wallet";
+"no_wallet_import" = "Import Wallet";
 
+"home_asset_wallet_address" = "Wallet address:";
+"home_asset_key" = "List of assets";
+
+"create_wallet_hint_password" = "Please enter your wallet password";
+"create_wallet_confirm" = "Enter Password and Click Create Wallet";
+"create_wallet_success" = "Create success!";
+"create_wallet_mnemonic" = "Mnemonic:";
+"create_wallet_keystore" = "Keystore:";
+"create_wallet_complete" = "Complete";
+
+"import_wallet_item1" = "Mnemonic Phrases";
+"import_wallet_item2" = "Keystore";
+"import_wallet_confirm" = "Confirm import";
+"import_wallet_please_input_mnemonic" = "Please enter mnemonics";
+"import_wallet_please_input_keystore" = "Please enter Keystore";
+"import_wallet_mnemonic_word_error" = "The quantity of mnemonic phrases is not 12";
+"import_wallet_mnemonic_word_format" = "Invalid mnemonic phrases";
+"import_wallet_fail" = "Import failed";
+"import_wallet_please_input_keystore_error" = "Keystore error";
+
+"manage_wallet_change_password" = "Modify the wallet password";
+"manage_wallet_export_keystore" = "Export Keystore";
+"manage_wallet_delete" = "Delete Wallet";
+"manage_wallet_delete_tip" = "Tips";
+"manage_wallet_delete_message" = "Are you sure you want to delete your wallet?";
+"manage_wallet_delete_ok" = "Confirm";
+"manage_wallet_delete_cancel" = "Cancel";
+
+"modify_password_current_password" = "Current password";
+"modify_password_first_new_password" = "New password";
+"modify_password_sencond_new_password" = "Repeat password";
+"modify_password_confirm" = "Confirm";
+
+"modify_password_old_error" = "Current password error";
+"modify_password_new_error" = "New password error";
+"modify_password_failr" = "Modification failed!";
+"modify_password_success" = "Modification successful!";
+
+"transfer_coin_adjust_cost" = "Change";
+"transfer_coin_trans_cost_default" = "Tx Fee: %1$s VTHO";
+"transfer_coin_trans_cost" = "Tx Fee: %1$s VTHO";
+"transfer_coin_balance" = "Balance:";
+"transfer_coin_amount_title" = "Amount";
+"transfer_coin_vx_address_hint" = "The VeChainThor wallet address is 42 characters in length starting with 0x";
+"transfer_coin_address_title" = "Receiver\'s Address";
+"transfer_coin_input_amount_hint" = "Amount";
+
+"transfer_coin_next_page" = "Next";
+"transfer_coin_quick" = "Fast";
+"transfer_coin_slow" = "Slow";
+"transfer_coin_title" = "Transfer";
+"transfer_coin_to_from_same_error" = "The receiver\'s address cannot be the same as sender\'s address";
+"transfer_coin_value_empty_error" = "Please enter the amount";
+"transfer_coin_to_address_error_empty" = "Please enter the address";
+"transfer_coin_to_address_error_format" = "The VeChainThor wallet address is 42 characters in length starting with 0x";
+"transfer_wallet_password_error" = "Password Incorrect";
+"transfer_wallet_chaintag_error" = "Get ChainTag Failed";
+"transfer_wallet_blockref_error" = "Get blockReference Failed";
+"transfer_wallet_send_fail" = "Send transaction failed";
+"transfer_wallet_send_balance_not_enough" = "Insufficient Balance";
+"transfer_wallet_value_not_negative" = "The amount cannot less than 0";
+"transfer_wallet_password_empty_error" = "Please enter wallet password";
+
+"transfer_coin_value_format_error" = "Input correct amount";
+"transaction_value_not_zero" = "Transaction amount cannot be 0";
+"address_char_not_hex" = "Input valid VeChainThor address.";
+
+"transfer_wallet_fail" = "Transaction failure";
+"transfer_wallet_success" = "Transactions have been sent, txId:%1$s";
+
+
+"web_url_input_hint" = "Enter Dapp\'s URL";
+
+"host_select_txt" = "Select network";
+
+"item0" = "Main Node";
+"item1" = "Test Node";
+"item2" = "Add custom Node";
+
+"host_info_test" = "Test Node";
+"host_info_release" = "Main Node";
+"host_info_test_msg" = "Test Node Connecting VeChain Test Network";
+"host_info_release_msg" = "Main Node Connecting VeChain Main Network";
+
+"host_setting_title" = "Add network";
+"host_setting_input_name_hint" = "Input name";
+"host_setting_input_hint" = "Input URL";
+
+// 新增
 "version" = "Demo Version：(%@)";
 "input_empty" = "The input cannot be blank";
 "mnemonic_not_available" = "Mnemonic Words is not available";

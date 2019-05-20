@@ -302,8 +302,8 @@
 {
     NSDecimalNumber *amountNumber = [NSDecimalNumber decimalNumberWithString:wei.decimalString];
     NSDecimalNumber *dicimalNumber = [NSDecimalNumber decimalNumberWithString:[NSString stringWithFormat:@"%f",pow(10, dicimals)]];
-    NSDecimalNumber *weiNumber = [amountNumber decimalNumberByMultiplyingBy:dicimalNumber];
-        
+    NSDecimalNumber *weiNumber = [amountNumber decimalNumberByDividingBy:dicimalNumber];
+    
     return weiNumber.stringValue;
 }
 
