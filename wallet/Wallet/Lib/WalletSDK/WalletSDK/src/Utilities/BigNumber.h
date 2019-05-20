@@ -35,10 +35,10 @@
 + (BigNumber*)constantTwo;
 + (BigNumber*)constantWeiPerEther;
 
-// BigNumber 只适用于整数间的计算
+// BigNumber only works for calculations between integers
 
-+ (instancetype)bigNumberWithDecimalString: (NSString*)decimalString;   // 10进制 整数值 字符串,
-+ (instancetype)bigNumberWithHexString: (NSString*)hexString;           // 16进制 数值 字符串
++ (instancetype)bigNumberWithDecimalString: (NSString*)decimalString;   //Decimal integer value string,
++ (instancetype)bigNumberWithHexString: (NSString*)hexString;           //Hexadecimal value string
 + (instancetype)bigNumberWithBase36String: (NSString*)base36String;
 
 + (instancetype)bigNumberWithData: (NSData*)data;

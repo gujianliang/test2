@@ -18,6 +18,7 @@
     if (self){
         _raw = raw;
         self.requestMethod = RequestPostMethod;
+        self.supportOtherDataFormat = YES;
         self.httpAddress =  [NSString stringWithFormat:@"%@/transactions",[WalletUserDefaultManager getBlockUrl]];
     }
     return self;

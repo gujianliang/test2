@@ -67,7 +67,7 @@
     }];
 }
 
-// mnemonicWords count 12,15,18,21,24
+// MnemonicWords count 12,15,18,21,24
 + (void)createWalletWithMnemonicWords:(NSArray<NSString *> *)mnemonicWords
                             password:(NSString *)password
                             callback:(void(^)(WalletAccountModel *account,NSError *error))callback
@@ -228,7 +228,7 @@
                             password:(NSString *)password
                             callback:(void(^)(NSString *txId))callback
 {
-    // check keystore format
+    // Check keystore format
     if (![WalletTools checkKeystore:keystoreJson]) {
         
         if (callback) {
@@ -246,7 +246,7 @@
                  password:(NSString*)password
                  callback:(void(^)(NSString *raw))callback
 {
-    // check keystore format
+    // Check keystore format
     if (![WalletTools checkKeystore:keystoreJson]) {
         
         if (callback) {
@@ -284,6 +284,7 @@
                                       [s substringFromIndex:2],
                                       [vData.hexString substringFromIndex:2]];
                  
+                 //Signature fails if v is 2 or 3
                  if (signature.v == 2
                      || signature.v == 3) {
                      
@@ -319,6 +320,7 @@
     if (nodelUrl.length == 0) {
         return;
     }
+    //Turn on network monitoring
     [[AFNetworkReachabilityManager sharedManager] startMonitoring];
     [WalletUserDefaultManager setBlockUrl:nodelUrl];
 }

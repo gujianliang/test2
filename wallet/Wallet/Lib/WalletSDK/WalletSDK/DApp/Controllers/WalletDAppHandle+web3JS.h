@@ -27,6 +27,10 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)getChainTag:(NSString *)requestId
   completionHandler:(void (^)(NSString * __nullable result))completionHandler;
 
+//Get the local wallet address
+-(void)getAccountsWithRequestId:(NSString *)requestId
+                     callbackId:(NSString *)callbackId
+                        webView:(WKWebView *)webView;
 @end
 
 NS_ASSUME_NONNULL_END

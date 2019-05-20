@@ -20,7 +20,7 @@
 
 @implementation WalletDAppHandle (web3JS)
 
-// Get vet amount
+// Get VET balance
 - (void)getBalance:(NSString *)callbackId
            webView:(WKWebView *)webView
          requestId:(NSString *)requestId
@@ -79,5 +79,29 @@
     }];
 }
 
-
+//Get the local wallet address
+-(void)getAccountsWithRequestId:(NSString *)requestId
+                     callbackId:(NSString *)callbackId
+                        webView:(WKWebView *)webView
+{
+    
+    if (self.delegate && [self.delegate respondsToSelector:@selector(onGetWalletAddress:)]) {
+        
+        [self.delegate onGetWalletAddress:^(NSArray * _Nonnull addressList) {
+            
+            [WalletTools callbackWithrequestId:requestId
+                                       webView:webView
+                                          data:addressList
+                                    callbackId:callbackId
+                                          code:OK];
+        }];
+        
+    }else{
+        [WalletTools callbackWithrequestId:requestId
+                                   webView:webView
+                                      data:@""
+                                callbackId:callbackId
+                                      code:ERROR_CANCEL];
+    }
+}
 @end

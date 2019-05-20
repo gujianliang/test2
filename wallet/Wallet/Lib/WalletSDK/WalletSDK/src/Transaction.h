@@ -46,7 +46,6 @@ extern NSString * _Nullable chainName(ChainId chainId);
 
 @property (nonatomic, assign) ChainId chainId;
 
-// 新增
 @property (nonatomic, assign) NSInteger Expiration;
 @property (nonatomic, strong, nonnull) BigNumber *ChainTag;
 @property (nonatomic, strong, nonnull) BigNumber *BlockRef;
@@ -63,7 +62,6 @@ extern NSString * _Nullable chainName(ChainId chainId);
 
 @property (nonatomic, readonly, nullable) Hash *transactionHash;
 
-// 观察钱包获得 txid
 - (NSString *_Nullable)obersverTxID:(NSString *_Nullable)address;
 
 - (NSData *_Nullable)getSigntureMessage;

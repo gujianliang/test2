@@ -115,7 +115,7 @@
 }
 
 
-- (void)methodAsClauseWithDictP:(NSDictionary *)dictP
+- (void)methodAsCallWithDictP:(NSDictionary *)dictP
                       requestId:(NSString *)requestId
                         webView:(WKWebView *)webView
                      callbackId:(NSString *)callbackId
@@ -190,6 +190,7 @@
     }];
 }
 
+//Get VET balance
 - (void)getAccountRequestId:(NSString *)requestId
                     webView:(WKWebView *)webView
                     address:(NSString *)address
@@ -418,31 +419,7 @@
     }];
 }
 
-//Get the local wallet address
--(void)getAccountsWithRequestId:(NSString *)requestId
-                     callbackId:(NSString *)callbackId
-                        webView:(WKWebView *)webView
-{
-    
-    if (self.delegate && [self.delegate respondsToSelector:@selector(onGetWalletAddress:)]) {
-        
-        [self.delegate onGetWalletAddress:^(NSArray * _Nonnull addressList) {
-            
-            [WalletTools callbackWithrequestId:requestId
-                                       webView:webView
-                                          data:addressList
-                                    callbackId:callbackId
-                                          code:OK];
-        }];
-       
-    }else{
-        [WalletTools callbackWithrequestId:requestId
-                                   webView:webView
-                                      data:@""
-                                callbackId:callbackId
-                                      code:ERROR_CANCEL];
-    }
-}
+
 
 - (void)tickerNextRequestId:(NSString *)requestId
                  callbackId:(NSString *)callbackId

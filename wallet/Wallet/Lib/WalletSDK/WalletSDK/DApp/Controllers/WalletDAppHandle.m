@@ -121,7 +121,7 @@ static dispatch_once_t predicate;
     }
     else if([method isEqualToString:@"methodAsCall"])
     {
-        [self methodAsClauseWithDictP:callbackParams requestId:requestId webView:webView callbackId:callbackId];
+        [self methodAsCallWithDictP:callbackParams requestId:requestId webView:webView callbackId:callbackId];
         
     }else if ([method isEqualToString:@"getAccounts"])
     {
@@ -416,8 +416,8 @@ static dispatch_once_t predicate;
         
         _versionData = finishApi.resultDict[@"data"];
         
-        BOOL needInject = [self analyzeVersion:_versionData];
-        if (needInject) {
+        BOOL forceUpdate = [self analyzeVersion:_versionData];
+        if (!forceUpdate) {
             [self inject:config];
         }
         

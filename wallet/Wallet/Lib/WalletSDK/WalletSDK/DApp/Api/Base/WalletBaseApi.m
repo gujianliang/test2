@@ -114,6 +114,7 @@
     NSNumber *errCode = nil;
     NSString *errMsg = nil;
     self.resultModel = responseData;
+    
     if (responseData != nil) {
         NSDictionary *dict = responseData;
         errCode = [dict valueForKey:@"code"];
@@ -129,75 +130,46 @@
         }
         
         if ((errCode != nil && [errCode integerValue] == 1) || (errCode.integerValue == 0)) {
-            
-            if ([responseData isKindOfClass:[NSString class]]) { //  3840 Return format does not match
-                
-                [self convertJsonResultToModel:nil];
-                self.resultModel = nil;
-                
-                if (self.supportOtherDataFormat) { // support other data models
-                    self.resultDict = nil;
-                    self.status = RequestSuccess;
-                    _successBlock(self);
-                    return;
-                    
-                }else { // not support
-                    errCode = @(3840);
-                    
-                    self.status = RequestFailed;
-                }
-                
-            }else { //Other data models
-                
-                id objDict = nil;
-                NSDictionary *dictEntity = [dict objectForKey:@"data"];
-                if (_specialRequest) {
-                    objDict = responseData;
-                }else if(dictEntity != nil && dictEntity != (NSDictionary *)[NSNull null]) {
-                    objDict = dictEntity;
-                }else{
-                    objDict = responseData;
-                }
-                
-                if(objDict && [objDict isKindOfClass:[NSDictionary class]]){  // The return may not be dict
-                    
-                    self.status = RequestSuccess;
-                    [self convertJsonResultToModel:objDict];
-                    
-                }else{
-                    self.status = RequestSuccess;
-                    self.resultModel = objDict;
-                }
-                self.status = RequestSuccess;
-                _successBlock(self);
-                return;
+        
+            id objDict = nil;
+            NSDictionary *dictEntity = [dict objectForKey:@"data"];
+            if (_specialRequest) {
+                objDict = responseData;
+            }else if(dictEntity != nil && dictEntity != (NSDictionary *)[NSNull null]) {
+                objDict = dictEntity;
+            }else{
+                objDict = responseData;
             }
+            
+            if(objDict && [objDict isKindOfClass:[NSDictionary class]]){  // The return may not be dict
+                
+                self.status = RequestSuccess;
+                [self convertJsonResultToModel:objDict];
+                
+            }else{
+                self.status = RequestSuccess;
+                self.resultModel = objDict;
+            }
+            self.status = RequestSuccess;
+            _successBlock(self);
+            return;
             
         } else {
             self.status = RequestFailed;
         }
         
     } else {
-#warning test
-        if ([_httpAddress containsString:@"transactions"] && [_httpAddress hasSuffix:@"receipt"]) {
-            self.status = RequestSuccess;
-            _successBlock(self);
-            return;
-            
-        }else{
-            
-            if (self.supportOtherDataFormat) {
-                if (error.code == 3840) {
-                    self.resultDict = nil;
-                    self.status = RequestSuccess;
-                    _successBlock(self);
-                    return;
-                }else{
-                    self.status = RequestFailed;
-                }
+        if (self.supportOtherDataFormat) {
+            if (error.code == 3840) {
+                self.resultDict = nil;
+                self.status = RequestSuccess;
+                _successBlock(self);
+                return;
             }else{
                 self.status = RequestFailed;
             }
+        }else{
+            self.status = RequestFailed;
         }
     }
     

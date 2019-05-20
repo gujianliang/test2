@@ -24,7 +24,6 @@
 - (instancetype)initWithURL:(NSURL *)URL{
     self = [super init];
     if (self) {
-        URL = [NSURL URLWithString:@"http://192.168.50.207:8080"];
         _URL = URL;
     }
     return self;
@@ -54,20 +53,6 @@
                                                           timeoutInterval:30.0];
     [_webView loadRequest:theRequest];
     [self.view addSubview:_webView];
-    
-    
-#warning check
-    /*
-     CurrentWallet has two key; addres and ketstore
-                Address: wallet address
-                Keystore: NSDictionary, specific format, please read the readme
-     */
-    NSDictionary *currentWallet = [[NSUserDefaults standardUserDefaults]objectForKey:@"currentWallet"];
-
-    NSMutableArray *walletList = [NSMutableArray array];
-    if (currentWallet) {
-        [walletList addObject:currentWallet[@"keystore"]];
-    }
     
     // Set delegate
     [WalletUtils initDAppWithDelegate:self];

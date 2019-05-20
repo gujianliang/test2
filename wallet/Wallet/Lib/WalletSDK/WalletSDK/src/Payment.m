@@ -77,7 +77,7 @@ static RegEx *RegexNumbersOnly = nil;
         whole = [commified substringToIndex:commified.length - 1];
     }
     
-    // 保留2 小数
+    // Keep 2 decimals
     if ((options & EtherFormatOptionApproximate) && decimal.length > 2) {
         decimal = [decimal substringToIndex:2];
     }

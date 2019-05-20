@@ -14,7 +14,7 @@
 {
     self = [super init];
     if (self){
-        
+        self.supportOtherDataFormat = YES;
         self.httpAddress =  [NSString stringWithFormat:@"%@/transactions/%@",[WalletUserDefaultManager getBlockUrl],txid];
     }
     return self;
