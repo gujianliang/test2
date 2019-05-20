@@ -126,6 +126,8 @@ callback:(void(^)(NSString *txId))callback
          }
 
          [account sign:transaction];
+        
+        //If v is 2 or 3, the signature fails
          if (transaction.signature.v == 2
              || transaction.signature.v == 3) {
              
@@ -133,7 +135,6 @@ callback:(void(^)(NSString *txId))callback
 
          }else{
 
-             
             self.txId = [transaction txID:account];
              NSString *raw = [SecureData dataToHexString: [transaction serialize]];
              
@@ -165,10 +166,8 @@ callback:(void(^)(NSString *txId))callback
 
 - (void)showTransactionFail:(void(^)(NSString *txId ))callback
 {
-#warning 处理方式
     callback(self.txId);
 }
-
 
 - (void)signCertFrom:(NSString *)from
              account:(Account *)account
@@ -196,9 +195,10 @@ callback:(void(^)(NSString *txId))callback
                          [s substringFromIndex:2],
                          [vData.hexString substringFromIndex:2]];
     
+    //If v is 2 or 3, the signature fails
     if (signature.v == 2
         || signature.v == 3) {
-        // fail
+        
         [WalletTools callbackWithrequestId:requestId
                                    webView:webView
                                       data:@""

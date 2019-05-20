@@ -7,17 +7,16 @@
 //
 
 #import "WalletCheckVersionApi.h"
+#import "WalletDAppHead.h"
 
 @implementation WalletCheckVersionApi
 {
-    NSString *_version;
     NSString *_language;
 }
--(instancetype)initWithVersion:(NSString *)version language:(NSString *)language
+-(instancetype)initWithLanguage:(NSString *)language
 {
     self = [super init];
     if (self){
-        _version = version;
         _language = language;
         
         self.requestMethod = RequestPostMethod;
@@ -32,10 +31,10 @@
     // increase the parameter
     NSMutableDictionary* dict = [super buildRequestDict];
     [dict setValueIfNotNil:@"iOS" forKey:@"platformType"];
-    [dict setValueIfNotNil:_version forKey:@"softwareVersion"];
+    [dict setValueIfNotNil:SDKVersion forKey:@"softwareVersion"];
     [dict setValueIfNotNil:_language forKey:@"language"];
     [dict setValueIfNotNil:@"appstore" forKey:@"channel"];
-    [dict setValueIfNotNil:@"27a7898b733ce99d90ec5338de5ced52" forKey:@"appid"];
+    [dict setValueIfNotNil:AppId forKey:@"appid"];
 
     return dict;
 }

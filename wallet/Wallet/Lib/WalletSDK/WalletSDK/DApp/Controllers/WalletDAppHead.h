@@ -15,7 +15,8 @@
 #import "Transaction.h"
 
 
-#define sdkVersion  @"1.0.0"
+#define SDKVersion  @"1.0.0"
+#define AppId @"27a7898b733ce99d90ec5338de5ced52"
 
 static int OK = 1;
 static int ERROR_NETWORK = 500;

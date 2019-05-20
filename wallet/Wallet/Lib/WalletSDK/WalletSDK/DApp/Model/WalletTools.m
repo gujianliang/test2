@@ -89,26 +89,7 @@
     return inputAddress;
 }
 
-+ (void)checkNetwork:(void(^)(BOOL t))block
-{
-    BOOL result = YES;
-    AFNetworkReachabilityManager *reachManager = [AFNetworkReachabilityManager sharedManager];
-    if (![reachManager isReachable]) {
 
-        UIViewController * vc= [WalletTools getCurrentVC];
-        UIView *cententView = vc.view;
-        if (vc.navigationController) {
-            cententView = vc.navigationController.view;
-        }
-        [WalletMBProgressShower showTextIn:cententView
-                                     Text:VCNSLocalizedBundleString(@"no_network_hint", nil)
-                                   During:1.5];
-        result = NO;
-    }
-    if (block) {
-        block(result);
-    }
-}
 
 
 + (NSString *)splitLongStr:(NSString *)inputStr

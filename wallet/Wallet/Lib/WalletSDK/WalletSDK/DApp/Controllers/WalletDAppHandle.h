@@ -28,7 +28,8 @@ completionHandler:(void (^)(NSString * __nullable result))completionHandler;
 
 - (void)injectJS:(WKWebViewConfiguration *)config;
 
-+ (void)attempDealloc;
+//Release object
++ (void)deallocDApp;
 
 @end
 

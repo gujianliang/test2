@@ -52,12 +52,9 @@
 
 + (UIViewController*)getCurrentVC;
 
-
 + (NSString *)localStringBundlekey:(NSString *)key; // get bundle key
 
 + (NSString *)checksumAddress:(NSString *)inputAddress;
-
-+ (void)checkNetwork:(void(^)(BOOL t))block;
 
 + (UIViewController*)topViewControllerWithRootViewController:(UIViewController*)rootViewController;
 

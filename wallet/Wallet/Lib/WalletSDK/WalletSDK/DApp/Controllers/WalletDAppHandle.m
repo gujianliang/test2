@@ -77,7 +77,7 @@ static dispatch_once_t predicate;
         
         [self getStatusWithRequestId:requestId completionHandler:completionHandler];
         
-        //open ticker
+        //Open ticker
         [self tickerNextRequestId:requestId callbackId:callbackId];
         
         return;
@@ -215,7 +215,7 @@ static dispatch_once_t predicate;
 
     NSMutableArray *clauseModelList = [[NSMutableArray alloc]init];
 
-    if (bConnex) { // connex
+    if (bConnex) { // Connex
         
         NSArray *clauseList = callbackParams[@"clauses"];
         
@@ -236,7 +236,7 @@ static dispatch_once_t predicate;
         
         from       = callbackParams[@"options"][@"signer"];
         
-    }else{ // web3
+    }else{ // Web3
         
         ClauseModel *clauseModel = [[ClauseModel alloc]init];
         clauseModel.to    = callbackParams[@"to"];
@@ -325,16 +325,16 @@ static dispatch_once_t predicate;
                                    webView:webView
                                       data:@""
                                 callbackId:callbackId
-                                      code:ERROR_CANCEL];
+                                      code:ERROR_NETWORK];
     }
 }
 
 - (void)paramsError:(NSString *)requestId webView:(WKWebView *)webView callbackId:(NSString *)callbackId
 {
-    [WalletTools callbackWithrequestId:requestId webView:webView data:@"" callbackId:callbackId code:ERROR_CANCEL];
+    [WalletTools callbackWithrequestId:requestId webView:webView data:@"" callbackId:callbackId code:ERROR_NETWORK];
 }
 
-//websocket notification
+//Websocket notification
 - (void)websocket:(NSNotification *)sender
 {
     NSDictionary *dict = sender.object;
@@ -409,10 +409,8 @@ static dispatch_once_t predicate;
 
 - (void)injectJS:(WKWebViewConfiguration *)config
 {
-    NSString *currentVersion = sdkVersion;
-    
-    // check sdk version
-    WalletCheckVersionApi *checkApi = [[WalletCheckVersionApi alloc]initWithVersion:currentVersion language:[self getLanuage]];
+    // Check sdk version
+    WalletCheckVersionApi *checkApi = [[WalletCheckVersionApi alloc]initWithLanguage:[self getLanuage]];
     [checkApi loadDataAsyncWithSuccess:^(WalletBaseApi *finishApi) {
         
         _versionData = finishApi.resultDict[@"data"];
@@ -437,7 +435,7 @@ static dispatch_once_t predicate;
         NSLog(@"%@",description);
     }else{
         //The current sdk version is different from the version returned by the server.
-        if (![sdkVersion isEqualToString:latestVersion]) {
+        if (![SDKVersion isEqualToString:latestVersion]) {
             NSLog(@"%@",description);
         }
     }
@@ -446,7 +444,7 @@ static dispatch_once_t predicate;
 
 - (void)inject:(WKWebViewConfiguration *)config
 {
-    //inject connex js
+    //Inject connex js
     NSString *bundlePath = [[NSBundle mainBundle] pathForResource:@"WalletSDKBundle" ofType:@"bundle"];
     if(!bundlePath){
         return ;
@@ -461,7 +459,7 @@ static dispatch_once_t predicate;
     [config.userContentController addUserScript:userScriptConnex];
     
     
-    //inject web3 js
+    //Inject web3 js
     NSString *web3Path = [bundlePath stringByAppendingString:@"/web3.js"];
     NSString *web3js = [NSString stringWithContentsOfFile:web3Path encoding:NSUTF8StringEncoding error:nil];
     web3js = [web3js stringByReplacingOccurrencesOfString:@"\n" withString:@""];
@@ -488,13 +486,13 @@ static dispatch_once_t predicate;
     return language;
 }
 
-+(void)attempDealloc
++(void)deallocDApp
 {
     predicate = 0;
     singleton = nil;
     [[NSNotificationCenter defaultCenter]removeObserver:self];
     
-    // close websocket
+    // Close websocket
     [[SocketRocketUtility instance] SRWebSocketClose];
 }
 

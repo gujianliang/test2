@@ -317,8 +317,6 @@
 + (void)setNodeUrl:(NSString *)nodelUrl
 {
     if (nodelUrl.length == 0) {
-        [WalletMBProgressShower showTextIn:[WalletTools getCurrentVC].view
-                                      Text:ERROR_CANCEL_MSG During:1];
         return;
     }
     [[AFNetworkReachabilityManager sharedManager] startMonitoring];
@@ -332,7 +330,7 @@
 
 + (void)deallocDApp
 {
-    [WalletDAppHandle attempDealloc];
+    [WalletDAppHandle deallocDApp];
 }
 
 + (void)modifyKeystore:(NSString *)keystoreJson
@@ -440,7 +438,7 @@
 
 + (NSString *)getVersion
 {
-    return sdkVersion;
+    return SDKVersion;
 }
 
 

@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface WalletCheckVersionApi : WalletBaseApi
 
--(instancetype)initWithVersion:(NSString *)version language:(NSString *)language;
+-(instancetype)initWithLanguage:(NSString *)language;
 
 @end
 
