@@ -42,12 +42,12 @@
 }
 
 + (NSString *)localStringBundlekey:(NSString *)key{
-    NSString *pathString1 = [[NSBundle mainBundle] pathForResource:@"WalletSDKBundle" ofType:@"bundle"];
-    if(!pathString1){
+    NSString *pathString = [[NSBundle mainBundle] pathForResource:@"WalletSDKBundle" ofType:@"bundle"];
+    if(!pathString){
         return key;
     }
         
-    NSBundle *resourceBundle = [NSBundle bundleWithPath:pathString1];
+    NSBundle *resourceBundle = [NSBundle bundleWithPath:pathString];
     
     // Get current device language
     NSArray *appLanguages = [[NSUserDefaults standardUserDefaults] objectForKey:@"AppleLanguages"];
@@ -88,8 +88,6 @@
     }
     return inputAddress;
 }
-
-
 
 
 + (NSString *)splitLongStr:(NSString *)inputStr

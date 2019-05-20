@@ -44,6 +44,7 @@ static dispatch_once_t predicate;
     if (self ) {
         [[NSNotificationCenter defaultCenter]removeObserver:self];
         
+        //Add web socket NSNotification
         [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(websocket:) name:kWebSocketdidReceiveMessageNote object:nil];
     }
     return self;

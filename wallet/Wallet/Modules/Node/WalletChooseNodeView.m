@@ -7,7 +7,8 @@
 //
 
 #import "WalletChooseNodeView.h"
-#import "WalletSdkMacro.h"
+#import "WalletDemoMacro.h"
+#import <WalletSDK/WalletSDKMacro.h>
 
 
 @interface WalletChooseNodeView()<UITableViewDataSource, UITableViewDelegate>

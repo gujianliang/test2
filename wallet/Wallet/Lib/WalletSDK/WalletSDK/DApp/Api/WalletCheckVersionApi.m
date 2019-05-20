@@ -20,8 +20,7 @@
         _language = language;
         
         self.requestMethod = RequestPostMethod;
-#warning 上线需要修改
-        self.httpAddress = @"https://version-management-test.vechaindev.com/api/v1/version/";
+        self.httpAddress = @"https://version-management.vechain.com/api/v1/version/";
     }
     return self;
 }

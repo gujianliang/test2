@@ -12,6 +12,9 @@
 #import "WalletAccountModel.h"
 #import "MBProgressHUD.h"
 #import "BigNumber.h"
+
+#import "WalletSDKMacro.h"
+
 NS_ASSUME_NONNULL_BEGIN
 
 @protocol WalletUtilsDelegate <NSObject>

@@ -14,8 +14,9 @@
 #import "WalletChooseNodeView.h"
 #import "WalletNodeDetailVC.h"
 #import "WalletAddVthoNodeVC.h"
-#import "WalletSdkMacro.h"
+#import "WalletDemoMacro.h"
 #import <WalletSDK/WalletUtils.h>
+#import <WalletSDK/WalletSDKMacro.h>
 
 @interface WalletDetailVC ()<UISearchBarDelegate>
 {
@@ -200,7 +201,7 @@
 /**
 *  Get the VTHO balance from Node environment, '_blockHost' is a Node variable . Which Node environment
 *  they work in depends on how you set it up.
-*  'vthoTokenAddress' is a fixed contract address. It is declarationed in the file of 'WalletSdkMacro.h'.
+*  'vthoTokenAddress' is a fixed contract address. It is declarationed in the file of 'WalletDemoMacro.h'.
 *  vthoTokenAddress : '0x0000000000000000000000000000456e65726779'
 */
 - (void)getVTHOBalance {

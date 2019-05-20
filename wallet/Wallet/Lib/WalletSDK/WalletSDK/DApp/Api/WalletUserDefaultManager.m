@@ -7,8 +7,6 @@
 //
 #import "WalletUserDefaultManager.h"
 
-#define Main_Node      @"https://vethor-node.digonchain.com"
-
 @implementation WalletUserDefaultManager
 
 

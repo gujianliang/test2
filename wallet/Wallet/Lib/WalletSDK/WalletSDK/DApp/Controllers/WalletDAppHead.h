@@ -13,10 +13,9 @@
 #import "SecureData.h"
 #import "Account.h"
 #import "Transaction.h"
+#import "WalletSDKMacro.h"
 
 
-#define SDKVersion  @"1.0.0"
-#define AppId @"27a7898b733ce99d90ec5338de5ced52"
 
 static int OK = 1;
 static int ERROR_NETWORK = 500;

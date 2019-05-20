@@ -16,6 +16,7 @@
 @implementation WalletDAppHandle (transfer)
 
 
+//Initiate a transaction
 - (void)signTransfer:(TransactionParameter *)paramModel
             keystore:(NSString *)keystore
             password:(NSString *)password
@@ -51,6 +52,7 @@
     [self sign:transaction paramModel:paramModel keystore:keystore password:password callback:callback];
 }
 
+//Organize the clause data
 - (void)packageClausesData:(Transaction *)transaction
                 paramModel:(TransactionParameter *)paramModel
 {
@@ -125,9 +127,10 @@ callback:(void(^)(NSString *txId))callback
              return;
          }
 
+        //Sign with private key
          [account sign:transaction];
         
-        //If v is 2 or 3, the signature fails
+        //Signature fails if v is 2 or 3
          if (transaction.signature.v == 2
              || transaction.signature.v == 3) {
              
@@ -195,7 +198,7 @@ callback:(void(^)(NSString *txId))callback
                          [s substringFromIndex:2],
                          [vData.hexString substringFromIndex:2]];
     
-    //If v is 2 or 3, the signature fails
+    //Signature fails if v is 2 or 3
     if (signature.v == 2
         || signature.v == 3) {
         

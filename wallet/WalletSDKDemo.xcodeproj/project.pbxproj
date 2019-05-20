@@ -166,7 +166,7 @@
 		4126DED32240DC7600850291 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/WalletTransferVC.strings"; sourceTree = "<group>"; };
 		4126DED52240E28000850291 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/WalletCreateVC.xib; sourceTree = "<group>"; };
 		4126DED82240E28200850291 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/WalletCreateVC.strings"; sourceTree = "<group>"; };
-		41A5B18B222630740025AA1C /* WalletSdkMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WalletSdkMacro.h; sourceTree = "<group>"; };
+		41A5B18B222630740025AA1C /* WalletDemoMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WalletDemoMacro.h; sourceTree = "<group>"; };
 		41A5B19D2227EC210025AA1C /* WalletAddVthoNodeVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletAddVthoNodeVC.xib; sourceTree = "<group>"; };
 		9718121A2227945B008F9639 /* WalletNodeDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WalletNodeDetailVC.h; sourceTree = "<group>"; };
 		9718121D2227945B008F9639 /* WalletNodeDetailVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WalletNodeDetailVC.xib; sourceTree = "<group>"; };
@@ -505,7 +505,7 @@
 				9747227820EDE9F800F9EAB3 /* ViewController.h */,
 				9747227920EDE9F800F9EAB3 /* ViewController.m */,
 				4126DEAE2240CE7000850291 /* ViewController.xib */,
-				41A5B18B222630740025AA1C /* WalletSdkMacro.h */,
+				41A5B18B222630740025AA1C /* WalletDemoMacro.h */,
 				9747227E20EDE9FA00F9EAB3 /* Assets.xcassets */,
 				9747228320EDE9FA00F9EAB3 /* Info.plist */,
 				4126DEA42240BBCD00850291 /* LaunchScreen.storyboard */,

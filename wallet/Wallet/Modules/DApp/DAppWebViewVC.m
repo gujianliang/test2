@@ -9,7 +9,7 @@
 #import "DAppWebViewVC.h"
 #import <WebKit/WebKit.h>
 #import <WalletSDK/WalletUtils.h>
-#import "WalletSdkMacro.h"
+#import "WalletDemoMacro.h"
 
 @interface DAppWebViewVC ()<WKNavigationDelegate,WKUIDelegate,WalletUtilsDelegate>
 {

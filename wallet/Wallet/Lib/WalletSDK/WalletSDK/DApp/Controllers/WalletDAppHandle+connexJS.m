@@ -120,9 +120,9 @@
                         webView:(WKWebView *)webView
                      callbackId:(NSString *)callbackId
 {
-    NSDictionary *dictclause    = dictP[@"clause"];
-    NSDictionary *dictOpts      = dictP[@"opts"];
-    NSString *revision          = dictP[@"revision"];
+    NSString *revision        = dictP[@"revision"];
+    NSDictionary *dictOpts    = dictP[@"opts"];
+    NSDictionary *dictclause  = dictP[@"clause"];
     
     WalletDappSimulateAccountApi *accountApi = [[WalletDappSimulateAccountApi alloc]initClause:dictclause opts:dictOpts revision:revision];
     accountApi.supportOtherDataFormat = YES;
@@ -449,7 +449,7 @@
 {
     NSString *url = [[WalletUserDefaultManager getBlockUrl] stringByAppendingString:@"/subscriptions/block"];
     
-    // open web socket
+    // Open web socket
     SocketRocketUtility *socket = [SocketRocketUtility instance];
     
     socket.requestIdList = @[requestId];
@@ -457,6 +457,7 @@
     [socket SRWebSocketOpenWithURLString:url];
 }
 
+// Cert sign
 - (void)certTransferParamModel:(NSDictionary *)callbackParams
                           from:(NSString *)from
                      requestId:(NSString *)requestId

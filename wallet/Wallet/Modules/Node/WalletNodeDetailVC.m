@@ -7,9 +7,10 @@
 //
 
 #import "WalletNodeDetailVC.h"
-#import <WalletSDK/WalletUtils.h>
 #import "MBProgressHUD.h"
-#import "WalletSdkMacro.h"
+#import "WalletDemoMacro.h"
+#import <WalletSDK/WalletUtils.h>
+#import <WalletSDK/WalletSDKMacro.h>
 
 @interface WalletNodeDetailVC ()
 {

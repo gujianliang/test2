@@ -414,6 +414,8 @@
     }
     NSDictionary *dictKeystore = [NSJSONSerialization dictionaryWithJsonString:keystore];
     NSString *address = dictKeystore[@"address"];
+    
+    //Check 0x at the beginning
     if (![address hasPrefix:@"0x"]) {
         if (address.length > 0) {
             address = [@"0x" stringByAppendingString:address];
