@@ -225,7 +225,7 @@
 }
 
 
-#pragma mark 获取stringSize
+#pragma mark get stringSize
 -(NSMutableAttributedString *)attributedStringFromStingWithFont:(UIFont *)font
                                                 withLineSpacing:(CGFloat)lineSpacing
 {

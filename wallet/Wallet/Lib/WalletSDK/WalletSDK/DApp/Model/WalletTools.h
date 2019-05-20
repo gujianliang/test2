@@ -83,7 +83,7 @@
 
 + (BOOL)isEmpty:(id )input;
 
-+ (NSString *)packCertParam:(NSDictionary *)param;
++ (NSString *)packageCertParam:(NSDictionary *)param;
 
 @end
 

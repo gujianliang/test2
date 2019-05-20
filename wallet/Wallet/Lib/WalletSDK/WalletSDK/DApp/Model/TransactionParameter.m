@@ -479,7 +479,7 @@
      transactionModel.expiration        = self.expiration;
      transactionModel.gasPriceCoef      = self.gasPriceCoef;
      
-     // not mandatory
+     // Not mandatory
      transactionModel.dependsOn = self.dependsOn;
      transactionModel.reserveds = self.reserveds;
      

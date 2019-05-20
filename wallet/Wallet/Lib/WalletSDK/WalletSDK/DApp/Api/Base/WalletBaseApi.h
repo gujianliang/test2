@@ -38,7 +38,7 @@ typedef void (^requestBlock)(NSDictionary *requestDict,NSError *error);
 @property (nonatomic, copy) WalletLoadSuccessBlock successBlock;
 @property (nonatomic, copy) WalletLoadFailBlock failBlock;
 @property (nonatomic, copy) NSString *httpAddress; // Request address
-@property (nonatomic, copy) NSMutableDictionary *requestParmas;
+@property (nonatomic, strong) NSMutableDictionary *requestParmas;
 @property (nonatomic, strong) NSError *lastError;
 @property (nonatomic, assign) BOOL specialRequest; // Special request return processing
 @property (nonatomic, assign) WalletRequestStatus status;

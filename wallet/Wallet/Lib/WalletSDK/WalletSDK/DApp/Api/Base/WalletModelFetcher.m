@@ -19,7 +19,6 @@
 
 + (void)requestGetWithUrl:(NSString*)aUrl
                    params:(NSMutableDictionary*)dict
-                    error:(NSError **)error
             responseBlock:(responseBlock)block
 {
     NSString *urlString = [NSString stringWithString:aUrl];
@@ -42,7 +41,6 @@
 
 + (void)requestPostWithUrl:(NSString*)aUrl
                     params:(NSMutableDictionary*)dict
-                     error:(NSError *__autoreleasing *)error
              responseBlock:(responseBlock)block
 {
     NSString *urlString = [NSString stringWithString:aUrl];

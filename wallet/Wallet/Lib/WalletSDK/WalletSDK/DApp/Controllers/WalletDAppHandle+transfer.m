@@ -181,7 +181,7 @@ callback:(void(^)(NSString *txId))callback
                param:(NSDictionary *)param
 {
     
-    NSString *packSign = [WalletTools packCertParam:param];
+    NSString *packSign = [WalletTools packageCertParam:param];
     
     NSData *totalData1 = [packSign dataUsingEncoding:NSUTF8StringEncoding];
     SecureData *data = [SecureData BLAKE2B:totalData1];

@@ -436,7 +436,7 @@
     NSMutableDictionary *newMessage = [NSMutableDictionary dictionaryWithDictionary:message];
     [newMessage setValueIfNotNil:signer forKey:@"signer"];
     
-   return  [WalletTools packCertParam:newMessage];
+   return  [WalletTools packageCertParam:newMessage];
 }
 
 

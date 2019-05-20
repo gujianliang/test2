@@ -108,17 +108,25 @@
     }
 }
 
-- (void)onTransfer:(NSArray *)clauses gas:(NSString *)gas callback:(void(^)(NSString *txId ,NSString *address))callback
+
+- (void)onTransfer:(NSArray<ClauseModel *> *)clauses
+            signer:(NSString *)signer
+               gas:(NSString *)gas
+          callback:(void(^)(NSString *txid ,NSString *signer))callback
 {
     
+   //Get the local keystore
     NSDictionary *currentWalletDict = [[NSUserDefaults standardUserDefaults]objectForKey:@"currentWallet"];
-    
-    NSMutableArray *walletList = [NSMutableArray array];
-    if (currentWalletDict) {
-        [walletList addObject:currentWalletDict];
-    }
-    
     NSString *keystore = currentWalletDict[@"keystore"];
+    
+    NSString *address = [WalletUtils getAddressWithKeystore:keystore];
+    
+    //Specified signature address
+    if (signer.length > 0 && [address.lowercaseString isEqualToString:signer.lowercaseString]) {
+        
+        callback(@"",@"");
+        return;
+    }
     
     //Custom password input box
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil
@@ -239,13 +247,13 @@
 
 - (void)onGetWalletAddress:(void (^)(NSArray<NSString *> * _Nonnull))callback
 {
-    //get the wallet address from local database or file cache
+    //Get the wallet address from local database or file cache
     
     NSDictionary *currentWallet = [[NSUserDefaults standardUserDefaults]objectForKey:@"currentWallet"];
     
     NSString *address = [WalletUtils getAddressWithKeystore:currentWallet[@"keystore"]];
     
-    //callback to webview
+    //Callback to webview
     callback(@[address]);
 }
 
@@ -261,7 +269,7 @@
     }
 }
 
-- (void)onCertificate:(NSDictionary *)message signer:(NSString *)signer callback:(void (^)(NSString * _Nonnull signer, NSData * _Nonnull signatureData))callback
+- (void)onCertificate:(NSDictionary *)message signer:(NSString *)signer callback:(void (^)(NSString * signer, NSData *  signatureData))callback
 {
     NSDictionary *currentWalletDict = [[NSUserDefaults standardUserDefaults]objectForKey:@"currentWallet"];
     NSString *keystore = currentWalletDict[@"keystore"];
@@ -276,7 +284,8 @@
             NSData *dataMessage = [strMessage dataUsingEncoding:NSUTF8StringEncoding];
             [self signCert:dataMessage signer:address.lowercaseString keystore:keystore callback:callback];
         }else{
-            //alert error
+            //Cusmtom alert error
+            callback(@"",nil);
         }
     }else{
         NSString *strMessage = [WalletUtils addSignerToCertMessage:address.lowercaseString message:message];
@@ -295,7 +304,7 @@
                                                                              message:@"Please enter the wallet password"
                                                                       preferredStyle:UIAlertControllerStyleAlert];
     
-
+    
     [alertController addAction:([UIAlertAction actionWithTitle: @"Confirm"
                                                          style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action)
                                  {

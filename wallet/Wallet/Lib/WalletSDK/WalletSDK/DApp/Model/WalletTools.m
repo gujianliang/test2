@@ -42,6 +42,8 @@
 }
 
 + (NSString *)localStringBundlekey:(NSString *)key{
+    
+    //Get the WalletSDKBundle resource
     NSString *pathString = [[NSBundle mainBundle] pathForResource:@"WalletSDKBundle" ofType:@"bundle"];
     if(!pathString){
         return key;
@@ -65,6 +67,8 @@
 }
 
 + (UIImage *)localImageWithName:(NSString *)name{
+    
+    //Get the WalletSDKBundle resource
     NSString *bundlePath = [[NSBundle mainBundle] pathForResource:@"WalletSDKBundle" ofType:@"bundle"];
     if(!bundlePath){
         return nil;
@@ -87,23 +91,6 @@
         return a.checksumAddress;
     }
     return inputAddress;
-}
-
-
-+ (NSString *)splitLongStr:(NSString *)inputStr
-{
-    NSMutableArray *strList = [NSMutableArray array];
-    for (NSInteger i = inputStr.length; i > 0; i = i - 3) {
-        NSString *tmp = @"";
-        if (i - 3 <= 0) {
-            tmp = [inputStr substringWithRange:NSMakeRange(0 , i)];
-        }else{
-            tmp = [inputStr substringWithRange:NSMakeRange(i - 3, 3)];
-        }
-        [strList addObject:tmp];
-    }
-    
-    return [[strList reverseObjectEnumerator].allObjects componentsJoinedByString:@","];
 }
 
 + (NSMutableDictionary *)packageWithRequestId:(NSString *)requestId
@@ -153,7 +140,6 @@
     }];
     
 }
-
 
 + (NSString *)errorMessageWith:(NSInteger)code
 {
@@ -213,16 +199,15 @@
         return NO;
     }
     
-    BOOL isOK = YES;
     if (toAddress.length != 42) {
-        isOK = NO;
+        return NO;
         
     }else if (![toAddress.uppercaseString hasPrefix:@"0X"]) {
-        isOK = NO;
+        return NO;
         
     }else if ([[toAddress substringFromIndex:2].lowercaseString isEqualToString:[toAddress substringFromIndex:2]]) {
         
-    }else{ //不是全小写，就验证checksum
+    }else{ //Not all lowercase, verify checksum
         NSString *checksumAddress = [WalletTools checksumAddress:toAddress.lowercaseString];
         if (![[toAddress substringFromIndex:2] isEqualToString:[checksumAddress substringFromIndex:2]]) {
             return NO;
@@ -247,19 +232,21 @@
     }
     NSDictionary *dictKS = [NSJSONSerialization dictionaryWithJsonString:[keystore lowercaseString]];
     
+    NSString *_id        = dictKS[@"id"];
+    NSString *version    = dictKS[@"version"];
     NSDictionary *crypto = dictKS[@"crypto"];
-    NSString *_id = dictKS[@"id"];
-    NSString *version = dictKS[@"version"];
-    
+
     BOOL isOK = NO;
     if ( crypto && _id && version) {
         if ([crypto isKindOfClass:[NSDictionary class]]) {
-            NSString *cipher = crypto[@"cipher"];
-            NSString *ciphertext = crypto[@"ciphertext"];
+            
+            NSString *cipher           = crypto[@"cipher"];
+            NSString *kdf              = crypto[@"kdf"];
+            NSString *mac              = crypto[@"mac"];
+            NSString *ciphertext       = crypto[@"ciphertext"];
+            NSDictionary *kdfparams    = crypto[@"kdfparams"];
             NSDictionary *cipherparams = crypto[@"cipherparams"];
-            NSString *kdf = crypto[@"kdf"];
-            NSDictionary *kdfparams = crypto[@"kdfparams"];
-            NSString *mac = crypto[@"mac"];
+
             if (cipher && ciphertext && cipherparams && kdf && kdfparams && mac) {
                 if ([cipherparams isKindOfClass:[NSDictionary class]] && [kdfparams isKindOfClass:[NSDictionary class]]) {
                     isOK = YES;
@@ -296,7 +283,7 @@
     return NO;
 }
 
-+ (NSString *)packCertParam:(NSDictionary *)param
++ (NSString *)packageCertParam:(NSDictionary *)param
 {
     NSMutableDictionary *dictOrigin = [NSMutableDictionary dictionaryWithDictionary:param];
     
@@ -316,7 +303,7 @@
             keyValue = [NSString stringWithFormat:@"\"%@\":%@",key,value];
         }else if([value isKindOfClass:[NSDictionary class]])
         {
-            keyValue = [NSString stringWithFormat:@"\"%@\":%@",key, [self packCertParam:(NSDictionary *)value]];
+            keyValue = [NSString stringWithFormat:@"\"%@\":%@",key, [self packageCertParam:(NSDictionary *)value]];
         }else{
             keyValue = [NSString stringWithFormat:@"\"%@\":\"%@\"",key,value];
         }

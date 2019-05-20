@@ -71,13 +71,11 @@
     }
     
     NSMutableDictionary *postDict = [self buildRequestDict];
-    NSError *error = nil;
     switch (_requestMethod) {
         case RequestGetMethod:
         {
             [WalletModelFetcher requestGetWithUrl:_httpAddress
                                           params:postDict
-                                           error:&error
                                    responseBlock:^(NSDictionary *responseDict, NSDictionary *responseHeaderFields, NSError *error)
             {
                [self analyseResponseInfo:responseDict
@@ -91,7 +89,6 @@
         {
             [WalletModelFetcher requestPostWithUrl:_httpAddress
                                            params:postDict
-                                            error:&error
                                     responseBlock:^(NSDictionary *responseDict, NSDictionary *responseHeaderFields, NSError *error)
             {
                 [self analyseResponseInfo:responseDict

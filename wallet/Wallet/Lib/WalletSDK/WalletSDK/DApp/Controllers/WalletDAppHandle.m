@@ -211,9 +211,9 @@ static dispatch_once_t predicate;
         return ;
     }
    
-    __block NSString *gas           = @"";
-    __block NSString *gasPrice      = @"";
-    __block NSString *from          = @"";
+    __block NSString *gas      = @"";
+    __block NSString *signer   = @"";
+    __block NSString *gasPrice = @"";
 
     NSMutableArray *clauseModelList = [[NSMutableArray alloc]init];
 
@@ -236,7 +236,7 @@ static dispatch_once_t predicate;
         
         gasPrice   = @"120"; //connex js No pass gaspPrice write default
         
-        from       = callbackParams[@"options"][@"signer"];
+        signer       = callbackParams[@"options"][@"signer"];
         
     }else{ // Web3
         
@@ -264,7 +264,7 @@ static dispatch_once_t predicate;
                 gas = [NSString stringWithFormat:@"%ld",gas.integerValue + gasUsed.integerValue + 15000];
             }
             
-            [self callbackClauseList:clauseModelList gas:gas from:from bConnex:bConnex webView:webView callbackId:callbackId requestId:requestId];
+            [self callbackClauseList:clauseModelList gas:gas signer:signer bConnex:bConnex webView:webView callbackId:callbackId requestId:requestId];
 
         }failure:^(WalletBaseApi *finishApi, NSString *errMsg) {
             
@@ -272,20 +272,20 @@ static dispatch_once_t predicate;
 
         }];
     }else{
-        [self callbackClauseList:clauseModelList gas:gas from:from bConnex:bConnex webView:webView callbackId:callbackId requestId:requestId];
+        [self callbackClauseList:clauseModelList gas:gas signer:signer bConnex:bConnex webView:webView callbackId:callbackId requestId:requestId];
     }
 }
 
-- (void)callbackClauseList:(NSArray *)clauseModelList gas:(NSString *)gas from:(NSString *)from bConnex:(BOOL)bConnex  webView:(WKWebView *)webView callbackId:(NSString *)callbackId requestId:(NSString *)requestId
+- (void)callbackClauseList:(NSArray *)clauseModelList gas:(NSString *)gas signer:(NSString *)signer bConnex:(BOOL)bConnex  webView:(WKWebView *)webView callbackId:(NSString *)callbackId requestId:(NSString *)requestId
 {
     id delegate = [WalletDAppHandle shareWalletHandle].delegate;
     if (delegate) {
-        if ([delegate respondsToSelector:@selector(onTransfer: gas: callback:)]) {
+        if ([delegate respondsToSelector:@selector(onTransfer: signer: gas: callback:)]) {
             
-            [delegate onTransfer:clauseModelList gas:gas callback:^(NSString * _Nonnull txid,NSString *address)
+            [delegate onTransfer:clauseModelList signer:signer gas:gas callback:^(NSString * _Nonnull txid,NSString *signer)
              {
                  [self callbackToWebView:txid
-                                 address:address
+                                 signer:signer
                                  bConnex:bConnex
                                  webView:webView
                               callbackId:callbackId
@@ -303,7 +303,7 @@ static dispatch_once_t predicate;
 }
 
 //Call back to dapp webview
-- (void)callbackToWebView:(NSString *)txid address:(NSString *)address bConnex:(BOOL)bConnex  webView:(WKWebView *)webView callbackId:(NSString *)callbackId requestId:(NSString *)requestId
+- (void)callbackToWebView:(NSString *)txid signer:(NSString *)signer bConnex:(BOOL)bConnex  webView:(WKWebView *)webView callbackId:(NSString *)callbackId requestId:(NSString *)requestId
 {
     if (txid.length != 0) {
         id data = nil;
@@ -311,7 +311,7 @@ static dispatch_once_t predicate;
             
             NSMutableDictionary *dictData = [NSMutableDictionary dictionary];
             [dictData setValueIfNotNil:txid forKey:@"txid"];
-            [dictData setValueIfNotNil:address.lowercaseString forKey:@"signer"];
+            [dictData setValueIfNotNil:signer.lowercaseString forKey:@"signer"];
             
             data = dictData;
         }else{

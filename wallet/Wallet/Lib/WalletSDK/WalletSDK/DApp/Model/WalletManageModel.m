@@ -16,12 +16,5 @@
 @implementation WalletCoinModel
 
 
-+(NSDictionary *)modelCustomPropertyMapper
-{
-    return @{
-             @"pdescription_cn":@"description_cn",
-             @"pdescription_en":@"description_en",             
-             };
-}
 
 @end

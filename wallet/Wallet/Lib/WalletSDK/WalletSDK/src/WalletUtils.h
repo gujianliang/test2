@@ -28,10 +28,14 @@ NS_ASSUME_NONNULL_BEGIN
  *
  *  @param clauses : Clause model list
  *  @param gas : Set maximum gas allowed for call
+ *  @param signer : Enforces the specified address to sign the transaction
  *  @param callback : Callback after the end. txid:Transaction identifier; signer:Signer address
  *
  */
-- (void)onTransfer:(NSArray<ClauseModel *> *)clauses gas:(NSString *)gas callback:(void(^)(NSString *txid ,NSString *signer))callback;
+- (void)onTransfer:(NSArray<ClauseModel *> *)clauses
+            signer:(NSString *)signer
+               gas:(NSString *)gas
+          callback:(void(^)(NSString *txid ,NSString *signer))callback;
 
 /**
  *  @abstract
@@ -53,7 +57,9 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param callback : Callback after the end.signer: Signer address; signatureData : Signature is 65 bytes
  *
  */
-- (void)onCertificate:(NSDictionary *)message signer:(NSString *)signer callback:(void(^)(NSString *signer, NSData *signatureData))callback;
+- (void)onCertificate:(NSDictionary *)message
+               signer:(NSString *)signer
+             callback:(void(^)(NSString *signer, NSData *signatureData))callback;
 
 
 /**
