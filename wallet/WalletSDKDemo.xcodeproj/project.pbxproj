@@ -91,6 +91,27 @@
 			remoteGlobalIDString = 9747227120EDE9F800F9EAB3;
 			remoteInfo = wallet;
 		};
+		9784DECF22939B150071F173 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9784DD9C22921E3E0071F173 /* ThorWalletSDK.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = E2317E631E3191AC00DBE3E4;
+			remoteInfo = ThorWalletSDK;
+		};
+		9784DED122939B150071F173 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9784DD9C22921E3E0071F173 /* ThorWalletSDK.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = E2317E6C1E3191AC00DBE3E4;
+			remoteInfo = ThorWalletSDKTests;
+		};
+		9784DED322939B150071F173 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9784DD9C22921E3E0071F173 /* ThorWalletSDK.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 4143ED9E22019AC50056C08A;
+			remoteInfo = ThorWalletSDKBundle;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -517,6 +538,16 @@
 			name = "Recovered References";
 			sourceTree = "<group>";
 		};
+		9784DECA22939B150071F173 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				9784DED022939B150071F173 /* ThorWalletSDK.framework */,
+				9784DED222939B150071F173 /* ThorWalletSDKTests.xctest */,
+				9784DED422939B150071F173 /* ThorWalletSDKBundle.bundle */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		97F713BD225B25B000786D79 /* AFNetworking */ = {
 			isa = PBXGroup;
 			children = (
@@ -667,6 +698,12 @@
 			mainGroup = 9747226920EDE9F800F9EAB3;
 			productRefGroup = 9747227320EDE9F800F9EAB3 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 9784DECA22939B150071F173 /* Products */;
+					ProjectRef = 9784DD9C22921E3E0071F173 /* ThorWalletSDK.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				9747227120EDE9F800F9EAB3 /* WalletSDKDemo */,
@@ -675,6 +712,30 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		9784DED022939B150071F173 /* ThorWalletSDK.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = ThorWalletSDK.framework;
+			remoteRef = 9784DECF22939B150071F173 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		9784DED222939B150071F173 /* ThorWalletSDKTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = ThorWalletSDKTests.xctest;
+			remoteRef = 9784DED122939B150071F173 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		9784DED422939B150071F173 /* ThorWalletSDKBundle.bundle */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = ThorWalletSDKBundle.bundle;
+			remoteRef = 9784DED322939B150071F173 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		9747227020EDE9F800F9EAB3 /* Resources */ = {
