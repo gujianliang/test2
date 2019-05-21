@@ -446,7 +446,7 @@ static dispatch_once_t predicate;
 - (void)inject:(WKWebViewConfiguration *)config
 {
     //Inject connex js
-    NSString *bundlePath = [[NSBundle mainBundle] pathForResource:@"WalletSDKBundle" ofType:@"bundle"];
+    NSString *bundlePath = [[NSBundle mainBundle] pathForResource:@"ThorWalletSDKBundle" ofType:@"bundle"];
     if(!bundlePath){
         return ;
     }

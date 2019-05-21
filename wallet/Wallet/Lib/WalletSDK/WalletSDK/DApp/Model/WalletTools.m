@@ -43,8 +43,8 @@
 
 + (NSString *)localStringBundlekey:(NSString *)key{
     
-    //Get the WalletSDKBundle resource
-    NSString *pathString = [[NSBundle mainBundle] pathForResource:@"WalletSDKBundle" ofType:@"bundle"];
+    //Get the ThorWalletSDKBundle resource
+    NSString *pathString = [[NSBundle mainBundle] pathForResource:@"ThorWalletSDKBundle" ofType:@"bundle"];
     if(!pathString){
         return key;
     }
@@ -68,8 +68,8 @@
 
 + (UIImage *)localImageWithName:(NSString *)name{
     
-    //Get the WalletSDKBundle resource
-    NSString *bundlePath = [[NSBundle mainBundle] pathForResource:@"WalletSDKBundle" ofType:@"bundle"];
+    //Get the ThorWalletSDKBundle resource
+    NSString *bundlePath = [[NSBundle mainBundle] pathForResource:@"ThorWalletSDKBundle" ofType:@"bundle"];
     if(!bundlePath){
         return nil;
     }

@@ -52,11 +52,11 @@
 		9754E3DD222F6ADA0054439C /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 9754E3DB222F6ADA0054439C /* MBProgressHUD.m */; };
 		975AA981226D984700C1034D /* NSObject+YYModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 975AA97B226D984600C1034D /* NSObject+YYModel.m */; };
 		975AA982226D984700C1034D /* YYClassInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 975AA97C226D984600C1034D /* YYClassInfo.m */; };
-		9773F8512213B22B00DF5972 /* WalletSDKBundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 9773F84D2213B22B00DF5972 /* WalletSDKBundle.bundle */; };
 		978127652227DACD00BDCC5F /* WalletChooseNodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 978127612227DACC00BDCC5F /* WalletChooseNodeView.m */; };
 		978127662227DACD00BDCC5F /* WalletAddVthoNodeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 978127622227DACC00BDCC5F /* WalletAddVthoNodeVC.m */; };
 		9784DD6A228EB3900071F173 /* DAppWebViewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9784DD69228EB3900071F173 /* DAppWebViewVC.m */; };
 		9784DEBF229395D20071F173 /* ThorWallet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9784DEBE229395D20071F173 /* ThorWallet.framework */; };
+		9784DEC1229398F70071F173 /* ThorWalletSDKBundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 9784DEC0229398F70071F173 /* ThorWalletSDKBundle.bundle */; };
 		97F713E5225B25B000786D79 /* UIAlertView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 97F713BF225B25B000786D79 /* UIAlertView+AFNetworking.m */; };
 		97F713E6225B25B000786D79 /* UIProgressView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 97F713C0225B25B000786D79 /* UIProgressView+AFNetworking.m */; };
 		97F713E7225B25B000786D79 /* UIRefreshControl+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 97F713C2225B25B000786D79 /* UIRefreshControl+AFNetworking.m */; };
@@ -192,7 +192,6 @@
 		975AA97B226D984600C1034D /* NSObject+YYModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+YYModel.m"; sourceTree = "<group>"; };
 		975AA97C226D984600C1034D /* YYClassInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYClassInfo.m; sourceTree = "<group>"; };
 		975AA97D226D984600C1034D /* NSObject+YYModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+YYModel.h"; sourceTree = "<group>"; };
-		9773F84D2213B22B00DF5972 /* WalletSDKBundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = WalletSDKBundle.bundle; sourceTree = "<group>"; };
 		978127612227DACC00BDCC5F /* WalletChooseNodeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WalletChooseNodeView.m; sourceTree = "<group>"; };
 		978127622227DACC00BDCC5F /* WalletAddVthoNodeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WalletAddVthoNodeVC.m; sourceTree = "<group>"; };
 		978127632227DACD00BDCC5F /* WalletChooseNodeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WalletChooseNodeView.h; sourceTree = "<group>"; };
@@ -201,6 +200,7 @@
 		9784DD69228EB3900071F173 /* DAppWebViewVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DAppWebViewVC.m; sourceTree = "<group>"; };
 		9784DD9C22921E3E0071F173 /* ThorWalletSDK.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ThorWalletSDK.xcodeproj; path = WalletSDK/ThorWalletSDK.xcodeproj; sourceTree = "<group>"; };
 		9784DEBE229395D20071F173 /* ThorWallet.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ThorWallet.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9784DEC0229398F70071F173 /* ThorWalletSDKBundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ThorWalletSDKBundle.bundle; sourceTree = "<group>"; };
 		97F713BF225B25B000786D79 /* UIAlertView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertView+AFNetworking.m"; sourceTree = "<group>"; };
 		97F713C0225B25B000786D79 /* UIProgressView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIProgressView+AFNetworking.m"; sourceTree = "<group>"; };
 		97F713C1225B25B000786D79 /* UIButton+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+AFNetworking.h"; sourceTree = "<group>"; };
@@ -352,7 +352,7 @@
 		971B3E4621E60044007845F0 /* Lib */ = {
 			isa = PBXGroup;
 			children = (
-				9773F84D2213B22B00DF5972 /* WalletSDKBundle.bundle */,
+				9784DEC0229398F70071F173 /* ThorWalletSDKBundle.bundle */,
 				9784DD9C22921E3E0071F173 /* ThorWalletSDK.xcodeproj */,
 				975AA978226D984600C1034D /* YYModel */,
 				97F713BD225B25B000786D79 /* AFNetworking */,
@@ -685,9 +685,9 @@
 				4126DEA62240C46C00850291 /* WalletDetailVC.xib in Resources */,
 				4126DE9C2240BB0500850291 /* InfoPlist.strings in Resources */,
 				4126DEAC2240CE7000850291 /* ViewController.xib in Resources */,
+				9784DEC1229398F70071F173 /* ThorWalletSDKBundle.bundle in Resources */,
 				4126DEC52240D7C700850291 /* WalletChangePWVC.xib in Resources */,
 				971812222227945B008F9639 /* WalletNodeDetailVC.xib in Resources */,
-				9773F8512213B22B00DF5972 /* WalletSDKBundle.bundle in Resources */,
 				4126DEA52240BBCD00850291 /* LaunchScreen.storyboard in Resources */,
 				4126DED42240E28000850291 /* WalletCreateVC.xib in Resources */,
 				4126DEB12240CFF300850291 /* WalletRecoverMainVC.xib in Resources */,
