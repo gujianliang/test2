@@ -55,8 +55,8 @@
 		978127652227DACD00BDCC5F /* WalletChooseNodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 978127612227DACC00BDCC5F /* WalletChooseNodeView.m */; };
 		978127662227DACD00BDCC5F /* WalletAddVthoNodeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 978127622227DACC00BDCC5F /* WalletAddVthoNodeVC.m */; };
 		9784DD6A228EB3900071F173 /* DAppWebViewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9784DD69228EB3900071F173 /* DAppWebViewVC.m */; };
-		9784DEBF229395D20071F173 /* ThorWallet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9784DEBE229395D20071F173 /* ThorWallet.framework */; };
 		9784DEC1229398F70071F173 /* ThorWalletSDKBundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 9784DEC0229398F70071F173 /* ThorWalletSDKBundle.bundle */; };
+		9784E09F2293A25A0071F173 /* ThorWalletSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9784DED022939B150071F173 /* ThorWalletSDK.framework */; };
 		97F713E5225B25B000786D79 /* UIAlertView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 97F713BF225B25B000786D79 /* UIAlertView+AFNetworking.m */; };
 		97F713E6225B25B000786D79 /* UIProgressView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 97F713C0225B25B000786D79 /* UIProgressView+AFNetworking.m */; };
 		97F713E7225B25B000786D79 /* UIRefreshControl+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 97F713C2225B25B000786D79 /* UIRefreshControl+AFNetworking.m */; };
@@ -267,7 +267,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9784DEBF229395D20071F173 /* ThorWallet.framework in Frameworks */,
+				9784E09F2293A25A0071F173 /* ThorWalletSDK.framework in Frameworks */,
 				974EA4DC2259F910009C021B /* CoreGraphics.framework in Frameworks */,
 				974EA4DA2259F90A009C021B /* UIKit.framework in Frameworks */,
 			);
