@@ -8,7 +8,7 @@
 
 #import "WalletMoreInfoVC.h"
 #import "WalletChangePWVC.h"
-#import <WalletSDK/WalletUtils.h>
+#import <ThorWalletSDK/WalletUtils.h>
 
 @interface WalletMoreInfoVC ()
 

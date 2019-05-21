@@ -7,7 +7,7 @@
 //
 
 #import "ViewController.h"
-#import <WalletSDK/WalletUtils.h>
+#import <ThorWalletSDK/WalletUtils.h>
 #import "DAppWebViewVC.h"
 #import "WalletCreateVC.h"
 #import "WalletRecoverMainVC.h"

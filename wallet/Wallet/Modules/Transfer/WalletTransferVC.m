@@ -7,7 +7,7 @@
 //
 
 #import "WalletTransferVC.h"
-#import <WalletSDK/WalletUtils.h>
+#import <ThorWalletSDK/WalletUtils.h>
 #import "WalletDemoMacro.h"
 
 @interface WalletTransferVC ()<UITextFieldDelegate>

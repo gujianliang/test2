@@ -15,8 +15,8 @@
 #import "WalletNodeDetailVC.h"
 #import "WalletAddVthoNodeVC.h"
 #import "WalletDemoMacro.h"
-#import <WalletSDK/WalletUtils.h>
-#import <WalletSDK/WalletSDKMacro.h>
+#import <ThorWalletSDK/WalletUtils.h>
+#import <ThorWalletSDK/WalletSDKMacro.h>
 
 @interface WalletDetailVC ()<UISearchBarDelegate>
 {

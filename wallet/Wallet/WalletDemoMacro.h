@@ -6,7 +6,7 @@
 //  Copyright © 2019 demo. All rights reserved.
 //
 
-#import <WalletSDK/WalletUtils.h>
+#import <ThorWalletSDK/WalletUtils.h>
 
 #ifndef WalletDemoMacro_h
 #define WalletDemoMacro_h

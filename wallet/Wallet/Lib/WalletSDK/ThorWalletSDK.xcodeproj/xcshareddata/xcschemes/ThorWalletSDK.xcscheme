@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1010"
+   LastUpgradeVersion = "1020"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "E2317E621E3191AC00DBE3E4"
-               BuildableName = "WalletSDK.framework"
-               BlueprintName = "WalletSDK"
-               ReferencedContainer = "container:WalletSDK.xcodeproj">
+               BuildableName = "ThorWalletSDK.framework"
+               BlueprintName = "ThorWalletSDK"
+               ReferencedContainer = "container:ThorWalletSDK.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -46,9 +46,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E2317E621E3191AC00DBE3E4"
-            BuildableName = "WalletSDK.framework"
-            BlueprintName = "WalletSDK"
-            ReferencedContainer = "container:WalletSDK.xcodeproj">
+            BuildableName = "ThorWalletSDK.framework"
+            BlueprintName = "ThorWalletSDK"
+            ReferencedContainer = "container:ThorWalletSDK.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -64,9 +64,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E2317E621E3191AC00DBE3E4"
-            BuildableName = "WalletSDK.framework"
-            BlueprintName = "WalletSDK"
-            ReferencedContainer = "container:WalletSDK.xcodeproj">
+            BuildableName = "ThorWalletSDK.framework"
+            BlueprintName = "ThorWalletSDK"
+            ReferencedContainer = "container:ThorWalletSDK.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </ProfileAction>

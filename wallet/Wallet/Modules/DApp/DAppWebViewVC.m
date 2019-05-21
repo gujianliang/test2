@@ -8,8 +8,8 @@
 
 #import "DAppWebViewVC.h"
 #import <WebKit/WebKit.h>
-#import <WalletSDK/WalletUtils.h>
 #import "WalletDemoMacro.h"
+#import <ThorWalletSDK/WalletUtils.h>
 
 @interface DAppWebViewVC ()<WKNavigationDelegate,WKUIDelegate,WalletUtilsDelegate>
 {

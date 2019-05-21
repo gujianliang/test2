@@ -8,7 +8,7 @@
 
 #import "WalletMnemonicImportVC.h"
 #import "WalletDetailVC.h"
-#import <WalletSDK/WalletUtils.h>
+#import <ThorWalletSDK/WalletUtils.h>
 
 
 @interface WalletMnemonicImportVC ()

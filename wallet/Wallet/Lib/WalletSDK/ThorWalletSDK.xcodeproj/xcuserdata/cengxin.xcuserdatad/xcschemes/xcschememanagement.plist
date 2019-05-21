@@ -4,10 +4,10 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>WalletSDK.xcscheme_^#shared#^_</key>
+		<key>ThorWalletSDK.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>0</integer>
+			<integer>3</integer>
 		</dict>
 		<key>WalletSDKBundle.xcscheme_^#shared#^_</key>
 		<dict>
