@@ -56,9 +56,7 @@ Vechain wallet SDK provides a series of functional interface can help the iOS de
 
 
 
-```obj-c
-#import <WalletSDK/WalletUtils.h>
-```
+
 
 ###  1，Basic wallet development
 
@@ -69,6 +67,10 @@ Vechain wallet SDK provides a series of functional interface can help the iOS de
 [WalletUtils setNode:Main_Node];
 ````
 #### 1.2 Create wallet
+
+```obj-c
+#import <WalletSDK/WalletUtils.h>
+```
 
 ```obj-c
 [WalletUtils createWalletWithPassword:Password
