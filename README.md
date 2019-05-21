@@ -49,7 +49,7 @@ Vechain wallet SDK provides a series of functional interface can help the iOS de
     
     pod 'YYModel', '~>  1.0.4'
     
-    pod 'ThorSDK', '~>  1.0.0'
+    pod 'ThorWallet', '~>  1.0.0'
  
  end
 ```
