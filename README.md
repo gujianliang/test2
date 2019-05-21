@@ -64,13 +64,14 @@ Vechain wallet SDK provides a series of functional interface can help the iOS de
 ##### Set up the node environment. (```Test_Node environment``` , ```Main_Node environment``` and custom node environment in demo)
 
 ```obj-c
+#import <ThorWalletSDK/WalletUtils.h>
+```
+```obj-c
 [WalletUtils setNode:Main_Node];
 ````
 #### 1.2 Create wallet
 
-```obj-c
-#import <WalletSDK/WalletUtils.h>
-```
+
 
 ```obj-c
 [WalletUtils createWalletWithPassword:Password
