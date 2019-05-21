@@ -1,4 +1,4 @@
-# Vechain Wallet SDK    
+# Vechain ThorWallet SDK    
 
 
 ## Introduction
