@@ -691,18 +691,18 @@
 			isa = PBXGroup;
 			children = (
 				9784DF5122939E1B0071F173 /* Signature.h */,
-				9784DF5222939E1B0071F173 /* Account.h */,
-				9784DF5322939E1B0071F173 /* Address.h */,
-				9784DF5422939E1B0071F173 /* Hash.m */,
-				9784DF5522939E1B0071F173 /* Transaction.m */,
-				9784DF5622939E1B0071F173 /* Payment.h */,
-				9784DF5722939E1B0071F173 /* Utilities */,
 				9784DF6222939E1B0071F173 /* Signature.m */,
+				9784DF5222939E1B0071F173 /* Account.h */,
 				9784DF6322939E1B0071F173 /* Account.m */,
 				9784DF6422939E1B0071F173 /* Address.m */,
-				9784DF6522939E1B0071F173 /* Payment.m */,
-				9784DF6622939E1B0071F173 /* Transaction.h */,
+				9784DF5322939E1B0071F173 /* Address.h */,
 				9784DF6722939E1B0071F173 /* Hash.h */,
+				9784DF5422939E1B0071F173 /* Hash.m */,
+				9784DF6622939E1B0071F173 /* Transaction.h */,
+				9784DF5522939E1B0071F173 /* Transaction.m */,
+				9784DF5622939E1B0071F173 /* Payment.h */,
+				9784DF6522939E1B0071F173 /* Payment.m */,
+				9784DF5722939E1B0071F173 /* Utilities */,
 			);
 			path = BasicWallet;
 			sourceTree = "<group>";
@@ -710,15 +710,15 @@
 		9784DF5722939E1B0071F173 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				9784DF5D22939E1B0071F173 /* BigNumber.h */,
 				9784DF5822939E1B0071F173 /* BigNumber.m */,
 				9784DF5922939E1B0071F173 /* RLPSerialization.h */,
-				9784DF5A22939E1B0071F173 /* SecureData.m */,
-				9784DF5B22939E1B0071F173 /* Utilities.h */,
-				9784DF5C22939E1B0071F173 /* RegEx.h */,
-				9784DF5D22939E1B0071F173 /* BigNumber.h */,
-				9784DF5E22939E1B0071F173 /* SecureData.h */,
 				9784DF5F22939E1B0071F173 /* RLPSerialization.m */,
+				9784DF5A22939E1B0071F173 /* SecureData.m */,
+				9784DF5E22939E1B0071F173 /* SecureData.h */,
+				9784DF5B22939E1B0071F173 /* Utilities.h */,
 				9784DF6022939E1B0071F173 /* Utilities.m */,
+				9784DF5C22939E1B0071F173 /* RegEx.h */,
 				9784DF6122939E1B0071F173 /* RegEx.m */,
 			);
 			path = Utilities;
