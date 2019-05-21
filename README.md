@@ -48,23 +48,13 @@ Vechain wallet SDK provides a series of functional interface can help the iOS de
     pod 'SocketRocket', '~> 0.4.2'
     
     pod 'YYModel', '~>  1.0.4'
+    
+    pod 'ThorSDK', '~>  1.0.0'
  
  end
 ```
-####  Other libraries need to be added manually
-These libraries can be found in the demo
-
- ```obj-c
- Blake2
- trezor-crypto
- BreadWallet
- libtommath-1.0
- scrypt-1.1.6
- 
-```
 
 
-To use the Framework, add the ```WalletSDK.Framework``` and ```WalletSDKBundle.bundle``` to your project :
 
 ```obj-c
 #import <WalletSDK/WalletUtils.h>
