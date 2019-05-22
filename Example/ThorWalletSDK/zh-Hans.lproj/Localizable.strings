@@ -1,0 +1,105 @@
+/* 
+  Localizable.strings
+  ThorWalletSDK
+
+  Created by 曾新 on 2019/5/22.
+  Copyright © 2019 zengxin. All rights reserved.
+*/
+
+"no_wallet_create" = "创建钱包";
+"no_wallet_import" = "导入钱包";
+
+"home_asset_wallet_address" = "钱包地址：";
+"home_asset_key" = "资产列表";
+
+"create_wallet_hint_password" = "请输入钱包密码";
+"create_wallet_confirm" = "输入密码点击创建钱包";
+"create_wallet_success" = "创建成功！";
+"create_wallet_mnemonic" = "助记词：";
+"create_wallet_keystore" = "Keystore：";
+"create_wallet_complete" = "完成";
+
+"import_wallet_item1" = "助记词";
+"import_wallet_item2" = "Keystore";
+"import_wallet_confirm" = "确认导入";
+"import_wallet_please_input_mnemonic" = "请输入助记词";
+"import_wallet_please_input_keystore" = "请输入Keystore";
+"import_wallet_mnemonic_word_error" = "助记词数量不正确";
+"import_wallet_mnemonic_word_format" = "无效的助记词";
+"import_wallet_fail" = "导入钱包失败";
+"import_wallet_please_input_keystore_error" = "Keystore错误";
+
+"manage_wallet_change_password" = "修改钱包密码";
+"manage_wallet_export_keystore" = "导出Keystore";
+"manage_wallet_delete" = "删除钱包";
+"manage_wallet_delete_tip" = "提示";
+"manage_wallet_delete_message" = "您确认要删除钱包？";
+"manage_wallet_delete_ok" = "确认";
+"manage_wallet_delete_cancel" = "取消";
+
+"modify_password_current_password" = "当前密码";
+"modify_password_first_new_password" = "新密码";
+"modify_password_sencond_new_password" = "重复密码";
+"modify_password_confirm" = "确认";
+
+"modify_password_old_error" = "当前密码错误";
+"modify_password_new_error" = "新密码错误";
+"modify_password_failr" = "修改失败！";
+"modify_password_success" = "修改成功!";
+
+"transfer_coin_adjust_cost" = "调整";
+"transfer_coin_trans_cost_default" = "交易费用： %1$s VTHO";
+"transfer_coin_trans_cost" = "交易费用： %1$s VTHO";
+"transfer_coin_balance" = "余额：";
+"transfer_coin_amount_title" = "转账金额";
+"transfer_coin_vx_address_hint" = "唯链雷神钱包地址(0x开头)";
+"transfer_coin_address_title" = "收款人地址";
+"transfer_coin_input_amount_hint" = "请输入转账金额";
+
+"transfer_coin_next_page" = "下一步";
+"transfer_coin_quick" = "快";
+"transfer_coin_slow" = "慢";
+"transfer_coin_title" = "转账";
+"transfer_coin_to_from_same_error" = "收款人地址不能是自己";
+"transfer_coin_value_empty_error" = "请输入转账金额";
+"transfer_coin_to_address_error_empty" = "唯链雷神钱包地址是以0x为开头的42位字符";
+"transfer_coin_to_address_error_format" = "唯链雷神钱包地址是以0x为开头的42位字符";
+"transfer_wallet_password_error" = "钱包密码错误";
+"transfer_wallet_chaintag_error" = "获取ChainTag失败";
+"transfer_wallet_blockref_error" = "获取blockReference失败";
+"transfer_wallet_send_fail" = "发送交易失败";
+"transfer_wallet_send_balance_not_enough" = "余额不足";
+"transfer_wallet_value_not_negative" = "转账额不能为负数";
+"transfer_wallet_password_empty_error" = "请输入钱包密码";
+
+"transfer_coin_value_format_error" = "请输入正确的转账金额";
+"transaction_value_not_zero" = "转账金额不能为零";
+"address_char_not_hex" = "请输入符合唯链雷神钱包规则的地址";
+
+"transfer_wallet_fail" = "交易失败";
+"transfer_wallet_success" = "交易已经发出txId:%1$s";
+
+
+"web_url_input_hint" = "输入Dapp的URL";
+"host_select_txt" = "选择网络";
+
+
+"item0" = "正式节点";
+"item1" = "测试节点";
+"item2" = "添加自定义节点";
+
+"host_info_test" = "测试网络";
+"host_info_release" = "正式网络";
+"host_info_test_msg" = "测试网络连接雷神测试网络";
+"host_info_release_msg" = "正式网络连接雷神正式网络";
+
+"host_setting_title" = "添加网络";
+"host_setting_input_name_hint" = "输入名称";
+"host_setting_input_hint" = "输入url";
+
+// 新增
+"version" = "用例版本：(%@)";
+"input_empty" = "输入不能为空";
+"mnemonic_not_available" = "无效的助记词";
+"wait" = "进行中...";
+"Check_right" = "检查输入是否正确";
