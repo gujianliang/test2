@@ -44,25 +44,17 @@ Vechain wallet SDK provides a series of functional interface can help the iOS de
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
   
-  s.subspec 'FDApp1' do |ss|
-  ss.source_files = 'ThorWalletSDK/Classes/FDApp/**/*.{h,m}'
+  s.subspec 'DApp' do |ss|
+  ss.source_files = 'ThorWalletSDK/Classes/DApp/Controllers/*.{h,m}'
       #ss.public_header_files = 'ThorWalletSDK/Classes/BasicWallet/*.h'
   end
   
-   s.subspec 'DApp' do |ss|
-       ss.source_files = 'ThorWalletSDK/Classes/Lib/*.{h,m}'
+   s.subspec 'BasicWallet' do |ss|
+       ss.source_files = 'ThorWalletSDK/Classes/BasicWallet/*.{h,m}'
       #ss.public_header_files = ''
    end
   
-  #s.subspec 'FDApp1' do |ss|
-  #ss.source_files = 'ThorWalletSDK/Classes/FDApp/*.{h,m}'
-  #ss.public_header_files = 'ThorWalletSDK/Classes/BasicWallet/*.h'
-  #end
-  
-  #s.subspec 'DApp1' do |ss|
-  #ss.source_files = 'ThorWalletSDK/Classes/Lib/*.{h,m}'
-      #ss.public_header_files = ''
-      #end
+
   
   s.dependency 'AFNetworking', '~> 3.0'
   
