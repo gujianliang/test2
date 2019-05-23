@@ -9,7 +9,7 @@
 Pod::Spec.new do |s|
   s.name             = 'ThorWalletSDK'
   s.version          = '1.0.0'
-  s.summary          = 'A short description of ThorWalletSDK.'
+  s.summary          = 'Vechain wallet SDK provides a series of functional interface can help the iOS developers, for example: quickly create the wallet, the private key signature, call the vechain block interface, put data in the vechain block, and support dapp development environment.'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -18,14 +18,14 @@ Pod::Spec.new do |s|
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
   s.description      = <<-DESC
-TODO: Add long description of the pod here.
+Vechain wallet SDK provides a series of functional interface can help the iOS developers, for example: quickly create the wallet, the private key signature, call the vechain block interface, put data in the vechain block, and support dapp development environment.
                        DESC
 
   s.homepage         = 'https://github.com/zengxin/ThorWalletSDK'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'vechain' => 'tom.zeng@vechain.com' }
-  s.source           = { :git => 'https://github.com/zengxin/ThorWalletSDK.git', :tag => s.version.to_s }
+  s.source           = { :git => 'https://vit.digonchain.com/vechain-mobile-apps/ios-wallet-sdk.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
   s.ios.deployment_target = '10.0'
