@@ -2,8 +2,8 @@
 //  ThorViewController.h
 //  ThorWalletSDK_Example
 //
-//  Created by 曾新 on 2019/5/22.
-//  Copyright © 2019 zengxin. All rights reserved.
+//  Created by Tom on 2019/5/22.
+//  Copyright © 2019 VeChain. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>

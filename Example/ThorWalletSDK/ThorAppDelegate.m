@@ -3,7 +3,7 @@
 //  ThorWalletSDK
 //
 //  Created by zengxin on 05/21/2019.
-//  Copyright (c) 2019 zengxin. All rights reserved.
+//  Copyright (c) 2019 VeChain. All rights reserved.
 //
 
 #import "ThorAppDelegate.h"
