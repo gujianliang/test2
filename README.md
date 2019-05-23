@@ -38,20 +38,7 @@ Vechain wallet SDK provides a series of functional interface can help the iOS de
     pod 'ThorWalletSDK', '~>  1.0.0'
  ```
 
- 
 
-#### ThorWalletSDK also requires support from other libraries
-```obj-c
-   pod 'AFNetworking', '~> 3.0'
- 
-   pod 'MBProgressHUD', '1.1.0'            
- 
-   pod 'Masonry', '1.1.0'
- 
-   pod 'SocketRocket', '~> 0.4.2'
-    
-   pod 'YYModel', '~>  1.0.4'
- ```
 
 ###  1，Basic wallet development
 
