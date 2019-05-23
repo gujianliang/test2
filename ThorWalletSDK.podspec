@@ -21,7 +21,7 @@ Pod::Spec.new do |s|
 Vechain wallet SDK provides a series of functional interface can help the iOS developers, for example: quickly create the wallet, the private key signature, call the vechain block interface, put data in the vechain block, and support dapp development environment.
                        DESC
 
-  s.homepage         = 'https://github.com/zengxin/ThorWalletSDK'
+  s.homepage         = 'https://vit.digonchain.com/vechain-mobile-apps/ios-wallet-sdk'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'vechain' => 'tom.zeng@vechain.com' }
