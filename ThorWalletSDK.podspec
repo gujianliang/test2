@@ -35,9 +35,9 @@ Vechain wallet SDK provides a series of functional interface can help the iOS de
   #s.source_files = 'ThorWalletSDK/Classes/*.{h}'
   #s.public_header_files = 'ThorWalletSDK/Classes/*.{h}'
   
-   s.resource_bundles = {
-     'ThorWalletSDK' => ['ThorWalletSDK/Assets/*.png']
-   }
+  #s.resource_bundles = {
+  #  'ThorWalletSDK' => ['ThorWalletSDK/Assets/*.png']
+  #}
   
    s.resource = 'ThorWalletSDK/Assets/ThorWalletSDKBundle.bundle'
   
