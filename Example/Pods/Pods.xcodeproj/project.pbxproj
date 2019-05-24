@@ -87,7 +87,7 @@
 		456B1579B872B28C712D393216D1DE1D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A7BBAAA3622B39BCF2BC84976793CD6 /* Foundation.framework */; };
 		4799D7DDB099CE2E6BBC8B96DE6B6EFB /* ViewController+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 25E8E4AE409E59FDF0678E1D341C3F4E /* ViewController+MASAdditions.m */; };
 		486DC99A82CA0F5331189E1D455A7923 /* aesopt.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F7798AE50642D533DC1991C95ACF4C2 /* aesopt.h */; };
-		48D9C3C186F0FC9777B526F184D71875 /* RegEx.h in Headers */ = {isa = PBXBuildFile; fileRef = 8404FF5F0A759144551DD310A99178AF /* RegEx.h */; };
+		48D9C3C186F0FC9777B526F184D71875 /* RegEx.h in Headers */ = {isa = PBXBuildFile; fileRef = 8404FF5F0A759144551DD310A99178AF /* RegEx.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4A1417AF315966324D24AF074B1E9D88 /* AFURLRequestSerialization.h in Headers */ = {isa = PBXBuildFile; fileRef = 4FEFE9751BD31B41BD0A58E7E452A9B3 /* AFURLRequestSerialization.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4D4FBF00A81F59B6BCAECB11126DF4DC /* ripemd160.h in Headers */ = {isa = PBXBuildFile; fileRef = 60764CBA597F10A47662F9338C407A04 /* ripemd160.h */; };
 		4F023AD47324B293518522F03F5C53F9 /* pbkdf2.h in Headers */ = {isa = PBXBuildFile; fileRef = 240287606B0E9FB9A6188529D2DB7958 /* pbkdf2.h */; };
