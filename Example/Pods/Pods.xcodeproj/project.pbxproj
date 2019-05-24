@@ -440,7 +440,7 @@
 		2D7A7C8025C5A2D1CC6069DF5C88F169 /* aestab.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = aestab.h; sourceTree = "<group>"; };
 		2F5E62BFD0D1970E628CFD1993139CCD /* UIView+Sizes.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "UIView+Sizes.m"; sourceTree = "<group>"; };
 		2FC1035ABFEDD140F700BC9984D5BE71 /* WalletDappLogEventApi.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = WalletDappLogEventApi.m; sourceTree = "<group>"; };
-		30DC70375383FD3A68EDC54CE6CA0F50 /* PrefixHeader.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PrefixHeader.h; path = ThorWalletSDK/Classes/PrefixHeader.h; sourceTree = "<group>"; };
+		30DC70375383FD3A68EDC54CE6CA0F50 /* PrefixHeader.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.h; sourceTree = "<group>"; };
 		33E4A7131C925052E8507E5001606E15 /* AFAutoPurgingImageCache.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AFAutoPurgingImageCache.h; path = "UIKit+AFNetworking/AFAutoPurgingImageCache.h"; sourceTree = "<group>"; };
 		35516B6E714995AE00209B89469D5744 /* WalletDAppHandle+web3JS.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "WalletDAppHandle+web3JS.m"; sourceTree = "<group>"; };
 		3584DE391CE0E04BDFFBF994CB75AB48 /* AFNetworking.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = AFNetworking.modulemap; sourceTree = "<group>"; };
@@ -1121,7 +1121,6 @@
 		864FC9BC783939C152A02EA60FAC27B3 /* ThorWalletSDK */ = {
 			isa = PBXGroup;
 			children = (
-				30DC70375383FD3A68EDC54CE6CA0F50 /* PrefixHeader.h */,
 				9784E3DD229799780071F173 /* Public */,
 				9784E1B622952B530071F173 /* Assets */,
 				399B016527A07DE8648FA908738D4302 /* BasicWallet */,
@@ -1182,6 +1181,7 @@
 		9784E3DD229799780071F173 /* Public */ = {
 			isa = PBXGroup;
 			children = (
+				30DC70375383FD3A68EDC54CE6CA0F50 /* PrefixHeader.h */,
 				41EB22B016367487DA4EECD2E7E5E759 /* SecureData.h */,
 				77ED12D98FB1C713E12C9E949F7395E3 /* SecureData.m */,
 				9784E3E6229799780071F173 /* WalletSDKMacro.h */,
