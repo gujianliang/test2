@@ -10,7 +10,7 @@
 #import "WalletModelFetcher.h"
 #import "NSStringAdditions.h"
 #import "NSObject+LKModel.h"
-#import "PrefixHeader.h"
+#import "ThorWalletHeader.h"
 #import "YYModel.h"
 
 @implementation WalletBaseApi

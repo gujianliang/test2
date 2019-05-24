@@ -7,7 +7,7 @@
 //
 
 #import "WalletVETBalanceApi.h"
-#import "PrefixHeader.h"
+#import "ThorWalletHeader.h"
 
 @implementation WalletVETBalanceApi
 

@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "PrefixHeader.h"
+#import "ThorWalletHeader.h"
 
 typedef enum {
     lowBlueType = 0,         // Dark gray--light gray

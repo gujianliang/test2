@@ -7,7 +7,7 @@
 //
 
 #import "WalletMBProgressShower.h"
-#import "PrefixHeader.h"
+#import "ThorWalletHeader.h"
 #import "MBProgressHUD.h"
 
 const NSInteger kWalletHudTag = 9090;

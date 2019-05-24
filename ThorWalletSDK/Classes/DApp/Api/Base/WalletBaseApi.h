@@ -8,11 +8,11 @@
 
 #import <Foundation/Foundation.h>
 #import "WalletBaseApi.h"
-#import "PrefixHeader.h"
+#import "ThorWalletHeader.h"
 //#import "YYModel.h"
 //#import "AFNetworking.h"
 
-#import "PrefixHeader.h"
+#import "ThorWalletHeader.h"
 
 typedef NS_ENUM(NSInteger, WalletRequestStatus){
     NotAvailable = 1,

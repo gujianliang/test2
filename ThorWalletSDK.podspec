@@ -24,7 +24,7 @@ Vechain wallet SDK provides a series of functional interface can help the iOS de
   s.homepage         = 'https://vit.digonchain.com/vechain-mobile-apps/ios-wallet-sdk'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
-  s.author           = { 'vechain' => 'tom.zeng@vechain.com' }
+  s.author           = { 'Tom' => 'tom.zeng@vechain.com' }
   s.source           = { :git => 'https://vit.digonchain.com/vechain-mobile-apps/ios-wallet-sdk.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
@@ -49,11 +49,6 @@ Vechain wallet SDK provides a series of functional interface can help the iOS de
       #ss.public_header_files = 'ThorWalletSDK/Classes/BasicWallet/*.h'
   end
   
-  s.subspec 'Public' do |ss|
-      ss.source_files = 'ThorWalletSDK/Classes/Public/*.{h,m}'
-      #ss.public_header_files = 'ThorWalletSDK/Classes/BasicWallet/*.h'
-  end
-  
    s.subspec 'BasicWallet' do |ss|
        ss.source_files = 'ThorWalletSDK/Classes/BasicWallet/*.{h,m}','ThorWalletSDK/Classes/BasicWallet/**/*.{h,m}'
       #ss.public_header_files = ''
@@ -64,12 +59,9 @@ Vechain wallet SDK provides a series of functional interface can help the iOS de
       #ss.public_header_files = ''
   end
 
-  
   s.dependency 'AFNetworking', '~> 3.0'
   
   s.dependency 'MBProgressHUD', '1.1.0'
-  
-  s.dependency 'Masonry', '1.1.0'
   
   s.dependency 'SocketRocket', '~> 0.4.2'
   

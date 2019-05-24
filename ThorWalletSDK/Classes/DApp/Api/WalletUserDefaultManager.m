@@ -6,7 +6,7 @@
 //  Copyright © VECHAIN. All rights reserved.
 //
 #import "WalletUserDefaultManager.h"
-#import "PrefixHeader.h"
+#import "ThorWalletHeader.h"
 
 @implementation WalletUserDefaultManager
 

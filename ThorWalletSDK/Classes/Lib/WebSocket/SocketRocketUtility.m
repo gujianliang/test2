@@ -2,12 +2,12 @@
 //  SocketRocketUtility.m
 //  SUN
 //
-//  Created by 孙俊 on 17/2/16.
+//  Created by shunjun on 17/2/16.
 //  Copyright © 2017年 SUN. All rights reserved.
 //
 
 #import "SocketRocketUtility.h"
-#import "PrefixHeader.h"
+#import "ThorWalletHeader.h"
 
 #define dispatch_main_async_safe(block)\
 if ([NSThread isMainThread]) {\
@@ -49,7 +49,6 @@ NSString * const kWebSocketdidReceiveMessageNote = @"kWebSocketdidReceiveMessage
 #pragma mark - **************** public methods
 -(void)SRWebSocketOpenWithURLString:(NSString *)urlString
 {
-    //如果是同一个url return
     if (self.socket) {
         return;
     }
@@ -63,12 +62,10 @@ NSString * const kWebSocketdidReceiveMessageNote = @"kWebSocketdidReceiveMessage
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:urlString]];
     self.socket = [[SRWebSocket alloc] initWithURLRequest:request];
     
-    NSLog(@"请求的websocket地址：%@",self.socket.url.absoluteString);
 
-    //SRWebSocketDelegate 协议
+    //SRWebSocketDelegate
     self.socket.delegate = self;   
     
-    //开始连接
     [self.socket open];
 }
 
@@ -76,7 +73,6 @@ NSString * const kWebSocketdidReceiveMessageNote = @"kWebSocketdidReceiveMessage
     if (self.socket){
         [self.socket close];
         self.socket = nil;
-        //断开连接时销毁心跳
         [self destoryHeartBeat];
     }
 }
@@ -90,19 +86,14 @@ NSString * const kWebSocketdidReceiveMessageNote = @"kWebSocketdidReceiveMessage
     
     dispatch_async(queue, ^{
         if (weakSelf.socket != nil) {
-            // 只有 SR_OPEN 开启状态才能调 send 方法啊，不然要崩
             if (weakSelf.socket.readyState == SR_OPEN) {
-                [weakSelf.socket send:data];    // 发送数据
+                [weakSelf.socket send:data];
                 
             } else if (weakSelf.socket.readyState == SR_CONNECTING) {
-                // 每隔2秒检测一次 socket.readyState 状态，检测 10 次左右
-                // 只要有一次状态是 SR_OPEN 的就调用 [ws.socket send:data] 发送数据
-                // 如果 10 次都还是没连上的，那这个发送请求就丢失了，这种情况是服务器的问题了，小概率的
-                // 代码有点长，我就写个逻辑在这里好了
+                
                 [self reConnect];
                 
             } else if (weakSelf.socket.readyState == SR_CLOSING || weakSelf.socket.readyState == SR_CLOSED) {
-                // websocket 断开了，调用 reConnect 方法重连
                 
                 
                 [self reConnect];
@@ -114,13 +105,10 @@ NSString * const kWebSocketdidReceiveMessageNote = @"kWebSocketdidReceiveMessage
 }
 
 #pragma mark - **************** private mothodes
-//重连机制
 - (void)reConnect {
     [self SRWebSocketClose];
 
-    //超过一分钟就不再重连 所以只会重连5次 2^5 = 64
     if (reConnectTime > 64) {
-        //您的网络状况不是很好，请检查网络后重试
         return;
     }
     
@@ -129,7 +117,6 @@ NSString * const kWebSocketdidReceiveMessageNote = @"kWebSocketdidReceiveMessage
         [self SRWebSocketOpenWithURLString:self.urlString];
     });
     
-    //重连时间2的指数级增长
     if (reConnectTime == 0) {
         reConnectTime = 2;
     } else {
@@ -138,7 +125,6 @@ NSString * const kWebSocketdidReceiveMessageNote = @"kWebSocketdidReceiveMessage
 }
 
 
-//取消心跳
 - (void)destoryHeartBeat {
     dispatch_main_async_safe(^{
         if (heartBeat) {
@@ -152,19 +138,15 @@ NSString * const kWebSocketdidReceiveMessageNote = @"kWebSocketdidReceiveMessage
     })
 }
 
-//初始化心跳
 - (void)initHeartBeat {
     dispatch_main_async_safe(^{
         [self destoryHeartBeat];
-        //心跳设置为3分钟，NAT超时一般为5分钟
         heartBeat = [NSTimer timerWithTimeInterval:3 target:self selector:@selector(sentheart) userInfo:nil repeats:YES];
-        //和服务端约定好发送什么作为心跳标识，尽可能的减小心跳包大小
         [[NSRunLoop currentRunLoop] addTimer:heartBeat forMode:NSRunLoopCommonModes];
     })
 }
 
 - (void)sentheart {
-    //发送心跳 和后台可以约定发送什么内容  一般可以调用ping  我这里根据后台的要求 发送了data给他
     [self sendData:@"heart"];
 }
 
@@ -177,9 +159,7 @@ NSString * const kWebSocketdidReceiveMessageNote = @"kWebSocketdidReceiveMessage
 
 #pragma mark - **************** SRWebSocketDelegate
 - (void)webSocketDidOpen:(SRWebSocket *)webSocket {
-    //每次正常连接的时候清零重连时间
     reConnectTime = 0;
-    //开启心跳
     [self initHeartBeat];
     if (webSocket == self.socket) {
         [[NSNotificationCenter defaultCenter] postNotificationName:kWebSocketDidOpenNote object:nil];
@@ -189,7 +169,6 @@ NSString * const kWebSocketdidReceiveMessageNote = @"kWebSocketdidReceiveMessage
 - (void)webSocket:(SRWebSocket *)webSocket didFailWithError:(NSError *)error {
     if (webSocket == self.socket) {
         _socket = nil;
-        //连接失败就重连
         [self reConnect];
     }
 }
@@ -202,12 +181,6 @@ NSString * const kWebSocketdidReceiveMessageNote = @"kWebSocketdidReceiveMessage
     }
 }
 
-/*
- 该函数是接收服务器发送的pong消息，其中最后一个是接受pong消息的，
- 在这里就要提一下心跳包，一般情况下建立长连接都会建立一个心跳包，
- 用于每隔一段时间通知一次服务端，客户端还是在线，这个心跳包其实就是一个ping消息，
- 我的理解就是建立一个定时器，每隔十秒或者十五秒向服务端发送一个ping消息，这个消息可是是空的
- */
 - (void)webSocket:(SRWebSocket *)webSocket didReceivePong:(NSData *)pongPayload {
     NSString *reply = [[NSString alloc] initWithData:pongPayload encoding:NSUTF8StringEncoding];
     NSLog(@"reply===%@",reply);

@@ -8,7 +8,7 @@
 
 #import "TransactionParameter.h"
 #import "YYModel.h"
-#import "PrefixHeader.h"
+#import "ThorWalletHeader.h"
 
 @implementation TransactionParameter
 
