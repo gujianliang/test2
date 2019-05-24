@@ -12,11 +12,13 @@
 
 #import "Account.h"
 #import "Address.h"
+#import "BigNumber.h"
 #import "Hash.h"
 #import "Payment.h"
+#import "PrefixHeader.h"
 #import "Signature.h"
 #import "Transaction.h"
-#import "BigNumber.h"
+#import "WalletUtils.h"
 #import "RegEx.h"
 #import "RLPSerialization.h"
 #import "SecureData.h"
@@ -97,8 +99,6 @@
 #import "sha2.h"
 #import "sha3.h"
 #import "SocketRocketUtility.h"
-#import "PrefixHeader.h"
-#import "WalletUtils.h"
 
 FOUNDATION_EXPORT double ThorWalletSDKVersionNumber;
 FOUNDATION_EXPORT const unsigned char ThorWalletSDKVersionString[];

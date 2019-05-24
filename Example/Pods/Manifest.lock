@@ -17,7 +17,35 @@ PODS:
   - Masonry (1.1.0)
   - MBProgressHUD (1.1.0)
   - SocketRocket (0.4.2)
-  - ThorWalletSDK (1.1.0):
+  - ThorWalletSDK (1.0.0):
+    - AFNetworking (~> 3.0)
+    - Masonry (= 1.1.0)
+    - MBProgressHUD (= 1.1.0)
+    - SocketRocket (~> 0.4.2)
+    - ThorWalletSDK/BasicWallet (= 1.0.0)
+    - ThorWalletSDK/DApp (= 1.0.0)
+    - ThorWalletSDK/Public (= 1.0.0)
+    - ThorWalletSDK/Tool (= 1.0.0)
+    - YYModel (~> 1.0.4)
+  - ThorWalletSDK/BasicWallet (1.0.0):
+    - AFNetworking (~> 3.0)
+    - Masonry (= 1.1.0)
+    - MBProgressHUD (= 1.1.0)
+    - SocketRocket (~> 0.4.2)
+    - YYModel (~> 1.0.4)
+  - ThorWalletSDK/DApp (1.0.0):
+    - AFNetworking (~> 3.0)
+    - Masonry (= 1.1.0)
+    - MBProgressHUD (= 1.1.0)
+    - SocketRocket (~> 0.4.2)
+    - YYModel (~> 1.0.4)
+  - ThorWalletSDK/Public (1.0.0):
+    - AFNetworking (~> 3.0)
+    - Masonry (= 1.1.0)
+    - MBProgressHUD (= 1.1.0)
+    - SocketRocket (~> 0.4.2)
+    - YYModel (~> 1.0.4)
+  - ThorWalletSDK/Tool (1.0.0):
     - AFNetworking (~> 3.0)
     - Masonry (= 1.1.0)
     - MBProgressHUD (= 1.1.0)
@@ -50,9 +78,9 @@ SPEC CHECKSUMS:
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
   SocketRocket: ffe08119b00ef982f6c37052a4705a057c8494ad
-  ThorWalletSDK: aafe232a7bd7eab33c1fa8d61c64315702a30a4b
+  ThorWalletSDK: d265093bb290245e39c65d3a12efd118a6340bb5
   YYModel: 2a7fdd96aaa4b86a824e26d0c517de8928c04b30
 
-PODFILE CHECKSUM: 2dac12883e37b70062c8b5168bd4be54d260ab0f
+PODFILE CHECKSUM: 9b95aab1df37279f27ed9409a8446dfbfd67307b
 
-COCOAPODS: 1.7.0.beta.3
+COCOAPODS: 1.7.0.rc.2
