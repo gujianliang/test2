@@ -162,15 +162,15 @@
 		96EB8ECEF89CF095DFBB2114C66A0BEC /* UIRefreshControl+AFNetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = 2A1872FFB4CFC184F0D8CD6F43A9EAC0 /* UIRefreshControl+AFNetworking.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9776118CADA834091519251DA444242A /* SecureData.m in Sources */ = {isa = PBXBuildFile; fileRef = 77ED12D98FB1C713E12C9E949F7395E3 /* SecureData.m */; };
 		9784E1BB22952EE40071F173 /* ThorWalletSDKBundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 9784E1B722952B530071F173 /* ThorWalletSDKBundle.bundle */; };
-		9784E3D42297973D0071F173 /* BigNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = 9784E3C2229797370071F173 /* BigNumber.m */; };
-		9784E3D5229797410071F173 /* TransactionParameter.h in Headers */ = {isa = PBXBuildFile; fileRef = 9784E3C3229797370071F173 /* TransactionParameter.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		9784E3D6229797460071F173 /* WalletAccountModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9784E3C4229797370071F173 /* WalletAccountModel.m */; };
-		9784E3D72297974A0071F173 /* WalletUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 9784E3C5229797370071F173 /* WalletUtils.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		9784E3D82297974E0071F173 /* WalletAccountModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 9784E3C6229797370071F173 /* WalletAccountModel.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		9784E3D9229797520071F173 /* TransactionParameter.m in Sources */ = {isa = PBXBuildFile; fileRef = 9784E3C7229797370071F173 /* TransactionParameter.m */; };
-		9784E3DA229797550071F173 /* BigNumber.h in Headers */ = {isa = PBXBuildFile; fileRef = 9784E3C8229797370071F173 /* BigNumber.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		9784E3DB2297975A0071F173 /* WalletUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 9784E3C9229797370071F173 /* WalletUtils.m */; };
-		9784E3DC2297975D0071F173 /* WalletSDKMacro.h in Headers */ = {isa = PBXBuildFile; fileRef = 9784E3CA229797370071F173 /* WalletSDKMacro.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9784E3F022979B760071F173 /* BigNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = 9784E3DE229799780071F173 /* BigNumber.m */; };
+		9784E3F122979B7C0071F173 /* TransactionParameter.h in Headers */ = {isa = PBXBuildFile; fileRef = 9784E3DF229799780071F173 /* TransactionParameter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9784E3F222979B800071F173 /* WalletAccountModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9784E3E0229799780071F173 /* WalletAccountModel.m */; };
+		9784E3F322979B830071F173 /* WalletUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 9784E3E1229799780071F173 /* WalletUtils.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9784E3F422979B880071F173 /* WalletAccountModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 9784E3E2229799780071F173 /* WalletAccountModel.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9784E3F522979B8E0071F173 /* TransactionParameter.m in Sources */ = {isa = PBXBuildFile; fileRef = 9784E3E3229799780071F173 /* TransactionParameter.m */; };
+		9784E3F622979B920071F173 /* BigNumber.h in Headers */ = {isa = PBXBuildFile; fileRef = 9784E3E4229799780071F173 /* BigNumber.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9784E3F722979B960071F173 /* WalletUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 9784E3E5229799780071F173 /* WalletUtils.m */; };
+		9784E3F822979B990071F173 /* WalletSDKMacro.h in Headers */ = {isa = PBXBuildFile; fileRef = 9784E3E6229799780071F173 /* WalletSDKMacro.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9813B170D1DEDCF96C96BCB91ACDFAD5 /* RLPSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = E7E58D0577E183F5510EA0BD7BFD481A /* RLPSerialization.m */; };
 		98CFE7DDEA01A4B1657587701011D3EF /* SRWebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = CBB490328E372F0749D498B827F68A08 /* SRWebSocket.m */; };
 		99914A2380F8E56767C887546BF466BE /* WalletBaseApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F7C8604389C851EB92C1A987BDF8691 /* WalletBaseApi.m */; };
@@ -570,15 +570,15 @@
 		96BF2402B09F2D04116D178621A20EEC /* sha2.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = sha2.h; sourceTree = "<group>"; };
 		96DDA0C5F21B6D42F2ED74C3BCCAA4D0 /* blake2b-ref.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; path = "blake2b-ref.c"; sourceTree = "<group>"; };
 		9784E1B722952B530071F173 /* ThorWalletSDKBundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ThorWalletSDKBundle.bundle; sourceTree = "<group>"; };
-		9784E3C2229797370071F173 /* BigNumber.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BigNumber.m; sourceTree = "<group>"; };
-		9784E3C3229797370071F173 /* TransactionParameter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransactionParameter.h; sourceTree = "<group>"; };
-		9784E3C4229797370071F173 /* WalletAccountModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WalletAccountModel.m; sourceTree = "<group>"; };
-		9784E3C5229797370071F173 /* WalletUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WalletUtils.h; sourceTree = "<group>"; };
-		9784E3C6229797370071F173 /* WalletAccountModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WalletAccountModel.h; sourceTree = "<group>"; };
-		9784E3C7229797370071F173 /* TransactionParameter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransactionParameter.m; sourceTree = "<group>"; };
-		9784E3C8229797370071F173 /* BigNumber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BigNumber.h; sourceTree = "<group>"; };
-		9784E3C9229797370071F173 /* WalletUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WalletUtils.m; sourceTree = "<group>"; };
-		9784E3CA229797370071F173 /* WalletSDKMacro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WalletSDKMacro.h; sourceTree = "<group>"; };
+		9784E3DE229799780071F173 /* BigNumber.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BigNumber.m; sourceTree = "<group>"; };
+		9784E3DF229799780071F173 /* TransactionParameter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransactionParameter.h; sourceTree = "<group>"; };
+		9784E3E0229799780071F173 /* WalletAccountModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WalletAccountModel.m; sourceTree = "<group>"; };
+		9784E3E1229799780071F173 /* WalletUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WalletUtils.h; sourceTree = "<group>"; };
+		9784E3E2229799780071F173 /* WalletAccountModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WalletAccountModel.h; sourceTree = "<group>"; };
+		9784E3E3229799780071F173 /* TransactionParameter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransactionParameter.m; sourceTree = "<group>"; };
+		9784E3E4229799780071F173 /* BigNumber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BigNumber.h; sourceTree = "<group>"; };
+		9784E3E5229799780071F173 /* WalletUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WalletUtils.m; sourceTree = "<group>"; };
+		9784E3E6229799780071F173 /* WalletSDKMacro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WalletSDKMacro.h; sourceTree = "<group>"; };
 		97DCED24C4CDA1170AC35857F16C847F /* WalletVETBalanceApi.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = WalletVETBalanceApi.h; sourceTree = "<group>"; };
 		98ADC0CA52E5C61D4D82B6CE46329E67 /* MASUtilities.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MASUtilities.h; path = Masonry/MASUtilities.h; sourceTree = "<group>"; };
 		9AB7A246BBC9BC5630C673DCA0683A7B /* NSObject+LKModel.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "NSObject+LKModel.h"; sourceTree = "<group>"; };
@@ -1123,9 +1123,9 @@
 		864FC9BC783939C152A02EA60FAC27B3 /* ThorWalletSDK */ = {
 			isa = PBXGroup;
 			children = (
-				9784E3C1229797370071F173 /* Public */,
-				9784E1B622952B530071F173 /* Assets */,
 				30DC70375383FD3A68EDC54CE6CA0F50 /* PrefixHeader.h */,
+				9784E3DD229799780071F173 /* Public */,
+				9784E1B622952B530071F173 /* Assets */,
 				399B016527A07DE8648FA908738D4302 /* BasicWallet */,
 				6AB4828F579C071BC84B33A1E30BADFD /* DApp */,
 				3C0D1D0F97A665843149CFBBAE4422F2 /* Lib */,
@@ -1181,20 +1181,21 @@
 			path = ThorWalletSDK/Assets;
 			sourceTree = "<group>";
 		};
-		9784E3C1229797370071F173 /* Public */ = {
+		9784E3DD229799780071F173 /* Public */ = {
 			isa = PBXGroup;
 			children = (
-				9784E3C2229797370071F173 /* BigNumber.m */,
-				9784E3C3229797370071F173 /* TransactionParameter.h */,
-				9784E3C4229797370071F173 /* WalletAccountModel.m */,
-				9784E3C5229797370071F173 /* WalletUtils.h */,
-				9784E3C6229797370071F173 /* WalletAccountModel.h */,
-				9784E3C7229797370071F173 /* TransactionParameter.m */,
-				9784E3C8229797370071F173 /* BigNumber.h */,
-				9784E3C9229797370071F173 /* WalletUtils.m */,
-				9784E3CA229797370071F173 /* WalletSDKMacro.h */,
+				9784E3E6229799780071F173 /* WalletSDKMacro.h */,
+				9784E3E4229799780071F173 /* BigNumber.h */,
+				9784E3DE229799780071F173 /* BigNumber.m */,
+				9784E3DF229799780071F173 /* TransactionParameter.h */,
+				9784E3E3229799780071F173 /* TransactionParameter.m */,
+				9784E3E1229799780071F173 /* WalletUtils.h */,
+				9784E3E5229799780071F173 /* WalletUtils.m */,
+				9784E3E2229799780071F173 /* WalletAccountModel.h */,
+				9784E3E0229799780071F173 /* WalletAccountModel.m */,
 			);
-			path = Public;
+			name = Public;
+			path = ThorWalletSDK/Classes/Public;
 			sourceTree = "<group>";
 		};
 		B5319E56CC75303F40A9088FAE54FAD8 /* Reachability */ = {
@@ -1536,10 +1537,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D47DE07D173038E2B8472CE7B795BC3 /* Account.h in Headers */,
+				9784E3F822979B990071F173 /* WalletSDKMacro.h in Headers */,
 				CB9AADE427EEA04A8AB999D4E39D118C /* Address.h in Headers */,
 				376B1BDD229085E96E88296DC1747337 /* aes.h in Headers */,
 				486DC99A82CA0F5331189E1D455A7923 /* aesopt.h in Headers */,
 				15E5F888E5A18C29A91F39CC44ACFEAE /* aestab.h in Headers */,
+				9784E3F422979B880071F173 /* WalletAccountModel.h in Headers */,
 				EE1A423A8CB9AE09074718F16D41EB61 /* base58.h in Headers */,
 				BE16044A920ABFB9818610D3A1E2FBD6 /* bignum.h in Headers */,
 				772D85C6F2B34A301952D8AD6B63A156 /* bip32.h in Headers */,
@@ -1552,7 +1555,6 @@
 				DA02E8B98A4375333DEFD28CC7D2417D /* curves.h in Headers */,
 				9D884F416D1FEBD3F64F15BCB77C4109 /* ecdsa.h in Headers */,
 				DFC4588A18E503AB40313B22C8F73FDF /* Hash.h in Headers */,
-				9784E3DC2297975D0071F173 /* WalletSDKMacro.h in Headers */,
 				BF74F2A8FD4AB9D4BAF3F914529BFFF7 /* hmac.h in Headers */,
 				E8F15D41E4302291D635D2261F6B3A61 /* macros.h in Headers */,
 				BCEFC5925C03310BA84757A57279B0F4 /* NSDataAdditions.h in Headers */,
@@ -1566,6 +1568,7 @@
 				35F8DABA7F9395F4B1B226D6EAE99684 /* PrefixHeader.h in Headers */,
 				CE4F14DAE1F9B649632A9C6DD9DB578B /* rand.h in Headers */,
 				48D9C3C186F0FC9777B526F184D71875 /* RegEx.h in Headers */,
+				9784E3F122979B7C0071F173 /* TransactionParameter.h in Headers */,
 				4D4FBF00A81F59B6BCAECB11126DF4DC /* ripemd160.h in Headers */,
 				69B3FDEAF3C4F5991141C921282AF97D /* RLPSerialization.h in Headers */,
 				43FCEB7EA43DA1B086503B94320139CB /* scrypt_sha256.h in Headers */,
@@ -1578,10 +1581,9 @@
 				14F8B06C71278DDEFEF86C55C3748E2C /* sysendian.h in Headers */,
 				52CE56CD5C900CC4A9441E33DCBBA0A4 /* ThorWalletSDK-umbrella.h in Headers */,
 				BA7BF8A7CB4F06D5ED83CC2B193322A0 /* tommath.h in Headers */,
-				9784E3D82297974E0071F173 /* WalletAccountModel.h in Headers */,
 				846FE1823612CAED95BDF26C43B9A564 /* tommath_class.h in Headers */,
 				236109E8E7219A5C824C4398AEAC23D6 /* tommath_private.h in Headers */,
-				9784E3DA229797550071F173 /* BigNumber.h in Headers */,
+				9784E3F322979B830071F173 /* WalletUtils.h in Headers */,
 				CBA8394C34D19F0AE33DFF9D995C4CB9 /* tommath_superclass.h in Headers */,
 				64910467FCAB3F3379198A8F7E7D2DBB /* Transaction.h in Headers */,
 				91118E4A54990BC01C14BD9868A35D96 /* UIButton+Block.h in Headers */,
@@ -1592,8 +1594,8 @@
 				CB59784E918C732A48B3095ACC12D014 /* WalletApiManageMacro.h in Headers */,
 				A5BF0C9E8C3D46F29CB357634822DF8C /* WalletBalanceModel.h in Headers */,
 				F68537486AD00B758620FB0388D49C47 /* WalletBaseApi.h in Headers */,
-				9784E3D72297974A0071F173 /* WalletUtils.h in Headers */,
 				04DD3693E67B87C77877ABCDDF30F4B1 /* WalletBaseModel.h in Headers */,
+				9784E3F622979B920071F173 /* BigNumber.h in Headers */,
 				A94A327801DCA9918BA61F3EDB7FBCC2 /* WalletBestBlockInfoApi.h in Headers */,
 				07E6EA808531908F6EFE71F0729F4AE3 /* WalletBlockApi.h in Headers */,
 				E25381D10B5F1C52693C752BBFC90761 /* WalletBlockInfoModel.h in Headers */,
@@ -1622,7 +1624,6 @@
 				DEE4AD580A81B100505B4416A595E405 /* WalletTransactionApi.h in Headers */,
 				8EC161B633A0D1446C3B8A896873F17A /* WalletTransantionsReceiptApi.h in Headers */,
 				7EBDA618F28CBACDA37A7AF6B4C2C093 /* WalletTransantionsReceiptModel.h in Headers */,
-				9784E3D5229797410071F173 /* TransactionParameter.h in Headers */,
 				9ED2BA120318840D46417884A9DF6F62 /* WalletUserDefaultManager.h in Headers */,
 				0ACBB9CB54C1698CA9B09A50E1B16CDC /* WalletVersionModel.h in Headers */,
 				BABCE6ACBEB767D3327281F72F8CC081 /* WalletVETBalanceApi.h in Headers */,
@@ -2017,7 +2018,6 @@
 			files = (
 				A906D4FD4C8645E54ACB657359538ABA /* Account.m in Sources */,
 				4164DB4314D3B01D6F89A7CC13EEC9A9 /* Address.m in Sources */,
-				9784E3DB2297975A0071F173 /* WalletUtils.m in Sources */,
 				3AA3C851D1FE75A80D7326C02F32A75D /* aes_modes.c in Sources */,
 				F5C428EA6E6D47C556E11BD734259522 /* aescrypt.c in Sources */,
 				F9E8B56EC9B2CD7CB8A3200B43860348 /* aeskey.c in Sources */,
@@ -2030,6 +2030,7 @@
 				B993615B796E4A7DD0149890FCDE9AAC /* blake2bp-ref.c in Sources */,
 				B6B7E124171DF40EE4344547F1631088 /* blake2s-ref.c in Sources */,
 				71A1598833BA586A793E8C777136F877 /* blake2sp-ref.c in Sources */,
+				9784E3F222979B800071F173 /* WalletAccountModel.m in Sources */,
 				81175D2B9FEA7D8EB839C69315E0835A /* blake2xb-ref.c in Sources */,
 				2F7B5EF86C9E000F81D5935A05ED5010 /* blake2xs-ref.c in Sources */,
 				D4604F113072955BB4AB8A9790A4AF46 /* crypto_scrypt-nosse.c in Sources */,
@@ -2046,7 +2047,6 @@
 				6F708CE78B5E85622203959258654A5D /* Payment.m in Sources */,
 				224D67760D00E01B4925DE71114F7E34 /* pbkdf2.c in Sources */,
 				F361ADE6B6CC38D488A62916CF4EDD6C /* rand.c in Sources */,
-				9784E3D9229797520071F173 /* TransactionParameter.m in Sources */,
 				0B969A9DEB79F3BAEE551FB0D389015C /* RegEx.m in Sources */,
 				883E7CCE434C3F64CB87660C20FC231C /* ripemd160.c in Sources */,
 				9813B170D1DEDCF96C96BCB91ACDFAD5 /* RLPSerialization.m in Sources */,
@@ -2060,6 +2060,7 @@
 				357F3E8130320E6D50BB46A4F3F18455 /* SocketRocketUtility.m in Sources */,
 				3307E6B9BA94A592A6E6BC69644D9C21 /* ThorWalletSDK-dummy.m in Sources */,
 				C7460F5340EF824BF471078065FD65B3 /* Transaction.m in Sources */,
+				9784E3F022979B760071F173 /* BigNumber.m in Sources */,
 				DE99D0B150FE2A01AB885C30C120437F /* UIButton+Block.m in Sources */,
 				A2ADD99FFA3C497BDBED20F20E93A23D /* UIColor+SNFoundation.m in Sources */,
 				C34F0B9BBF28C9E0578702DA8787EEEF /* UIView+Sizes.m in Sources */,
@@ -2077,6 +2078,7 @@
 				ADB28741B4CFE28637F5F24DA3EA26AD /* WalletDAppHandle+web3JS.m in Sources */,
 				0986C8F31BA3072E880460BDFADF6224 /* WalletDAppHandle.m in Sources */,
 				ADACF9F6CD056560F24E3DA8C6F8CFAD /* WalletDappLogEventApi.m in Sources */,
+				9784E3F722979B960071F173 /* WalletUtils.m in Sources */,
 				AE7A71AF425174DDF86C30E27029D75F /* WalletDappLogTransferApi.m in Sources */,
 				531255289AA2F391E9E4F8C9FD608060 /* WalletDAppPeerModel.m in Sources */,
 				B6D29E1559F236BF05DD633A1020B54D /* WalletDAppPeersApi.m in Sources */,
@@ -2086,14 +2088,13 @@
 				C76597F94AAFADFBFF405855ADBEE9F2 /* WalletGenesisBlockInfoApi.m in Sources */,
 				B66E3F2B6A6D1AAD98ED49F2B1268BED /* WalletGetStorageApi.m in Sources */,
 				8547F1893AE3F2CC3730413D14CF3DBA /* WalletGradientLayerButton.m in Sources */,
-				9784E3D6229797460071F173 /* WalletAccountModel.m in Sources */,
 				3B75E2BCEBDB93E7A69314156AFAE3BC /* WalletJSCallbackModel.m in Sources */,
 				3449B012602A296105B658B1B0CAA609 /* WalletManageModel.m in Sources */,
 				7DF5319968F3D3972A0F164199A7DEB4 /* WalletMBProgressShower.m in Sources */,
 				9D30B7698F14D0BE4DC37443C603B9B9 /* WalletModelFetcher.m in Sources */,
 				6997DDB938BA20B938A7C07D1DAB9744 /* WalletTools.m in Sources */,
+				9784E3F522979B8E0071F173 /* TransactionParameter.m in Sources */,
 				DE319E21F19AB44BB4140255BC5F3997 /* WalletTransactionApi.m in Sources */,
-				9784E3D42297973D0071F173 /* BigNumber.m in Sources */,
 				F1687AB420122747995ED27907FA457D /* WalletTransantionsReceiptApi.m in Sources */,
 				B3BE2BAA26589454C4FAF52BA882B402 /* WalletTransantionsReceiptModel.m in Sources */,
 				150037572E663ED87DE8CD295303E864 /* WalletUserDefaultManager.m in Sources */,
