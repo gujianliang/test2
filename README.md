@@ -166,6 +166,10 @@ The injectJSWithWebView method injects connex bridge js and web3 bridge js into 
 
 #### 3，Address : 20 bytes hex string and start with 0x.
 
+## Attention：
+
+Before the release of DApp, it is recommended that different versions of WebView be adapted to ensure the reliable and stable operation of HTML 5 pages.
+
 ## API Reference：
 
 + [API Reference](https://vit.digonchain.com/vechain-mobile-apps/ios-wallet-sdk/blob/master/API%20Reference%20.md) for VeChain app developers
@@ -173,7 +177,7 @@ The injectJSWithWebView method injects connex bridge js and web3 bridge js into 
 ## License
 
 Vechain Wallet SDK is licensed under the
-[GNU Lesser General Public License v3.0](https://www.gnu.org/licenses/lgpl-3.0.html), also included
+[MIT LICENSE](https://mit-license.org), also included
 in *LICENSE* file in the repository.
 
 
