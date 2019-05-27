@@ -177,7 +177,7 @@ Before the release of DApp, it is recommended that different versions of WebView
 ## License
 
 Vechain Wallet SDK is licensed under the
-[https://mit-license.org](https://mit-license.org), also included
+[MIT LICENSE](https://mit-license.org), also included
 in *LICENSE* file in the repository.
 
 
