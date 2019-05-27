@@ -177,7 +177,7 @@ Before the release of DApp, it is recommended that different versions of WebView
 ## License
 
 Vechain Wallet SDK is licensed under the
-[GNU Lesser General Public License v3.0](https://www.gnu.org/licenses/lgpl-3.0.html), also included
+[https://mit-license.org](https://mit-license.org), also included
 in *LICENSE* file in the repository.
 
 
