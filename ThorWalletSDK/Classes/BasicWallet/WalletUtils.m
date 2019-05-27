@@ -189,7 +189,8 @@
         if (decryptError == nil) {
             
             if (callback) {
-                callback(account.address.checksumAddress,nil);
+                NSString *privateKey = [SecureData dataToHexString:account.privateKey];
+                callback(privateKey,nil);
             }
         }else{
             if (callback) {

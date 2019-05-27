@@ -55,6 +55,7 @@
 		9784E19F2294F1AF0071F173 /* ThorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9784E19D2294F1AF0071F173 /* ThorViewController.m */; };
 		9784E1A02294F1AF0071F173 /* ThorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9784E19E2294F1AF0071F173 /* ThorViewController.xib */; };
 		9784E1A32294F7FF0071F173 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9784E1A52294F7FF0071F173 /* Localizable.strings */; };
+		9784E404229B7AB10071F173 /* ThorTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9784E403229B7AB10071F173 /* ThorTest.m */; };
 		BC4763BAD07A7B12C42FFE80 /* Pods_ThorWalletSDK_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F2FABEDA71F11B960E6EA0E /* Pods_ThorWalletSDK_Tests.framework */; };
 /* End PBXBuildFile section */
 
@@ -142,6 +143,8 @@
 		9784E19E2294F1AF0071F173 /* ThorViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ThorViewController.xib; sourceTree = "<group>"; };
 		9784E1A62294F8050071F173 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		9784E1A72294F8140071F173 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		9784E402229B7AB10071F173 /* ThorTest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ThorTest.h; sourceTree = "<group>"; };
+		9784E403229B7AB10071F173 /* ThorTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ThorTest.m; sourceTree = "<group>"; };
 		9F2FABEDA71F11B960E6EA0E /* Pods_ThorWalletSDK_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ThorWalletSDK_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4F68F4B1903F277B9001563 /* Pods-ThorWalletSDK_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ThorWalletSDK_Example.release.xcconfig"; path = "Target Support Files/Pods-ThorWalletSDK_Example/Pods-ThorWalletSDK_Example.release.xcconfig"; sourceTree = "<group>"; };
 		EF140763CF74F8CFEBB87AF1 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
@@ -291,6 +294,8 @@
 				9784E1282293D8F10071F173 /* Transfer */,
 				9784E1342293D8F10071F173 /* Node */,
 				9784E13D2293D8F10071F173 /* Recover */,
+				9784E402229B7AB10071F173 /* ThorTest.h */,
+				9784E403229B7AB10071F173 /* ThorTest.m */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -428,7 +433,7 @@
 			attributes = {
 				CLASSPREFIX = Thor;
 				LastUpgradeCheck = 0720;
-				ORGANIZATIONNAME = zengxin;
+				ORGANIZATIONNAME = VeChain;
 				TargetAttributes = {
 					6003F589195388D20070C39A = {
 						DevelopmentTeam = G687LKP7Q7;
@@ -584,6 +589,7 @@
 			files = (
 				9784E16F2293D8F20071F173 /* WalletMnemonicImportVC.m in Sources */,
 				9784E16D2293D8F20071F173 /* WalletRecoverMainVC.m in Sources */,
+				9784E404229B7AB10071F173 /* ThorTest.m in Sources */,
 				9784E1552293D8F20071F173 /* WalletMoreInfoVC.m in Sources */,
 				9784E15E2293D8F20071F173 /* WalletTransferVC.m in Sources */,
 				9784E15C2293D8F20071F173 /* WalletCreateVC.m in Sources */,

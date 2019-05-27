@@ -12,10 +12,12 @@
 #import "WalletCreateVC.h"
 #import "WalletRecoverMainVC.h"
 #import "WalletDetailVC.h"
-
+#import "ThorTest.h"
 
 @interface ThorViewController ()
-
+{
+    ThorTest *test;
+}
 @end
 
 @implementation ThorViewController
@@ -40,6 +42,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    test = [[ThorTest alloc]init];
+    [test startTest];
 }
 
 /**
