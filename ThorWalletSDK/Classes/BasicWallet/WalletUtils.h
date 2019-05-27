@@ -357,15 +357,6 @@ completionHandler:(void (^)(NSString *result))completionHandler;
 + (void)deallocDApp;
 
 
-/**
- *  @abstract
- *  Get SDK Version
- *
- *
- *
- */
-+ (NSString *)getVersion;
-
 
 
 NS_ASSUME_NONNULL_END
