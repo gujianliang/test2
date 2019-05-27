@@ -29,8 +29,6 @@ Vechain wallet SDK provides a series of functional interface can help the iOS de
 
 #### Latest version 1.0.0
 
-#### The dependency package should be added to the project, as listed below:
-
 
 #### Support installation with CocoaPods
  
