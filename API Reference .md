@@ -129,7 +129,17 @@ Example:
               password:(NSString *)password
               callback:(void (^)(BOOL result))callback;
 
-
+Example:
+//Verification keystore
+    [WalletUtils verifyKeystore:keystore password:password callback:^(BOOL result) {
+        if (result) {
+            //success
+            
+        }else{//fail
+            
+        }
+    }];
+    
 ```
 
 ## Modify password of keystore
@@ -144,6 +154,18 @@ Example:
            newPassword:(NSString *)newPassword
            oldPassword:(NSString *)oldPassword
               callback:(void (^)(NSString *newKeystore))callback;
+
+Example:
+//change Password
+    [WalletUtils modifyKeystore:keystore newPassword:newPassword oldPassword:oldPassword callback:^(NSString * _Nonnull newKeystore) {
+
+        if (newKeystore.length > 0) {
+            //success
+
+        }else {
+            //fail
+        }
+    }];
 ```
 
 ##  Decrypt keystore
