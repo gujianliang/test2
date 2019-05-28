@@ -316,10 +316,7 @@ Example:
     //checkSumAddress:0x36D7189625587D7C4c806E0856b6926Af8d36FEa
 ```
 ##  Get address from keystore   
- >  @param keystoreJson : Keystore JSON encryption format for user wallet private key   
- >  retuen : Wallet address   
- >
- >
+
  ```obj-c
  /*
   *  @param keystoreJson :  Keystore JSON encryption format for user wallet private key
