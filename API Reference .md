@@ -652,9 +652,9 @@ Example:
 
 ```
 
-Several main data structures
+##Several main data structures
 
-#### keystore
+### keystore
 ```obj-c
 /**
 *  Keystore is a json string. Its file structure is as follows:
@@ -696,9 +696,9 @@ Several main data structures
 *
 */
 ```
-Hexadecimal must start with 0x.
+### Hexadecimal must start with 0x.
 
-Address : 20 bytes hex string and start with 0x.
+### Address : 20 bytes hex string and start with 0x.
 
 
 
