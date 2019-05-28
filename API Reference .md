@@ -394,15 +394,7 @@ Example:
 
 ```
 
-##  Add the signature address to the authentication signature data  
 
-```obj-c
-+ (NSString *)addSignerToCertMessage:(NSString *)signer message:(NSDictionary *)message;
-
-Example:
- NSString *newMessage = [WalletUtils addSignerToCertMessage:signer.lowercaseString message:message];
-      
-```
 
 
 
@@ -703,7 +695,15 @@ Example:
 }
 
  ```
+##  Add the signature address to the authentication signature data  
 
+```obj-c
++ (NSString *)addSignerToCertMessage:(NSString *)signer message:(NSDictionary *)message;
+
+Example:
+ NSString *newMessage = [WalletUtils addSignerToCertMessage:signer.lowercaseString message:message];
+      
+```
 
  ##  App developer implementation when DApp calls get address function    
  
