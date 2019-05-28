@@ -10,7 +10,6 @@ Inherit the AppDelegate class and implement the following methods:
     // Override point for customization after application launch.
     
     [WalletUtils setNodeUrl:Main_Node];
-    
     ...
     
     return YES;
@@ -23,13 +22,10 @@ Inherit the AppDelegate class and implement the following methods:
 >
 >
 ```obj-c
-+ (void)setNodeUrl:(NSString *)nodelUrl;
 
-Example:
- //Set it as a Main_Node environment
+   //Set it as a Main_Node environment
 
     [WalletUtils setNodeUrl:Main_Node];
-
 
 ```
 
@@ -38,9 +34,7 @@ Example:
 ##  Get node url   
 ### If nodeUrl is not set, the default value is Main_Node.
 ```obj-c
-+ (NSString *)getNodeUrl;
- 
-Example:
+
     NSString *nodeUrl = [WalletUtils getNodeUrl];
 
 ```
@@ -53,11 +47,7 @@ Example:
 > 
 
 ```obj-c
-+ (void)createWalletWithPassword:(NSString *)password  
-                        callback:(void(^)(WalletAccountModel *account,NSError *error))callback;
 
-
-Example:
     //Create a wallet with your password.
     [WalletUtils createWalletWithPassword:password
                                  callback:^(WalletAccountModel * _Nonnull account, NSError * _Nonnull error)
@@ -82,12 +72,6 @@ Example:
 > 
 ```obj-c
 
-+ (void)createWalletWithMnemonicWords:(NSArray<NSString *> *)mnemonicWords
-                            password:(NSString *)password
-                            callback:(void(^)(WalletAccountModel *account,NSError *error))callback;
-
-
-Example:
     // Create a wallet with your password and mnemonic words.
     [WalletUtils createWalletWithMnemonicWords:mnemonicWords
                                 password:self.password.text
@@ -107,10 +91,6 @@ Example:
 >   @return result   
 > 
 ```obj-c
-+ (BOOL)isValidMnemonicWords:(NSArray<NSString *> *)mnemonicWords;
-
-
-Example:
 
     NSString *mnemonicWords = @"admit mad dream stable scrub rubber cabbage exist maple excuse copper month";
     BOOL result = [WalletUtils isValidMnemonicWords:[mnemonicWords componentsSeparatedByString:@" "]];
@@ -124,9 +104,8 @@ Example:
 >
 
 ```obj-c
-+ (BOOL)isValidKeystore:(NSString *)keystoreJson;
 
-Example:
+
     NSString *keystore = @"{\"version\":3,\"id\":\"1150C15C-2E20-462B-8A88-EDF8A0E4DB71\",\n \"crypto\":{\"ciphertext\":\"1cf8d74d31b1ec2568f903fc2c84d215c0401cbb710b7b3de081af1449ae2a89\",\"cipherparams\":{\"iv\":\"03ccae46eff93b3d9bdf2b21739d7205\"},\"kdf\":\"scrypt\",\"kdfparams\":{\"r\":8,\"p\":1,\"n\":262144,\"dklen\":32,\"salt\":\"a71ecee9a1c33f0311e46f7da7da8d218a8c5b3d1067716a9bcdb767785d8e83\"},\"mac\":\"82b20c61854621f35b4d60ffb795655258356f310cdffa587f7db68a1789de75\",\"cipher\":\"aes-128-ctr\"},\"address\":\"cc2b456b2c9399b4b68ef632cf6a1aeabe67b417\"}";
     BOOL result = [WalletUtils isValidKeystore:keystore];
     
@@ -144,12 +123,7 @@ Example:
 
  ```obj-c
  
-+ (void)verifyKeystore:(NSString *)keystoreJson
-              password:(NSString *)password
-              callback:(void (^)(BOOL result))callback;
 
-Example:
-//Verification keystore
     [WalletUtils verifyKeystore:keystore password:password callback:^(BOOL result) {
         if (result) {
             //success
@@ -169,12 +143,7 @@ Example:
  >
  >
  ```obj-c
-+ (void)modifyKeystore:(NSString *)keystoreJson
-           newPassword:(NSString *)newPassword
-           oldPassword:(NSString *)oldPassword
-              callback:(void (^)(NSString *newKeystore))callback;
 
-Example:
 //change Password
     [WalletUtils modifyKeystore:keystore newPassword:newPassword oldPassword:oldPassword callback:^(NSString * _Nonnull newKeystore) {
 
@@ -195,12 +164,7 @@ Example:
  >
  >
  ```obj-c
-+ (void)decryptkeystore:(NSString *)keystoreJson
-               password:(NSString *)password
-               callback:(void(^)(WalletAccountModel *account,NSError *error))callback;
 
-Example:
-//Get the private key through the keystore
     [WalletUtils decryptKeystore:keystore password:password callback:^(NSString * _Nonnull privatekey, NSError * _Nonnull error) {
         
         if (!error) {
@@ -220,13 +184,10 @@ Example:
 > 
 > 
 ```obj-c
-+ (void)encryptPrivateKeyWithPassword:(NSString *)password
-                           privateKey:(NSString *)privateKey
-                             callback:(void (^)(NSString *keystoreJson))callback;
 
-Example:
-    //Private key to keystore
-        [WalletUtils encryptPrivateKeyWithPassword:password privateKey:privatekey callback:^(NSString * _Nonnull keystoreJson) {
+        [WalletUtils encryptPrivateKeyWithPassword:password 
+                                        privateKey:privatekey 
+                                        callback:^(NSString * _Nonnull keystoreJson) {
                 
         }];
 ```
@@ -237,10 +198,7 @@ Example:
 >  @return checksum address   
 >
 ```obj-c
-+ (NSString *)getChecksumAddress:(NSString *)address;
 
-Example:
-//Get checksum address
     NSString *address = @"0x7567d83b7b8d80addcb281a71d54fc7b3364ffed";
     NSString *checksumAddress = [WalletUtils getChecksumAddress:address];
     
@@ -251,10 +209,7 @@ Example:
  >
  >
  ```obj-c
-+ (NSString *)getAddressWithKeystore:(NSString *)keystoreJson;
- 
-Example:
-//Get the address through the keystore
+
     NSString *getAddress = [WalletUtils getAddressWithKeystore:keystore];
 ```
 ##   Sign message  
@@ -266,12 +221,7 @@ Example:
 >
 
 ```obj-c
-+ (void)signWithMessage:(NSData *)message
-               keystore:(NSString*)keystoreJson
-               password:(NSString*)password
-               callback:(void (^)(NSData *signatureData,NSError *error))callback;
 
-Example:
     NSData *messageData = [@"test unit" dataUsingEncoding:NSUTF8StringEncoding];
     //Data signature
     [WalletUtils signWithMessage:messageData
@@ -295,10 +245,7 @@ Example:
 > 
 
 ```obj-c
-+ (NSString *)recoverAddressFromMessage:(NSData *)message signatureData:(NSData *)signatureData;
- 
-Example:
-    //Signature information, recovery address
+
       NSString *address = [WalletUtils recoverAddressFromMessage:messageData signatureData:signatureData];
       NSLog(@"address == %@",address);
 
@@ -311,9 +258,7 @@ Example:
 >
 
 ```obj-c
-+ (NSString *)addSignerToCertMessage:(NSString *)signer message:(NSDictionary *)message;
 
-Example:
  NSString *newMessage = [WalletUtils addSignerToCertMessage:signer.lowercaseString message:message];
       
 ```
@@ -326,9 +271,7 @@ Example:
  >
  >
  ```obj-c
-+ (void)getChainTag:(void (^)(NSString *chainTag))callback;
 
-Example:
 //Get the chain tag of the block chain
     [WalletUtils getChainTag:^(NSString * _Nonnull chainTag) {
         NSLog(@"chainTag == %@",chainTag);
@@ -340,9 +283,7 @@ Example:
  >
  >
  ```obj-c
-+ (void)getBlockReference:(void (^)(NSString *blockReference))callback;
- 
-Example:
+
  //Get the reference of the block chain
     [WalletUtils getBlockReference:^(NSString * _Nonnull blockReference) {
             NSLog(@"blockReference == %@",blockReference);
@@ -361,12 +302,7 @@ Example:
 >
 >
 ```obj-c
-+ (void)signAndSendTransferWithParameter:(TransactionParameter *)parameter
-                                keystore:(NSString*)keystoreJson
-                                password:(NSString *)password
-                                callback:(void(^)(NSString *txid))callback;
 
-Example:
 [WalletUtils signAndSendTransferWithParameter:transactionModel
                                      keystore:keystore
                                      password:password
@@ -430,12 +366,7 @@ TransactionParameter attribute description：
 >
 >
 ```obj-c
-+ (void)signWithParameter:(TransactionParameter *)parameter
-                 keystore:(NSString*)keystoreJson
-                 password:(NSString*)password
-                 callback:(void(^)(NSString *raw))callback;
 
-Example:
 [WalletUtils signWithParameter:transactionModel
                       keystore:keystore
                       password:password
@@ -458,9 +389,7 @@ Example:
 >
 
 ```obj-c
-+ (void)initDAppWithDelegate:(id)delegate;
 
-Example:
  // Set delegate
     [WalletUtils initDAppWithDelegate:self];
 
@@ -473,9 +402,6 @@ Example:
 >
 >
 ```obj-c
-+ (void)injectJSWithWebView:(WKWebViewConfiguration *)config;  
-
-Example:
 
     // Please note that, This is a 'WKWebView' object, does not support a "UIWebView" object.
 
@@ -497,12 +423,7 @@ Example:
   OK, otherwise nil
 >
 ```obj-c
-+ (void)webView:(WKWebView *)webView 
-    defaultText:(NSString *)defaultText 
-completionHandler:(void (^)(NSString *result))completionHandler;
 
-
-Example:
 /**
 * You must implement this delegate method to call js.
 */
@@ -523,9 +444,7 @@ Example:
  >
  >
  ```obj-c
-+ (void)deallocDApp;
 
-Example:
 /**
  * You must implement this method to free memory, otherwise there may be a memory overflow or leak.
  */
@@ -546,13 +465,7 @@ Example:
  >
  >
  ```obj-c
-- (void)onTransfer:(NSArray<ClauseModel *> *)clauses
-            signer:(NSString *)signer
-               gas:(NSString *)gas
-          callback:(void(^)(NSString *txid ,NSString *signer))callback;
 
-
-Example:
 - (void)onTransfer:(NSArray<ClauseModel *> *)clauses
             signer:(NSString *)signer
                gas:(NSString *)gas
@@ -605,9 +518,7 @@ Example:
  >
  
 ```obj-c
-- (void)onGetWalletAddress:(void(^)(NSArray<NSString *> *addressList))callback;
 
-Example:
 - (void)onGetWalletAddress:(void (^)(NSArray<NSString *> * _Nonnull))callback
 {
     //Get the wallet address from local database or file cache
@@ -629,11 +540,7 @@ Example:
  >
   
  ```obj-c
-- (void)onCertificate:(NSDictionary *)message 
-               signer:(NSString *)signer 
-             callback:(void(^)(NSString *signer, NSData *signatureData))callback;
 
-Example:
 - (void)onCertificate:(NSDictionary *)message signer:(NSString *)signer callback:(void (^)(NSString * signer, NSData *  signatureData))callback
 {
    
@@ -684,9 +591,7 @@ Example:
  >
   
 ```obj-c
-- (void)onCheckOwnAddress:(NSString *)address callback:(void(^)(BOOL result))callback;
 
-Example:
 - (void)onCheckOwnAddress:(NSString *)address callback:(void(^)(BOOL result))callback
 {
 
