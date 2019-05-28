@@ -1,4 +1,3 @@
-
 The wallet function is implemented by calling SDK WalletUtils class: #import "WalletUtils.h"
 
 ##  Set node url   
@@ -9,9 +8,9 @@ The wallet function is implemented by calling SDK WalletUtils class: #import "Wa
 ```obj-c
 + (void)setNodeUrl:(NSString *)nodelUrl;
 
+eg:
  //Set it as a Main_Node environment
-
-[WalletUtils setNodeUrl:Main_Node];
+ [WalletUtils setNodeUrl:Main_Node];
 
 ```
 
