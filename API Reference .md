@@ -1,4 +1,4 @@
-# The wallet function is implemented by calling SDK WalletUtils class: #import "WalletUtils.h"
+# The wallet function is implemented by calling class: WalletUtils
 
 ## SDK initialization
 
@@ -26,8 +26,10 @@ Inherit the AppDelegate class and implement the following methods:
 >
 ```obj-c
 + (void)setNodeUrl:(NSString *)nodelUrl;
+```
 
 Example:
+```obj-c
  //Set it as a Main_Node environment
 
  [WalletUtils setNodeUrl:Main_Node];
@@ -41,7 +43,7 @@ Switching test node url:
  [WalletUtils setNodeUrl:Test_Node];
 
 If nodeUrl is not set, the default value is Main_Node
-       
+```   
 
 ```
 
