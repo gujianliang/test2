@@ -541,8 +541,6 @@ Example:
 {
     
    //Get the local keystore
-    NSDictionary *currentWalletDict = [[NSUserDefaults standardUserDefaults]objectForKey:@"currentWallet"];
-    NSString *keystore = currentWalletDict[@"keystore"];
     
     NSString *address = [WalletUtils getAddressWithKeystore:keystore];
     
@@ -552,6 +550,27 @@ Example:
         callback(@"",@"");
         return;
     }
+
+... Preparation parameters
+... Assembly transactionParameter
+... Verify parameters
+... Initiate a transaction
+
+[WalletUtils signAndSendTransferWithParameter:transactionModel
+                                     keystore:keystore
+                                     password:password
+                                     callback:^(NSString * _Nonnull txid)
+                     {
+                         //Developers can use txid to query the status of data packaged on the chain
+
+                         NSLog(@"\n txId: %@", txid);
+                         
+                         // Pass txid and signature address back to dapp webview
+                         NSString *singerAddress = [WalletUtils getAddressWithKeystore:keystore];
+                         callback(txid,singerAddress.lowercaseString);
+                         
+                     }];
+
 
 }
 
