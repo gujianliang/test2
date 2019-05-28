@@ -1,5 +1,29 @@
 # The wallet function is implemented by calling SDK WalletUtils class: #import "WalletUtils.h"
 
+## SDK initialization
+
+SDK initialization
+Inherit the AppDelegate class and implement the following methods:
+```obj-c
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
+    // Override point for customization after application launch.
+    
+    [WalletUtils setNodeUrl:Main_Node];
+    
+    self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    self.window.backgroundColor = [UIColor whiteColor];
+    
+    ThorViewController *vc = [[ThorViewController alloc] init];
+    UINavigationController *nVC = [[UINavigationController alloc] initWithRootViewController:vc];
+    self.window.rootViewController = nVC;
+    
+    [self.window makeKeyAndVisible];
+    
+    return YES;
+}
+```
+
 ##  Set node url   
 >
 >  @param nodelUrl : Node url   
@@ -10,7 +34,9 @@
 
 Example:
  //Set it as a Main_Node environment
- [WalletUtils setNodeUrl:Main_Node];
+
+    [WalletUtils setNodeUrl:Main_Node];
+
 
 ```
 
