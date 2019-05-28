@@ -570,12 +570,12 @@ Example:
         return;
     }
 
-/**
-... Preparation parameters
-... Assembly transactionParameter
-... Verify parameters
-... Initiate a transaction
-**/
+
+    ... Preparation parameters
+    ... Assembly transactionParameter
+    ... Verify parameters
+    ... Initiate a transaction
+
 [WalletUtils signAndSendTransferWithParameter:transactionModel
                                      keystore:keystore
                                      password:password
@@ -655,9 +655,9 @@ Example:
         [self signCert:dataMessage signer:address.lowercaseString keystore:keystore callback:callback];
     }
 
-/**
-... Verify password
-**/
+
+    ... Verify password
+
  [WalletUtils signWithMessage:dataMessage
                      keystore:keystore 
                      password:password
