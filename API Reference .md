@@ -615,6 +615,21 @@ Example:
         NSData *dataMessage = [strMessage dataUsingEncoding:NSUTF8StringEncoding];
         [self signCert:dataMessage signer:address.lowercaseString keystore:keystore callback:callback];
     }
+
+... verify password
+
+ [WalletUtils signWithMessage:dataMessage
+                     keystore:keystore 
+                     password:password
+                     callback:^(NSData * _Nonnull signatureData, NSError * _Nonnull error) {
+                                         
+                                         if (!error) {
+                                             callback(signer,signatureData);
+                                         }else{
+                                             NSLog(@"error == %@",error.userInfo);
+                                         }
+                                     }];
+
 }
 
  ```
