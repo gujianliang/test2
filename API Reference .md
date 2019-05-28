@@ -58,7 +58,7 @@ If nodeUrl is not set, the default value is Main_Node
  ```
 Example:
 ```obj-c
-    NSString *nodeUrl = [WalletUtils getNodeUrl];
+ NSString *nodeUrl = [WalletUtils getNodeUrl];
 
 ```
 
