@@ -252,19 +252,21 @@ Example:
                password:(NSString*)password
                callback:(void (^)(NSData *signatureData,NSError *error))callback;
 
+Example:
+    NSData *messageData = [@"test unit" dataUsingEncoding:NSUTF8StringEncoding];
+    //Data signature
+    [WalletUtils signWithMessage:messageData
+                        keystore:keystore
+                        password:@"123456"
+                        callback:^(NSData * _Nonnull signatureData, NSError * _Nonnull error)
+     {
+         
+     }];
+
 ```
 
 
 
-##  Add the signature address to the authentication signature data  
->
->  @param signer : Enforces the specified address to sign the certificate   
->  @param message : Authentication signature data   
->
-
-```obj-c
-+ (NSString *)addSignerToCertMessage:(NSString *)signer message:(NSDictionary *)message;
-```
 
 ##  Recover address
 >
@@ -275,6 +277,27 @@ Example:
 
 ```obj-c
 + (NSString *)recoverAddressFromMessage:(NSData *)message signatureData:(NSData *)signatureData;
+ 
+Example:
+    //Signature information, recovery address
+      NSString *address = [WalletUtils recoverAddressFromMessage:messageData signatureData:signatureData];
+      NSLog(@"address == %@",address);
+
+```
+
+##  Add the signature address to the authentication signature data  
+>
+>  @param signer : Enforces the specified address to sign the certificate   
+>  @param message : Authentication signature data   
+>
+
+```obj-c
++ (NSString *)addSignerToCertMessage:(NSString *)signer message:(NSDictionary *)message;
+
+Example:
+ 
+ NSString *newMessage = [WalletUtils addSignerToCertMessage:signer.lowercaseString message:message];
+      
 ```
 
 
