@@ -19,12 +19,13 @@ Inherit the AppDelegate class and implement the following methods:
 
 ##  Set node url   
 >
->  @param nodelUrl : Node url   
+>  
 > Node: Any form of server in a block chain network.
 > 
 > Node url: Unified resource location address for participating block chain servers.
 >
 ```obj-c
+@param nodelUrl : Node url   
 + (void)setNodeUrl:(NSString *)nodelUrl;
 ```
 
