@@ -135,7 +135,7 @@ Example:
         if (result) {
             //success
             
-        }else{//fail
+        }else{ //fail
             
         }
     }];
@@ -179,6 +179,19 @@ Example:
 + (void)decryptkeystore:(NSString *)keystoreJson
                password:(NSString *)password
                callback:(void(^)(WalletAccountModel *account,NSError *error))callback;
+
+Example:
+//Get the private key through the keystore
+    [WalletUtils decryptKeystore:keystore password:password callback:^(NSString * _Nonnull privatekey, NSError * _Nonnull error) {
+        
+        if (!error) {
+            //success
+            
+        }else //fail
+        {
+            
+        }
+    }];
 ```
 ## Encrypted private key
 >
@@ -191,6 +204,12 @@ Example:
 + (void)encryptPrivateKeyWithPassword:(NSString *)password
                            privateKey:(NSString *)privateKey
                              callback:(void (^)(NSString *keystoreJson))callback;
+
+Example:
+    //Private key to keystore
+        [WalletUtils encryptPrivateKeyWithPassword:@"123" privateKey:privatekey callback:^(NSString * _Nonnull keystoreJson) {
+                
+        }];
 ```
 
 ##  Get checksum address    
@@ -200,6 +219,12 @@ Example:
 >
 ```obj-c
 + (NSString *)getChecksumAddress:(NSString *)address;
+
+Example:
+//Get checksum address
+    NSString *address = @"0x7567d83b7b8d80addcb281a71d54fc7b3364ffed";
+    NSString *checksumAddress = [WalletUtils getChecksumAddress:address];
+    
 ```
 ##  Get address from keystore   
  >  @param keystoreJson : Keystore JSON encryption format for user wallet private key   
@@ -208,6 +233,10 @@ Example:
  >
  ```obj-c
 + (NSString *)getAddressWithKeystore:(NSString *)keystoreJson;
+ 
+Example:
+//Get the address through the keystore
+    NSString *getAddress = [WalletUtils getAddressWithKeystore:keystore];
 ```
 ##   Sign message  
 >
