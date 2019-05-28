@@ -11,14 +11,7 @@ Inherit the AppDelegate class and implement the following methods:
     
     [WalletUtils setNodeUrl:Main_Node];
     
-    self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    self.window.backgroundColor = [UIColor whiteColor];
-    
-    ThorViewController *vc = [[ThorViewController alloc] init];
-    UINavigationController *nVC = [[UINavigationController alloc] initWithRootViewController:vc];
-    self.window.rootViewController = nVC;
-    
-    [self.window makeKeyAndVisible];
+   ...
     
     return YES;
 }
