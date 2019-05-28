@@ -34,7 +34,6 @@
 #import "YYModel.h"
 #import "WalletDAppHead.h"
 #import "WalletTransactionApi.h"
-#import "WalletMBProgressShower.h"
 
 @implementation WalletDAppHandle (transfer)
 
@@ -144,9 +143,8 @@ callback:(void(^)(NSString *txId))callback
          @strongify(self)
          if (!account) {
              
-             [WalletMBProgressShower showTextIn:[WalletTools getCurrentVC].view
-                                           Text:VCNSLocalizedBundleString(@"transfer_wallet_password_error", nil) During:1];
-             
+             callback(@"");
+             NSLog(@"wrong password");
              return;
          }
 

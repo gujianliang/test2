@@ -438,8 +438,8 @@ static dispatch_once_t predicate;
     [checkApi loadDataAsyncWithSuccess:^(WalletBaseApi *finishApi) {
         
         NSDictionary *dataDict = finishApi.resultDict[@"data"];
-        _versionModel = [WalletVersionModel yy_modelWithDictionary:dataDict];
-        BOOL forceUpdate = [self analyzeVersion:_versionModel];
+        self->_versionModel = [WalletVersionModel yy_modelWithDictionary:dataDict];
+        BOOL forceUpdate = [self analyzeVersion:self->_versionModel];
         if (!forceUpdate) {
             [self inject:config];
         }

@@ -39,7 +39,6 @@
 #import "WalletUtils.h"
 #import "NSMutableDictionary+Helpers.h"
 #import "AFNetworkReachabilityManager.h"
-#import "WalletMBProgressShower.h"
 #import "WalletDAppHead.h"
 #import "NSJSONSerialization+NilDataParameter.h"
 #import "YYModel.h"

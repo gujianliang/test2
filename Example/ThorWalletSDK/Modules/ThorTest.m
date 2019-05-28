@@ -38,7 +38,7 @@
     NSString *checksumAddress = [WalletUtils getChecksumAddress:address];
     
     //Verify keystore format
-    NSString *keystore = @"{\"address\":\"7567d83b7b8d80addcb281a71d54fc7b3364ffed\",\"crypto\":{\"cipher\":\"aes-128-ctr\",\"cipherparams\":{\"iv\":\"61f56506769dbddf0366a3fd479ceb05\"},\"ciphertext\":\"23077a4e5aa7cd30590a878083d802d9c1b44c78923236524918e023d189b69f\",\"kdf\":\"scrypt\",\"kdfparams\":{\"dklen\":32,\"n\":262144,\"p\":1,\"r\":8,\"salt\":\"93e8cea9e1e4822258e453a11a2c8e5b8168cfaadc5821258c18f75e7ef36d90\"},\"mac\":\"f99cd87ed0c4cb9248fcee03fddd7f791c92e10533f3a103a46cbbc4f0324b22\"},\"id\":\"fad80d2d-1826-4383-a49e-a36183ccdf7e\",\"version\":3}";
+    NSString *keystore = @"{\"address\":\"36d7189625587d7c4c806e0856b6926af8d36fea\",\"crypto\":{\"cipher\":\"aes-128-ctr\",\"cipherparams\":{\"iv\":\"c4a723d57e1325a99d88572651959a9d\"},\"ciphertext\":\"73a4a3a6e8706d099b536e41f6799e71ef9ff3a9f115e21c58d9e81ade036705\",\"kdf\":\"scrypt\",\"kdfparams\":{\"dklen\":32,\"n\":262144,\"p\":1,\"r\":8,\"salt\":\"a322d4dce0f075f95a7748c008048bd3f80dbb5645dee37576ea93fd119feda2\"},\"mac\":\"66744cc5967ff5858266c247dbb088e0986c6f1d50156b5e2ce2a19afdc0e498\"},\"id\":\"0fe540de-1957-4bfe-a326-16772e61f677\",\"version\":3}";
     
     BOOL isOKKeystore = [WalletUtils isValidKeystore:keystore];
 
@@ -102,6 +102,166 @@
 
     }];
     
+}
+
+- (void)signAndSend
+{
+    //The amount of the transaction needs to be multiplied by the disimals of the coin
+    BigNumber *amountBig = [self amountConvertWei:@"2" dicimals:18];
+    
+    //The random number is 8 bytes
+    NSMutableData* randomData = [[NSMutableData alloc]initWithCapacity:8];
+    randomData.length = 8;
+    int result = SecRandomCopyBytes(kSecRandomDefault, randomData.length, randomData.mutableBytes);
+    if (result != 0) {
+        return ;
+    }
+    //nonce: hex string
+    NSString *nonce = [BigNumber bigNumberWithData:randomData].hexString;
+    
+    NSMutableArray *clauseList = [NSMutableArray array];
+    ClauseModel *clauseModel = [[ClauseModel alloc]init];
+    clauseModel.to    = @"0x1231231231231231231231231231231231231231";//Payee's address
+    clauseModel.value = amountBig.hexString;//Payment amount,hex string
+    clauseModel.data  = @"";
+    [clauseList addObject:clauseModel];
+    
+    
+    //Get the chain tag of the block chain
+    [WalletUtils getChainTag:^(NSString * _Nonnull chainTag) {
+        NSLog(@"chainTag == %@",chainTag);
+        //If the chainTag is nil, then the acquisition fails, you can prompt alert
+        
+        //Get the reference of the block chain
+        [WalletUtils getBlockReference:^(NSString * _Nonnull blockReference) {
+            
+            NSLog(@"blockReference == %@",blockReference);
+            //If the blockReference is nil, then the acquisition fails, you can prompt alert
+            
+            TransactionParameter *transactionModel = [TransactionParameter creatTransactionParameter:^(TransactionParameterBuiler * _Nonnull builder) {
+                
+                builder.chainTag = chainTag;
+                builder.blockReference = blockReference;
+                builder.nonce = nonce;
+                builder.clauses = clauseList;
+                builder.gas = @"600000";
+                builder.expiration = @"720";
+                builder.gasPriceCoef = @"0";
+                
+                
+            } checkParams:^(NSString * _Nonnull errorMsg) {
+                NSLog(@"errorMsg == %@",errorMsg);
+            }];
+            
+            
+            if (transactionModel != nil) {
+                
+                                NSString *keystore = @"{\"address\":\"36d7189625587d7c4c806e0856b6926af8d36fea\",\"crypto\":{\"cipher\":\"aes-128-ctr\",\"cipherparams\":{\"iv\":\"c4a723d57e1325a99d88572651959a9d\"},\"ciphertext\":\"73a4a3a6e8706d099b536e41f6799e71ef9ff3a9f115e21c58d9e81ade036705\",\"kdf\":\"scrypt\",\"kdfparams\":{\"dklen\":32,\"n\":262144,\"p\":1,\"r\":8,\"salt\":\"a322d4dce0f075f95a7748c008048bd3f80dbb5645dee37576ea93fd119feda2\"},\"mac\":\"66744cc5967ff5858266c247dbb088e0986c6f1d50156b5e2ce2a19afdc0e498\"},\"id\":\"0fe540de-1957-4bfe-a326-16772e61f677\",\"version\":3}";
+                
+                
+                [WalletUtils signAndSendTransferWithParameter:transactionModel
+                                                     keystore:keystore
+                                                     password:@"123456"
+                                                     callback:^(NSString * _Nonnull txid)
+                 {
+                     //Developers can use txid to query the status of data packaged on the chain
+                     
+                     NSLog(@"\n txId: %@", txid);
+                 }];
+            }
+        }];
+    }];
+}
+
+- (void)sign
+{
+    //The amount of the transaction needs to be multiplied by the disimals of the coin
+    BigNumber *amountBig = [self amountConvertWei:@"2" dicimals:18];
+    
+    //The random number is 8 bytes
+    NSMutableData* randomData = [[NSMutableData alloc]initWithCapacity:8];
+    randomData.length = 8;
+    int result = SecRandomCopyBytes(kSecRandomDefault, randomData.length, randomData.mutableBytes);
+    if (result != 0) {
+        return ;
+    }
+    //nonce: hex string
+    NSString *nonce = [BigNumber bigNumberWithData:randomData].hexString;
+    
+    NSMutableArray *clauseList = [NSMutableArray array];
+    ClauseModel *clauseModel = [[ClauseModel alloc]init];
+    clauseModel.to    = @"0x1231231231231231231231231231231231231231";//Payee's address
+    clauseModel.value = amountBig.hexString;//Payment amount,hex string
+    clauseModel.data  = @"";
+    [clauseList addObject:clauseModel];
+    
+    
+    //Get the chain tag of the block chain
+    [WalletUtils getChainTag:^(NSString * _Nonnull chainTag) {
+        NSLog(@"chainTag == %@",chainTag);
+        //If the chainTag is nil, then the acquisition fails, you can prompt alert
+        
+        //Get the reference of the block chain
+        [WalletUtils getBlockReference:^(NSString * _Nonnull blockReference) {
+            
+            NSLog(@"blockReference == %@",blockReference);
+            //If the blockReference is nil, then the acquisition fails, you can prompt alert
+            
+            TransactionParameter *transactionModel = [TransactionParameter creatTransactionParameter:^(TransactionParameterBuiler * _Nonnull builder) {
+                
+                builder.chainTag = chainTag;
+                builder.blockReference = blockReference;
+                builder.nonce = nonce;
+                builder.clauses = clauseList;
+                builder.gas = @"600000";
+                builder.expiration = @"720";
+                builder.gasPriceCoef = @"0";
+                
+                
+            } checkParams:^(NSString * _Nonnull errorMsg) {
+                NSLog(@"errorMsg == %@",errorMsg);
+            }];
+            
+            
+            if (transactionModel != nil) {
+                
+                NSString *keystore = @"{\"address\":\"36d7189625587d7c4c806e0856b6926af8d36fea\",\"crypto\":{\"cipher\":\"aes-128-ctr\",\"cipherparams\":{\"iv\":\"c4a723d57e1325a99d88572651959a9d\"},\"ciphertext\":\"73a4a3a6e8706d099b536e41f6799e71ef9ff3a9f115e21c58d9e81ade036705\",\"kdf\":\"scrypt\",\"kdfparams\":{\"dklen\":32,\"n\":262144,\"p\":1,\"r\":8,\"salt\":\"a322d4dce0f075f95a7748c008048bd3f80dbb5645dee37576ea93fd119feda2\"},\"mac\":\"66744cc5967ff5858266c247dbb088e0986c6f1d50156b5e2ce2a19afdc0e498\"},\"id\":\"0fe540de-1957-4bfe-a326-16772e61f677\",\"version\":3}";
+                
+                
+                [WalletUtils signWithParameter:transactionModel
+                                      keystore:keystore
+                                      password:@"123456"
+                                      callback:^(NSString * _Nonnull txid)
+                 {
+                     //Developers can use txid to query the status of data packaged on the chain
+                     
+                     NSLog(@"\n txId: %@", txid);
+                 }];
+            }
+        }];
+    }];
+}
+
+
+
+- (BigNumber *)amountConvertWei:(NSString *)amount dicimals:(NSInteger )dicimals
+{
+    NSDecimalNumber *amountNumber = [NSDecimalNumber decimalNumberWithString:amount];
+    NSDecimalNumber *dicimalNumber = [NSDecimalNumber decimalNumberWithString:[NSString stringWithFormat:@"%f",pow(10, dicimals)]];
+    NSDecimalNumber *weiNumber = [amountNumber decimalNumberByMultiplyingBy:dicimalNumber];
+    
+    return [BigNumber bigNumberWithNumber:weiNumber];
+}
+
+- (BOOL)checkEnoughCoinBalance:(NSString *)coinBalance transferAmount:(NSString *)transferAmount
+{
+    NSDecimalNumber *coinBalanceNumber = [NSDecimalNumber decimalNumberWithString:coinBalance];
+    NSDecimalNumber *transferAmounttnumber = [NSDecimalNumber decimalNumberWithString:transferAmount];
+    
+    if ([coinBalanceNumber compare:transferAmounttnumber] == NSOrderedAscending) {
+        return NO;
+    }
+    return YES;
 }
 
 @end

@@ -24,7 +24,7 @@ Vechain wallet SDK provides a series of functional interface can help the iOS de
   s.homepage         = 'https://vit.digonchain.com/vechain-mobile-apps/ios-wallet-sdk'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
-  s.author           = { 'Tom' => 'tom.zeng@vechain.com' }
+  s.author           = { 'vechaindev' => 'support@vechain.com' }
   s.source           = { :git => 'https://vit.digonchain.com/vechain-mobile-apps/ios-wallet-sdk.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
@@ -62,9 +62,7 @@ Vechain wallet SDK provides a series of functional interface can help the iOS de
 
   
   s.dependency 'AFNetworking', '~> 3.0'
-  
-  s.dependency 'MBProgressHUD', '1.1.0'
-  
+    
   s.dependency 'SocketRocket', '~> 0.4.2'
   
   s.dependency 'YYModel', '~>  1.0.4'

@@ -32,7 +32,6 @@
 #import "WalletDAppHandle.h"
 #import "WalletTools.h"
 #import "WalletDAppHead.h"
-#import "WalletMBProgressShower.h"
 #import "Account.h"
 #import "WalletGenesisBlockInfoApi.h"
 #import "WalletBestBlockInfoApi.h"
@@ -338,7 +337,10 @@
 
 + (NSString *)getChecksumAddress:(NSString *)address
 {
-   return [WalletTools checksumAddress:address];
+    if (![WalletTools checkHEXStr:address]) {
+        return @"";
+    }
+    return [WalletTools checksumAddress:address];
 }
 
 + (void)setNodeUrl:(NSString *)nodelUrl
