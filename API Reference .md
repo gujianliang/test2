@@ -25,7 +25,9 @@ Inherit the AppDelegate class and implement the following methods:
 > Node url: Unified resource location address for participating block chain servers.
 >
 ```obj-c
-@param nodelUrl : Node url   
+/**
+ *  @param nodelUrl : node url
+ */ 
 + (void)setNodeUrl:(NSString *)nodelUrl;
 ```
 
@@ -46,7 +48,6 @@ Switching test node url:
 If nodeUrl is not set, the default value is Main_Node
 ```   
 
-```
 
 
 
