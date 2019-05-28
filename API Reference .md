@@ -573,10 +573,7 @@ Example:
 {
     //Get the wallet address from local database or file cache
     
-    NSDictionary *currentWallet = [[NSUserDefaults standardUserDefaults]objectForKey:@"currentWallet"];
-    
-    NSString *address = [WalletUtils getAddressWithKeystore:currentWallet[@"keystore"]];
-    
+
     //Callback to webview
     callback(@[address]);
 }
@@ -600,10 +597,7 @@ Example:
 Example:
 - (void)onCertificate:(NSDictionary *)message signer:(NSString *)signer callback:(void (^)(NSString * signer, NSData *  signatureData))callback
 {
-    NSDictionary *currentWalletDict = [[NSUserDefaults standardUserDefaults]objectForKey:@"currentWallet"];
-    NSString *keystore = currentWalletDict[@"keystore"];
-    
-    NSString *address = [WalletUtils getAddressWithKeystore:keystore];
+   
     
     if (signer.length > 0) { //Specified signature address
        
@@ -640,9 +634,7 @@ Example:
 Example:
 - (void)onCheckOwnAddress:(NSString *)address callback:(void(^)(BOOL result))callback
 {
-    NSDictionary *currentWallet = [[NSUserDefaults standardUserDefaults]objectForKey:@"currentWallet"];
-    
-    NSString *localAddrss = [WalletUtils getAddressWithKeystore:currentWallet[@"keystore"]];
+
     if ([localAddrss.lowercaseString isEqualToString:address.lowercaseString]) {
         callback(YES);
     }else{
