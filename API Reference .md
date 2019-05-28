@@ -246,7 +246,7 @@ NSString *keystoreJson = "{\"address\":\"36d7189625587d7c4c806e0856b6926af8d36fe
         if (!error) {
             //success
             
-            //privateKey:bc9fe2428a8faec37674412c113f4a9a66b2e40076014547bfe7bbdc2c5a85ee
+            //privateKey:0xbc9fe2428a8faec37674412c113f4a9a66b2e40076014547bfe7bbdc2c5a85ee
 
             
         }else //fail
@@ -360,7 +360,7 @@ Example:
     NSData *messageData = [@"dkfjalsdjfk" dataUsingEncoding:NSUTF8StringEncoding];
       NSString *address = [WalletUtils recoverAddressFromMessage:messageData signatureData:signatureData];
       NSLog(@"address == %@",address);
-//address:0x36D7189625587D7C4c806E0856b6926Af8d36FEa
+    //address:0x36D7189625587D7C4c806E0856b6926Af8d36FEa
 
 ```
 
@@ -679,7 +679,6 @@ Example:
 - (void)onGetWalletAddress:(void (^)(NSArray<NSString *> * _Nonnull))callback
 {
     //Get the wallet address from local database or file cache
-    
 
     //Callback to webview
     callback(@[address]);
