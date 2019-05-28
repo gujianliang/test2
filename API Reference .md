@@ -1,4 +1,4 @@
-The wallet function is implemented by calling SDK WalletUtils class: #import "WalletUtils.h"
+#The wallet function is implemented by calling SDK WalletUtils class: #import "WalletUtils.h"
 
 ##  Set node url   
 >
@@ -175,7 +175,7 @@ Example:
  >  @param callback : Callback after the end . account :The attributes of a class has mnemonicPhras , address, privateKey and keystore   
  >
  >
- ```
+ ```obj-c
 + (void)decryptkeystore:(NSString *)keystoreJson
                password:(NSString *)password
                callback:(void(^)(WalletAccountModel *account,NSError *error))callback;
@@ -207,7 +207,7 @@ Example:
 
 Example:
     //Private key to keystore
-        [WalletUtils encryptPrivateKeyWithPassword:@"123" privateKey:privatekey callback:^(NSString * _Nonnull keystoreJson) {
+        [WalletUtils encryptPrivateKeyWithPassword:password privateKey:privatekey callback:^(NSString * _Nonnull keystoreJson) {
                 
         }];
 ```
@@ -257,7 +257,7 @@ Example:
     //Data signature
     [WalletUtils signWithMessage:messageData
                         keystore:keystore
-                        password:@"123456"
+                        password:password
                         callback:^(NSData * _Nonnull signatureData, NSError * _Nonnull error)
      {
          
@@ -333,7 +333,7 @@ Example:
  
 
 
-##   Sign and send Transaction
+##   Sign and send transaction
 >
 >  @param parameter: Transaction parameters   
 >  @param keystoreJson: Keystore JSON encryption format for user wallet private key   
@@ -402,7 +402,7 @@ TransactionParameter attribute description：
     
 ```
 
-##   Signe transaction
+##   Sign transaction
 >
 >  @param parameter: Transaction parameters     
 >  @param keystoreJson: Keystore JSON encryption format for user wallet private key   
