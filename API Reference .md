@@ -695,15 +695,7 @@ Example:
 }
 
  ```
-##  Add the signature address to the authentication signature data  
 
-```obj-c
-+ (NSString *)addSignerToCertMessage:(NSString *)signer message:(NSDictionary *)message;
-
-Example:
- NSString *newMessage = [WalletUtils addSignerToCertMessage:signer.lowercaseString message:message];
-      
-```
 
  ##  App developer implementation when DApp calls get address function    
  
@@ -754,6 +746,7 @@ Example:
        
         if ([address.lowercaseString isEqualToString:signer.lowercaseString]) {
             
+            //Add the signature address to the authentication signature data  
             NSString *strMessage = [WalletUtils addSignerToCertMessage:signer.lowercaseString message:message];
             NSData *dataMessage = [strMessage dataUsingEncoding:NSUTF8StringEncoding];
             [self signCert:dataMessage signer:address.lowercaseString keystore:keystore callback:callback];
@@ -762,6 +755,8 @@ Example:
             callback(@"",nil);
         }
     }else{
+        
+        //Add the signature address to the authentication signature data  
         NSString *strMessage = [WalletUtils addSignerToCertMessage:address.lowercaseString message:message];
         NSData *dataMessage = [strMessage dataUsingEncoding:NSUTF8StringEncoding];
         [self signCert:dataMessage signer:address.lowercaseString keystore:keystore callback:callback];
