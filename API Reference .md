@@ -1,4 +1,4 @@
-#The wallet function is implemented by calling SDK WalletUtils class: #import "WalletUtils.h"
+# The wallet function is implemented by calling SDK WalletUtils class: #import "WalletUtils.h"
 
 ##  Set node url   
 >
