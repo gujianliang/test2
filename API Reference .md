@@ -20,7 +20,9 @@ Inherit the AppDelegate class and implement the following methods:
 ##  Set node url   
 >
 >  @param nodelUrl : Node url   
->
+> Node: Any form of server in a block chain network.
+> 
+> Node url: Unified resource location address for participating block chain servers.
 >
 ```obj-c
 + (void)setNodeUrl:(NSString *)nodelUrl;
@@ -28,8 +30,18 @@ Inherit the AppDelegate class and implement the following methods:
 Example:
  //Set it as a Main_Node environment
 
-    [WalletUtils setNodeUrl:Main_Node];
+ [WalletUtils setNodeUrl:Main_Node];
 
+Or if you have a corresponding node url, you can change it to your own node url:
+
+ [WalletUtils setNodeUrl:@"customNode"];
+            
+Switching test node url:
+
+ [WalletUtils setNodeUrl:Test_Node];
+
+If nodeUrl is not set, the default value is Main_Node
+       
 
 ```
 
