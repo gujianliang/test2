@@ -11,7 +11,7 @@ Inherit the AppDelegate class and implement the following methods:
     
     [WalletUtils setNodeUrl:Main_Node];
     
-   ...
+    ...
     
     return YES;
 }
