@@ -63,11 +63,16 @@ Example:
                                  callback:^(WalletAccountModel * _Nonnull account, NSError * _Nonnull error)
 
     {
-        NSString *mnemonic = [account.words componentsJoinedByString:@" "];
-        NSString *address = account.address;
-        NSString *privateKey = account.privatekey;
-        NSString *keystore = account.keystore;
+       if(error == nil){
+    
+            NSString *mnemonic = [account.words componentsJoinedByString:@" "];
+            NSString *address = account.address;
+            NSString *privateKey = account.privatekey;
+            NSString *keystore = account.keystore;
         
+        }else{
+            //fail
+        }
     }];
     
 ```
@@ -93,9 +98,15 @@ Example:
                                 password:self.password.text
                                 callback:^(WalletAccountModel * _Nonnull account, NSError * _Nonnull error)
     {
-        NSString *address = account.address;
-        NSString *privateKey = account.privatekey;
-        NSString *keystore = account.keystore;
+        if(error == nil){
+            
+            NSString *address = account.address;
+            NSString *privateKey = account.privatekey;
+            NSString *keystore = account.keystore;
+
+        }else{
+            //fail
+        }
          
     }];
 
@@ -176,7 +187,10 @@ Example:
 
 Example:
 //change Password
-    [WalletUtils modifyKeystore:keystore newPassword:newPassword oldPassword:oldPassword callback:^(NSString * _Nonnull newKeystore) {
+    [WalletUtils modifyKeystore:keystore 
+                    newPassword:newPassword 
+                    oldPassword:oldPassword 
+                       callback:^(NSString * _Nonnull newKeystore) {
 
         if (newKeystore.length > 0) {
             //success
@@ -185,6 +199,7 @@ Example:
             //fail
         }
     }];
+    
 ```
 
 ##  Decrypt keystore
@@ -201,7 +216,9 @@ Example:
 
 Example:
 //Get the private key through the keystore
-    [WalletUtils decryptKeystore:keystore password:password callback:^(NSString * _Nonnull privatekey, NSError * _Nonnull error) {
+    [WalletUtils decryptKeystore:keystore
+                        password:password 
+                        callback:^(NSString * _Nonnull privatekey, NSError * _Nonnull error) {
         
         if (!error) {
             //success
@@ -226,7 +243,9 @@ Example:
 
 Example:
     //Private key to keystore
-        [WalletUtils encryptPrivateKeyWithPassword:password privateKey:privatekey callback:^(NSString * _Nonnull keystoreJson) {
+        [WalletUtils encryptPrivateKeyWithPassword:password 
+                                        privateKey:privatekey 
+                                          callback:^(NSString * _Nonnull keystoreJson) {
                 
         }];
 ```
