@@ -580,7 +580,7 @@ Example:
 
  ##  App developer implementation when DApp calls get address function    
  
- >  delegate function that must be implemented to support the DApp environment   
+ >  Delegate function that must be implemented to support the DApp environment   
  >  @param callback : Callback after the end. addressList :address list   
  >
  >
@@ -603,7 +603,7 @@ Example:
 
  ##   App developer implementation when dapp calls authentication function   
 
- >  delegate function that must be implemented to support the DApp environment   
+ >  Delegate function that must be implemented to support the DApp environment   
  >  @param message : Data to be signed,form dapp  
  >  @param signer : Enforces the specified address to sign the certificate    
  >  @param callback : Callback after the end.signer: Signer address; signatureData : Signature is 65 bytes   
@@ -659,7 +659,7 @@ Example:
 
  ##    App developer implementation when dapp calls checkOwn address function   
  
- >  delegate function that must be implemented to support the DApp environment   
+ >  Delegate function that must be implemented to support the DApp environment   
  >  @param address : Address from dapp  
  >  @param callback : Callback after the end  
  >
