@@ -355,8 +355,12 @@ Example:
  
 Example:
     //Signature information, recovery address
+    NSString *strSignture = @"0x4eb1ae9254217b356b2958ab0b7a02e72f6fa86858240ca4998f74ef8a0fd68155e71ba8bd15625dc3d5e0c89c021f3852070d290688a65ba7e1d608a03d6e8400";
+    NSString *signatureData = [SecureData hexStringToData::strSigntureData];
+    NSData *messageData = [@"dkfjalsdjfk" dataUsingEncoding:NSUTF8StringEncoding];
       NSString *address = [WalletUtils recoverAddressFromMessage:messageData signatureData:signatureData];
       NSLog(@"address == %@",address);
+//address:0x36D7189625587D7C4c806E0856b6926Af8d36FEa
 
 ```
 
@@ -388,6 +392,9 @@ Example:
 //Get the chain tag of the block chain
     [WalletUtils getChainTag:^(NSString * _Nonnull chainTag) {
         NSLog(@"chainTag == %@",chainTag);
+        
+        //Main_Node chainTag:0x4a
+        //Test_Node chainTag:0x27
     }];
     
 ```
@@ -445,9 +452,9 @@ TransactionParameter attribute description：
 
 - gas : NSString  - Miner Fee Parameters for Packing
 
-- chainTag : NSString - Genesis block ID last byte hexadecimal
+- chainTag : NSString - Genesis block ID last byte hexadecimal.[WalletUtils getBlockReference]
 
-- blockReference : NSString - Refer to the last 8 bytes of blockId in hexadecimal
+- blockReference : NSString - Refer to the last 8 bytes of blockId in hexadecimal.[WalletUtils getBlockReference]
 
 - nonce : NSString  - The random number of trading entities. Changing Nonce can make the transaction have different IDs, which can be used to accelerate the trader.
 
@@ -508,6 +515,11 @@ Example:
 
 
 ## Support the DApp development environment in webview
+###  Support DApp development environment in Webview
+To support the Dapp function, WebView needs the following initialization before opening Dapp.
+Initialization is mainly JS injected into connex and web3.
+[connex reference.](https://github.com/vechain/connex/blob/master/docs/api.md/)
+
 ###  Set delegate to SDK
 >
 >  @param delegate : Delegate object  
