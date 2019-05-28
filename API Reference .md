@@ -295,7 +295,6 @@ Example:
 + (NSString *)addSignerToCertMessage:(NSString *)signer message:(NSDictionary *)message;
 
 Example:
- 
  NSString *newMessage = [WalletUtils addSignerToCertMessage:signer.lowercaseString message:message];
       
 ```
@@ -309,6 +308,13 @@ Example:
  >
  ```obj-c
 + (void)getChainTag:(void (^)(NSString *chainTag))callback;
+
+Example:
+//Get the chain tag of the block chain
+    [WalletUtils getChainTag:^(NSString * _Nonnull chainTag) {
+        NSLog(@"chainTag == %@",chainTag);
+    }];
+    
 ```
  ## Get reference of block chain   
  >  @param callback : Callback after the end.    
@@ -316,6 +322,13 @@ Example:
  >
  ```obj-c
 + (void)getBlockReference:(void (^)(NSString *blockReference))callback;
+ 
+Example:
+ //Get the reference of the block chain
+    [WalletUtils getBlockReference:^(NSString * _Nonnull blockReference) {
+            NSLog(@"blockReference == %@",blockReference);
+    }];
+
 ```
  
 
@@ -333,6 +346,23 @@ Example:
                                 keystore:(NSString*)keystoreJson
                                 password:(NSString *)password
                                 callback:(void(^)(NSString *txid))callback;
+
+Example:
+[WalletUtils signAndSendTransferWithParameter:transactionModel
+                                     keystore:keystore
+                                     password:password
+                                     callback:^(NSString * _Nonnull txid)
+                     {
+                         //Developers can use txid to query the status of data packaged on the chain
+
+                         NSLog(@"\n txId: %@", txid);
+                         
+                         // Pass txid and signature address back to dapp webview
+                         NSString *singerAddress = [WalletUtils getAddressWithKeystore:keystore];
+                         callback(txid,singerAddress.lowercaseString);
+                         
+                     }];
+
 ```
 TransactionParameter attribute description：
 
@@ -385,6 +415,18 @@ TransactionParameter attribute description：
                  keystore:(NSString*)keystoreJson
                  password:(NSString*)password
                  callback:(void(^)(NSString *raw))callback;
+
+Example:
+[WalletUtils signWithParameter:transactionModel
+                      keystore:keystore
+                      password:password
+                      callback:^(NSString * _Nonnull raw)
+                     {
+
+                         NSLog(@"\n raw: %@", raw);
+                         
+                     }];
+                     
 ```
 
 
@@ -399,6 +441,10 @@ TransactionParameter attribute description：
 ```obj-c
 + (void)initDAppWithDelegate:(id)delegate;
 
+Example:
+ // Set delegate
+    [WalletUtils initDAppWithDelegate:self];
+
 ```
 
 
@@ -409,6 +455,17 @@ TransactionParameter attribute description：
 >
 ```obj-c
 + (void)injectJSWithWebView:(WKWebViewConfiguration *)config;  
+
+Example:
+
+    // Please note that, This is a 'WKWebView' object, does not support a "UIWebView" object.
+
+    WKWebViewConfiguration* configuration = [[WKWebViewConfiguration alloc] init];
+    configuration.userContentController = [[WKUserContentController alloc] init];
+    
+    //inject js to wkwebview
+    [WalletUtils injectJSWithWebView:configuration];
+    
 
 ```
 
@@ -425,6 +482,19 @@ TransactionParameter attribute description：
     defaultText:(NSString *)defaultText 
 completionHandler:(void (^)(NSString *result))completionHandler;
 
+
+Example:
+/**
+* You must implement this delegate method to call js.
+*/
+- (void)webView:(WKWebView *)webView runJavaScriptTextInputPanelWithPrompt:(NSString *)prompt defaultText:(nullable NSString *)defaultText initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(NSString * __nullable result))completionHandler{
+        
+    /*
+     You must call this method. It is used to response web3 or connex operations.
+     */
+    [WalletUtils webView:webView  defaultText:defaultText completionHandler:completionHandler];
+}
+
 ```
 
 
@@ -435,6 +505,14 @@ completionHandler:(void (^)(NSString *result))completionHandler;
  >
  ```obj-c
 + (void)deallocDApp;
+
+Example:
+/**
+ * You must implement this method to free memory, otherwise there may be a memory overflow or leak.
+ */
+- (void)dealloc{
+    [WalletUtils deallocDApp];
+}
 ```
 
  
@@ -454,6 +532,29 @@ completionHandler:(void (^)(NSString *result))completionHandler;
                gas:(NSString *)gas
           callback:(void(^)(NSString *txid ,NSString *signer))callback;
 
+
+Example:
+- (void)onTransfer:(NSArray<ClauseModel *> *)clauses
+            signer:(NSString *)signer
+               gas:(NSString *)gas
+          callback:(void(^)(NSString *txid ,NSString *signer))callback
+{
+    
+   //Get the local keystore
+    NSDictionary *currentWalletDict = [[NSUserDefaults standardUserDefaults]objectForKey:@"currentWallet"];
+    NSString *keystore = currentWalletDict[@"keystore"];
+    
+    NSString *address = [WalletUtils getAddressWithKeystore:keystore];
+    
+    //Specified signature address
+    if (signer.length > 0 && [address.lowercaseString isEqualToString:signer.lowercaseString]) {
+        
+        callback(@"",@"");
+        return;
+    }
+
+}
+
  ```
 
 
@@ -466,6 +567,19 @@ completionHandler:(void (^)(NSString *result))completionHandler;
  
 ```obj-c
 - (void)onGetWalletAddress:(void(^)(NSArray<NSString *> *addressList))callback;
+
+Example:
+- (void)onGetWalletAddress:(void (^)(NSArray<NSString *> * _Nonnull))callback
+{
+    //Get the wallet address from local database or file cache
+    
+    NSDictionary *currentWallet = [[NSUserDefaults standardUserDefaults]objectForKey:@"currentWallet"];
+    
+    NSString *address = [WalletUtils getAddressWithKeystore:currentWallet[@"keystore"]];
+    
+    //Callback to webview
+    callback(@[address]);
+}
 ```
 
 
@@ -483,6 +597,32 @@ completionHandler:(void (^)(NSString *result))completionHandler;
                signer:(NSString *)signer 
              callback:(void(^)(NSString *signer, NSData *signatureData))callback;
 
+Example:
+- (void)onCertificate:(NSDictionary *)message signer:(NSString *)signer callback:(void (^)(NSString * signer, NSData *  signatureData))callback
+{
+    NSDictionary *currentWalletDict = [[NSUserDefaults standardUserDefaults]objectForKey:@"currentWallet"];
+    NSString *keystore = currentWalletDict[@"keystore"];
+    
+    NSString *address = [WalletUtils getAddressWithKeystore:keystore];
+    
+    if (signer.length > 0) { //Specified signature address
+       
+        if ([address.lowercaseString isEqualToString:signer.lowercaseString]) {
+            
+            NSString *strMessage = [WalletUtils addSignerToCertMessage:signer.lowercaseString message:message];
+            NSData *dataMessage = [strMessage dataUsingEncoding:NSUTF8StringEncoding];
+            [self signCert:dataMessage signer:address.lowercaseString keystore:keystore callback:callback];
+        }else{
+            //Cusmtom alert error
+            callback(@"",nil);
+        }
+    }else{
+        NSString *strMessage = [WalletUtils addSignerToCertMessage:address.lowercaseString message:message];
+        NSData *dataMessage = [strMessage dataUsingEncoding:NSUTF8StringEncoding];
+        [self signCert:dataMessage signer:address.lowercaseString keystore:keystore callback:callback];
+    }
+}
+
  ```
 
 
@@ -496,6 +636,20 @@ completionHandler:(void (^)(NSString *result))completionHandler;
   
 ```obj-c
 - (void)onCheckOwnAddress:(NSString *)address callback:(void(^)(BOOL result))callback;
+
+Example:
+- (void)onCheckOwnAddress:(NSString *)address callback:(void(^)(BOOL result))callback
+{
+    NSDictionary *currentWallet = [[NSUserDefaults standardUserDefaults]objectForKey:@"currentWallet"];
+    
+    NSString *localAddrss = [WalletUtils getAddressWithKeystore:currentWallet[@"keystore"]];
+    if ([localAddrss.lowercaseString isEqualToString:address.lowercaseString]) {
+        callback(YES);
+    }else{
+        callback(NO);
+    }
+}
+
 ```
 
 
