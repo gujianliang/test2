@@ -1,3 +1,5 @@
+#The wallet function is implemented by calling SDK WalletUtils class: #import "WalletUtils.h"
+
 ##  Set node url   
 >
 >  @param nodelUrl : Node url   
@@ -5,6 +7,11 @@
 >
 ```obj-c
 + (void)setNodeUrl:(NSString *)nodelUrl;
+
+Example:
+ //Set it as a Main_Node environment
+ [WalletUtils setNodeUrl:Main_Node];
+
 ```
 
 
@@ -13,6 +20,10 @@
 ### If nodeUrl is not set, the default value is Main_Node.
 ```obj-c
 + (NSString *)getNodeUrl;
+ 
+Example:
+    NSString *nodeUrl = [WalletUtils getNodeUrl];
+
 ```
 
 
@@ -26,6 +37,20 @@
 + (void)createWalletWithPassword:(NSString *)password  
                         callback:(void(^)(WalletAccountModel *account,NSError *error))callback;
 
+
+Example:
+    //Create a wallet with your password.
+    [WalletUtils createWalletWithPassword:password
+                                 callback:^(WalletAccountModel * _Nonnull account, NSError * _Nonnull error)
+
+    {
+        NSString *mnemonic = [account.words componentsJoinedByString:@" "];
+        NSString *address = account.address;
+        NSString *privateKey = account.privatekey;
+        NSString *keystore = account.keystore;
+        
+    }];
+    
 ```
 
 
@@ -42,6 +67,19 @@
                             password:(NSString *)password
                             callback:(void(^)(WalletAccountModel *account,NSError *error))callback;
 
+
+Example:
+    // Create a wallet with your password and mnemonic words.
+    [WalletUtils createWalletWithMnemonicWords:mnemonicWords
+                                password:self.password.text
+                                callback:^(WalletAccountModel * _Nonnull account, NSError * _Nonnull error)
+    {
+        NSString *address = account.address;
+        NSString *privateKey = account.privatekey;
+        NSString *keystore = account.keystore;
+         
+    }];
+
 ```
 
 ##  Verify the mnemonic words    
@@ -51,6 +89,13 @@
 > 
 ```obj-c
 + (BOOL)isValidMnemonicWords:(NSArray<NSString *> *)mnemonicWords;
+
+
+Example:
+
+    NSString *mnemonicWords = @"admit mad dream stable scrub rubber cabbage exist maple excuse copper month";
+    BOOL result = [WalletUtils isValidMnemonicWords:[mnemonicWords componentsSeparatedByString:@" "]];
+    
 ```
 ##  Verify keystore format   
 
@@ -61,6 +106,12 @@
 
 ```obj-c
 + (BOOL)isValidKeystore:(NSString *)keystoreJson;
+
+Example:
+    NSString *keystore = @"{\"version\":3,\"id\":\"1150C15C-2E20-462B-8A88-EDF8A0E4DB71\",\n \"crypto\":{\"ciphertext\":\"1cf8d74d31b1ec2568f903fc2c84d215c0401cbb710b7b3de081af1449ae2a89\",\"cipherparams\":{\"iv\":\"03ccae46eff93b3d9bdf2b21739d7205\"},\"kdf\":\"scrypt\",\"kdfparams\":{\"r\":8,\"p\":1,\"n\":262144,\"dklen\":32,\"salt\":\"a71ecee9a1c33f0311e46f7da7da8d218a8c5b3d1067716a9bcdb767785d8e83\"},\"mac\":\"82b20c61854621f35b4d60ffb795655258356f310cdffa587f7db68a1789de75\",\"cipher\":\"aes-128-ctr\"},\"address\":\"cc2b456b2c9399b4b68ef632cf6a1aeabe67b417\"}";
+    BOOL result = [WalletUtils isValidKeystore:keystore];
+    
+    
 ```
 
 
@@ -78,7 +129,17 @@
               password:(NSString *)password
               callback:(void (^)(BOOL result))callback;
 
-
+Example:
+//Verification keystore
+    [WalletUtils verifyKeystore:keystore password:password callback:^(BOOL result) {
+        if (result) {
+            //success
+            
+        }else{ //fail
+            
+        }
+    }];
+    
 ```
 
 ## Modify password of keystore
@@ -93,6 +154,18 @@
            newPassword:(NSString *)newPassword
            oldPassword:(NSString *)oldPassword
               callback:(void (^)(NSString *newKeystore))callback;
+
+Example:
+//change Password
+    [WalletUtils modifyKeystore:keystore newPassword:newPassword oldPassword:oldPassword callback:^(NSString * _Nonnull newKeystore) {
+
+        if (newKeystore.length > 0) {
+            //success
+
+        }else {
+            //fail
+        }
+    }];
 ```
 
 ##  Decrypt keystore
@@ -102,10 +175,23 @@
  >  @param callback : Callback after the end . account :The attributes of a class has mnemonicPhras , address, privateKey and keystore   
  >
  >
- ```
+ ```obj-c
 + (void)decryptkeystore:(NSString *)keystoreJson
                password:(NSString *)password
                callback:(void(^)(WalletAccountModel *account,NSError *error))callback;
+
+Example:
+//Get the private key through the keystore
+    [WalletUtils decryptKeystore:keystore password:password callback:^(NSString * _Nonnull privatekey, NSError * _Nonnull error) {
+        
+        if (!error) {
+            //success
+            
+        }else //fail
+        {
+            
+        }
+    }];
 ```
 ## Encrypted private key
 >
@@ -118,6 +204,12 @@
 + (void)encryptPrivateKeyWithPassword:(NSString *)password
                            privateKey:(NSString *)privateKey
                              callback:(void (^)(NSString *keystoreJson))callback;
+
+Example:
+    //Private key to keystore
+        [WalletUtils encryptPrivateKeyWithPassword:password privateKey:privatekey callback:^(NSString * _Nonnull keystoreJson) {
+                
+        }];
 ```
 
 ##  Get checksum address    
@@ -127,6 +219,12 @@
 >
 ```obj-c
 + (NSString *)getChecksumAddress:(NSString *)address;
+
+Example:
+//Get checksum address
+    NSString *address = @"0x7567d83b7b8d80addcb281a71d54fc7b3364ffed";
+    NSString *checksumAddress = [WalletUtils getChecksumAddress:address];
+    
 ```
 ##  Get address from keystore   
  >  @param keystoreJson : Keystore JSON encryption format for user wallet private key   
@@ -135,6 +233,10 @@
  >
  ```obj-c
 + (NSString *)getAddressWithKeystore:(NSString *)keystoreJson;
+ 
+Example:
+//Get the address through the keystore
+    NSString *getAddress = [WalletUtils getAddressWithKeystore:keystore];
 ```
 ##   Sign message  
 >
@@ -150,19 +252,21 @@
                password:(NSString*)password
                callback:(void (^)(NSData *signatureData,NSError *error))callback;
 
+Example:
+    NSData *messageData = [@"test unit" dataUsingEncoding:NSUTF8StringEncoding];
+    //Data signature
+    [WalletUtils signWithMessage:messageData
+                        keystore:keystore
+                        password:password
+                        callback:^(NSData * _Nonnull signatureData, NSError * _Nonnull error)
+     {
+         
+     }];
+
 ```
 
 
 
-##  Add the signature address to the authentication signature data  
->
->  @param signer : Enforces the specified address to sign the certificate   
->  @param message : Authentication signature data   
->
-
-```obj-c
-+ (NSString *)addSignerToCertMessage:(NSString *)signer message:(NSDictionary *)message;
-```
 
 ##  Recover address
 >
@@ -173,6 +277,26 @@
 
 ```obj-c
 + (NSString *)recoverAddressFromMessage:(NSData *)message signatureData:(NSData *)signatureData;
+ 
+Example:
+    //Signature information, recovery address
+      NSString *address = [WalletUtils recoverAddressFromMessage:messageData signatureData:signatureData];
+      NSLog(@"address == %@",address);
+
+```
+
+##  Add the signature address to the authentication signature data  
+>
+>  @param signer : Enforces the specified address to sign the certificate   
+>  @param message : Authentication signature data   
+>
+
+```obj-c
++ (NSString *)addSignerToCertMessage:(NSString *)signer message:(NSDictionary *)message;
+
+Example:
+ NSString *newMessage = [WalletUtils addSignerToCertMessage:signer.lowercaseString message:message];
+      
 ```
 
 
@@ -184,6 +308,13 @@
  >
  ```obj-c
 + (void)getChainTag:(void (^)(NSString *chainTag))callback;
+
+Example:
+//Get the chain tag of the block chain
+    [WalletUtils getChainTag:^(NSString * _Nonnull chainTag) {
+        NSLog(@"chainTag == %@",chainTag);
+    }];
+    
 ```
  ## Get reference of block chain   
  >  @param callback : Callback after the end.    
@@ -191,11 +322,18 @@
  >
  ```obj-c
 + (void)getBlockReference:(void (^)(NSString *blockReference))callback;
+ 
+Example:
+ //Get the reference of the block chain
+    [WalletUtils getBlockReference:^(NSString * _Nonnull blockReference) {
+            NSLog(@"blockReference == %@",blockReference);
+    }];
+
 ```
  
 
 
-##   Sign and send Transaction
+##   Sign and send transaction
 >
 >  @param parameter: Transaction parameters   
 >  @param keystoreJson: Keystore JSON encryption format for user wallet private key   
@@ -208,6 +346,23 @@
                                 keystore:(NSString*)keystoreJson
                                 password:(NSString *)password
                                 callback:(void(^)(NSString *txid))callback;
+
+Example:
+[WalletUtils signAndSendTransferWithParameter:transactionModel
+                                     keystore:keystore
+                                     password:password
+                                     callback:^(NSString * _Nonnull txid)
+                     {
+                         //Developers can use txid to query the status of data packaged on the chain
+
+                         NSLog(@"\n txId: %@", txid);
+                         
+                         // Pass txid and signature address back to dapp webview
+                         NSString *singerAddress = [WalletUtils getAddressWithKeystore:keystore];
+                         callback(txid,singerAddress.lowercaseString);
+                         
+                     }];
+
 ```
 TransactionParameter attribute description：
 
@@ -247,7 +402,7 @@ TransactionParameter attribute description：
     
 ```
 
-##   Signe transaction
+##   Sign transaction
 >
 >  @param parameter: Transaction parameters     
 >  @param keystoreJson: Keystore JSON encryption format for user wallet private key   
@@ -260,6 +415,18 @@ TransactionParameter attribute description：
                  keystore:(NSString*)keystoreJson
                  password:(NSString*)password
                  callback:(void(^)(NSString *raw))callback;
+
+Example:
+[WalletUtils signWithParameter:transactionModel
+                      keystore:keystore
+                      password:password
+                      callback:^(NSString * _Nonnull raw)
+                     {
+
+                         NSLog(@"\n raw: %@", raw);
+                         
+                     }];
+                     
 ```
 
 
@@ -274,6 +441,10 @@ TransactionParameter attribute description：
 ```obj-c
 + (void)initDAppWithDelegate:(id)delegate;
 
+Example:
+ // Set delegate
+    [WalletUtils initDAppWithDelegate:self];
+
 ```
 
 
@@ -284,6 +455,17 @@ TransactionParameter attribute description：
 >
 ```obj-c
 + (void)injectJSWithWebView:(WKWebViewConfiguration *)config;  
+
+Example:
+
+    // Please note that, This is a 'WKWebView' object, does not support a "UIWebView" object.
+
+    WKWebViewConfiguration* configuration = [[WKWebViewConfiguration alloc] init];
+    configuration.userContentController = [[WKUserContentController alloc] init];
+    
+    //inject js to wkwebview
+    [WalletUtils injectJSWithWebView:configuration];
+    
 
 ```
 
@@ -300,6 +482,19 @@ TransactionParameter attribute description：
     defaultText:(NSString *)defaultText 
 completionHandler:(void (^)(NSString *result))completionHandler;
 
+
+Example:
+/**
+* You must implement this delegate method to call js.
+*/
+- (void)webView:(WKWebView *)webView runJavaScriptTextInputPanelWithPrompt:(NSString *)prompt defaultText:(nullable NSString *)defaultText initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(NSString * __nullable result))completionHandler{
+        
+    /*
+     You must call this method. It is used to response web3 or connex operations.
+     */
+    [WalletUtils webView:webView  defaultText:defaultText completionHandler:completionHandler];
+}
+
 ```
 
 
@@ -310,6 +505,14 @@ completionHandler:(void (^)(NSString *result))completionHandler;
  >
  ```obj-c
 + (void)deallocDApp;
+
+Example:
+/**
+ * You must implement this method to free memory, otherwise there may be a memory overflow or leak.
+ */
+- (void)dealloc{
+    [WalletUtils deallocDApp];
+}
 ```
 
  
@@ -329,6 +532,29 @@ completionHandler:(void (^)(NSString *result))completionHandler;
                gas:(NSString *)gas
           callback:(void(^)(NSString *txid ,NSString *signer))callback;
 
+
+Example:
+- (void)onTransfer:(NSArray<ClauseModel *> *)clauses
+            signer:(NSString *)signer
+               gas:(NSString *)gas
+          callback:(void(^)(NSString *txid ,NSString *signer))callback
+{
+    
+   //Get the local keystore
+    NSDictionary *currentWalletDict = [[NSUserDefaults standardUserDefaults]objectForKey:@"currentWallet"];
+    NSString *keystore = currentWalletDict[@"keystore"];
+    
+    NSString *address = [WalletUtils getAddressWithKeystore:keystore];
+    
+    //Specified signature address
+    if (signer.length > 0 && [address.lowercaseString isEqualToString:signer.lowercaseString]) {
+        
+        callback(@"",@"");
+        return;
+    }
+
+}
+
  ```
 
 
@@ -341,6 +567,19 @@ completionHandler:(void (^)(NSString *result))completionHandler;
  
 ```obj-c
 - (void)onGetWalletAddress:(void(^)(NSArray<NSString *> *addressList))callback;
+
+Example:
+- (void)onGetWalletAddress:(void (^)(NSArray<NSString *> * _Nonnull))callback
+{
+    //Get the wallet address from local database or file cache
+    
+    NSDictionary *currentWallet = [[NSUserDefaults standardUserDefaults]objectForKey:@"currentWallet"];
+    
+    NSString *address = [WalletUtils getAddressWithKeystore:currentWallet[@"keystore"]];
+    
+    //Callback to webview
+    callback(@[address]);
+}
 ```
 
 
@@ -358,6 +597,32 @@ completionHandler:(void (^)(NSString *result))completionHandler;
                signer:(NSString *)signer 
              callback:(void(^)(NSString *signer, NSData *signatureData))callback;
 
+Example:
+- (void)onCertificate:(NSDictionary *)message signer:(NSString *)signer callback:(void (^)(NSString * signer, NSData *  signatureData))callback
+{
+    NSDictionary *currentWalletDict = [[NSUserDefaults standardUserDefaults]objectForKey:@"currentWallet"];
+    NSString *keystore = currentWalletDict[@"keystore"];
+    
+    NSString *address = [WalletUtils getAddressWithKeystore:keystore];
+    
+    if (signer.length > 0) { //Specified signature address
+       
+        if ([address.lowercaseString isEqualToString:signer.lowercaseString]) {
+            
+            NSString *strMessage = [WalletUtils addSignerToCertMessage:signer.lowercaseString message:message];
+            NSData *dataMessage = [strMessage dataUsingEncoding:NSUTF8StringEncoding];
+            [self signCert:dataMessage signer:address.lowercaseString keystore:keystore callback:callback];
+        }else{
+            //Cusmtom alert error
+            callback(@"",nil);
+        }
+    }else{
+        NSString *strMessage = [WalletUtils addSignerToCertMessage:address.lowercaseString message:message];
+        NSData *dataMessage = [strMessage dataUsingEncoding:NSUTF8StringEncoding];
+        [self signCert:dataMessage signer:address.lowercaseString keystore:keystore callback:callback];
+    }
+}
+
  ```
 
 
@@ -371,7 +636,69 @@ completionHandler:(void (^)(NSString *result))completionHandler;
   
 ```obj-c
 - (void)onCheckOwnAddress:(NSString *)address callback:(void(^)(BOOL result))callback;
+
+Example:
+- (void)onCheckOwnAddress:(NSString *)address callback:(void(^)(BOOL result))callback
+{
+    NSDictionary *currentWallet = [[NSUserDefaults standardUserDefaults]objectForKey:@"currentWallet"];
+    
+    NSString *localAddrss = [WalletUtils getAddressWithKeystore:currentWallet[@"keystore"]];
+    if ([localAddrss.lowercaseString isEqualToString:address.lowercaseString]) {
+        callback(YES);
+    }else{
+        callback(NO);
+    }
+}
+
 ```
+
+## Several main data structures
+
+### keystore
+```obj-c
+/**
+*  Keystore is a json string. Its file structure is as follows:
+*
+*  — — — — — — — — — — — — — — — — — — — — — — — — — — ——
+*      {
+*          "version": 3,
+*          "id": "F56FDA19-FB1B-4752-8EF6-E2F50A93BFB8",
+*          "kdf": "scrypt",
+*          "mac": "9a1a1db3b2735c36015a3893402b361d151b4d2152770f4a51729e3ac416d79f",
+*          "cipher": "aes-128-ctr"
+*          "address": "ea8a62180562ab3eac1e55ed6300ea7b786fb27d"
+*          "crypto": {
+*                      "ciphertext": "d2820582d2434751b83c2b4ba9e2e61d50fa9a8c9bb6af64564fc6df2661f4e0",
+*                      "cipherparams": {
+*                                          "iv": "769ef3174114a270f4a2678f6726653d"
+*                                      },
+*                      "kdfparams": {
+*                              "r": 8,
+*                              "p": 1,
+*                              "n": 262144,
+*                              "dklen": 32,
+*                              "salt": "67b84c3b75f9c0bdf863ea8be1ac8ab830698dd75056b8133350f0f6f7a20590"
+*                      },
+*          },
+*      }
+*
+*  — — — — — — — — — — — — — — — — — — — — — — — — — — ——
+*  Field description:
+*          version: This is a version information, when you decryption, you should use the same version.
+*          id: You can ignore. It is just a UUIDString.
+*          Kdf: This is a encryption function.
+*          mac: This is the mac device information.
+*          cipher: Describes the encryption algorithm used.
+*          address：The wallet address.
+*          crypto: This section is the main encryption area.
+*
+*  If you want to recover a wallet by keystore, you should have the correct password.
+*
+*/
+```
+### Hexadecimal must start with 0x.
+
+### Address : 20 bytes hex string and start with 0x.
 
 
 
