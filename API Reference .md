@@ -25,7 +25,7 @@ Inherit the AppDelegate class and implement the following methods:
 > Node url: Unified resource location address for participating block chain servers.
 >
 ```obj-c
-/**
+/*
  *  @param nodelUrl : node url
  */ 
 + (void)setNodeUrl:(NSString *)nodelUrl;
@@ -68,10 +68,9 @@ After entering the wallet password, the user can create the wallet through the f
 
 
 ```obj-c
-/**
+/*
  *  @param password : Wallet password
  *  @param callback : Callback after the end;The attributes of a class has mnemonicPhras , address, privateKey, keystore
- *
  */
 + (void)createWalletWithPassword:(NSString *)password  
                         callback:(void(^)(WalletAccountModel *account,NSError *error))callback;
@@ -107,7 +106,7 @@ When the user has mnemonic words, enter the mnemonic words and the password of t
 
 
 ```obj-c
-/**
+/*
  *  @param mnemonicWords :Mnemonic Words
  *  @param password : Wallet password
  *  @param callback : Callback after the end;The attributes of a class has mnemonicPhras , address, privateKey, keystore
@@ -144,7 +143,7 @@ Example:
 ##  Verify the mnemonic words    
 
 ```obj-c
-/**
+/*
  *  @param mnemonicWords : Mnemonic words,Number of mnemonic words : 12, 15, 18, 21 and 24.
  *  @return result
  */
@@ -162,9 +161,8 @@ Example:
 
 
 ```obj-c
-/**
+/*
  *  @param keystoreJson :Keystore JSON encryption format for user wallet private key
- *
  *  @return verification result
  */
 + (BOOL)isValidKeystore:(NSString *)keystoreJson;
@@ -184,12 +182,11 @@ Example:
 ## Verify the keystore with a password   
 
  ```obj-c
- /**
- *  @param keystoreJson :  Keystore JSON encryption format for user wallet private key
- *  @param password :  Wallet password
- *  @param callback : Callback after the end
- *
- */
+ /*
+  *  @param keystoreJson :  Keystore JSON encryption format for user wallet private key
+  *  @param password :  Wallet password
+  *  @param callback : Callback after the end
+  */
 + (void)verifyKeystore:(NSString *)keystoreJson
               password:(NSString *)password
               callback:(void (^)(BOOL result))callback;
@@ -213,13 +210,12 @@ Example:
 ## Modify password of keystore
 
  ```obj-c
- /**
- *  @param oldPassword : old password for wallet.
- *  @param newPassword : new password for wallet.
- *  @param keystoreJson :  Keystore JSON encryption format for user wallet private key
- *  @param callback : Callback after the end
- *
- */
+ /*
+  *  @param oldPassword : old password for wallet.
+  *  @param newPassword : new password for wallet.
+  *  @param keystoreJson :  Keystore JSON encryption format for user wallet private key
+  *  @param callback : Callback after the end
+  */
 + (void)modifyKeystore:(NSString *)keystoreJson
            newPassword:(NSString *)newPassword
            oldPassword:(NSString *)oldPassword
@@ -246,12 +242,11 @@ Example:
 
 ##  Decrypt keystore
  ```obj-c
- /**
- *  @param keystoreJson : Keystore JSON encryption format for user wallet private key
- *  @param password : Wallet password
- *  @param callback : Callback after the end. Callback after the end;The attributes of a class has mnemonicPhras , address, privateKey, keystore
- *
- */
+ /*
+  *  @param keystoreJson : Keystore JSON encryption format for user wallet private key
+  *  @param password : Wallet password
+  *  @param callback : Callback after the end. Callback after the end;The attributes of a class has mnemonicPhras , address, privateKey, keystore
+  */
 + (void)decryptkeystore:(NSString *)keystoreJson
                password:(NSString *)password
                callback:(void(^)(WalletAccountModel *account,NSError *error))callback;
@@ -281,11 +276,10 @@ NSString *keystoreJson = "{\"address\":\"36d7189625587d7c4c806e0856b6926af8d36fe
 ## Encrypted private key
 
 ```obj-c
-/**
+/*
  *  @param password : Wallet password
  *  @param privateKey : PrivateKey
  *  @param callback : Callback after the end. keystoreJson : Keystore in json format
- *
  */
 + (void)encryptPrivateKeyWithPassword:(NSString *)password
                            privateKey:(NSString *)privateKey
@@ -308,9 +302,8 @@ Example:
 ##  Get checksum address    
 
 ```obj-c
-/**
+/*
  *  @param address :Wallet address
- *
  *  @return checksum address
  */
 + (NSString *)getChecksumAddress:(NSString *)address;
@@ -328,13 +321,9 @@ Example:
  >
  >
  ```obj-c
- /**
- *  @abstract
- *  Get address from keystore
- *
- *  @param keystoreJson :  Keystore JSON encryption format for user wallet private key
- *
- */
+ /*
+  *  @param keystoreJson :  Keystore JSON encryption format for user wallet private key
+  */
 + (NSString *)getAddressWithKeystore:(NSString *)keystoreJson;
  ```
 Example:
@@ -349,12 +338,11 @@ Example:
 
 
 ```obj-c
-/**
+/*
  *  @param message : Prepare the data to be signed
  *  @param keystoreJson :  Keystore JSON encryption format for user wallet private key
  *  @param password : Wallet password
  *  @param callback : Callback after the end
- *
  */
 + (void)signWithMessage:(NSData *)message
                keystore:(NSString*)keystoreJson
@@ -387,10 +375,9 @@ Example:
 
 
 ```obj-c
-/**
+/*
  *  @param message : Data to be signed
  *  @param signatureData : Signature is 65 bytes
- *
  *  @return address
  */
 + (NSString *)recoverAddressFromMessage:(NSData *)message signatureData:(NSData *)signatureData;
@@ -422,9 +409,9 @@ Example:
  ##  Get chainTag of block chain 
 
  ```obj-c
- /**
- *  @param callback : Callback after the end
- */
+ /*
+  *  @param callback : Callback after the end
+  */
 + (void)getChainTag:(void (^)(NSString *chainTag))callback;
     
 ```
@@ -444,10 +431,9 @@ Example:
  >
  >
  ```obj-c
- /**
- *  @param callback : Callback after the end
- *
- */
+ /*
+  *  @param callback : Callback after the end
+  */
 + (void)getBlockReference:(void (^)(NSString *blockReference))callback;
  ```
 Example:
@@ -464,12 +450,11 @@ Example:
 ##   Sign and send transaction
 
 ```obj-c
-/**
+/*
  *  @param parameter : Signature parameters
  *  @param keystoreJson :  Keystore JSON encryption format for user wallet private key
  *  @param password : Wallet password
  *  @param callback : Callback after the end
- *
  */
 + (void)signAndSendTransferWithParameter:(TransactionParameter *)parameter
                                 keystore:(NSString*)keystoreJson
@@ -534,12 +519,11 @@ TransactionParameter attribute description：
 
 ##   Sign transaction
 ```obj-c
-/**
+/*
  *  @param parameter : Transaction parameters
  *  @param keystoreJson :  Keystore JSON encryption format for user wallet private key
  *  @param password : Wallet password
  *  @param callback :  Callback after the end. raw: RLP encode data and signature
- *
  */
 + (void)signWithParameter:(TransactionParameter *)parameter
                  keystore:(NSString*)keystoreJson
@@ -572,7 +556,7 @@ Initialization is mainly JS injected into connex and web3.
 ###  Set delegate to SDK
 
 ```obj-c
-/**
+/*
  *  @param delegate : delegate object
  */
 + (void)initDAppWithDelegate:(id)delegate;
@@ -588,7 +572,7 @@ Example:
 ##   Inject js into webview   
 
 ```obj-c
-/**
+/*
  *  @param config : Developer generated WKWebViewConfiguration object
  */
 + (void)injectJSWithWebView:(WKWebViewConfiguration *)config;  
@@ -624,7 +608,7 @@ completionHandler:(void (^)(NSString *result))completionHandler;
 
 Example:
 ```obj-c
-/**
+/*
 * You must implement this delegate method to call js.
 */
 - (void)webView:(WKWebView *)webView runJavaScriptTextInputPanelWithPrompt:(NSString *)prompt defaultText:(nullable NSString *)defaultText initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(NSString * __nullable result))completionHandler{
@@ -661,15 +645,15 @@ Example:
  ##  App developer implementation when DApp calls transaction function  
 
  ```obj-c
- /**
- *  Delegate function that must be implemented to support the DApp environment
- *
- *  @param clauses : Clause model list
- *  @param gas : Set maximum gas allowed for call
- *  @param signer : Enforces the specified address to sign the transaction
- *  @param callback : Callback after the end. txid:Transaction identifier; signer:Signer address
- *
- */
+ /*
+  *  Delegate function that must be implemented to support the DApp environment
+  *
+  *  @param clauses : Clause model list
+  *  @param gas : Set maximum gas allowed for call
+  *  @param signer : Enforces the specified address to sign the transaction
+  *  @param callback : Callback after the end. txid:Transaction identifier; signer:Signer address
+  *
+  */
 - (void)onTransfer:(NSArray<ClauseModel *> *)clauses
             signer:(NSString *)signer
                gas:(NSString *)gas
@@ -726,11 +710,9 @@ Example:
  
  
 ```obj-c
-/**
- *   Delegate function that must be implemented to support the DApp environment
- *
+/*
+ *  Delegate function that must be implemented to support the DApp environment
  *  @param callback : Callback after the end
- *
  */
 - (void)onGetWalletAddress:(void(^)(NSArray<NSString *> *addressList))callback;
 ```
@@ -751,13 +733,12 @@ Example:
 
   
  ```obj-c
- /**
- *   Delegate function that must be implemented to support the DApp environment
- *
- *  @param message : Data to be signed,form dapp
- *  @param signer : Enforces the specified address to sign the certificate
- *  @param callback : Callback after the end.signer: Signer address; signatureData : Signature is 65 bytes
- *
+ /*
+  *   Delegate function that must be implemented to support the DApp environment
+  *
+  *  @param message : Data to be signed,form dapp
+  *  @param signer : Enforces the specified address to sign the certificate
+  *  @param callback : Callback after the end.signer: Signer address; signatureData : Signature is 65 bytes
  */
 - (void)onCertificate:(NSDictionary *)message 
                signer:(NSString *)signer 
@@ -813,12 +794,10 @@ Example:
 
   
 ```obj-c
-/**
- *   Delegate function that must be implemented to support the DApp environment
- *
+/*
+ *  Delegate function that must be implemented to support the DApp environment
  *  @param address : Address from dapp
  *  @param callback : Callback after the end
- *
  */
 - (void)onCheckOwnAddress:(NSString *)address callback:(void(^)(BOOL result))callback;
 ```
