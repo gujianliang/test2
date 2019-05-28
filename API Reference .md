@@ -547,7 +547,6 @@ Example:
 
 
 
-## Support the DApp development environment in webview
 ###  Support DApp development environment in Webview
 To support the Dapp function, WebView needs the following initialization before opening Dapp.
 Initialization is mainly JS injected into connex and web3.
