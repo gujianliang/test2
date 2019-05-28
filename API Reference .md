@@ -37,6 +37,19 @@ Example:
 + (void)createWalletWithPassword:(NSString *)password  
                         callback:(void(^)(WalletAccountModel *account,NSError *error))callback;
 
+
+Example:
+    //Create a wallet with your password.
+    [WalletUtils createWalletWithPassword:self.passwordLabel.text
+                                 callback:^(WalletAccountModel * _Nonnull account, NSError * _Nonnull error)
+
+    {
+        NSString *mnemonic = [account.words componentsJoinedByString:@" "];
+        NSString *address = account.address;
+        NSString *privateKey = account.privatekey;
+        NSString *keystore = account.keystore;
+    }];
+    
 ```
 
 
