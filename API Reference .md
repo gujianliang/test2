@@ -145,7 +145,6 @@ Example:
 
 ```obj-c
 /**
- *
  *  @param mnemonicWords : Mnemonic words,Number of mnemonic words : 12, 15, 18, 21 and 24.
  *  @return result
  */
@@ -351,9 +350,6 @@ Example:
 
 ```obj-c
 /**
- *  @abstract
- *  Sign message
- *
  *  @param message : Prepare the data to be signed
  *  @param keystoreJson :  Keystore JSON encryption format for user wallet private key
  *  @param password : Wallet password
@@ -428,7 +424,6 @@ Example:
  ```obj-c
  /**
  *  @param callback : Callback after the end
- *
  */
 + (void)getChainTag:(void (^)(NSString *chainTag))callback;
     
@@ -470,9 +465,6 @@ Example:
 
 ```obj-c
 /**
- *  @abstract
- *  Sign and send
- *
  *  @param parameter : Signature parameters
  *  @param keystoreJson :  Keystore JSON encryption format for user wallet private key
  *  @param password : Wallet password
@@ -581,9 +573,6 @@ Initialization is mainly JS injected into connex and web3.
 
 ```obj-c
 /**
- *  @abstract
- *  Set delegate to SDK
- *
  *  @param delegate : delegate object
  */
 + (void)initDAppWithDelegate:(id)delegate;
@@ -600,9 +589,7 @@ Example:
 
 ```obj-c
 /**
-
  *  @param config : Developer generated WKWebViewConfiguration object
- *
  */
 + (void)injectJSWithWebView:(WKWebViewConfiguration *)config;  
 ```
@@ -621,13 +608,7 @@ Example:
 ```
 
 ##  Parsing data in webview's callback method runJavaScriptTextInputPanelWithPrompt
->
-> @param webView :The web view invoking the delegate method.   
-> @param defaultText: The initial text to display in the text entry field.   
-> @param completionHandler: The completion handler to call after the text   
-  input panel has been dismissed. Pass the entered text if the user choose
-  OK, otherwise nil
->
+
 ```obj-c
 /*
  *  @param webView : The web view invoking the delegate method.
@@ -661,11 +642,7 @@ Example:
 
  ```obj-c
  /**
- *  @abstract
- *  Release the singleton of dapp
- *
  *  Call this method when exiting the contrller where dapp is located
- *
  */
 + (void)deallocDApp;
 ```
@@ -685,7 +662,7 @@ Example:
 
  ```obj-c
  /**
- *  delegate function that must be implemented to support the DApp environment
+ *  Delegate function that must be implemented to support the DApp environment
  *
  *  @param clauses : Clause model list
  *  @param gas : Set maximum gas allowed for call
@@ -750,9 +727,7 @@ Example:
  
 ```obj-c
 /**
- *  @abstract
- *   App developer implementation when dapp calls get address function
- *   delegate function that must be implemented to support the DApp environment
+ *   Delegate function that must be implemented to support the DApp environment
  *
  *  @param callback : Callback after the end
  *
@@ -774,17 +749,10 @@ Example:
 
  ##   App developer implementation when dapp calls authentication function   
 
- >  Delegate function that must be implemented to support the DApp environment   
- >  @param message : Data to be signed,form dapp  
- >  @param signer : Enforces the specified address to sign the certificate    
- >  @param callback : Callback after the end.signer: Signer address; signatureData : Signature is 65 bytes   
- >
   
  ```obj-c
  /**
- *  @abstract
- *   App developer implementation when dapp calls authentication function
- *   delegate function that must be implemented to support the DApp environment
+ *   Delegate function that must be implemented to support the DApp environment
  *
  *  @param message : Data to be signed,form dapp
  *  @param signer : Enforces the specified address to sign the certificate
@@ -846,9 +814,7 @@ Example:
   
 ```obj-c
 /**
- *  @abstract
- *   App developer implementation when dapp calls checkOwn address function
- *   delegate function that must be implemented to support the DApp environment
+ *   Delegate function that must be implemented to support the DApp environment
  *
  *  @param address : Address from dapp
  *  @param callback : Callback after the end
