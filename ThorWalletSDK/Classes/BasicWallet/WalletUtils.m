@@ -276,6 +276,13 @@
         return;
     }
     
+    if (parameter == nil || keystoreJson == nil || password == nil) {
+        if (callback) {
+            callback(nil);
+        }
+        return;
+    }
+    
     [WalletUtils signTransfer:parameter keystore:keystoreJson password:password isSend:YES  completionHandler:callback];
     
 }
@@ -294,6 +301,13 @@
         return;
     }
     
+    if (parameter == nil || keystoreJson == nil || password == nil) {
+        if (callback) {
+            callback(nil);
+        }
+        return;
+    }
+    
     [WalletUtils signTransfer:parameter keystore:keystoreJson password:password isSend:NO completionHandler:callback];
     
 }
@@ -301,11 +315,21 @@
 + (void)signWithMessage:(NSData *)message
                keystore:(NSString*)keystoreJson
                password:(NSString*)password
-               callback:(void (^)(NSData *signatureData,NSError *error))callback
+               callback:(void (^)(NSData *signatureData))callback
 {
-    if (message == nil || [message isKindOfClass:[NSString class]]) {
-        NSError *error = [NSError errorWithDomain:NSURLErrorDomain code:121 userInfo:@{NSLocalizedDescriptionKey:@"Message cannot be nil"}];
-        callback(nil,error);
+    if ( ![message isKindOfClass:[NSData class]]) {
+        
+        if (callback) {
+            callback(nil);
+        }
+        return;
+    }
+    
+    if (message == nil || keystoreJson == nil || password == nil) {
+       
+        if (callback) {
+            callback(nil);
+        }
         return;
     }
     [Account decryptSecretStorageJSON:keystoreJson
@@ -333,17 +357,17 @@
                      || signature.v == 3) {
                      
                      if (callback) {
-                         callback(nil,error);
+                         callback(nil);
                      }
                  }else{
                      if (callback) {
-                         callback([SecureData hexStringToData:hashStr],nil);
+                         callback([SecureData hexStringToData:hashStr]);
                      }
                  }
              }
          }else{
              if (callback) {
-                 callback(nil,error);
+                 callback(nil);
              }
          }
      }];

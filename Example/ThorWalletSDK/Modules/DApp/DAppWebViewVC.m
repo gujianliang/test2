@@ -311,12 +311,11 @@
                                      
                                      UITextField *textF =  alertController.textFields.lastObject;
                                      
-                                     [WalletUtils signWithMessage:message keystore:keystore password:textF.text callback:^(NSData * _Nonnull signatureData, NSError * _Nonnull error) {
+                                     [WalletUtils signWithMessage:message keystore:keystore password:textF.text callback:^(NSData * _Nonnull signatureData) {
                                          
-                                         if (!error) {
+                                         if (!signatureData) {
                                              callback(signer,signatureData);
                                          }else{
-                                             NSLog(@"error == %@",error.userInfo);
                                          }
                                      }];
                                      

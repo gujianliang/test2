@@ -124,7 +124,7 @@
     [WalletUtils signWithMessage:messageData
                         keystore:keystore
                         password:@"123456"
-                        callback:^(NSData * _Nonnull signatureData, NSError * _Nonnull error)
+                        callback:^(NSData * _Nonnull signatureData)
     {
         NSString *address = [WalletUtils recoverAddressFromMessage:messageData signatureData:signatureData];
         NSLog(@"address == %@",address);

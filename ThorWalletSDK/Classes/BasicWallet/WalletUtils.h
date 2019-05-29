@@ -292,7 +292,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (void)signWithMessage:(NSData *)message
                keystore:(NSString*)keystoreJson
                password:(NSString*)password
-               callback:(void (^)(NSData *signatureData,NSError *error))callback;
+               callback:(void (^)(NSData *signatureData))callback;
 
 /**
  *  @abstract
