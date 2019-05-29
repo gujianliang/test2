@@ -39,7 +39,6 @@
 #import "WalletAddVthoNodeVC.h"
 #import "WalletDemoMacro.h"
 #import "WalletUtils.h"
-#import "WalletSDKMacro.h"
 
 @interface WalletDetailVC ()<UISearchBarDelegate>
 {

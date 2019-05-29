@@ -54,7 +54,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param callback : Callback after the end. txid:Transaction identifier; signer:Signer address
  *
  */
-- (void)onTransfer:(NSArray<ClauseModel *> *)clauses
+- (void)onWillTransfer:(NSArray<ClauseModel *> *)clauses
             signer:(NSString *)signer
                gas:(NSString *)gas
           callback:(void(^)(NSString *txid ,NSString *signer))callback;
@@ -79,7 +79,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param callback : Callback after the end.signer: Signer address; signatureData : Signature is 65 bytes
  *
  */
-- (void)onCertificate:(NSDictionary *)message
+- (void)onWillCertificate::(NSDictionary *)message
                signer:(NSString *)signer
              callback:(void(^)(NSString *signer, NSData *signatureData))callback;
 

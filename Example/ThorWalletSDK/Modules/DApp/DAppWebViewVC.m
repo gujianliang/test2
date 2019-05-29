@@ -109,7 +109,7 @@
 }
 
 
-- (void)onTransfer:(NSArray<ClauseModel *> *)clauses
+- (void)onWillTransfer:(NSArray<ClauseModel *> *)clauses
             signer:(NSString *)signer
                gas:(NSString *)gas
           callback:(void(^)(NSString *txid ,NSString *signer))callback
@@ -269,7 +269,7 @@
     }
 }
 
-- (void)onCertificate:(NSDictionary *)message signer:(NSString *)signer callback:(void (^)(NSString * signer, NSData *  signatureData))callback
+- (void)onWillCertificate::(NSDictionary *)message signer:(NSString *)signer callback:(void (^)(NSString * signer, NSData *  signatureData))callback
 {
     NSDictionary *currentWalletDict = [[NSUserDefaults standardUserDefaults]objectForKey:@"currentWallet"];
     NSString *keystore = currentWalletDict[@"keystore"];

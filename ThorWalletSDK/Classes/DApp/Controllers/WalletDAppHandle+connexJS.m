@@ -491,9 +491,9 @@
         [dictSignParam setValueIfNotNil:domain forKey:@"domain"];
         [dictSignParam setValueIfNotNil:from.lowercaseString forKey:@"signer"];
 
-        if (self.delegate && [self.delegate respondsToSelector:@selector(onCertificate:signer:callback:)]) {
+        if (self.delegate && [self.delegate respondsToSelector:@selector(onWillCertificate::signer:callback:)]) {
             
-            [self.delegate onCertificate:dictSignParam signer:from callback:^(NSString * _Nonnull signer, NSData * _Nonnull signature) {
+            [self.delegate onWillCertificate::dictSignParam signer:from callback:^(NSString * _Nonnull signer, NSData * _Nonnull signature) {
                 
                 NSString *hashSignture = [SecureData dataToHexString:signature];
                 

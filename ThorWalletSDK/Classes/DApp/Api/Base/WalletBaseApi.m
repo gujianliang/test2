@@ -218,15 +218,15 @@
         
         self.lastError = [NSError errorWithDomain:@"Wallet"
                                              code:errCode.integerValue
-                                         userInfo:@{NSLocalizedFailureReasonErrorKey: errMsg.length > 0 ? errMsg : VCNSLocalizedBundleString(@"no_network_hint", nil)}];
+                                         userInfo:@{NSLocalizedFailureReasonErrorKey: errMsg.length > 0 ? errMsg : @"no network"}];
         
     }
     else if (nil == errCode || [errCode intValue] != 1) {
         
         if ([errMsg isEqual:[NSNull null]]) {
-            errMsg = VCNSLocalizedBundleString(@"Unknown error", nil);
+            errMsg = @"Unknown error";
         }else{
-            errMsg = [errMsg length] ? errMsg : VCNSLocalizedBundleString(@"Unknown error", nil);
+            errMsg = [errMsg length] ? errMsg : @"Unknown error";
         }
         
         self.lastError = [NSError errorWithDomain:@"Wallet"

@@ -33,7 +33,6 @@
 #import "MBProgressHUD.h"
 #import "WalletDemoMacro.h"
 #import "WalletUtils.h"
-#import "WalletSDKMacro.h"
 
 @interface WalletNodeDetailVC ()
 {

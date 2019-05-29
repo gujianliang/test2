@@ -42,8 +42,6 @@
 #define     Main_Node      @"https://vethor-node.digonchain.com"           /* The main Node environment of block chain*/
 
 
-#define VCNSLocalizedBundleString(key, comment) [WalletTools localStringBundlekey:(key)]
-
 #define SCREEN_WIDTH          ([UIScreen mainScreen].bounds.size.width)
 #define SCREEN_HEIGHT         ([UIScreen mainScreen].bounds.size.height)
 
