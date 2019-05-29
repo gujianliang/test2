@@ -79,9 +79,9 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param callback : Callback after the end.signer: Signer address; signatureData : Signature is 65 bytes
  *
  */
-- (void)onWillCertificate::(NSDictionary *)message
-               signer:(NSString *)signer
-             callback:(void(^)(NSString *signer, NSData *signatureData))callback;
+- (void)onWillCertificate:(NSDictionary *)message
+                   signer:(NSString *)signer
+                 callback:(void(^)(NSString *signer, NSData *signatureData))callback;
 
 
 /*
