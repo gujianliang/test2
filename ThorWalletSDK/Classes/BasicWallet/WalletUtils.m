@@ -183,6 +183,15 @@
                password:(NSString*)password
                callback:(void(^)(NSString *privateKey,NSError *error))callback
 {
+    if (keystoreJson == nil
+        || password == nil
+        || keystoreJson.length == 0
+        || password.length == 0 ) {
+        if (callback) {
+            callback(nil, nil);
+        }
+        return;
+    }
     [Account decryptSecretStorageJSON:keystoreJson password:password callback:^(Account *account, NSError *decryptError) {
         
         if (decryptError == nil) {
@@ -207,12 +216,20 @@
         if (callback) {
             callback(nil);
         }
+        return;
     }
     
     if (privateKey.length != 66) {
         if (callback) {
             callback(nil);
         }
+        return;
+    }
+    if ( password == nil || privateKey == nil || privateKey.length == 0 || password.length == 0 ) {
+        if (callback) {
+            callback(nil);
+        }
+        return;
     }
     NSData *dataPrivate = [SecureData hexStringToData:privateKey];
     Account *ethAccount = [Account accountWithPrivateKey:dataPrivate];
@@ -276,7 +293,12 @@
         return;
     }
     
-    if (parameter == nil || keystoreJson == nil || password == nil) {
+    if (parameter == nil
+        || keystoreJson == nil
+        || password == nil
+        || keystoreJson.length == 0
+        || password.length == 0) {
+        
         if (callback) {
             callback(nil);
         }
@@ -301,7 +323,7 @@
         return;
     }
     
-    if (parameter == nil || keystoreJson == nil || password == nil) {
+   if (parameter == nil || keystoreJson == nil || password == nil || keystoreJson.length == 0|| password.length == 0) {
         if (callback) {
             callback(nil);
         }
@@ -325,7 +347,11 @@
         return;
     }
     
-    if (message == nil || keystoreJson == nil || password == nil) {
+    if (message == nil
+        || keystoreJson == nil
+        || password == nil
+        || keystoreJson.length == 0
+        || password.length == 0) {
        
         if (callback) {
             callback(nil);
@@ -380,7 +406,7 @@
 
 + (NSString *)getChecksumAddress:(NSString *)address
 {
-    if (![WalletTools checkHEXStr:address]) {
+    if (![WalletTools checkHEXStr:address] || address.length != 42) {
         return @"";
     }
     return [WalletTools checksumAddress:address];
@@ -411,16 +437,33 @@
            oldPassword:(NSString *)oldPassword
               callback:(void (^)(NSString *newKeystore))callback
 {
+    if (keystoreJson == nil
+        || newPassword == nil
+        || oldPassword == nil
+        || keystoreJson.length == 0
+        || newPassword.length == 0
+        || oldPassword.length == 0) {
+        
+        if (callback) {
+            callback(nil);
+        }
+        return ;
+    }
+    
     [WalletUtils decryptKeystore:keystoreJson password:oldPassword callback:^(NSString * _Nonnull privatekey, NSError * _Nonnull error) {
         
         if (error) {
-            callback(nil);
+            if (callback) {
+                callback(nil);
+            }
+            
             return ;
         }else{
             [WalletUtils encryptPrivateKeyWithPassword:newPassword privateKey:privatekey callback:^(NSString * _Nonnull keystoreJson) {
                 
-                callback(keystoreJson);
-                
+                if (callback) {
+                    callback(keystoreJson);
+                }
             }];
         }
     }];
@@ -430,6 +473,16 @@
                       password:(NSString *)password
                       callback:(void (^)(BOOL result))callback
 {
+    if (keystore == nil
+        || password == nil
+        || keystore.length == 0
+        || password.length == 0 ) {
+        
+        if (callback) {
+            callback(nil);
+        }
+        return ;
+    }
     [WalletUtils decryptKeystore:keystore password:password callback:^(NSString * _Nonnull privatekey, NSError * _Nonnull error){
         
         if (privatekey) {
@@ -482,7 +535,7 @@
 
 + (NSString *)getAddressWithKeystore:(NSString *)keystore
 {
-    if (keystore.length == 0) {
+    if (keystore.length == 0 || keystore == nil) {
         return @"";
     }
     NSDictionary *dictKeystore = [NSJSONSerialization dictionaryWithJsonString:keystore];
