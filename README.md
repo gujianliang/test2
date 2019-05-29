@@ -46,7 +46,16 @@ Vechain wallet SDK provides a series of functional interface can help the iOS de
 #import "WalletUtils.h"
 ```
 ```obj-c
-[WalletUtils setNode:Main_Node];
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
+    // Override point for customization after application launch.
+    
+    [WalletUtils setNodeUrl:Main_Node];
+    
+    ...
+    
+    return YES;
+}
 ````
 
 
