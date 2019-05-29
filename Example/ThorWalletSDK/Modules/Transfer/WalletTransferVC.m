@@ -84,7 +84,7 @@
                                                                              message:@"Please enter the wallet password"
                                                                       preferredStyle:UIAlertControllerStyleAlert];
     
-//    @weakify(self);
+    @weakify(self);
     [alertController addAction:([UIAlertAction actionWithTitle: @"Confirm"
                                                          style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action)
     {
@@ -94,7 +94,7 @@
         NSString *password = textF.text;
         
         [WalletUtils verifyKeystore:keystore password:password callback:^(BOOL result) {
-//            @strongify(self);
+            @strongify(self);
                  if (result) {
                      
                      if (self.isVET) {
