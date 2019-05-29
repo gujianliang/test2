@@ -37,15 +37,15 @@ Eg:
 
  [WalletUtils setNodeUrl:Main_Node];
 
-Or if you have a corresponding node url, you can change it to your own node url:
+ //Or if you have a corresponding node url, you can change it to your own node url:
 
  [WalletUtils setNodeUrl:@"customNode"];
             
-Switching test node url:
+ //Switching test node url:
 
  [WalletUtils setNodeUrl:Test_Node];
 
-If nodeUrl is not set, the default value is Main_Node
+ //If nodeUrl is not set, the default value is Main_Node
 ```   
 
 
