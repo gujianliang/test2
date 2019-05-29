@@ -53,13 +53,14 @@
                                          code:-101
                                      userInfo:userInfo];
     
-    if (password.length == 0) {
+    if (password.length == 0 || password == nil) {
         
         if (callback) {
             callback(nil,error);
         }
         return;
     }
+    
     __block Account *account = [Account randomMnemonicAccount];
     
     [account encryptSecretStorageJSON:password callback:^(NSString *json) {
@@ -109,6 +110,14 @@
     if (![WalletUtils  isValidMnemonicWords:mnemonicWords]) {
         
         NSLog(@"mnemonicWords is invaild");
+        if (callback) {
+            callback(nil, error);
+        }
+        return;
+    }
+    
+    if (password.length == 0 || password == nil) {
+        NSLog(@"password is invaild");
         if (callback) {
             callback(nil, error);
         }
