@@ -34,18 +34,16 @@ Inherit the AppDelegate class and implement the following methods:
 Eg:
 ```obj-c
  //Set it as a Main_Node environment
-
  [WalletUtils setNodeUrl:Main_Node];
 
  //Or if you have a corresponding node url, you can change it to your own node url:
-
  [WalletUtils setNodeUrl:@"customNode"];
             
  //Switching test node url:
-
  [WalletUtils setNodeUrl:Test_Node];
 
  //If nodeUrl is not set, the default value is Main_Node
+ 
 ```   
 
 
