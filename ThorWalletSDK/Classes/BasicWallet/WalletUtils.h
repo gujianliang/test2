@@ -35,6 +35,7 @@
 #import "WalletAccountModel.h"
 #import "BigNumber.h"
 #import "WalletSDKMacro.h"
+#import "SecureData.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -83,7 +84,7 @@ NS_ASSUME_NONNULL_BEGIN
              callback:(void(^)(NSString *signer, NSData *signatureData))callback;
 
 
-/**
+/*
  *  @abstract
  *   App developer implementation when dapp calls checkOwn address function
  *   delegate function that must be implemented to support the DApp environment

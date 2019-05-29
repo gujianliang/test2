@@ -203,6 +203,17 @@
                            privateKey:(NSString *)privateKey
                              callback:(void (^)(NSString *keystoreJson))callback
 {
+    if (![WalletTools checkHEXStr:privateKey]) {
+        if (callback) {
+            callback(nil);
+        }
+    }
+    
+    if (privateKey.length != 66) {
+        if (callback) {
+            callback(nil);
+        }
+    }
     NSData *dataPrivate = [SecureData hexStringToData:privateKey];
     Account *ethAccount = [Account accountWithPrivateKey:dataPrivate];
     [ethAccount encryptSecretStorageJSON:password
@@ -224,6 +235,9 @@
 + (NSString *)recoverAddressFromMessage:(NSData*)message
                 signatureData:(NSData *)signatureData
 {
+    if (message == nil || signatureData == nil) {
+        return @"";
+    }
     SecureData *digest = [SecureData BLAKE2B:message];
     Signature *signature = [Signature signatureWithData:signatureData];
     return [Account verifyMessage:digest.data signature:signature].checksumAddress;
@@ -289,6 +303,11 @@
                password:(NSString*)password
                callback:(void (^)(NSData *signatureData,NSError *error))callback
 {
+    if (message == nil || [message isKindOfClass:[NSString class]]) {
+        NSError *error = [NSError errorWithDomain:NSURLErrorDomain code:121 userInfo:@{NSLocalizedDescriptionKey:@"Message cannot be nil"}];
+        callback(nil,error);
+        return;
+    }
     [Account decryptSecretStorageJSON:keystoreJson
                              password:password
                              callback:^(Account *account, NSError *error)

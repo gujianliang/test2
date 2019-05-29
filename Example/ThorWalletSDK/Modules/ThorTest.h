@@ -12,6 +12,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ThorTest : NSObject
 - (void)startTest;
+
+- (void)sign7;
+- (void)sign8;
 @end
 
 NS_ASSUME_NONNULL_END
