@@ -150,7 +150,7 @@
 
 
 /**
-*  Change the main Node environment or add what you custom Node environment.
+*  Change the main node environment or add what you custom Node environment.
 */
 - (void)setNodeEnvironmentHost{
     
@@ -158,7 +158,7 @@
     
     NSDictionary *dictCurrentNode = [[NSUserDefaults standardUserDefaults] objectForKey:@"currentNode"];
     
-    if (dictCurrentNode) { /* Set to the main Node of your choice. */
+    if (dictCurrentNode) { /* Set to the main node of your choice. */
         NSString *customServerUrl = dictCurrentNode[@"nodeUrl"];
         if (customServerUrl.length > 0 ) {
             _blockHost = customServerUrl;
@@ -166,7 +166,7 @@
         }
     }
     
-    if (_blockHost.length == 0) {  /* THe default Boloc Host. */
+    if (_blockHost.length == 0) {  /* THe default block Host. */
         _blockHost = Test_Node;
         self.title = NSLocalizedString(@"item0", nil);
         
