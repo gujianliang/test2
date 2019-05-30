@@ -163,6 +163,8 @@
 		95E1D99388EC0E78346383A521686B72 /* MASCompositeConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 63DCCE96AFAE0EEE789388D23952C6DB /* MASCompositeConstraint.m */; };
 		964A2250BBB8878515B2F29A2B22FA18 /* WalletBaseApi.h in Headers */ = {isa = PBXBuildFile; fileRef = BB438B3271C3BBFBF6104B8CFCD9CDE7 /* WalletBaseApi.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		96EB8ECEF89CF095DFBB2114C66A0BEC /* UIRefreshControl+AFNetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = 2A1872FFB4CFC184F0D8CD6F43A9EAC0 /* UIRefreshControl+AFNetworking.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9727E929229FD74B00D26E90 /* connex.js in Resources */ = {isa = PBXBuildFile; fileRef = 9727E927229FD74B00D26E90 /* connex.js */; };
+		9727E92A229FD74B00D26E90 /* web3.js in Resources */ = {isa = PBXBuildFile; fileRef = 9727E928229FD74B00D26E90 /* web3.js */; };
 		9770A2E0DFAEA1F080E540A2B4AF97E4 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A09BE52D949B02335256819B35FF63E6 /* CoreFoundation.framework */; };
 		984B9F9DBC1EE7DB1A812E15D0391110 /* BigNumber.h in Headers */ = {isa = PBXBuildFile; fileRef = 726E034DFAF916537E466E037053EA5F /* BigNumber.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		98CFE7DDEA01A4B1657587701011D3EF /* SRWebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = CBB490328E372F0749D498B827F68A08 /* SRWebSocket.m */; };
@@ -567,6 +569,8 @@
 		93C68B6B134E6AC74A2195C13CA9A80A /* AFURLRequestSerialization.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = AFURLRequestSerialization.m; path = AFNetworking/AFURLRequestSerialization.m; sourceTree = "<group>"; };
 		94C46BE570CA0A539CEAB665C1B5B721 /* AFHTTPSessionManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = AFHTTPSessionManager.m; path = AFNetworking/AFHTTPSessionManager.m; sourceTree = "<group>"; };
 		9571A1F8278B024F24F7B16801696136 /* crypto_scrypt.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = crypto_scrypt.h; sourceTree = "<group>"; };
+		9727E927229FD74B00D26E90 /* connex.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = connex.js; path = ThorWalletSDK/Assets/connex.js; sourceTree = "<group>"; };
+		9727E928229FD74B00D26E90 /* web3.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = web3.js; path = ThorWalletSDK/Assets/web3.js; sourceTree = "<group>"; };
 		979EC31AACBE672328881B29BCE55A82 /* blake2sp-ref.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; path = "blake2sp-ref.c"; sourceTree = "<group>"; };
 		97EB9A4513718270B17CAAE08DE55372 /* WalletTransactionApi.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = WalletTransactionApi.h; sourceTree = "<group>"; };
 		98ADC0CA52E5C61D4D82B6CE46329E67 /* MASUtilities.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MASUtilities.h; path = Masonry/MASUtilities.h; sourceTree = "<group>"; };
@@ -1062,6 +1066,8 @@
 		64EBF30555282DA93057FD6E9482C12D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				9727E927229FD74B00D26E90 /* connex.js */,
+				9727E928229FD74B00D26E90 /* web3.js */,
 				A338BCA86316A31A1254EC445BAEAE67 /* ThorWalletSDKBundle.bundle */,
 			);
 			name = Resources;
@@ -1946,6 +1952,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9727E929229FD74B00D26E90 /* connex.js in Resources */,
+				9727E92A229FD74B00D26E90 /* web3.js in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
