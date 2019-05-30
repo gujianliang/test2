@@ -59,9 +59,6 @@ Vechain wallet SDK provides a series of functional interface can help the iOS de
 ````
 
 
-## Tips
-
-Before the release of DApp, it is recommended that different versions of WebView be adapted to ensure the reliable and stable operation of HTML 5 pages.
 
 ## API Reference：
 
