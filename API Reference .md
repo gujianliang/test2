@@ -253,7 +253,7 @@ Eg:
 Eg:
  ```obj-c
 //Get the private key through the keystore
-NSString *keystoreJson = @"{\"address\":\"36d7189625587d7c4c806e0856b6926af8d36fea\",\"crypto\":{\"cipher\":\"aes-128-ctr\",\"cipherparams\":{\"iv\":\"c4a723d57e1325a99d88572651959a9d\"},\"ciphertext\":\"73a4a3a6e8706d099b536e41f6799e71ef9ff3a9f115e21c58d9e81ade036705\",\"kdf\":\"scrypt\",\"kdfparams\":{\"dklen\":32,\"n\":262144,\"p\":1,\"r\":8,\"salt\":\"a322d4dce0f075f95a7748c008048bd3f80dbb5645dee37576ea93fd119feda2\"},\"mac\":\"66744cc5967ff5858266c247dbb088e0986c6f1d50156b5e2ce2a19afdc0e498\"},\"id\":\"0fe540de-1957-4bfe-a326-16772e61f677\",\"version\":3}";
+    NSString *keystoreJson = @"{\"address\":\"36d7189625587d7c4c806e0856b6926af8d36fea\",\"crypto\":{\"cipher\":\"aes-128-ctr\",\"cipherparams\":{\"iv\":\"c4a723d57e1325a99d88572651959a9d\"},\"ciphertext\":\"73a4a3a6e8706d099b536e41f6799e71ef9ff3a9f115e21c58d9e81ade036705\",\"kdf\":\"scrypt\",\"kdfparams\":{\"dklen\":32,\"n\":262144,\"p\":1,\"r\":8,\"salt\":\"a322d4dce0f075f95a7748c008048bd3f80dbb5645dee37576ea93fd119feda2\"},\"mac\":\"66744cc5967ff5858266c247dbb088e0986c6f1d50156b5e2ce2a19afdc0e498\"},\"id\":\"0fe540de-1957-4bfe-a326-16772e61f677\",\"version\":3}";
 
     [WalletUtils decryptKeystore:keystoreJson
                         password:@"123456" 
@@ -287,8 +287,8 @@ NSString *keystoreJson = @"{\"address\":\"36d7189625587d7c4c806e0856b6926af8d36f
 Eg:
 ```obj-c
     //Private key to keystore
-        NSString *privatekey = @"0xbc9fe2428a8faec37674412c113f4a9a66b2e40076014547bfe7bbdc2c5a85ee";
-        [WalletUtils encryptPrivateKeyWithPassword:@"123"
+    NSString *privatekey = @"0xbc9fe2428a8faec37674412c113f4a9a66b2e40076014547bfe7bbdc2c5a85ee";
+    [WalletUtils encryptPrivateKeyWithPassword:@"123"
                                     privateKey:privatekey
                                       callback:^(NSString * _Nonnull keystoreJson) {
                                           
@@ -308,7 +308,7 @@ Eg:
 ```
 Eg:
 ```obj-c
-//Get checksum address
+    //Get checksum address
     NSString *address = @"0x36d7189625587d7c4c806e0856b6926af8d36fea";
     NSString *checksumAddress = [WalletUtils getChecksumAddress:address];
     //checkSumAddress:0x36D7189625587D7C4c806E0856b6926Af8d36FEa
@@ -404,7 +404,7 @@ Eg:
 ```
 Eg:
  ```obj-c
-//Get the chain tag of the block chain
+    //Get the chain tag of the block chain
     [WalletUtils getChainTag:^(NSString * _Nonnull chainTag) {
         NSLog(@"chainTag == %@",chainTag);
         
@@ -450,10 +450,10 @@ Eg:
 ```
 Eg:
 ```obj-c
-[WalletUtils signAndSendTransferWithParameter:transactionModel
-                                     keystore:keystore
-                                     password:password
-                                     callback:^(NSString * _Nonnull txid)
+    [WalletUtils signAndSendTransferWithParameter:transactionModel
+                                        keystore:keystore
+                                        password:password
+                                        callback:^(NSString * _Nonnull txid)
                      {
                          //Developers can use txid to query the status of data packaged on the chain
 
@@ -519,10 +519,10 @@ TransactionParameter attribute description：
 ```
 Eg:
 ```obj-c
-[WalletUtils signWithParameter:transactionModel
-                      keystore:keystore
-                      password:password
-                      callback:^(NSString * _Nonnull raw)
+    [WalletUtils signWithParameter:transactionModel
+                         keystore:keystore
+                         password:password
+                         callback:^(NSString * _Nonnull raw)
                      {
 
                          NSLog(@"\n raw: %@", raw);
@@ -734,8 +734,8 @@ Eg:
 Eg:
  ```obj-c
 - (void)onWillCertificate:(NSDictionary *)message 
--                  signer:(NSString *)signer 
--                callback:(void (^)(NSString * signer, NSData *  signatureData))callback
+                   signer:(NSString *)signer 
+                 callback:(void (^)(NSString * signer, NSData *  signatureData))callback
 {
    
     
