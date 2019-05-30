@@ -288,7 +288,7 @@
     [dappHandle injectJS:config];
 }
 
-+ (void)signAndSendTransferWithParameter:(TransactionParameter *)parameter
++ (void)signAndSendTransferWithParameter:(WalletTransactionParameter *)parameter
                             keystore:(NSString*)keystoreJson
                             password:(NSString *)password
                             callback:(void(^)(NSString *txId))callback
@@ -318,7 +318,7 @@
     
 }
 
-+ (void)signWithParameter:(TransactionParameter *)parameter
++ (void)signWithParameter:(WalletTransactionParameter *)parameter
                  keystore:(NSString*)keystoreJson
                  password:(NSString*)password
                  callback:(void(^)(NSString *raw))callback
@@ -536,7 +536,7 @@
     }];
 }
 
-+ (void)signTransfer:(TransactionParameter *)paramModel keystore:(NSString *)keystore password:(NSString *)password isSend:(BOOL)isSend completionHandler:(void(^)(NSString *txId))completionHandler
++ (void)signTransfer:(WalletTransactionParameter *)paramModel keystore:(NSString *)keystore password:(NSString *)password isSend:(BOOL)isSend completionHandler:(void(^)(NSString *txId))completionHandler
 {
     WalletDAppHandle *handle = [WalletDAppHandle shareWalletHandle];
     [handle signTransfer:paramModel keystore:keystore password:password isSend:isSend callback:completionHandler];

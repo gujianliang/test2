@@ -39,7 +39,7 @@
 
 
 //Initiate a transaction
-- (void)signTransfer:(TransactionParameter *)paramModel
+- (void)signTransfer:(WalletTransactionParameter *)paramModel
             keystore:(NSString *)keystore
             password:(NSString *)password
               isSend:(BOOL)isSend
@@ -76,7 +76,7 @@
 
 //Organize the clause data
 - (void)packageClausesData:(Transaction *)transaction
-                paramModel:(TransactionParameter *)paramModel
+                paramModel:(WalletTransactionParameter *)paramModel
 {
     NSMutableArray *clauseList = [NSMutableArray array];
     
@@ -127,7 +127,7 @@
 }
 
 - (void)sign:(Transaction *)transaction
-  paramModel:(TransactionParameter *)paramModel
+  paramModel:(WalletTransactionParameter *)paramModel
     keystore:(NSString *)keystore
     password:(NSString *)password
 callback:(void(^)(NSString *txId))callback

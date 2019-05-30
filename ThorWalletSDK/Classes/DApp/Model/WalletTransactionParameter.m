@@ -1,16 +1,39 @@
+/**
+ Copyright (c) 2019 vechaindev <support@vechain.com>
+ 
+ Permission is hereby granted, free of charge, to any person obtaining a copy
+ of this software and associated documentation files (the "Software"), to deal
+ in the Software without restriction, including without limitation the rights
+ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ copies of the Software, and to permit persons to whom the Software is
+ furnished to do so, subject to the following conditions:
+ 
+ The above copyright notice and this permission notice shall be included in
+ all copies or substantial portions of the Software.
+ 
+ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ THE SOFTWARE.
+ 
+ **/
+
 //
-//  TransactionParameter.m
+//  WalletTransactionParameter.m
 //  WalletSDK
 //
 //  Created by vechaindev on 2019/4/7.
 //  Copyright © 2019年 VeChain. All rights reserved.
 //
 
-#import "TransactionParameter.h"
+#import "WalletTransactionParameter.h"
 #import "YYModel.h"
 #import "ThorWalletHeader.h"
 
-@implementation TransactionParameter
+@implementation WalletTransactionParameter
 
 - (void)checkParameter:(void(^)(NSString *error,bool result))callback
 {
@@ -440,13 +463,13 @@
     _reserveds = reserveds;
 }
 
-+ (TransactionParameter *)creatTransactionParameter:(void(^)(TransactionParameterBuiler *builder))callback checkParams:(void(^)(NSString *errorMsg))checkParamsCallback
++ (WalletTransactionParameter *)creatTransactionParameter:(void(^)(TransactionParameterBuiler *builder))callback checkParams:(void(^)(NSString *errorMsg))checkParamsCallback
 {
     TransactionParameterBuiler *builder = [[TransactionParameterBuiler alloc]init];
 
     callback(builder);
     
-    TransactionParameter *transactionModel = [builder build];
+    WalletTransactionParameter *transactionModel = [builder build];
     __block BOOL hasError = NO;
     [transactionModel checkParameter:^(NSString *error, bool result) {
         
@@ -468,9 +491,9 @@
 
 @implementation TransactionParameterBuiler
 
-- (TransactionParameter *)build
+- (WalletTransactionParameter *)build
  {
-     TransactionParameter *transactionModel = [[TransactionParameter alloc] init];
+     WalletTransactionParameter *transactionModel = [[WalletTransactionParameter alloc] init];
      
      transactionModel.chainTag          = self.chainTag;
      transactionModel.blockReference    = self.blockReference;

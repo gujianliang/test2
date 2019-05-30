@@ -85,7 +85,7 @@
 		430284A97E881E07F98B10A236F20487 /* Payment.h in Headers */ = {isa = PBXBuildFile; fileRef = 24D75B7D92C74E61B0507AF5DCD60895 /* Payment.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		441A7B1B25EC00C9F682C41CFAF66D7A /* ThorWalletSDK-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C226301F21E4E58F97180E3F25BDEA8 /* ThorWalletSDK-dummy.m */; };
 		44603A5817A31175D2B8BE5C374B4780 /* WalletManageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 219DA514899637F17C365F422EB21DEE /* WalletManageModel.m */; };
-		45E0EB54EF04BA1119857CE12B7FA577 /* TransactionParameter.h in Headers */ = {isa = PBXBuildFile; fileRef = 3B8963EEEAE2E90F386CDC97A7206E08 /* TransactionParameter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		45E0EB54EF04BA1119857CE12B7FA577 /* WalletTransactionParameter.h in Headers */ = {isa = PBXBuildFile; fileRef = 3B8963EEEAE2E90F386CDC97A7206E08 /* WalletTransactionParameter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4621306477187D6E09B40E38726D8CCE /* YYModel.h in Headers */ = {isa = PBXBuildFile; fileRef = C44345747C071163F0C78872B172D0E5 /* YYModel.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4799D7DDB099CE2E6BBC8B96DE6B6EFB /* ViewController+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 25E8E4AE409E59FDF0678E1D341C3F4E /* ViewController+MASAdditions.m */; };
 		47CD6CCF295D30E3A95AB834732A016A /* Utilities.h in Headers */ = {isa = PBXBuildFile; fileRef = 0DB50D96C9C5166FCAD54F2EBDE74C4D /* Utilities.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -210,7 +210,7 @@
 		B47480127ADB224C1A8FCA90BC9200D7 /* bip39_english.h in Headers */ = {isa = PBXBuildFile; fileRef = F1ADBBBBD77A0AA75998E05D08B6DCC2 /* bip39_english.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B47A0B418C676FEFEC3CF5975BCD2976 /* WalletDAppPeerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5777E78BCAC54235CFC2C42FD4B824D3 /* WalletDAppPeerModel.m */; };
 		B4D91D1BD4D345ACCA8A68574A51402A /* AFNetworkActivityIndicatorManager.h in Headers */ = {isa = PBXBuildFile; fileRef = AE8FEC091C47483A7FD631939A9B3E5C /* AFNetworkActivityIndicatorManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		B4E2BFD1B9F36EB37231967F758EAA74 /* TransactionParameter.m in Sources */ = {isa = PBXBuildFile; fileRef = A7FFA90B8A9461618A64DBF282A3C93D /* TransactionParameter.m */; };
+		B4E2BFD1B9F36EB37231967F758EAA74 /* WalletTransactionParameter.m in Sources */ = {isa = PBXBuildFile; fileRef = A7FFA90B8A9461618A64DBF282A3C93D /* WalletTransactionParameter.m */; };
 		B79E6AD5BFBD3B2E9319650F5131A59C /* UIProgressView+AFNetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = 29D343E0304241B4893A4D54FCB30297 /* UIProgressView+AFNetworking.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B7C706A593F603693F322760014863BC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A7BBAAA3622B39BCF2BC84976793CD6 /* Foundation.framework */; };
 		B7EC22D78B30E2169E28F2634CB04329 /* WalletAccountCodeApi.m in Sources */ = {isa = PBXBuildFile; fileRef = B40B93EE2C9AD55233DFEC03FB7F8A98 /* WalletAccountCodeApi.m */; };
@@ -456,7 +456,7 @@
 		386839853E87BC431CE577C3B16163ED /* blake2.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = blake2.h; sourceTree = "<group>"; };
 		3B51F02900E70EEE2DE7FE809DD15B56 /* WalletGradientLayerButton.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = WalletGradientLayerButton.m; sourceTree = "<group>"; };
 		3B5EEF4264104D8E4D5B470157BB4D59 /* SRWebSocket.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SRWebSocket.h; path = SocketRocket/SRWebSocket.h; sourceTree = "<group>"; };
-		3B8963EEEAE2E90F386CDC97A7206E08 /* TransactionParameter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = TransactionParameter.h; sourceTree = "<group>"; };
+		3B8963EEEAE2E90F386CDC97A7206E08 /* WalletTransactionParameter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = WalletTransactionParameter.h; sourceTree = "<group>"; };
 		3BADF1A8E2E1ECAE621EDAA0C3E406A6 /* NSArray+MASAdditions.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSArray+MASAdditions.m"; path = "Masonry/NSArray+MASAdditions.m"; sourceTree = "<group>"; };
 		3D2F7A15025F7257BA4747BC26A31B21 /* Pods-ThorWalletSDK_Example-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-ThorWalletSDK_Example-Info.plist"; sourceTree = "<group>"; };
 		3E98B51C565F271686529F1235214885 /* Masonry-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Masonry-prefix.pch"; sourceTree = "<group>"; };
@@ -596,7 +596,7 @@
 		A71B2315EE49692C7A6009A310C39487 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk/System/Library/Frameworks/QuartzCore.framework; sourceTree = DEVELOPER_DIR; };
 		A71FF105B3477EF9663D05D261BD1889 /* AFURLSessionManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = AFURLSessionManager.m; path = AFNetworking/AFURLSessionManager.m; sourceTree = "<group>"; };
 		A7DF1735AA66DDA04D0D2DE204FA7814 /* Account.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = Account.h; path = ThorWalletSDK/Classes/BasicWallet/Account.h; sourceTree = "<group>"; };
-		A7FFA90B8A9461618A64DBF282A3C93D /* TransactionParameter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = TransactionParameter.m; sourceTree = "<group>"; };
+		A7FFA90B8A9461618A64DBF282A3C93D /* WalletTransactionParameter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = WalletTransactionParameter.m; sourceTree = "<group>"; };
 		A8359C523D50CC7670703E8474BDC70E /* SocketRocketUtility.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = SocketRocketUtility.h; sourceTree = "<group>"; };
 		A96411063A2627623CAA2116A3C6A3F5 /* bip39.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; path = bip39.c; sourceTree = "<group>"; };
 		A97502EEA405D2695430E7F6586F20A8 /* RegEx.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = RegEx.h; sourceTree = "<group>"; };
@@ -908,8 +908,8 @@
 		2B135486AE057C50F7A62C05720C99C8 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				3B8963EEEAE2E90F386CDC97A7206E08 /* TransactionParameter.h */,
-				A7FFA90B8A9461618A64DBF282A3C93D /* TransactionParameter.m */,
+				3B8963EEEAE2E90F386CDC97A7206E08 /* WalletTransactionParameter.h */,
+				A7FFA90B8A9461618A64DBF282A3C93D /* WalletTransactionParameter.m */,
 				B0324A98F03F521807871B8437BAA7EF /* WalletAccountModel.h */,
 				91D747988FC7F79750DCF0F02AF3D717 /* WalletAccountModel.m */,
 				DE604D265D1ADA20E6080AE70B1C503D /* WalletBalanceModel.h */,
@@ -1626,7 +1626,7 @@
 				A6C708A5AD5BE85CB5284F162F3754FF /* tommath_private.h in Headers */,
 				D758697ECC5D975BBDE8B45C73C627A1 /* tommath_superclass.h in Headers */,
 				9211E0C5EEE11107EC5CAA315990D3C6 /* Transaction.h in Headers */,
-				45E0EB54EF04BA1119857CE12B7FA577 /* TransactionParameter.h in Headers */,
+				45E0EB54EF04BA1119857CE12B7FA577 /* WalletTransactionParameter.h in Headers */,
 				A624F7CCB88A6862FA155A58C33595C3 /* UIButton+Block.h in Headers */,
 				CC0FB6EF35F8CE6EAEC352BD725FA821 /* UIColor+SNFoundation.h in Headers */,
 				F39ACA411ED740DBE5A9DF76A0FF128E /* UIView+Sizes.h in Headers */,
@@ -2092,7 +2092,7 @@
 				E58E231E9777D1CF56EEF3F34B5F10BD /* SocketRocketUtility.m in Sources */,
 				441A7B1B25EC00C9F682C41CFAF66D7A /* ThorWalletSDK-dummy.m in Sources */,
 				53F5FBA87E9253F0EC71B9FB4F314339 /* Transaction.m in Sources */,
-				B4E2BFD1B9F36EB37231967F758EAA74 /* TransactionParameter.m in Sources */,
+				B4E2BFD1B9F36EB37231967F758EAA74 /* WalletTransactionParameter.m in Sources */,
 				ADA4A55D9EB245F8B696B41B3708F091 /* UIButton+Block.m in Sources */,
 				8FCF86C1204C0ACAE7A66F2675B523FA /* UIColor+SNFoundation.m in Sources */,
 				151225EFBC94396264880AAFA8B84FAD /* UIView+Sizes.m in Sources */,

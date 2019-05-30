@@ -29,7 +29,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "TransactionParameter.h"
+#import "WalletTransactionParameter.h"
 #import <UIKit/UIKit.h>
 #import <WebKit/WebKit.h>
 #import "WalletAccountModel.h"
@@ -274,7 +274,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param callback :  Callback after the end. raw: RLP encode data and signature
  *
  */
-+ (void)signWithParameter:(TransactionParameter *)parameter
++ (void)signWithParameter:(WalletTransactionParameter *)parameter
                  keystore:(NSString*)keystoreJson
                  password:(NSString*)password
                  callback:(void(^)(NSString *raw))callback;
@@ -313,7 +313,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param callback : Callback after the end
  *
  */
-+ (void)signAndSendTransferWithParameter:(TransactionParameter *)parameter
++ (void)signAndSendTransferWithParameter:(WalletTransactionParameter *)parameter
                             keystore:(NSString*)keystoreJson
                             password:(NSString *)password
                             callback:(void(^)(NSString *txid))callback;

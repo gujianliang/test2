@@ -56,7 +56,7 @@
 #import "WalletDAppHandle+web3JS.h"
 #import "WalletDAppHandle.h"
 #import "WalletDAppHead.h"
-#import "TransactionParameter.h"
+#import "WalletTransactionParameter.h"
 #import "WalletAccountModel.h"
 #import "WalletBalanceModel.h"
 #import "WalletBaseModel.h"
