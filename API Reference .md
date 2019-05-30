@@ -76,11 +76,11 @@ After entering the wallet password, the user can create the wallet through the f
 
 Eg:
 ```obj-c
-    //Create a wallet with your password.
-    [WalletUtils createWalletWithPassword:password
-                                 callback:^(WalletAccountModel * _Nonnull account, NSError * _Nonnull error)
+ //Create a wallet with your password.
+ [WalletUtils createWalletWithPassword:password
+                              callback:^(WalletAccountModel * _Nonnull account, NSError * _Nonnull error)
 
-    {
+ {
        if(error == nil){
     
             NSString *mnemonic = [account.words componentsJoinedByString:@" "];
@@ -93,7 +93,7 @@ Eg:
         }else{
             //fail
         }
-    }];
+ }];
     
 ```
 
@@ -117,11 +117,11 @@ When the user has mnemonic words, enter the mnemonic words and the password of t
 
 Eg:
 ```obj-c
-    // Create a wallet with your password and mnemonic words.
-    [WalletUtils createWalletWithMnemonicWords:mnemonicWords
-                                password:self.password.text
-                                callback:^(WalletAccountModel * _Nonnull account, NSError * _Nonnull error)
-    {
+ // Create a wallet with your password and mnemonic words.
+ [WalletUtils createWalletWithMnemonicWords:mnemonicWords
+                                   password:self.password.text
+                                   callback:^(WalletAccountModel * _Nonnull account, NSError * _Nonnull error)
+ {
         if(error == nil){
             
             NSString *address = account.address;
@@ -134,7 +134,7 @@ Eg:
             //fail
         }
          
-    }];
+ }];
 
 ```
 
@@ -150,9 +150,9 @@ Eg:
 
 Eg:
 ```obj-c
-    NSString *mnemonicWords = @"admit mad dream stable scrub rubber cabbage exist maple excuse copper month";
-    BOOL isValid = [WalletUtils isValidMnemonicWords:[mnemonicWords componentsSeparatedByString:@" "]];
-    // isValid is YES
+ NSString *mnemonicWords = @"admit mad dream stable scrub rubber cabbage exist maple excuse copper month";
+ BOOL isValid = [WalletUtils isValidMnemonicWords:[mnemonicWords componentsSeparatedByString:@" "]];
+ // isValid is YES
 ```
 ##  Verify keystore format   
 
@@ -167,9 +167,9 @@ Eg:
 ```
 Eg:
 ```obj-c
-    NSString *keystore = @"{\"version\":3,\"id\":\"1150C15C-2E20-462B-8A88-EDF8A0E4DB71\",\n \"crypto\":{\"ciphertext\":\"1cf8d74d31b1ec2568f903fc2c84d215c0401cbb710b7b3de081af1449ae2a89\",\"cipherparams\":{\"iv\":\"03ccae46eff93b3d9bdf2b21739d7205\"},\"kdf\":\"scrypt\",\"kdfparams\":{\"r\":8,\"p\":1,\"n\":262144,\"dklen\":32,\"salt\":\"a71ecee9a1c33f0311e46f7da7da8d218a8c5b3d1067716a9bcdb767785d8e83\"},\"mac\":\"82b20c61854621f35b4d60ffb795655258356f310cdffa587f7db68a1789de75\",\"cipher\":\"aes-128-ctr\"},\"address\":\"cc2b456b2c9399b4b68ef632cf6a1aeabe67b417\"}";
-    BOOL isValid = [WalletUtils isValidKeystore:keystore];
-    // isValid is YES
+ NSString *keystore = @"{\"version\":3,\"id\":\"1150C15C-2E20-462B-8A88-EDF8A0E4DB71\",\n \"crypto\":{\"ciphertext\":\"1cf8d74d31b1ec2568f903fc2c84d215c0401cbb710b7b3de081af1449ae2a89\",\"cipherparams\":{\"iv\":\"03ccae46eff93b3d9bdf2b21739d7205\"},\"kdf\":\"scrypt\",\"kdfparams\":{\"r\":8,\"p\":1,\"n\":262144,\"dklen\":32,\"salt\":\"a71ecee9a1c33f0311e46f7da7da8d218a8c5b3d1067716a9bcdb767785d8e83\"},\"mac\":\"82b20c61854621f35b4d60ffb795655258356f310cdffa587f7db68a1789de75\",\"cipher\":\"aes-128-ctr\"},\"address\":\"cc2b456b2c9399b4b68ef632cf6a1aeabe67b417\"}";
+ BOOL isValid = [WalletUtils isValidKeystore:keystore];
+ // isValid is YES
     
 ```
 
@@ -192,8 +192,8 @@ Eg:
 
 Eg:
  ```obj-c
-//Verification keystore
-    [WalletUtils verifyKeystore:keystore password:password callback:^(BOOL result) {
+ //Verification keystore
+ [WalletUtils verifyKeystore:keystore password:password callback:^(BOOL result) {
         if (result) {
             //success
             
@@ -201,7 +201,7 @@ Eg:
         }else{ //fail
             
         }
-    }];
+  }];
     
 ```
 
@@ -222,11 +222,11 @@ Eg:
 
 Eg:
  ```obj-c
-//change Password
-    [WalletUtils modifyKeystore:keystore 
-                    newPassword:newPassword 
-                    oldPassword:oldPassword 
-                       callback:^(NSString * _Nonnull newKeystore) {
+ //change Password
+ [WalletUtils modifyKeystore:keystore 
+                 newPassword:newPassword 
+                 oldPassword:oldPassword 
+                    callback:^(NSString * _Nonnull newKeystore) {
 
         if (newKeystore.length > 0) {
             //success
@@ -234,7 +234,7 @@ Eg:
         }else {
             //fail
         }
-    }];
+ }];
     
 ```
 
@@ -252,12 +252,12 @@ Eg:
 
 Eg:
  ```obj-c
-//Get the private key through the keystore
-    NSString *keystoreJson = @"{\"address\":\"36d7189625587d7c4c806e0856b6926af8d36fea\",\"crypto\":{\"cipher\":\"aes-128-ctr\",\"cipherparams\":{\"iv\":\"c4a723d57e1325a99d88572651959a9d\"},\"ciphertext\":\"73a4a3a6e8706d099b536e41f6799e71ef9ff3a9f115e21c58d9e81ade036705\",\"kdf\":\"scrypt\",\"kdfparams\":{\"dklen\":32,\"n\":262144,\"p\":1,\"r\":8,\"salt\":\"a322d4dce0f075f95a7748c008048bd3f80dbb5645dee37576ea93fd119feda2\"},\"mac\":\"66744cc5967ff5858266c247dbb088e0986c6f1d50156b5e2ce2a19afdc0e498\"},\"id\":\"0fe540de-1957-4bfe-a326-16772e61f677\",\"version\":3}";
+ //Get the private key through the keystore
+ NSString *keystoreJson = @"{\"address\":\"36d7189625587d7c4c806e0856b6926af8d36fea\",\"crypto\":{\"cipher\":\"aes-128-ctr\",\"cipherparams\":{\"iv\":\"c4a723d57e1325a99d88572651959a9d\"},\"ciphertext\":\"73a4a3a6e8706d099b536e41f6799e71ef9ff3a9f115e21c58d9e81ade036705\",\"kdf\":\"scrypt\",\"kdfparams\":{\"dklen\":32,\"n\":262144,\"p\":1,\"r\":8,\"salt\":\"a322d4dce0f075f95a7748c008048bd3f80dbb5645dee37576ea93fd119feda2\"},\"mac\":\"66744cc5967ff5858266c247dbb088e0986c6f1d50156b5e2ce2a19afdc0e498\"},\"id\":\"0fe540de-1957-4bfe-a326-16772e61f677\",\"version\":3}";
 
-    [WalletUtils decryptKeystore:keystoreJson
-                        password:@"123456" 
-                        callback:^(NSString * _Nonnull privatekey, NSError * _Nonnull error) {
+ [WalletUtils decryptKeystore:keystoreJson
+                     password:@"123456" 
+                     callback:^(NSString * _Nonnull privatekey, NSError * _Nonnull error) {
         
         if (!error) {
             //success
@@ -269,7 +269,8 @@ Eg:
         {
             
         }
-    }];
+ }];
+ 
 ```
 ## Encrypted private key
 
@@ -286,11 +287,11 @@ Eg:
 ```
 Eg:
 ```obj-c
-    //Private key to keystore
-    NSString *privatekey = @"0xbc9fe2428a8faec37674412c113f4a9a66b2e40076014547bfe7bbdc2c5a85ee";
-    [WalletUtils encryptPrivateKeyWithPassword:@"123"
-                                    privateKey:privatekey
-                                      callback:^(NSString * _Nonnull keystoreJson) {
+ //Private key to keystore
+ NSString *privatekey = @"0xbc9fe2428a8faec37674412c113f4a9a66b2e40076014547bfe7bbdc2c5a85ee";
+ [WalletUtils encryptPrivateKeyWithPassword:@"123"
+                                 privateKey:privatekey
+                                   callback:^(NSString * _Nonnull keystoreJson) {
                                           
                                           NSString *address = [WalletUtils getAddressWithKeystore:keystoreJson];
                                           //address:0x36D7189625587D7C4c806E0856b6926Af8d36FEa
@@ -308,10 +309,10 @@ Eg:
 ```
 Eg:
 ```obj-c
-    //Get checksum address
-    NSString *address = @"0x36d7189625587d7c4c806e0856b6926af8d36fea";
-    NSString *checksumAddress = [WalletUtils getChecksumAddress:address];
-    //checkSumAddress:0x36D7189625587D7C4c806E0856b6926Af8d36FEa
+ //Get checksum address
+ NSString *address = @"0x36d7189625587d7c4c806e0856b6926af8d36fea";
+ NSString *checksumAddress = [WalletUtils getChecksumAddress:address];
+ //checkSumAddress:0x36D7189625587D7C4c806E0856b6926Af8d36FEa
 ```
 ##  Get address from keystore   
 
@@ -323,11 +324,12 @@ Eg:
  ```
 Eg:
  ```obj-c
-//Get the address through the keystore
-   NSString *keystoreJson = @"{\"address\":\"36d7189625587d7c4c806e0856b6926af8d36fea\",\"crypto\":{\"cipher\":\"aes-128-ctr\",\"cipherparams\":{\"iv\":\"c4a723d57e1325a99d88572651959a9d\"},\"ciphertext\":\"73a4a3a6e8706d099b536e41f6799e71ef9ff3a9f115e21c58d9e81ade036705\",\"kdf\":\"scrypt\",\"kdfparams\":{\"dklen\":32,\"n\":262144,\"p\":1,\"r\":8,\"salt\":\"a322d4dce0f075f95a7748c008048bd3f80dbb5645dee37576ea93fd119feda2\"},\"mac\":\"66744cc5967ff5858266c247dbb088e0986c6f1d50156b5e2ce2a19afdc0e498\"},\"id\":\"0fe540de-1957-4bfe-a326-16772e61f677\",\"version\":3}";
+ //Get the address through the keystore
+ NSString *keystoreJson = @"{\"address\":\"36d7189625587d7c4c806e0856b6926af8d36fea\",\"crypto\":{\"cipher\":\"aes-128-ctr\",\"cipherparams\":{\"iv\":\"c4a723d57e1325a99d88572651959a9d\"},\"ciphertext\":\"73a4a3a6e8706d099b536e41f6799e71ef9ff3a9f115e21c58d9e81ade036705\",\"kdf\":\"scrypt\",\"kdfparams\":{\"dklen\":32,\"n\":262144,\"p\":1,\"r\":8,\"salt\":\"a322d4dce0f075f95a7748c008048bd3f80dbb5645dee37576ea93fd119feda2\"},\"mac\":\"66744cc5967ff5858266c247dbb088e0986c6f1d50156b5e2ce2a19afdc0e498\"},\"id\":\"0fe540de-1957-4bfe-a326-16772e61f677\",\"version\":3}";
     
-    NSString *address = [WalletUtils getAddressWithKeystore:keystoreJson];
-    //address:0x36D7189625587D7C4c806E0856b6926Af8d36FEa
+ NSString *address = [WalletUtils getAddressWithKeystore:keystoreJson];
+ //address:0x36D7189625587D7C4c806E0856b6926Af8d36FEa
+ 
 ```
 ##   Sign message  
 
@@ -346,20 +348,20 @@ Eg:
 ```
 Eg:
 ```obj-c
-    NSString *keystore = @"{\"address\":\"36d7189625587d7c4c806e0856b6926af8d36fea\",\"crypto\":{\"cipher\":\"aes-128-ctr\",\"cipherparams\":{\"iv\":\"c4a723d57e1325a99d88572651959a9d\"},\"ciphertext\":\"73a4a3a6e8706d099b536e41f6799e71ef9ff3a9f115e21c58d9e81ade036705\",\"kdf\":\"scrypt\",\"kdfparams\":{\"dklen\":32,\"n\":262144,\"p\":1,\"r\":8,\"salt\":\"a322d4dce0f075f95a7748c008048bd3f80dbb5645dee37576ea93fd119feda2\"},\"mac\":\"66744cc5967ff5858266c247dbb088e0986c6f1d50156b5e2ce2a19afdc0e498\"},\"id\":\"0fe540de-1957-4bfe-a326-16772e61f677\",\"version\":3}";
+ NSString *keystore = @"{\"address\":\"36d7189625587d7c4c806e0856b6926af8d36fea\",\"crypto\":{\"cipher\":\"aes-128-ctr\",\"cipherparams\":{\"iv\":\"c4a723d57e1325a99d88572651959a9d\"},\"ciphertext\":\"73a4a3a6e8706d099b536e41f6799e71ef9ff3a9f115e21c58d9e81ade036705\",\"kdf\":\"scrypt\",\"kdfparams\":{\"dklen\":32,\"n\":262144,\"p\":1,\"r\":8,\"salt\":\"a322d4dce0f075f95a7748c008048bd3f80dbb5645dee37576ea93fd119feda2\"},\"mac\":\"66744cc5967ff5858266c247dbb088e0986c6f1d50156b5e2ce2a19afdc0e498\"},\"id\":\"0fe540de-1957-4bfe-a326-16772e61f677\",\"version\":3}";
     
-    NSData *messageData = [@"dkfjalsdjfk" dataUsingEncoding:NSUTF8StringEncoding];
-    //Data signature
-    [WalletUtils signWithMessage:messageData
-                        keystore:keystore
-                        password:@"123456"
-                        callback:^(NSData * _Nonnull signatureData)
-     {
+ NSData *messageData = [@"dkfjalsdjfk" dataUsingEncoding:NSUTF8StringEncoding];
+ //Data signature
+ [WalletUtils signWithMessage:messageData
+                     keystore:keystore
+                     password:@"123456"
+                     callback:^(NSData * _Nonnull signatureData)
+ {
          
          NSString *strSignature = [SecureData dataToHexString:signatureData];
          //strSignature:0x4eb1ae9254217b356b2958ab0b7a02e72f6fa86858240ca4998f74ef8a0fd68155e71ba8bd15625dc3d5e0c89c021f3852070d290688a65ba7e1d608a03d6e8400
          
-     }];
+ }];
 
 ```
 
@@ -404,13 +406,13 @@ Eg:
 ```
 Eg:
  ```obj-c
-    //Get the chain tag of the block chain
-    [WalletUtils getChainTag:^(NSString * _Nonnull chainTag) {
+ //Get the chain tag of the block chain
+ [WalletUtils getChainTag:^(NSString * _Nonnull chainTag) {
         NSLog(@"chainTag == %@",chainTag);
         
         //Main_Node chainTag:0x4a
         //Test_Node chainTag:0x27
-    }];
+ }];
     
 ```
  ## Get reference of block chain   
@@ -426,9 +428,9 @@ Eg:
 Eg:
  ```obj-c
  //Get the reference of the block chain
-    [WalletUtils getBlockReference:^(NSString * _Nonnull blockReference) {
+ [WalletUtils getBlockReference:^(NSString * _Nonnull blockReference) {
             NSLog(@"blockReference == %@",blockReference);
-    }];
+ }];
 
 ```
  
@@ -450,10 +452,10 @@ Eg:
 ```
 Eg:
 ```obj-c
-    [WalletUtils signAndSendTransferWithParameter:transactionModel
-                                        keystore:keystore
-                                        password:password
-                                        callback:^(NSString * _Nonnull txid)
+ [WalletUtils signAndSendTransferWithParameter:transactionModel
+                                      keystore:keystore
+                                      password:password
+                                      callback:^(NSString * _Nonnull txid)
                      {
                          //Developers can use txid to query the status of data packaged on the chain
 
@@ -519,10 +521,10 @@ TransactionParameter attribute description：
 ```
 Eg:
 ```obj-c
-    [WalletUtils signWithParameter:transactionModel
-                         keystore:keystore
-                         password:password
-                         callback:^(NSString * _Nonnull raw)
+ [WalletUtils signWithParameter:transactionModel
+                       keystore:keystore
+                       password:password
+                       callback:^(NSString * _Nonnull raw)
                      {
 
                          NSLog(@"\n raw: %@", raw);
@@ -550,7 +552,7 @@ Initialization is mainly JS injected into connex and web3.
 Eg:
 ```obj-c
  // Set delegate
-    [WalletUtils initDAppWithDelegate:self];
+ [WalletUtils initDAppWithDelegate:self];
 
 ```
 
@@ -566,13 +568,13 @@ Eg:
 
 Eg:
 ```obj-c
-    // Please note that, This is a 'WKWebView' object, does not support a "UIWebView" object.
+ // Please note that, This is a 'WKWebView' object, does not support a "UIWebView" object.
 
-    WKWebViewConfiguration* configuration = [[WKWebViewConfiguration alloc] init];
-    configuration.userContentController = [[WKUserContentController alloc] init];
+ WKWebViewConfiguration* configuration = [[WKWebViewConfiguration alloc] init];
+ configuration.userContentController = [[WKUserContentController alloc] init];
     
-    //inject js to wkwebview
-    [WalletUtils injectJSWithWebView:configuration];
+ //inject js to wkwebview
+ [WalletUtils injectJSWithWebView:configuration];
     
 
 ```
