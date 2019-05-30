@@ -378,13 +378,14 @@ Eg:
  ```
 Eg:
 ```obj-c
-    //Signature information, recovery address
-    NSString *strSignture = @"0x4eb1ae9254217b356b2958ab0b7a02e72f6fa86858240ca4998f74ef8a0fd68155e71ba8bd15625dc3d5e0c89c021f3852070d290688a65ba7e1d608a03d6e8400";
-    NSData *signatureData = [SecureData hexStringToData:strSignture];
-    NSData *messageData = [@"dkfjalsdjfk" dataUsingEncoding:NSUTF8StringEncoding];
-    NSString *address = [WalletUtils recoverAddressFromMessage:messageData signatureData:signatureData];
-    NSLog(@"address == %@",address);
-    //address:0x36D7189625587D7C4c806E0856b6926Af8d36FEa
+
+ //Signature information, recovery address
+ NSString *strSignture = @"0x4eb1ae9254217b356b2958ab0b7a02e72f6fa86858240ca4998f74ef8a0fd68155e71ba8bd15625dc3d5e0c89c021f3852070d290688a65ba7e1d608a03d6e8400";
+ NSData *signatureData = [SecureData hexStringToData:strSignture];
+ NSData *messageData = [@"dkfjalsdjfk" dataUsingEncoding:NSUTF8StringEncoding];
+ NSString *address = [WalletUtils recoverAddressFromMessage:messageData signatureData:signatureData];
+ NSLog(@"address == %@",address);
+ //address:0x36D7189625587D7C4c806E0856b6926Af8d36FEa
 
 ```
 
