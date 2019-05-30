@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -23,7 +23,7 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Afk-yu-ukO">
-                    <rect key="frame" x="20" y="150" width="335" height="100"/>
+                    <rect key="frame" x="20" y="168" width="335" height="100"/>
                     <color key="backgroundColor" red="0.96862745100000003" green="0.97254901959999995" blue="0.98823529409999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="100" id="eGJ-bU-lub"/>
@@ -53,21 +53,33 @@
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Node url :" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xP2-Qe-4ro">
+                    <rect key="frame" x="20" y="143" width="87" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="87" id="Qqz-Eg-vDD"/>
+                        <constraint firstAttribute="height" constant="21" id="ggy-ch-JM8"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="Afk-yu-ukO" firstAttribute="leading" secondItem="WHG-4c-Y62" secondAttribute="leading" id="2kW-km-P7L"/>
                 <constraint firstItem="LH9-YZ-1vA" firstAttribute="leading" secondItem="Afk-yu-ukO" secondAttribute="leading" id="Lii-hA-vgn"/>
-                <constraint firstItem="Afk-yu-ukO" firstAttribute="top" secondItem="WHG-4c-Y62" secondAttribute="bottom" constant="15" id="Lmi-Ba-dWU"/>
+                <constraint firstItem="Afk-yu-ukO" firstAttribute="top" secondItem="WHG-4c-Y62" secondAttribute="bottom" constant="33" id="Lmi-Ba-dWU"/>
+                <constraint firstItem="xP2-Qe-4ro" firstAttribute="leading" secondItem="gUD-as-FJS" secondAttribute="leading" constant="20" id="MdS-sm-VdL"/>
                 <constraint firstItem="LH9-YZ-1vA" firstAttribute="trailing" secondItem="Afk-yu-ukO" secondAttribute="trailing" id="STQ-Ll-xLk"/>
                 <constraint firstItem="WHG-4c-Y62" firstAttribute="top" secondItem="gUD-as-FJS" secondAttribute="top" constant="75" id="VAS-hl-hbS"/>
+                <constraint firstItem="Afk-yu-ukO" firstAttribute="top" secondItem="xP2-Qe-4ro" secondAttribute="bottom" constant="4" id="WHe-7c-c3q"/>
                 <constraint firstItem="gUD-as-FJS" firstAttribute="trailing" secondItem="WHG-4c-Y62" secondAttribute="trailing" constant="20" id="gmj-Pb-7yg"/>
-                <constraint firstItem="LH9-YZ-1vA" firstAttribute="top" secondItem="Afk-yu-ukO" secondAttribute="bottom" constant="53" id="qIw-hJ-Xdj"/>
+                <constraint firstItem="LH9-YZ-1vA" firstAttribute="top" secondItem="Afk-yu-ukO" secondAttribute="bottom" constant="35" id="qIw-hJ-Xdj"/>
                 <constraint firstItem="WHG-4c-Y62" firstAttribute="leading" secondItem="gUD-as-FJS" secondAttribute="leading" constant="20" id="qcq-eB-14W"/>
                 <constraint firstItem="Afk-yu-ukO" firstAttribute="trailing" secondItem="WHG-4c-Y62" secondAttribute="trailing" id="vup-UV-fkS"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="gUD-as-FJS"/>
-            <point key="canvasLocation" x="223" y="-134"/>
+            <point key="canvasLocation" x="221.59999999999999" y="-134.48275862068968"/>
         </view>
     </objects>
 </document>

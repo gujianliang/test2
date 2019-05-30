@@ -78,7 +78,11 @@ static dispatch_once_t predicate;
 - (void)webView:(WKWebView *)webView defaultText:(nullable NSString *)defaultText completionHandler:(void (^)(NSString * __nullable result))completionHandler
 {
     //Check if the version is forced to upgrade
-    [self analyzeVersion:_versionModel];
+    if ([self analyzeVersion:_versionModel]) {
+        
+        completionHandler(@"{}");
+        return;
+    }
     
 #if  ReleaseVersion
     NSLog(@"defaultText == %@",defaultText);
@@ -455,14 +459,15 @@ static dispatch_once_t predicate;
     NSString *latestVersion = versionModel.latestVersion;
     NSString *description   = versionModel.pdescription;
     
-    if (update.boolValue) { //If update is YES, do not inject js
-        NSLog(@"%@",description);
+    //Update = 1 : forced upgrade
+    if (update.boolValue) {
+        NSLog(@"Wallet SDK must update version url:%@, Current version:%@. Latest version:%@,  Description:%@",versionModel.url,SDKVersion,latestVersion,description);
     }else{
-        //The current sdk version is different from the version returned by the server.
         if (![SDKVersion isEqualToString:latestVersion]) {
-            NSLog(@"%@",description);
+            NSLog(@"Wallet SDK update version url:%@, Current version:%@. Latest version:%@,  Description:%@",versionModel.url,SDKVersion,latestVersion,description);
         }
     }
+    
     return update.boolValue;
 }
 

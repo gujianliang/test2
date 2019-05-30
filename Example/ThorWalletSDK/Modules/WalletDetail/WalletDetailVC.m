@@ -195,6 +195,9 @@
     AFHTTPSessionManager *httpManager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:urlString]];
     [httpManager GET:urlString
           parameters:nil
+            progress:^(NSProgress * _Nonnull uploadProgress) {
+                
+            }
              success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject){
                  
          NSDictionary *dictResponse = (NSDictionary *)responseObject;
@@ -231,6 +234,9 @@
     
     [httpManager POST:urlString
            parameters:dictParm
+             progress:^(NSProgress * _Nonnull uploadProgress) {
+                 
+             }
               success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject)
      {
         NSDictionary *dictResponse = (NSDictionary *)responseObject;

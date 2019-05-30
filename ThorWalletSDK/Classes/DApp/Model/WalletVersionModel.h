@@ -38,6 +38,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy)NSString *update;
 @property (nonatomic, copy)NSString *latestVersion;
 @property (nonatomic, copy)NSString *pdescription;
+@property (nonatomic, copy)NSString *url;
 
 @end
 

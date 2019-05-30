@@ -11,192 +11,187 @@
 
 @implementation ThorTest
 
-// 助记词恢复钱包
-/* 助记词正确 */
+// mnemonic recovery wallet
+/* Mnemonic correct */
 - (void)createWallet{
     NSArray *mnemonicWords = @[@"admit", @"mad", @"dream" ,@"stable", @"scrub" ,@"rubber" ,@"cabbage", @"exist" ,@"maple" ,@"excuse" ,@"copper", @"month"];
     [WalletUtils createWalletWithMnemonicWords:mnemonicWords password:@"123" callback:^(WalletAccountModel * _Nonnull account, NSError * _Nonnull error) {
-        NSLog(@"助记词正确");
-        NSAssert(account != NULL, @"助记词正确");
+        NSLog(@"Mnemonic correct");
+        NSAssert(account != NULL, @"Mnemonic correct");
     }];
 }
-/* 助记词=null*/
+
 - (void)createWallet1{
 
     NSArray *mnemonicWords = @[@"admit", @"mad", @"dream" ,@"stable", @"scrub" ,@"rubber" ,@"cabbage", @"exist" ,@"maple" ,@"excuse" ,@"copper", @"month"];
 
     [WalletUtils createWalletWithMnemonicWords:mnemonicWords password:@"123" callback:^(WalletAccountModel * _Nonnull account, NSError * _Nonnull error) {
-        NSLog(@"助记词=null, 错误结果 %@", [error localizedDescription]);
-        NSAssert([error code]== -101, @"错误码为-101");
-        NSAssert([error.localizedDescription isEqualToString: @"mnemonicWords is invaild"], @"错误信息");
+        NSLog(@"Mnemonic=null, Wrong result %@", [error localizedDescription]);
+        NSAssert([error code]== -101, @"The error code is -101");
+        NSAssert([error.localizedDescription isEqualToString: @"mnemonicWords is invaild"], @"Error message");
     }];
 }
-/* 助记词为空字符串 */
+/* Mnemonic is an empty string */
 - (void)createWallet2{
     NSArray *mnemonicWords = @[];
     [WalletUtils createWalletWithMnemonicWords:mnemonicWords password:@"123" callback:^(WalletAccountModel * _Nonnull account, NSError * _Nonnull error) {
-        NSLog(@"助记词为空字符串, 错误结果 %@", [error localizedDescription]);
-        NSAssert([error code]== -101, @"错误码为-101");
-        NSAssert([error.localizedDescription isEqualToString: @"mnemonicWords is invaild"], @"错误信息");
+        NSLog(@"Mnemonic is an empty string, wrong result %@", [error localizedDescription]);
+        NSAssert([error code]== -101, @"The error code is -101");
+        NSAssert([error.localizedDescription isEqualToString: @"mnemonicWords is invaild"], @"Error message");
     }];
 }
-/* 助记词为13个 */
+/*The mnemonic is 13 */
 - (void)createWallet3{
     NSArray *mnemonicWords = @[@"admit", @"mad", @"dream" ,@"stable", @"scrub" ,@"rubber" ,@"cabbage", @"exist" ,@"maple" ,@"excuse" ,@"copper", @"month"];
     [WalletUtils createWalletWithMnemonicWords:mnemonicWords password:@"123" callback:^(WalletAccountModel * _Nonnull account, NSError * _Nonnull error) {
-        NSLog(@"助记词为13个, 错误结果 %@", [error localizedDescription]);
-        NSAssert([error code]== -101, @"错误码为-101");
-        NSAssert([error.localizedDescription isEqualToString: @"mnemonicWords is invaild"], @"错误信息");
+        NSLog(@"Assistive words are 13, wrong results %@", [error localizedDescription]);
+        NSAssert([error code]== -101, @"The error code is -101");
+        NSAssert([error.localizedDescription isEqualToString: @"mnemonicWords is invaild"], @"Error message");
     }];
 }
-/* 助记词为11个 */
+/* The mnemonic is 11 */
 - (void)createWallet4{
     NSArray *mnemonicWords = @[@"admit", @"mad", @"dream" ,@"stable", @"scrub" ,@"rubber" ,@"cabbage", @"exist" ,@"maple" ,@"excuse" ,@"copper", @"month"];
     [WalletUtils createWalletWithMnemonicWords:mnemonicWords password:@"123" callback:^(WalletAccountModel * _Nonnull account, NSError * _Nonnull error) {
-        NSLog(@"助记词为11个, 错误结果 %@", [error localizedDescription]);
-        NSAssert([error code]== -101, @"错误码为-101");
-        NSAssert([error.localizedDescription isEqualToString: @"mnemonicWords is invaild"], @"错误信息");
+        NSLog(@" The mnemonic is 11, wrong result %@", [error localizedDescription]);
+        NSAssert([error code]== -101, @"The error code is -101");
+        NSAssert([error.localizedDescription isEqualToString: @"mnemonicWords is invaild"], @"Error message");
     }];
 }
-/* 助记词错误 */
+/* Mnemonic error*/
 - (void)createWallet5{
     NSString *mnemonicWords = @"admit mad dream stable scrub rubber cabbage exist maple excuse copper exist";
     [WalletUtils createWalletWithMnemonicWords:[mnemonicWords componentsSeparatedByString:@" "] password:@"123" callback:^(WalletAccountModel * _Nonnull account, NSError * _Nonnull error) {
-        NSLog(@"助记词错误, 错误结果 %@", [error localizedDescription]);
-        NSAssert([error code]== -101, @"错误码为-101");
-        NSAssert([error.localizedDescription isEqualToString: @"mnemonicWords is invaild"], @"错误信息");
+        NSLog(@"Mnemonic error, wrong result %@", [error localizedDescription]);
+        NSAssert([error code]== -101, @"The error code is -101");
+        NSAssert([error.localizedDescription isEqualToString: @"mnemonicWords is invaild"], @"Error message");
     }];
 }
-/* 助记词正确，密码=null */
+/* Mnemonic correct, password = null */
 - (void)createWallet6{
     NSString *mnemonicWords = @"admit mad dream stable scrub rubber cabbage exist maple excuse copper month";
     [WalletUtils createWalletWithMnemonicWords:[mnemonicWords componentsSeparatedByString:@" "] password:NULL callback:^(WalletAccountModel * _Nonnull account, NSError * _Nonnull error) {
-        NSLog(@"助记词正确，密码=null, 错误结果 %@", [error localizedDescription]);
-        NSAssert(account != NULL, @"助记词正确，密码=null");
+        NSLog(@"Mnemonic correct, password = null, wrong result %@", [error localizedDescription]);
+        NSAssert(account != NULL, @"Mnemonic correct, password = null");
     }];
 }
-/* 助记词正确，密码=@"" */
+/* Mnemonic correct, password = @"" */
 - (void)createWallet7{
     NSString *mnemonicWords = @"admit mad dream stable scrub rubber cabbage exist maple excuse copper month";
     [WalletUtils createWalletWithMnemonicWords:[mnemonicWords componentsSeparatedByString:@" "] password:@"" callback:^(WalletAccountModel * _Nonnull account, NSError * _Nonnull error) {
-        NSLog(@"助记词正确，密码=空字符串");
-        NSAssert(account != NULL, @"助记词正确，密码=空字符串");
+        NSLog(@"Mnemonic correct, password = empty string");
+        NSAssert(account != NULL, @"Mnemonic correct, password = empty string");
     }];
 }
-/* 助记词正确，密码正确，助记词分隔符为null */
+/* The mnemonic is correct, the password is correct, and the mnemonic separator is null. */
 - (void)createWallet8{
     NSArray *mnemonicWords = @[@"admit", @"mad", @"dream" ,@"stable", @"scrub" ,@"rubber" ,@"cabbage", @"exist" ,@"maple" ,@"excuse" ,@"copper", @"month"];
     [WalletUtils createWalletWithMnemonicWords:mnemonicWords password:@"123" callback:^(WalletAccountModel * _Nonnull account, NSError * _Nonnull error) {
-        NSLog(@"助记词正确，密码=空字符串");
-        NSAssert(account == NULL, @"助记词正确，密码=空字符串");
+        NSLog(@"Mnemonic correct, password = empty string");
+        NSAssert(account == NULL, @"Mnemonic correct, password = empty string");
     }];
 }
 /*------------------------------------------------------------------------------------------------------------------*/
-//创建钱包
-/* 密码=NULL */
+//Create a wallet
+/* pw=NULL */
 - (void)createWallet11{
     [WalletUtils createWalletWithPassword:NULL callback:^(WalletAccountModel * _Nonnull account, NSError * _Nonnull error) {
-        NSLog(@"密码=NULL, 错误结果 %@", error.localizedDescription);
-        NSAssert([error code]== -101, @"错误码为-101");
-        NSAssert([error.localizedDescription isEqualToString: @"password is invaild"], @"创建钱包密码为nil 创建失败");
+        NSLog(@"Password=NULL, wrong result %@", error.localizedDescription);
+        NSAssert([error code]== -101, @"The error code is -101");
+        NSAssert([error.localizedDescription isEqualToString: @"password is invaild"], @"Create wallet password for nil creation failed");
     }];
 }
-/*密码为空字符串""*/
+/*Password is an empty string""*/
 - (void)createWallet12{
     [WalletUtils createWalletWithPassword:@"" callback:^(WalletAccountModel * _Nonnull account, NSError * _Nonnull error) {
-        NSLog(@"密码=空字符串, 错误结果 %@", error.localizedDescription);
-        NSAssert([error code]== -101, @"错误码为-101");
-        NSAssert([error.localizedDescription isEqualToString: @"password is invaild"], @"创建钱包密码为nil 创建失败");
+        NSLog(@"Password = empty string, wrong result %@", error.localizedDescription);
+        NSAssert([error code]== -101, @"The error code is -101");
+        NSAssert([error.localizedDescription isEqualToString: @"password is invaild"], @"Create wallet password for nil creation failed");
     }];
 }
 /*------------------------------------------------------------------------------------------------------------------*/
-//验证助记词是的合法
-/*助记词=NULL*/
+//Verify that the mnemonic is legal
+/*mnemonic=NULL*/
 - (void)isValidMnemonicWords1{
     NSString *mnemonicWords = NULL;
     BOOL isValidMnemonicWords = [WalletUtils isValidMnemonicWords:[mnemonicWords componentsSeparatedByString:@" "]];
     NSAssert(isValidMnemonicWords== false, @"isValidMnemonicWords为false");
 }
-/*助记词=空字符串*/
+/*Mnemonic = empty string*/
 - (void)isValidMnemonicWords2{
     NSString *mnemonicWords = @"";
     BOOL isValidMnemonicWords = [WalletUtils isValidMnemonicWords:[mnemonicWords componentsSeparatedByString:@" "]];
     NSAssert(isValidMnemonicWords== false, @"isValidMnemonicWords为false");
 }
-/*助记词为13个*/
+/*The mnemonic is 13*/
 - (void)isValidMnemonicWords3{
     NSString *mnemonicWords = @"admit mad dream stable scrub rubber cabbage exist maple excuse copper month dream";
     BOOL isValidMnemonicWords = [WalletUtils isValidMnemonicWords:[mnemonicWords componentsSeparatedByString:@" "]];
     NSAssert(isValidMnemonicWords== false, @"isValidMnemonicWords为false");
 }
-/*助记词为11个*/
+/*The mnemonic is 11*/
 - (void)isValidMnemonicWords4{
     NSString *mnemonicWords = @"admit mad dream stable scrub rubber cabbage exist maple excuse copper";
     BOOL isValidMnemonicWords = [WalletUtils isValidMnemonicWords:[mnemonicWords componentsSeparatedByString:@" "]];
     NSAssert(isValidMnemonicWords== false, @"isValidMnemonicWords为false");
 }
-/*助记词错误*/
+/*Mnemonic error*/
 - (void)isValidMnemonicWords5{
     NSString *mnemonicWords = @"admit mad dream stable scrub rubber cabbage exist maple excuse copper exist";
     BOOL isValidMnemonicWords = [WalletUtils isValidMnemonicWords:[mnemonicWords componentsSeparatedByString:@" "]];
     NSAssert(isValidMnemonicWords== false, @"isValidMnemonicWords为false");
 }
-/*助记词大小写敏感*/
+/*Mnemonic case sensitivity*/
 - (void)isValidMnemonicWords6{
     NSString *mnemonicWords = @"admit mad dream stable Scrub rubber cabbage exist maple excuse copper month";
     BOOL isValidMnemonicWords = [WalletUtils isValidMnemonicWords:[mnemonicWords componentsSeparatedByString:@" "]];
     NSAssert(isValidMnemonicWords== false, @"isValidMnemonicWords为false");
 }
-/*助记词正确 componentsSeparatedByString=null*/
-- (void)isValidMnemonicWords7{
-    NSString *mnemonicWords = @"admit mad dream stable scrub rubber cabbage exist maple excuse copper month";
-    BOOL isValidMnemonicWords = [WalletUtils isValidMnemonicWords:[mnemonicWords componentsSeparatedByString:NULL]];
-    NSAssert(isValidMnemonicWords== false, @"isValidMnemonicWords为false");
-}
+
 /*------------------------------------------------------------------------------------------------------------------*/
-// 获得checksum地址
-/* 地址全小写 */
+// Get checksum address
+/* Address is all lowercase */
 - (void)getChecksumAddress{
     NSString *address = @"0x7567d83b7b8d80addcb281a71d54fc7b3364ffed";
     NSString *checksumAddress = [WalletUtils getChecksumAddress:address];
-    NSAssert([checksumAddress isEqualToString: @"0x7567D83b7b8d80ADdCb281A71d54Fc7B3364ffed"], @"获取checksum地址");
+    NSAssert([checksumAddress isEqualToString: @"0x7567D83b7b8d80ADdCb281A71d54Fc7B3364ffed"], @"Get the checksum address");
     NSLog(@"checksumAddress= %@", checksumAddress);
 }
-/*地址=null*/
+/*address=null*/
 - (void)getChecksumAddress1{
     NSString *address = NULL;
     NSString *checksumAddress = [WalletUtils getChecksumAddress:address];
-    NSAssert(checksumAddress == NULL, @"获取checksum地址");
+    NSAssert(checksumAddress == NULL, @"Get the checksum address");
 }
-/*地址=""*/
+/*address=""*/
 - (void)getChecksumAddress2{
     NSString *address = @"";
     NSString *checksumAddress = [WalletUtils getChecksumAddress:address];
-    NSAssert([checksumAddress isEqualToString:@""], @"获取checksum地址");
+    NSAssert([checksumAddress isEqualToString:@""], @"Get the checksum address");
 }
-/*地址长度=43位*/
+/*Address length = 43 */
 - (void)getChecksumAddress3{
     NSString *address = @"0x7567d83b7b8d80addcb281a71d54fc7b3364ffed1";
     NSString *checksumAddress = [WalletUtils getChecksumAddress:address];
-    NSAssert([checksumAddress isEqualToString:@""], @"获取空字符串checksum地址");
-    NSLog(@"错误结果 %@", checksumAddress);
+    NSAssert([checksumAddress isEqualToString:@""], @"Get empty string checksum address");
+    NSLog(@"Wrong result %@", checksumAddress);
 }
-/*地址长度=41位*/
+/*Address length =41*/
 - (void)getChecksumAddress4{
     NSString *address = @"0x7567d83b7b8d80addcb281a71d54fc7b3364ffe";
     NSString *checksumAddress = [WalletUtils getChecksumAddress:address];
-    NSAssert([checksumAddress isEqualToString:@""], @"获取空字符串checksum地址");
-    NSLog(@"错误结果 %@", checksumAddress);
+    NSAssert([checksumAddress isEqualToString:@""], @"Get empty string checksum address");
+    NSLog(@"Wrong result %@", checksumAddress);
 }
-/*地址非16进制*/
+/*Address is not hexadecimal*/
 - (void)getChecksumAddress5{
     NSString *address = @"0x7567d83b7b8d80addcb281a71d54fc7b3364ffeg";
     NSString *checksumAddress = [WalletUtils getChecksumAddress:address];
-    NSAssert([checksumAddress isEqualToString:@""], @"获取空字符串checksum地址");
-    NSLog(@"错误结果 %@", checksumAddress);
+    NSAssert([checksumAddress isEqualToString:@""], @"Get empty string checksum address");
+    NSLog(@"Wrong result %@", checksumAddress);
 }
 /*------------------------------------------------------------------------------------------------------------------*/
-// 验证keystore 格式
+// Verify keystore format
 /*keystore=null*/
 - (void)isValidKeystore1{
     NSString *keystore = NULL;
@@ -207,36 +202,36 @@
 - (void)isValidKeystore2{
     NSString *keystore = @"";
     BOOL isOKKestore = [WalletUtils isValidKeystore:keystore];
-    NSAssert(isOKKestore == false, @"keystore=空字符串");
+    NSAssert(isOKKestore == false, @"Keystore=empty string");
 }
 /*keystore=”true“*/
 - (void)isValidKeystore3{
     NSString *keystore = @"true";
     BOOL isOKKestore = [WalletUtils isValidKeystore:keystore];
-    NSAssert(isOKKestore == false, @"keystore=非json格式的字符串");
+    NSAssert(isOKKestore == false, @"keystore=Non-json format string");
 }
 /*------------------------------------------------------------------------------------------------------------------*/
-//通过keystore获得地址
+//Get the address through the keystore
 /*keystore=null*/
 - (void)getAddress1{
     NSString *keystore = NULL;
     NSString *getAddress = [WalletUtils getAddressWithKeystore:keystore];
-    NSAssert([getAddress isEqualToString:@""], @"通过keystore获得地址,keystore=null");
+    NSAssert([getAddress isEqualToString:@""], @"Get the address through the keystore, keystore=null");
 }
 /*keystore=”“*/
 - (void)getAddress2{
     NSString *keystore = @"";
     NSString *getAddress = [WalletUtils getAddressWithKeystore:keystore];
-    NSAssert([getAddress isEqualToString:@""], @"通过keystore获得地址,keystore=空字符串");
+    NSAssert([getAddress isEqualToString:@""], @"Get the address through the keystore, keystore=null");
 }
 /*keystore=”true“*/
 - (void)getAddress3{
     NSString *keystore = @"true";
     NSString *getAddress = [WalletUtils getAddressWithKeystore:keystore];
-    NSAssert([getAddress isEqualToString:@""], @"通过keystore获得地址,keystore=非json格式的字符串");
+    NSAssert([getAddress isEqualToString:@""], @"Get the address through keystore, keystore=string in non-json format");
 }
 /*------------------------------------------------------------------------------------------------------------------*/
-//数据签名
+//Data signature
 /*keystore=null*/
 - (void)sign1{
     NSString *keystore = NULL;
@@ -276,7 +271,7 @@
 //         NSAssert([error.localizedDescription isEqualToString: @"The operation couldn’t be completed. (io.AccountError error -1.)"], @"sign3");
      }];
 }
-/*keystore正确，密码为=null*/
+/*The keystore is correct and the password is =null*/
 - (void)sign4{
     NSString *keystore = @"{\"address\":\"7567d83b7b8d80addcb281a71d54fc7b3364ffed\",\"crypto\":{\"cipher\":\"aes-128-ctr\",\"cipherparams\":{\"iv\":\"61f56506769dbddf0366a3fd479ceb05\"},\"ciphertext\":\"23077a4e5aa7cd30590a878083d802d9c1b44c78923236524918e023d189b69f\",\"kdf\":\"scrypt\",\"kdfparams\":{\"dklen\":32,\"n\":262144,\"p\":1,\"r\":8,\"salt\":\"93e8cea9e1e4822258e453a11a2c8e5b8168cfaadc5821258c18f75e7ef36d90\"},\"mac\":\"f99cd87ed0c4cb9248fcee03fddd7f791c92e10533f3a103a46cbbc4f0324b22\"},\"id\":\"fad80d2d-1826-4383-a49e-a36183ccdf7e\",\"version\":3}";
     NSData *messageData = [@"test unit" dataUsingEncoding:NSUTF8StringEncoding];
@@ -290,7 +285,7 @@
 //         NSAssert([error.localizedDescription isEqualToString: @"The operation couldn’t be completed. (io.AccountError error -10.)"], @"sign4");
      }];
 }
-/*keystore正确，密码为=“”*/
+/*The keystore is correct, the password is = ""*/
 - (void)sign5{
     NSString *keystore = @"{\"address\":\"7567d83b7b8d80addcb281a71d54fc7b3364ffed\",\"crypto\":{\"cipher\":\"aes-128-ctr\",\"cipherparams\":{\"iv\":\"61f56506769dbddf0366a3fd479ceb05\"},\"ciphertext\":\"23077a4e5aa7cd30590a878083d802d9c1b44c78923236524918e023d189b69f\",\"kdf\":\"scrypt\",\"kdfparams\":{\"dklen\":32,\"n\":262144,\"p\":1,\"r\":8,\"salt\":\"93e8cea9e1e4822258e453a11a2c8e5b8168cfaadc5821258c18f75e7ef36d90\"},\"mac\":\"f99cd87ed0c4cb9248fcee03fddd7f791c92e10533f3a103a46cbbc4f0324b22\"},\"id\":\"fad80d2d-1826-4383-a49e-a36183ccdf7e\",\"version\":3}";
     NSData *messageData = [@"test unit" dataUsingEncoding:NSUTF8StringEncoding];
@@ -304,7 +299,7 @@
 //         NSAssert([error.localizedDescription isEqualToString: @"The operation couldn’t be completed. (io.AccountError error -10.)"], @"sign4");
      }];
 }
-/*keystore正确，密码错误*/
+/*Keystore is correct, password is wrong*/
 - (void)sign6{
     NSString *keystore = @"{\"address\":\"7567d83b7b8d80addcb281a71d54fc7b3364ffed\",\"crypto\":{\"cipher\":\"aes-128-ctr\",\"cipherparams\":{\"iv\":\"61f56506769dbddf0366a3fd479ceb05\"},\"ciphertext\":\"23077a4e5aa7cd30590a878083d802d9c1b44c78923236524918e023d189b69f\",\"kdf\":\"scrypt\",\"kdfparams\":{\"dklen\":32,\"n\":262144,\"p\":1,\"r\":8,\"salt\":\"93e8cea9e1e4822258e453a11a2c8e5b8168cfaadc5821258c18f75e7ef36d90\"},\"mac\":\"f99cd87ed0c4cb9248fcee03fddd7f791c92e10533f3a103a46cbbc4f0324b22\"},\"id\":\"fad80d2d-1826-4383-a49e-a36183ccdf7e\",\"version\":3}";
     NSData *messageData = [@"test unit" dataUsingEncoding:NSUTF8StringEncoding];
@@ -318,7 +313,7 @@
 //         NSAssert([error.localizedDescription isEqualToString: @"The operation couldn’t be completed. (io.AccountError error -10.)"], @"sign4");
      }];
 }
-/*keystore密码正确，签名为空*/
+/*The keystore password is correct and the signature is empty.*/
 - (void)sign7{
     NSString *keystore = @"{\"address\":\"7567d83b7b8d80addcb281a71d54fc7b3364ffed\",\"crypto\":{\"cipher\":\"aes-128-ctr\",\"cipherparams\":{\"iv\":\"61f56506769dbddf0366a3fd479ceb05\"},\"ciphertext\":\"23077a4e5aa7cd30590a878083d802d9c1b44c78923236524918e023d189b69f\",\"kdf\":\"scrypt\",\"kdfparams\":{\"dklen\":32,\"n\":262144,\"p\":1,\"r\":8,\"salt\":\"93e8cea9e1e4822258e453a11a2c8e5b8168cfaadc5821258c18f75e7ef36d90\"},\"mac\":\"f99cd87ed0c4cb9248fcee03fddd7f791c92e10533f3a103a46cbbc4f0324b22\"},\"id\":\"fad80d2d-1826-4383-a49e-a36183ccdf7e\",\"version\":3}";
     
@@ -333,7 +328,7 @@
 //         NSLog(@"address == %@",error.localizedDescription);
      }];
 }
-/*keystore密码正确，签名=“”*/
+/*The keystore password is correct, signature = ""*/
 - (void)sign8{
     NSString *keystore = @"{\"address\":\"7567d83b7b8d80addcb281a71d54fc7b3364ffed\",\"crypto\":{\"cipher\":\"aes-128-ctr\",\"cipherparams\":{\"iv\":\"61f56506769dbddf0366a3fd479ceb05\"},\"ciphertext\":\"23077a4e5aa7cd30590a878083d802d9c1b44c78923236524918e023d189b69f\",\"kdf\":\"scrypt\",\"kdfparams\":{\"dklen\":32,\"n\":262144,\"p\":1,\"r\":8,\"salt\":\"93e8cea9e1e4822258e453a11a2c8e5b8168cfaadc5821258c18f75e7ef36d90\"},\"mac\":\"f99cd87ed0c4cb9248fcee03fddd7f791c92e10533f3a103a46cbbc4f0324b22\"},\"id\":\"fad80d2d-1826-4383-a49e-a36183ccdf7e\",\"version\":3}";
     
@@ -349,14 +344,14 @@
      }];
 }
 /*------------------------------------------------------------------------------------------------------------------*/
-// 签名信息，恢复地址
-/*签名信息=null*/
+// Signature information, recovery address
+/*Signature information=null*/
 - (void)recoverAddress1{
     NSData *messageData = [@"test" dataUsingEncoding:NSUTF8StringEncoding];
     NSString *address = [WalletUtils recoverAddressFromMessage:messageData signatureData:NULL];
     NSAssert(address == NULL, @"recoverAddress1");
 }
-/*签名信息=""*/
+/*Signature information=""*/
 - (void)recoverAddress2{
     NSData *messageData = [@"test" dataUsingEncoding:NSUTF8StringEncoding];
     NSString *address = [WalletUtils recoverAddressFromMessage:messageData signatureData:@""];
@@ -373,14 +368,14 @@
                         callback:^(NSData * _Nonnull signatureData)
      {
          
-         //签名信息，恢复地址
+         //Signature information, recovery address
          NSString *address = [WalletUtils recoverAddressFromMessage:NULL signatureData:signatureData];
          NSLog(@"address == %@",address);
          //         NSAssert([address isEqualToString:@"0x7567D83b7b8d80ADdCb281A71d54Fc7B3364ffed"], @"错误码为-1");
      }];
 }
 /*------------------------------------------------------------------------------------------------------------------*/
-//修改密码
+//change Password
 /*keystore=null*/
 - (void)modifyKeystorePassword1{
     NSString *keystore = NULL;
@@ -405,7 +400,7 @@
         NSAssert(newKeystore.length == 0, @"modifyKeystorePassword3");
     }];
 }
-/*keystore正确，旧密码=null*/
+/*Keystore is correct, old password = null*/
 - (void)modifyKeystorePassword4{
     NSString *keystore = @"{\"address\":\"7567d83b7b8d80addcb281a71d54fc7b3364ffed\",\"crypto\":{\"cipher\":\"aes-128-ctr\",\"cipherparams\":{\"iv\":\"61f56506769dbddf0366a3fd479ceb05\"},\"ciphertext\":\"23077a4e5aa7cd30590a878083d802d9c1b44c78923236524918e023d189b69f\",\"kdf\":\"scrypt\",\"kdfparams\":{\"dklen\":32,\"n\":262144,\"p\":1,\"r\":8,\"salt\":\"93e8cea9e1e4822258e453a11a2c8e5b8168cfaadc5821258c18f75e7ef36d90\"},\"mac\":\"f99cd87ed0c4cb9248fcee03fddd7f791c92e10533f3a103a46cbbc4f0324b22\"},\"id\":\"fad80d2d-1826-4383-a49e-a36183ccdf7e\",\"version\":3}";
     [WalletUtils modifyKeystore:keystore newPassword:@"123" oldPassword:NULL callback:^(NSString * _Nonnull newKeystore) {
@@ -413,7 +408,7 @@
         NSAssert(newKeystore.length == 0, @"modifyKeystorePassword4");
     }];
 }
-/*keystore正确，旧密码=”“*/
+/*Keystore is correct, old password = ""*/
 - (void)modifyKeystorePassword5{
     NSString *keystore = @"{\"address\":\"7567d83b7b8d80addcb281a71d54fc7b3364ffed\",\"crypto\":{\"cipher\":\"aes-128-ctr\",\"cipherparams\":{\"iv\":\"61f56506769dbddf0366a3fd479ceb05\"},\"ciphertext\":\"23077a4e5aa7cd30590a878083d802d9c1b44c78923236524918e023d189b69f\",\"kdf\":\"scrypt\",\"kdfparams\":{\"dklen\":32,\"n\":262144,\"p\":1,\"r\":8,\"salt\":\"93e8cea9e1e4822258e453a11a2c8e5b8168cfaadc5821258c18f75e7ef36d90\"},\"mac\":\"f99cd87ed0c4cb9248fcee03fddd7f791c92e10533f3a103a46cbbc4f0324b22\"},\"id\":\"fad80d2d-1826-4383-a49e-a36183ccdf7e\",\"version\":3}";
     [WalletUtils modifyKeystore:keystore newPassword:@"123" oldPassword:@"" callback:^(NSString * _Nonnull newKeystore) {
@@ -421,7 +416,7 @@
         NSAssert(newKeystore.length == 0, @"modifyKeystorePassword5");
     }];
 }
-/*keystore正确，旧密码错误*/
+/*Keystore is correct, old password is wrong*/
 - (void)modifyKeystorePassword6{
     NSString *keystore = @"{\"address\":\"7567d83b7b8d80addcb281a71d54fc7b3364ffed\",\"crypto\":{\"cipher\":\"aes-128-ctr\",\"cipherparams\":{\"iv\":\"61f56506769dbddf0366a3fd479ceb05\"},\"ciphertext\":\"23077a4e5aa7cd30590a878083d802d9c1b44c78923236524918e023d189b69f\",\"kdf\":\"scrypt\",\"kdfparams\":{\"dklen\":32,\"n\":262144,\"p\":1,\"r\":8,\"salt\":\"93e8cea9e1e4822258e453a11a2c8e5b8168cfaadc5821258c18f75e7ef36d90\"},\"mac\":\"f99cd87ed0c4cb9248fcee03fddd7f791c92e10533f3a103a46cbbc4f0324b22\"},\"id\":\"fad80d2d-1826-4383-a49e-a36183ccdf7e\",\"version\":3}";
     [WalletUtils modifyKeystore:keystore newPassword:@"123" oldPassword:@"1" callback:^(NSString * _Nonnull newKeystore) {
@@ -429,7 +424,7 @@
         NSAssert(newKeystore.length == 0, @"modifyKeystorePassword6");
     }];
 }
-/*keystore旧密码正确，新密码=null*/
+/*Keystore old password is correct, new password = null*/
 - (void)modifyKeystorePassword7{
     NSString *keystore = @"{\"address\":\"36d7189625587d7c4c806e0856b6926af8d36fea\",\"crypto\":{\"cipher\":\"aes-128-ctr\",\"cipherparams\":{\"iv\":\"c4a723d57e1325a99d88572651959a9d\"},\"ciphertext\":\"73a4a3a6e8706d099b536e41f6799e71ef9ff3a9f115e21c58d9e81ade036705\",\"kdf\":\"scrypt\",\"kdfparams\":{\"dklen\":32,\"n\":262144,\"p\":1,\"r\":8,\"salt\":\"a322d4dce0f075f95a7748c008048bd3f80dbb5645dee37576ea93fd119feda2\"},\"mac\":\"66744cc5967ff5858266c247dbb088e0986c6f1d50156b5e2ce2a19afdc0e498\"},\"id\":\"0fe540de-1957-4bfe-a326-16772e61f677\",\"version\":3}";
     [WalletUtils modifyKeystore:keystore newPassword:NULL oldPassword:@"123456" callback:^(NSString * _Nonnull newKeystore) {
@@ -441,7 +436,7 @@
     
     
 }
-/*keystore旧密码正确，新密码=""*/
+/*Keystore old password is correct, new password=""*/
 - (void)modifyKeystorePassword8{
     NSString *keystore = @"{\"address\":\"36d7189625587d7c4c806e0856b6926af8d36fea\",\"crypto\":{\"cipher\":\"aes-128-ctr\",\"cipherparams\":{\"iv\":\"c4a723d57e1325a99d88572651959a9d\"},\"ciphertext\":\"73a4a3a6e8706d099b536e41f6799e71ef9ff3a9f115e21c58d9e81ade036705\",\"kdf\":\"scrypt\",\"kdfparams\":{\"dklen\":32,\"n\":262144,\"p\":1,\"r\":8,\"salt\":\"a322d4dce0f075f95a7748c008048bd3f80dbb5645dee37576ea93fd119feda2\"},\"mac\":\"66744cc5967ff5858266c247dbb088e0986c6f1d50156b5e2ce2a19afdc0e498\"},\"id\":\"0fe540de-1957-4bfe-a326-16772e61f677\",\"version\":3}";
     [WalletUtils modifyKeystore:keystore newPassword:@"123" oldPassword:@"123456" callback:^(NSString * _Nonnull newKeystore) {
@@ -452,7 +447,7 @@
 }
 
 /*------------------------------------------------------------------------------------------------------------------*/
-// 验证keystore密码正确
+// Verify that the keystore password is correct
 /*keystore=null*/
 - (void)verifyKeystorePassword1{
     NSString *keystore = NULL;
@@ -474,21 +469,21 @@
         NSAssert(result == false, @"verifyKeystorePassword3");
     }];
 }
-/*keystore正确, 密码=null*/
+/*Keystore is correct, password = null*/
 - (void)verifyKeystorePassword4{
     NSString *keystore = @"{\"address\":\"7567d83b7b8d80addcb281a71d54fc7b3364ffed\",\"crypto\":{\"cipher\":\"aes-128-ctr\",\"cipherparams\":{\"iv\":\"61f56506769dbddf0366a3fd479ceb05\"},\"ciphertext\":\"23077a4e5aa7cd30590a878083d802d9c1b44c78923236524918e023d189b69f\",\"kdf\":\"scrypt\",\"kdfparams\":{\"dklen\":32,\"n\":262144,\"p\":1,\"r\":8,\"salt\":\"93e8cea9e1e4822258e453a11a2c8e5b8168cfaadc5821258c18f75e7ef36d90\"},\"mac\":\"f99cd87ed0c4cb9248fcee03fddd7f791c92e10533f3a103a46cbbc4f0324b22\"},\"id\":\"fad80d2d-1826-4383-a49e-a36183ccdf7e\",\"version\":3}";
     [WalletUtils verifyKeystore:keystore password:NULL callback:^(BOOL result) {
         NSAssert(result == false, @"verifyKeystorePassword4");
     }];
 }
-/*keystore正确, 密码=”“*/
+/*Keystore is correct, password = ""*/
 - (void)verifyKeystorePassword5{
     NSString *keystore = @"{\"address\":\"7567d83b7b8d80addcb281a71d54fc7b3364ffed\",\"crypto\":{\"cipher\":\"aes-128-ctr\",\"cipherparams\":{\"iv\":\"61f56506769dbddf0366a3fd479ceb05\"},\"ciphertext\":\"23077a4e5aa7cd30590a878083d802d9c1b44c78923236524918e023d189b69f\",\"kdf\":\"scrypt\",\"kdfparams\":{\"dklen\":32,\"n\":262144,\"p\":1,\"r\":8,\"salt\":\"93e8cea9e1e4822258e453a11a2c8e5b8168cfaadc5821258c18f75e7ef36d90\"},\"mac\":\"f99cd87ed0c4cb9248fcee03fddd7f791c92e10533f3a103a46cbbc4f0324b22\"},\"id\":\"fad80d2d-1826-4383-a49e-a36183ccdf7e\",\"version\":3}";
     [WalletUtils verifyKeystore:keystore password:@"" callback:^(BOOL result) {
         NSAssert(result == false, @"verifyKeystorePassword4");
     }];
 }
-/*keystore正确, 密码错误*/
+/*Keystore is correct, password is wrong*/
 - (void)verifyKeystorePassword6{
     NSString *keystore = @"{\"address\":\"7567d83b7b8d80addcb281a71d54fc7b3364ffed\",\"crypto\":{\"cipher\":\"aes-128-ctr\",\"cipherparams\":{\"iv\":\"61f56506769dbddf0366a3fd479ceb05\"},\"ciphertext\":\"23077a4e5aa7cd30590a878083d802d9c1b44c78923236524918e023d189b69f\",\"kdf\":\"scrypt\",\"kdfparams\":{\"dklen\":32,\"n\":262144,\"p\":1,\"r\":8,\"salt\":\"93e8cea9e1e4822258e453a11a2c8e5b8168cfaadc5821258c18f75e7ef36d90\"},\"mac\":\"f99cd87ed0c4cb9248fcee03fddd7f791c92e10533f3a103a46cbbc4f0324b22\"},\"id\":\"fad80d2d-1826-4383-a49e-a36183ccdf7e\",\"version\":3}";
     [WalletUtils verifyKeystore:keystore password:@"a" callback:^(BOOL result) {
@@ -496,7 +491,7 @@
     }];
 }
 /*------------------------------------------------------------------------------------------------------------------*/
-// 通过keystore 获得私钥
+// Get the private key through the keystore
 /*keystore=null*/
 - (void)decryptKeystore1{
     NSString *keystore = NULL;
@@ -521,7 +516,7 @@
         NSAssert([error.localizedDescription isEqualToString: @"The operation couldn’t be completed. (io.AccountError error -1.)"], @"decryptKeystore3");
     }];
 }
-/*keystore正确，密码=null*/
+/*Keystore is correct, password = null*/
 - (void)decryptKeystore4{
     NSString *keystore = @"{\"address\":\"36d7189625587d7c4c806e0856b6926af8d36fea\",\"crypto\":{\"cipher\":\"aes-128-ctr\",\"cipherparams\":{\"iv\":\"c4a723d57e1325a99d88572651959a9d\"},\"ciphertext\":\"73a4a3a6e8706d099b536e41f6799e71ef9ff3a9f115e21c58d9e81ade036705\",\"kdf\":\"scrypt\",\"kdfparams\":{\"dklen\":32,\"n\":262144,\"p\":1,\"r\":8,\"salt\":\"a322d4dce0f075f95a7748c008048bd3f80dbb5645dee37576ea93fd119feda2\"},\"mac\":\"66744cc5967ff5858266c247dbb088e0986c6f1d50156b5e2ce2a19afdc0e498\"},\"id\":\"0fe540de-1957-4bfe-a326-16772e61f677\",\"version\":3}";
     [WalletUtils decryptKeystore:keystore password:NULL callback:^(NSString * _Nonnull privatekey, NSError * _Nonnull error) {
@@ -529,7 +524,7 @@
         NSAssert([error.localizedDescription isEqualToString: @"The operation couldn’t be completed. (io.AccountError error -10.)"], @"decryptKeystore4");
     }];
 }
-/*keystore正确，密码=""*/
+/*Keystore is correct, password=""*/
 - (void)decryptKeystore5{
     NSString *keystore = @"{\"address\":\"36d7189625587d7c4c806e0856b6926af8d36fea\",\"crypto\":{\"cipher\":\"aes-128-ctr\",\"cipherparams\":{\"iv\":\"c4a723d57e1325a99d88572651959a9d\"},\"ciphertext\":\"73a4a3a6e8706d099b536e41f6799e71ef9ff3a9f115e21c58d9e81ade036705\",\"kdf\":\"scrypt\",\"kdfparams\":{\"dklen\":32,\"n\":262144,\"p\":1,\"r\":8,\"salt\":\"a322d4dce0f075f95a7748c008048bd3f80dbb5645dee37576ea93fd119feda2\"},\"mac\":\"66744cc5967ff5858266c247dbb088e0986c6f1d50156b5e2ce2a19afdc0e498\"},\"id\":\"0fe540de-1957-4bfe-a326-16772e61f677\",\"version\":3}";
     [WalletUtils decryptKeystore:keystore password:@"" callback:^(NSString * _Nonnull privatekey, NSError * _Nonnull error) {
@@ -538,7 +533,7 @@
     }];
 }
 
-/*keystore正确，密码错误*/
+/*Keystore is correct, password is wrong*/
 - (void)decryptKeystore6{
     NSString *keystore = @"{\"address\":\"36d7189625587d7c4c806e0856b6926af8d36fea\",\"crypto\":{\"cipher\":\"aes-128-ctr\",\"cipherparams\":{\"iv\":\"c4a723d57e1325a99d88572651959a9d\"},\"ciphertext\":\"73a4a3a6e8706d099b536e41f6799e71ef9ff3a9f115e21c58d9e81ade036705\",\"kdf\":\"scrypt\",\"kdfparams\":{\"dklen\":32,\"n\":262144,\"p\":1,\"r\":8,\"salt\":\"a322d4dce0f075f95a7748c008048bd3f80dbb5645dee37576ea93fd119feda2\"},\"mac\":\"66744cc5967ff5858266c247dbb088e0986c6f1d50156b5e2ce2a19afdc0e498\"},\"id\":\"0fe540de-1957-4bfe-a326-16772e61f677\",\"version\":3}";
     [WalletUtils decryptKeystore:keystore password:@"a" callback:^(NSString * _Nonnull privatekey, NSError * _Nonnull error) {
@@ -547,7 +542,7 @@
     }];
 }
 /*------------------------------------------------------------------------------------------------------------------*/
-//私钥转keystore
+//Private key to keystore
 /*privatekey=null*/
 - (void)encryptPrivateKey1{
     NSString *privatekey = NULL;
@@ -566,7 +561,7 @@
     
 
 }
-/*privatekey=非16进制*/
+/*Privatekey=non-hexadecimal*/
 - (void)encryptPrivateKey3{
     NSString *privatekey = @"0xbc9fe2428a8faec37674412c113f4a9a66b2e40076014547bfe7bbdc2c5a85eg";
     [WalletUtils encryptPrivateKeyWithPassword:@"123" privateKey:privatekey callback:^(NSString * _Nonnull keystoreJson) {
@@ -574,7 +569,7 @@
         NSAssert(keystoreJson.length == 0, @"encryptPrivateKey3");
     }];
 }
-/*privatekey 0x后65位*/
+/*65 after privatekey 0x*/
 - (void)encryptPrivateKey4{
     NSString *privatekey = @"0xbc9fe2428a8faec37674412c113f4a9a66b2e40076014547bfe7bbdc2c5a85eee";
     [WalletUtils encryptPrivateKeyWithPassword:@"123" privateKey:privatekey callback:^(NSString * _Nonnull keystoreJson) {
@@ -582,7 +577,7 @@
         NSAssert(keystoreJson.length == 0, @"encryptPrivateKey4");
     }];
 }
-/*privatekey 0x后63位*/
+/*63 after privatekey 0x*/
 - (void)encryptPrivateKey5{
     NSString *privatekey = @"0xbc9fe2428a8faec37674412c113f4a9a66b2e40076014547bfe7bbdc2c5a85e";
     [WalletUtils encryptPrivateKeyWithPassword:@"123" privateKey:privatekey callback:^(NSString * _Nonnull keystoreJson) {
@@ -590,7 +585,7 @@
         NSAssert(keystoreJson.length == 0, @"encryptPrivateKey5");
     }];
 }
-/*privatekey正确，密码为null*/
+/*Privatekey is correct, password is null*/
 - (void)encryptPrivateKey6{
     NSString *privatekey = @"0xbc9fe2428a8faec37674412c113f4a9a66b2e40076014547bfe7bbdc2c5a85ee";
     [WalletUtils encryptPrivateKeyWithPassword:NULL privateKey:privatekey callback:^(NSString * _Nonnull keystoreJson) {
@@ -598,7 +593,7 @@
         NSAssert(keystoreJson.length == 491, @"encryptPrivateKey6");
     }];
 }
-/*privatekey正确，密码为""*/
+/*Privatekey is correct, password is ""*/
 - (void)encryptPrivateKey7{
     NSString *privatekey = @"0xbc9fe2428a8faec37674412c113f4a9a66b2e40076014547bfe7bbdc2c5a85ee";
     [WalletUtils encryptPrivateKeyWithPassword:@"" privateKey:privatekey callback:^(NSString * _Nonnull keystoreJson) {
@@ -809,7 +804,7 @@
         }];
     }];
 }
-/*keystore正确, 密码=null*/
+/*Keystore is correct, password = null*/
 - (void)signTransfer4{
     //The amount of the transaction needs to be multiplied by the disimals of the coin
     BigNumber *amountBig = [self amountConvertWei:@"2" dicimals:18];
@@ -876,7 +871,7 @@
         }];
     }];
 }
-/*keystore正确, 密码=""*/
+/*Keystore is correct, password=""*/
 - (void)signTransfer5{
     //The amount of the transaction needs to be multiplied by the disimals of the coin
     BigNumber *amountBig = [self amountConvertWei:@"2" dicimals:18];
@@ -943,7 +938,7 @@
         }];
     }];
 }
-/*keystore正确, 密码错误*/
+/*Keystore is correct, password is wrong*/
 - (void)signTransfer6{
     //The amount of the transaction needs to be multiplied by the disimals of the coin
     BigNumber *amountBig = [self amountConvertWei:@"2" dicimals:18];
@@ -1010,7 +1005,7 @@
         }];
     }];
 }
-/*keystore 密码正确, transactionModel=null*/
+/*Keystore password is correct, transactionModel=null*/
 - (void)signTransfer7{
     //The amount of the transaction needs to be multiplied by the disimals of the coin
     BigNumber *amountBig = [self amountConvertWei:@"2" dicimals:18];
@@ -1287,7 +1282,7 @@
         }];
     }];
 }
-/* keystore正确，密码=null */
+/* Keystore is correct, password = null */
 - (void)signAndSendTransfer4
 {
     //The amount of the transaction needs to be multiplied by the disimals of the coin
@@ -1356,7 +1351,7 @@
         }];
     }];
 }
-/* keystore正确，密码="" */
+/* Keystore is correct, password="" */
 - (void)signAndSendTransfer5
 {
     //The amount of the transaction needs to be multiplied by the disimals of the coin
@@ -1425,7 +1420,7 @@
         }];
     }];
 }
-/* keystore正确，密码错误 transactionModel=null*/
+/* Keystore is correct, password is incorrect transactionModel=null*/
 - (void)signAndSendTransfer6
 {
     //The amount of the transaction needs to be multiplied by the disimals of the coin
@@ -1494,7 +1489,7 @@
         }];
     }];
 }
-/* keystore正确，密码正确， */
+/* The keystore is correct and the password is correct.*/
 - (void)signAndSendTransfer7
 {
     //The amount of the transaction needs to be multiplied by the disimals of the coin
@@ -1729,7 +1724,6 @@
     //
     //    }];
     
-    [self signAndSendTransfer7];
 }
 
 
