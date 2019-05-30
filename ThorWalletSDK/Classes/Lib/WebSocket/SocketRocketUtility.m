@@ -79,7 +79,7 @@ NSString * const kWebSocketdidReceiveMessageNote = @"kWebSocketdidReceiveMessage
 
 #define WeakSelf(ws) __weak __typeof(&*self)weakSelf = self
 - (void)sendData:(id)data {
-    NSLog(@"socketSendData --------------- %@",data);
+//    NSLog(@"socketSendData --------------- %@",data);
     
     WeakSelf(ws);
     dispatch_queue_t queue =  dispatch_queue_create("zy", NULL);

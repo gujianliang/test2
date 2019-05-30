@@ -57,7 +57,7 @@
     transaction.Expiration = paramModel.expiration.integerValue;
     transaction.gasPrice  = [BigNumber bigNumberWithInteger:paramModel.gasPriceCoef.integerValue];
     
-    if (paramModel.dependsOn.length == 0) {
+    if (paramModel.dependsOn.length == 0 || paramModel.dependsOn == nil) {
         transaction.dependsOn = [NSData data];
     }else{
         transaction.dependsOn = [SecureData hexStringToData:paramModel.dependsOn];
@@ -190,7 +190,7 @@ callback:(void(^)(NSString *txId))callback
 
 - (void)showTransactionFail:(void(^)(NSString *txId ))callback
 {
-    callback(self.txId);
+    callback(@"");
 }
 
 - (void)signCertFrom:(NSString *)from
