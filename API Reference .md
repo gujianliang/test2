@@ -805,6 +805,9 @@ Eg:
 }
 
 ```
+## Tips
+
+Before the release of DApp, it is recommended that different versions of WebView be adapted to ensure the reliable and stable operation of HTML 5 pages.
 
 ## Several main data structures
 
