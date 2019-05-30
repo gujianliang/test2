@@ -25,8 +25,8 @@
 //  WalletMnemonicImportVC.m
 //  walletSDKDemo
 //
-//  Created by Tom on 2018/12/26.
-//  Copyright © 2018年 demo. All rights reserved.
+//  Created by vechaindev on 2018/12/26.
+//  Copyright © 2019 WalletSDKDemo. All rights reserved.
 //
 
 #import "WalletMnemonicImportVC.h"

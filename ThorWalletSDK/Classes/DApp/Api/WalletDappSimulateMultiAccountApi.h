@@ -25,7 +25,7 @@
 //  WalletDappSimulateMultiAccountApi.h
 //  VeWallet
 //
-//  Created by Tom on 2019/4/11.
+//  Created by vechaindev on 2019/4/11.
 //  Copyright © 2019年 VeChain. All rights reserved.
 //
 

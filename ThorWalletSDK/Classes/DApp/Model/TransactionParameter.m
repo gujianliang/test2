@@ -2,7 +2,7 @@
 //  TransactionParameter.m
 //  WalletSDK
 //
-//  Created by Tom on 2019/4/7.
+//  Created by vechaindev on 2019/4/7.
 //  Copyright © 2019年 VeChain. All rights reserved.
 //
 

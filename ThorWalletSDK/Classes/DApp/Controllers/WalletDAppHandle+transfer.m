@@ -25,7 +25,7 @@
 //  WalletDAppHandle+transfer.m
 //  WalletSDK
 //
-//  Created by Tom on 2019/4/2.
+//  Created by vechaindev on 2019/4/2.
 //  Copyright © 2019年 VeChain. All rights reserved.
 //
 

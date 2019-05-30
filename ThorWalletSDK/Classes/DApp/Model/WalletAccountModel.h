@@ -25,7 +25,7 @@
 //  WalletAccountModel.h
 //  WalletSDK
 //
-//  Created by Tom on 2019/2/28.
+//  Created by vechaindev on 2019/2/28.
 //  Copyright © 2019年 VeChain. All rights reserved.
 //
 

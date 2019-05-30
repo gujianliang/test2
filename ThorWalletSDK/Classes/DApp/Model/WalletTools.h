@@ -25,7 +25,7 @@
 //  WalletTools.h
 //  Wallet
 //
-//  Created by Tom on 18/4/26.
+//  Created by vechaindev on 18/4/26.
 //  Copyright © VECHAIN. All rights reserved.
 //
 

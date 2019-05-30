@@ -25,7 +25,7 @@
 //  WalletBaseApi.h
 //  Wallet
 //
-//  Created by Tom on 18/4/7.
+//  Created by vechaindev on 18/4/7.
 //  Copyright © VECHAIN. All rights reserved.
 //
 

@@ -25,7 +25,7 @@
 //  WalletGetStorageApi.m
 //  VeWallet
 //
-//  Created by Tom on 2019/2/20.
+//  Created by vechaindev on 2019/2/20.
 //  Copyright © 2019年 VeChain. All rights reserved.
 //
 

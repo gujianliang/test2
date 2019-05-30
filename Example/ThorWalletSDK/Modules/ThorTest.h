@@ -2,7 +2,7 @@
 //  ThorTest.h
 //  ThorWalletSDK_Example
 //
-//  Created by Tom on 2019/5/27.
+//  Created by vechaindev on 2019/5/27.
 //  Copyright © 2019 VeChain. All rights reserved.
 //
 

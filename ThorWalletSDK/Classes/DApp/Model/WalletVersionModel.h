@@ -25,7 +25,7 @@
 //  WalletVersionModel.h
 //  WalletSDK
 //
-//  Created by Tom on 2019/5/20.
+//  Created by vechaindev on 2019/5/20.
 //  Copyright © 2019 Ethers. All rights reserved.
 //
 

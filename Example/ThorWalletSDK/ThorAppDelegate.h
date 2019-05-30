@@ -2,7 +2,7 @@
 //  ThorAppDelegate.h
 //  ThorWalletSDK
 //
-//  Created by Tom on 05/21/2019.
+//  Created by vechaindev on 05/21/2019.
 //  Copyright (c) 2019 VeChain. All rights reserved.
 //
 

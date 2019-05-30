@@ -25,7 +25,7 @@
 //  WalletTransantionsReceiptApi.h
 //  VeWallet
 //
-//  Created by Tom on 2018/6/1.
+//  Created by vechaindev on 2018/6/1.
 //  Copyright © 2018年 VeChain. All rights reserved.
 //
 

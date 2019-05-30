@@ -25,7 +25,7 @@
 //  WalletCheckVersionApi.h
 //  WalletSDK
 //
-//  Created by Tom on 2019/5/9.
+//  Created by vechaindev on 2019/5/9.
 //  Copyright © 2019年 VeChain. All rights reserved.
 //
 

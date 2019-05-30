@@ -2,7 +2,7 @@
 //  UIColor+SNFoundation.h
 //  Wallet
 //
-//  Created by Tom on 18/4/11.
+//  Created by vechaindev on 18/4/11.
 //  Copyright © VECHAIN. All rights reserved.
 //
 

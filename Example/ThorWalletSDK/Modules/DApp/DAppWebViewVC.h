@@ -2,7 +2,7 @@
 //  DAppWebViewVC.h
 //  walletSDKDemo
 //
-//  Created by Tom on 2019/1/29.
+//  Created by vechaindev on 2019/1/29.
 //  Copyright © 2019年 demo. All rights reserved.
 //
 
