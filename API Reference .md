@@ -133,7 +133,6 @@ Eg:
         }else{
             //fail
         }
-         
  }];
 
 ```
@@ -264,7 +263,6 @@ Eg:
             
             //privateKey:0xbc9fe2428a8faec37674412c113f4a9a66b2e40076014547bfe7bbdc2c5a85ee
 
-            
         }else //fail
         {
             
@@ -357,9 +355,8 @@ Eg:
                      password:@"123456"
                      callback:^(NSData * _Nonnull signatureData)
  {
-         
-         NSString *strSignature = [SecureData dataToHexString:signatureData];
-         //strSignature:0x4eb1ae9254217b356b2958ab0b7a02e72f6fa86858240ca4998f74ef8a0fd68155e71ba8bd15625dc3d5e0c89c021f3852070d290688a65ba7e1d608a03d6e8400
+    NSString *strSignature = [SecureData dataToHexString:signatureData];
+    //strSignature:0x4eb1ae9254217b356b2958ab0b7a02e72f6fa86858240ca4998f74ef8a0fd68155e71ba8bd15625dc3d5e0c89c021f3852070d290688a65ba7e1d608a03d6e8400
          
  }];
 
@@ -575,7 +572,6 @@ Eg:
     
  //inject js to wkwebview
  [WalletUtils injectJSWithWebView:configuration];
-    
 
 ```
 
@@ -798,7 +794,6 @@ Eg:
 ```obj-c
 - (void)onCheckOwnAddress:(NSString *)address callback:(void(^)(BOOL result))callback
 {
-
     if ([localAddrss.lowercaseString isEqualToString:address.lowercaseString]) {
         callback(YES);
     }else{
