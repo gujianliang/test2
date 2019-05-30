@@ -26,7 +26,7 @@
 //  walletSDKDemo
 //
 //  Created by vechaindev on 2018/12/29.
-//  Copyright © 2019 WalletSDKDemo. All rights reserved.
+//  Copyright © 2019 VeChain. All rights reserved.
 //
 
 #import "WalletMoreInfoVC.h"

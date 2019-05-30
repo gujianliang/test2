@@ -26,7 +26,7 @@
 //  WalletSDKDemo
 //
 //  Created by  VechainIOS on 2019/2/27.
-//  Copyright © 2019 demo. All rights reserved.
+//  Copyright © 2019 VeChain. All rights reserved.
 //
 
 #import "WalletUtils.h"

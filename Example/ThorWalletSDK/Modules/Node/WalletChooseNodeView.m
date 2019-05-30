@@ -26,7 +26,7 @@
 //  walletSDKDemo
 //
 //  Created by vechaindev on 2019/1/30.
-//  Copyright © 2019年 demo. All rights reserved.
+//  Copyright © 2019年 VeChain. All rights reserved.
 //
 
 #import "WalletChooseNodeView.h"
