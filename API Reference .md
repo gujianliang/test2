@@ -253,7 +253,7 @@ Eg:
 Eg:
  ```obj-c
 //Get the private key through the keystore
-NSString *keystoreJson = "{\"address\":\"36d7189625587d7c4c806e0856b6926af8d36fea\",\"crypto\":{\"cipher\":\"aes-128-ctr\",\"cipherparams\":{\"iv\":\"c4a723d57e1325a99d88572651959a9d\"},\"ciphertext\":\"73a4a3a6e8706d099b536e41f6799e71ef9ff3a9f115e21c58d9e81ade036705\",\"kdf\":\"scrypt\",\"kdfparams\":{\"dklen\":32,\"n\":262144,\"p\":1,\"r\":8,\"salt\":\"a322d4dce0f075f95a7748c008048bd3f80dbb5645dee37576ea93fd119feda2\"},\"mac\":\"66744cc5967ff5858266c247dbb088e0986c6f1d50156b5e2ce2a19afdc0e498\"},\"id\":\"0fe540de-1957-4bfe-a326-16772e61f677\",\"version\":3}";
+NSString *keystoreJson = @"{\"address\":\"36d7189625587d7c4c806e0856b6926af8d36fea\",\"crypto\":{\"cipher\":\"aes-128-ctr\",\"cipherparams\":{\"iv\":\"c4a723d57e1325a99d88572651959a9d\"},\"ciphertext\":\"73a4a3a6e8706d099b536e41f6799e71ef9ff3a9f115e21c58d9e81ade036705\",\"kdf\":\"scrypt\",\"kdfparams\":{\"dklen\":32,\"n\":262144,\"p\":1,\"r\":8,\"salt\":\"a322d4dce0f075f95a7748c008048bd3f80dbb5645dee37576ea93fd119feda2\"},\"mac\":\"66744cc5967ff5858266c247dbb088e0986c6f1d50156b5e2ce2a19afdc0e498\"},\"id\":\"0fe540de-1957-4bfe-a326-16772e61f677\",\"version\":3}";
 
     [WalletUtils decryptKeystore:keystoreJson
                         password:@"123456" 
@@ -287,14 +287,14 @@ NSString *keystoreJson = "{\"address\":\"36d7189625587d7c4c806e0856b6926af8d36fe
 Eg:
 ```obj-c
     //Private key to keystore
-        NSString *privateKey = "0xbc9fe2428a8faec37674412c113f4a9a66b2e40076014547bfe7bbdc2c5a85ee";
-        [WalletUtils encryptPrivateKeyWithPassword:@"123" 
-                                        privateKey:privatekey 
-                                          callback:^(NSString * _Nonnull keystoreJson) {
-                
-                NSString *address = [WalletUtils getAddressWithKeystore:keystoreJson];
-                //address:0x36D7189625587D7C4c806E0856b6926Af8d36FEa
-        }];
+        NSString *privatekey = @"0xbc9fe2428a8faec37674412c113f4a9a66b2e40076014547bfe7bbdc2c5a85ee";
+        [WalletUtils encryptPrivateKeyWithPassword:@"123"
+                                    privateKey:privatekey
+                                      callback:^(NSString * _Nonnull keystoreJson) {
+                                          
+                                          NSString *address = [WalletUtils getAddressWithKeystore:keystoreJson];
+                                          //address:0x36D7189625587D7C4c806E0856b6926Af8d36FEa
+                                      }];
 ```
 
 ##  Get checksum address    
@@ -324,8 +324,8 @@ Eg:
 Eg:
  ```obj-c
 //Get the address through the keystore
-    NSString keystoreJson = "{\"address\":\"36d7189625587d7c4c806e0856b6926af8d36fea\",\"crypto\":{\"cipher\":\"aes-128-ctr\",\"cipherparams\":{\"iv\":\"c4a723d57e1325a99d88572651959a9d\"},\"ciphertext\":\"73a4a3a6e8706d099b536e41f6799e71ef9ff3a9f115e21c58d9e81ade036705\",\"kdf\":\"scrypt\",\"kdfparams\":{\"dklen\":32,\"n\":262144,\"p\":1,\"r\":8,\"salt\":\"a322d4dce0f075f95a7748c008048bd3f80dbb5645dee37576ea93fd119feda2\"},\"mac\":\"66744cc5967ff5858266c247dbb088e0986c6f1d50156b5e2ce2a19afdc0e498\"},\"id\":\"0fe540de-1957-4bfe-a326-16772e61f677\",\"version\":3}";
-
+   NSString *keystoreJson = @"{\"address\":\"36d7189625587d7c4c806e0856b6926af8d36fea\",\"crypto\":{\"cipher\":\"aes-128-ctr\",\"cipherparams\":{\"iv\":\"c4a723d57e1325a99d88572651959a9d\"},\"ciphertext\":\"73a4a3a6e8706d099b536e41f6799e71ef9ff3a9f115e21c58d9e81ade036705\",\"kdf\":\"scrypt\",\"kdfparams\":{\"dklen\":32,\"n\":262144,\"p\":1,\"r\":8,\"salt\":\"a322d4dce0f075f95a7748c008048bd3f80dbb5645dee37576ea93fd119feda2\"},\"mac\":\"66744cc5967ff5858266c247dbb088e0986c6f1d50156b5e2ce2a19afdc0e498\"},\"id\":\"0fe540de-1957-4bfe-a326-16772e61f677\",\"version\":3}";
+    
     NSString *address = [WalletUtils getAddressWithKeystore:keystoreJson];
     //address:0x36D7189625587D7C4c806E0856b6926Af8d36FEa
 ```
@@ -347,18 +347,18 @@ Eg:
 Eg:
 ```obj-c
     NSString *keystore = @"{\"address\":\"36d7189625587d7c4c806e0856b6926af8d36fea\",\"crypto\":{\"cipher\":\"aes-128-ctr\",\"cipherparams\":{\"iv\":\"c4a723d57e1325a99d88572651959a9d\"},\"ciphertext\":\"73a4a3a6e8706d099b536e41f6799e71ef9ff3a9f115e21c58d9e81ade036705\",\"kdf\":\"scrypt\",\"kdfparams\":{\"dklen\":32,\"n\":262144,\"p\":1,\"r\":8,\"salt\":\"a322d4dce0f075f95a7748c008048bd3f80dbb5645dee37576ea93fd119feda2\"},\"mac\":\"66744cc5967ff5858266c247dbb088e0986c6f1d50156b5e2ce2a19afdc0e498\"},\"id\":\"0fe540de-1957-4bfe-a326-16772e61f677\",\"version\":3}";
-
+    
     NSData *messageData = [@"dkfjalsdjfk" dataUsingEncoding:NSUTF8StringEncoding];
     //Data signature
     [WalletUtils signWithMessage:messageData
                         keystore:keystore
-                        password:password
-                        callback:^(NSData * _Nonnull signatureData, NSError * _Nonnull error)
+                        password:@"123456"
+                        callback:^(NSData * _Nonnull signatureData)
      {
          
          NSString *strSignature = [SecureData dataToHexString:signatureData];
          //strSignature:0x4eb1ae9254217b356b2958ab0b7a02e72f6fa86858240ca4998f74ef8a0fd68155e71ba8bd15625dc3d5e0c89c021f3852070d290688a65ba7e1d608a03d6e8400
-
+         
      }];
 
 ```
@@ -381,10 +381,10 @@ Eg:
 ```obj-c
     //Signature information, recovery address
     NSString *strSignture = @"0x4eb1ae9254217b356b2958ab0b7a02e72f6fa86858240ca4998f74ef8a0fd68155e71ba8bd15625dc3d5e0c89c021f3852070d290688a65ba7e1d608a03d6e8400";
-    NSString *signatureData = [SecureData hexStringToData::strSigntureData];
+    NSData *signatureData = [SecureData hexStringToData:strSignture];
     NSData *messageData = [@"dkfjalsdjfk" dataUsingEncoding:NSUTF8StringEncoding];
-      NSString *address = [WalletUtils recoverAddressFromMessage:messageData signatureData:signatureData];
-      NSLog(@"address == %@",address);
+    NSString *address = [WalletUtils recoverAddressFromMessage:messageData signatureData:signatureData];
+    NSLog(@"address == %@",address);
     //address:0x36D7189625587D7C4c806E0856b6926Af8d36FEa
 
 ```
