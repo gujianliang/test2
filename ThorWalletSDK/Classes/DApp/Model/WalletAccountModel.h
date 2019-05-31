@@ -1,3 +1,13 @@
+//
+//  WalletAccountModel.h
+//  Wallet
+//
+//  Created by vechaindev on 2019/2/28.
+//  Copyright © 2019年 VeChain. All rights reserved.
+//
+
+// This code is distributed under the terms and conditions of the MIT license. 
+
 /**
     Copyright (c) 2019 vechaindev <support@vechain.com>
 
@@ -21,13 +31,6 @@
 
 **/
 
-//
-//  WalletAccountModel.h
-//  WalletSDK
-//
-//  Created by vechaindev on 2019/2/28.
-//  Copyright © 2019年 VeChain. All rights reserved.
-//
 
 #import <Foundation/Foundation.h>
 

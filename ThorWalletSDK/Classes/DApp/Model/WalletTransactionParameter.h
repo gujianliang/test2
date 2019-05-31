@@ -1,3 +1,12 @@
+//
+//  WalletTransactionParameter.h
+//  Wallet
+//
+//  Created by vechaindev on 2019/4/7.
+//  Copyright © 2019年 VeChain. All rights reserved.
+//
+// This code is distributed under the terms and conditions of the MIT license.
+
 /**
  Copyright (c) 2019 vechaindev <support@vechain.com>
  
@@ -21,13 +30,7 @@
  
  **/
 
-//
-//  WalletTransactionParameter.h
-//  WalletSDK
-//
-//  Created by vechaindev on 2019/4/7.
-//  Copyright © 2019年 VeChain. All rights reserved.
-//
+
 
 //#import <PromiseKit/PromiseKit.h>
 NS_ASSUME_NONNULL_BEGIN

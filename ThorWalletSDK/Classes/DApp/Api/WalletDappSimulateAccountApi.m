@@ -1,3 +1,12 @@
+//
+//  WalletDappSimulateAccountApi.m
+//  Wallet
+//
+//  Created by vechaindev on 2019/4/11.
+//  Copyright © 2019年 VeChain. All rights reserved.
+//
+// This code is distributed under the terms and conditions of the MIT license. 
+
 /**
     Copyright (c) 2019 vechaindev <support@vechain.com>
 
@@ -21,13 +30,7 @@
 
 **/
 
-//
-//  WalletDappSimulateAccountApi.m
-//  VeWallet
-//
-//  Created by vechaindev on 2019/4/11.
-//  Copyright © 2019年 VeChain. All rights reserved.
-//
+
 
 #import "WalletDappSimulateAccountApi.h"
 

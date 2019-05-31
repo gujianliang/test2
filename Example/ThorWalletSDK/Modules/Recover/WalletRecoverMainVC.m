@@ -1,3 +1,12 @@
+//
+//  WalletRecoverMainVC.m
+//  walletSDKDemo
+//
+//  Created by vechaindev on 2018/12/26.
+//  Copyright © 2019 VeChain. All rights reserved.
+//
+// This code is distributed under the terms and conditions of the MIT license. 
+
 /**
     Copyright (c) 2019 vechaindev <support@vechain.com>
 
@@ -21,13 +30,7 @@
 
 **/
 
-//
-//  WalletRecoverMainVC.m
-//  walletSDKDemo
-//
-//  Created by vechaindev on 2018/12/26.
-//  Copyright © 2019 VeChain. All rights reserved.
-//
+
 
 #import "WalletRecoverMainVC.h"
 #import "WalletKeystoreImportVC.h"

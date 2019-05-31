@@ -1,3 +1,12 @@
+//
+//  WalletMacro.h
+//  Wallet
+//
+//  Created by vechaindev on 2019/5/20.
+//  Copyright © 2019 VeChain. All rights reserved.
+//
+// This code is distributed under the terms and conditions of the MIT license. 
+
 /**
     Copyright (c) 2019 vechaindev <support@vechain.com>
 
@@ -21,13 +30,7 @@
 
 **/
 
-//
-//  WalletSDKMacro.h
-//  WalletSDK
-//
-//  Created by vechaindev on 2019/5/20.
-//  Copyright © 2019 VeChain. All rights reserved.
-//
+
 
 #ifndef WalletSDKMacro_h
 #define WalletSDKMacro_h

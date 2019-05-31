@@ -1,3 +1,12 @@
+//
+//  WalletNodeDetailVC.h
+//  walletSDKDemo
+//
+//  Created by vechaindev on 2019/1/30.
+//  Copyright © 2019年 VeChain. All rights reserved.
+//
+// This code is distributed under the terms and conditions of the MIT license. 
+
 /**
     Copyright (c) 2019 vechaindev <support@vechain.com>
 
@@ -21,13 +30,7 @@
 
 **/
 
-//
-//  WalletNodeDetailVC.h
-//  walletSDKDemo
-//
-//  Created by vechaindev on 2019/1/30.
-//  Copyright © 2019年 VeChain. All rights reserved.
-//
+
 
 #import <UIKit/UIKit.h>
 #import "WalletChooseNodeView.h"

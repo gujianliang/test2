@@ -1,3 +1,12 @@
+//
+//  WalletChangePWVC.m
+//  walletSDKDemo
+//
+//  Created by vechaindev on 2018/12/29.
+//  Copyright © 2019 VeChain. All rights reserved.
+//
+// This code is distributed under the terms and conditions of the MIT license. 
+
 /**
     Copyright (c) 2019 vechaindev <support@vechain.com>
 
@@ -21,13 +30,7 @@
 
 **/
 
-//
-//  WalletChangePWVC.m
-//  walletSDKDemo
-//
-//  Created by vechaindev on 2018/12/29.
-//  Copyright © 2019 VeChain. All rights reserved.
-//
+
 
 #import "WalletChangePWVC.h"
 #import "WalletUtils.h"

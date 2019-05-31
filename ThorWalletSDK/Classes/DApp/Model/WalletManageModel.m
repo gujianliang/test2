@@ -1,3 +1,13 @@
+
+//
+//  WalletManageModel.m
+//  Wallet
+//
+//  Created by vechaindev on 2018/4/18.
+//  Copyright © 2018年 VeChain. All rights reserved.
+//
+// This code is distributed under the terms and conditions of the MIT license. 
+
 /**
     Copyright (c) 2019 vechaindev <support@vechain.com>
 
@@ -21,13 +31,6 @@
 
 **/
 
-//
-//  WalletManageModel.m
-//  VCWallet
-//
-//  Created by vechaindev on 2018/4/18.
-//  Copyright © 2018年 VeChain. All rights reserved.
-//
 
 #import "WalletManageModel.h"
 

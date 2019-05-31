@@ -1,3 +1,12 @@
+//
+//  WalletDAppPeersApi.m
+//  Wallet
+//
+//  Created by vechaindev on 2019/1/23.
+//  Copyright © 2019年 VeChain. All rights reserved.
+//
+// This code is distributed under the terms and conditions of the MIT license. 
+
 /**
     Copyright (c) 2019 vechaindev <support@vechain.com>
 
@@ -21,13 +30,7 @@
 
 **/
 
-//
-//  WalletDAppPeersApi.m
-//  VeWallet
-//
-//  Created by vechaindev on 2019/1/23.
-//  Copyright © 2019年 VeChain. All rights reserved.
-//
+
 
 #import "WalletDAppPeersApi.h"
 

@@ -1,3 +1,12 @@
+//
+//  WalletUserDefaultManager.m
+//  Wallet
+//
+//  Created by vechaindev on 18/4/11.
+//  Copyright ©  VeChain. All rights reserved.
+//
+// This code is distributed under the terms and conditions of the MIT license. 
+
 /**
     Copyright (c) 2019 vechaindev <support@vechain.com>
 
@@ -21,13 +30,7 @@
 
 **/
 
-//
-//  WalletUserDefaultManager.m
-//  Wallet
-//
-//  Created by vechaindev on 18/4/11.
-//  Copyright ©  VeChain. All rights reserved.
-//
+
 #import "WalletUserDefaultManager.h"
 #import "WalletHeader.h"
 

@@ -1,3 +1,12 @@
+//
+//  WalletTransactionParameter.m
+//  Wallet
+//
+//  Created by vechaindev on 2019/4/7.
+//  Copyright © 2019年 VeChain. All rights reserved.
+//
+// This code is distributed under the terms and conditions of the MIT license.
+
 /**
  Copyright (c) 2019 vechaindev <support@vechain.com>
  
@@ -21,13 +30,7 @@
  
  **/
 
-//
-//  WalletTransactionParameter.m
-//  WalletSDK
-//
-//  Created by vechaindev on 2019/4/7.
-//  Copyright © 2019年 VeChain. All rights reserved.
-//
+
 
 #import "WalletTransactionParameter.h"
 #import "YYModel.h"

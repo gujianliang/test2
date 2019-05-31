@@ -1,3 +1,12 @@
+//
+//  WalletTransactionApi.m
+//  Wallet
+//
+//  Created by vechaindev on 2018/4/27.
+//  Copyright © 2018年 VeChain. All rights reserved.
+//
+// This code is distributed under the terms and conditions of the MIT license. 
+
 /**
     Copyright (c) 2019 vechaindev <support@vechain.com>
 
@@ -21,13 +30,7 @@
 
 **/
 
-//
-//  WalletTransactionApi.m
-//  VCWallet
-//
-//  Created by vechaindev on 2018/4/27.
-//  Copyright © 2018年 VeChain. All rights reserved.
-//
+
 
 #import "WalletTransactionApi.h"
 

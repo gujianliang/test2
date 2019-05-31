@@ -1,3 +1,13 @@
+//
+//  WalletDemoMacro.h
+//  WalletDemo
+//
+//  Created by  VechainIOS on 2019/2/27.
+//  Copyright © 2019 VeChain. All rights reserved.
+//
+
+// This code is distributed under the terms and conditions of the MIT license. 
+
 /**
     Copyright (c) 2019 vechaindev <support@vechain.com>
 
@@ -21,13 +31,7 @@
 
 **/
 
-//
-//  WalletDemoMacro.h
-//  WalletSDKDemo
-//
-//  Created by  VechainIOS on 2019/2/27.
-//  Copyright © 2019 VeChain. All rights reserved.
-//
+
 
 #import "WalletUtils.h"
 

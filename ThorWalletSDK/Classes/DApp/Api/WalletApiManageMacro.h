@@ -1,3 +1,12 @@
+//
+//  WalletApiManageMacro.h
+//  Wallet
+//
+//  Created by vechaindev on 2018/9/20.
+//  Copyright © 2018年 VeChain. All rights reserved.
+//
+// This code is distributed under the terms and conditions of the MIT license. 
+
 /**
     Copyright (c) 2019 vechaindev <support@vechain.com>
 
@@ -21,13 +30,7 @@
 
 **/
 
-//
-//  WalletApiManageMacro.h
-//  VeWallet
-//
-//  Created by vechaindev on 2018/9/20.
-//  Copyright © 2018年 VeChain. All rights reserved.
-//
+
 
 #ifndef WalletApiManageMacro_h
 #define WalletApiManageMacro_h

@@ -1,3 +1,13 @@
+//
+//  WalletModelFetcher.h
+//  Wallet
+//
+//  Created by vechaindev on 18/4/7.
+//  Copyright ©  VeChain. All rights reserved.
+//
+
+// This code is distributed under the terms and conditions of the MIT license. 
+
 /**
     Copyright (c) 2019 vechaindev <support@vechain.com>
 
@@ -21,13 +31,6 @@
 
 **/
 
-//
-//  WalletModelFetcher.h
-//  Wallet
-//
-//  Created by vechaindev on 18/4/7.
-//  Copyright ©  VeChain. All rights reserved.
-//
 
 #import <Foundation/Foundation.h>
 

@@ -1,3 +1,12 @@
+//
+//  WalletVersionModel.h
+//  Wallet
+//
+//  Created by vechaindev on 2019/5/20.
+//  Copyright © 2019 Ethers. All rights reserved.
+//
+// This code is distributed under the terms and conditions of the MIT license. 
+
 /**
     Copyright (c) 2019 vechaindev <support@vechain.com>
 
@@ -21,13 +30,7 @@
 
 **/
 
-//
-//  WalletVersionModel.h
-//  WalletSDK
-//
-//  Created by vechaindev on 2019/5/20.
-//  Copyright © 2019 Ethers. All rights reserved.
-//
+
 
 #import "WalletBaseModel.h"
 

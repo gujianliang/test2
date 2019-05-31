@@ -1,3 +1,12 @@
+//
+//  WalletAddVthoNodeVC.m
+//  walletSDKDemo
+//
+//  Created by vechaindev on 2019/1/30.
+//  Copyright © 2019年 VeChain. All rights reserved.
+//
+// This code is distributed under the terms and conditions of the MIT license. 
+
 /**
     Copyright (c) 2019 vechaindev <support@vechain.com>
 
@@ -21,13 +30,7 @@
 
 **/
 
-//
-//  WalletAddVthoNodeVC.m
-//  walletSDKDemo
-//
-//  Created by vechaindev on 2019/1/30.
-//  Copyright © 2019年 VeChain. All rights reserved.
-//
+
 
 #import "WalletAddVthoNodeVC.h"
 #import "MBProgressHUD.h"

@@ -1,3 +1,12 @@
+//
+//  WalletVETBalanceApi.m
+//  Wallet
+//
+//  Created by Andy Deng on 2018/5/2.
+//  Copyright © 2018年 VeChain. All rights reserved.
+//
+// This code is distributed under the terms and conditions of the MIT license. 
+
 /**
     Copyright (c) 2019 vechaindev <support@vechain.com>
 
@@ -21,13 +30,7 @@
 
 **/
 
-//
-//  WalletVETBalanceApi.m
-//  VCWallet
-//
-//  Created by Andy Deng on 2018/5/2.
-//  Copyright © 2018年 VeChain. All rights reserved.
-//
+
 
 #import "WalletVETBalanceApi.h"
 #import "WalletHeader.h"
