@@ -3,7 +3,7 @@
 //  Wallet
 //
 //  Created by vechaindev on 18/4/11.
-//  Copyright © VECHAIN. All rights reserved.
+//  Copyright ©  VeChain. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>

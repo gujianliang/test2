@@ -1,10 +1,3 @@
-//
-//  NSObject+LKModel.m
-//  LKDBHelper
-//
-//  Created by LJH on 13-4-15.
-//  Copyright (c) 2013年 ljh. All rights reserved.
-//
 
 #import "NSObject+LKModel.h"
 #import <objc/runtime.h>

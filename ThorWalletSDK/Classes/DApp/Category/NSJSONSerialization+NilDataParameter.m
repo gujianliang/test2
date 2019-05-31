@@ -1,10 +1,3 @@
-//
-//  NSJSONSerialization+NilDataParameter.m
-//  OntheRoadV4
-//
-//  Created by hz on 9/16/14.
-//  Copyright (c) 2014 EricHuang. All rights reserved.
-//
 
 #import "NSJSONSerialization+NilDataParameter.h"
 

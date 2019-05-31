@@ -3,7 +3,7 @@
 //  VCBMW
 //
 //  Created by vechaindev on 2018/3/14.
-//  Copyright © 2018年 Tom. All rights reserved.
+//  Copyright © 2018年 VeChain. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>

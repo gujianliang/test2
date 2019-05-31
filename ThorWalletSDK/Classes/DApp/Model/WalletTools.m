@@ -26,7 +26,7 @@
 //  Wallet
 //
 //  Created by vechaindev on 18/4/26.
-//  Copyright © VECHAIN. All rights reserved.
+//  Copyright ©  VeChain. All rights reserved.
 //
 
 #import "WalletTools.h"
@@ -88,24 +88,6 @@
     NSString *translatedString = NSLocalizedStringWithDefaultValue(key, nil, languageBundle, key, key);
     
     return translatedString;
-}
-
-+ (UIImage *)localImageWithName:(NSString *)name{
-    
-    //Get the ThorWalletSDKBundle resource
-    NSString *bundlePath = [[NSBundle mainBundle] pathForResource:@"ThorWalletSDKBundle" ofType:@"bundle"];
-    if(!bundlePath){
-        return nil;
-    }
-    
-    NSString *imageName = [NSString stringWithFormat:@"%@/%@.png", bundlePath, name];
-    UIImage *image = [UIImage imageWithContentsOfFile:imageName];
-    if (!image) {
-        imageName = [NSString stringWithFormat:@"%@/%@.tiff", bundlePath, name];
-        image = [UIImage imageWithContentsOfFile:imageName];
-    }
-    
-    return image;
 }
 
 + (NSString *)checksumAddress:(NSString *)inputAddress

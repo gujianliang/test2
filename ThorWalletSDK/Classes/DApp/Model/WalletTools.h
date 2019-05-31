@@ -26,7 +26,7 @@
 //  Wallet
 //
 //  Created by vechaindev on 18/4/26.
-//  Copyright © VECHAIN. All rights reserved.
+//  Copyright ©  VeChain. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -94,7 +94,6 @@
                          code:(NSInteger)code;
 
 
-+ (UIImage *)localImageWithName:(NSString *)name;
 
 + (BOOL)errorAddressAlert:(NSString *)toAddress;
 
