@@ -22,15 +22,15 @@
 **/
 
 //
-//  WalletDAppHead.h
+//  WalletDAppHeader.h
 //  VeWallet
 //
 //  Created by vechaindev on 2019/1/23.
 //  Copyright © 2019年 VeChain. All rights reserved.
 //
 
-#ifndef WalletDAppHead_h
-#define WalletDAppHead_h
+#ifndef  WalletDAppHeader_h
+#define  WalletDAppHeader_h
 
 #import "Payment.h"
 #import "SecureData.h"
@@ -46,4 +46,4 @@ static NSString *ERROR_NETWORK_MSG = @"NetError";
 static NSString *ERROR_REJECTED_MSG  = @"Rejected";
 
 
-#endif /* WalletDAppHead_h */
+#endif /*  WalletDAppHeader_h */

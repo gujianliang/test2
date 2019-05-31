@@ -31,7 +31,7 @@
 
 #import "WalletDAppHandle.h"
 #import <WebKit/WebKit.h>
-#import "WalletDAppHead.h"
+#import "WalletDAppHeader.h"
 #import "WalletDAppHandle+web3JS.h"
 #import "WalletDAppHandle+connexJS.h"
 #import "WalletJSCallbackModel.h"

@@ -30,7 +30,6 @@
 //
 
 #import "WalletModelFetcher.h"
-#import "NSStringAdditions.h"
 #import "AFNetworking.h"
 #import "NSMutableDictionary+Helpers.h"
 

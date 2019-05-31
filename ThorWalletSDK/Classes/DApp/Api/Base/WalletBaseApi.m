@@ -31,7 +31,6 @@
 
 #import "WalletBaseApi.h"
 #import "WalletModelFetcher.h"
-#import "NSStringAdditions.h"
 #import "NSObject+LKModel.h"
 #import "ThorWalletHeader.h"
 #import "YYModel.h"

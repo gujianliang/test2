@@ -31,7 +31,7 @@
 
 #import "WalletDAppHandle.h"
 #import <WebKit/WebKit.h>
-#import "WalletDAppHead.h"
+#import "WalletDAppHeader.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

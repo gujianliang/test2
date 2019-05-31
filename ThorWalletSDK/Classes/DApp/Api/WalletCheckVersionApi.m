@@ -30,7 +30,7 @@
 //
 
 #import "WalletCheckVersionApi.h"
-#import "WalletDAppHead.h"
+#import "WalletDAppHeader.h"
 
 @implementation WalletCheckVersionApi
 {

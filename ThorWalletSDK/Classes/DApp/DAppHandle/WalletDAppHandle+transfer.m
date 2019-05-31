@@ -32,7 +32,7 @@
 #import "WalletDAppHandle+transfer.h"
 #import <WebKit/WebKit.h>
 #import "YYModel.h"
-#import "WalletDAppHead.h"
+#import "WalletDAppHeader.h"
 #import "WalletTransactionApi.h"
 
 @implementation WalletDAppHandle (transfer)

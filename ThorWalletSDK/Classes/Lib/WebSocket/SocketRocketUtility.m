@@ -1,10 +1,4 @@
-//
-//  SocketRocketUtility.m
-//  SUN
-//
-//  Created by shunjun on 17/2/16.
-//  Copyright © 2017年 SUN. All rights reserved.
-//
+
 
 #import "SocketRocketUtility.h"
 #import "ThorWalletHeader.h"

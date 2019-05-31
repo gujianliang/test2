@@ -31,7 +31,7 @@
 #import "WalletUtils.h"
 #import "WalletDAppHandle.h"
 #import "WalletTools.h"
-#import "WalletDAppHead.h"
+#import "WalletDAppHeader.h"
 #import "Account.h"
 #import "WalletGenesisBlockInfoApi.h"
 #import "WalletBestBlockInfoApi.h"
