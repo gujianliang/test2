@@ -29,7 +29,7 @@
 //  Copyright ©  VeChain. All rights reserved.
 //
 #import "WalletUserDefaultManager.h"
-#import "ThorWalletHeader.h"
+#import "WalletHeader.h"
 
 @implementation WalletUserDefaultManager
 

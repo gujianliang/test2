@@ -31,11 +31,11 @@
 
 #import <Foundation/Foundation.h>
 #import "WalletBaseApi.h"
-#import "ThorWalletHeader.h"
+#import "WalletHeader.h"
 //#import "YYModel.h"
 //#import "AFNetworking.h"
 
-#import "ThorWalletHeader.h"
+#import "WalletHeader.h"
 
 typedef NS_ENUM(NSInteger, WalletRequestStatus){
     NotAvailable = 1,

@@ -30,7 +30,7 @@
 //
 
 #import "WalletVETBalanceApi.h"
-#import "ThorWalletHeader.h"
+#import "WalletHeader.h"
 
 @implementation WalletVETBalanceApi
 

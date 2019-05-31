@@ -1,7 +1,7 @@
 
 
 #import "SocketRocketUtility.h"
-#import "ThorWalletHeader.h"
+#import "WalletHeader.h"
 
 #define dispatch_main_async_safe(block)\
 if ([NSThread isMainThread]) {\

@@ -37,7 +37,7 @@
 #import <Photos/PHPhotoLibrary.h>
 #import <WebKit/WebKit.h>
 #import "BigNumber.h"
-#import "ThorWalletHeader.h"
+#import "WalletHeader.h"
 
 #ifndef weakify
 #if DEBUG

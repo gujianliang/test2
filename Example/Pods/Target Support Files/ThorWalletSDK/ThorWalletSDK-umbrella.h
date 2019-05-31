@@ -15,7 +15,7 @@
 #import "BigNumber.h"
 #import "Hash.h"
 #import "Payment.h"
-#import "ThorWalletHeader.h"
+#import "WalletHeader.h"
 #import "Signature.h"
 #import "Transaction.h"
 #import "WalletUtils.h"

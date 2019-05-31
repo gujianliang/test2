@@ -31,7 +31,7 @@
 
 #import "WalletTransactionParameter.h"
 #import "YYModel.h"
-#import "ThorWalletHeader.h"
+#import "WalletHeader.h"
 
 @implementation WalletTransactionParameter
 

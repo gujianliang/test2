@@ -61,7 +61,7 @@
 		2F11FB657D789ABF5D927E224992D9BB /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A330FB07B6F5A6498CA3AEE64CA02CA1 /* CoreGraphics.framework */; };
 		3258F0BABC17E4AF6A7EDC477F2EB609 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A7BBAAA3622B39BCF2BC84976793CD6 /* Foundation.framework */; };
 		338659C8361BF485D80787501E38C470 /* AFNetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C8C68907A483D2795786C41C0F66635 /* AFNetworking.framework */; };
-		3532EFA72C1D6E533EA12152063BF3FB /* ThorWalletHeader.h in Headers */ = {isa = PBXBuildFile; fileRef = 026D315296B0D921A7CA23853D2A6079 /* ThorWalletHeader.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3532EFA72C1D6E533EA12152063BF3FB /* WalletHeader.h in Headers */ = {isa = PBXBuildFile; fileRef = 026D315296B0D921A7CA23853D2A6079 /* WalletHeader.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		376C1D473D22564AF7788A0F44FAA6A2 /* WalletDappLogTransferApi.m in Sources */ = {isa = PBXBuildFile; fileRef = A10138C96F2DCD1195ED7180EF12192F /* WalletDappLogTransferApi.m */; };
 		37C3DD810764469C693614FABF9698EB /* blake2bp-ref.c in Sources */ = {isa = PBXBuildFile; fileRef = B0286D75745DF9314EE56DBA4C08E838 /* blake2bp-ref.c */; };
 		38114817BD4DFAB648D33443482CD0D4 /* Hash.m in Sources */ = {isa = PBXBuildFile; fileRef = BE759F1BE78EA652F3931E505E4B5D0D /* Hash.m */; };
@@ -377,7 +377,7 @@
 		00C170077F15B422376EEC5DE791D324 /* ThorWalletSDK.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = ThorWalletSDK.modulemap; sourceTree = "<group>"; };
 		01EEA067C052D797E29EE23C5C4CBC32 /* options.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = options.h; sourceTree = "<group>"; };
 		0248A8153A5772BD2D73A45725C36EA3 /* UIProgressView+AFNetworking.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIProgressView+AFNetworking.m"; path = "UIKit+AFNetworking/UIProgressView+AFNetworking.m"; sourceTree = "<group>"; };
-		026D315296B0D921A7CA23853D2A6079 /* ThorWalletHeader.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ThorWalletHeader.h; path = ThorWalletSDK/Classes/BasicWallet/ThorWalletHeader.h; sourceTree = "<group>"; };
+		026D315296B0D921A7CA23853D2A6079 /* WalletHeader.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = WalletHeader.h; path = ThorWalletSDK/Classes/BasicWallet/WalletHeader.h; sourceTree = "<group>"; };
 		02F32FAA2DBC4A359E1E6CF15A0B6998 /* WalletUtils.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = WalletUtils.m; path = ThorWalletSDK/Classes/BasicWallet/WalletUtils.m; sourceTree = "<group>"; };
 		0338E639C1F73C7E7E7C6E2DD2705254 /* blake2xs-ref.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; path = "blake2xs-ref.c"; sourceTree = "<group>"; };
 		045507D8066E78DE34746877A76DB455 /* ResourceBundle-ThorWalletSDK-ThorWalletSDK-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "ResourceBundle-ThorWalletSDK-ThorWalletSDK-Info.plist"; sourceTree = "<group>"; };
@@ -928,7 +928,7 @@
 				BE759F1BE78EA652F3931E505E4B5D0D /* Hash.m */,
 				24D75B7D92C74E61B0507AF5DCD60895 /* Payment.h */,
 				73AB6F3E75EA07D2E5DAB09E620F41D9 /* Payment.m */,
-				026D315296B0D921A7CA23853D2A6079 /* ThorWalletHeader.h */,
+				026D315296B0D921A7CA23853D2A6079 /* WalletHeader.h */,
 				6D065D479BDEC7879FE4BC52348AA54F /* Signature.h */,
 				CCF19E849BBB0F3AD6745864644201C2 /* Signature.m */,
 				4CECFFBE306162E703A3F778BDD44043 /* Transaction.h */,
@@ -1566,7 +1566,7 @@
 				2DA0DA674A0E9CBE769979162EFB05F8 /* options.h in Headers */,
 				430284A97E881E07F98B10A236F20487 /* Payment.h in Headers */,
 				090E8CB4043DEC847E38BB369AB17567 /* pbkdf2.h in Headers */,
-				3532EFA72C1D6E533EA12152063BF3FB /* ThorWalletHeader.h in Headers */,
+				3532EFA72C1D6E533EA12152063BF3FB /* WalletHeader.h in Headers */,
 				3A7F096277481F3ABDF5A607820317E7 /* rand.h in Headers */,
 				BD39E4146AD9C23006D705E4B229F275 /* RegEx.h in Headers */,
 				64EBA99AD331CCF1B65F169D900ED972 /* ripemd160.h in Headers */,
