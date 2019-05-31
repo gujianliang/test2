@@ -271,7 +271,6 @@
                 builder.expiration = expiration;
                 builder.gasPriceCoef = gasPriceCoef;
                 
-                
             } checkParams:^(NSString * _Nonnull errorMsg) {
                 NSLog(@"errorMsg == %@",errorMsg);
             }];

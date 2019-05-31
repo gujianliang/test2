@@ -202,7 +202,7 @@
     if (toAddress.length != 42) {
         return NO;
         
-    }else if (![toAddress.uppercaseString hasPrefix:@"0X"]) {
+    }else if (![toAddress hasPrefix:@"0x"]) {
         return NO;
         
     }else if ([[toAddress substringFromIndex:2].lowercaseString isEqualToString:[toAddress substringFromIndex:2]]) {
@@ -215,7 +215,7 @@
         return YES;
     }
     
-    NSString *regex = @"^(0x|0X){1}[0-9A-Fa-f]{40}$";
+    NSString *regex = @"^(0x){1}[0-9A-Fa-f]{40}$";
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",regex];
     BOOL allAreValidChar = [predicate evaluateWithObject:toAddress];
     if (!allAreValidChar) {
