@@ -57,8 +57,10 @@
 #define Scale(num)          ((num) * SCREEN_WIDTH / 375.0)
 #define ScaleH(num)         ((num) * SCREEN_HEIGHT / 667.0)
 
-// control NSLog
-#define     ReleaseVersion    1
 
+#if DEBUG
+#else
+#define NSlog(...) {}
+#endif
 
 #endif /* WalletSDKMacro_h */

@@ -147,19 +147,13 @@
     NSString *injectJS = [NSString stringWithFormat:@"%@('%@')",callbackId,[packageDict yy_modelToJSONString]];
 
     injectJS = [injectJS stringByReplacingOccurrencesOfString:@"\"nu&*ll\"" withString:@"null"];
-#if ReleaseVersion
     NSLog(@"injectJS == %@",injectJS);
-#endif
     
     [webView evaluateJavaScript:injectJS completionHandler:^(id _Nullable item, NSError * _Nullable error) {
         if (error) {
-            #if ReleaseVersion
             NSLog(@"injectJS error == %@",error);
-            #endif
         }else {
-            #if ReleaseVersion
             NSLog(@"injectJS success");
-            #endif
         }
     }];
     

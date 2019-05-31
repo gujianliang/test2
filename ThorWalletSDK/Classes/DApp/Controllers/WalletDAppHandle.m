@@ -84,9 +84,7 @@ static dispatch_once_t predicate;
         return;
     }
     
-#if  ReleaseVersion
     NSLog(@"defaultText == %@",defaultText);
-#endif
     _webView = webView;
     
     //Whether the scheme conforms to the dapp response
