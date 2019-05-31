@@ -41,23 +41,6 @@
 #define     Test_Node      @"https://vethor-node-test.vechaindev.com"      /* The test Node environment of block chain */
 #define     Main_Node      @"https://vethor-node.vechain.com"           /* The main Node environment of block chain*/
 
-
-#define SCREEN_WIDTH          ([UIScreen mainScreen].bounds.size.width)
-#define SCREEN_HEIGHT         ([UIScreen mainScreen].bounds.size.height)
-
-// MARK: -
-// MARK: iPhoneX
-#define iS_iPhoneX ([UIScreen mainScreen].bounds.size.height >= 812)
-#define kStatusBarHeight                (iS_iPhoneX ? (20 + kiPhoneXStatusBarOffset) : 20)
-#define kNavigationBarHeight            (iS_iPhoneX ? 88 : 64)
-
-#define KBottomHeight       ((SCREEN_HEIGHT >= 812) ? 34 : 0)     // iPhonex bottom height
-#define KNavY               ((SCREEN_HEIGHT >= 812) ? 20 : 0)     // iPhonex navigation bar height
-#define KTabBarH            ((SCREEN_HEIGHT >= 812) ? 83 : 49)    // tabBar height
-#define Scale(num)          ((num) * SCREEN_WIDTH / 375.0)
-#define ScaleH(num)         ((num) * SCREEN_HEIGHT / 667.0)
-
-
 #if DEBUG
 #else
 #define NSlog(...) {}
