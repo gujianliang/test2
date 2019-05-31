@@ -37,7 +37,6 @@
 #import "WalletBestBlockInfoApi.h"
 #import "WalletDAppHandle+transfer.h"
 #import "AFNetworking.h"
-#import "MBProgressHUD.h"
 
 @implementation WalletUtils
 
