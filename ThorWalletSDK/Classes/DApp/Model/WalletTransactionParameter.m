@@ -466,7 +466,7 @@
     _reserveds = reserveds;
 }
 
-+ (WalletTransactionParameter *)creatTransactionParameter:(void(^)(TransactionParameterBuiler *builder))callback checkParams:(void(^)(NSString *errorMsg))checkParamsCallback
++ (WalletTransactionParameter *)createTransactionParameter:(void(^)(TransactionParameterBuiler *builder))callback checkParams:(void(^)(NSString *errorMsg))checkParamsCallback
 {
     TransactionParameterBuiler *builder = [[TransactionParameterBuiler alloc]init];
 

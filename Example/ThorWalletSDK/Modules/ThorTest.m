@@ -637,7 +637,7 @@
             NSLog(@"blockReference == %@",blockReference);
             //If the blockReference is nil, then the acquisition fails, you can prompt alert
             
-            WalletTransactionParameter *transactionModel = [WalletTransactionParameter creatTransactionParameter:^(TransactionParameterBuiler * _Nonnull builder) {
+            WalletTransactionParameter *transactionModel = [WalletTransactionParameter createTransactionParameter:^(TransactionParameterBuiler * _Nonnull builder) {
                 
                 builder.chainTag = chainTag;
                 builder.blockReference = blockReference;
@@ -704,7 +704,7 @@
             NSLog(@"blockReference == %@",blockReference);
             //If the blockReference is nil, then the acquisition fails, you can prompt alert
             
-            WalletTransactionParameter *transactionModel = [WalletTransactionParameter creatTransactionParameter:^(TransactionParameterBuiler * _Nonnull builder) {
+            WalletTransactionParameter *transactionModel = [WalletTransactionParameter createTransactionParameter:^(TransactionParameterBuiler * _Nonnull builder) {
                 
                 builder.chainTag = chainTag;
                 builder.blockReference = blockReference;
@@ -771,7 +771,7 @@
             NSLog(@"blockReference == %@",blockReference);
             //If the blockReference is nil, then the acquisition fails, you can prompt alert
             
-            WalletTransactionParameter *transactionModel = [WalletTransactionParameter creatTransactionParameter:^(TransactionParameterBuiler * _Nonnull builder) {
+            WalletTransactionParameter *transactionModel = [WalletTransactionParameter createTransactionParameter:^(TransactionParameterBuiler * _Nonnull builder) {
                 
                 builder.chainTag = chainTag;
                 builder.blockReference = blockReference;
@@ -838,7 +838,7 @@
             NSLog(@"blockReference == %@",blockReference);
             //If the blockReference is nil, then the acquisition fails, you can prompt alert
             
-            WalletTransactionParameter *transactionModel = [WalletTransactionParameter creatTransactionParameter:^(TransactionParameterBuiler * _Nonnull builder) {
+            WalletTransactionParameter *transactionModel = [WalletTransactionParameter createTransactionParameter:^(TransactionParameterBuiler * _Nonnull builder) {
                 
                 builder.chainTag = chainTag;
                 builder.blockReference = blockReference;
@@ -905,7 +905,7 @@
             NSLog(@"blockReference == %@",blockReference);
             //If the blockReference is nil, then the acquisition fails, you can prompt alert
             
-            WalletTransactionParameter *transactionModel = [WalletTransactionParameter creatTransactionParameter:^(TransactionParameterBuiler * _Nonnull builder) {
+            WalletTransactionParameter *transactionModel = [WalletTransactionParameter createTransactionParameter:^(TransactionParameterBuiler * _Nonnull builder) {
                 
                 builder.chainTag = chainTag;
                 builder.blockReference = blockReference;
@@ -972,7 +972,7 @@
             NSLog(@"blockReference == %@",blockReference);
             //If the blockReference is nil, then the acquisition fails, you can prompt alert
             
-            WalletTransactionParameter *transactionModel = [WalletTransactionParameter creatTransactionParameter:^(TransactionParameterBuiler * _Nonnull builder) {
+            WalletTransactionParameter *transactionModel = [WalletTransactionParameter createTransactionParameter:^(TransactionParameterBuiler * _Nonnull builder) {
                 
                 builder.chainTag = chainTag;
                 builder.blockReference = blockReference;
@@ -1039,7 +1039,7 @@
             NSLog(@"blockReference == %@",blockReference);
             //If the blockReference is nil, then the acquisition fails, you can prompt alert
             
-            WalletTransactionParameter *transactionModel = [WalletTransactionParameter creatTransactionParameter:^(TransactionParameterBuiler * _Nonnull builder) {
+            WalletTransactionParameter *transactionModel = [WalletTransactionParameter createTransactionParameter:^(TransactionParameterBuiler * _Nonnull builder) {
                 
                 builder.chainTag = chainTag;
                 builder.blockReference = blockReference;
@@ -1110,7 +1110,7 @@
             NSLog(@"blockReference == %@",blockReference);
             //If the blockReference is nil, then the acquisition fails, you can prompt alert
             
-            WalletTransactionParameter *transactionModel = [WalletTransactionParameter creatTransactionParameter:^(TransactionParameterBuiler * _Nonnull builder) {
+            WalletTransactionParameter *transactionModel = [WalletTransactionParameter createTransactionParameter:^(TransactionParameterBuiler * _Nonnull builder) {
                 
                 builder.chainTag = chainTag;
                 builder.blockReference = blockReference;
@@ -1179,7 +1179,7 @@
             NSLog(@"blockReference == %@",blockReference);
             //If the blockReference is nil, then the acquisition fails, you can prompt alert
             
-            WalletTransactionParameter *transactionModel = [WalletTransactionParameter creatTransactionParameter:^(TransactionParameterBuiler * _Nonnull builder) {
+            WalletTransactionParameter *transactionModel = [WalletTransactionParameter createTransactionParameter:^(TransactionParameterBuiler * _Nonnull builder) {
                 
                 builder.chainTag = chainTag;
                 builder.blockReference = blockReference;
@@ -1248,7 +1248,7 @@
             NSLog(@"blockReference == %@",blockReference);
             //If the blockReference is nil, then the acquisition fails, you can prompt alert
             
-            WalletTransactionParameter *transactionModel = [WalletTransactionParameter creatTransactionParameter:^(TransactionParameterBuiler * _Nonnull builder) {
+            WalletTransactionParameter *transactionModel = [WalletTransactionParameter createTransactionParameter:^(TransactionParameterBuiler * _Nonnull builder) {
                 
                 builder.chainTag = chainTag;
                 builder.blockReference = blockReference;
@@ -1317,7 +1317,7 @@
             NSLog(@"blockReference == %@",blockReference);
             //If the blockReference is nil, then the acquisition fails, you can prompt alert
             
-            WalletTransactionParameter *transactionModel = [WalletTransactionParameter creatTransactionParameter:^(TransactionParameterBuiler * _Nonnull builder) {
+            WalletTransactionParameter *transactionModel = [WalletTransactionParameter createTransactionParameter:^(TransactionParameterBuiler * _Nonnull builder) {
                 
                 builder.chainTag = chainTag;
                 builder.blockReference = blockReference;
@@ -1386,7 +1386,7 @@
             NSLog(@"blockReference == %@",blockReference);
             //If the blockReference is nil, then the acquisition fails, you can prompt alert
             
-            WalletTransactionParameter *transactionModel = [WalletTransactionParameter creatTransactionParameter:^(TransactionParameterBuiler * _Nonnull builder) {
+            WalletTransactionParameter *transactionModel = [WalletTransactionParameter createTransactionParameter:^(TransactionParameterBuiler * _Nonnull builder) {
                 
                 builder.chainTag = chainTag;
                 builder.blockReference = blockReference;
@@ -1455,7 +1455,7 @@
             NSLog(@"blockReference == %@",blockReference);
             //If the blockReference is nil, then the acquisition fails, you can prompt alert
             
-            WalletTransactionParameter *transactionModel = [WalletTransactionParameter creatTransactionParameter:^(TransactionParameterBuiler * _Nonnull builder) {
+            WalletTransactionParameter *transactionModel = [WalletTransactionParameter createTransactionParameter:^(TransactionParameterBuiler * _Nonnull builder) {
                 
                 builder.chainTag = chainTag;
                 builder.blockReference = blockReference;
@@ -1524,7 +1524,7 @@
             NSLog(@"blockReference == %@",blockReference);
             //If the blockReference is nil, then the acquisition fails, you can prompt alert
             
-            WalletTransactionParameter *transactionModel = [WalletTransactionParameter creatTransactionParameter:^(TransactionParameterBuiler * _Nonnull builder) {
+            WalletTransactionParameter *transactionModel = [WalletTransactionParameter createTransactionParameter:^(TransactionParameterBuiler * _Nonnull builder) {
                 
                 builder.chainTag = chainTag;
                 builder.blockReference = blockReference;
@@ -1693,7 +1693,7 @@
             NSLog(@"blockReference == %@",blockReference);
             //If the blockReference is nil, then the acquisition fails, you can prompt alert
             
-            WalletTransactionParameter *transactionModel = [WalletTransactionParameter creatTransactionParameter:^(TransactionParameterBuiler * _Nonnull builder) {
+            WalletTransactionParameter *transactionModel = [WalletTransactionParameter createTransactionParameter:^(TransactionParameterBuiler * _Nonnull builder) {
                 
                 builder.chainTag = chainTag;
                 builder.blockReference = blockReference;
@@ -1762,7 +1762,7 @@
             NSLog(@"blockReference == %@",blockReference);
             //If the blockReference is nil, then the acquisition fails, you can prompt alert
             
-            WalletTransactionParameter *transactionModel = [WalletTransactionParameter creatTransactionParameter:^(TransactionParameterBuiler * _Nonnull builder) {
+            WalletTransactionParameter *transactionModel = [WalletTransactionParameter createTransactionParameter:^(TransactionParameterBuiler * _Nonnull builder) {
                 
                 builder.chainTag = chainTag;
                 builder.blockReference = blockReference;

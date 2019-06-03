@@ -55,7 +55,7 @@
 /**
 * Create a wallet.
 */
-- (IBAction)creatWallet:(id)sender{
+- (IBAction)createWallet:(id)sender{
     [self.view endEditing:YES];
    
 //    [self signAndRecover];

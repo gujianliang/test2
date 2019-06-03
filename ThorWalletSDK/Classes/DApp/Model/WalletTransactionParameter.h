@@ -57,7 +57,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, readonly)NSArray<NSData *> *reserveds;
 
-+ (WalletTransactionParameter *)creatTransactionParameter:(void(^)(TransactionParameterBuiler *builder))callback checkParams:(void(^)(NSString *errorMsg))checkParamsCallback;
++ (WalletTransactionParameter *)createTransactionParameter:(void(^)(TransactionParameterBuiler *builder))callback checkParams:(void(^)(NSString *errorMsg))checkParamsCallback;
 
 @end
 
