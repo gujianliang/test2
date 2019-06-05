@@ -2,7 +2,7 @@
 //  ThorViewController.h
 //  ThorWalletSDK_Example
 //
-//  Created by vechaindev on 2019/5/22.
+//  Created by VeChain on 2019/5/22.
 //  Copyright © 2019 VeChain. All rights reserved.
 //
 

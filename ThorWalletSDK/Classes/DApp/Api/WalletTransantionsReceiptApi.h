@@ -2,13 +2,13 @@
 //  WalletTransantionsReceiptApi.h
 //  Wallet
 //
-//  Created by vechaindev on 2018/6/1.
+//  Created by VeChain on 2018/6/1.
 //  Copyright © 2018年 VeChain. All rights reserved.
 //
 // This code is distributed under the terms and conditions of the MIT license. 
 
 /**
-    Copyright (c) 2019 vechaindev <support@vechain.com>
+    Copyright (c) 2019 VeChain <support@vechain.com>
 
     Permission is hereby granted, free of charge, to any person obtaining a copy
     of this software and associated documentation files (the "Software"), to deal

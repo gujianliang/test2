@@ -2,7 +2,7 @@
 //  PrefixHeader.pch
 //  walletSDK
 //
-//  Created by vechaindev on 2019/1/28.
+//  Created by VeChain on 2019/1/28.
 //  Copyright © 2019年 VeChain. All rights reserved.
 //
 

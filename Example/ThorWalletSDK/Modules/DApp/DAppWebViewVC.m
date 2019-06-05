@@ -1,5 +1,5 @@
 /**
- Copyright (c) 2019 vechaindev <support@vechain.com>
+ Copyright (c) 2019 VeChain <support@vechain.com>
  
  Permission is hereby granted, free of charge, to any person obtaining a copy
  of this software and associated documentation files (the "Software"), to deal
@@ -24,7 +24,7 @@
 //  DAppWebViewVC.m
 //  walletSDKDemo
 //
-//  Created by vechaindev on 2019/1/29.
+//  Created by VeChain on 2019/1/29.
 //  Copyright © 2019年 VeChain. All rights reserved.
 //
 
