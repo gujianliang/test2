@@ -251,17 +251,17 @@
                             password:(NSString *)password
 {
     //Get the chain tag of the block chain
-    [WalletUtils getChainTag:^(NSString * _Nonnull chainTag) {
+    [WalletUtils getChainTag:^(NSString *chainTag) {
         NSLog(@"chainTag == %@",chainTag);
         //If the chainTag is nil, then the acquisition fails, you can prompt alert
         
         //Get the reference of the block chain
-        [WalletUtils getBlockReference:^(NSString * _Nonnull blockReference) {
+        [WalletUtils getBlockReference:^(NSString *blockReference) {
             
             NSLog(@"blockReference == %@",blockReference);
             //If the blockReference is nil, then the acquisition fails, you can prompt alert
             
-            WalletTransactionParameter *transactionModel = [WalletTransactionParameter createTransactionParameter:^(TransactionParameterBuiler * _Nonnull builder) {
+            WalletTransactionParameter *transactionModel = [WalletTransactionParameter createTransactionParameter:^(TransactionParameterBuiler *builder) {
                 
                 builder.chainTag = chainTag;
                 builder.blockReference = blockReference;
@@ -271,7 +271,7 @@
                 builder.expiration = expiration;
                 builder.gasPriceCoef = gasPriceCoef;
                 
-            } checkParams:^(NSString * _Nonnull errorMsg) {
+            } checkParams:^(NSString *errorMsg) {
                 NSLog(@"errorMsg == %@",errorMsg);
             }];
             
@@ -281,11 +281,11 @@
                 [WalletUtils signAndSendTransferWithParameter:transactionModel
                                                      keystore:keystore
                                                      password:password
-                                                     callback:^(NSString * _Nonnull txid)
+                                                     callback:^(NSString *txId)
                 {
                        //Developers can use txid to query the status of data packaged on the chain
      
-                       NSLog(@"\n txId: %@", txid);
+                       NSLog(@"\n txId: %@", txId);
                 }];
             }
         }];

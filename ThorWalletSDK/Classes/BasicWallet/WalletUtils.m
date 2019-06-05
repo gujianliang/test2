@@ -461,7 +461,7 @@
         return ;
     }
     
-    [WalletUtils decryptKeystore:keystoreJson password:oldPassword callback:^(NSString * _Nonnull privatekey, NSError * _Nonnull error) {
+    [WalletUtils decryptKeystore:keystoreJson password:oldPassword callback:^(NSString *privatekey, NSError *error) {
         
         if (error) {
             if (callback) {
@@ -470,7 +470,7 @@
             
             return ;
         }else{
-            [WalletUtils encryptPrivateKeyWithPassword:newPassword privateKey:privatekey callback:^(NSString * _Nonnull keystoreJson) {
+            [WalletUtils encryptPrivateKeyWithPassword:newPassword privateKey:privatekey callback:^(NSString *keystoreJson) {
                 
                 if (callback) {
                     callback(keystoreJson);
@@ -494,7 +494,7 @@
         }
         return ;
     }
-    [WalletUtils decryptKeystore:keystore password:password callback:^(NSString * _Nonnull privatekey, NSError * _Nonnull error){
+    [WalletUtils decryptKeystore:keystore password:password callback:^(NSString *privatekey, NSError *error){
         
         if (privatekey) {
             callback(YES);
@@ -566,9 +566,10 @@
     }
 }
 
-+ (NSString *)addSignerToCertMessage:(NSString *)signer message:(NSDictionary *)message
++ (NSString *)addSignerToCertMessage:(NSString *)signer message:(NSString *)message
 {
-    NSMutableDictionary *newMessage = [NSMutableDictionary dictionaryWithDictionary:message];
+    
+    NSMutableDictionary *newMessage = [NSMutableDictionary dictionaryWithDictionary:[NSJSONSerialization dictionaryWithJsonString:message]];
     [newMessage setValueIfNotNil:signer forKey:@"signer"];
     
    return  [WalletTools packageCertParam:newMessage];

@@ -40,8 +40,6 @@
 #import "WalletSDKMacro.h"
 #import "SecureData.h"
 
-NS_ASSUME_NONNULL_BEGIN
-
 @protocol WalletUtilsDelegate <NSObject>
 
 #pragma mark setDelegate
@@ -53,14 +51,14 @@ NS_ASSUME_NONNULL_BEGIN
  *
  *  @param clauses : Clause model list
  *  @param gas : Set maximum gas allowed for call
- *  @param signer : Enforces the specified address to sign the transaction
- *  @param callback : Callback after the end. txid:Transaction identifier; signer:Signer address
+ *  @param signer : Enforces the specified address to sign the transaction.May be  nil
+ *  @param completionHandler : Callback after the end. txId:Transaction identifier; signer:Signer address
  *
  */
 - (void)onWillTransfer:(NSArray<ClauseModel *> *)clauses
             signer:(NSString *)signer
                gas:(NSString *)gas
-          callback:(void(^)(NSString *txid ,NSString *signer))callback;
+ completionHandler:(void(^)(NSString *txId ,NSString *signer))completionHandler;
 
 /**
  *  @abstract
@@ -77,14 +75,14 @@ NS_ASSUME_NONNULL_BEGIN
  *   App developer implementation when dapp calls authentication function
  *   delegate function that must be implemented to support the DApp environment
  *
- *  @param message : Data to be signed,form dapp
- *  @param signer : Enforces the specified address to sign the certificate
- *  @param callback : Callback after the end.signer: Signer address; signatureData : Signature is 65 bytes
+ *  @param certificateMessage : string to be signed,form dapp
+ *  @param signer : Enforces the specified address to sign the certificate.May be  nil
+ *  @param completionHandler : Callback after the end.signer: Signer address; signatureData : Signature is 65 bytes
  *
  */
-- (void)onWillCertificate:(NSDictionary *)message
+- (void)onWillCertificate:(NSString *)certificateMessage
                    signer:(NSString *)signer
-                 callback:(void(^)(NSString *signer, NSData *signatureData))callback;
+        completionHandler:(void(^)(NSString *signer, NSData *signatureData))completionHandler;
 
 
 /*
@@ -304,7 +302,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param signer : Enforces the specified address to sign the certificate
  *  @param message : Authentication signature data
  */
-+ (NSString *)addSignerToCertMessage:(NSString *)signer message:(NSDictionary *)message;
++ (NSString *)addSignerToCertMessage:(NSString *)signer message:(NSString *)message;
 
 /**
  *  @abstract
@@ -319,7 +317,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (void)signAndSendTransferWithParameter:(WalletTransactionParameter *)parameter
                             keystore:(NSString*)keystoreJson
                             password:(NSString *)password
-                            callback:(void(^)(NSString *txid))callback;
+                            callback:(void(^)(NSString *txId))callback;
 
 /**
  *  @abstract
@@ -362,8 +360,6 @@ completionHandler:(void (^)(NSString *result))completionHandler;
 
 
 
-
-NS_ASSUME_NONNULL_END
 
 
 

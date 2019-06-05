@@ -248,42 +248,35 @@
 
 - (BOOL)isRightClause:(ClauseModel *)clauseModel errorMsg:(NSString **)errorMsg
 {
-    if ([WalletTools isEmpty:clauseModel.to]) {
+    if ([WalletTools isEmpty:clauseModel.to] && [WalletTools isEmpty:clauseModel.data]) {
         
-        if ([WalletTools isEmpty:clauseModel.data]) {
-            *errorMsg = @"clause is invalid";
-            return NO;
-        }
+        *errorMsg = @"clause is invalid";
+        return NO;
         
-    }else{ // To has a value, need to judge the data is divisible by 64
-        if (![WalletTools isEmpty:clauseModel.data]) {
-            
-            // Divided by 64
-            if (clauseModel.data.length >= 10) {
-                NSInteger i = (clauseModel.data.length - 10) % 64;
-                if (i != 0) {
-                    *errorMsg = @"clause is invalid";
-                    return NO;
-                }
-            }
-            else{
-                if ([clauseModel.data isEqualToString:@"0x"]) {
-                    return YES;
-                }else{
-                    *errorMsg = @"clause is invalid";
-                    return NO;
-                }
-            }
-            
-        }else{
-            //to != nil data = nil value == nil
-            if ([WalletTools isEmpty:clauseModel.value]) {
+    }else if (![WalletTools isEmpty:clauseModel.data]){
+        // To has a value, need to judge the data is divisible by 64
+        
+        // Divided by 64
+        if (clauseModel.data.length >= 10) {
+            NSInteger i = (clauseModel.data.length - 10) % 64;
+            if (i != 0) {
                 *errorMsg = @"clause is invalid";
                 return NO;
             }
         }
+        else if ([clauseModel.data isEqualToString:@"0x"]) {
+            return YES;
+            
+        }else{
+            *errorMsg = @"clause is invalid";
+            return NO;
+        }
+    }else if ([WalletTools isEmpty:clauseModel.value]) {
+            //to != nil data = nil value == nil
+           
+            *errorMsg = @"clause is invalid";
+            return NO;
     }
-    
     return YES;
 }
 

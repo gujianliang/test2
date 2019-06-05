@@ -41,8 +41,8 @@
 
 #define AppId_Test @"27a7898b733ce99d90ec5338de5ced52"
 
-#define     Test_Node      @"https://vethor-node-test.vechaindev.com"      /* The test Node environment of block chain */
-#define     Main_Node      @"https://vethor-node.vechain.com"           /* The main Node environment of block chain*/
+#define     Test_Node      @"https://vethor-node-test.digonchain.com"      /* The test Node environment of block chain */
+#define     Main_Node      @"https://vethor-node.digonchain.com"           /* The main Node environment of block chain*/
 
 #if DEBUG
 #else

@@ -134,9 +134,8 @@
 - (void)onWillTransfer:(NSArray<ClauseModel *> *)clauses
             signer:(NSString *)signer
                gas:(NSString *)gas
-          callback:(void(^)(NSString *txid ,NSString *signer))callback
+ completionHandler:(void(^)(NSString *txId ,NSString *signer))completionHandler
 {
-    
    //Get the local keystore
     NSDictionary *currentWalletDict = [[NSUserDefaults standardUserDefaults]objectForKey:@"currentWallet"];
     NSString *keystore = currentWalletDict[@"keystore"];
@@ -144,9 +143,9 @@
     NSString *address = [WalletUtils getAddressWithKeystore:keystore];
     
     //Specified signature address
-    if (signer.length > 0 && [address.lowercaseString isEqualToString:signer.lowercaseString]) {
+    if (signer.length > 0 && ![address.lowercaseString isEqualToString:signer.lowercaseString]) {
         
-        callback(@"",@"");
+        completionHandler(@"",@"");
         return;
     }
     
@@ -159,7 +158,6 @@
     [alertController addAction:([UIAlertAction actionWithTitle: @"Confirm"
                                                          style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action)
      {
-         
          UITextField *textF =  alertController.textFields.lastObject;
          
          NSString *password = textF.text;
@@ -168,7 +166,7 @@
              @strongify(self);
              if (result) {
                  
-                 [self packageParameter:clauses gas:gas keystore:keystore password:password callback:callback] ;
+                 [self packageParameter:clauses gas:gas keystore:keystore password:password completionHandler:completionHandler] ;
              }
          }];
          
@@ -179,7 +177,7 @@
     [self presentViewController:alertController animated:YES completion:nil];
 }
 
-- (void)packageParameter:(NSArray *)clauses gas:(NSString *)gas keystore:(NSString *)keystore password:(NSString *)password callback:(void(^)(NSString *txid ,NSString *address))callback
+- (void)packageParameter:(NSArray *)clauses gas:(NSString *)gas keystore:(NSString *)keystore password:(NSString *)password completionHandler:(void(^)(NSString *txId ,NSString *signer))completionHandler
 {
     //The random number is 8 bytes
     NSMutableData* randomData = [[NSMutableData alloc]initWithCapacity:8];
@@ -199,7 +197,7 @@
                              gasPriceCoef:@"0"   // Coefficient used to calculate the final gas price (0 - 255)
                                  keystore:keystore
                                  password:password
-                                 callback:callback];
+                                 completionHandler:completionHandler];
 }
 
 - (void)packageTranstionModelClauseList:(NSArray *)clauseList
@@ -209,20 +207,20 @@
                            gasPriceCoef:(NSString *)gasPriceCoef
                                keystore:(NSString *)keystore
                                password:(NSString *)password
-                            callback:(void(^)(NSString *txid ,NSString *address))callback
+                      completionHandler:(void(^)(NSString *txId ,NSString *signer))completionHandler
 {
     //Get the chain tag of the block chain
-    [WalletUtils getChainTag:^(NSString * _Nonnull chainTag) {
+    [WalletUtils getChainTag:^(NSString *chainTag) {
         NSLog(@"chainTag == %@",chainTag);
         //If the chainTag is nil, then the acquisition fails, you can prompt alert
         
         //Get the reference of the block chain
-        [WalletUtils getBlockReference:^(NSString * _Nonnull blockReference) {
+        [WalletUtils getBlockReference:^(NSString *blockReference) {
             
             NSLog(@"blockReference == %@",blockReference);
             //If the blockReference is nil, then the acquisition fails, you can prompt alert
             
-                WalletTransactionParameter *transactionModel = [WalletTransactionParameter createTransactionParameter:^(TransactionParameterBuiler * _Nonnull builder) {
+                WalletTransactionParameter *transactionModel = [WalletTransactionParameter createTransactionParameter:^(TransactionParameterBuiler *builder) {
 
                     builder.chainTag = chainTag;
                     builder.blockReference = blockReference;
@@ -232,7 +230,7 @@
                     builder.expiration = expiration;
                     builder.gasPriceCoef = gasPriceCoef;
 
-                } checkParams:^(NSString * _Nonnull errorMsg) {
+                } checkParams:^(NSString *errorMsg) {
                     NSLog(@"errorMsg == %@",errorMsg);
                 }];
             
@@ -241,19 +239,18 @@
                     [WalletUtils signAndSendTransferWithParameter:transactionModel
                                                          keystore:keystore
                                                          password:password
-                                                         callback:^(NSString * _Nonnull txid)
+                                                         callback:^(NSString * txId)
                      {
                          //Developers can use txid to query the status of data packaged on the chain
 
-                         NSLog(@"\n txId: %@", txid);
+                         NSLog(@"\n txId: %@", txId);
                          
                          // Pass txid and signature address back to dapp webview
                          NSString *singerAddress = [WalletUtils getAddressWithKeystore:keystore];
-                         callback(txid,singerAddress.lowercaseString);
+                         completionHandler(txId,singerAddress.lowercaseString);
                          
                      }];
                 }
-
         }];
     }];
 }
@@ -291,7 +288,9 @@
     }
 }
 
-- (void)onWillCertificate:(NSDictionary *)message signer:(NSString *)signer callback:(void (^)(NSString * signer, NSData *  signatureData))callback
+- (void)onWillCertificate:(NSString *)certificateMessage
+                   signer:(NSString *)signer
+        completionHandler:(void (^)(NSString * signer, NSData * signatureData))completionHandler
 {
     NSDictionary *currentWalletDict = [[NSUserDefaults standardUserDefaults]objectForKey:@"currentWallet"];
     NSString *keystore = currentWalletDict[@"keystore"];
@@ -299,27 +298,33 @@
     NSString *address = [WalletUtils getAddressWithKeystore:keystore];
     
     if (signer.length > 0) { //Specified signature address
-       
+        
         if ([address.lowercaseString isEqualToString:signer.lowercaseString]) {
             
-            NSString *strMessage = [WalletUtils addSignerToCertMessage:signer.lowercaseString message:message];
-            NSData *dataMessage = [strMessage dataUsingEncoding:NSUTF8StringEncoding];
-            [self signCert:dataMessage signer:address.lowercaseString keystore:keystore callback:callback];
+            NSString *strMessage = [WalletUtils addSignerToCertMessage:signer.lowercaseString
+                                                               message:certificateMessage];
+            [self signCert:strMessage
+                    signer:address.lowercaseString
+                  keystore:keystore
+         completionHandler:completionHandler];
         }else{
             //Cusmtom alert error
-            callback(@"",nil);
+            completionHandler(@"",nil);
         }
     }else{
-        NSString *strMessage = [WalletUtils addSignerToCertMessage:address.lowercaseString message:message];
-        NSData *dataMessage = [strMessage dataUsingEncoding:NSUTF8StringEncoding];
-        [self signCert:dataMessage signer:address.lowercaseString keystore:keystore callback:callback];
+        NSString *strMessage = [WalletUtils addSignerToCertMessage:address.lowercaseString
+                                                           message:certificateMessage];
+        [self signCert:strMessage
+                signer:address.lowercaseString
+              keystore:keystore
+     completionHandler:completionHandler];
     }
 }
 
-- (void)signCert:(NSData *) message
+- (void)signCert:(NSString *)message
           signer:(NSString *)signer
         keystore:(NSString *)keystore
-        callback:(void (^)(NSString * _Nonnull signer, NSData * _Nonnull signatureData))callback
+completionHandler:(void (^)(NSString *signer, NSData *signatureData))completionHandler
 {
     //Custom password input box
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil
@@ -332,12 +337,18 @@
                                  {
                                      
                                      UITextField *textF =  alertController.textFields.lastObject;
+                                     NSData *dataMessage = [message dataUsingEncoding:NSUTF8StringEncoding];
                                      
-                                     [WalletUtils signWithMessage:message keystore:keystore password:textF.text callback:^(NSData * _Nonnull signatureData) {
+                                     [WalletUtils signWithMessage:dataMessage
+                                                         keystore:keystore
+                                                         password:textF.text
+                                                         callback:^(NSData *signatureData)
+                                     {
                                          
-                                         if (!signatureData) {
-                                             callback(signer,signatureData);
+                                         if (signatureData) {
+                                             completionHandler(signer,signatureData);
                                          }else{
+                                             completionHandler(signer,nil);
                                          }
                                      }];
                                      

@@ -83,7 +83,7 @@
     
     /* Create a wallet with your password. */
     [WalletUtils createWalletWithPassword:self.passwordLabel.text
-                                 callback:^(WalletAccountModel * _Nonnull account, NSError * _Nonnull error)
+                                 callback:^(WalletAccountModel *account, NSError *error)
 
     {
         [hud hideAnimated:YES];
@@ -127,7 +127,7 @@
     [WalletUtils signWithMessage:messageData
                         keystore:keystore
                         password:@"123456"
-                        callback:^(NSData * _Nonnull signatureData)
+                        callback:^(NSData *signatureData)
     {
         NSString *address = [WalletUtils recoverAddressFromMessage:messageData signatureData:signatureData];
         NSLog(@"address == %@",address);

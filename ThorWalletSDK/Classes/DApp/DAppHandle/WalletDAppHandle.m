@@ -307,11 +307,11 @@ static dispatch_once_t predicate;
 {
     id delegate = [WalletDAppHandle shareWalletHandle].delegate;
     if (delegate) {
-        if ([delegate respondsToSelector:@selector(onWillTransfer: signer: gas: callback:)]) {
+        if ([delegate respondsToSelector:@selector(onWillTransfer: signer: gas: completionHandler:)]) {
             
-            [delegate onWillTransfer:clauseModelList signer:signer gas:gas callback:^(NSString * _Nonnull txid,NSString *signer)
+            [delegate onWillTransfer:clauseModelList signer:signer gas:gas completionHandler:^(NSString * txId,NSString *signer)
              {
-                 [self callbackToWebView:txid
+                 [self callbackToWebView:txId
                                  signer:signer
                                  bConnex:bConnex
                                  webView:webView

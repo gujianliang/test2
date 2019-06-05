@@ -113,7 +113,7 @@
     
     if (self.delegate && [self.delegate respondsToSelector:@selector(onGetWalletAddress:)]) {
         
-        [self.delegate onGetWalletAddress:^(NSArray * _Nonnull addressList) {
+        [self.delegate onGetWalletAddress:^(NSArray *addressList) {
             
             [WalletTools callbackWithrequestId:requestId
                                        webView:webView

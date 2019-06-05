@@ -484,7 +484,6 @@
         WalletBlockInfoModel *blockModel = finishApi.resultModel;
         NSNumber *timestamp = (NSNumber *)blockModel.timestamp;
         
-        
         NSString *time = [NSString stringWithFormat:@"%.0ld",(long)timestamp.integerValue];
         NSString *domain  = webView.URL.host;
         
@@ -494,10 +493,22 @@
         [dictSignParam setValueIfNotNil:domain forKey:@"domain"];
         [dictSignParam setValueIfNotNil:from.lowercaseString forKey:@"signer"];
 
-        if (self.delegate && [self.delegate respondsToSelector:@selector(onWillCertificate:signer:callback:)]) {
+        NSString *strParams = [dictSignParam yy_modelToJSONString];
+        if (self.delegate && [self.delegate respondsToSelector:@selector(onWillCertificate:signer:completionHandler:)]) {
             
-            [self.delegate onWillCertificate:dictSignParam signer:from callback:^(NSString * _Nonnull signer, NSData * _Nonnull signature) {
+            [self.delegate onWillCertificate:strParams
+                                      signer:from
+                           completionHandler:^(NSString *signer, NSData *signature)
+            {
                 
+                if (signature == nil) {
+                    [WalletTools callbackWithrequestId:requestId
+                                               webView:webView
+                                                  data:@""
+                                            callbackId:callbackId
+                                                  code:ERROR_REJECTED];
+                    return ;
+                }
                 NSString *hashSignture = [SecureData dataToHexString:signature];
                 
                 NSMutableDictionary *dictSub = [NSMutableDictionary dictionary];
