@@ -35,83 +35,75 @@
 #import "WalletDAppHandle.h"
 #import <WebKit/WebKit.h>
 #import "WalletDAppHeader.h"
-
+#import "WalletJSCallbackModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface WalletDAppHandle (connexJS)
 
 //Get the genesis block information
--(void)getGenesisBlockWithRequestId:(NSString *)requestId
-                  completionHandler:(void (^)(NSString * __nullable result))completionHandler;
-
+-(void)getGenesisBlockWithRequestId:(WalletJSCallbackModel *)callbackModel
+                  completionHandler:(void (^)(NSString * __nullable result))completionHandler
+                            webView:(WKWebView *)webView;
 //Get block status
--(void)getStatusWithRequestId:(NSString *)requestId
-            completionHandler:(void (^)(NSString * __nullable result))completionHandler;
+-(void)getStatusWithRequestId:(WalletJSCallbackModel *)callbackModel
+            completionHandler:(void (^)(NSString * __nullable result))completionHandler
+                      webView:(WKWebView *)webView;
 
 //Get VET balance
-- (void)getAccountRequestId:(NSString *)requestId
-                    webView:(WKWebView *)webView
-                    address:(NSString *)address
-                 callbackId:(NSString *)callbackId;
+- (void)getAccountRequestId:(WalletJSCallbackModel *)callbackModel
+          completionHandler:(void (^)(NSString * __nullable result))completionHandler
+                    webView:(WKWebView *)webView;
 
 //Get account code
-- (void)getAccountCode:(NSString *)callbackId
-               webView:(WKWebView *)webView
-             requestId:(NSString *)requestId
-               address:(NSString *)address;
+- (void)getAccountCode:(WalletJSCallbackModel *)callbackModel
+     completionHandler:(void (^)(NSString * __nullable result))completionHandler
+               webView:(WKWebView *)webView;
 
 //Get account storge
-- (void)getStorageApiDictParam:(NSDictionary *)dictParam
-                     requestId:(NSString *)requestId
-                       webView:(WKWebView *)webView
-                    callbackId:(NSString *)callbackId;
+- (void)getStorageApiDictParam:(WalletJSCallbackModel *)callbackModel
+             completionHandler:(void (^)(NSString * __nullable result))completionHandler
+                       webView:(WKWebView *)webView;
 
 
 //Get information about a block
-- (void)getBlock:(NSString *)callbackId
-         webView:(WKWebView *)webView
-       requestId:(NSString *)requestId
-        revision:(NSString *)revision;
+- (void)getBlock:(WalletJSCallbackModel *)callbackModel
+completionHandler:(void (^)(NSString * __nullable result))completionHandler
+         webView:(WKWebView *)webView;
 
 //Get transaction details
-- (void)getTransaction:(NSString *)callbackId
-               webView:(WKWebView *)webView
-             requestId:(NSString *)requestId
-                  txID:(NSString *)txID;
+- (void)getTransaction:(WalletJSCallbackModel *)callbackModel
+     completionHandler:(void (^)(NSString * __nullable result))completionHandler
+               webView:(WKWebView *)webView;
 
 //Get transaction receipt
-- (void)getTransactionReceipt:(NSString *)callbackId
-                      webView:(WKWebView *)webView
-                    requestId:(NSString *)requestId
-                         txid:(NSString *)txid;
+- (void)getTransactionReceipt:(WalletJSCallbackModel *)callbackModel
+            completionHandler:(void (^)(NSString * __nullable result))completionHandler
+                      webView:(WKWebView *)webView;
 
 //Open ticker next
-- (void)tickerNextRequestId:(NSString *)requestId
-                 callbackId:(NSString *)callbackId;
+- (void)tickerNextRequestId:(WalletJSCallbackModel *)callbackModel
+          completionHandler:(void (^)(NSString * __nullable result))completionHandler
+                    webView:(WKWebView *)webView;
 
 //Simulate a single transaction
-- (void)methodAsCallWithDictP:(NSDictionary *)dictP
-                      requestId:(NSString *)requestId
-                        webView:(WKWebView *)webView
-                     callbackId:(NSString *)callbackId;
+- (void)methodAsCallWithDictP:(WalletJSCallbackModel *)callbackModel
+            completionHandler:(void (^)(NSString * __nullable result))completionHandler
+                      webView:(WKWebView *)webView;
 
 //Filter by condition
-- (void)filterDictParam:(NSDictionary *)dictParam
-              requestId:(NSString *)requestId
-                webView:(WKWebView *)webView
-             callbackId:(NSString *)callbackId;
+- (void)filterDictParam:(WalletJSCallbackModel *)callbackModel
+      completionHandler:(void (^)(NSString * __nullable result))completionHandler
+                webView:(WKWebView *)webView;
 
 //Simulate multiple transactions
-- (void)explainDictParam:(NSDictionary *)dictParam
-               requestId:(NSString *)requestId
-                 webView:(WKWebView *)webView
-              callbackId:(NSString *)callbackId;
+- (void)explainDictParam:(WalletJSCallbackModel *)callbackModel
+       completionHandler:(void (^)(NSString * __nullable result))completionHandler
+                 webView:(WKWebView *)webView;
 
 //Determine if the local wallet has this address
-- (void)checkAddressOwn:(NSString *)address
-              requestId:(NSString *)requestId
-             callbackId:(NSString *)callbackId
-      completionHandler:(void (^)(NSString * __nullable result))completionHandler;
+- (void)checkAddressOwn:(WalletJSCallbackModel *)callbackModel
+      completionHandler:(void (^)(NSString * __nullable result))completionHandler
+                webView:(WKWebView *)webView;
 
 //Certification signature
 - (void)certTransferParamModel:(NSDictionary *)callbackParams

@@ -42,13 +42,15 @@
 #import "WalletCheckVersionApi.h"
 #import "WalletVersionModel.h"
 #import "WalletDappSimulateMultiAccountApi.h"
-
+#import "WalletDAppGasCalculateHandle.h"
+#import "WalletGenesisBlockInfoApi.h"
+#import "WalletDAppInjectJSHandle.h"
 
 @interface WalletDAppHandle ()<WKNavigationDelegate,WKUIDelegate>
 {
     WKWebView *_webView;
-    WalletVersionModel *_versionModel;
 }
+@property (nonatomic, strong)WalletVersionModel *versionModel;
 @end
 
 @implementation WalletDAppHandle
@@ -77,11 +79,61 @@ static dispatch_once_t predicate;
     return self;
 }
 
+
+- (NSDictionary *)Strategies
+{
+   return
+  @{
+    @"getStatus" :  NSStringFromSelector(@selector(getStatusWithRequestId:completionHandler:webView:)),
+
+    @"getGenesisBlock" : NSStringFromSelector(@selector(getGenesisBlockWithRequestId:completionHandler:webView:)),
+    
+    @"getAccount" :  NSStringFromSelector(@selector(getAccountRequestId:completionHandler: webView:)),
+    
+    @"getAccountCode" :  NSStringFromSelector(@selector(getAccountCode:completionHandler: webView:)),
+
+    @"getBlock" :  NSStringFromSelector(@selector(getBlock:completionHandler: webView:)),
+
+    @"getTransaction" :  NSStringFromSelector(@selector(getTransaction:completionHandler: webView:)),
+
+    @"getTransactionReceipt" :  NSStringFromSelector(@selector(getTransactionReceipt:completionHandler: webView:)),
+
+    @"methodAsCall" :  NSStringFromSelector(@selector(methodAsCallWithDictP:completionHandler: webView:)),
+
+    @"getAccounts" :  NSStringFromSelector(@selector(getAccountsWithRequestId:completionHandler: webView:)),
+
+    @"getAccountStorage" :  NSStringFromSelector(@selector(getStorageApiDictParam:completionHandler: webView:)),
+
+    @"tickerNext" :  NSStringFromSelector(@selector( tickerNextRequestId:completionHandler: webView:)),
+
+//    @"sign" :  NSStringFromSelector(@selector(transferCallbackParams:
+//                                              webView:
+//                                              connex:
+//                                              requestId:
+//                                              callbackId:
+//                                              completionHandler:)),
+    @"getBalance" :  NSStringFromSelector(@selector(getBalance:completionHandler: webView:)),
+    @"getNodeUrl" :  NSStringFromSelector(@selector(getNodeUrl: completionHandler:webView:)),
+//    @"send" :  NSStringFromSelector(@selector(transferCallbackParams:
+//                                              webView:
+//                                              connex:
+//                                              requestId:
+//                                              callbackId:
+//                                              completionHandler:)),
+    @"filterApply" :  NSStringFromSelector(@selector(filterDictParam:completionHandler: webView:)),
+
+    @"explain" :  NSStringFromSelector(@selector(explainDictParam:completionHandler: webView:)),
+
+    @"owned" :  NSStringFromSelector(@selector(checkAddressOwn:completionHandler: webView:)),
+
+    };
+}
+
 //Analyze data from Dapp
 - (void)webView:(WKWebView *)webView defaultText:(nullable NSString *)defaultText completionHandler:(void (^)(NSString * __nullable result))completionHandler
 {
     //Check if the version is forced to upgrade
-    if ([self analyzeVersion:_versionModel]) {
+    if ([WalletDAppInjectJSHandle analyzeVersion:_versionModel]) {
         
         completionHandler(@"{}");
         return;
@@ -96,127 +148,33 @@ static dispatch_once_t predicate;
     
     WalletJSCallbackModel *callbackModel = [WalletJSCallbackModel yy_modelWithDictionary:dict];
     
-    NSString *callbackId = callbackModel.callbackId;
     NSString *requestId  = callbackModel.requestId;
     NSString *method     = callbackModel.method;
-    NSDictionary *callbackParams  = callbackModel.params;
-    
-    //Match methodId
-    if ([method isEqualToString:@"getStatus"]) {
+
+    NSString *strSEL = [self Strategies][method];
+    if (strSEL) {
+        SEL myMethod =  NSSelectorFromString(strSEL);
+     
+        NSMethodSignature*signature = [[self class] instanceMethodSignatureForSelector:myMethod];
+        NSInvocation*invocation = [NSInvocation invocationWithMethodSignature:signature];
+        invocation.target = self;
+        invocation.selector = myMethod;
         
-        [self getStatusWithRequestId:requestId completionHandler:completionHandler];
-        
-        //Open ticker
-        [self tickerNextRequestId:requestId callbackId:callbackId];
-        
-        return;
-        
-    }else if ([method isEqualToString:@"getGenesisBlock"])
-    {
-        [self getGenesisBlockWithRequestId:requestId completionHandler:completionHandler];
-        return;
-    }else if ([method isEqualToString:@"getAccount"]){
-        
-        [self getAccountRequestId:requestId webView:webView address:callbackParams[@"address"] callbackId:callbackId];
-        
-    }else if([method isEqualToString:@"getAccountCode"])
-    {
-        [self getAccountCode:callbackId
-                     webView:webView
-                   requestId:requestId
-                     address:callbackParams[@"address"]];
-        
-    }else if([method isEqualToString:@"getBlock"])
-    {
-        [self getBlock:callbackId
-               webView:webView
-             requestId:requestId
-              revision:callbackParams[@"revision"]];
-        
-    }else if([method isEqualToString:@"getTransaction"])
-    {
-        [self getTransaction:callbackId
-                     webView:webView
-                   requestId:requestId
-                        txID:callbackParams[@"id"]];
-    }
-    else if([method isEqualToString:@"getTransactionReceipt"])
-    {
-        [self getTransactionReceipt:callbackId
-                            webView:webView
-                          requestId:requestId
-                               txid:callbackParams[@"id"]];
-    }
-    else if([method isEqualToString:@"methodAsCall"])
-    {
-        [self methodAsCallWithDictP:callbackParams requestId:requestId webView:webView callbackId:callbackId];
-        
-    }else if ([method isEqualToString:@"getAccounts"])
-    {
-        [self getAccountsWithRequestId:requestId callbackId:callbackId webView:webView];
-        
-    }else if ([method isEqualToString:@"getAccountStorage"])
-    {
-        [self getStorageApiDictParam:callbackParams requestId:requestId webView:webView callbackId:callbackId];
-        
-        
-    }else if ([method isEqualToString:@"tickerNext"])
-    {
-        [self tickerNextRequestId:requestId callbackId:callbackId];
-        
-    }
-    else if([method isEqualToString:@"sign"])
-    {
-        [self transferCallbackParams:callbackParams
-                             webView:webView
-                              connex:YES
-                           requestId:requestId
-                          callbackId:callbackId
-                   completionHandler:completionHandler];
-        
-    }else if ([method isEqualToString:@"getBalance"]){
-        
-        [self getBalance:callbackId
-                 webView:webView
-               requestId:requestId
-                 address:callbackParams[@"address"]];
-        
-    }else if([method isEqualToString:@"getNodeUrl"]){
-        
-        [self getNodeUrl:requestId completionHandler:completionHandler];
-        return;
-    }else if ([method isEqualToString:@"send"]){
-        
-        [self transferCallbackParams:callbackParams
-                             webView:webView
-                              connex:NO
-                           requestId:requestId
-                          callbackId:callbackId
-                   completionHandler:completionHandler];
-    }else if ([method isEqualToString:@"filterApply"])
-    {
-        [self filterDictParam:callbackParams requestId:requestId webView:webView callbackId:callbackId];
-    }else if ([method isEqualToString:@"explain"])
-    {
-        [self explainDictParam:callbackParams requestId:requestId webView:webView callbackId:callbackId];
-    }else if ([method isEqualToString:@"owned"])
-    {
-        NSString *address = callbackParams[@"address"];
-        
-        [self checkAddressOwn:address requestId:requestId callbackId:callbackId completionHandler:completionHandler];
-        return;
-    }
-    else{
+        [invocation setArgument:&callbackModel atIndex:2];
+        [invocation setArgument:&completionHandler atIndex:3];
+        [invocation setArgument:&webView atIndex:4];
+
+        [invocation invoke];
+    }else{
         //No matching methodId found
         NSDictionary *noMethodDict = [WalletTools packageWithRequestId:requestId
-                                                           data:@""
-                                                           code:ERROR_REJECTED
-                                                        message:ERROR_REJECTED_MSG];
+                                                                  data:@""
+                                                                  code:ERROR_REJECTED
+                                                               message:ERROR_REJECTED_MSG];
         completionHandler([noMethodDict yy_modelToJSONString]);
         
         return ;
     }
-    completionHandler(@"{}");
 }
 
 - (void)transferCallbackParams:(NSDictionary *)callbackParams
@@ -244,42 +202,45 @@ static dispatch_once_t predicate;
 
     NSMutableArray *clauseModelList = [[NSMutableArray alloc]init];
 
-    if (bConnex) { // Connex
-        
-        NSArray *clauseList = callbackParams[@"clauses"];
-        
-        for (NSDictionary *clauseDict in clauseList) {
-            
-            ClauseModel *clauseModel = [[ClauseModel alloc]init];
-            clauseModel.to    = clauseDict[@"to"];
-            clauseModel.value = clauseDict[@"value"];
-            clauseModel.data  = clauseDict[@"data"];
-            
-            [clauseModelList addObject:clauseModel];
-        }
-        
-        gas        = callbackParams[@"options"][@"gas"];
-        gasPrice   = callbackParams[@"options"][@"gasPrice"];
-        
-        gasPrice   = @"120"; //connex js No pass gaspPrice write default
-        
-        signer       = callbackParams[@"options"][@"signer"];
-        
-    }else{ // Web3
-        
-        ClauseModel *clauseModel = [[ClauseModel alloc]init];
-        clauseModel.to    = callbackParams[@"to"];
-        clauseModel.value = callbackParams[@"value"];
-        clauseModel.data  = callbackParams[@"data"];
-        
-        gas        = callbackParams[@"gas"];
-        gasPrice   = callbackParams[@"gasPrice"];
-        
-        [clauseModelList addObject:clauseModel];
-    }
+    [self testbConnex:bConnex clauseModelList:clauseModelList gas:&gas gasPrice:&gasPrice signer:&signer callbackParams:callbackParams];
+    
+//    if (bConnex) { // Connex
+//
+//        NSArray *clauseList = callbackParams[@"clauses"];
+//
+//        for (NSDictionary *clauseDict in clauseList) {
+//
+//            ClauseModel *clauseModel = [[ClauseModel alloc]init];
+//            clauseModel.to    = clauseDict[@"to"];
+//            clauseModel.value = clauseDict[@"value"];
+//            clauseModel.data  = clauseDict[@"data"];
+//
+//            [clauseModelList addObject:clauseModel];
+//        }
+//
+//        gas        = callbackParams[@"options"][@"gas"];
+//        gasPrice   = callbackParams[@"options"][@"gasPrice"];
+//
+//        gasPrice   = @"120"; //connex js No pass gaspPrice write default
+//
+//        signer       = callbackParams[@"options"][@"signer"];
+//
+//    }else{ // Web3
+//
+//        ClauseModel *clauseModel = [[ClauseModel alloc]init];
+//        clauseModel.to    = callbackParams[@"to"];
+//        clauseModel.value = callbackParams[@"value"];
+//        clauseModel.data  = callbackParams[@"data"];
+//
+//        gas        = callbackParams[@"gas"];
+//        gasPrice   = callbackParams[@"gasPrice"];
+//
+//        [clauseModelList addObject:clauseModel];
+//    }
+    
     if (gas.integerValue == 0) {
         
-        gas = [NSString stringWithFormat:@"%d",[self getGas:clauseModelList]];
+        gas = [NSString stringWithFormat:@"%d",[WalletDAppGasCalculateHandle getGas:clauseModelList]];
         
         WalletDappSimulateMultiAccountApi *simulateApi = [[WalletDappSimulateMultiAccountApi alloc]initClause:clauseModelList opts:@{} revision:@""];
         [simulateApi loadDataAsyncWithSuccess:^(WalletBaseApi *finishApi) {
@@ -300,6 +261,41 @@ static dispatch_once_t predicate;
         }];
     }else{
         [self callbackClauseList:clauseModelList gas:gas signer:signer bConnex:bConnex webView:webView callbackId:callbackId requestId:requestId];
+    }
+}
+
+- (void)testbConnex:(BOOL)bConnex clauseModelList:(NSMutableArray *)clauseModelList gas:(NSString **)gas gasPrice:(NSString **)gasPrice signer:(NSString **)signer callbackParams:(NSDictionary *)callbackParams
+{
+    if (bConnex) { // Connex
+        
+        NSArray *clauseList = callbackParams[@"clauses"];
+        
+        for (NSDictionary *clauseDict in clauseList) {
+            
+            ClauseModel *clauseModel = [[ClauseModel alloc]init];
+            clauseModel.to    = clauseDict[@"to"];
+            clauseModel.value = clauseDict[@"value"];
+            clauseModel.data  = clauseDict[@"data"];
+            
+            [clauseModelList addObject:clauseModel];
+        }
+        
+        *gas        = callbackParams[@"options"][@"gas"];
+        *gasPrice   = @"120"; //connex js No pass gaspPrice write default
+        
+        *signer       = callbackParams[@"options"][@"signer"];
+        
+    }else{ // Web3
+        
+        ClauseModel *clauseModel = [[ClauseModel alloc]init];
+        clauseModel.to    = callbackParams[@"to"];
+        clauseModel.value = callbackParams[@"value"];
+        clauseModel.data  = callbackParams[@"data"];
+        
+        *gas        = callbackParams[@"gas"];
+        *gasPrice   = callbackParams[@"gasPrice"];
+        
+        [clauseModelList addObject:clauseModel];
     }
 }
 
@@ -373,153 +369,16 @@ static dispatch_once_t predicate;
     }
 }
 
-- (int)getGas:(NSArray *)clauseList
-{
-    int gas = 0;
-    for (ClauseModel *model in clauseList) {
-       
-        NSString *to     = model.to;
-        NSString *value  = model.value;
-        NSString *data   = model.data;
-        
-       gas = gas + [self calculateSingleGasTo:&to value:&value data:&data];
-    }
-    return gas;
-}
-
-- (int)calculateSingleGasTo:(NSString **)to value:(NSString **)value data:(NSString **)data
-{
-    if ([WalletTools isEmpty:*to]) {
-        *to = @"";
-    }
-    
-    if ([WalletTools isEmpty:*value]) {
-        *value = @"";
-    }
-    
-    if ([WalletTools isEmpty:*data]) {
-        *data = @"";
-    }
-    
-    int txGas = 5000;
-    int clauseGas = 16000;
-    int clauseGasContractCreation = 48000;
-    
-    if ((*data).length == 0 ) {
-        return txGas + clauseGas;
-    }
-    int sum = txGas;
-    
-    if ((*to).length > 0) {
-        sum += clauseGas;
-    } else {
-        sum += clauseGasContractCreation;
-    }
-    
-    sum += [self dataGas:(*data)];
-    return sum ;
-}
-
-- (int)dataGas:(NSString *)data {
-    int zgas = 4;
-    int nzgas = 68;
-    
-    int sum = 0;
-    for (int i = 2; i < data.length; i += 2) {
-        NSString *subStr = [data substringWithRange:NSMakeRange(i, 2)];
-        if ([subStr isEqualToString: @"00"]) {
-            sum += zgas;
-        } else {
-            sum += nzgas;
-        }
-    }
-    return sum;
-}
-
 - (void)injectJS:(WKWebViewConfiguration *)config
 {
-    // Check sdk version
-    WalletCheckVersionApi *checkApi = [[WalletCheckVersionApi alloc]initWithLanguage:[self getLanuage]];
-    [checkApi loadDataAsyncWithSuccess:^(WalletBaseApi *finishApi) {
-        
-        NSDictionary *dataDict = finishApi.resultDict[@"data"];
-        self->_versionModel = [WalletVersionModel yy_modelWithDictionary:dataDict];
-        BOOL forceUpdate = [self analyzeVersion:self->_versionModel];
-        if (!forceUpdate) {
-            [self inject:config];
-        }
-        
-    } failure:^(WalletBaseApi *finishApi, NSString *errMsg) {
-        
+    @weakify(self);
+    [WalletDAppInjectJSHandle injectJS:config callback:^(WalletVersionModel * _Nonnull versionModel) {
+        @strongify(self);
+        self.versionModel = versionModel;
     }];
 }
 
-- (BOOL)analyzeVersion:(WalletVersionModel *)versionModel
-{
-    NSString *update        = versionModel.update;
-    NSString *latestVersion = versionModel.latestVersion;
-    NSString *description   = versionModel.pdescription;
-    
-    //Update = 1 : forced upgrade
-    if (update.boolValue) {
-        NSLog(@"Wallet SDK must update version url:%@, Current version:%@. Latest version:%@,  Description:%@",versionModel.url,SDKVersion,latestVersion,description);
-    }else{
-        if (![SDKVersion isEqualToString:latestVersion]) {
-            NSLog(@"Wallet SDK update version url:%@, Current version:%@. Latest version:%@,  Description:%@",versionModel.url,SDKVersion,latestVersion,description);
-        }
-    }
-    
-    return update.boolValue;
-}
-
-- (void)inject:(WKWebViewConfiguration *)config
-{
-    
-    NSString *bundlePath = [[NSBundle bundleForClass:[self class]].resourcePath
-                            stringByAppendingPathComponent:@"/ThorWalletSDKBundle.bundle"];
-    
-    
-    if(!bundlePath){
-        return ;
-    }
-    NSString *path = [bundlePath stringByAppendingString:@"/connex.js"];
-    NSString *connex_js = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:nil];
-    connex_js = [connex_js stringByReplacingOccurrencesOfString:@"\n" withString:@""];
-    
-    WKUserScript* userScriptConnex = [[WKUserScript alloc] initWithSource:connex_js
-                                                            injectionTime:WKUserScriptInjectionTimeAtDocumentStart
-                                                         forMainFrameOnly:YES];
-    [config.userContentController addUserScript:userScriptConnex];
-    
-    
-    //Inject web3 js
-    NSString *web3Path = [bundlePath stringByAppendingString:@"/web3.js"];
-    NSString *web3js = [NSString stringWithContentsOfFile:web3Path encoding:NSUTF8StringEncoding error:nil];
-    web3js = [web3js stringByReplacingOccurrencesOfString:@"\n" withString:@""];
-    WKUserScript* userScriptWeb3 = [[WKUserScript alloc] initWithSource:web3js
-                                                          injectionTime:WKUserScriptInjectionTimeAtDocumentStart
-                                                       forMainFrameOnly:YES];
-    [config.userContentController addUserScript:userScriptWeb3];
-}
-
-// Get phone language
--(NSString *)getLanuage
-{
-    NSString *language = @"";
-    NSArray *appLanguages = [[NSUserDefaults standardUserDefaults] objectForKey:@"AppleLanguages"];
-    NSString *localeLanguageCode = [appLanguages objectAtIndex:0];
-    
-    if ([localeLanguageCode containsString:@"zh"]) {
-        language = @"zh-Hans";
-        
-    }else{
-        language = @"en";
-    }
-   
-    return language;
-}
-
-+(void)deallocDApp
++ (void)deallocDApp
 {
     predicate = 0;
     singleton = nil;

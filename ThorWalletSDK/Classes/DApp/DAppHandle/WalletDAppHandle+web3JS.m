@@ -47,35 +47,39 @@
 @implementation WalletDAppHandle (web3JS)
 
 // Get VET balance
-- (void)getBalance:(NSString *)callbackId
+- (void)getBalance:(WalletJSCallbackModel *)callbackModel
+ completionHandler:(void (^)(NSString * __nullable result))completionHandler
            webView:(WKWebView *)webView
-         requestId:(NSString *)requestId
-           address:(NSString *)address
 {
-    WalletVETBalanceApi *vetBalanceApi = [[WalletVETBalanceApi alloc]initWith:address];
+    WalletVETBalanceApi *vetBalanceApi = [[WalletVETBalanceApi alloc]initWith:callbackModel.params[@"address"]];
     [vetBalanceApi loadDataAsyncWithSuccess:^(WalletBaseApi *finishApi) {
         WalletBalanceModel *balanceModel = finishApi.resultModel;
         
-        [WalletTools callbackWithrequestId:requestId
+        [WalletTools callbackWithrequestId:callbackModel.requestId
                                   webView:webView 
                                      data:balanceModel.balance
-                               callbackId:callbackId
+                               callbackId:callbackModel.callbackId
                                      code:OK];
         
+        completionHandler(@"{}");
+
     } failure:^(WalletBaseApi *finishApi, NSString *errMsg) {
-        [WalletTools callbackWithrequestId:requestId
+        [WalletTools callbackWithrequestId:callbackModel.requestId
                                   webView:webView 
                                      data:@""
-                               callbackId:callbackId
+                               callbackId:callbackModel.callbackId
                                      code:ERROR_NETWORK];
+        completionHandler(@"{}");
+
     }];
 }
 
 //Get NodeUrl
-- (void)getNodeUrl:(NSString *)requestId
-  completionHandler:(void (^)(NSString * __nullable result))completionHandler
+- (void)getNodeUrl:(WalletJSCallbackModel *)callbackModel
+ completionHandler:(void (^)(NSString * __nullable result))completionHandler
+           webView:(WKWebView *)webView
 {
-    NSDictionary *dict = [WalletTools packageWithRequestId:requestId
+    NSDictionary *dict = [WalletTools packageWithRequestId:callbackModel.requestId
                                                        data:[WalletUserDefaultManager getBlockUrl]
                                                        code:OK
                                                     message:@""];
@@ -106,8 +110,8 @@
 }
 
 //Get the local wallet address
--(void)getAccountsWithRequestId:(NSString *)requestId
-                     callbackId:(NSString *)callbackId
+-(void)getAccountsWithRequestId:(WalletJSCallbackModel *)callbackModel
+              completionHandler:(void (^)(NSString * __nullable result))completionHandler
                         webView:(WKWebView *)webView
 {
     
@@ -115,19 +119,25 @@
         
         [self.delegate onGetWalletAddress:^(NSArray *addressList) {
             
-            [WalletTools callbackWithrequestId:requestId
+            [WalletTools callbackWithrequestId:callbackModel.requestId
                                        webView:webView
                                           data:addressList
-                                    callbackId:callbackId
+                                    callbackId:callbackModel.callbackId
                                           code:OK];
+            
+            completionHandler(@"{}");
+
         }];
         
+        
     }else{
-        [WalletTools callbackWithrequestId:requestId
+        [WalletTools callbackWithrequestId:callbackModel.requestId
                                    webView:webView
                                       data:@""
-                                callbackId:callbackId
+                                callbackId:callbackModel.callbackId
                                       code:ERROR_REJECTED];
+        completionHandler(@"{}");
+
     }
 }
 @end

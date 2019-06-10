@@ -35,27 +35,28 @@
 #import "WalletDAppHandle.h"
 #import <WebKit/WebKit.h>
 #import "WalletDAppHeader.h"
+#import "WalletJSCallbackModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface WalletDAppHandle (web3JS)
 
-- (void)getBalance:(NSString *)callbackId
-           webView:(WKWebView *)webView
-         requestId:(NSString *)requestId
-           address:(NSString *)address;
+- (void)getBalance:(WalletJSCallbackModel *)callbackModel
+ completionHandler:(void (^)(NSString * __nullable result))completionHandler
+           webView:(WKWebView *)webView;
 
 
-- (void)getNodeUrl:(NSString *)requestId
-  completionHandler:(void (^)(NSString * __nullable result))completionHandler;
+- (void)getNodeUrl:(WalletJSCallbackModel *)callbackModel
+ completionHandler:(void (^)(NSString * __nullable result))completionHandler
+           webView:(WKWebView *)webView;
 
 //Get chaintag
 - (void)getChainTag:(NSString *)requestId
   completionHandler:(void (^)(NSString * __nullable result))completionHandler;
 
 //Get the local wallet address
--(void)getAccountsWithRequestId:(NSString *)requestId
-                     callbackId:(NSString *)callbackId
+-(void)getAccountsWithRequestId:(WalletJSCallbackModel *)callbackModel
+              completionHandler:(void (^)(NSString * __nullable result))completionHandler
                         webView:(WKWebView *)webView;
 @end
 

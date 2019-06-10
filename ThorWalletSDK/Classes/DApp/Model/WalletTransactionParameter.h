@@ -31,6 +31,7 @@
  **/
 
 
+#import <UIKit/UIKit.h>
 
 //#import <PromiseKit/PromiseKit.h>
 NS_ASSUME_NONNULL_BEGIN
