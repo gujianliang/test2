@@ -230,13 +230,13 @@
 		6003F593195388D20070C39A /* Example for ThorWalletSDK */ = {
 			isa = PBXGroup;
 			children = (
-				9784E1702293E2A90071F173 /* WalletDemoMacro.h */,
 				9784E10A2293D8F10071F173 /* Modules */,
 				6003F59C195388D20070C39A /* ThorAppDelegate.h */,
 				6003F59D195388D20070C39A /* ThorAppDelegate.m */,
 				9784E19C2294F1AF0071F173 /* ThorViewController.h */,
 				9784E19D2294F1AF0071F173 /* ThorViewController.m */,
 				9784E19E2294F1AF0071F173 /* ThorViewController.xib */,
+				9784E1702293E2A90071F173 /* WalletDemoMacro.h */,
 				6003F594195388D20070C39A /* Supporting Files */,
 			);
 			name = "Example for ThorWalletSDK";
@@ -288,19 +288,39 @@
 			name = "Podspec Metadata";
 			sourceTree = "<group>";
 		};
+		971D5BFD22AE64DC008B68D0 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				9737D74022AE2B09008187E4 /* WalletDemoTool.h */,
+				9737D74122AE2B09008187E4 /* WalletDemoTool.m */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		971D5BFE22AE6515008B68D0 /* ManageWallet */ = {
+			isa = PBXGroup;
+			children = (
+				9784E11D2293D8F10071F173 /* WalletChangePWVC.h */,
+				9784E1122293D8F10071F173 /* WalletChangePWVC.m */,
+				9784E1192293D8F10071F173 /* WalletChangePWVC.xib */,
+				9784E10C2293D8F10071F173 /* WalletChangePWVC.strings */,
+			);
+			path = ManageWallet;
+			sourceTree = "<group>";
+		};
 		9784E10A2293D8F10071F173 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				971D5BFE22AE6515008B68D0 /* ManageWallet */,
+				971D5BFD22AE64DC008B68D0 /* Utils */,
 				9784E10B2293D8F10071F173 /* WalletDetail */,
 				9784E11E2293D8F10071F173 /* DApp */,
-				9784E1212293D8F10071F173 /* Creat */,
+				9784E1212293D8F10071F173 /* CreateWallet */,
 				9784E1282293D8F10071F173 /* Transfer */,
-				9784E1342293D8F10071F173 /* Node */,
-				9784E13D2293D8F10071F173 /* Recover */,
+				9784E1342293D8F10071F173 /* Setting */,
+				9784E13D2293D8F10071F173 /* ImportWallet */,
 				9784E402229B7AB10071F173 /* ThorTest.h */,
 				9784E403229B7AB10071F173 /* ThorTest.m */,
-				9737D74022AE2B09008187E4 /* WalletDemoTool.h */,
-				9737D74122AE2B09008187E4 /* WalletDemoTool.m */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -316,10 +336,6 @@
 				9784E1142293D8F10071F173 /* WalletMoreInfoVC.m */,
 				9784E1152293D8F10071F173 /* WalletMoreInfoVC.xib */,
 				9784E1102293D8F10071F173 /* WalletMoreInfoVC.strings */,
-				9784E11D2293D8F10071F173 /* WalletChangePWVC.h */,
-				9784E1122293D8F10071F173 /* WalletChangePWVC.m */,
-				9784E1192293D8F10071F173 /* WalletChangePWVC.xib */,
-				9784E10C2293D8F10071F173 /* WalletChangePWVC.strings */,
 			);
 			path = WalletDetail;
 			sourceTree = "<group>";
@@ -333,7 +349,7 @@
 			path = DApp;
 			sourceTree = "<group>";
 		};
-		9784E1212293D8F10071F173 /* Creat */ = {
+		9784E1212293D8F10071F173 /* CreateWallet */ = {
 			isa = PBXGroup;
 			children = (
 				9784E1242293D8F10071F173 /* WalletCreateVC.h */,
@@ -341,7 +357,7 @@
 				9784E1252293D8F10071F173 /* WalletCreateVC.xib */,
 				9784E1222293D8F10071F173 /* WalletCreateVC.strings */,
 			);
-			path = Creat;
+			path = CreateWallet;
 			sourceTree = "<group>";
 		};
 		9784E1282293D8F10071F173 /* Transfer */ = {
@@ -355,7 +371,7 @@
 			path = Transfer;
 			sourceTree = "<group>";
 		};
-		9784E1342293D8F10071F173 /* Node */ = {
+		9784E1342293D8F10071F173 /* Setting */ = {
 			isa = PBXGroup;
 			children = (
 				9784E1352293D8F10071F173 /* WalletChooseNodeView.h */,
@@ -367,10 +383,10 @@
 				9784E1382293D8F10071F173 /* WalletAddVthoNodeVC.m */,
 				9784E13A2293D8F10071F173 /* WalletAddVthoNodeVC.xib */,
 			);
-			path = Node;
+			path = Setting;
 			sourceTree = "<group>";
 		};
-		9784E13D2293D8F10071F173 /* Recover */ = {
+		9784E13D2293D8F10071F173 /* ImportWallet */ = {
 			isa = PBXGroup;
 			children = (
 				9784E1442293D8F10071F173 /* WalletKeystoreImportVC.h */,
@@ -386,7 +402,7 @@
 				9784E1482293D8F10071F173 /* WalletMnemonicImportVC.xib */,
 				9784E1422293D8F10071F173 /* WalletMnemonicImportVC.strings */,
 			);
-			path = Recover;
+			path = ImportWallet;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

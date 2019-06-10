@@ -33,6 +33,7 @@
 
 
 #import "WalletDAppHandle.h"
+#import "WalletJSCallbackModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -43,6 +44,10 @@ NS_ASSUME_NONNULL_BEGIN
             password:(NSString *)password
               isSend:(BOOL)isSend
             callback:(void(^)(NSString *txId))callback;
+
+- (void)transferCallback:(WalletJSCallbackModel *)callbackModel
+                  connex:(BOOL)bConnex
+       completionHandler:(void (^)(NSString * __nullable result))completionHandler;
 
 @end
 

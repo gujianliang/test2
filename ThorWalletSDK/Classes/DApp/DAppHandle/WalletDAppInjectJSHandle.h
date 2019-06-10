@@ -13,8 +13,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface WalletDAppInjectJSHandle : NSObject
 
-+ (void)injectJS:(WKWebViewConfiguration *)config
-        callback:(void (^)(WalletVersionModel *versionModel))callback;
++ (void)checkVersion:(WKWebViewConfiguration *)config
+            callback:(void (^)(WalletVersionModel *versionModel))callback;
 
 + (BOOL)analyzeVersion:(WalletVersionModel *)versionModel;
 @end

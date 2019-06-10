@@ -131,9 +131,9 @@
         chooseNodeView = [[WalletChooseNodeView alloc] initWithFrame:self.view.frame];
         chooseNodeView.tag = 90;
         [self.view addSubview:chooseNodeView];
-        
+        @weakify(self)
         chooseNodeView.block = ^(NSString *nodeName, NSString *nodeUrl) {
-
+            @strongify(self);
             if (nodeUrl.length == 0) {
                 WalletAddVthoNodeVC *detailVC = [[WalletAddVthoNodeVC alloc]init];
                 [self.navigationController pushViewController:detailVC animated:YES];

@@ -45,6 +45,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *txId;
 @property (nonatomic, copy) NSString *keystore;
 @property (nonatomic, weak) id<WalletUtilsDelegate> delegate;
+@property (nonatomic, strong)WKWebView *webView;
 
 + (instancetype)shareWalletHandle;
 

@@ -11,8 +11,8 @@
 
 @implementation WalletDAppInjectJSHandle
 
-+ (void)injectJS:(WKWebViewConfiguration *)config
-         callback:(void (^)(WalletVersionModel *versionModel))callback
++ (void)checkVersion:(WKWebViewConfiguration *)config
+            callback:(void (^)(WalletVersionModel *versionModel))callback
 {
     // Check sdk version
     WalletCheckVersionApi *checkApi = [[WalletCheckVersionApi alloc]initWithLanguage:[self getLanuage]];
@@ -53,12 +53,12 @@
 
 + (void)inject:(WKWebViewConfiguration *)config
 {
-    
     NSString *bundlePath = [[NSBundle bundleForClass:[self class]].resourcePath
                             stringByAppendingPathComponent:@"/ThorWalletSDKBundle.bundle"];
     
     
     if(!bundlePath){
+        NSLog(@"Injecting js failed");
         return ;
     }
     NSString *path = [bundlePath stringByAppendingString:@"/connex.js"];

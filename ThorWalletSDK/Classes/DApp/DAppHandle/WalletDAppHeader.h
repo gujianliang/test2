@@ -40,6 +40,17 @@
 #import "Account.h"
 #import "Transaction.h"
 #import "WalletSDKMacro.h"
+#import "WalletDAppHandle+web3JS.h"
+#import "WalletDAppHandle+connexJS.h"
+#import "WalletJSCallbackModel.h"
+#import "SocketRocketUtility.h"
+#import "WalletCheckVersionApi.h"
+#import "WalletVersionModel.h"
+#import "WalletDappSimulateMultiAccountApi.h"
+#import "WalletDAppGasCalculateHandle.h"
+#import "WalletGenesisBlockInfoApi.h"
+#import "WalletDAppInjectJSHandle.h"
+
 
 static int OK = 1;
 static int ERROR_NETWORK = 500;

@@ -49,6 +49,7 @@
 #import "WalletDappLogEventApi.h"
 #import "WalletDappSimulateMultiAccountApi.h"
 #import "WalletDappSimulateAccountApi.h"
+#import "WalletDAppHandle+transfer.h"
 
 #define nullString @"nu&*ll"
 
@@ -113,9 +114,8 @@ completionHandler:(void (^)(NSString * __nullable result))completionHandler
 }
 
 - (void)statusBlockNum:(NSString *)blockNum
-       callbackModel:(WalletJSCallbackModel *)callbackModel
-   completionHandler:(void (^)(NSString * __nullable result))completionHandler
-
+         callbackModel:(WalletJSCallbackModel *)callbackModel
+     completionHandler:(void (^)(NSString * __nullable result))completionHandler
 {
     WalletBestBlockInfoApi *bestApi = [[WalletBestBlockInfoApi alloc]init];
     [bestApi loadDataAsyncWithSuccess:^(WalletBaseApi *finishApi) {
@@ -317,32 +317,13 @@ completionHandler:(void (^)(NSString * __nullable result))completionHandler
 completionHandler:(void (^)(NSString * __nullable result))completionHandler
          webView:(WKWebView *)webView
 {
-    BOOL revisionOK = NO;
-    NSString *revision = callbackModel.params[@"revision"];
-    //Revision : "best" or decimal
-    if (revision != nil ) {
-        revisionOK = YES;
-    
-    }else if ([revision isEqualToString:@"best"]) {
-        revisionOK = YES;
-    
-    }else{
+    if (![self checkStatusParams:callbackModel webView:webView]) {
         
-        if ([WalletTools checkDecimalStr:revision]) {
-            revisionOK = YES;
-        }
-    }
-    
-    if (!revisionOK) {
-        [WalletTools callbackWithrequestId:callbackModel.requestId
-                                   webView:webView
-                                      data:@""
-                                callbackId:callbackModel.callbackId
-                                      code:ERROR_REJECTED];
         completionHandler(@"{}");
         return;
     }
     
+    NSString *revision = callbackModel.params[@"revision"];
     WalletBlockApi *vetBalanceApi = [[WalletBlockApi alloc]initWithRevision:revision];
     vetBalanceApi.supportOtherDataFormat = YES;
     [vetBalanceApi loadDataAsyncWithSuccess:^(WalletBaseApi *finishApi) {
@@ -372,6 +353,29 @@ completionHandler:(void (^)(NSString * __nullable result))completionHandler
         completionHandler(@"{}");
     }];
 }
+
+- (BOOL)checkStatusParams:(WalletJSCallbackModel *)callbackModel
+                  webView:(WKWebView *)webView
+{
+    BOOL revisionOK = NO;
+    NSString *revision = callbackModel.params[@"revision"];
+    //Revision : "best" or decimal
+    if ([revision isEqualToString:@"best"]
+        || [WalletTools checkDecimalStr:revision]) {
+        revisionOK = YES;
+        
+    }
+    
+    if (!revisionOK) {
+        [WalletTools callbackWithrequestId:callbackModel.requestId
+                                   webView:webView
+                                      data:@""
+                                callbackId:callbackModel.callbackId
+                                      code:ERROR_REJECTED];
+    }
+    return revisionOK;
+}
+
 
 - (void)getTransaction:(WalletJSCallbackModel *)callbackModel
      completionHandler:(void (^)(NSString * __nullable result))completionHandler
@@ -465,8 +469,6 @@ completionHandler:(void (^)(NSString * __nullable result))completionHandler
     }];
 }
 
-
-
 - (void)tickerNext:(WalletJSCallbackModel *)callbackModel
           completionHandler:(void (^)(NSString * __nullable result))completionHandler
                     webView:(WKWebView *)webView
@@ -516,37 +518,7 @@ completionHandler:(void (^)(NSString * __nullable result))completionHandler
         NSString *strParams = [dictSignParam yy_modelToJSONString];
         if (self.delegate && [self.delegate respondsToSelector:@selector(onWillCertificate:signer:completionHandler:)]) {
             
-            [self.delegate onWillCertificate:strParams
-                                      signer:from
-                           completionHandler:^(NSString *signer, NSData *signature)
-            {
-                
-                if (signature == nil) {
-                    [WalletTools callbackWithrequestId:callbackModel.requestId
-                                               webView:webView
-                                                  data:@""
-                                            callbackId:callbackModel.callbackId
-                                                  code:ERROR_REJECTED];
-                    return ;
-                }
-                NSString *hashSignture = [SecureData dataToHexString:signature];
-                
-                NSMutableDictionary *dictSub = [NSMutableDictionary dictionary];
-                
-                [dictSub setValueIfNotNil:dictSignParam[@"domain"] forKey:@"domain"];
-                [dictSub setValueIfNotNil:signer.lowercaseString forKey:@"signer"];
-                [dictSub setValueIfNotNil:dictSignParam[@"timestamp"] forKey:@"timestamp"];
-                
-                NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-                [dict setValueIfNotNil:dictSub forKey:@"annex"];
-                [dict setValueIfNotNil:hashSignture forKey:@"signature"];
-                
-                [WalletTools callbackWithrequestId:callbackModel.requestId
-                                           webView:webView
-                                              data:dict
-                                        callbackId:callbackModel.callbackId
-                                              code:OK];
-            }];
+            [self certTransferCallback:strParams dictSignParam:dictSignParam callbackModel:callbackModel from:from webView:webView];
         }else{
             [WalletTools callbackWithrequestId:callbackModel.requestId
                                        webView:webView
@@ -563,33 +535,44 @@ completionHandler:(void (^)(NSString * __nullable result))completionHandler
     }];
 }
 
-- (BOOL)errorAmount:(NSString *)amount
+- (void)certTransferCallback:(NSString *)strParams
+               dictSignParam:(NSMutableDictionary *)dictSignParam
+               callbackModel:(WalletJSCallbackModel *)callbackModel
+                        from:(NSString *)from
+                     webView:(WKWebView *)webView
 {
-    // Exception - VET Transfer 0
-    BOOL bAmount = YES;
-    
-    // Amount logic check
-    if ([amount floatValue] <= 0
-        || [Payment parseEther:amount] == nil
-        || amount.length == 0) {
-        bAmount = NO;
-    }
-    
-    if (amount.length == 0) {
-        bAmount = NO;
-    }
-    
-    if ([amount floatValue] == 0
-        && [[Payment parseEther:amount] lessThanEqualTo:[BigNumber constantZero]]){
-        bAmount = YES;
-    }
-    if (!bAmount) {
-
-        return NO;
-    }
-    return YES;
+    [self.delegate onWillCertificate:strParams
+                              signer:from
+                   completionHandler:^(NSString *signer, NSData *signature)
+     {
+         if (signature == nil) {
+             [WalletTools callbackWithrequestId:callbackModel.requestId
+                                        webView:webView
+                                           data:@""
+                                     callbackId:callbackModel.callbackId
+                                           code:ERROR_REJECTED];
+             return ;
+         }
+         NSString *hashSignture = [SecureData dataToHexString:signature];
+         
+         NSMutableDictionary *dictSub = [NSMutableDictionary dictionary];
+         
+         [dictSub setValueIfNotNil:dictSignParam[@"domain"] forKey:@"domain"];
+         [dictSub setValueIfNotNil:signer.lowercaseString forKey:@"signer"];
+         [dictSub setValueIfNotNil:dictSignParam[@"timestamp"] forKey:@"timestamp"];
+         
+         NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+         [dict setValueIfNotNil:dictSub forKey:@"annex"];
+         [dict setValueIfNotNil:hashSignture forKey:@"signature"];
+         
+         [WalletTools callbackWithrequestId:callbackModel.requestId
+                                    webView:webView
+                                       data:dict
+                                 callbackId:callbackModel.callbackId
+                                       code:OK];
+     }];
 }
-
+     
 - (void)failResult:(NSString *)requestId
         callbackId:(NSString *)callbackId
            webView:(WKWebView *)webView
@@ -671,45 +654,60 @@ completionHandler:(void (^)(NSString * __nullable result))completionHandler
 }
 
 - (void)owned:(WalletJSCallbackModel *)callbackModel
-      completionHandler:(void (^)(NSString * __nullable result))completionHandler
-                webView:(WKWebView *)webView
+completionHandler:(void (^)(NSString * __nullable result))completionHandler
+        webView:(WKWebView *)webView
 {
     if (self.delegate
         &&[self.delegate respondsToSelector:@selector(onCheckOwnAddress:callback:)]) {
         [self.delegate onCheckOwnAddress:callbackModel.params[@"address"] callback:^(BOOL result) {
             
-            if (result) {
-               
-                NSDictionary *resultDict = [WalletTools packageWithRequestId:callbackModel.requestId
-                                                                        data:@"true"
-                                                                        code:OK
-                                                                     message:@""];
-                NSString *injectJS = [resultDict yy_modelToJSONString];
-                
-                //Remove "
-                injectJS = [injectJS stringByReplacingOccurrencesOfString:@"\"true\"" withString:@"true"];
-                completionHandler(injectJS);
-                
-            }else{
-               
-                NSDictionary *resultDict = [WalletTools packageWithRequestId:callbackModel.requestId
-                                                                        data:@"false"
-                                                                        code:OK
-                                                                     message:@""];
-                NSString *injectJS = [resultDict yy_modelToJSONString];
-                
-                //Remove "
-                injectJS = [injectJS stringByReplacingOccurrencesOfString:@"\"false\"" withString:@"false"];
-                
-                completionHandler(injectJS);
-            }
+            [self ownedCallback:result callbackModel:callbackModel completionHandler:completionHandler];
         }];
     }else{
         completionHandler(@"{}");
     }
 }
 
+- (void)ownedCallback:(BOOL)result
+        callbackModel:(WalletJSCallbackModel *)callbackModel
+    completionHandler:(void (^)(NSString * __nullable result))completionHandler
+{
+    if (result) {
+        
+        NSDictionary *resultDict = [WalletTools packageWithRequestId:callbackModel.requestId
+                                                                data:@"true"
+                                                                code:OK
+                                                             message:@""];
+        NSString *injectJS = [resultDict yy_modelToJSONString];
+        
+        //Remove "
+        injectJS = [injectJS stringByReplacingOccurrencesOfString:@"\"true\"" withString:@"true"];
+        completionHandler(injectJS);
+        
+    }else{
+        
+        NSDictionary *resultDict = [WalletTools packageWithRequestId:callbackModel.requestId
+                                                                data:@"false"
+                                                                code:OK
+                                                             message:@""];
+        NSString *injectJS = [resultDict yy_modelToJSONString];
+        
+        //Remove "
+        injectJS = [injectJS stringByReplacingOccurrencesOfString:@"\"false\"" withString:@"false"];
+        
+        completionHandler(injectJS);
+    }
+}
 
+- (void)sign:(WalletJSCallbackModel *)callbackModel completionHandler:(void (^)(NSString * __nullable result))completionHandler webView:(WKWebView *)webView
+{
+    [self transferCallback:callbackModel connex:YES completionHandler:completionHandler];
+}
+
+- (void)send:(WalletJSCallbackModel *)callbackModel completionHandler:(void (^)(NSString * __nullable result))completionHandler webView:(WKWebView *)webView
+{
+    [self transferCallback:callbackModel connex:NO completionHandler:completionHandler];
+}
 
 
 @end

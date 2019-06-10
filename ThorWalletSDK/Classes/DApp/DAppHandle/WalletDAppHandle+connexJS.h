@@ -110,6 +110,12 @@ completionHandler:(void (^)(NSString * __nullable result))completionHandler
                 from:(NSString *)from
              webView:(WKWebView *)webView;
 
+- (void)sign:(WalletJSCallbackModel *)callbackModel completionHandler:(void (^)(NSString * __nullable result))completionHandler webView:(WKWebView *)webView;
+
+
+- (void)send:(WalletJSCallbackModel *)callbackModel completionHandler:(void (^)(NSString * __nullable result))completionHandler webView:(WKWebView *)webView;
+
+
 @end
 
 NS_ASSUME_NONNULL_END

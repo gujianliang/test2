@@ -762,16 +762,16 @@
 				40F441B1AFBC7D5F8AE97281898747E6 /* WalletDAppHeader.h */,
 				EBE68F56AF845B4E0FC6107A24EF677A /* WalletDAppHandle.h */,
 				2EAA5AC6AA021DFE0957C948C7831B08 /* WalletDAppHandle.m */,
-				9771B36122A913B9006E51DF /* WalletDAppGasCalculateHandle.h */,
-				9771B36222A913B9006E51DF /* WalletDAppGasCalculateHandle.m */,
 				2B87A601266DD3BB635B81F457C17775 /* WalletDAppHandle+connexJS.h */,
 				DDD6F20686C080C5B20ADE1A5394E904 /* WalletDAppHandle+connexJS.m */,
-				D538C13CF27EC3CBB3B17FA6305802C0 /* WalletDAppHandle+transfer.h */,
-				9CD7B35D159224E91FF774A1A771C3C0 /* WalletDAppHandle+transfer.m */,
 				304BC289DC3231C8D98AD82AB96AD036 /* WalletDAppHandle+web3JS.h */,
 				052E31A5D23728304C091E56C023D64B /* WalletDAppHandle+web3JS.m */,
+				D538C13CF27EC3CBB3B17FA6305802C0 /* WalletDAppHandle+transfer.h */,
+				9CD7B35D159224E91FF774A1A771C3C0 /* WalletDAppHandle+transfer.m */,
 				9771B36722A917D6006E51DF /* WalletDAppInjectJSHandle.h */,
 				9771B36822A917D6006E51DF /* WalletDAppInjectJSHandle.m */,
+				9771B36122A913B9006E51DF /* WalletDAppGasCalculateHandle.h */,
+				9771B36222A913B9006E51DF /* WalletDAppGasCalculateHandle.m */,
 			);
 			name = DAppHandle;
 			path = ThorWalletSDK/Classes/DApp/DAppHandle;

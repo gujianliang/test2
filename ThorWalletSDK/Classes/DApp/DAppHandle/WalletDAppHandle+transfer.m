@@ -31,15 +31,167 @@
 
 **/
 
-
-#import "WalletDAppHandle+transfer.h"
-#import <WebKit/WebKit.h>
 #import "YYModel.h"
+#import <WebKit/WebKit.h>
 #import "WalletDAppHeader.h"
 #import "WalletTransactionApi.h"
+#import "WalletDAppHandle+transfer.h"
 
 @implementation WalletDAppHandle (transfer)
 
+- (void)transferCallback:(WalletJSCallbackModel *)callbackModel
+                  connex:(BOOL)bConnex
+       completionHandler:(void (^)(NSString * __nullable result))completionHandler
+{
+    
+    NSString *kind = callbackModel.params[@"kind"];
+    
+    if ([kind isEqualToString:@"cert"]) { // Cert type signature
+        
+        NSString *from = callbackModel.params[@"options"][@"signer"];
+        [self certTransfer:callbackModel from:from webView:self.webView];
+        return ;
+    }
+    
+    __block NSString *gas      = @"";
+    __block NSString *signer   = @"";
+    __block NSString *gasPrice = @"";
+    
+    NSMutableArray *clauseModelList = [[NSMutableArray alloc]init];
+    
+    [self packgetDatabConnex:bConnex
+             clauseModelList:clauseModelList
+                         gas:&gas
+                    gasPrice:&gasPrice
+                      signer:&signer
+              callbackParams:callbackModel.params];
+    
+    if (gas.integerValue == 0) {
+        
+        gas = [NSString stringWithFormat:@"%d",[WalletDAppGasCalculateHandle getGas:clauseModelList]];
+        
+        [self simulateMultiAccount:clauseModelList gas:&gas signer:signer callbackModel:callbackModel bConnex:bConnex];
+    }else{
+        [self callbackClauseList:clauseModelList gas:gas signer:signer bConnex:bConnex callbackModel:callbackModel];
+    }
+}
+
+- (void)simulateMultiAccount:(NSArray *)clauseModelList gas:(NSString * __autoreleasing *)gas signer:(NSString *)signer callbackModel:(WalletJSCallbackModel *)callbackModel bConnex:(BOOL)bConnex
+{
+    @weakify(self);
+    WalletDappSimulateMultiAccountApi *simulateApi = [[WalletDappSimulateMultiAccountApi alloc]initClause:clauseModelList opts:@{} revision:@""];
+    [simulateApi loadDataAsyncWithSuccess:^(WalletBaseApi *finishApi) {
+        @strongify(self);
+        NSArray *list = (NSArray *)finishApi.resultDict;
+        NSString *gasUsed = [list firstObject][@"gasUsed"];
+        if (gasUsed.integerValue != 0) {
+            //Gasused If it is not 0,  need to add 15000
+            NSString *originGas = *gas;
+            *gas = [NSString stringWithFormat:@"%ld",originGas.integerValue + gasUsed.integerValue + 15000];
+        }
+        
+        [self callbackClauseList:clauseModelList gas:*gas signer:signer bConnex:bConnex  callbackModel:callbackModel];
+        
+    }failure:^(WalletBaseApi *finishApi, NSString *errMsg) {
+        @strongify(self);
+        [self paramsErrorCallbackModel:callbackModel webView:self.webView ];
+    }];
+}
+
+- (void)packgetDatabConnex:(BOOL)bConnex clauseModelList:(NSMutableArray *)clauseModelList gas:(NSString **)gas gasPrice:(NSString **)gasPrice signer:(NSString **)signer callbackParams:(NSDictionary *)callbackParams
+{
+    if (bConnex) { // Connex
+        
+        NSArray *clauseList = callbackParams[@"clauses"];
+        
+        for (NSDictionary *clauseDict in clauseList) {
+            
+            ClauseModel *clauseModel = [[ClauseModel alloc]init];
+            clauseModel.to    = clauseDict[@"to"];
+            clauseModel.value = clauseDict[@"value"];
+            clauseModel.data  = clauseDict[@"data"];
+            
+            [clauseModelList addObject:clauseModel];
+        }
+        
+        *gas        = callbackParams[@"options"][@"gas"];
+        *gasPrice   = @"120"; //connex js No pass gaspPrice write default
+        
+        *signer       = callbackParams[@"options"][@"signer"];
+        
+    }else{ // Web3
+        
+        ClauseModel *clauseModel = [[ClauseModel alloc]init];
+        clauseModel.to    = callbackParams[@"to"];
+        clauseModel.value = callbackParams[@"value"];
+        clauseModel.data  = callbackParams[@"data"];
+        
+        *gas        = callbackParams[@"gas"];
+        *gasPrice   = callbackParams[@"gasPrice"];
+        
+        [clauseModelList addObject:clauseModel];
+    }
+}
+
+- (void)callbackClauseList:(NSArray *)clauseModelList gas:(NSString *)gas signer:(NSString *)signer bConnex:(BOOL)bConnex callbackModel:(WalletJSCallbackModel *)callbackModel
+{
+    id delegate = [WalletDAppHandle shareWalletHandle].delegate;
+    if (delegate) {
+        if ([delegate respondsToSelector:@selector(onWillTransfer: signer: gas: completionHandler:)]) {
+            @weakify(self)
+            [delegate onWillTransfer:clauseModelList signer:signer gas:gas completionHandler:^(NSString * txId,NSString *signer)
+             {
+                 @strongify(self);
+                 [self callbackToWebView:txId
+                                  signer:signer
+                                 bConnex:bConnex
+                                 webView:self.webView
+                           callbackModel:callbackModel];
+                 
+             }];
+        }else{
+            [WalletTools callbackWithrequestId:callbackModel.requestId
+                                       webView:self.webView
+                                          data:@""
+                                    callbackId:callbackModel.callbackId
+                                          code:ERROR_REJECTED];
+        }
+    }
+}
+
+//Call back to dapp webview
+- (void)callbackToWebView:(NSString *)txid signer:(NSString *)signer bConnex:(BOOL)bConnex  webView:(WKWebView *)webView callbackModel:(WalletJSCallbackModel *)callbackModel
+{
+    if (txid.length != 0) {
+        id data = nil;
+        if (bConnex) {
+            
+            NSMutableDictionary *dictData = [NSMutableDictionary dictionary];
+            [dictData setValueIfNotNil:txid forKey:@"txid"];
+            [dictData setValueIfNotNil:signer.lowercaseString forKey:@"signer"];
+            
+            data = dictData;
+        }else{
+            data = txid;
+        }
+        [WalletTools callbackWithrequestId:callbackModel.requestId
+                                   webView:webView
+                                      data:data
+                                callbackId:callbackModel.callbackId
+                                      code:OK];
+    }else{
+        [WalletTools callbackWithrequestId:callbackModel.requestId
+                                   webView:webView
+                                      data:@""
+                                callbackId:callbackModel.callbackId
+                                      code:ERROR_NETWORK];
+    }
+}
+
+- (void)paramsErrorCallbackModel:(WalletJSCallbackModel *)callbackModel webView:(WKWebView *)webView
+{
+    [WalletTools callbackWithrequestId:callbackModel.requestId webView:webView data:@"" callbackId:callbackModel.callbackId code:ERROR_NETWORK];
+}
 
 //Initiate a transaction
 - (void)signTransfer:(WalletTransactionParameter *)paramModel
@@ -202,58 +354,5 @@ callback:(void(^)(NSString *txId))callback
     callback(@"");
 }
 
-- (void)signCertFrom:(NSString *)from
-             account:(Account *)account
-             content:(NSString *)content
-           requestId:(NSString *)requestId
-             webView:(WKWebView *)webView
-          callbackId:(NSString *)callbackId
-               param:(NSDictionary *)param
-{
-    
-    NSString *packSign = [WalletTools packageCertParam:param];
-    
-    NSData *totalData = [packSign dataUsingEncoding:NSUTF8StringEncoding];
-    SecureData *data = [SecureData BLAKE2B:totalData];
-    Signature *signature = [account signDigest:data.data];
-    
-    SecureData *vData = [[SecureData alloc]init];
-    [vData appendByte:signature.v];
-    
-    NSString *s = [SecureData dataToHexString:signature.s];
-    NSString *r = [SecureData dataToHexString:signature.r];
-    
-    NSString *hashStr = [NSString stringWithFormat:@"0x%@%@%@",
-                         [r substringFromIndex:2],
-                         [s substringFromIndex:2],
-                         [vData.hexString substringFromIndex:2]];
-    
-    //Signature fails if v is 2 or 3
-    if (signature.v == 2
-        || signature.v == 3) {
-        
-        [WalletTools callbackWithrequestId:requestId
-                                   webView:webView
-                                      data:@""
-                                callbackId:callbackId
-                                      code:ERROR_NETWORK];
-    }else{
-        NSMutableDictionary *dictSub = [NSMutableDictionary dictionary];
-        
-        [dictSub setValueIfNotNil:param[@"domain"]      forKey:@"domain"];
-        [dictSub setValueIfNotNil:from.lowercaseString  forKey:@"signer"];
-        [dictSub setValueIfNotNil:param[@"timestamp"]   forKey:@"timestamp"];
-        
-        NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-        [dict setObject:dictSub forKey:@"annex"];
-        [dict setObject:hashStr forKey:@"signature"];
-        
-        [WalletTools callbackWithrequestId:requestId
-                                   webView:webView
-                                      data:dict
-                                callbackId:callbackId
-                                      code:OK];
-    }
-}
 
 @end

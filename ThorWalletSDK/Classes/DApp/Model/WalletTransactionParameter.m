@@ -207,21 +207,21 @@
     if ([WalletTools isEmpty:*gasPriceCoef]) {
         *gasPriceCoef = @"0";
         return YES;
+    }
+    
+    *gasPriceCoef = [NSString stringWithFormat:@"%@",*gasPriceCoef];
+    
+    if (![WalletTools checkDecimalStr:*gasPriceCoef]) {
+        *errorMsg = @"gasPriceCoef should be decimal string";
+        return NO;
     }else{
-        *gasPriceCoef = [NSString stringWithFormat:@"%@",*gasPriceCoef];
-        
-        if (![WalletTools checkDecimalStr:*gasPriceCoef]) {
-            *errorMsg = @"gasPriceCoef should be decimal string";
-            return NO;
+        NSInteger intGasPriceCoef = (*gasPriceCoef).integerValue;
+        if (intGasPriceCoef >= 0 && intGasPriceCoef <= 255) {
+            return YES;
         }else{
-            NSInteger intGasPriceCoef = (*gasPriceCoef).integerValue;
-            if (intGasPriceCoef >= 0 && intGasPriceCoef <= 255) {
-                return YES;
-            }else{
-                *errorMsg = @"gasPriceCoef is an integer type from 0 to 255";
-                
-                return NO;
-            }
+            *errorMsg = @"gasPriceCoef is an integer type from 0 to 255";
+            
+            return NO;
         }
     }
     
@@ -346,7 +346,7 @@
         return YES;
     }
     
-    if ([*data isKindOfClass:[NSString class]] ) {
+    if ([*data isKindOfClass:[NSString class]]) {
         if ([WalletTools checkHEXStr:*data]) {
             
              return YES;
