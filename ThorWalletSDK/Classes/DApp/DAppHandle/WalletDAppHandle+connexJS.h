@@ -41,13 +41,13 @@ NS_ASSUME_NONNULL_BEGIN
 @interface WalletDAppHandle (connexJS)
 
 //Get the genesis block information
--(void)getGenesisBlockWithRequestId:(WalletJSCallbackModel *)callbackModel
-                  completionHandler:(void (^)(NSString * __nullable result))completionHandler
-                            webView:(WKWebView *)webView;
+-(void)getGenesisBlock:(WalletJSCallbackModel *)callbackModel
+     completionHandler:(void (^)(NSString * __nullable result))completionHandler
+               webView:(WKWebView *)webView;
 //Get block status
--(void)getStatusWithRequestId:(WalletJSCallbackModel *)callbackModel
-            completionHandler:(void (^)(NSString * __nullable result))completionHandler
-                      webView:(WKWebView *)webView;
+-(void)getStatus:(WalletJSCallbackModel *)callbackModel
+completionHandler:(void (^)(NSString * __nullable result))completionHandler
+         webView:(WKWebView *)webView;
 
 //Get VET balance
 - (void)getAccountRequestId:(WalletJSCallbackModel *)callbackModel
@@ -60,9 +60,9 @@ NS_ASSUME_NONNULL_BEGIN
                webView:(WKWebView *)webView;
 
 //Get account storge
-- (void)getStorageApiDictParam:(WalletJSCallbackModel *)callbackModel
-             completionHandler:(void (^)(NSString * __nullable result))completionHandler
-                       webView:(WKWebView *)webView;
+- (void)getAccountStorage:(WalletJSCallbackModel *)callbackModel
+        completionHandler:(void (^)(NSString * __nullable result))completionHandler
+                  webView:(WKWebView *)webView;
 
 
 //Get information about a block
@@ -81,36 +81,34 @@ completionHandler:(void (^)(NSString * __nullable result))completionHandler
                       webView:(WKWebView *)webView;
 
 //Open ticker next
-- (void)tickerNextRequestId:(WalletJSCallbackModel *)callbackModel
-          completionHandler:(void (^)(NSString * __nullable result))completionHandler
-                    webView:(WKWebView *)webView;
+- (void)tickerNext:(WalletJSCallbackModel *)callbackModel
+ completionHandler:(void (^)(NSString * __nullable result))completionHandler
+           webView:(WKWebView *)webView;
 
 //Simulate a single transaction
-- (void)methodAsCallWithDictP:(WalletJSCallbackModel *)callbackModel
-            completionHandler:(void (^)(NSString * __nullable result))completionHandler
-                      webView:(WKWebView *)webView;
+- (void)methodAsCall:(WalletJSCallbackModel *)callbackModel
+   completionHandler:(void (^)(NSString * __nullable result))completionHandler
+             webView:(WKWebView *)webView;
 
 //Filter by condition
-- (void)filterDictParam:(WalletJSCallbackModel *)callbackModel
-      completionHandler:(void (^)(NSString * __nullable result))completionHandler
-                webView:(WKWebView *)webView;
+- (void)filterApply:(WalletJSCallbackModel *)callbackModel
+  completionHandler:(void (^)(NSString * __nullable result))completionHandler
+            webView:(WKWebView *)webView;
 
 //Simulate multiple transactions
-- (void)explainDictParam:(WalletJSCallbackModel *)callbackModel
-       completionHandler:(void (^)(NSString * __nullable result))completionHandler
-                 webView:(WKWebView *)webView;
+- (void)explain:(WalletJSCallbackModel *)callbackModel
+completionHandler:(void (^)(NSString * __nullable result))completionHandler
+        webView:(WKWebView *)webView;
 
 //Determine if the local wallet has this address
-- (void)checkAddressOwn:(WalletJSCallbackModel *)callbackModel
-      completionHandler:(void (^)(NSString * __nullable result))completionHandler
-                webView:(WKWebView *)webView;
+- (void)owned:(WalletJSCallbackModel *)callbackModel
+completionHandler:(void (^)(NSString * __nullable result))completionHandler
+      webView:(WKWebView *)webView;
 
 //Certification signature
-- (void)certTransferParamModel:(NSDictionary *)callbackParams
-                          from:(NSString *)from
-                     requestId:(NSString *)requestId
-                       webView:(WKWebView *)webView
-                    callbackId:(NSString *)callbackId;
+- (void)certTransfer:(WalletJSCallbackModel *)callbackModel
+                from:(NSString *)from
+             webView:(WKWebView *)webView;
 
 @end
 

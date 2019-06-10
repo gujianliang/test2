@@ -32,6 +32,7 @@
 #import <WebKit/WebKit.h>
 #import "WalletDemoMacro.h"
 #import "WalletUtils.h"
+#import "WalletDemoTool.h"
 
 @interface DAppWebViewVC ()<WKNavigationDelegate,WKUIDelegate,WalletUtilsDelegate>
 {
@@ -150,18 +151,13 @@
     }
     
     //Custom password input box
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil
-                                                                             message:@"Please enter the wallet password"
-                                                                      preferredStyle:UIAlertControllerStyleAlert];
-    
     @weakify(self);
-    [alertController addAction:([UIAlertAction actionWithTitle: @"Confirm"
-                                                         style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action)
+    [WalletDemoTool alertCurrentVC:self
+                           message:@"Please enter the wallet password"
+                   actionWithTitle:@"Confirm"
+                          callback:^(NSString * input)
      {
-         UITextField *textF =  alertController.textFields.lastObject;
-         
-         NSString *password = textF.text;
-         
+         NSString *password = input;
          [WalletUtils verifyKeystore:keystore password:password callback:^(BOOL result) {
              @strongify(self);
              if (result) {
@@ -169,12 +165,7 @@
                  [self packageParameter:clauses gas:gas keystore:keystore password:password completionHandler:completionHandler] ;
              }
          }];
-         
-     }])];
-    [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
-    }];
-    
-    [self presentViewController:alertController animated:YES completion:nil];
+     }];
 }
 
 - (void)packageParameter:(NSArray *)clauses gas:(NSString *)gas keystore:(NSString *)keystore password:(NSString *)password completionHandler:(void(^)(NSString *txId ,NSString *signer))completionHandler
@@ -197,7 +188,7 @@
                              gasPriceCoef:@"0"   // Coefficient used to calculate the final gas price (0 - 255)
                                  keystore:keystore
                                  password:password
-                                 completionHandler:completionHandler];
+                        completionHandler:completionHandler];
 }
 
 - (void)packageTranstionModelClauseList:(NSArray *)clauseList
@@ -220,39 +211,56 @@
             NSLog(@"blockReference == %@",blockReference);
             //If the blockReference is nil, then the acquisition fails, you can prompt alert
             
-                WalletTransactionParameter *transactionModel = [WalletTransactionParameter createTransactionParameter:^(TransactionParameterBuiler *builder) {
-
-                    builder.chainTag = chainTag;
-                    builder.blockReference = blockReference;
-                    builder.nonce = nonce;
-                    builder.clauses = clauseList;
-                    builder.gas = gas;
-                    builder.expiration = expiration;
-                    builder.gasPriceCoef = gasPriceCoef;
-
-                } checkParams:^(NSString *errorMsg) {
-                    NSLog(@"errorMsg == %@",errorMsg);
-                }];
-            
-                if (transactionModel != nil) {
-
-                    [WalletUtils signAndSendTransferWithParameter:transactionModel
-                                                         keystore:keystore
-                                                         password:password
-                                                         callback:^(NSString * txId)
-                     {
-                         //Developers can use txid to query the status of data packaged on the chain
-
-                         NSLog(@"\n txId: %@", txId);
-                         
-                         // Pass txid and signature address back to dapp webview
-                         NSString *singerAddress = [WalletUtils getAddressWithKeystore:keystore];
-                         completionHandler(txId,singerAddress.lowercaseString);
-                         
-                     }];
-                }
+            [self signAndSendClauseList:clauseList
+                                  nonce:nonce
+                                    gas:gasPriceCoef
+                             expiration:expiration
+                           gasPriceCoef:gasPriceCoef
+                               keystore:keystore
+                               password:password
+                               chainTag:chainTag
+                         blockReference:blockReference];
         }];
     }];
+}
+
+- (void)signAndSendClauseList:(NSArray *)clauseList
+                        nonce:(NSString *)nonce
+                          gas:(NSString *)gas
+                   expiration:(NSString *)expiration
+                 gasPriceCoef:(NSString *)gasPriceCoef
+                     keystore:(NSString *)keystore
+                     password:(NSString *)password
+                     chainTag:(NSString *)chainTag
+               blockReference:(NSString *)blockReference
+{
+    WalletTransactionParameter *transactionModel = [WalletTransactionParameter createTransactionParameter:^(TransactionParameterBuiler *builder) {
+        
+        builder.chainTag = chainTag;
+        builder.blockReference = blockReference;
+        builder.nonce = nonce;
+        builder.clauses = clauseList;
+        builder.gas = gas;
+        builder.expiration = expiration;
+        builder.gasPriceCoef = gasPriceCoef;
+        
+    } checkParams:^(NSString *errorMsg) {
+        NSLog(@"errorMsg == %@",errorMsg);
+    }];
+    
+    
+    if (transactionModel != nil) {
+        
+        [WalletUtils signAndSendTransferWithParameter:transactionModel
+                                             keystore:keystore
+                                             password:password
+                                             callback:^(NSString *txId)
+         {
+             //Developers can use txid to query the status of data packaged on the chain
+             
+             NSLog(@"\n txId: %@", txId);
+         }];
+    }
 }
 
 - (BigNumber *)amountConvertWei:(NSString *)amount dicimals:(NSInteger )dicimals
@@ -327,36 +335,24 @@
 completionHandler:(void (^)(NSString *signer, NSData *signatureData))completionHandler
 {
     //Custom password input box
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil
-                                                                             message:@"Please enter the wallet password"
-                                                                      preferredStyle:UIAlertControllerStyleAlert];
-    
-    
-    [alertController addAction:([UIAlertAction actionWithTitle: @"Confirm"
-                                                         style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action)
-                                 {
-                                     
-                                     UITextField *textF =  alertController.textFields.lastObject;
-                                     NSData *dataMessage = [message dataUsingEncoding:NSUTF8StringEncoding];
-                                     
-                                     [WalletUtils signWithMessage:dataMessage
-                                                         keystore:keystore
-                                                         password:textF.text
-                                                         callback:^(NSData *signatureData)
-                                     {
-                                         
-                                         if (signatureData) {
-                                             completionHandler(signer,signatureData);
-                                         }else{
-                                             completionHandler(signer,nil);
-                                         }
-                                     }];
-                                     
-                                 }])];
-    [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
-    }];
-    
-    [self presentViewController:alertController animated:YES completion:nil];
+    [WalletDemoTool alertCurrentVC:self
+                           message:@"Please enter the wallet password"
+                   actionWithTitle:@"Confirm"
+                          callback:^(NSString * input)
+     {
+        NSData *dataMessage = [message dataUsingEncoding:NSUTF8StringEncoding];
+         [WalletUtils signWithMessage:dataMessage
+                             keystore:keystore
+                             password:input
+                             callback:^(NSData *signatureData)
+          {
+              if (signatureData) {
+                  completionHandler(signer,signatureData);
+              }else{
+                  completionHandler(signer,nil);
+              }
+          }];
+     }];
 }
 
 /**

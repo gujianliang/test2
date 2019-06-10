@@ -55,9 +55,9 @@ NS_ASSUME_NONNULL_BEGIN
   completionHandler:(void (^)(NSString * __nullable result))completionHandler;
 
 //Get the local wallet address
--(void)getAccountsWithRequestId:(WalletJSCallbackModel *)callbackModel
-              completionHandler:(void (^)(NSString * __nullable result))completionHandler
-                        webView:(WKWebView *)webView;
+-(void)getAccounts:(WalletJSCallbackModel *)callbackModel
+ completionHandler:(void (^)(NSString * __nullable result))completionHandler
+           webView:(WKWebView *)webView;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -110,9 +110,9 @@
 }
 
 //Get the local wallet address
--(void)getAccountsWithRequestId:(WalletJSCallbackModel *)callbackModel
-              completionHandler:(void (^)(NSString * __nullable result))completionHandler
-                        webView:(WKWebView *)webView
+-(void)getAccounts:(WalletJSCallbackModel *)callbackModel
+ completionHandler:(void (^)(NSString * __nullable result))completionHandler
+           webView:(WKWebView *)webView
 {
     
     if (self.delegate && [self.delegate respondsToSelector:@selector(onGetWalletAddress:)]) {

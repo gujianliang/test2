@@ -162,17 +162,23 @@ callback:(void(^)(NSString *txId))callback
 
          }else{
 
-            self.txId = [transaction txID:account];
-             NSString *raw = [SecureData dataToHexString: [transaction serialize]];
-             
-             if (self.isSend) {
-                 [self sendRaw:raw callback:callback];
-
-             }else{
-                 callback(raw);
-             }
+             [self account:account transaction:transaction callback:callback];
          }
     }];
+}
+
+- (void)account:(Account *)account transaction:(Transaction *)transaction callback:(void(^)(NSString *txId))callback
+
+{
+    self.txId = [transaction txID:account];
+    NSString *raw = [SecureData dataToHexString: [transaction serialize]];
+    
+    if (self.isSend) {
+        [self sendRaw:raw callback:callback];
+        
+    }else{
+        callback(raw);
+    }
 }
 
 - (void)sendRaw:(NSString *)raw callback:(void(^)(NSString *txId))callback

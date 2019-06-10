@@ -32,6 +32,7 @@
 #import "WalletUtils.h"
 #import "WalletDemoMacro.h"
 #import "MBProgressHUD.h"
+#import "WalletDemoTool.h"
 
 @interface WalletTransferVC ()<UITextFieldDelegate>
 {
@@ -100,45 +101,37 @@
     
     NSString *keystore = currentWalletDict[@"keystore"];
     
-    
     //Custom password input box
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil
-                                                                             message:@"Please enter the wallet password"
-                                                                      preferredStyle:UIAlertControllerStyleAlert];
-    
     @weakify(self);
-    [alertController addAction:([UIAlertAction actionWithTitle: @"Confirm"
-                                                         style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action)
+    [WalletDemoTool alertCurrentVC:self
+                           message:@"Please enter the wallet password"
+                   actionWithTitle:@"Confirm"
+                          callback:^(NSString * input)
     {
-                                     
-        UITextField *textF =  alertController.textFields.lastObject;
-        
-        NSString *password = textF.text;
+        NSString *password = input;
         
         [WalletUtils verifyKeystore:keystore password:password callback:^(BOOL result) {
             @strongify(self);
-                 if (result) {
-                     
-                     if (self.isVET) {
-                         [self vetTransfer:from keystore:keystore password:password];
-                     }else{
-                         [self tokenTransfer:from keystore:keystore password:password];
-                     }
-                     
-                 }else{
-                     NSLog(@"The password is wrong");
-                 }
+            if (result) {
+                
+                [self transfer:from keystore:keystore password:password];
+                
+            }else{
+                NSLog(@"The password is wrong");
+            }
         }];
-        
-    }])];
-    [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
-        
-        
     }];
-    
-    [self presentViewController:alertController animated:YES completion:nil];
-    
 }
+
+- (void)transfer:(NSString *)from keystore:(NSString *)keystore password:(NSString *)password
+{
+    if (self.isVET) {
+        [self vetTransfer:from keystore:keystore password:password];
+    }else{
+        [self tokenTransfer:from keystore:keystore password:password];
+    }
+}
+
 
 - (void)vetTransfer:(NSString *)from keystore:(NSString *)keystore  password:(NSString *)password{
     
@@ -261,36 +254,59 @@
             NSLog(@"blockReference == %@",blockReference);
             //If the blockReference is nil, then the acquisition fails, you can prompt alert
             
-            WalletTransactionParameter *transactionModel = [WalletTransactionParameter createTransactionParameter:^(TransactionParameterBuiler *builder) {
-                
-                builder.chainTag = chainTag;
-                builder.blockReference = blockReference;
-                builder.nonce = nonce;
-                builder.clauses = clauseList;
-                builder.gas = gas;
-                builder.expiration = expiration;
-                builder.gasPriceCoef = gasPriceCoef;
-                
-            } checkParams:^(NSString *errorMsg) {
-                NSLog(@"errorMsg == %@",errorMsg);
-            }];
+            [self signAndSendClauseList:clauseList
+                                  nonce:nonce
+                                    gas:gas
+                             expiration:expiration
+                           gasPriceCoef:gasPriceCoef
+                               keystore:keystore
+                               password:password
+                               chainTag:chainTag
+                         blockReference:blockReference];
             
             
-            if (transactionModel != nil) {
-                
-                [WalletUtils signAndSendTransferWithParameter:transactionModel
-                                                     keystore:keystore
-                                                     password:password
-                                                     callback:^(NSString *txId)
-                {
-                       //Developers can use txid to query the status of data packaged on the chain
-     
-                       NSLog(@"\n txId: %@", txId);
-                }];
-            }
         }];
     }];
     
+}
+
+- (void)signAndSendClauseList:(NSArray *)clauseList
+                        nonce:(NSString *)nonce
+                          gas:(NSString *)gas
+                   expiration:(NSString *)expiration
+                 gasPriceCoef:(NSString *)gasPriceCoef
+                     keystore:(NSString *)keystore
+                     password:(NSString *)password
+                     chainTag:(NSString *)chainTag
+               blockReference:(NSString *)blockReference
+{
+    WalletTransactionParameter *transactionModel = [WalletTransactionParameter createTransactionParameter:^(TransactionParameterBuiler *builder) {
+        
+        builder.chainTag = chainTag;
+        builder.blockReference = blockReference;
+        builder.nonce = nonce;
+        builder.clauses = clauseList;
+        builder.gas = gas;
+        builder.expiration = expiration;
+        builder.gasPriceCoef = gasPriceCoef;
+        
+    } checkParams:^(NSString *errorMsg) {
+        NSLog(@"errorMsg == %@",errorMsg);
+    }];
+    
+    
+    if (transactionModel != nil) {
+        
+        [WalletUtils signAndSendTransferWithParameter:transactionModel
+                                             keystore:keystore
+                                             password:password
+                                             callback:^(NSString *txId)
+         {
+             //Developers can use txid to query the status of data packaged on the chain
+             
+             NSLog(@"\n txId: %@", txId);
+         }];
+    }
 }
 
 /**

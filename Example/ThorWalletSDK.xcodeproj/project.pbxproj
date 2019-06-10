@@ -22,6 +22,7 @@
 		71719F9F1E33DC2100824A3D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */; };
 		873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 873B8AEA1B1F5CCA007FD442 /* Main.storyboard */; };
 		96B9C4865F3F5E00A6DCDF60 /* Pods_ThorWalletSDK_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30537BF4C88FAD9D119C9978 /* Pods_ThorWalletSDK_Example.framework */; };
+		9737D74222AE2B09008187E4 /* WalletDemoTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 9737D74122AE2B09008187E4 /* WalletDemoTool.m */; };
 		9784E1502293D8F20071F173 /* WalletChangePWVC.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9784E10C2293D8F10071F173 /* WalletChangePWVC.strings */; };
 		9784E1512293D8F20071F173 /* WalletDetailVC.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9784E10E2293D8F10071F173 /* WalletDetailVC.strings */; };
 		9784E1522293D8F20071F173 /* WalletMoreInfoVC.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9784E1102293D8F10071F173 /* WalletMoreInfoVC.strings */; };
@@ -93,6 +94,8 @@
 		787F59A93613E202F2B4A4CD /* Pods-ThorWalletSDK_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ThorWalletSDK_Tests.debug.xcconfig"; path = "Target Support Files/Pods-ThorWalletSDK_Tests/Pods-ThorWalletSDK_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		82629E372C325FF3F1DCAA77 /* Pods-ThorWalletSDK_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ThorWalletSDK_Example.debug.xcconfig"; path = "Target Support Files/Pods-ThorWalletSDK_Example/Pods-ThorWalletSDK_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		873B8AEA1B1F5CCA007FD442 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		9737D74022AE2B09008187E4 /* WalletDemoTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WalletDemoTool.h; sourceTree = "<group>"; };
+		9737D74122AE2B09008187E4 /* WalletDemoTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WalletDemoTool.m; sourceTree = "<group>"; };
 		9784E10D2293D8F10071F173 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/WalletChangePWVC.strings"; sourceTree = "<group>"; };
 		9784E10F2293D8F10071F173 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/WalletDetailVC.strings"; sourceTree = "<group>"; };
 		9784E1112293D8F10071F173 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/WalletMoreInfoVC.strings"; sourceTree = "<group>"; };
@@ -296,6 +299,8 @@
 				9784E13D2293D8F10071F173 /* Recover */,
 				9784E402229B7AB10071F173 /* ThorTest.h */,
 				9784E403229B7AB10071F173 /* ThorTest.m */,
+				9737D74022AE2B09008187E4 /* WalletDemoTool.h */,
+				9737D74122AE2B09008187E4 /* WalletDemoTool.m */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -592,6 +597,7 @@
 				9784E15E2293D8F20071F173 /* WalletTransferVC.m in Sources */,
 				9784E15C2293D8F20071F173 /* WalletCreateVC.m in Sources */,
 				9784E1532293D8F20071F173 /* WalletChangePWVC.m in Sources */,
+				9737D74222AE2B09008187E4 /* WalletDemoTool.m in Sources */,
 				6003F59E195388D20070C39A /* ThorAppDelegate.m in Sources */,
 				9784E16E2293D8F20071F173 /* WalletKeystoreImportVC.m in Sources */,
 				9784E1662293D8F20071F173 /* WalletNodeDetailVC.m in Sources */,

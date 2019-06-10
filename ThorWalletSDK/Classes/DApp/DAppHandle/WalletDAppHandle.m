@@ -48,9 +48,11 @@
 
 @interface WalletDAppHandle ()<WKNavigationDelegate,WKUIDelegate>
 {
-    WKWebView *_webView;
+
 }
 @property (nonatomic, strong)WalletVersionModel *versionModel;
+@property (nonatomic, strong)WKWebView *webView;
+
 @end
 
 @implementation WalletDAppHandle
@@ -79,56 +81,6 @@ static dispatch_once_t predicate;
     return self;
 }
 
-
-- (NSDictionary *)Strategies
-{
-   return
-  @{
-    @"getStatus" :  NSStringFromSelector(@selector(getStatusWithRequestId:completionHandler:webView:)),
-
-    @"getGenesisBlock" : NSStringFromSelector(@selector(getGenesisBlockWithRequestId:completionHandler:webView:)),
-    
-    @"getAccount" :  NSStringFromSelector(@selector(getAccountRequestId:completionHandler: webView:)),
-    
-    @"getAccountCode" :  NSStringFromSelector(@selector(getAccountCode:completionHandler: webView:)),
-
-    @"getBlock" :  NSStringFromSelector(@selector(getBlock:completionHandler: webView:)),
-
-    @"getTransaction" :  NSStringFromSelector(@selector(getTransaction:completionHandler: webView:)),
-
-    @"getTransactionReceipt" :  NSStringFromSelector(@selector(getTransactionReceipt:completionHandler: webView:)),
-
-    @"methodAsCall" :  NSStringFromSelector(@selector(methodAsCallWithDictP:completionHandler: webView:)),
-
-    @"getAccounts" :  NSStringFromSelector(@selector(getAccountsWithRequestId:completionHandler: webView:)),
-
-    @"getAccountStorage" :  NSStringFromSelector(@selector(getStorageApiDictParam:completionHandler: webView:)),
-
-    @"tickerNext" :  NSStringFromSelector(@selector( tickerNextRequestId:completionHandler: webView:)),
-
-//    @"sign" :  NSStringFromSelector(@selector(transferCallbackParams:
-//                                              webView:
-//                                              connex:
-//                                              requestId:
-//                                              callbackId:
-//                                              completionHandler:)),
-    @"getBalance" :  NSStringFromSelector(@selector(getBalance:completionHandler: webView:)),
-    @"getNodeUrl" :  NSStringFromSelector(@selector(getNodeUrl: completionHandler:webView:)),
-//    @"send" :  NSStringFromSelector(@selector(transferCallbackParams:
-//                                              webView:
-//                                              connex:
-//                                              requestId:
-//                                              callbackId:
-//                                              completionHandler:)),
-    @"filterApply" :  NSStringFromSelector(@selector(filterDictParam:completionHandler: webView:)),
-
-    @"explain" :  NSStringFromSelector(@selector(explainDictParam:completionHandler: webView:)),
-
-    @"owned" :  NSStringFromSelector(@selector(checkAddressOwn:completionHandler: webView:)),
-
-    };
-}
-
 //Analyze data from Dapp
 - (void)webView:(WKWebView *)webView defaultText:(nullable NSString *)defaultText completionHandler:(void (^)(NSString * __nullable result))completionHandler
 {
@@ -147,24 +99,13 @@ static dispatch_once_t predicate;
     NSDictionary *dict = [NSJSONSerialization dictionaryWithJsonString:result];
     
     WalletJSCallbackModel *callbackModel = [WalletJSCallbackModel yy_modelWithDictionary:dict];
-    
     NSString *requestId  = callbackModel.requestId;
     NSString *method     = callbackModel.method;
 
-    NSString *strSEL = [self Strategies][method];
+    NSString *strSEL = [self methodNameWithSEL][method];
     if (strSEL) {
-        SEL myMethod =  NSSelectorFromString(strSEL);
      
-        NSMethodSignature*signature = [[self class] instanceMethodSignatureForSelector:myMethod];
-        NSInvocation*invocation = [NSInvocation invocationWithMethodSignature:signature];
-        invocation.target = self;
-        invocation.selector = myMethod;
-        
-        [invocation setArgument:&callbackModel atIndex:2];
-        [invocation setArgument:&completionHandler atIndex:3];
-        [invocation setArgument:&webView atIndex:4];
-
-        [invocation invoke];
+        [self invocationMethod:strSEL callbackModel:callbackModel completionHandler:completionHandler];
     }else{
         //No matching methodId found
         NSDictionary *noMethodDict = [WalletTools packageWithRequestId:requestId
@@ -177,22 +118,73 @@ static dispatch_once_t predicate;
     }
 }
 
-- (void)transferCallbackParams:(NSDictionary *)callbackParams
-                       webView:(WKWebView *)webView
-                        connex:(BOOL)bConnex
-                     requestId:(NSString *)requestId
-                    callbackId:(NSString *)callbackId
-             completionHandler:(void (^)(NSString * __nullable result))completionHandler
+- (NSDictionary *)methodNameWithSEL
+{
+    NSArray *methodList = @[@"getStatus",
+                            @"getGenesisBlock",
+                            @"getAccount",
+                            @"getAccountCode",
+                            @"getBlock",
+                            @"getTransaction",
+                            @"getTransactionReceipt",
+                            @"methodAsCall",
+                            @"getAccounts",
+                            @"getAccountStorage",
+                            @"tickerNext",
+                            @"sign",
+                            @"getBalance",
+                            @"getNodeUrl",
+                            @"send",
+                            @"filterApply",
+                            @"explain",
+                            @"owned"];
+    
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+
+    for (NSString *methodName in methodList) {
+        NSString *strSEL = [NSString stringWithFormat:@"%@:completionHandler:webView:",methodName];
+        [dict setValueIfNotNil:strSEL forKey:methodName];
+    }
+    return dict;
+}
+
+- (void)invocationMethod:(NSString *)strSEL callbackModel:(WalletJSCallbackModel *)callbackModel completionHandler:(void (^)(NSString * __nullable result))completionHandler
+{
+    SEL myMethod =  NSSelectorFromString(strSEL);
+    
+    NSMethodSignature*signature = [[self class] instanceMethodSignatureForSelector:myMethod];
+    NSInvocation*invocation = [NSInvocation invocationWithMethodSignature:signature];
+    invocation.target = self;
+    invocation.selector = myMethod;
+    
+    [invocation setArgument:&callbackModel atIndex:2];
+    [invocation setArgument:&completionHandler atIndex:3];
+    [invocation setArgument:&_webView atIndex:4];
+    
+    [invocation invoke];
+}
+
+- (void)sign:(WalletJSCallbackModel *)callbackModel completionHandler:(void (^)(NSString * __nullable result))completionHandler webView:(WKWebView *)webView
+{
+    [self transferCallback:callbackModel connex:YES completionHandler:completionHandler];
+}
+
+- (void)send:(WalletJSCallbackModel *)callbackModel completionHandler:(void (^)(NSString * __nullable result))completionHandler webView:(WKWebView *)webView
+{
+    [self transferCallback:callbackModel connex:NO completionHandler:completionHandler];
+}
+
+- (void)transferCallback:(WalletJSCallbackModel *)callbackModel
+                  connex:(BOOL)bConnex
+       completionHandler:(void (^)(NSString * __nullable result))completionHandler
 {
 
-    NSString *kind = callbackParams[@"kind"];
+    NSString *kind = callbackModel.params[@"kind"];
     
     if ([kind isEqualToString:@"cert"]) { // Cert type signature
         
-        NSString *from = callbackParams[@"options"][@"signer"];
-        
-        [self certTransferParamModel:callbackParams from:from requestId:requestId webView:webView callbackId:callbackId];
-       
+        NSString *from = callbackModel.params[@"options"][@"signer"];
+        [self certTransfer:callbackModel from:from webView:_webView];
         return ;
     }
    
@@ -202,69 +194,46 @@ static dispatch_once_t predicate;
 
     NSMutableArray *clauseModelList = [[NSMutableArray alloc]init];
 
-    [self testbConnex:bConnex clauseModelList:clauseModelList gas:&gas gasPrice:&gasPrice signer:&signer callbackParams:callbackParams];
-    
-//    if (bConnex) { // Connex
-//
-//        NSArray *clauseList = callbackParams[@"clauses"];
-//
-//        for (NSDictionary *clauseDict in clauseList) {
-//
-//            ClauseModel *clauseModel = [[ClauseModel alloc]init];
-//            clauseModel.to    = clauseDict[@"to"];
-//            clauseModel.value = clauseDict[@"value"];
-//            clauseModel.data  = clauseDict[@"data"];
-//
-//            [clauseModelList addObject:clauseModel];
-//        }
-//
-//        gas        = callbackParams[@"options"][@"gas"];
-//        gasPrice   = callbackParams[@"options"][@"gasPrice"];
-//
-//        gasPrice   = @"120"; //connex js No pass gaspPrice write default
-//
-//        signer       = callbackParams[@"options"][@"signer"];
-//
-//    }else{ // Web3
-//
-//        ClauseModel *clauseModel = [[ClauseModel alloc]init];
-//        clauseModel.to    = callbackParams[@"to"];
-//        clauseModel.value = callbackParams[@"value"];
-//        clauseModel.data  = callbackParams[@"data"];
-//
-//        gas        = callbackParams[@"gas"];
-//        gasPrice   = callbackParams[@"gasPrice"];
-//
-//        [clauseModelList addObject:clauseModel];
-//    }
+    [self packgetDatabConnex:bConnex
+             clauseModelList:clauseModelList
+                         gas:&gas
+                    gasPrice:&gasPrice
+                      signer:&signer
+              callbackParams:callbackModel.params];
     
     if (gas.integerValue == 0) {
         
         gas = [NSString stringWithFormat:@"%d",[WalletDAppGasCalculateHandle getGas:clauseModelList]];
         
-        WalletDappSimulateMultiAccountApi *simulateApi = [[WalletDappSimulateMultiAccountApi alloc]initClause:clauseModelList opts:@{} revision:@""];
-        [simulateApi loadDataAsyncWithSuccess:^(WalletBaseApi *finishApi) {
-            
-            NSArray *list = (NSArray *)finishApi.resultDict;
-            NSString *gasUsed = [list firstObject][@"gasUsed"];
-            if (gasUsed.integerValue != 0) {
-                //Gasused If it is not 0,  need to add 15000
-                gas = [NSString stringWithFormat:@"%ld",gas.integerValue + gasUsed.integerValue + 15000];
-            }
-            
-            [self callbackClauseList:clauseModelList gas:gas signer:signer bConnex:bConnex webView:webView callbackId:callbackId requestId:requestId];
-
-        }failure:^(WalletBaseApi *finishApi, NSString *errMsg) {
-            
-            [self paramsError:requestId webView:webView callbackId:callbackId];
-
-        }];
+        [self simulateMultiAccount:clauseModelList gas:&gas signer:signer callbackModel:callbackModel bConnex:bConnex];
     }else{
-        [self callbackClauseList:clauseModelList gas:gas signer:signer bConnex:bConnex webView:webView callbackId:callbackId requestId:requestId];
+        [self callbackClauseList:clauseModelList gas:gas signer:signer bConnex:bConnex callbackModel:callbackModel];
     }
 }
 
-- (void)testbConnex:(BOOL)bConnex clauseModelList:(NSMutableArray *)clauseModelList gas:(NSString **)gas gasPrice:(NSString **)gasPrice signer:(NSString **)signer callbackParams:(NSDictionary *)callbackParams
+- (void)simulateMultiAccount:(NSArray *)clauseModelList gas:(NSString * __autoreleasing *)gas signer:(NSString *)signer callbackModel:(WalletJSCallbackModel *)callbackModel bConnex:(BOOL)bConnex
+{
+    @weakify(self);
+    WalletDappSimulateMultiAccountApi *simulateApi = [[WalletDappSimulateMultiAccountApi alloc]initClause:clauseModelList opts:@{} revision:@""];
+    [simulateApi loadDataAsyncWithSuccess:^(WalletBaseApi *finishApi) {
+        @strongify(self);
+        NSArray *list = (NSArray *)finishApi.resultDict;
+        NSString *gasUsed = [list firstObject][@"gasUsed"];
+        if (gasUsed.integerValue != 0) {
+            //Gasused If it is not 0,  need to add 15000
+            NSString *originGas = *gas;
+            *gas = [NSString stringWithFormat:@"%ld",originGas.integerValue + gasUsed.integerValue + 15000];
+        }
+        
+        [self callbackClauseList:clauseModelList gas:*gas signer:signer bConnex:bConnex  callbackModel:callbackModel];
+        
+    }failure:^(WalletBaseApi *finishApi, NSString *errMsg) {
+        @strongify(self);
+        [self paramsErrorCallbackModel:callbackModel webView:self.webView ];
+    }];
+}
+
+- (void)packgetDatabConnex:(BOOL)bConnex clauseModelList:(NSMutableArray *)clauseModelList gas:(NSString **)gas gasPrice:(NSString **)gasPrice signer:(NSString **)signer callbackParams:(NSDictionary *)callbackParams
 {
     if (bConnex) { // Connex
         
@@ -299,34 +268,34 @@ static dispatch_once_t predicate;
     }
 }
 
-- (void)callbackClauseList:(NSArray *)clauseModelList gas:(NSString *)gas signer:(NSString *)signer bConnex:(BOOL)bConnex  webView:(WKWebView *)webView callbackId:(NSString *)callbackId requestId:(NSString *)requestId
+- (void)callbackClauseList:(NSArray *)clauseModelList gas:(NSString *)gas signer:(NSString *)signer bConnex:(BOOL)bConnex callbackModel:(WalletJSCallbackModel *)callbackModel
 {
     id delegate = [WalletDAppHandle shareWalletHandle].delegate;
     if (delegate) {
         if ([delegate respondsToSelector:@selector(onWillTransfer: signer: gas: completionHandler:)]) {
-            
+             @weakify(self)
             [delegate onWillTransfer:clauseModelList signer:signer gas:gas completionHandler:^(NSString * txId,NSString *signer)
              {
+                 @strongify(self);
                  [self callbackToWebView:txId
-                                 signer:signer
+                                  signer:signer
                                  bConnex:bConnex
-                                 webView:webView
-                              callbackId:callbackId
-                               requestId:requestId];
+                                 webView:self.webView
+                           callbackModel:callbackModel];
                  
              }];
         }else{
-            [WalletTools callbackWithrequestId:requestId
-                                       webView:webView
+            [WalletTools callbackWithrequestId:callbackModel.requestId
+                                       webView:_webView
                                           data:@""
-                                    callbackId:callbackId
+                                    callbackId:callbackModel.callbackId
                                           code:ERROR_REJECTED];
         }
     }
 }
 
 //Call back to dapp webview
-- (void)callbackToWebView:(NSString *)txid signer:(NSString *)signer bConnex:(BOOL)bConnex  webView:(WKWebView *)webView callbackId:(NSString *)callbackId requestId:(NSString *)requestId
+- (void)callbackToWebView:(NSString *)txid signer:(NSString *)signer bConnex:(BOOL)bConnex  webView:(WKWebView *)webView callbackModel:(WalletJSCallbackModel *)callbackModel
 {
     if (txid.length != 0) {
         id data = nil;
@@ -340,23 +309,23 @@ static dispatch_once_t predicate;
         }else{
             data = txid;
         }
-        [WalletTools callbackWithrequestId:requestId
+        [WalletTools callbackWithrequestId:callbackModel.requestId
                                    webView:webView
                                       data:data
-                                callbackId:callbackId
+                                callbackId:callbackModel.callbackId
                                       code:OK];
     }else{
-        [WalletTools callbackWithrequestId:requestId
+        [WalletTools callbackWithrequestId:callbackModel.requestId
                                    webView:webView
                                       data:@""
-                                callbackId:callbackId
+                                callbackId:callbackModel.callbackId
                                       code:ERROR_NETWORK];
     }
 }
 
-- (void)paramsError:(NSString *)requestId webView:(WKWebView *)webView callbackId:(NSString *)callbackId
+- (void)paramsErrorCallbackModel:(WalletJSCallbackModel *)callbackModel webView:(WKWebView *)webView
 {
-    [WalletTools callbackWithrequestId:requestId webView:webView data:@"" callbackId:callbackId code:ERROR_NETWORK];
+    [WalletTools callbackWithrequestId:callbackModel.requestId webView:webView data:@"" callbackId:callbackModel.callbackId code:ERROR_NETWORK];
 }
 
 //Websocket notification

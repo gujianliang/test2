@@ -55,9 +55,9 @@
 @implementation WalletDAppHandle (connexJS)
 
 //Get the genesis block information
--(void)getGenesisBlockWithRequestId:(WalletJSCallbackModel *)callbackModel
-                  completionHandler:(void (^)(NSString * __nullable result))completionHandler
-                            webView:(WKWebView *)webView
+-(void)getGenesisBlock:(WalletJSCallbackModel *)callbackModel
+     completionHandler:(void (^)(NSString * __nullable result))completionHandler
+               webView:(WKWebView *)webView
 {
     WalletGenesisBlockInfoApi *genesisBlock = [WalletGenesisBlockInfoApi new];
     [genesisBlock loadDataAsyncWithSuccess:^(WalletBaseApi *finishApi) {
@@ -78,9 +78,9 @@
 }
 
 //Get block status
--(void)getStatusWithRequestId:(WalletJSCallbackModel *)callbackModel
-            completionHandler:(void (^)(NSString * __nullable result))completionHandler
-                      webView:(WKWebView *)webView
+-(void)getStatus:(WalletJSCallbackModel *)callbackModel
+completionHandler:(void (^)(NSString * __nullable result))completionHandler
+         webView:(WKWebView *)webView
 {
     WalletDAppPeersApi *peersApi = [[WalletDAppPeersApi alloc]init];
     [peersApi loadDataAsyncWithSuccess:^(WalletBaseApi *finishApi) {
@@ -99,38 +99,8 @@
         }
         
         // Get best block info
-        WalletBestBlockInfoApi *bestApi = [[WalletBestBlockInfoApi alloc]init];
-        [bestApi loadDataAsyncWithSuccess:^(WalletBaseApi *finishApi) {
-            
-            WalletBlockInfoModel *blockModel = finishApi.resultModel;
-            BigNumber *peerNum = [BigNumber bigNumberWithHexString:blockNum];
-            CGFloat progress = peerNum.decimalString.floatValue/blockModel.number.floatValue;
-            
-            NSMutableDictionary *dictParam = [NSMutableDictionary dictionary];
-            [dictParam setValueIfNotNil:@(progress) forKey:@"progress"];
-            
-            NSMutableDictionary *subDict = [NSMutableDictionary dictionary];
-            [subDict setValueIfNotNil:blockModel.id         forKey:@"id"];
-            [subDict setValueIfNotNil:@(blockModel.number.integerValue) forKey:@"number"];
-            [subDict setValueIfNotNil:@(blockModel.timestamp.integerValue) forKey:@"timestamp"];
-            [subDict setValueIfNotNil:blockModel.parentID    forKey:@"parentID"];
-            
-            [dictParam setValueIfNotNil:subDict forKey:@"head"];
-            
-            NSDictionary *resultDict = [WalletTools packageWithRequestId:callbackModel.requestId
-                                                                    data:dictParam
-                                                                    code:OK
-                                                                 message:@""];
-            completionHandler([resultDict yy_modelToJSONString]);
-            
-        } failure:^(WalletBaseApi *finishApi, NSString *errMsg) {
-            NSDictionary *resultDict = [WalletTools packageWithRequestId:callbackModel.requestId
-                                                                    data:@""
-                                                                    code:ERROR_NETWORK
-                                                                 message:ERROR_NETWORK_MSG];
-            completionHandler([resultDict yy_modelToJSONString]);
-            
-        }];
+        [self statusBlockNum:blockNum callbackModel:callbackModel completionHandler:completionHandler];
+        
     } failure:^(WalletBaseApi *finishApi, NSString *errMsg) {
         
         NSDictionary *resultDict = [WalletTools packageWithRequestId:callbackModel.requestId
@@ -142,10 +112,48 @@
     }];
 }
 
+- (void)statusBlockNum:(NSString *)blockNum
+       callbackModel:(WalletJSCallbackModel *)callbackModel
+   completionHandler:(void (^)(NSString * __nullable result))completionHandler
 
-- (void)methodAsCallWithDictP:(WalletJSCallbackModel *)callbackModel
-            completionHandler:(void (^)(NSString * __nullable result))completionHandler
-                      webView:(WKWebView *)webView
+{
+    WalletBestBlockInfoApi *bestApi = [[WalletBestBlockInfoApi alloc]init];
+    [bestApi loadDataAsyncWithSuccess:^(WalletBaseApi *finishApi) {
+        
+        WalletBlockInfoModel *blockModel = finishApi.resultModel;
+        BigNumber *peerNum = [BigNumber bigNumberWithHexString:blockNum];
+        CGFloat progress = peerNum.decimalString.floatValue/blockModel.number.floatValue;
+        
+        NSMutableDictionary *dictParam = [NSMutableDictionary dictionary];
+        [dictParam setValueIfNotNil:@(progress) forKey:@"progress"];
+        
+        NSMutableDictionary *subDict = [NSMutableDictionary dictionary];
+        [subDict setValueIfNotNil:blockModel.id         forKey:@"id"];
+        [subDict setValueIfNotNil:@(blockModel.number.integerValue) forKey:@"number"];
+        [subDict setValueIfNotNil:@(blockModel.timestamp.integerValue) forKey:@"timestamp"];
+        [subDict setValueIfNotNil:blockModel.parentID    forKey:@"parentID"];
+        
+        [dictParam setValueIfNotNil:subDict forKey:@"head"];
+        
+        NSDictionary *resultDict = [WalletTools packageWithRequestId:callbackModel.requestId
+                                                                data:dictParam
+                                                                code:OK
+                                                             message:@""];
+        completionHandler([resultDict yy_modelToJSONString]);
+        
+    } failure:^(WalletBaseApi *finishApi, NSString *errMsg) {
+        NSDictionary *resultDict = [WalletTools packageWithRequestId:callbackModel.requestId
+                                                                data:@""
+                                                                code:ERROR_NETWORK
+                                                             message:ERROR_NETWORK_MSG];
+        completionHandler([resultDict yy_modelToJSONString]);
+        
+    }];
+}
+
+- (void)methodAsCall:(WalletJSCallbackModel *)callbackModel
+   completionHandler:(void (^)(NSString * __nullable result))completionHandler
+             webView:(WKWebView *)webView
 {
     NSString *revision        = callbackModel.params[@"revision"];
     NSDictionary *dictOpts    = callbackModel.params[@"opts"];
@@ -181,9 +189,9 @@
     }];
 }
 
-- (void)getStorageApiDictParam:(WalletJSCallbackModel *)callbackModel
-             completionHandler:(void (^)(NSString * __nullable result))completionHandler
-                       webView:(WKWebView *)webView
+- (void)getAccountStorage:(WalletJSCallbackModel *)callbackModel
+        completionHandler:(void (^)(NSString * __nullable result))completionHandler
+                  webView:(WKWebView *)webView
 {
     NSString *key = callbackModel.params[@"key"];
     NSString *address = callbackModel.params[@"address"];
@@ -314,8 +322,10 @@ completionHandler:(void (^)(NSString * __nullable result))completionHandler
     //Revision : "best" or decimal
     if (revision != nil ) {
         revisionOK = YES;
+    
     }else if ([revision isEqualToString:@"best"]) {
         revisionOK = YES;
+    
     }else{
         
         if ([WalletTools checkDecimalStr:revision]) {
@@ -367,8 +377,8 @@ completionHandler:(void (^)(NSString * __nullable result))completionHandler
      completionHandler:(void (^)(NSString * __nullable result))completionHandler
                webView:(WKWebView *)webView
 {
-    NSString *txID = callbackModel.params[@"id"];
-    if (txID == nil || ![WalletTools checkHEXStr:txID] || txID.length != 66) {
+    NSString *txId = callbackModel.params[@"id"];
+    if (txId == nil || ![WalletTools checkHEXStr:txId] || txId.length != 66) {
         [WalletTools callbackWithrequestId:callbackModel.requestId
                                    webView:webView
                                       data:@""
@@ -378,7 +388,7 @@ completionHandler:(void (^)(NSString * __nullable result))completionHandler
         return;
     }
     
-    WalletDAppTransferDetailApi *vetBalanceApi = [[WalletDAppTransferDetailApi alloc]initWithTxid:txID];
+    WalletDAppTransferDetailApi *vetBalanceApi = [[WalletDAppTransferDetailApi alloc]initWithTxid:txId];
     vetBalanceApi.supportOtherDataFormat = YES;
     [vetBalanceApi loadDataAsyncWithSuccess:^(WalletBaseApi *finishApi) {
         
@@ -413,9 +423,9 @@ completionHandler:(void (^)(NSString * __nullable result))completionHandler
             completionHandler:(void (^)(NSString * __nullable result))completionHandler
                       webView:(WKWebView *)webView
 {
-    NSString *txid = callbackModel.params[@"id"];
+    NSString *txId = callbackModel.params[@"id"];
 
-    if (txid == nil || ![WalletTools checkHEXStr:txid] || txid.length != 66) {
+    if (txId == nil || ![WalletTools checkHEXStr:txId] || txId.length != 66) {
         [WalletTools callbackWithrequestId:callbackModel.requestId
                                    webView:webView
                                       data:@""
@@ -425,7 +435,7 @@ completionHandler:(void (^)(NSString * __nullable result))completionHandler
         return;
     }
     
-    WalletTransantionsReceiptApi *vetBalanceApi = [[WalletTransantionsReceiptApi alloc]initWithTxid:txid];
+    WalletTransantionsReceiptApi *vetBalanceApi = [[WalletTransantionsReceiptApi alloc]initWithTxid:txId];
     vetBalanceApi.supportOtherDataFormat = YES;
     [vetBalanceApi loadDataAsyncWithSuccess:^(WalletBaseApi *finishApi) {
         
@@ -457,7 +467,7 @@ completionHandler:(void (^)(NSString * __nullable result))completionHandler
 
 
 
-- (void)tickerNextRequestId:(WalletJSCallbackModel *)callbackModel
+- (void)tickerNext:(WalletJSCallbackModel *)callbackModel
           completionHandler:(void (^)(NSString * __nullable result))completionHandler
                     webView:(WKWebView *)webView
 {
@@ -473,19 +483,17 @@ completionHandler:(void (^)(NSString * __nullable result))completionHandler
 }
 
 // Certification signature
-- (void)certTransferParamModel:(NSDictionary *)callbackParams
-                          from:(NSString *)from
-                     requestId:(NSString *)requestId
-                       webView:(WKWebView *)webView
-                    callbackId:(NSString *)callbackId
-{    
-    NSDictionary *clauses = callbackParams[@"clauses"];
+- (void)certTransfer:(WalletJSCallbackModel *)callbackModel
+                from:(NSString *)from
+            webView:(WKWebView *)webView
+{
+    NSDictionary *clauses = callbackModel.params[@"clauses"];
     
     if (![clauses isKindOfClass:[NSDictionary class]]) {
-        [WalletTools callbackWithrequestId:requestId
+        [WalletTools callbackWithrequestId:callbackModel.requestId
                                    webView:webView
                                       data:@""
-                                callbackId:callbackId
+                                callbackId:callbackModel.callbackId
                                       code:ERROR_REJECTED];
         return;
     }
@@ -514,10 +522,10 @@ completionHandler:(void (^)(NSString * __nullable result))completionHandler
             {
                 
                 if (signature == nil) {
-                    [WalletTools callbackWithrequestId:requestId
+                    [WalletTools callbackWithrequestId:callbackModel.requestId
                                                webView:webView
                                                   data:@""
-                                            callbackId:callbackId
+                                            callbackId:callbackModel.callbackId
                                                   code:ERROR_REJECTED];
                     return ;
                 }
@@ -533,24 +541,24 @@ completionHandler:(void (^)(NSString * __nullable result))completionHandler
                 [dict setValueIfNotNil:dictSub forKey:@"annex"];
                 [dict setValueIfNotNil:hashSignture forKey:@"signature"];
                 
-                [WalletTools callbackWithrequestId:requestId
+                [WalletTools callbackWithrequestId:callbackModel.requestId
                                            webView:webView
                                               data:dict
-                                        callbackId:callbackId
+                                        callbackId:callbackModel.callbackId
                                               code:OK];
             }];
         }else{
-            [WalletTools callbackWithrequestId:requestId
+            [WalletTools callbackWithrequestId:callbackModel.requestId
                                        webView:webView
                                           data:@""
-                                    callbackId:callbackId
+                                    callbackId:callbackModel.callbackId
                                           code:ERROR_REJECTED];
         }
     }failure:^(WalletBaseApi *finishApi, NSString *errMsg) {
-        [WalletTools callbackWithrequestId:requestId
+        [WalletTools callbackWithrequestId:callbackModel.requestId
                                    webView:webView
                                       data:@""
-                                callbackId:callbackId
+                                callbackId:callbackModel.callbackId
                                       code:ERROR_NETWORK];
     }];
 }
@@ -594,7 +602,7 @@ completionHandler:(void (^)(NSString * __nullable result))completionHandler
 }
 
 
-- (void)filterDictParam:(WalletJSCallbackModel *)callbackModel
+- (void)filterApply:(WalletJSCallbackModel *)callbackModel
       completionHandler:(void (^)(NSString * __nullable result))completionHandler
                 webView:(WKWebView *)webView
 {
@@ -621,9 +629,9 @@ completionHandler:(void (^)(NSString * __nullable result))completionHandler
     }];
 }
 
-- (void)explainDictParam:(WalletJSCallbackModel *)callbackModel
-       completionHandler:(void (^)(NSString * __nullable result))completionHandler
-                 webView:(WKWebView *)webView
+- (void)explain:(WalletJSCallbackModel *)callbackModel
+completionHandler:(void (^)(NSString * __nullable result))completionHandler
+        webView:(WKWebView *)webView
 {
     NSArray *clauses = callbackModel.params[@"clauses"];
     NSDictionary *options = callbackModel.params[@"options"];
@@ -662,7 +670,7 @@ completionHandler:(void (^)(NSString * __nullable result))completionHandler
     
 }
 
-- (void)checkAddressOwn:(WalletJSCallbackModel *)callbackModel
+- (void)owned:(WalletJSCallbackModel *)callbackModel
       completionHandler:(void (^)(NSString * __nullable result))completionHandler
                 webView:(WKWebView *)webView
 {
