@@ -221,7 +221,9 @@
                                keystore:keystore
                                password:password
                                chainTag:chainTag
-                         blockReference:blockReference];
+                         blockReference:blockReference
+                      completionHandler:completionHandler
+];
         }];
     }];
 }
@@ -235,6 +237,8 @@
                      password:(NSString *)password
                      chainTag:(NSString *)chainTag
                blockReference:(NSString *)blockReference
+            completionHandler:(void(^)(NSString *txId ,NSString *signer))completionHandler
+
 {
     WalletTransactionParameter *transactionModel = [WalletTransactionParameter createTransactionParameter:^(TransactionParameterBuiler *builder) {
         
@@ -259,8 +263,9 @@
                                              callback:^(NSString *txId)
          {
              //Developers can use txid to query the status of data packaged on the chain
-             
+             NSString *signAddress = [WalletUtils getAddressWithKeystore:keystore];
              NSLog(@"\n txId: %@", txId);
+             completionHandler(txId,signAddress);
          }];
     }
 }

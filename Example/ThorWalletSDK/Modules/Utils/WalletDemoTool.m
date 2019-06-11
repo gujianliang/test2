@@ -27,8 +27,7 @@
                                      
                                  }])];
     [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
-        
-        
+        textField.secureTextEntry = YES;
     }];
     
     [currentVC presentViewController:alertController animated:YES completion:nil];

@@ -113,8 +113,6 @@ completionHandler:(void (^)(NSString * __nullable result))completionHandler
 - (void)sign:(WalletJSCallbackModel *)callbackModel completionHandler:(void (^)(NSString * __nullable result))completionHandler webView:(WKWebView *)webView;
 
 
-- (void)send:(WalletJSCallbackModel *)callbackModel completionHandler:(void (^)(NSString * __nullable result))completionHandler webView:(WKWebView *)webView;
-
 
 @end
 

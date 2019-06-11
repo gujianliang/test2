@@ -50,14 +50,15 @@ NS_ASSUME_NONNULL_BEGIN
  completionHandler:(void (^)(NSString * __nullable result))completionHandler
            webView:(WKWebView *)webView;
 
-//Get chaintag
-- (void)getChainTag:(NSString *)requestId
-  completionHandler:(void (^)(NSString * __nullable result))completionHandler;
+- (void)send:(WalletJSCallbackModel *)callbackModel completionHandler:(void (^)(NSString * __nullable result))completionHandler webView:(WKWebView *)webView;
+
 
 //Get the local wallet address
 -(void)getAccounts:(WalletJSCallbackModel *)callbackModel
  completionHandler:(void (^)(NSString * __nullable result))completionHandler
            webView:(WKWebView *)webView;
+
+
 @end
 
 NS_ASSUME_NONNULL_END

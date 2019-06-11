@@ -689,11 +689,6 @@ completionHandler:(void (^)(NSString * __nullable result))completionHandler
     [self transferCallback:callbackModel connex:YES];
 }
 
-- (void)send:(WalletJSCallbackModel *)callbackModel completionHandler:(void (^)(NSString * __nullable result))completionHandler webView:(WKWebView *)webView
-{
-    completionHandler(@"{}");
-    [self transferCallback:callbackModel connex:NO];
-}
 
 
 @end

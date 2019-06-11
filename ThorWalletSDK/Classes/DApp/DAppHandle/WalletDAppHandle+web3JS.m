@@ -42,7 +42,7 @@
 #import "WalletTransantionsReceiptApi.h"
 #import "WalletManageModel.h"
 #import "WalletDAppHandle+connexJS.h"
-
+#import "WalletDAppHandle+transfer.h"
 
 @implementation WalletDAppHandle (web3JS)
 
@@ -87,28 +87,6 @@
 }
 
 
-//Get chaintag
-- (void)getChainTag:(NSString *)requestId
-  completionHandler:(void (^)(NSString * __nullable result))completionHandler
-{
-    // Get the creation block id to do chainTag
-    WalletGenesisBlockInfoApi *genesisBlock = [WalletGenesisBlockInfoApi new];
-    [genesisBlock loadDataAsyncWithSuccess:^(WalletBaseApi *finishApi) {
-        WalletBlockInfoModel *genesisblockModel = finishApi.resultModel;
-        NSString *blockID = genesisblockModel.id;
-        NSString *chainTag = [NSString stringWithFormat:@"0x%@", [blockID substringFromIndex:blockID.length-2]];
-        
-        NSDictionary *dict = [WalletTools packageWithRequestId:requestId
-                                                           data:chainTag
-                                                           code:OK
-                                                        message:@""];
-        completionHandler([dict yy_modelToJSONString]);
-        
-    } failure:^(WalletBaseApi *finishApi, NSString *errMsg) {
-        completionHandler(@"{}");
-    }];
-}
-
 //Get the local wallet address
 -(void)getAccounts:(WalletJSCallbackModel *)callbackModel
  completionHandler:(void (^)(NSString * __nullable result))completionHandler
@@ -140,4 +118,11 @@
 
     }
 }
+
+- (void)send:(WalletJSCallbackModel *)callbackModel completionHandler:(void (^)(NSString * __nullable result))completionHandler webView:(WKWebView *)webView
+{
+    completionHandler(@"{}");
+    [self transferCallback:callbackModel connex:NO];
+}
+
 @end
