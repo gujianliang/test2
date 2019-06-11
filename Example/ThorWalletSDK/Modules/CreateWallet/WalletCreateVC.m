@@ -68,7 +68,7 @@
     if (self.passwordLabel.text.length  == 0) {
         [WalletMBProgressShower showMulLineTextIn:self.view
                                              Text:NSLocalizedString(@"input_empty", nil)
-                                           During:2.5];
+                                           During:1.5];
         return;
     }
     

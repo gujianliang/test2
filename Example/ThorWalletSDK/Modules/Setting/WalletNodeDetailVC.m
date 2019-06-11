@@ -79,7 +79,7 @@
         
         [WalletMBProgressShower showMulLineTextIn:self.view
                                              Text:@"It's not a custom node."
-                                           During:2.5];
+                                           During:1.5];
         
         return;
     }
@@ -114,7 +114,7 @@
         
         [WalletMBProgressShower showMulLineTextIn:self.view
                                              Text:@"It's not a custom node."
-                                           During:2.5];
+                                           During:1.5];
     }
 }
 

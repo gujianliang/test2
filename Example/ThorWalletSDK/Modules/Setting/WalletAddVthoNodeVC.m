@@ -65,7 +65,7 @@
         
         [WalletMBProgressShower showMulLineTextIn:self.view
                                              Text:@"The input cannot be blank."
-                                           During:2.5];
+                                           During:1.5];
         return;
     }
     
@@ -76,7 +76,7 @@
         
         [WalletMBProgressShower showMulLineTextIn:self.view
                                              Text:@"The URL is not available."
-                                           During:2.5];
+                                           During:1.5];
         return;
     }
     

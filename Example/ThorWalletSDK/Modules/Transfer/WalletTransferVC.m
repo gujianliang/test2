@@ -88,7 +88,7 @@
         
          [WalletMBProgressShower showMulLineTextIn:self.view
                                               Text:@"The balance is not enough to pay"
-                                            During:2.5];
+                                            During:1.5];
          return;
      }
     NSDictionary *currentWalletDict = [[NSUserDefaults standardUserDefaults]objectForKey:@"currentWallet"];
@@ -140,7 +140,7 @@
         
         [WalletMBProgressShower showMulLineTextIn:self.view
                                              Text:NSLocalizedString(@"input_empty", nil)
-                                           During:2.5];
+                                           During:1.5];
         return;
     }
     
@@ -176,13 +176,13 @@
 
 
 - (void)tokenTransfer:(NSString *)from keystore:(NSString *)keystore  password:(NSString *)password{
+    
     if (self.receiveAddressTextView.text.length == 0
         || self.transferAmountTextField.text.length == 0) {
         
-        
         [WalletMBProgressShower showMulLineTextIn:self.view
                                              Text:NSLocalizedString(@"input_empty", nil)
-                                           During:2.5];
+                                           During:1.5];
         return;
     }
     
@@ -263,10 +263,8 @@
                                chainTag:chainTag
                          blockReference:blockReference];
             
-            
         }];
     }];
-    
 }
 
 - (void)signAndSendClauseList:(NSArray *)clauseList
@@ -292,7 +290,6 @@
     } checkParams:^(NSString *errorMsg) {
         NSLog(@"errorMsg == %@",errorMsg);
     }];
-    
     
     if (transactionModel != nil) {
         

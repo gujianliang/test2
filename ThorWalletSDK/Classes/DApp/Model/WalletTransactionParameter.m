@@ -146,15 +146,16 @@
     if ([WalletTools isEmpty:dependsOn]) {
         
         return YES;
-    }else{
-        if ([WalletTools checkHEXStr:dependsOn]) {
-            return YES;
-        }else
-        {
-            *errorMsg = @"dependsOn should be hex string";
-            return NO;
-        }
     }
+    
+    if ([WalletTools checkHEXStr:dependsOn]) {
+        return YES;
+    }else
+    {
+        *errorMsg = @"dependsOn should be hex string";
+        return NO;
+    }
+    
 }
 
 - (BOOL)checkChainTag:(NSString *)chainTag errorMsg:(NSString **)errorMsg
@@ -164,6 +165,7 @@
         
         return NO;
     }
+    
     if (![WalletTools checkHEXStr:chainTag] ) {
         *errorMsg = @"chainTag should be hex string";
         
@@ -179,6 +181,7 @@
         
         return NO;
     }
+    
     if (![WalletTools checkHEXStr:blockRef] ) {
         *errorMsg = @"blockRef should be hex string";
         
@@ -214,23 +217,20 @@
     if (![WalletTools checkDecimalStr:*gasPriceCoef]) {
         *errorMsg = @"gasPriceCoef should be decimal string";
         return NO;
-    }else{
-        NSInteger intGasPriceCoef = (*gasPriceCoef).integerValue;
-        if (intGasPriceCoef >= 0 && intGasPriceCoef <= 255) {
-            return YES;
-        }else{
-            *errorMsg = @"gasPriceCoef is an integer type from 0 to 255";
-            
-            return NO;
-        }
     }
     
-    return YES;
+    NSInteger intGasPriceCoef = (*gasPriceCoef).integerValue;
+    if (intGasPriceCoef >= 0 && intGasPriceCoef <= 255) {
+        return YES;
+    }else{
+        *errorMsg = @"gasPriceCoef is an integer type from 0 to 255";
+        
+        return NO;
+    }
 }
 
 - (BOOL)checkExpiration:(NSString **)expiration errorMsg:(NSString **)errorMsg
 {
-    
     *expiration = [NSString stringWithFormat:@"%@",*expiration];
     
     if ([WalletTools isEmpty:*expiration]) {
@@ -248,7 +248,8 @@
 
 - (BOOL)isRightClause:(ClauseModel *)clauseModel errorMsg:(NSString **)errorMsg
 {
-    if ([WalletTools isEmpty:clauseModel.to] && [WalletTools isEmpty:clauseModel.data]) {
+    if ([WalletTools isEmpty:clauseModel.to]
+        && [WalletTools isEmpty:clauseModel.data]) {
         
         *errorMsg = @"clause is invalid";
         return NO;
@@ -307,14 +308,17 @@
         return YES;
     }
     // value maybe string or number
-    if ([*value isKindOfClass:[NSString class]] || [*value isKindOfClass:[NSNumber class]]) {
+    
+    if (![*value isKindOfClass:[NSString class]]
+        && ![*value isKindOfClass:[NSNumber class]]) {
         
-        //maybe bool
-        if ([self checkNumberOriginBool:*value]) {
-            *errorMsg = @"value should be NSString or NSNumber";
-            return NO;
-        }
-        
+        *errorMsg = @"value should be NSString or NSNumber";
+        return NO;
+    }else if ([self checkNumberOriginBool:*value])
+    {
+        *errorMsg = @"value should be NSString or NSNumber";
+        return NO;
+    }else{
         *value = [NSString stringWithFormat:@"%@",*value];
         
         if ([(*value) isEqualToString:@"0x"]) { // 0x
@@ -324,18 +328,17 @@
         
         if ([WalletTools checkDecimalStr:*value]) {//Is a decimal
             return YES;
+        
         }else if ([WalletTools checkHEXStr:*value]){// Hex
             *value = [BigNumber bigNumberWithHexString:*value].decimalString;
             return YES;
+        
         }else{ //Neither decimal nor hexadecimal
             *errorMsg = @"value should be NSString or NSNumber";
             return NO;
         }
-        
-    }else{
-        *errorMsg = @"value should be NSString or NSNumber";
-        return NO;
     }
+    
     return YES;
 }
 
@@ -346,18 +349,21 @@
         return YES;
     }
     
-    if ([*data isKindOfClass:[NSString class]]) {
-        if ([WalletTools checkHEXStr:*data]) {
-            
-             return YES;
-        }else{
-            *errorMsg = @"data should be hex string";
-            return NO;
-        }
+    if (![*data isKindOfClass:[NSString class]]) {
+        
+        *errorMsg = @"data should be hex string";
+        return NO;
+        
+    }else if ([WalletTools checkHEXStr:*data])
+    {
+        return YES;
+        
     }else{
+        
         *errorMsg = @"data should be hex string";
         return NO;
     }
+    
     return YES;
 }
 
@@ -368,33 +374,33 @@
         
         return NO;
     }
+    
     // gas maybe string or number
-    if ([*gas isKindOfClass:[NSString class]]
-        || [*gas isKindOfClass:[NSNumber class]]) {
+    if (![*gas isKindOfClass:[NSString class]]
+        && ![*gas isKindOfClass:[NSNumber class]]) {
         
-        //maybe bool 
-        if ([self checkNumberOriginBool:*gas]) {
-            *errorMsg = @"gas should be NSString or NSNumber";
-            return NO;
-        }
-        
-        *gas = [NSString stringWithFormat:@"%@",*gas];
-        
-        if ([WalletTools checkDecimalStr:*gas]) {//Is a decimal
-            if((*gas).integerValue == 0)
-            {
-                *errorMsg = @"gas can't be 0";
-                return NO;
-            }
-            return YES;
-        }else{ //Not decimal
-            *errorMsg = @"gas should be decimal string";
-            return NO;
-        }
-        
-    }else{
         *errorMsg = @"gas should be NSString or NSNumber";
         return NO;
+    
+    }else if ([self checkNumberOriginBool:*gas])
+    {
+        *errorMsg = @"gas should be NSString or NSNumber";
+        return NO;
+    
+    }else{
+        *gas = [NSString stringWithFormat:@"%@",*gas];
+        
+        if (![WalletTools checkDecimalStr:*gas]) {
+            *errorMsg = @"gas should be decimal string";
+            return NO;
+            
+        }else if((*gas).integerValue == 0){
+            *errorMsg = @"gas can't be 0";
+            return NO;
+            
+        }else{
+            return YES;
+        }
     }
     return YES;
 }

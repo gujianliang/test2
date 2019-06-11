@@ -313,9 +313,8 @@
         
         [self signCert:strMessage signer:address.lowercaseString keystore:keystore completionHandler:completionHandler];
     
-    }else if (signer.length > 0
-              && [address.lowercaseString isEqualToString:signer.lowercaseString])
-    {
+    }else if ([address.lowercaseString isEqualToString:signer.lowercaseString]){
+        
         NSString *strMessage = [WalletUtils addSignerToCertMessage:signer.lowercaseString
                                                            message:certificateMessage];
         

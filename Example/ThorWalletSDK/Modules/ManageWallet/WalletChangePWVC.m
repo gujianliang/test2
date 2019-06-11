@@ -63,7 +63,7 @@
         
         [WalletMBProgressShower showMulLineTextIn:self.view
                                              Text:NSLocalizedString(@"input_empty", nil)
-                                           During:2.5];
+                                           During:1.5];
         return;
     }
     
@@ -72,7 +72,7 @@
         
         [WalletMBProgressShower showMulLineTextIn:self.view
                                              Text:NSLocalizedString(@"modify_password_new_error", nil)
-                                           During:2.5];
+                                           During:1.5];
         return;
     }
     
@@ -102,17 +102,17 @@
             
             [WalletMBProgressShower showMulLineTextIn:self.view
                                                  Text:NSLocalizedString(@"modify_password_success", nil)
-                                               During:2.5];
+                                               During:1.5];
             
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [self.navigationController popViewControllerAnimated:YES];
             });
             
         }else {
-            \
+            
             [WalletMBProgressShower showMulLineTextIn:self.view
                                                  Text:NSLocalizedString(@"modify_password_failr", nil)
-                                               During:2.5];
+                                               During:1.5];
         }
     }];
 }
