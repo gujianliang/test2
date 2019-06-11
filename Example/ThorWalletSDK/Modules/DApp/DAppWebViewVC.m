@@ -33,6 +33,7 @@
 #import "WalletDemoMacro.h"
 #import "WalletUtils.h"
 #import "WalletDemoTool.h"
+#import "WalletMBProgressShower.h"
 
 @interface DAppWebViewVC ()<WKNavigationDelegate,WKUIDelegate,WalletUtilsDelegate>
 {
@@ -158,6 +159,8 @@
                    actionWithTitle:@"Confirm"
                           callback:^(NSString * input)
      {
+         [WalletMBProgressShower showCircleIn:self.view];
+         
          NSString *password = input;
          [WalletUtils verifyKeystore:keystore password:password callback:^(BOOL result) {
              @strongify(self);
@@ -166,6 +169,7 @@
                  [self packageParameter:clauses gas:gas keystore:keystore password:password completionHandler:completionHandler] ;
              }else{
                  NSLog(@"password is wrong");
+                 [WalletMBProgressShower hide:self.view];
              }
          }];
      }];
@@ -177,6 +181,7 @@
     randomData.length = 8;
     int result = SecRandomCopyBytes(kSecRandomDefault, randomData.length, randomData.mutableBytes);
     if (result != 0) {
+        [WalletMBProgressShower hide:self.view];
         return ;
     }
     
@@ -262,11 +267,16 @@
                                              password:password
                                              callback:^(NSString *txId)
          {
+             [WalletMBProgressShower hide:self.view];
+
              //Developers can use txid to query the status of data packaged on the chain
              NSString *signAddress = [WalletUtils getAddressWithKeystore:keystore];
              NSLog(@"\n txId: %@", txId);
              completionHandler(txId,signAddress);
+             [WalletMBProgressShower hide:self.view];
          }];
+    }else{
+        [WalletMBProgressShower hide:self.view];
     }
 }
 
@@ -328,6 +338,8 @@
     }else{
         //Cusmtom alert error
         completionHandler(@"",nil);
+        [WalletMBProgressShower hide:self.view];
+
     }
 }
 
@@ -342,6 +354,8 @@ completionHandler:(void (^)(NSString *signer, NSData *signatureData))completionH
                    actionWithTitle:@"Confirm"
                           callback:^(NSString * input)
      {
+         [WalletMBProgressShower showCircleIn:self.view];
+
         NSData *dataMessage = [message dataUsingEncoding:NSUTF8StringEncoding];
          [WalletUtils signWithMessage:dataMessage
                              keystore:keystore
@@ -353,6 +367,7 @@ completionHandler:(void (^)(NSString *signer, NSData *signatureData))completionH
               }else{
                   completionHandler(signer,nil);
               }
+              [WalletMBProgressShower hide:self.view];
           }];
      }];
 }

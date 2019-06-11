@@ -51,6 +51,11 @@
 
 @implementation WalletCreateVC
 
+- (void)viewDidLoad
+{
+    self.passwordLabel.secureTextEntry = YES;
+}
+
 /**
 * Create a wallet.
 */

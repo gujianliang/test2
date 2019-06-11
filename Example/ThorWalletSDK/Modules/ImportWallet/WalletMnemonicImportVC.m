@@ -65,7 +65,14 @@
 *
 */
 
-
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    self.importMnemonicWords.text = @"enact again rate alone congress scheme solid theory flush length twenty head";
+    
+    self.password.secureTextEntry = YES;
+    self.password.text = @"123456";
+}
 /**
 *  Recover a wallet by your mnemonic words.
 */

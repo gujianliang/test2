@@ -355,24 +355,17 @@ completionHandler:(void (^)(NSString * __nullable result))completionHandler
 - (BOOL)checkStatusParams:(WalletJSCallbackModel *)callbackModel
                   webView:(WKWebView *)webView
 {
-    BOOL revisionOK = NO;
     NSString *revision = [NSString stringWithFormat:@"%@", callbackModel.params[@"revision"]];
     
-    //Revision : "best" or decimal
-    if ([revision isEqualToString:@"best"]
-        || [WalletTools checkDecimalStr:revision]) {
-        revisionOK = YES;
-        
-    }
-    
-    if (!revisionOK) {
+    if ([WalletTools isEmpty:revision]) {
         [WalletTools callbackWithrequestId:callbackModel.requestId
                                    webView:webView
                                       data:@""
                                 callbackId:callbackModel.callbackId
                                       code:ERROR_REJECTED];
+        return NO;
     }
-    return revisionOK;
+    return YES;
 }
 
 
@@ -577,7 +570,7 @@ completionHandler:(void (^)(NSString * __nullable result))completionHandler
     completionHandler(@"{}");
 
     WalletDappLogEventApi *eventApi = [[WalletDappLogEventApi alloc]initWithKind:callbackModel.params[@"kind"]];
-    eventApi.dictRange          = callbackModel.params [@"filterBody"][@"range"];;
+    eventApi.dictRange          = callbackModel.params[@"filterBody"][@"range"];;
     eventApi.dictOptions        = callbackModel.params[@"filterBody"][@"options"];
     eventApi.dictCriteriaSet    = callbackModel.params[@"filterBody"][@"criteriaSet"];
     eventApi.order              = callbackModel.params[@"filterBody"][@"order"];

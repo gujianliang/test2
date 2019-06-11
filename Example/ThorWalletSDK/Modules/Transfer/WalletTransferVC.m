@@ -84,7 +84,6 @@
 
      if (![self checkEnoughCoinBalance:self.coinAmount transferAmount:self.transferAmountTextField.text]) {
          NSLog(@"The balance is not enough to pay");
-         
         
          [WalletMBProgressShower showMulLineTextIn:self.view
                                               Text:@"The balance is not enough to pay"
@@ -109,7 +108,7 @@
                           callback:^(NSString * input)
     {
         NSString *password = input;
-        
+        [WalletMBProgressShower showCircleIn:self.view];
         [WalletUtils verifyKeystore:keystore password:password callback:^(BOOL result) {
             @strongify(self);
             if (result) {
@@ -118,6 +117,7 @@
                 
             }else{
                 NSLog(@"The password is wrong");
+                [WalletMBProgressShower hide:self.view];
             }
         }];
     }];
@@ -141,6 +141,8 @@
         [WalletMBProgressShower showMulLineTextIn:self.view
                                              Text:NSLocalizedString(@"input_empty", nil)
                                            During:1.5];
+        [WalletMBProgressShower hide:self.view];
+
         return;
     }
     
@@ -183,6 +185,8 @@
         [WalletMBProgressShower showMulLineTextIn:self.view
                                              Text:NSLocalizedString(@"input_empty", nil)
                                            During:1.5];
+        [WalletMBProgressShower hide:self.view];
+
         return;
     }
     
@@ -191,6 +195,8 @@
     randomData.length = 8;
     int result = SecRandomCopyBytes(kSecRandomDefault, randomData.length, randomData.mutableBytes);
     if (result != 0) {
+        [WalletMBProgressShower hide:self.view];
+
         return ;
     }
     //The amount of the transaction needs to be multiplied by the disimals of the coin
@@ -301,7 +307,10 @@
              //Developers can use txid to query the status of data packaged on the chain
              
              NSLog(@"\n txId: %@", txId);
+             [WalletMBProgressShower hide:self.view];
          }];
+    }else{
+        [WalletMBProgressShower hide:self.view];
     }
 }
 

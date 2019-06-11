@@ -255,23 +255,10 @@
         return NO;
         
     }else if (![WalletTools isEmpty:clauseModel.data]){
-        // To has a value, need to judge the data is divisible by 64
         
-        // Divided by 64
-        if (clauseModel.data.length >= 10) {
-            NSInteger i = (clauseModel.data.length - 10) % 64;
-            if (i != 0) {
-                *errorMsg = @"clause is invalid";
-                return NO;
-            }
-        }
-        else if ([clauseModel.data isEqualToString:@"0x"]) {
-            return YES;
-            
-        }else{
-            *errorMsg = @"clause is invalid";
-            return NO;
-        }
+        // To has a value, need to judge the data is divisible by 64
+        return [self rightData:clauseModel.data errorMsg:&*errorMsg];
+        
     }else if ([WalletTools isEmpty:clauseModel.value]) {
             //to != nil data = nil value == nil
            
@@ -279,6 +266,27 @@
             return NO;
     }
     return YES;
+}
+
+- (BOOL)rightData:(NSString *)data  errorMsg:(NSString **)errorMsg
+{
+    if (data.length >= 10) {
+        
+        NSInteger i = (data.length - 10) % 64;
+        if (i != 0) {
+            *errorMsg = @"clause is invalid";
+            return NO;
+        }else{
+            return YES;
+        }
+        
+    }else if ([data isEqualToString:@"0x"]) {
+        return YES;
+        
+    }else{
+        *errorMsg = @"clause is invalid";
+        return NO;
+    }
 }
 
 - (BOOL)checkTo:(NSString **)to errorMsg:(NSString **)errorMsg
@@ -314,32 +322,38 @@
         
         *errorMsg = @"value should be NSString or NSNumber";
         return NO;
+        
     }else if ([self checkNumberOriginBool:*value])
     {
         *errorMsg = @"value should be NSString or NSNumber";
         return NO;
+        
     }else{
-        *value = [NSString stringWithFormat:@"%@",*value];
         
-        if ([(*value) isEqualToString:@"0x"]) { // 0x
-            *value = @"0";
-            return YES;
-        }
-        
-        if ([WalletTools checkDecimalStr:*value]) {//Is a decimal
-            return YES;
-        
-        }else if ([WalletTools checkHEXStr:*value]){// Hex
-            *value = [BigNumber bigNumberWithHexString:*value].decimalString;
-            return YES;
-        
-        }else{ //Neither decimal nor hexadecimal
-            *errorMsg = @"value should be NSString or NSNumber";
-            return NO;
-        }
+        return [self rightValue:&*value errorMsg:&*errorMsg];
     }
     
     return YES;
+}
+
+- (BOOL)rightValue:(NSString **)value errorMsg:(NSString **)errorMsg
+{
+    if ([(*value) isEqualToString:@"0x"]) { // 0x
+        *value = @"0";
+        return YES;
+    }
+    
+    if ([WalletTools checkDecimalStr:*value]) {//Is a decimal
+        return YES;
+        
+    }else if ([WalletTools checkHEXStr:*value]){// Hex
+        *value = [BigNumber bigNumberWithHexString:*value].decimalString;
+        return YES;
+        
+    }else{ //Neither decimal nor hexadecimal
+        *errorMsg = @"value should be NSString or NSNumber";
+        return NO;
+    }
 }
 
 - (BOOL)checkData:(NSString **)data errorMsg:(NSString **)errorMsg
@@ -354,8 +368,8 @@
         *errorMsg = @"data should be hex string";
         return NO;
         
-    }else if ([WalletTools checkHEXStr:*data])
-    {
+    }else if ([WalletTools checkHEXStr:*data]){
+        
         return YES;
         
     }else{
