@@ -572,18 +572,6 @@ completionHandler:(void (^)(NSString * __nullable result))completionHandler
                                        code:OK];
      }];
 }
-     
-- (void)failResult:(NSString *)requestId
-        callbackId:(NSString *)callbackId
-           webView:(WKWebView *)webView
-{
-    [WalletTools callbackWithrequestId:requestId
-                               webView:webView
-                                 data:@""
-                           callbackId:callbackId
-                                 code:ERROR_NETWORK];
-}
-
 
 - (void)filterApply:(WalletJSCallbackModel *)callbackModel
       completionHandler:(void (^)(NSString * __nullable result))completionHandler
