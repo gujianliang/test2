@@ -33,7 +33,7 @@
 
 
 #import "WalletNodeDetailVC.h"
-#import "MBProgressHUD.h"
+#import "WalletMBProgressShower.h"
 #import "WalletDemoMacro.h"
 #import "WalletUtils.h"
 
@@ -76,10 +76,11 @@
     NSArray *oldList = [[NSUserDefaults standardUserDefaults] objectForKey:@"nodeList"];
     
     if (oldList.count == 0) {
-        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        hud.mode = MBProgressHUDModeText;
-        hud.label.text =  @"It's not a custom node.";
-        [hud hideAnimated:YES afterDelay:2.5];
+        
+        [WalletMBProgressShower showMulLineTextIn:self.view
+                                             Text:@"It's not a custom node."
+                                           During:2.5];
+        
         return;
     }
     
@@ -110,10 +111,10 @@
         [self.navigationController popViewControllerAnimated:YES];
         
     }else {
-        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        hud.mode = MBProgressHUDModeText;
-        hud.label.text =  @"It's not a custom node.";
-        [hud hideAnimated:YES afterDelay:2.5];
+        
+        [WalletMBProgressShower showMulLineTextIn:self.view
+                                             Text:@"It's not a custom node."
+                                           During:2.5];
     }
 }
 

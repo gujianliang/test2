@@ -34,7 +34,7 @@
 
 #import "WalletKeystoreImportVC.h"
 #import "WalletDetailVC.h"
-#import "MBProgressHUD.h"
+#import "WalletMBProgressShower.h"
 #import "WalletUtils.h"
 
 @interface WalletKeystoreImportVC ()
@@ -101,18 +101,15 @@
     
     /* Check your input password and keystore that can not be blank. */
     if (self.password.text.length == 0 || self.keystoreTextView.text.length == 0) {
-        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        hud.mode = MBProgressHUDModeText;
-        hud.label.text = NSLocalizedString(@"input_empty", nil);
-        [hud hideAnimated:YES afterDelay:1.5];
+       
+        [WalletMBProgressShower showMulLineTextIn:self.view
+                                             Text:NSLocalizedString(@"input_empty", nil)
+                                           During:2.5];
         return;
     }
     
     /* show loading state */
-    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    hud.mode = MBProgressHUDModeText;
-    hud.label.text = NSLocalizedString(@"wait", nil);
-
+    [WalletMBProgressShower showTextIn:self.view Text:NSLocalizedString(@"wait", nil)];
     /*
      Please note that this is just a demo that tell you how to recover a wallet by keystore.
      We save the wallet keystore and addrss in the Sandbox by the class 'NSUserDefaults'. It is not a safety way.
@@ -122,10 +119,10 @@
     
     /* Create a wallet with your password and keystore. */
     
-//    @weakify(self);
+    @weakify(self);
     [WalletUtils verifyKeystore:self.keystoreTextView.text.lowercaseString password:self.password.text callback:^(BOOL result) {
-//        @strongify(self);
-        [hud hideAnimated:YES];
+        @strongify(self);
+        [WalletMBProgressShower hide:self.view];
         if (result) {
             
             NSString *address = [WalletUtils getAddressWithKeystore:self.keystoreTextView.text];
@@ -139,10 +136,10 @@
             WalletDetailVC *detailVC = [[WalletDetailVC alloc]init];
             [self.navigationController pushViewController:detailVC animated:YES];
         }else{
-            MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-            hud.mode = MBProgressHUDModeText;
-            hud.label.text = NSLocalizedString(@"Check_right", nil);
-            [hud hideAnimated:YES afterDelay:3];
+            
+            [WalletMBProgressShower showMulLineTextIn:self.view
+                                                 Text:NSLocalizedString(@"Check_right", nil)
+                                               During:2.5];
         }
     }];
 }

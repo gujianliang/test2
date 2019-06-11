@@ -50,7 +50,7 @@ completionHandler:(void (^)(NSString * __nullable result))completionHandler
          webView:(WKWebView *)webView;
 
 //Get VET balance
-- (void)getAccountRequestId:(WalletJSCallbackModel *)callbackModel
+- (void)getAccount:(WalletJSCallbackModel *)callbackModel
           completionHandler:(void (^)(NSString * __nullable result))completionHandler
                     webView:(WKWebView *)webView;
 

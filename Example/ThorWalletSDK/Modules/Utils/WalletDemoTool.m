@@ -2,7 +2,7 @@
 //  WalletDemoTool.m
 //  ThorWalletSDK_Example
 //
-//  Created by 曾新 on 2019/6/10.
+//  Created by VeChain on 2019/6/10.
 //  Copyright © 2019 VeChain. All rights reserved.
 //
 

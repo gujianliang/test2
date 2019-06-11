@@ -144,7 +144,8 @@
     NSString *address = [WalletUtils getAddressWithKeystore:keystore];
     
     //Specified signature address
-    if (signer.length > 0 && ![address.lowercaseString isEqualToString:signer.lowercaseString]) {
+    if (signer.length > 0
+        && ![address.lowercaseString isEqualToString:signer.lowercaseString]) {
         
         completionHandler(@"",@"");
         return;
@@ -163,6 +164,8 @@
              if (result) {
                  
                  [self packageParameter:clauses gas:gas keystore:keystore password:password completionHandler:completionHandler] ;
+             }else{
+                 NSLog(@"password is wrong");
              }
          }];
      }];
@@ -170,7 +173,6 @@
 
 - (void)packageParameter:(NSArray *)clauses gas:(NSString *)gas keystore:(NSString *)keystore password:(NSString *)password completionHandler:(void(^)(NSString *txId ,NSString *signer))completionHandler
 {
-    //The random number is 8 bytes
     NSMutableData* randomData = [[NSMutableData alloc]initWithCapacity:8];
     randomData.length = 8;
     int result = SecRandomCopyBytes(kSecRandomDefault, randomData.length, randomData.mutableBytes);
@@ -213,7 +215,7 @@
             
             [self signAndSendClauseList:clauseList
                                   nonce:nonce
-                                    gas:gasPriceCoef
+                                    gas:gas
                              expiration:expiration
                            gasPriceCoef:gasPriceCoef
                                keystore:keystore
@@ -305,27 +307,23 @@
     
     NSString *address = [WalletUtils getAddressWithKeystore:keystore];
     
-    if (signer.length > 0) { //Specified signature address
-        
-        if ([address.lowercaseString isEqualToString:signer.lowercaseString]) {
-            
-            NSString *strMessage = [WalletUtils addSignerToCertMessage:signer.lowercaseString
-                                                               message:certificateMessage];
-            [self signCert:strMessage
-                    signer:address.lowercaseString
-                  keystore:keystore
-         completionHandler:completionHandler];
-        }else{
-            //Cusmtom alert error
-            completionHandler(@"",nil);
-        }
-    }else{
+    if (signer.length == 0) {
         NSString *strMessage = [WalletUtils addSignerToCertMessage:address.lowercaseString
                                                            message:certificateMessage];
-        [self signCert:strMessage
-                signer:address.lowercaseString
-              keystore:keystore
-     completionHandler:completionHandler];
+        
+        [self signCert:strMessage signer:address.lowercaseString keystore:keystore completionHandler:completionHandler];
+    
+    }else if (signer.length > 0
+              && [address.lowercaseString isEqualToString:signer.lowercaseString])
+    {
+        NSString *strMessage = [WalletUtils addSignerToCertMessage:signer.lowercaseString
+                                                           message:certificateMessage];
+        
+        [self signCert:strMessage signer:address.lowercaseString keystore:keystore completionHandler:completionHandler];
+        
+    }else{
+        //Cusmtom alert error
+        completionHandler(@"",nil);
     }
 }
 

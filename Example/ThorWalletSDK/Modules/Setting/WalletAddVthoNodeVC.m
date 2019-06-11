@@ -33,7 +33,7 @@
 
 
 #import "WalletAddVthoNodeVC.h"
-#import "MBProgressHUD.h"
+#import "WalletMBProgressShower.h"
 #import "WalletUtils.h"
 
 @interface WalletAddVthoNodeVC ()
@@ -62,10 +62,10 @@
     
     /* Check your input node name and node URL that can not be blank. */
     if (nodeName.length == 0 || nodeUrl.length == 0 ){
-        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        hud.mode = MBProgressHUDModeText;
-        hud.label.text =  @"The input cannot be blank.";
-        [hud hideAnimated:YES afterDelay:2.5];
+        
+        [WalletMBProgressShower showMulLineTextIn:self.view
+                                             Text:@"The input cannot be blank."
+                                           During:2.5];
         return;
     }
     
@@ -73,10 +73,10 @@
     /* Check your URL is available */
     NSURL *URL = [NSURL URLWithString:nodeUrl];
     if (![[UIApplication sharedApplication] canOpenURL:URL]) {
-        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        hud.mode = MBProgressHUDModeText;
-        hud.label.text =  @"The URL is not available.";
-        [hud hideAnimated:YES afterDelay:2.5];
+        
+        [WalletMBProgressShower showMulLineTextIn:self.view
+                                             Text:@"The URL is not available."
+                                           During:2.5];
         return;
     }
     

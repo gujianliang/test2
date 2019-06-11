@@ -155,6 +155,8 @@ completionHandler:(void (^)(NSString * __nullable result))completionHandler
    completionHandler:(void (^)(NSString * __nullable result))completionHandler
              webView:(WKWebView *)webView
 {
+    completionHandler(@"{}");
+
     NSString *revision        = callbackModel.params[@"revision"];
     NSDictionary *dictOpts    = callbackModel.params[@"opts"];
     NSDictionary *dictclause  = callbackModel.params[@"clause"];
@@ -178,14 +180,12 @@ completionHandler:(void (^)(NSString * __nullable result))completionHandler
                                           code:OK];
         }
         
-        completionHandler(@"{}");
     } failure:^(WalletBaseApi *finishApi, NSString *errMsg) {
         [WalletTools callbackWithrequestId:callbackModel.requestId
                                    webView:webView
                                       data:@""
                                 callbackId:callbackModel.callbackId
                                       code:ERROR_NETWORK];
-        completionHandler(@"{}");
     }];
 }
 
@@ -193,6 +193,8 @@ completionHandler:(void (^)(NSString * __nullable result))completionHandler
         completionHandler:(void (^)(NSString * __nullable result))completionHandler
                   webView:(WKWebView *)webView
 {
+    completionHandler(@"{}");
+
     NSString *key = callbackModel.params[@"key"];
     NSString *address = callbackModel.params[@"address"];
     
@@ -214,7 +216,6 @@ completionHandler:(void (^)(NSString * __nullable result))completionHandler
                                     callbackId:callbackModel.callbackId
                                           code:OK];
         }
-        completionHandler(@"{}");
     } failure:^(WalletBaseApi *finishApi, NSString *errMsg) {
         
         [WalletTools callbackWithrequestId:callbackModel.requestId
@@ -222,22 +223,23 @@ completionHandler:(void (^)(NSString * __nullable result))completionHandler
                                       data:@""
                                 callbackId:callbackModel.callbackId
                                       code:ERROR_NETWORK];
-        completionHandler(@"{}");
     }];
+
 }
 
 //Get VET balance
-- (void)getAccountRequestId:(WalletJSCallbackModel *)callbackModel
+- (void)getAccount:(WalletJSCallbackModel *)callbackModel
           completionHandler:(void (^)(NSString * __nullable result))completionHandler
                     webView:(WKWebView *)webView
 {
+    completionHandler(@"{}");
+
     if (![WalletTools errorAddressAlert:callbackModel.params[@"address"]]) {
         [WalletTools callbackWithrequestId:callbackModel.requestId
                                    webView:webView
                                       data:@""
                                 callbackId:callbackModel.callbackId
                                       code:ERROR_REJECTED];
-        completionHandler(@"{}");
         return;
     }
     
@@ -259,7 +261,6 @@ completionHandler:(void (^)(NSString * __nullable result))completionHandler
                                     callbackId:callbackModel.callbackId
                                           code:OK];
         }
-        completionHandler(@"{}");
     } failure:^(WalletBaseApi *finishApi, NSString *errMsg) {
         
         [WalletTools callbackWithrequestId:callbackModel.requestId
@@ -267,7 +268,6 @@ completionHandler:(void (^)(NSString * __nullable result))completionHandler
                                       data:@""
                                 callbackId:callbackModel.callbackId
                                       code:ERROR_NETWORK];
-        completionHandler(@"{}");
     }];
 }
 
@@ -275,13 +275,14 @@ completionHandler:(void (^)(NSString * __nullable result))completionHandler
      completionHandler:(void (^)(NSString * __nullable result))completionHandler
                webView:(WKWebView *)webView
 {
+    completionHandler(@"{}");
+
     if (![WalletTools errorAddressAlert:callbackModel.params[@"address"]]) {
         [WalletTools callbackWithrequestId:callbackModel.requestId
                                    webView:webView
                                       data:@""
                                 callbackId:callbackModel.callbackId
                                       code:ERROR_REJECTED];
-        completionHandler(@"{}");
         return;
     }
     
@@ -302,14 +303,12 @@ completionHandler:(void (^)(NSString * __nullable result))completionHandler
                                     callbackId:callbackModel.callbackId
                                           code:OK];
         }
-        completionHandler(@"{}");
     } failure:^(WalletBaseApi *finishApi, NSString *errMsg) {
         [WalletTools callbackWithrequestId:callbackModel.requestId
                                    webView:webView
                                       data:@""
                                 callbackId:callbackModel.callbackId
                                       code:ERROR_NETWORK];
-        completionHandler(@"{}");
     }];
 }
 
@@ -317,9 +316,10 @@ completionHandler:(void (^)(NSString * __nullable result))completionHandler
 completionHandler:(void (^)(NSString * __nullable result))completionHandler
          webView:(WKWebView *)webView
 {
+    completionHandler(@"{}");
+
     if (![self checkStatusParams:callbackModel webView:webView]) {
         
-        completionHandler(@"{}");
         return;
     }
     
@@ -343,14 +343,12 @@ completionHandler:(void (^)(NSString * __nullable result))completionHandler
                                     callbackId:callbackModel.callbackId
                                           code:OK];
         }
-        completionHandler(@"{}");
     } failure:^(WalletBaseApi *finishApi, NSString *errMsg) {
         [WalletTools callbackWithrequestId:callbackModel.requestId
                                    webView:webView
                                       data:@""
                                 callbackId:callbackModel.callbackId
                                       code:ERROR_NETWORK];
-        completionHandler(@"{}");
     }];
 }
 
@@ -358,7 +356,8 @@ completionHandler:(void (^)(NSString * __nullable result))completionHandler
                   webView:(WKWebView *)webView
 {
     BOOL revisionOK = NO;
-    NSString *revision = callbackModel.params[@"revision"];
+    NSString *revision = [NSString stringWithFormat:@"%@", callbackModel.params[@"revision"]];
+    
     //Revision : "best" or decimal
     if ([revision isEqualToString:@"best"]
         || [WalletTools checkDecimalStr:revision]) {
@@ -381,6 +380,8 @@ completionHandler:(void (^)(NSString * __nullable result))completionHandler
      completionHandler:(void (^)(NSString * __nullable result))completionHandler
                webView:(WKWebView *)webView
 {
+    completionHandler(@"{}");
+
     NSString *txId = callbackModel.params[@"id"];
     if (txId == nil || ![WalletTools checkHEXStr:txId] || txId.length != 66) {
         [WalletTools callbackWithrequestId:callbackModel.requestId
@@ -388,7 +389,6 @@ completionHandler:(void (^)(NSString * __nullable result))completionHandler
                                       data:@""
                                 callbackId:callbackModel.callbackId
                                       code:ERROR_REJECTED];
-        completionHandler(@"{}");
         return;
     }
     
@@ -412,14 +412,12 @@ completionHandler:(void (^)(NSString * __nullable result))completionHandler
                                     callbackId:callbackModel.callbackId
                                           code:OK];
         }
-        completionHandler(@"{}");
     } failure:^(WalletBaseApi *finishApi, NSString *errMsg) {
         [WalletTools callbackWithrequestId:callbackModel.requestId
                                    webView:webView
                                       data:@""
                                 callbackId:callbackModel.callbackId
                                       code:ERROR_NETWORK];
-        completionHandler(@"{}");
     }];
 }
 
@@ -427,6 +425,8 @@ completionHandler:(void (^)(NSString * __nullable result))completionHandler
             completionHandler:(void (^)(NSString * __nullable result))completionHandler
                       webView:(WKWebView *)webView
 {
+    completionHandler(@"{}");
+
     NSString *txId = callbackModel.params[@"id"];
 
     if (txId == nil || ![WalletTools checkHEXStr:txId] || txId.length != 66) {
@@ -435,7 +435,6 @@ completionHandler:(void (^)(NSString * __nullable result))completionHandler
                                       data:@""
                                 callbackId:callbackModel.callbackId
                                       code:ERROR_REJECTED];
-        completionHandler(@"{}");
         return;
     }
     
@@ -457,7 +456,6 @@ completionHandler:(void (^)(NSString * __nullable result))completionHandler
                                     callbackId:callbackModel.callbackId
                                           code:OK];
         }
-        completionHandler(@"{}");
         
     } failure:^(WalletBaseApi *finishApi, NSString *errMsg) {
         [WalletTools callbackWithrequestId:callbackModel.requestId
@@ -465,7 +463,6 @@ completionHandler:(void (^)(NSString * __nullable result))completionHandler
                                       data:@""
                                 callbackId:callbackModel.callbackId
                                       code:ERROR_NETWORK];
-        completionHandler(@"{}");
     }];
 }
 
@@ -577,6 +574,8 @@ completionHandler:(void (^)(NSString * __nullable result))completionHandler
       completionHandler:(void (^)(NSString * __nullable result))completionHandler
                 webView:(WKWebView *)webView
 {
+    completionHandler(@"{}");
+
     WalletDappLogEventApi *eventApi = [[WalletDappLogEventApi alloc]initWithKind:callbackModel.params[@"kind"]];
     eventApi.dictRange          = callbackModel.params [@"filterBody"][@"range"];;
     eventApi.dictOptions        = callbackModel.params[@"filterBody"][@"options"];
@@ -589,21 +588,22 @@ completionHandler:(void (^)(NSString * __nullable result))completionHandler
                                       data:finishApi.resultDict
                                 callbackId:callbackModel.callbackId
                                       code:OK];
-        completionHandler(@"{}");
     } failure:^(WalletBaseApi *finishApi, NSString *errMsg) {
         [WalletTools callbackWithrequestId:callbackModel.requestId
                                    webView:webView
                                       data:@""
                                 callbackId:callbackModel.callbackId
                                       code:ERROR_NETWORK];
-        completionHandler(@"{}");
     }];
+
 }
 
 - (void)explain:(WalletJSCallbackModel *)callbackModel
 completionHandler:(void (^)(NSString * __nullable result))completionHandler
         webView:(WKWebView *)webView
 {
+    completionHandler(@"{}");
+
     NSArray *clauses = callbackModel.params[@"clauses"];
     NSDictionary *options = callbackModel.params[@"options"];
     NSString *rev = callbackModel.params[@"rev"];
@@ -615,7 +615,7 @@ completionHandler:(void (^)(NSString * __nullable result))completionHandler
                                       data:@""
                                 callbackId:callbackModel.callbackId
                                       code:ERROR_REJECTED];
-        completionHandler(@"{}");
+        
         return;
     }
     
@@ -628,17 +628,13 @@ completionHandler:(void (^)(NSString * __nullable result))completionHandler
                                 callbackId:callbackModel.callbackId
                                       code:OK];
         
-        completionHandler(@"{}");
-        
     } failure:^(WalletBaseApi *finishApi, NSString *errMsg) {
         [WalletTools callbackWithrequestId:callbackModel.requestId
                                    webView:webView
                                       data:@""
                                 callbackId:callbackModel.callbackId
                                       code:ERROR_NETWORK];
-        completionHandler(@"{}");
     }];
-    
 }
 
 - (void)owned:(WalletJSCallbackModel *)callbackModel
@@ -689,12 +685,14 @@ completionHandler:(void (^)(NSString * __nullable result))completionHandler
 
 - (void)sign:(WalletJSCallbackModel *)callbackModel completionHandler:(void (^)(NSString * __nullable result))completionHandler webView:(WKWebView *)webView
 {
-    [self transferCallback:callbackModel connex:YES completionHandler:completionHandler];
+    completionHandler(@"{}");
+    [self transferCallback:callbackModel connex:YES];
 }
 
 - (void)send:(WalletJSCallbackModel *)callbackModel completionHandler:(void (^)(NSString * __nullable result))completionHandler webView:(WKWebView *)webView
 {
-    [self transferCallback:callbackModel connex:NO completionHandler:completionHandler];
+    completionHandler(@"{}");
+    [self transferCallback:callbackModel connex:NO];
 }
 
 

@@ -41,7 +41,6 @@
 
 - (void)transferCallback:(WalletJSCallbackModel *)callbackModel
                   connex:(BOOL)bConnex
-       completionHandler:(void (^)(NSString * __nullable result))completionHandler
 {
     
     NSString *kind = callbackModel.params[@"kind"];

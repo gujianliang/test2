@@ -46,8 +46,7 @@ NS_ASSUME_NONNULL_BEGIN
             callback:(void(^)(NSString *txId))callback;
 
 - (void)transferCallback:(WalletJSCallbackModel *)callbackModel
-                  connex:(BOOL)bConnex
-       completionHandler:(void (^)(NSString * __nullable result))completionHandler;
+                  connex:(BOOL)bConnex;
 
 @end
 

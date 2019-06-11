@@ -34,7 +34,7 @@
 
 #import "WalletMnemonicImportVC.h"
 #import "WalletDetailVC.h"
-#import "MBProgressHUD.h"
+#import "WalletMBProgressShower.h"
 #import "WalletUtils.h"
 
 
@@ -84,35 +84,34 @@
     
     /* Check your input password and mnemonic words that can not be blank. */
     if (self.password.text.length == 0 || mnemonicWords.length == 0){
-        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        hud.mode = MBProgressHUDModeText;
-        hud.label.text = NSLocalizedString(@"input_empty", nil);
-        [hud hideAnimated:YES afterDelay:1.5];
+      
+        [WalletMBProgressShower showMulLineTextIn:self.view
+                                             Text:NSLocalizedString(@"input_empty", nil)
+                                           During:2.5];
         return;
     }
     
     /* Check your input mnemonic words are available. */
     NSArray *arr = [mnemonicWords componentsSeparatedByString:@" "];
     if (![WalletUtils isValidMnemonicWords:arr]) {
-        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        hud.mode = MBProgressHUDModeText;
-        hud.label.text =  NSLocalizedString(@"mnemonic_not_available", nil);
-        [hud hideAnimated:YES afterDelay:1.5];
+        
+        [WalletMBProgressShower showMulLineTextIn:self.view
+                                             Text:NSLocalizedString(@"mnemonic_not_available", nil)
+                                           During:2.5];
         return;
     }
     
     /* show loading state */
-    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    hud.mode = MBProgressHUDModeText;
-    hud.label.text = NSLocalizedString(@"wait", nil);
-    
+   
+    [WalletMBProgressShower showTextIn:self.view Text:NSLocalizedString(@"wait", nil)];
+
     
     /* Create a wallet with your password and mnemonic words. */
     [WalletUtils createWalletWithMnemonicWords:arr
                                 password:self.password.text
                                 callback:^(WalletAccountModel *account, NSError *error)
      {
-         [hud hideAnimated:YES];
+         [WalletMBProgressShower hide:self.view];
          
          if (error) {
              NSLog(@"error：%@", error);

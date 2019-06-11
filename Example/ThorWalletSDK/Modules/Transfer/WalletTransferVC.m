@@ -31,7 +31,7 @@
 #import "WalletTransferVC.h"
 #import "WalletUtils.h"
 #import "WalletDemoMacro.h"
-#import "MBProgressHUD.h"
+#import "WalletMBProgressShower.h"
 #import "WalletDemoTool.h"
 
 @interface WalletTransferVC ()<UITextFieldDelegate>
@@ -85,10 +85,10 @@
      if (![self checkEnoughCoinBalance:self.coinAmount transferAmount:self.transferAmountTextField.text]) {
          NSLog(@"The balance is not enough to pay");
          
-         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-         hud.mode = MBProgressHUDModeText;
-         hud.label.text =  @"The balance is not enough to pay";
-         [hud hideAnimated:YES afterDelay:1.5];
+        
+         [WalletMBProgressShower showMulLineTextIn:self.view
+                                              Text:@"The balance is not enough to pay"
+                                            During:2.5];
          return;
      }
     NSDictionary *currentWalletDict = [[NSUserDefaults standardUserDefaults]objectForKey:@"currentWallet"];
@@ -138,10 +138,9 @@
     if (self.receiveAddressTextView.text.length == 0
         || self.transferAmountTextField.text.length == 0) {
         
-        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        hud.mode = MBProgressHUDModeText;
-        hud.label.text =  NSLocalizedString(@"input_empty", nil);
-        [hud hideAnimated:YES afterDelay:1.5];
+        [WalletMBProgressShower showMulLineTextIn:self.view
+                                             Text:NSLocalizedString(@"input_empty", nil)
+                                           During:2.5];
         return;
     }
     
@@ -180,10 +179,10 @@
     if (self.receiveAddressTextView.text.length == 0
         || self.transferAmountTextField.text.length == 0) {
         
-        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        hud.mode = MBProgressHUDModeText;
-        hud.label.text =  NSLocalizedString(@"input_empty", nil);
-        [hud hideAnimated:YES afterDelay:1.5];
+        
+        [WalletMBProgressShower showMulLineTextIn:self.view
+                                             Text:NSLocalizedString(@"input_empty", nil)
+                                           During:2.5];
         return;
     }
     
