@@ -7,21 +7,29 @@ Vechain wallet SDK provides a series of functional interface can help the iOS de
 
 **Features:**
 
+#### Features:
+
+##### Setting
 - Set node url
 - Get node url
-- Creat wallet
-- Creat wallet with mnemonic words
+
+##### Manage Wallet
+- Create wallet
+- Create wallet with mnemonic words
 - Get checksum address
-- Change wallet password
+- Change Wallet password
 - Verify mnemonic words
 - Verify keystore
 - Recover address
-- Sign message
-- Sign transfer message
-- Sign and send
-- Inject js into webview
-- Support dapp development environment
 
+##### Sign
+- Sign message
+- Sign transaction
+- Sign and send transaction
+
+##### Support DApp development environment
+- 100% support for the [connex.](https://github.com/vechain/connex/blob/master/docs/api.md/)
+- Support for web3 features :getNodeUrl, getAccounts,sign,getBalance
 
 ## Get Started 
 
