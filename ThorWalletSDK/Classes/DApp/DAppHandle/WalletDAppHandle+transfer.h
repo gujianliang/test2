@@ -39,11 +39,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface WalletDAppHandle (transfer)
 
-- (void)signTransfer:(WalletTransactionParameter *)paramModel
-            keystore:(NSString *)keystore
-            password:(NSString *)password
-              isSend:(BOOL)isSend
-            callback:(void(^)(NSString *txId))callback;
 
 - (void)transferCallback:(WalletJSCallbackModel *)callbackModel
                   connex:(BOOL)bConnex;

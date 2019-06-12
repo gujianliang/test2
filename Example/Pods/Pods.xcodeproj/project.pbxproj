@@ -149,6 +149,8 @@
 		933836E9F3D481D5E12E5AFF542A238B /* SRWebSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = 9668D6783C56B9ECB5CE0C843452610C /* SRWebSocket.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9595FA4BFF73CB3393C17B2467EAD09A /* bip32.c in Sources */ = {isa = PBXBuildFile; fileRef = 09A8F714A2DBB8182BAFB60B5392E687 /* bip32.c */; };
 		96EB8ECEF89CF095DFBB2114C66A0BEC /* UIRefreshControl+AFNetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = 7DD56749D6C2D104FCF711087AE9C49D /* UIRefreshControl+AFNetworking.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		971D5C1022B09B25008B68D0 /* WalletSendTranfer.h in Headers */ = {isa = PBXBuildFile; fileRef = 971D5C0C22B09A62008B68D0 /* WalletSendTranfer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		971D5C1122B09B2A008B68D0 /* WalletSendTranfer.m in Sources */ = {isa = PBXBuildFile; fileRef = 971D5C0D22B09A62008B68D0 /* WalletSendTranfer.m */; };
 		9771B36522A9167F006E51DF /* WalletDAppGasCalculateHandle.h in Headers */ = {isa = PBXBuildFile; fileRef = 9771B36122A913B9006E51DF /* WalletDAppGasCalculateHandle.h */; };
 		9771B36622A91685006E51DF /* WalletDAppGasCalculateHandle.m in Sources */ = {isa = PBXBuildFile; fileRef = 9771B36222A913B9006E51DF /* WalletDAppGasCalculateHandle.m */; };
 		9771B36B22A91891006E51DF /* WalletDAppInjectJSHandle.h in Headers */ = {isa = PBXBuildFile; fileRef = 9771B36722A917D6006E51DF /* WalletDAppInjectJSHandle.h */; };
@@ -492,6 +494,8 @@
 		94A584E7D66DBE48E5573EBDDAB5B4A5 /* YYModel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = YYModel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		94C4DEB7D138EE81EE53095CB0F590E1 /* WalletVETBalanceApi.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = WalletVETBalanceApi.m; sourceTree = "<group>"; };
 		9668D6783C56B9ECB5CE0C843452610C /* SRWebSocket.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SRWebSocket.h; path = SocketRocket/SRWebSocket.h; sourceTree = "<group>"; };
+		971D5C0C22B09A62008B68D0 /* WalletSendTranfer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = WalletSendTranfer.h; path = ThorWalletSDK/Classes/BasicWallet/WalletSendTranfer.h; sourceTree = "<group>"; };
+		971D5C0D22B09A62008B68D0 /* WalletSendTranfer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = WalletSendTranfer.m; path = ThorWalletSDK/Classes/BasicWallet/WalletSendTranfer.m; sourceTree = "<group>"; };
 		9771B36122A913B9006E51DF /* WalletDAppGasCalculateHandle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WalletDAppGasCalculateHandle.h; sourceTree = "<group>"; };
 		9771B36222A913B9006E51DF /* WalletDAppGasCalculateHandle.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WalletDAppGasCalculateHandle.m; sourceTree = "<group>"; };
 		9771B36722A917D6006E51DF /* WalletDAppInjectJSHandle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WalletDAppInjectJSHandle.h; sourceTree = "<group>"; };
@@ -1222,6 +1226,8 @@
 				837EAF86BB0DB133D8BF1645BA20467B /* WalletUtils.h */,
 				0D9D928334E7E7D788D499CAFC6D06FF /* WalletUtils.m */,
 				3E1767962F0FD008EBF0CB440AC61D8B /* Utilities */,
+				971D5C0C22B09A62008B68D0 /* WalletSendTranfer.h */,
+				971D5C0D22B09A62008B68D0 /* WalletSendTranfer.m */,
 			);
 			name = BasicWallet;
 			sourceTree = "<group>";
@@ -1346,6 +1352,7 @@
 				9FDF915C5FED0E4213EFB7274AFDAB6F /* BigNumber.h in Headers */,
 				DC4CF969EED316D26CE2E40BD74D202B /* bip32.h in Headers */,
 				67F095051B0D72BC6A123EA90AB37063 /* bip39.h in Headers */,
+				971D5C1022B09B25008B68D0 /* WalletSendTranfer.h in Headers */,
 				1F4B7D7CCB1F690ED45BDD00CA3E3DC3 /* bip39_english.h in Headers */,
 				3B19DEB26F62B125313DF76195C60AD6 /* blake2-impl.h in Headers */,
 				C057B81B82E75BA15C80CFA8B2B041F7 /* blake2.h in Headers */,
@@ -1743,6 +1750,7 @@
 				53AF73ACA37E886E05602DBE8600A90A /* blake2xs-ref.c in Sources */,
 				F1C950E161A0F6DC70A4F94ECB716F9E /* crypto_scrypt-nosse.c in Sources */,
 				6714FB09DA6186539FB6BD28D44BBC26 /* curves.c in Sources */,
+				971D5C1122B09B2A008B68D0 /* WalletSendTranfer.m in Sources */,
 				F783EAE1DA0C77E2D4248D52B94A3E82 /* ecdsa.c in Sources */,
 				9771B36C22A91896006E51DF /* WalletDAppInjectJSHandle.m in Sources */,
 				415D729B3B1B7AC9A8CEB37F91DDC7D3 /* Hash.m in Sources */,

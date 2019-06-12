@@ -39,6 +39,7 @@
 {
     NSURL *_URL;
     WKWebView *_webView;  /* It is a 'WKWebView' object that used to interact with dapp. */
+    WalletUtils *_walletUtils;
 }
 
 @end
@@ -65,7 +66,8 @@
     configuration.userContentController = [[WKUserContentController alloc] init];
     
     //inject js to wkwebview
-    [WalletUtils injectJSWithWebView:configuration];
+    _walletUtils = [[WalletUtils alloc]init];
+    [_walletUtils injectJSWithWebView:configuration];
     
     _webView = [[WKWebView alloc]initWithFrame:CGRectMake(0, 0, ScreenW, ScreenH) configuration:configuration];
     _webView.UIDelegate = self;             /* set UIDelegate */
@@ -79,7 +81,7 @@
     [self.view addSubview:_webView];
     
     // Set delegate
-    [WalletUtils initDAppWithDelegate:self];
+    [_walletUtils initDAppWithDelegate:self];
 }
 
 
@@ -120,7 +122,7 @@
     /*
      You must call this method. It is used to response web3 or connex operations.
      */
-    [WalletUtils webView:webView  defaultText:defaultText completionHandler:completionHandler];
+    [_walletUtils webView:webView  defaultText:defaultText completionHandler:completionHandler];
 }
 
 - (void)clickBackBtnClick {
@@ -209,6 +211,7 @@
 {
     //Get the chain tag of the block chain
     [WalletUtils getChainTag:^(NSString *chainTag) {
+        
         NSLog(@"chainTag == %@",chainTag);
         //If the chainTag is nil, then the acquisition fails, you can prompt alert
         
@@ -273,7 +276,6 @@
              NSString *signAddress = [WalletUtils getAddressWithKeystore:keystore];
              NSLog(@"\n txId: %@", txId);
              completionHandler(txId,signAddress);
-             [WalletMBProgressShower hide:self.view];
          }];
     }else{
         [WalletMBProgressShower hide:self.view];
@@ -376,7 +378,7 @@ completionHandler:(void (^)(NSString *signer, NSData *signatureData))completionH
  * You must implement this method to free memory, otherwise there may be a memory overflow or leak.
  */
 - (void)dealloc{
-    [WalletUtils deallocDApp];
+    [_walletUtils deallocDApp];
 }
 
 @end

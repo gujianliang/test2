@@ -325,7 +325,7 @@
  *
  *  @param delegate : delegate object
  */
-+ (void)initDAppWithDelegate:(id)delegate;
+- (void)initDAppWithDelegate:(id)delegate;
 
 /*! @abstract
  *  Displays a JavaScript text input panel.
@@ -336,7 +336,7 @@
 input panel has been dismissed. Pass the entered text if the user chose
 OK, otherwise nil.
 */
-+ (void)webView:(WKWebView *)webView
+- (void)webView:(WKWebView *)webView
     defaultText:(NSString *)defaultText
 completionHandler:(void (^)(NSString *result))completionHandler;
 
@@ -347,7 +347,7 @@ completionHandler:(void (^)(NSString *result))completionHandler;
  *  @param config : Developer generated WKWebViewConfiguration object
  *
  */
-+ (void)injectJSWithWebView:(WKWebViewConfiguration *)config;
+- (void)injectJSWithWebView:(WKWebViewConfiguration *)config;
 
 /**
  *  @abstract
@@ -356,7 +356,7 @@ completionHandler:(void (^)(NSString *result))completionHandler;
  *  Call this method when exiting the contrller where dapp is located
  *
  */
-+ (void)deallocDApp;
+- (void)deallocDApp;
 
 
 

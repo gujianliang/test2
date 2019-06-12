@@ -1,8 +1,8 @@
 //
 //  WalletDAppInjectJSHandle.m
-//  AFNetworking
+//  VeChain
 //
-//  Created by 曾新 on 2019/6/6.
+//  Created by VeChain on 2019/6/6.
 //
 
 #import "WalletCheckVersionApi.h"

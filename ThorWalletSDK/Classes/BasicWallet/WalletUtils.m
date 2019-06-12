@@ -40,6 +40,13 @@
 #import "WalletBestBlockInfoApi.h"
 #import "WalletDAppHandle+transfer.h"
 #import "AFNetworking.h"
+#import "WalletSendTranfer.h"
+
+@interface WalletUtils()
+
+@property (nonatomic, strong)WalletDAppHandle *dappHandle;
+
+@end
 
 @implementation WalletUtils
 
@@ -272,23 +279,6 @@
 }
 
 
-+ (void)initDAppWithDelegate:(id)delegate
-{
-    WalletDAppHandle *dappHandle = [WalletDAppHandle shareWalletHandle];
-    dappHandle.delegate = delegate;
-}
-
-+ (void)webView:(WKWebView *)webView defaultText:(NSString *)defaultText completionHandler:(void (^)(NSString * result))completionHandler
-{
-    WalletDAppHandle *dappHandle = [WalletDAppHandle shareWalletHandle];
-    [dappHandle webView:webView defaultText:defaultText completionHandler:completionHandler];
-}
-
-+ (void)injectJSWithWebView:(WKWebViewConfiguration *)config
-{
-    WalletDAppHandle *dappHandle = [WalletDAppHandle shareWalletHandle];
-    [dappHandle injectJS:config];
-}
 
 + (void)signAndSendTransferWithParameter:(WalletTransactionParameter *)parameter
                             keystore:(NSString*)keystoreJson
@@ -438,10 +428,6 @@
     return [WalletUserDefaultManager getBlockUrl];
 }
 
-+ (void)deallocDApp
-{
-    [WalletDAppHandle deallocDApp];
-}
 
 + (void)modifyKeystore:(NSString *)keystoreJson
            newPassword:(NSString *)newPassword
@@ -540,8 +526,11 @@
 
 + (void)signTransfer:(WalletTransactionParameter *)paramModel keystore:(NSString *)keystore password:(NSString *)password isSend:(BOOL)isSend completionHandler:(void(^)(NSString *txId))completionHandler
 {
-    WalletDAppHandle *handle = [WalletDAppHandle shareWalletHandle];
-    [handle signTransfer:paramModel keystore:keystore password:password isSend:isSend callback:completionHandler];
+    if (isSend) {
+        [WalletSendTranfer signAndSendTransfer:paramModel keystore:keystore password:password callback:completionHandler];
+    }else{
+        [WalletSendTranfer signTransfer:paramModel keystore:keystore password:password  callback:completionHandler];
+    }
 }
 
 + (NSString *)getAddressWithKeystore:(NSString *)keystore
@@ -573,6 +562,38 @@
     [newMessage setValueIfNotNil:signer forKey:@"signer"];
     
    return  [WalletTools packageCertParam:newMessage];
+}
+
+- (void)initDAppWithDelegate:(id)delegate
+{
+    WalletDAppHandle *dappHandle = self.dappHandle;
+    dappHandle.delegate = delegate;
+}
+
+- (WalletDAppHandle *)dappHandle
+{
+    if (_dappHandle == nil) {
+        _dappHandle = [[WalletDAppHandle alloc]init];
+    }
+    return _dappHandle;
+}
+
+- (void)webView:(WKWebView *)webView defaultText:(NSString *)defaultText completionHandler:(void (^)(NSString * result))completionHandler
+{
+    WalletDAppHandle *dappHandle = self.dappHandle;
+    [dappHandle webView:webView defaultText:defaultText completionHandler:completionHandler];
+}
+
+- (void)injectJSWithWebView:(WKWebViewConfiguration *)config
+{
+    WalletDAppHandle *dappHandle = self.dappHandle;
+    [dappHandle injectJS:config];
+}
+
+
+- (void)deallocDApp
+{
+    [self.dappHandle deallocDApp];
 }
 
 

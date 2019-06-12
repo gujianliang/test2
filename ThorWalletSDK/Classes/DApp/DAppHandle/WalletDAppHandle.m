@@ -48,17 +48,6 @@
 
 @implementation WalletDAppHandle
 
-static WalletDAppHandle *singleton = nil;
-static dispatch_once_t predicate;
-
-+ (instancetype)shareWalletHandle
-{
-    dispatch_once(&predicate, ^{
-        singleton = [[self alloc] init];
-        
-    });
-    return singleton;
-}
 
 -(instancetype)init
 {
@@ -186,10 +175,8 @@ static dispatch_once_t predicate;
     }];
 }
 
-+ (void)deallocDApp
+- (void)deallocDApp
 {
-    predicate = 0;
-    singleton = nil;
     [[NSNotificationCenter defaultCenter]removeObserver:self];
     
     // Close websocket
