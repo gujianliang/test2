@@ -545,12 +545,12 @@ Initialization is mainly JS injected into connex and web3.
 /*
  *  @param delegate : delegate object
  */
-+ (void)initDAppWithDelegate:(id)delegate;
+- (void)initDAppWithDelegate:(id)delegate;
 ```
 Eg:
 ```obj-c
  // Set delegate
- [WalletUtils initDAppWithDelegate:self];
+ [_walletUtils initDAppWithDelegate:self];
 
 ```
 
@@ -561,7 +561,7 @@ Eg:
 /*
  *  @param config : Developer generated WKWebViewConfiguration object
  */
-+ (void)injectJSWithWebView:(WKWebViewConfiguration *)config;  
+- (void)injectJSWithWebView:(WKWebViewConfiguration *)config;  
 ```
 
 Eg:
@@ -572,7 +572,8 @@ Eg:
  configuration.userContentController = [[WKUserContentController alloc] init];
     
  //inject js to wkwebview
- [WalletUtils injectJSWithWebView:configuration];
+ _walletUtils = [[WalletUtils alloc]init];
+ [_walletUtils injectJSWithWebView:configuration];
 
 ```
 
@@ -586,7 +587,7 @@ Eg:
 input panel has been dismissed. Pass the entered text if the user chose
 OK, otherwise nil.
 */
-+ (void)webView:(WKWebView *)webView 
+- (void)webView:(WKWebView *)webView 
     defaultText:(NSString *)defaultText 
 completionHandler:(void (^)(NSString *result))completionHandler;
 ```
@@ -601,7 +602,7 @@ Eg:
     /*
      You must call this method. It is used to response web3 or connex operations.
      */
-    [WalletUtils webView:webView  defaultText:defaultText completionHandler:completionHandler];
+    [_walletUtils webView:webView  defaultText:defaultText completionHandler:completionHandler];
 }
 
 ```
@@ -613,7 +614,7 @@ Eg:
  /**
  *  Call this method when exiting the contrller where dapp is located
  */
-+ (void)deallocDApp;
+- (void)deallocDApp;
 ```
 Eg:
  ```obj-c
@@ -621,7 +622,7 @@ Eg:
  * You must implement this method to free memory, otherwise there may be a memory overflow or leak.
  */
 - (void)dealloc{
-    [WalletUtils deallocDApp];
+    [_walletUtils deallocDApp];
 }
 ```
 
