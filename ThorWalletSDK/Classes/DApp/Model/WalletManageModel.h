@@ -3,7 +3,7 @@
 //  Wallet
 //
 //  Created by VeChain on 2018/4/18.
-//  Copyright © 2018年 VeChain. All rights reserved.
+//  Copyright © 2019 VeChain. All rights reserved.
 //
 
 // This code is distributed under the terms and conditions of the MIT license. 

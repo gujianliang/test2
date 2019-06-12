@@ -2,7 +2,7 @@
 //  WalletSendTranfer.m
 //  Wallet
 //
-//  Copyright © 2019年 VeChain. All rights reserved.
+//  Copyright © 2019 VeChain. All rights reserved.
 //
 
 // This code is distributed under the terms and conditions of the MIT license.

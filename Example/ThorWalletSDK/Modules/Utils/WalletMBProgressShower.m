@@ -3,7 +3,7 @@
 //  VeChain
 //
 //  Created by VeChain on 18/4/7.
-//  Copyright © 2018年 VeChain. All rights reserved.
+//  Copyright © 2019 VeChain. All rights reserved.
 //
 
 #import "WalletMBProgressShower.h"

@@ -2,7 +2,7 @@
 //  WalletUtils.h
 //
 //  Created by VeChain on 2018/8/12.
-//  Copyright © 2018年 VeChain. All rights reserved.
+//  Copyright © 2019 VeChain. All rights reserved.
 //
 // This code is distributed under the terms and conditions of the MIT license. 
 

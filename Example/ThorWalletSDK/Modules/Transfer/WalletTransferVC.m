@@ -253,12 +253,22 @@
     //Get the chain tag of the block chain
     [WalletUtils getChainTag:^(NSString *chainTag) {
         NSLog(@"chainTag == %@",chainTag);
+        if (chainTag.length == 0) {
+            
+            NSLog(@"get chainTag fail");
+            return ;
+        }
         //If the chainTag is nil, then the acquisition fails, you can prompt alert
         
         //Get the reference of the block chain
         [WalletUtils getBlockReference:^(NSString *blockReference) {
             
             NSLog(@"blockReference == %@",blockReference);
+            if (blockReference.length == 0) {
+                
+                NSLog(@"get blockReference fail");
+                return ;
+            }
             //If the blockReference is nil, then the acquisition fails, you can prompt alert
             
             [self signAndSendClauseList:clauseList
