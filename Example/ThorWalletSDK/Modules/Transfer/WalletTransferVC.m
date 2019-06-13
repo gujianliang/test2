@@ -39,7 +39,6 @@
     NSString *_toAddress;
     NSString *_tokenContractAddress;
     NSString *_blockHost;
-    WalletUtils *_walletUtils;
 }
 
 @property (weak, nonatomic) IBOutlet UITextView *receiveAddressTextView;
@@ -60,7 +59,6 @@
     
     self.transferAmountTextField.keyboardType = UIKeyboardTypeDecimalPad;
     
-    _walletUtils = [[WalletUtils alloc]init];
     _blockHost = [WalletUtils getNodeUrl];
     
     if (!_isVET) {

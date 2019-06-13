@@ -57,6 +57,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    //Generate WalletUtils object
+    _walletUtils = [[WalletUtils alloc]init];
     
     /*
      Please note that, This is a 'WKWebView' object, does not support a "UIWebView" object.
@@ -66,7 +68,6 @@
     configuration.userContentController = [[WKUserContentController alloc] init];
     
     //inject js to wkwebview
-    _walletUtils = [[WalletUtils alloc]init];
     [_walletUtils injectJSWithWebView:configuration];
     
     _webView = [[WKWebView alloc]initWithFrame:CGRectMake(0, 0, ScreenW, ScreenH) configuration:configuration];
