@@ -31,7 +31,6 @@
  
  **/
 
-//#import "WalletTools.h"
 #import "WalletTools.h"
 #import "WalletTransactionParameter.h"
 #import "WalletDAppGasCalculateHandle.h"

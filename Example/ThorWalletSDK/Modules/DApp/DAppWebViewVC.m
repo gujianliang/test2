@@ -362,7 +362,7 @@ completionHandler:(void (^)(NSString *signer, NSData *signatureData))completionH
 {
     //Custom password input box
     [WalletDemoTool alertCurrentVC:self
-                           message:@"Please enter the wallet password"
+                           message:@"Certificate Authority"
                    actionWithTitle:@"Confirm"
                           callback:^(NSString * input)
      {

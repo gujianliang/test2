@@ -28,6 +28,7 @@
                                  }])];
     [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
         textField.secureTextEntry = YES;
+        textField.placeholder = @"Please enter the wallet password";
     }];
     
     [currentVC presentViewController:alertController animated:YES completion:nil];
