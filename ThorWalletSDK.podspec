@@ -21,11 +21,11 @@ Pod::Spec.new do |s|
 Vechain wallet SDK provides a series of functional interface can help the iOS developers, for example: quickly create the wallet, the private key signature, call the vechain block interface, put data in the vechain block, and support dapp development environment.
                        DESC
 
-  s.homepage         = 'https://vit.digonchain.com/vechain-mobile-apps/ios-wallet-sdk'
+  s.homepage         = ''
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'VeChain' => 'support@vechain.com' }
-  s.source           = { :git => 'https://vit.digonchain.com/vechain-mobile-apps/ios-wallet-sdk.git', :tag => s.version.to_s }
+  s.source           = { :git => '', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
   s.ios.deployment_target = '10.0'

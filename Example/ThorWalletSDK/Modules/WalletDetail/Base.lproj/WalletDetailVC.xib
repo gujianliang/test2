@@ -27,7 +27,7 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <searchBar contentMode="redraw" placeholder="Please enter dapp url" translatesAutoresizingMaskIntoConstraints="NO" id="6Aw-T4-OTH">
+                <searchBar contentMode="redraw" placeholder="Please enter DApp's url" translatesAutoresizingMaskIntoConstraints="NO" id="6Aw-T4-OTH">
                     <rect key="frame" x="0.0" y="36" width="375" height="56"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="56" id="8av-R4-YSj"/>
