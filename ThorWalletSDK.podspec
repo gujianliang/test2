@@ -22,32 +22,18 @@ Vechain wallet SDK provides a series of functional interface can help the iOS de
                        DESC
 
   s.homepage         = ''
-  # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
+
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'VeChain' => 'support@vechain.com' }
   s.source           = { :git => '', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
   s.ios.deployment_target = '10.0'
-
-  #s.source_files = 'ThorWalletSDK/Classes/**/*'
   
-  #s.source_files = 'ThorWalletSDK/Classes/*.{h}'
-  #s.public_header_files = 'ThorWalletSDK/Classes/*.{h}'
-  
-  #s.resource_bundles = {
-  #  'ThorWalletSDK' => ['ThorWalletSDK/Assets/*.png']
-  #}
-  
-  #s.static_framework = true
-   s.resource = 'ThorWalletSDK/Assets/ThorWalletSDKBundle.bundle'
-  
-  # s.public_header_files = 'Pod/Classes/**/*.h'
-  # s.frameworks = 'UIKit', 'MapKit'
+  s.resource = 'ThorWalletSDK/Assets/ThorWalletSDKBundle.bundle'
   
   s.subspec 'DApp' do |ss|
   ss.source_files = 'ThorWalletSDK/Classes/DApp/**/*.{h,m}'
-      #ss.public_header_files = 'ThorWalletSDK/Classes/BasicWallet/*.h'
   end
   
   
@@ -68,5 +54,4 @@ Vechain wallet SDK provides a series of functional interface can help the iOS de
   
   s.dependency 'YYModel', '~>  1.0.4'
   
-#  s.vendored_frameworks = 'ThorWalletSDK/*.{framework}'
 end
