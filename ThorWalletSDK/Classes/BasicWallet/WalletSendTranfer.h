@@ -35,7 +35,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface WalletSendTranfer : UIView
+@interface WalletSendTranfer : NSObject
 
 + (void)signAndSendTransfer:(WalletTransactionParameter *)paramModel
                    keystore:(NSString *)keystore
