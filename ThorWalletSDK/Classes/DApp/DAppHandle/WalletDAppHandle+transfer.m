@@ -77,6 +77,7 @@
 
 - (void)simulateMultiAccount:(NSArray *)clauseModelList gas:(NSString * __autoreleasing *)gas signer:(NSString *)signer callbackModel:(WalletJSCallbackModel *)callbackModel bConnex:(BOOL)bConnex
 {
+    NSString *originGas = *gas;
     @weakify(self);
     WalletDappSimulateMultiAccountApi *simulateApi = [[WalletDappSimulateMultiAccountApi alloc]initClause:clauseModelList opts:@{} revision:@""];
     [simulateApi loadDataAsyncWithSuccess:^(WalletBaseApi *finishApi) {
@@ -85,11 +86,14 @@
         NSString *gasUsed = [list firstObject][@"gasUsed"];
         if (gasUsed.integerValue != 0) {
             //Gasused If it is not 0,  need to add 15000
-            NSString *originGas = *gas;
+           
             *gas = [NSString stringWithFormat:@"%ld",originGas.integerValue + gasUsed.integerValue + 15000];
+            
+            [self callbackClauseList:clauseModelList gas:*gas signer:signer bConnex:bConnex  callbackModel:callbackModel];
+        }else{
+            
+            [self callbackClauseList:clauseModelList gas:originGas signer:signer bConnex:bConnex  callbackModel:callbackModel];
         }
-        
-        [self callbackClauseList:clauseModelList gas:*gas signer:signer bConnex:bConnex  callbackModel:callbackModel];
         
     }failure:^(WalletBaseApi *finishApi, NSString *errMsg) {
         @strongify(self);

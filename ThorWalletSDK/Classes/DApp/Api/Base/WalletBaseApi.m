@@ -90,10 +90,10 @@
 -(void)loadDataAsyncWithSuccess:(WalletLoadSuccessBlock)success
                         failure:(WalletLoadFailBlock)failure
 {
-    _successBlock = success;
-    _failBlock = failure;
+    self.successBlock = success;
+    self.failBlock = failure;
     if ( _httpAddress == nil) {
-        _failBlock(self,@"");
+        self.failBlock(self,@"");
         return;
     }
     
@@ -149,7 +149,7 @@
             self.status = RequestSuccess;
             [self convertJsonResultToModel:responseData];
             self.resultModel = responseData;
-            _successBlock(self);
+            self.successBlock(self);
             return;
         }
         
@@ -175,7 +175,7 @@
                 self.resultModel = objDict;
             }
             self.status = RequestSuccess;
-            _successBlock(self);
+            self.successBlock(self);
             return;
             
         } else {
@@ -187,7 +187,7 @@
             if (error.code == 3840) {
                 self.resultDict = nil;
                 self.status = RequestSuccess;
-                _successBlock(self);
+                self.successBlock(self);
                 return;
             }else{
                 self.status = RequestFailed;
@@ -238,8 +238,8 @@
         self.lastError = nil;
     }
     if (self.status == RequestFailed) {
-        if (_failBlock) {
-            _failBlock(self,errMsg);
+        if (self.failBlock) {
+            self.failBlock(self,errMsg);
         }
     }
 }
