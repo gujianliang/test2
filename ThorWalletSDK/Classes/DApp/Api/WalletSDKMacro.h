@@ -35,7 +35,7 @@
 #ifndef WalletSDKMacro_h
 #define WalletSDKMacro_h
 
-#define SDKVersion  @"1.0.0"
+#define SDKVersion  @"0.10.0"
 
 #define AppId @"5c50bb8d9736b60f1f0f4f5c56604326"
 

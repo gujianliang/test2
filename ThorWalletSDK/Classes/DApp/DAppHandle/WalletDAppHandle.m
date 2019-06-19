@@ -70,7 +70,6 @@
         return;
     }
     
-    NSLog(@"defaultText == %@",defaultText);
     _webView = webView;
     
     //Whether the scheme conforms to the dapp response
