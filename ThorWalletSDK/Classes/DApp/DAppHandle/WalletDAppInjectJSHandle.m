@@ -64,13 +64,21 @@
     NSString *update        = versionModel.update;
     NSString *latestVersion = versionModel.latestVersion;
     NSString *description   = versionModel.pdescription;
+    NSString *timeStampString = versionModel.releasets;
+    
+    NSTimeInterval interval    =[timeStampString doubleValue];
+    NSDate *date               = [NSDate dateWithTimeIntervalSince1970:interval];
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    NSString *dateString       = [formatter stringFromDate: date];
     
     //Update = 1 : forced upgrade
     if (update.boolValue) {
-        NSLog(@"Wallet SDK must update version url:%@, Current version:%@. Latest version:%@,  Description:%@",versionModel.url,SDKVersion,latestVersion,description);
+        NSLog(@"\n Wallet SDK must update version url:%@ \n Current version:%@ \n Latest version:%@ \n WHAT'S NEW:%@ \n Updated:%@",versionModel.url,SDKVersion,latestVersion,description,dateString);
     }else{
         if (![SDKVersion isEqualToString:latestVersion]) {
-            NSLog(@"Wallet SDK update version url:%@, Current version:%@. Latest version:%@,  Description:%@",versionModel.url,SDKVersion,latestVersion,description);
+            NSLog(@"\n Wallet SDK update version url:%@ \n Current version:%@ \n Latest version:%@ \n WHAT'S NEW:%@ \n Updated:%@",versionModel.url,SDKVersion,latestVersion,description,dateString);
         }
     }
     
