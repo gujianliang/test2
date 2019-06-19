@@ -69,15 +69,15 @@
         
         gas = [NSString stringWithFormat:@"%d",[WalletDAppGasCalculateHandle getGas:clauseModelList]];
         
-        [self simulateMultiAccount:clauseModelList gas:&gas signer:signer callbackModel:callbackModel bConnex:bConnex];
+        [self simulateMultiAccount:clauseModelList gas:gas signer:signer callbackModel:callbackModel bConnex:bConnex];
     }else{
         [self callbackClauseList:clauseModelList gas:gas signer:signer bConnex:bConnex callbackModel:callbackModel];
     }
 }
 
-- (void)simulateMultiAccount:(NSArray *)clauseModelList gas:(NSString * __autoreleasing *)gas signer:(NSString *)signer callbackModel:(WalletJSCallbackModel *)callbackModel bConnex:(BOOL)bConnex
+- (void)simulateMultiAccount:(NSArray *)clauseModelList gas:(NSString *)gas signer:(NSString *)signer callbackModel:(WalletJSCallbackModel *)callbackModel bConnex:(BOOL)bConnex
 {
-    NSString *originGas = *gas;
+    NSString *originGas = gas;
     @weakify(self);
     WalletDappSimulateMultiAccountApi *simulateApi = [[WalletDappSimulateMultiAccountApi alloc]initClause:clauseModelList opts:@{} revision:@""];
     [simulateApi loadDataAsyncWithSuccess:^(WalletBaseApi *finishApi) {
@@ -87,9 +87,9 @@
         if (gasUsed.integerValue != 0) {
             //Gasused If it is not 0,  need to add 15000
            
-            *gas = [NSString stringWithFormat:@"%ld",originGas.integerValue + gasUsed.integerValue + 15000];
+           NSString *lastGas = [NSString stringWithFormat:@"%ld",originGas.integerValue + gasUsed.integerValue + 15000];
             
-            [self callbackClauseList:clauseModelList gas:*gas signer:signer bConnex:bConnex  callbackModel:callbackModel];
+            [self callbackClauseList:clauseModelList gas:lastGas signer:signer bConnex:bConnex  callbackModel:callbackModel];
         }else{
             
             [self callbackClauseList:clauseModelList gas:originGas signer:signer bConnex:bConnex  callbackModel:callbackModel];
