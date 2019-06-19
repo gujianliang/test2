@@ -167,7 +167,7 @@
     }
     
     if (_blockHost.length == 0) {  /* THe default block Host. */
-        _blockHost = Test_Node;
+        _blockHost = Main_Node;
         self.title = NSLocalizedString(@"item0", nil);
         
         NSMutableDictionary *serverDict = [NSMutableDictionary dictionary];
