@@ -39,52 +39,51 @@
 
 + (int)getGas:(NSArray *)clauseList
 {
-    int gas = 0;
+    int txGas = 5000;
+    int clauseGas = 16000;
+    int clauseGasContractCreation = 48000;
+    
+    if (clauseList.count == 0 || clauseList == nil) {
+        return txGas + clauseGas;
+    }
+    
+    int sum = txGas;
     for (ClauseModel *model in clauseList) {
         
         NSString *to     = model.to;
         NSString *value  = model.value;
         NSString *data   = model.data;
         
-        gas = gas + [self calculateSingleGasTo:&to value:&value data:&data];
+        if ([WalletTools isEmpty:to]) {
+            to = @"";
+        }
+        
+        if ([WalletTools isEmpty:value]) {
+            value = @"";
+        }
+        
+        if ([WalletTools isEmpty:data]) {
+            data = @"";
+        }
+
+        if (to.length > 0) {
+            sum += clauseGas;
+        } else {
+            sum += clauseGasContractCreation;
+        }
+        
+        sum += [self dataGas:data];
     }
-    return gas;
+    
+    return sum;
 }
 
-+ (int)calculateSingleGasTo:(NSString **)to value:(NSString **)value data:(NSString **)data
-{
-    if ([WalletTools isEmpty:*to]) {
-        *to = @"";
-    }
-    
-    if ([WalletTools isEmpty:*value]) {
-        *value = @"";
-    }
-    
-    if ([WalletTools isEmpty:*data]) {
-        *data = @"";
-    }
-    
-    int txGas = 5000;
-    int clauseGas = 16000;
-    int clauseGasContractCreation = 48000;
-    
-    if ((*data).length == 0 ) {
-        return txGas + clauseGas;
-    }
-    int sum = txGas;
-    
-    if ((*to).length > 0) {
-        sum += clauseGas;
-    } else {
-        sum += clauseGasContractCreation;
-    }
-    
-    sum += [self dataGas:(*data)];
-    return sum ;
-}
 
 + (int)dataGas:(NSString *)data {
+    if (data.length == 0 || [data.lowercaseString isEqualToString:@"0x"]) {
+        return 0;
+    }
+    
     int zgas = 4;
     int nzgas = 68;
     
