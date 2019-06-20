@@ -73,7 +73,7 @@ Vechain wallet SDK provides a series of functional interface can help the iOS de
 
 ## API Reference：
 
-+ ```API Reference.pdf``` for VeChain app developers
++ [API Reference](https://vit.digonchain.com/vechain-mobile-apps/android-wallet-sdk/blob/master/API%20Reference.md) for VeChain app developers
 
 ## License
 
