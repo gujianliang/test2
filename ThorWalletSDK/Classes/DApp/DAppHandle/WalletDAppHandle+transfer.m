@@ -118,7 +118,6 @@
         }
         
         *gas        = callbackParams[@"options"][@"gas"];
-        *gasPrice   = @"120"; //connex js No pass gaspPrice write default
         
         *signer       = callbackParams[@"options"][@"signer"];
         
