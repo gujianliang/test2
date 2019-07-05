@@ -34,6 +34,7 @@
 #import "WalletTools.h"
 #import "WalletTransactionParameter.h"
 #import "WalletDAppGasCalculateHandle.h"
+#import "WalletDappSimulateMultiAccountApi.h"
 
 @implementation WalletDAppGasCalculateHandle
 
@@ -48,11 +49,11 @@
     }
     
     int sum = txGas;
-    for (ClauseModel *model in clauseList) {
+    for (NSDictionary *clauseDit in clauseList) {
         
-        NSString *to     = model.to;
-        NSString *value  = model.value;
-        NSString *data   = model.data;
+        NSString *to     = clauseDit[@"to"];
+        NSString *value  = clauseDit[@"value"];
+        NSString *data   = clauseDit[@"data"];
         
         if ([WalletTools isEmpty:to]) {
             to = @"";
@@ -97,6 +98,42 @@
         }
     }
     return sum;
+}
+
++ (void)simulateGas:(NSArray *)clauseModelList from:(NSString *)from block:(void(^)(NSString *gas))block
+{
+    NSString *originGas = [NSString stringWithFormat:@"%d",[self getGas:clauseModelList]];
+    
+    NSMutableDictionary *dictOpts = [NSMutableDictionary dictionary];
+    [dictOpts setValueIfNotNil:from forKey:@"opts"];
+    
+    WalletDappSimulateMultiAccountApi *simulateApi = [[WalletDappSimulateMultiAccountApi alloc]initClause:clauseModelList opts:dictOpts revision:@""];
+    [simulateApi loadDataAsyncWithSuccess:^(WalletBaseApi *finishApi) {
+        NSArray *list = (NSArray *)finishApi.resultDict;
+        
+        NSInteger gasUsed = 0;
+        for (NSDictionary *dict in list) {
+            NSString *strGasUsed = dict[@"gasUsed"];
+            gasUsed = gasUsed + strGasUsed.integerValue ;
+        }
+        
+        if (gasUsed != 0) {
+            //Gasused If it is not 0,  need to add 15000
+            
+            NSString *lastGas = [NSString stringWithFormat:@"%ld",originGas.integerValue + gasUsed + 15000];
+            
+            if (block) {
+                block(lastGas);
+            }
+        }else{
+            
+            if (block) {
+                block(originGas);
+            }
+        }
+    } failure:^(WalletBaseApi *finishApi, NSString *errMsg) {
+        
+    }];
 }
 
 @end

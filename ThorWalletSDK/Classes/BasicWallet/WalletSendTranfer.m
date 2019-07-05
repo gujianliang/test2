@@ -37,6 +37,7 @@
 #import "WalletTools.h"
 #import "Account.h"
 #import "WalletTransactionApi.h"
+#import "WalletDAppGasCalculateHandle.h"
 
 @implementation WalletSendTranfer
 
@@ -74,13 +75,11 @@
     transaction.Expiration = paramModel.expiration.integerValue;
     transaction.gasPrice  = [BigNumber bigNumberWithInteger:paramModel.gasPriceCoef.integerValue];
     
-        if (paramModel.dependsOn.length == 0 || paramModel.dependsOn == nil) {
+    if (paramModel.dependsOn.length == 0 || paramModel.dependsOn == nil) {
             transaction.dependsOn = [NSData data];
     }else{
         transaction.dependsOn = [SecureData hexStringToData:paramModel.dependsOn];
     }
-
-    transaction.gasLimit = [BigNumber bigNumberWithInteger:paramModel.gas.integerValue];
 
     transaction.ChainTag = [BigNumber bigNumberWithHexString:paramModel.chainTag];
 
@@ -88,7 +87,22 @@
 
     [self packageClausesData:transaction paramModel:paramModel];
 
-    [self sign:transaction paramModel:paramModel keystore:keystore password:password callback:callback isSend:isSend];
+    if (paramModel.gas == nil || paramModel.gas.integerValue == 0) {
+        
+        NSString *strClause = [paramModel.clauses yy_modelToJSONString];
+        NSArray *clauseList = (NSArray *)[NSJSONSerialization dictionaryWithJsonString:strClause];
+        [WalletDAppGasCalculateHandle simulateGas:clauseList
+                                           from:[WalletUtils getAddressWithKeystore:keystore]
+                                          block:^(NSString * _Nonnull gas)
+         {
+             transaction.gasLimit = [BigNumber bigNumberWithInteger:gas.integerValue];
+             [self sign:transaction paramModel:paramModel keystore:keystore password:password callback:callback isSend:isSend];
+        }];
+        
+    }else{
+        transaction.gasLimit = [BigNumber bigNumberWithInteger:paramModel.gas.integerValue];
+        [self sign:transaction paramModel:paramModel keystore:keystore password:password callback:callback isSend:isSend];
+    }    
 }
 
 //Organize the clause data

@@ -384,9 +384,8 @@
 - (BOOL)checkGas:(NSString **)gas errorMsg:(NSString **)errorMsg
 {
     if ([WalletTools isEmpty:*gas]) {
-        *errorMsg = @"gas can't be empty";
-        
-        return NO;
+       
+        return YES;
     }
     
     // gas maybe string or number
@@ -406,10 +405,6 @@
         
         if (![WalletTools checkDecimalStr:*gas]) {
             *errorMsg = @"gas should be decimal string";
-            return NO;
-            
-        }else if((*gas).integerValue == 0){
-            *errorMsg = @"gas can't be 0";
             return NO;
             
         }else{

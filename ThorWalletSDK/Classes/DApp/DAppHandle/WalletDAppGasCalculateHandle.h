@@ -36,7 +36,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface WalletDAppGasCalculateHandle : NSObject
 
-+ (int)getGas:(NSArray *)clauseList;
++ (void)simulateGas:(NSArray *)clauseModelList from:(NSString *)from block:(void(^)(NSString *gas))block;
 
 @end
 
