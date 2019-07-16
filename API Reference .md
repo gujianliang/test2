@@ -723,7 +723,7 @@ Eg:
   *   Delegate function that must be implemented to support the DApp environment
   *
   *  @param certificateMessage : string to be signed,form dapp
-  *  @param signer : Enforces the specified address to sign the certificate.May be  nil
+  *  @param signer : Enforces the specified address to sign the certificate.May be nil
   *  @param callback : Callback after the end.signer: Signer address; signatureData : Signature is 65 bytes
  */
 - (void)onWillCertificate:(NSString *)certificateMessage 
