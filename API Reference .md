@@ -784,7 +784,7 @@ Eg:
 
 
 
- ##    App developer implementation when dapp calls checkOwn address function   
+ ##    App developer implementation when dapp calls checkOwnaddress function   
  
 
   
