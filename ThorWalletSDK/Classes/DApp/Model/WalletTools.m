@@ -129,7 +129,8 @@
                                                             data:data
                                                             code:code
                                                          message:message];
-    NSString *injectJS = [NSString stringWithFormat:@"%@('%@')",callbackId,[packageDict yy_modelToJSONString]];
+    NSString *newCallbackId = [NSString stringWithFormat:@"%@%@",callbackId,requestId];
+    NSString *injectJS = [NSString stringWithFormat:@"%@('%@')",newCallbackId,[packageDict yy_modelToJSONString]];
 
     injectJS = [injectJS stringByReplacingOccurrencesOfString:@"\"nu&*ll\"" withString:@"null"];
 //    NSLog(@"injectJS == %@",injectJS);
