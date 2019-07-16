@@ -659,9 +659,9 @@ Eg:
     NSString *address = [WalletUtils getAddressWithKeystore:keystore];
     
     //Specified signature address
-    if (signer.length > 0 && [address.lowercaseString isEqualToString:signer.lowercaseString]) {
+    if (signer.length > 0 && ![address.lowercaseString isEqualToString:signer.lowercaseString]) {
         
-        completionHandler(@"",@"");
+        completionHandler(@"",signer.lowercaseString);
         return;
     }
 
