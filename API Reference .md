@@ -9,7 +9,16 @@ Inherit the AppDelegate class and implement the following methods:
 {
     // Override point for customization after application launch.
     
+    //Set it as a main net environment
     [WalletUtils setNodeUrl:Main_Node];
+    
+    //Or if you have a corresponding node url, you can change it to your own node url:
+    //[WalletUtils setNodeUrl:@"https://www.yourCustomUrl.com"]; //your custom node url
+    
+    //Switching test net url:
+    //[WalletUtils setNodeUrl:Test_Node];
+    
+    //If nodeUrl is not set, the default value is main net
     
     ...
     
@@ -33,16 +42,16 @@ Inherit the AppDelegate class and implement the following methods:
 
 Eg:
 ```obj-c
- //Set it as a Main_Node environment
+ //Set it as a main net environment
  [WalletUtils setNodeUrl:Main_Node];
 
  //Or if you have a corresponding node url, you can change it to your own node url:
- [WalletUtils setNodeUrl:@"customNode"];
+ [WalletUtils setNodeUrl:@"https://www.yourCustomUrl.com"]; //
             
- //Switching test node url:
+ //Switching test net url:
  [WalletUtils setNodeUrl:Test_Node];
 
- //If nodeUrl is not set, the default value is Main_Node
+ //If nodeUrl is not set, the default value is main net
  
 ```   
 
@@ -329,67 +338,6 @@ Eg:
  //address:0x36D7189625587D7C4c806E0856b6926Af8d36FEa
  
 ```
-##   Sign message  
-
-
-```obj-c
-/*
- *  @param message : Prepare the data to be signed
- *  @param keystoreJson :  Keystore JSON encryption format for user wallet private key
- *  @param password : Wallet password
- *  @param callback : Callback after the end
- */
-+ (void)signWithMessage:(NSData *)message
-               keystore:(NSString*)keystoreJson
-               password:(NSString*)password
-               callback:(void (^)(NSData *signatureData,NSError *error))callback;
-```
-Eg:
-```obj-c
- NSString *keystore = @"{\"address\":\"36d7189625587d7c4c806e0856b6926af8d36fea\",\"crypto\":{\"cipher\":\"aes-128-ctr\",\"cipherparams\":{\"iv\":\"c4a723d57e1325a99d88572651959a9d\"},\"ciphertext\":\"73a4a3a6e8706d099b536e41f6799e71ef9ff3a9f115e21c58d9e81ade036705\",\"kdf\":\"scrypt\",\"kdfparams\":{\"dklen\":32,\"n\":262144,\"p\":1,\"r\":8,\"salt\":\"a322d4dce0f075f95a7748c008048bd3f80dbb5645dee37576ea93fd119feda2\"},\"mac\":\"66744cc5967ff5858266c247dbb088e0986c6f1d50156b5e2ce2a19afdc0e498\"},\"id\":\"0fe540de-1957-4bfe-a326-16772e61f677\",\"version\":3}";
-    
- NSData *messageData = [@"dkfjalsdjfk" dataUsingEncoding:NSUTF8StringEncoding];
- //Data signature
- [WalletUtils signWithMessage:messageData
-                     keystore:keystore
-                     password:@"123456"
-                     callback:^(NSData * _Nonnull signatureData)
- {
-    NSString *strSignature = [SecureData dataToHexString:signatureData];
-    //strSignature:0x4eb1ae9254217b356b2958ab0b7a02e72f6fa86858240ca4998f74ef8a0fd68155e71ba8bd15625dc3d5e0c89c021f3852070d290688a65ba7e1d608a03d6e8400
-         
- }];
-
-```
-
-
-
-
-##  Recover address
-
-
-```obj-c
-/*
- *  @param message : Data to be signed
- *  @param signatureData : Signature is 65 bytes
- *  @return address
- */
-+ (NSString *)recoverAddressFromMessage:(NSData *)message signatureData:(NSData *)signatureData;
- ```
-Eg:
-```obj-c
-
- //Signature information, recovery address
- NSString *strSignture = @"0x4eb1ae9254217b356b2958ab0b7a02e72f6fa86858240ca4998f74ef8a0fd68155e71ba8bd15625dc3d5e0c89c021f3852070d290688a65ba7e1d608a03d6e8400";
- NSData *signatureData = [SecureData hexStringToData:strSignture];
- NSData *messageData = [@"dkfjalsdjfk" dataUsingEncoding:NSUTF8StringEncoding];
- NSString *address = [WalletUtils recoverAddressFromMessage:messageData signatureData:signatureData];
- NSLog(@"address == %@",address);
- //address:0x36D7189625587D7C4c806E0856b6926Af8d36FEa
-
-```
-
-
 
 
 
