@@ -435,6 +435,17 @@ TransactionParameter attribute description：
 - reserveds: List  -  Currently empty, reserve fields. Reserved fields for backward compatibility,The default value is null
 
 ```obj-c
+
+    NSMutableData* randomData = [[NSMutableData alloc]initWithCapacity:8];
+    randomData.length = 8;
+    int result = SecRandomCopyBytes(kSecRandomDefault, randomData.length, randomData.mutableBytes);
+    if (result != 0) {
+       
+        return ;
+    }
+    //nonce: hex string
+    NSString *nonce = [BigNumber bigNumberWithData:randomData].hexString;
+
     TransactionParameter *transactionModel = [TransactionParameterBuiler creatTransactionParameter:^(TransactionParameterBuiler * _Nonnull builder) {
                 
                 builder.chainTag        = chainTag;
