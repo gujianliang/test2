@@ -18,10 +18,8 @@ Vechain wallet SDK provides a series of functional interface can help the iOS de
 - Change Wallet password
 - Verify mnemonic words
 - Verify keystore
-- Recover address
 
 ##### Sign
-- Sign message
 - Sign transaction
 - Sign and send transaction
 
@@ -47,7 +45,7 @@ Vechain wallet SDK provides a series of functional interface can help the iOS de
 
 
 
-#### Set up the node environment. (```Test_Node environment``` , ```Main_Node environment``` and custom node environment in demo)
+#### Set up the node environment. (```Test_Node environment``` , ```Main_Node environment``` and custom node environment)
 
 ```obj-c
 #import "WalletUtils.h"
@@ -57,7 +55,16 @@ Vechain wallet SDK provides a series of functional interface can help the iOS de
 {
     // Override point for customization after application launch.
     
+   //Set it as a main net environment
     [WalletUtils setNodeUrl:Main_Node];
+    
+    //Or if you have a custom node url, you can change it to your own node url:
+    //[WalletUtils setNodeUrl:@"https://www.yourCustomNodeUrl.com"]; //your custom node Url
+    
+    //Set it as a test net environment:
+    //[WalletUtils setNodeUrl:Test_Node];
+    
+    //If nodeUrl is not set, the default value is main net
     
     ...
     
