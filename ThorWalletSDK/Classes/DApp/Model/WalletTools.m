@@ -68,31 +68,6 @@
     }
 }
 
-+ (NSString *)localStringBundlekey:(NSString *)key{
-    
-    //Get the ThorWalletSDKBundle resource
-    NSString *pathString = [[NSBundle mainBundle] pathForResource:@"ThorWalletSDKBundle" ofType:@"bundle"];
-    if(!pathString){
-        return key;
-    }
-        
-    NSBundle *resourceBundle = [NSBundle bundleWithPath:pathString];
-    
-    // Get current device language
-    NSArray *appLanguages = [[NSUserDefaults standardUserDefaults] objectForKey:@"AppleLanguages"];
-    NSString *languageName = [appLanguages objectAtIndex:0];
-    
-    NSString *languageCode = @"en";
-    if([languageName containsString:@"zh"]){
-        languageCode = @"zh-Hans"; 
-    }
-    NSString *bundlePath = [resourceBundle pathForResource:languageCode ofType:@"lproj"];
-    NSBundle *languageBundle = [NSBundle bundleWithPath:bundlePath];
-    NSString *translatedString = NSLocalizedStringWithDefaultValue(key, nil, languageBundle, key, key);
-    
-    return translatedString;
-}
-
 + (NSString *)checksumAddress:(NSString *)inputAddress
 {
     Address *a = [Address addressWithString:inputAddress.lowercaseString];

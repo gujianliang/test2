@@ -78,8 +78,6 @@
 
 + (UIViewController*)getCurrentVC;
 
-+ (NSString *)localStringBundlekey:(NSString *)key; // get bundle key
-
 + (NSString *)checksumAddress:(NSString *)inputAddress;
 
 + (UIViewController*)topViewControllerWithRootViewController:(UIViewController*)rootViewController;
