@@ -361,7 +361,7 @@ Eg:
  }];
     
 ```
- ## Get reference of block chain   
+ ## Get the blockRef  
  >  @param callback : Callback after the end.    
  >
  >
@@ -369,13 +369,13 @@ Eg:
  /*
   *  @param callback : Callback after the end
   */
-+ (void)getBlockReference:(void (^)(NSString *blockReference))callback;
++ (void)getBlockRef:(void (^)(NSString *blockRef))callback;
  ```
 Eg:
  ```obj-c
- //Get the reference of the block chain
- [WalletUtils getBlockReference:^(NSString * _Nonnull blockReference) {
-            NSLog(@"blockReference == %@",blockReference);
+ //Get the blockRef  
+ [WalletUtils getBlockRef:^(NSString * _Nonnull blockRef) {
+            NSLog(@"blockRef == %@",blockRef);
  }];
 
 ```
@@ -420,9 +420,9 @@ TransactionParameter attribute description：
 
 - gas : NSString  - Miner Fee Parameters for Packing
 
-- chainTag : NSString - Genesis block ID last byte hexadecimal.[WalletUtils getBlockReference]
+- chainTag : NSString - Genesis block ID last byte hexadecimal.[WalletUtils getChainTag]
 
-- blockReference : NSString - Refer to the last 8 bytes of blockId in hexadecimal.[WalletUtils getBlockReference]
+- blockRef : NSString - Refer to the last 8 bytes of blockId in hexadecimal.[WalletUtils getBlockRef]
 
 - nonce : NSString  - The random number of trading entities. Changing Nonce can make the transaction have different IDs, which can be used to accelerate the trader.
 
@@ -438,7 +438,7 @@ TransactionParameter attribute description：
     TransactionParameter *transactionModel = [TransactionParameterBuiler creatTransactionParameter:^(TransactionParameterBuiler * _Nonnull builder) {
                 
                 builder.chainTag        = chainTag;
-                builder.blockReference  = blockReference;
+                builder.blockRef  = blockRef;
                 builder.nonce           = nonce;
                 builder.clauses         = clauseList;
                 builder.gas             = gas;
