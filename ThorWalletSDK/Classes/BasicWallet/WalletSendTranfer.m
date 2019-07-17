@@ -83,7 +83,7 @@
 
     transaction.ChainTag = [BigNumber bigNumberWithHexString:paramModel.chainTag];
 
-    transaction.BlockRef = [BigNumber bigNumberWithHexString:paramModel.blockReference];
+    transaction.BlockRef = [BigNumber bigNumberWithHexString:paramModel.blockRef];
 
     [self packageClausesData:transaction paramModel:paramModel];
 
@@ -119,16 +119,16 @@
         NSData *data = nil;
         
         BigNumber *subValue;
-        CGFloat amountF = 0.0;
+        NSDecimalNumber *amountF = nil;
         if ([WalletTools checkDecimalStr:model.value]) {
             subValue = [BigNumber bigNumberWithDecimalString:model.value];
-            amountF = model.value.floatValue;
+            amountF = [NSDecimalNumber decimalNumberWithString:model.value];
         }else{
             subValue = [BigNumber bigNumberWithHexString:model.value];
-            amountF = subValue.decimalString.floatValue;
+            amountF = [NSDecimalNumber decimalNumberWithString:subValue.decimalString];
         }
         
-        if (amountF == 0.0
+        if (amountF.doubleValue == 0.0
             && [subValue lessThanEqualTo:[BigNumber constantZero]]) {
             value = [NSData data];
         } else {
@@ -167,7 +167,6 @@
 {
     // Try user password to decrypt keystore
     @weakify(self)
-    
     [Account decryptSecretStorageJSON:keystore
                              password:password
                              callback:^(Account *account, NSError *NSError)
@@ -196,7 +195,7 @@
      }];
 }
 
-+ (void)account:(Account *)account transaction:(Transaction *)transaction          callback:(void(^)(NSString *txId))callback
++ (void)account:(Account *)account transaction:(Transaction *)transaction callback:(void(^)(NSString *txId))callback
         isSend:(BOOL)isSend
 {
     NSString *txId = [transaction txID:account];

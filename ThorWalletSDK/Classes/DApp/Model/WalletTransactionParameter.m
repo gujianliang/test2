@@ -95,7 +95,7 @@
         return ;
     }
     
-    if (![self checkBlockRef:self.blockReference errorMsg:&errorMsg]) {
+    if (![self checkBlockRef:self.blockRef errorMsg:&errorMsg]) {
         if (callback) {
             callback(errorMsg,NO);
         }
@@ -449,9 +449,9 @@
     _chainTag = chainTag;
 }
 
-- (void)setBlockReference:(NSString * _Nonnull)blockReference
+- (void)setBlockRef:(NSString * _Nonnull)blockRef
 {
-    _blockReference = blockReference;
+    _blockRef = blockRef;
 }
 
 - (void)setNonce:(NSString * _Nonnull)nonce
@@ -507,7 +507,7 @@
      WalletTransactionParameter *transactionModel = [[WalletTransactionParameter alloc] init];
      
      transactionModel.chainTag          = self.chainTag;
-     transactionModel.blockReference    = self.blockReference;
+     transactionModel.blockRef          = self.blockRef;
      transactionModel.nonce             = self.nonce;
      transactionModel.clauses           = self.clauses;
      transactionModel.gas               = self.gas;

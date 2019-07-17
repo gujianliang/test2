@@ -44,7 +44,7 @@
 
 @interface WalletUtils()
 
-@property (nonatomic, strong)WalletDAppHandle *dappHandle;
+@property (nonatomic, strong)WalletDAppHandle *dAppHandle;
 
 @end
 
@@ -509,7 +509,7 @@
     }];
 }
 
-+ (void)getBlockReference:(void (^)(NSString *blockReference))callback
++ (void)getBlockRef:(void (^)(NSString *blockRef))callback
 {
     // Get the latest block ID first 8bytes as blockRef
     WalletBestBlockInfoApi *bestBlockApi = [[WalletBestBlockInfoApi alloc] init];
@@ -566,34 +566,31 @@
 
 - (void)initDAppWithDelegate:(id)delegate
 {
-    WalletDAppHandle *dappHandle = self.dappHandle;
-    dappHandle.delegate = delegate;
+    self.dAppHandle.delegate = delegate;
 }
 
-- (WalletDAppHandle *)dappHandle
+- (WalletDAppHandle *)dAppHandle
 {
-    if (_dappHandle == nil) {
-        _dappHandle = [[WalletDAppHandle alloc]init];
+    if (_dAppHandle == nil) {
+        _dAppHandle = [[WalletDAppHandle alloc]init];
     }
-    return _dappHandle;
+    return _dAppHandle;
 }
 
 - (void)webView:(WKWebView *)webView defaultText:(NSString *)defaultText completionHandler:(void (^)(NSString * result))completionHandler
 {
-    WalletDAppHandle *dappHandle = self.dappHandle;
-    [dappHandle webView:webView defaultText:defaultText completionHandler:completionHandler];
+    [self.dAppHandle webView:webView defaultText:defaultText completionHandler:completionHandler];
 }
 
-- (void)injectJSWithWebView:(WKWebViewConfiguration *)config
+- (void)injectJSWithConfig:(WKWebViewConfiguration *)config
 {
-    WalletDAppHandle *dappHandle = self.dappHandle;
-    [dappHandle injectJS:config];
+    [self.dAppHandle injectJS:config];
 }
 
 
 - (void)deallocDApp
 {
-    [self.dappHandle deallocDApp];
+    [self.dAppHandle deallocDApp];
 }
 
 

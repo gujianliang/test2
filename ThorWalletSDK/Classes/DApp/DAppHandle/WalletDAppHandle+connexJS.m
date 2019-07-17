@@ -90,12 +90,14 @@ completionHandler:(void (^)(NSString * __nullable result))completionHandler
         NSArray *list = (NSArray *)finishApi.resultDict;
         
         for (NSDictionary *dict in list) {
-            NSString *bestBlockID = dict[@"bestBlockID"];
-            bestBlockID = [bestBlockID substringToIndex:10];
-            BigNumber *new = [BigNumber bigNumberWithHexString:bestBlockID];
-            BigNumber *old = [BigNumber bigNumberWithHexString:blockNum];
-            if (new.decimalString.floatValue > old.decimalString.floatValue) {
-                blockNum = bestBlockID;
+            NSString *bestBlockNum = [dict[@"bestBlockID"] substringToIndex:10];
+            BigNumber *bigBestBlockNum = [BigNumber bigNumberWithHexString:bestBlockNum];
+            BigNumber *bigBlockNum = [BigNumber bigNumberWithHexString:blockNum];
+            NSDecimalNumber *decBestBlockNum = [NSDecimalNumber decimalNumberWithString:bigBestBlockNum.decimalString];
+            NSDecimalNumber *decBlockNum = [NSDecimalNumber decimalNumberWithString:bigBlockNum.decimalString];
+
+            if ([decBestBlockNum compare:decBlockNum] == NSOrderedDescending) { //
+                blockNum = bestBlockNum;
             }
         }
         

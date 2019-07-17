@@ -632,15 +632,15 @@
         //If the chainTag is nil, then the acquisition fails, you can prompt alert
         
         //Get the reference of the block chain
-        [WalletUtils getBlockReference:^(NSString *blockReference) {
+        [WalletUtils getBlockRef:^(NSString *blockRef) {
             
-            NSLog(@"blockReference == %@",blockReference);
-            //If the blockReference is nil, then the acquisition fails, you can prompt alert
+            NSLog(@"blockRef == %@",blockRef);
+            //If the blockRef is nil, then the acquisition fails, you can prompt alert
             
             WalletTransactionParameter *transactionModel = [WalletTransactionParameter createTransactionParameter:^(TransactionParameterBuiler *builder) {
                 
                 builder.chainTag = chainTag;
-                builder.blockReference = blockReference;
+                builder.blockRef = blockRef;
                 builder.nonce = nonce;
                 builder.clauses = clauseList;
                 builder.gas = @"600000";
@@ -699,15 +699,15 @@
         //If the chainTag is nil, then the acquisition fails, you can prompt alert
         
         //Get the reference of the block chain
-        [WalletUtils getBlockReference:^(NSString *blockReference) {
+        [WalletUtils getBlockRef:^(NSString *blockRef) {
             
-            NSLog(@"blockReference == %@",blockReference);
-            //If the blockReference is nil, then the acquisition fails, you can prompt alert
+            NSLog(@"blockRef == %@",blockRef);
+            //If the blockRef is nil, then the acquisition fails, you can prompt alert
             
             WalletTransactionParameter *transactionModel = [WalletTransactionParameter createTransactionParameter:^(TransactionParameterBuiler *builder) {
                 
                 builder.chainTag = chainTag;
-                builder.blockReference = blockReference;
+                builder.blockRef = blockRef;
                 builder.nonce = nonce;
                 builder.clauses = clauseList;
                 builder.gas = @"600000";
@@ -766,15 +766,15 @@
         //If the chainTag is nil, then the acquisition fails, you can prompt alert
         
         //Get the reference of the block chain
-        [WalletUtils getBlockReference:^(NSString *blockReference) {
+        [WalletUtils getBlockRef:^(NSString *blockRef) {
             
-            NSLog(@"blockReference == %@",blockReference);
-            //If the blockReference is nil, then the acquisition fails, you can prompt alert
+            NSLog(@"blockRef == %@",blockRef);
+            //If the blockRef is nil, then the acquisition fails, you can prompt alert
             
             WalletTransactionParameter *transactionModel = [WalletTransactionParameter createTransactionParameter:^(TransactionParameterBuiler *builder) {
                 
                 builder.chainTag = chainTag;
-                builder.blockReference = blockReference;
+                builder.blockRef = blockRef;
                 builder.nonce = nonce;
                 builder.clauses = clauseList;
                 builder.gas = @"600000";
@@ -833,15 +833,15 @@
         //If the chainTag is nil, then the acquisition fails, you can prompt alert
         
         //Get the reference of the block chain
-        [WalletUtils getBlockReference:^(NSString *blockReference) {
+        [WalletUtils getBlockRef:^(NSString *blockRef) {
             
-            NSLog(@"blockReference == %@",blockReference);
-            //If the blockReference is nil, then the acquisition fails, you can prompt alert
+            NSLog(@"blockRef == %@",blockRef);
+            //If the blockRef is nil, then the acquisition fails, you can prompt alert
             
             WalletTransactionParameter *transactionModel = [WalletTransactionParameter createTransactionParameter:^(TransactionParameterBuiler *builder) {
                 
                 builder.chainTag = chainTag;
-                builder.blockReference = blockReference;
+                builder.blockRef = blockRef;
                 builder.nonce = nonce;
                 builder.clauses = clauseList;
                 builder.gas = @"600000";
@@ -900,15 +900,15 @@
         //If the chainTag is nil, then the acquisition fails, you can prompt alert
         
         //Get the reference of the block chain
-        [WalletUtils getBlockReference:^(NSString *blockReference) {
+        [WalletUtils getBlockRef:^(NSString *blockRef) {
             
-            NSLog(@"blockReference == %@",blockReference);
-            //If the blockReference is nil, then the acquisition fails, you can prompt alert
+            NSLog(@"blockRef == %@",blockRef);
+            //If the blockRef is nil, then the acquisition fails, you can prompt alert
             
             WalletTransactionParameter *transactionModel = [WalletTransactionParameter createTransactionParameter:^(TransactionParameterBuiler *builder) {
                 
                 builder.chainTag = chainTag;
-                builder.blockReference = blockReference;
+                builder.blockRef = blockRef;
                 builder.nonce = nonce;
                 builder.clauses = clauseList;
                 builder.gas = @"600000";
@@ -967,15 +967,15 @@
         //If the chainTag is nil, then the acquisition fails, you can prompt alert
         
         //Get the reference of the block chain
-        [WalletUtils getBlockReference:^(NSString *blockReference) {
+        [WalletUtils getBlockRef:^(NSString *blockRef) {
             
-            NSLog(@"blockReference == %@",blockReference);
-            //If the blockReference is nil, then the acquisition fails, you can prompt alert
+            NSLog(@"blockRef == %@",blockRef);
+            //If the blockRef is nil, then the acquisition fails, you can prompt alert
             
             WalletTransactionParameter *transactionModel = [WalletTransactionParameter createTransactionParameter:^(TransactionParameterBuiler *builder) {
                 
                 builder.chainTag = chainTag;
-                builder.blockReference = blockReference;
+                builder.blockRef = blockRef;
                 builder.nonce = nonce;
                 builder.clauses = clauseList;
                 builder.gas = @"600000";
@@ -1034,15 +1034,15 @@
         //If the chainTag is nil, then the acquisition fails, you can prompt alert
         
         //Get the reference of the block chain
-        [WalletUtils getBlockReference:^(NSString *blockReference) {
+        [WalletUtils getBlockRef:^(NSString *blockRef) {
             
-            NSLog(@"blockReference == %@",blockReference);
-            //If the blockReference is nil, then the acquisition fails, you can prompt alert
+            NSLog(@"blockRef == %@",blockRef);
+            //If the blockRef is nil, then the acquisition fails, you can prompt alert
             
             WalletTransactionParameter *transactionModel = [WalletTransactionParameter createTransactionParameter:^(TransactionParameterBuiler *builder) {
                 
                 builder.chainTag = chainTag;
-                builder.blockReference = blockReference;
+                builder.blockRef = blockRef;
                 builder.nonce = nonce;
                 builder.clauses = clauseList;
                 builder.gas = @"600000";
@@ -1105,15 +1105,15 @@
         //If the chainTag is nil, then the acquisition fails, you can prompt alert
         
         //Get the reference of the block chain
-        [WalletUtils getBlockReference:^(NSString *blockReference) {
+        [WalletUtils getBlockRef:^(NSString *blockRef) {
             
-            NSLog(@"blockReference == %@",blockReference);
-            //If the blockReference is nil, then the acquisition fails, you can prompt alert
+            NSLog(@"blockRef == %@",blockRef);
+            //If the blockRef is nil, then the acquisition fails, you can prompt alert
             
             WalletTransactionParameter *transactionModel = [WalletTransactionParameter createTransactionParameter:^(TransactionParameterBuiler *builder) {
                 
                 builder.chainTag = chainTag;
-                builder.blockReference = blockReference;
+                builder.blockRef = blockRef;
                 builder.nonce = nonce;
                 builder.clauses = clauseList;
                 builder.gas = @"600000";
@@ -1174,15 +1174,15 @@
         //If the chainTag is nil, then the acquisition fails, you can prompt alert
         
         //Get the reference of the block chain
-        [WalletUtils getBlockReference:^(NSString *blockReference) {
+        [WalletUtils getBlockRef:^(NSString *blockRef) {
             
-            NSLog(@"blockReference == %@",blockReference);
-            //If the blockReference is nil, then the acquisition fails, you can prompt alert
+            NSLog(@"blockRef == %@",blockRef);
+            //If the blockRef is nil, then the acquisition fails, you can prompt alert
             
             WalletTransactionParameter *transactionModel = [WalletTransactionParameter createTransactionParameter:^(TransactionParameterBuiler *builder) {
                 
                 builder.chainTag = chainTag;
-                builder.blockReference = blockReference;
+                builder.blockRef = blockRef;
                 builder.nonce = nonce;
                 builder.clauses = clauseList;
                 builder.gas = @"600000";
@@ -1243,15 +1243,15 @@
         //If the chainTag is nil, then the acquisition fails, you can prompt alert
         
         //Get the reference of the block chain
-        [WalletUtils getBlockReference:^(NSString *blockReference) {
+        [WalletUtils getBlockRef:^(NSString *blockRef) {
             
-            NSLog(@"blockReference == %@",blockReference);
-            //If the blockReference is nil, then the acquisition fails, you can prompt alert
+            NSLog(@"blockRef == %@",blockRef);
+            //If the blockRef is nil, then the acquisition fails, you can prompt alert
             
             WalletTransactionParameter *transactionModel = [WalletTransactionParameter createTransactionParameter:^(TransactionParameterBuiler *builder) {
                 
                 builder.chainTag = chainTag;
-                builder.blockReference = blockReference;
+                builder.blockRef = blockRef;
                 builder.nonce = nonce;
                 builder.clauses = clauseList;
                 builder.gas = @"600000";
@@ -1312,15 +1312,15 @@
         //If the chainTag is nil, then the acquisition fails, you can prompt alert
         
         //Get the reference of the block chain
-        [WalletUtils getBlockReference:^(NSString *blockReference) {
+        [WalletUtils getBlockRef:^(NSString *blockRef) {
             
-            NSLog(@"blockReference == %@",blockReference);
-            //If the blockReference is nil, then the acquisition fails, you can prompt alert
+            NSLog(@"blockRef == %@",blockRef);
+            //If the blockRef is nil, then the acquisition fails, you can prompt alert
             
             WalletTransactionParameter *transactionModel = [WalletTransactionParameter createTransactionParameter:^(TransactionParameterBuiler *builder) {
                 
                 builder.chainTag = chainTag;
-                builder.blockReference = blockReference;
+                builder.blockRef = blockRef;
                 builder.nonce = nonce;
                 builder.clauses = clauseList;
                 builder.gas = @"600000";
@@ -1381,15 +1381,15 @@
         //If the chainTag is nil, then the acquisition fails, you can prompt alert
         
         //Get the reference of the block chain
-        [WalletUtils getBlockReference:^(NSString *blockReference) {
+        [WalletUtils getBlockRef:^(NSString *blockRef) {
             
-            NSLog(@"blockReference == %@",blockReference);
-            //If the blockReference is nil, then the acquisition fails, you can prompt alert
+            NSLog(@"blockRef == %@",blockRef);
+            //If the blockRef is nil, then the acquisition fails, you can prompt alert
             
             WalletTransactionParameter *transactionModel = [WalletTransactionParameter createTransactionParameter:^(TransactionParameterBuiler *builder) {
                 
                 builder.chainTag = chainTag;
-                builder.blockReference = blockReference;
+                builder.blockRef = blockRef;
                 builder.nonce = nonce;
                 builder.clauses = clauseList;
                 builder.gas = @"600000";
@@ -1450,15 +1450,15 @@
         //If the chainTag is nil, then the acquisition fails, you can prompt alert
         
         //Get the reference of the block chain
-        [WalletUtils getBlockReference:^(NSString *blockReference) {
+        [WalletUtils getBlockRef:^(NSString *blockRef) {
             
-            NSLog(@"blockReference == %@",blockReference);
-            //If the blockReference is nil, then the acquisition fails, you can prompt alert
+            NSLog(@"blockRef == %@",blockRef);
+            //If the blockRef is nil, then the acquisition fails, you can prompt alert
             
             WalletTransactionParameter *transactionModel = [WalletTransactionParameter createTransactionParameter:^(TransactionParameterBuiler *builder) {
                 
                 builder.chainTag = chainTag;
-                builder.blockReference = blockReference;
+                builder.blockRef = blockRef;
                 builder.nonce = nonce;
                 builder.clauses = clauseList;
                 builder.gas = @"600000";
@@ -1519,15 +1519,15 @@
         //If the chainTag is nil, then the acquisition fails, you can prompt alert
         
         //Get the reference of the block chain
-        [WalletUtils getBlockReference:^(NSString *blockReference) {
+        [WalletUtils getBlockRef:^(NSString *blockRef) {
             
-            NSLog(@"blockReference == %@",blockReference);
-            //If the blockReference is nil, then the acquisition fails, you can prompt alert
+            NSLog(@"blockRef == %@",blockRef);
+            //If the blockRef is nil, then the acquisition fails, you can prompt alert
             
             WalletTransactionParameter *transactionModel = [WalletTransactionParameter createTransactionParameter:^(TransactionParameterBuiler *builder) {
                 
                 builder.chainTag = chainTag;
-                builder.blockReference = blockReference;
+                builder.blockRef = blockRef;
                 builder.nonce = nonce;
                 builder.clauses = clauseList;
                 builder.gas = @"600000";
@@ -1595,15 +1595,15 @@
         //If the chainTag is nil, then the acquisition fails, you can prompt alert
         
         //Get the reference of the block chain
-        [WalletUtils getBlockReference:^(NSString *blockReference) {
+        [WalletUtils getBlockRef:^(NSString *blockRef) {
             
-            NSLog(@"blockReference == %@",blockReference);
-            //If the blockReference is nil, then the acquisition fails, you can prompt alert
+            NSLog(@"blockRef == %@",blockRef);
+            //If the blockRef is nil, then the acquisition fails, you can prompt alert
             
             WalletTransactionParameter *transactionModel = [WalletTransactionParameter createTransactionParameter:^(TransactionParameterBuiler *builder) {
                 
                 builder.chainTag = chainTag;
-                builder.blockReference = blockReference;
+                builder.blockRef = blockRef;
                 builder.nonce = nonce;
                 builder.clauses = clauseList;
                 builder.gas = @"600000";
@@ -1664,15 +1664,15 @@
         //If the chainTag is nil, then the acquisition fails, you can prompt alert
         
         //Get the reference of the block chain
-        [WalletUtils getBlockReference:^(NSString *blockReference) {
+        [WalletUtils getBlockRef:^(NSString *blockRef) {
             
-            NSLog(@"blockReference == %@",blockReference);
-            //If the blockReference is nil, then the acquisition fails, you can prompt alert
+            NSLog(@"blockRef == %@",blockRef);
+            //If the blockRef is nil, then the acquisition fails, you can prompt alert
             
             WalletTransactionParameter *transactionModel = [WalletTransactionParameter createTransactionParameter:^(TransactionParameterBuiler *builder) {
                 
                 builder.chainTag = chainTag;
-                builder.blockReference = blockReference;
+                builder.blockRef = blockRef;
                 builder.nonce = nonce;
                 builder.clauses = clauseList;
                 builder.gas = @"600000";

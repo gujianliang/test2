@@ -40,20 +40,20 @@ NS_ASSUME_NONNULL_BEGIN
 @interface WalletTransactionParameter : NSObject
 
 
-@property (nonatomic, readonly)NSString *gas;   //Set maximum gas allowed for call(deciaml string)
+@property (nonatomic, readonly)NSString *gas;       //Set maximum gas allowed for call(deciaml string)
 
 @property (nonatomic, readonly)NSString *chainTag;  //Get the chain tag of the block chain
 
-@property (nonatomic, readonly)NSString *blockReference;  //Get the reference of the block chain
+@property (nonatomic, readonly)NSString *blockRef;  //Get the blockRef
 
-@property (nonatomic, readonly)NSString *nonce;// 8 bytes of random number,hex string
+@property (nonatomic, readonly)NSString *nonce;     // 8 bytes of random number,hex string
 
-@property (nonatomic, readonly)NSString *dependsOn; // txid depends other transfer
+@property (nonatomic, readonly)NSString *dependsOn;     // txid depends other transfer
 
 @property (nonatomic, readonly)NSString *gasPriceCoef; //Coefficient used to calculate the final gas price
 
-@property (nonatomic, readonly)NSString *expiration; //  Expiration relative to blockRef
-@property (nonatomic, readonly)NSArray *clauses; //clause list
+@property (nonatomic, readonly)NSString *expiration;    //  Expiration relative to blockRef
+@property (nonatomic, readonly)NSArray *clauses;    //clause list
 
 @property (nonatomic, readonly)NSArray<NSData *> *reserveds;
 
@@ -68,7 +68,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, copy)NSString *chainTag;  //Get the chain tag of the block chain
 
-@property (nonatomic, copy)NSString *blockReference;  //Get the reference of the block chain
+@property (nonatomic, copy)NSString *blockRef;  //Get the reference of the block chain
 
 @property (nonatomic, copy)NSString *nonce;// 8 bytes of random number,hex string
 

@@ -259,15 +259,15 @@
         //If the chainTag is nil, then the acquisition fails, you can prompt alert
         
         //Get the reference of the block chain
-        [WalletUtils getBlockReference:^(NSString *blockReference) {
+        [WalletUtils getBlockRef:^(NSString *blockRef) {
             
-            NSLog(@"blockReference == %@",blockReference);
-            if (blockReference.length == 0) {
+            NSLog(@"blockRef == %@",blockRef);
+            if (blockRef.length == 0) {
                 
-                NSLog(@"get blockReference fail");
+                NSLog(@"get blockRef fail");
                 return ;
             }
-            //If the blockReference is nil, then the acquisition fails, you can prompt alert
+            //If the blockRef is nil, then the acquisition fails, you can prompt alert
             
             [self signAndSendClauseList:clauseList
                                   nonce:nonce
@@ -277,7 +277,7 @@
                                keystore:keystore
                                password:password
                                chainTag:chainTag
-                         blockReference:blockReference];
+                         blockRef:blockRef];
             
         }];
     }];
@@ -291,12 +291,12 @@
                      keystore:(NSString *)keystore
                      password:(NSString *)password
                      chainTag:(NSString *)chainTag
-               blockReference:(NSString *)blockReference
+               blockRef:(NSString *)blockRef
 {
     WalletTransactionParameter *transactionModel = [WalletTransactionParameter createTransactionParameter:^(TransactionParameterBuiler *builder) {
         
         builder.chainTag = chainTag;
-        builder.blockReference = blockReference;
+        builder.blockRef = blockRef;
         builder.nonce = nonce;
         builder.clauses = clauseList;
         builder.gas = gas;

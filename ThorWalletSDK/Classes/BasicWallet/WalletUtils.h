@@ -262,7 +262,7 @@
  *  @param callback : Callback after the end
  *
  */
-+ (void)getBlockReference:(void (^)(NSString *blockReference))callback;
++ (void)getBlockRef:(void (^)(NSString *blockRef))callback;
 
 
 /**
@@ -347,7 +347,7 @@ completionHandler:(void (^)(NSString *result))completionHandler;
  *  @param config : Developer generated WKWebViewConfiguration object
  *
  */
-- (void)injectJSWithWebView:(WKWebViewConfiguration *)config;
+- (void)injectJSWithConfig:(WKWebViewConfiguration *)config;
 
 /**
  *  @abstract

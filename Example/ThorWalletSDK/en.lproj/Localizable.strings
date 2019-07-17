@@ -66,7 +66,7 @@
 "transfer_coin_to_address_error_format" = "The VeChainThor wallet address is 42 characters in length starting with 0x";
 "transfer_wallet_password_error" = "Password Incorrect";
 "transfer_wallet_chaintag_error" = "Get ChainTag Failed";
-"transfer_wallet_blockref_error" = "Get blockReference Failed";
+"transfer_wallet_blockref_error" = "Get blockRef Failed";
 "transfer_wallet_send_fail" = "Send transaction failed";
 "transfer_wallet_send_balance_not_enough" = "Insufficient Balance";
 "transfer_wallet_value_not_negative" = "The amount cannot less than 0";
