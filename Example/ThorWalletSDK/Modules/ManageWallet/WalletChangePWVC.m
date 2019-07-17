@@ -111,7 +111,7 @@
         }else {
             
             [WalletMBProgressShower showMulLineTextIn:self.view
-                                                 Text:NSLocalizedString(@"modify_password_failr", nil)
+                                                 Text:NSLocalizedString(@"modify_password_fail", nil)
                                                During:1.5];
         }
     }];
