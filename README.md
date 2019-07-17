@@ -55,7 +55,16 @@ Vechain wallet SDK provides a series of functional interface can help the iOS de
 {
     // Override point for customization after application launch.
     
+   //Set it as a main net environment
     [WalletUtils setNodeUrl:Main_Node];
+    
+    //Or if you have a custom node url, you can change it to your own node url:
+    //[WalletUtils setNodeUrl:@"https://www.yourCustomNodeUrl.com"]; //your custom node Url
+    
+    //Set it as a test net environment:
+    //[WalletUtils setNodeUrl:Test_Node];
+    
+    //If nodeUrl is not set, the default value is main net
     
     ...
     
