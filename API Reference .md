@@ -46,7 +46,7 @@ Eg:
  [WalletUtils setNodeUrl:Main_Node];
 
  //Or if you have a corresponding node url, you can change it to your own node url:
- [WalletUtils setNodeUrl:@"https://www.yourCustomUrl.com"]; //
+ [WalletUtils setNodeUrl:@"https://www.yourCustomUrl.com"]; //your custom node Url
             
  //Switching test net url:
  [WalletUtils setNodeUrl:Test_Node];
@@ -509,7 +509,7 @@ Eg:
 /*
  *  @param config : Developer generated WKWebViewConfiguration object
  */
-- (void)injectJSWithWebView:(WKWebViewConfiguration *)config;  
+- (void)injectJSWithConfig:(WKWebViewConfiguration *)config;  
 ```
 
 Eg:
@@ -521,7 +521,7 @@ Eg:
     
  //inject js to wkwebview
  _walletUtils = [[WalletUtils alloc]init];
- [_walletUtils injectJSWithWebView:configuration];
+ [_walletUtils injectJSWithConfig:configuration];
 
 ```
 
