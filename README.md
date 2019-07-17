@@ -18,10 +18,8 @@ Vechain wallet SDK provides a series of functional interface can help the iOS de
 - Change Wallet password
 - Verify mnemonic words
 - Verify keystore
-- Recover address
 
 ##### Sign
-- Sign message
 - Sign transaction
 - Sign and send transaction
 
@@ -47,7 +45,7 @@ Vechain wallet SDK provides a series of functional interface can help the iOS de
 
 
 
-#### Set up the node environment. (```Test_Node environment``` , ```Main_Node environment``` and custom node environment in demo)
+#### Set up the node environment. (```Test_Node environment``` , ```Main_Node environment``` and custom node environment)
 
 ```obj-c
 #import "WalletUtils.h"
