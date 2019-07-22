@@ -503,6 +503,7 @@ Initialization is mainly JS injected into connex and web3.
 ```obj-c
 
 @property (nonatomic, weak) id<WalletDAppHandleDelegate> delegate;
+
 ```
 Eg:
 ```obj-c
