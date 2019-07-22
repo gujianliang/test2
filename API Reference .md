@@ -501,15 +501,17 @@ Initialization is mainly JS injected into connex and web3.
 ###  Set delegate to SDK
 
 ```obj-c
-/*
- *  @param delegate : delegate object
- */
-- (void)initDAppWithDelegate:(id)delegate;
+
+@property (nonatomic, weak) id<WalletDAppHandleDelegate> delegate;
 ```
 Eg:
 ```obj-c
+
  // Set delegate
- [_walletUtils initDAppWithDelegate:self];
+ @interface DemoWebViewVC ()<WKNavigationDelegate,WKUIDelegate,WalletDAppHandleDelegate>
+...
+ _dAppHandle = [[WalletDAppHandle alloc]init];
+ _dAppHandle.delegate = self;
 
 ```
 
@@ -531,8 +533,8 @@ Eg:
  configuration.userContentController = [[WKUserContentController alloc] init];
     
  //inject js to wkwebview
- _walletUtils = [[WalletUtils alloc]init];
- [_walletUtils injectJSWithConfig:configuration];
+ 
+ [_dAppHandle injectJSWithConfig:configuration];
 
 ```
 
@@ -561,7 +563,7 @@ Eg:
     /*
      You must call this method. It is used to response web3 or connex operations.
      */
-    [_walletUtils webView:webView  defaultText:defaultText completionHandler:completionHandler];
+    [_dAppHandle webView:webView  defaultText:defaultText completionHandler:completionHandler];
 }
 
 ```
@@ -581,7 +583,7 @@ Eg:
  * You must implement this method to free memory, otherwise there may be a memory overflow or leak.
  */
 - (void)dealloc{
-    [_walletUtils deallocDApp];
+    [_dAppHandle deallocDApp];
 }
 ```
 
