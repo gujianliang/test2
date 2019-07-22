@@ -822,5 +822,21 @@ Before the release of DApp, it is recommended that different versions of WebView
 
 ### Address : 20 bytes hex string and start with 0x.
 
+### Availabel DApp List
+```obj-c
+https://vechainstats.com
+https://oceanex.pro/reg/v190528
+https://connex.vexchange.io/swap
+https://bmac.vecha.in/generate
+https://bc66.github.io/lucky-airdrop/#/
+https://explore.veforge.com/
+https://laalaguer.github.io/vechain-token-transfer/
+https://doc.vechainworld.io/docs
+https://vechainstore.com/ide
+https://vepress.org/
+https://inspector.vecha.in/
+https://insight.vecha.in
+https://vechaininsider.com/
+```
 
 
