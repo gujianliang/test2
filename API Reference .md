@@ -823,7 +823,7 @@ Before the release of DApp, it is recommended that different versions of WebView
 ### Address : 20 bytes hex string and start with 0x.
 
 ### Availabel DApp List
-```obj-c
+```
 https://vechainstats.com
 https://oceanex.pro/reg/v190528
 https://connex.vexchange.io/swap
