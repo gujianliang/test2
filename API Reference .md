@@ -435,6 +435,17 @@ TransactionParameter attribute description：
 - reserveds: List  -  Currently empty, reserve fields. Reserved fields for backward compatibility,The default value is null
 
 ```obj-c
+
+    NSMutableData* randomData = [[NSMutableData alloc]initWithCapacity:8];
+    randomData.length = 8;
+    int result = SecRandomCopyBytes(kSecRandomDefault, randomData.length, randomData.mutableBytes);
+    if (result != 0) {
+       
+        return ;
+    }
+    //nonce: hex string
+    NSString *nonce = [BigNumber bigNumberWithData:randomData].hexString;
+
     TransactionParameter *transactionModel = [TransactionParameterBuiler creatTransactionParameter:^(TransactionParameterBuiler * _Nonnull builder) {
                 
                 builder.chainTag        = chainTag;
@@ -482,7 +493,7 @@ Eg:
 
 
 
-###  Support DApp development environment in Webview
+##  Support DApp development environment in Webview by calling class: WalletDAppHandle
 To support the Dapp function, WebView needs the following initialization before opening Dapp.
 Initialization is mainly JS injected into connex and web3.
 [connex reference.](https://github.com/vechain/connex/blob/master/docs/api.md/)
@@ -490,15 +501,18 @@ Initialization is mainly JS injected into connex and web3.
 ###  Set delegate to SDK
 
 ```obj-c
-/*
- *  @param delegate : delegate object
- */
-- (void)initDAppWithDelegate:(id)delegate;
+
+@property (nonatomic, weak) id<WalletDAppHandleDelegate> delegate;
+
 ```
 Eg:
 ```obj-c
+
  // Set delegate
- [_walletUtils initDAppWithDelegate:self];
+ @interface DemoWebViewVC ()<WKNavigationDelegate,WKUIDelegate,WalletDAppHandleDelegate>
+...
+ _dAppHandle = [[WalletDAppHandle alloc]init];
+ _dAppHandle.delegate = self;
 
 ```
 
@@ -520,8 +534,8 @@ Eg:
  configuration.userContentController = [[WKUserContentController alloc] init];
     
  //inject js to wkwebview
- _walletUtils = [[WalletUtils alloc]init];
- [_walletUtils injectJSWithConfig:configuration];
+ 
+ [_dAppHandle injectJSWithConfig:configuration];
 
 ```
 
@@ -550,7 +564,7 @@ Eg:
     /*
      You must call this method. It is used to response web3 or connex operations.
      */
-    [_walletUtils webView:webView  defaultText:defaultText completionHandler:completionHandler];
+    [_dAppHandle webView:webView  defaultText:defaultText completionHandler:completionHandler];
 }
 
 ```
@@ -570,7 +584,7 @@ Eg:
  * You must implement this method to free memory, otherwise there may be a memory overflow or leak.
  */
 - (void)dealloc{
-    [_walletUtils deallocDApp];
+    [_dAppHandle deallocDApp];
 }
 ```
 
