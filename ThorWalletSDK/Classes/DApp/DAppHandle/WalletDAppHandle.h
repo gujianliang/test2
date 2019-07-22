@@ -37,20 +37,106 @@
 #import "WalletUtils.h"
 
 NS_ASSUME_NONNULL_BEGIN
+@protocol WalletDAppHandleDelegate <NSObject>
+
+#pragma mark setDelegate
+
+/**
+ *  @abstract
+ *  App developer implementation when dapp calls transaction function
+ *  delegate function that must be implemented to support the DApp environment
+ *
+ *  @param clauses : Clause model list
+ *  @param gas : Set maximum gas allowed for call
+ *  @param signer : Enforces the specified address to sign the transaction.May be  nil
+ *  @param completionHandler : Callback after the end. txId:Transaction identifier; signer:Signer address
+ *
+ */
+- (void)onWillTransfer:(NSArray<ClauseModel *> *)clauses
+                signer:(NSString *)signer
+                   gas:(NSString *)gas
+     completionHandler:(void(^)(NSString *txId ,NSString *signer))completionHandler;
+
+/**
+ *  @abstract
+ *   App developer implementation when dapp calls get address function
+ *   delegate function that must be implemented to support the DApp environment
+ *
+ *  @param callback : Callback after the end
+ *
+ */
+- (void)onGetWalletAddress:(void(^)(NSArray<NSString *> *addressList))callback;
+
+/**
+ *  @abstract
+ *   App developer implementation when dapp calls authentication function
+ *   delegate function that must be implemented to support the DApp environment
+ *
+ *  @param certificateMessage : string to be signed,form dapp
+ *  @param signer : Enforces the specified address to sign the certificate.May be  nil
+ *  @param completionHandler : Callback after the end.signer: Signer address; signatureData : Signature is 65 bytes
+ *
+ */
+- (void)onWillCertificate:(NSString *)certificateMessage
+                   signer:(NSString *)signer
+        completionHandler:(void(^)(NSString *signer, NSData *signatureData))completionHandler;
+
+
+/*
+ *  @abstract
+ *   App developer implementation when dapp calls checkOwn address function
+ *   delegate function that must be implemented to support the DApp environment
+ *
+ *  @param address : Address from dapp
+ *  @param callback : Callback after the end
+ *
+ */
+- (void)onCheckOwnAddress:(NSString *)address callback:(void(^)(BOOL result))callback;
+
+@end
 
 @interface WalletDAppHandle : NSObject
 
-@property (nonatomic, weak) id<WalletUtilsDelegate> delegate;
 @property (nonatomic, strong) WKWebView *webView;
+@property (nonatomic, copy) NSString *strStatus;
 
 
+/**
+ *  @abstract
+ *  Set delegate to SDK
+ *
+ */
+@property (nonatomic, weak) id<WalletDAppHandleDelegate> delegate;
+
+/*! @abstract
+ *  Displays a JavaScript text input panel.
+ *
+ *  @param webView : The web view invoking the delegate method.
+ *  @param defaultText : The initial text to display in the text entry field.
+ *  @param completionHandler : The completion handler to call after the text
+ input panel has been dismissed. Pass the entered text if the user chose
+ OK, otherwise nil.
+ */
 - (void)webView:(WKWebView *)webView
-    defaultText:(nullable NSString *)defaultText
-completionHandler:(void (^)(NSString * __nullable result))completionHandler;
+    defaultText:(NSString *)defaultText
+completionHandler:(void (^)(NSString *result))completionHandler;
 
-- (void)injectJS:(WKWebViewConfiguration *)config;
+/**
+ *  @abstract
+ *  Inject js into webview
+ *
+ *  @param config : Developer generated WKWebViewConfiguration object
+ *
+ */
+- (void)injectJSWithConfig:(WKWebViewConfiguration *)config;
 
-//Release object
+/**
+ *  @abstract
+ *  Release the singleton of dapp
+ *
+ *  Call this method when exiting the contrller where dapp is located
+ *
+ */
 - (void)deallocDApp;
 
 @end

@@ -40,6 +40,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface WalletDAppHandle (connexJS)
 
+
 //Get the genesis block information
 -(void)getGenesisBlock:(WalletJSCallbackModel *)callbackModel
      completionHandler:(void (^)(NSString * __nullable result))completionHandler
@@ -48,6 +49,10 @@ NS_ASSUME_NONNULL_BEGIN
 -(void)getStatus:(WalletJSCallbackModel *)callbackModel
 completionHandler:(void (^)(NSString * __nullable result))completionHandler
          webView:(WKWebView *)webView;
+
+- (void)requestStatus:(WalletJSCallbackModel *)callbackModel
+    completionHandler:(void (^)(NSString * result))completionHandler
+              webView:(WKWebView *)webView;
 
 //Get VET balance
 - (void)getAccount:(WalletJSCallbackModel *)callbackModel
@@ -84,6 +89,8 @@ completionHandler:(void (^)(NSString * __nullable result))completionHandler
 - (void)tickerNext:(WalletJSCallbackModel *)callbackModel
  completionHandler:(void (^)(NSString * __nullable result))completionHandler
            webView:(WKWebView *)webView;
+//Open WebSocket
+- (void)openWebSocket;
 
 //Simulate a single transaction
 - (void)methodAsCall:(WalletJSCallbackModel *)callbackModel

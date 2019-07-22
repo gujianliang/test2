@@ -35,11 +35,11 @@
 #import "WalletDemoTool.h"
 #import "WalletMBProgressShower.h"
 
-@interface DAppWebViewVC ()<WKNavigationDelegate,WKUIDelegate,WalletUtilsDelegate>
+@interface DAppWebViewVC ()<WKNavigationDelegate,WKUIDelegate,WalletDAppHandleDelegate>
 {
     NSURL *_URL;
     WKWebView *_webView;  /* It is a 'WKWebView' object that used to interact with dapp. */
-    WalletUtils *_walletUtils;
+    WalletDAppHandle *_dAppHandle;
 }
 
 @end
@@ -57,9 +57,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    //Generate WalletUtils object
-    _walletUtils = [[WalletUtils alloc]init];
-    
+    //Generate WalletDAppHandle object
+    _dAppHandle = [[WalletDAppHandle alloc]init];
+    // Set delegate
+    _dAppHandle.delegate = self;
     /*
      Please note that, This is a 'WKWebView' object, does not support a "UIWebView" object.
      */
@@ -68,7 +69,7 @@
     configuration.userContentController = [[WKUserContentController alloc] init];
     
     //inject js to wkwebview
-    [_walletUtils injectJSWithConfig:configuration];
+    [_dAppHandle injectJSWithConfig:configuration];
     
     _webView = [[WKWebView alloc]initWithFrame:CGRectMake(0, 0, ScreenW, ScreenH) configuration:configuration];
     _webView.UIDelegate = self;             /* set UIDelegate */
@@ -79,10 +80,7 @@
                                                               cachePolicy:NSURLRequestReloadIgnoringCacheData
                                                           timeoutInterval:30.0];
     [_webView loadRequest:theRequest];
-    [self.view addSubview:_webView];
-    
-    // Set delegate
-    [_walletUtils initDAppWithDelegate:self];
+    [self.view addSubview:_webView];    
 }
 
 
@@ -123,7 +121,7 @@
     /*
      You must call this method. It is used to response web3 or connex operations.
      */
-    [_walletUtils webView:webView  defaultText:defaultText completionHandler:completionHandler];
+    [_dAppHandle webView:webView  defaultText:defaultText completionHandler:completionHandler];
 }
 
 - (void)clickBackBtnClick {
@@ -389,7 +387,7 @@ completionHandler:(void (^)(NSString *signer, NSData *signatureData))completionH
  * You must implement this method to free memory, otherwise there may be a memory overflow or leak.
  */
 - (void)dealloc{
-    [_walletUtils deallocDApp];
+    [_dAppHandle deallocDApp];
 }
 
 @end

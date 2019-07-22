@@ -26,7 +26,7 @@ extern NSString * const kWebSocketdidReceiveMessageNote;
 + (SocketRocketUtility *)instance;
 
 
-@property (nonatomic,copy) NSArray *requestIdList;
+@property (nonatomic,copy) NSString *requestId;
 @property (nonatomic,copy) NSString *callbackId;
 
 @end

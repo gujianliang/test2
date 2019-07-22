@@ -97,6 +97,7 @@
         
         *gas        = callbackParams[@"gas"];
         *gasPrice   = callbackParams[@"gasPrice"];
+        *signer     = callbackParams[@"from"];
         
         [clauseModelList addObject:clauseModel];
     }

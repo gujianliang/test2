@@ -564,34 +564,5 @@
    return  [WalletTools packageCertParam:newMessage];
 }
 
-- (void)initDAppWithDelegate:(id)delegate
-{
-    self.dAppHandle.delegate = delegate;
-}
-
-- (WalletDAppHandle *)dAppHandle
-{
-    if (_dAppHandle == nil) {
-        _dAppHandle = [[WalletDAppHandle alloc]init];
-    }
-    return _dAppHandle;
-}
-
-- (void)webView:(WKWebView *)webView defaultText:(NSString *)defaultText completionHandler:(void (^)(NSString * result))completionHandler
-{
-    [self.dAppHandle webView:webView defaultText:defaultText completionHandler:completionHandler];
-}
-
-- (void)injectJSWithConfig:(WKWebViewConfiguration *)config
-{
-    [self.dAppHandle injectJS:config];
-}
-
-
-- (void)deallocDApp
-{
-    [self.dAppHandle deallocDApp];
-}
-
 
 @end

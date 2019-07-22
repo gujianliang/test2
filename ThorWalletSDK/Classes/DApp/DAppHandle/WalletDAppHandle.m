@@ -62,7 +62,7 @@
 }
 
 //Analyze data from Dapp
-- (void)webView:(WKWebView *)webView defaultText:(nullable NSString *)defaultText completionHandler:(void (^)(NSString * __nullable result))completionHandler
+- (void)webView:(WKWebView *)webView defaultText:( NSString *)defaultText completionHandler:(void (^)(NSString * result))completionHandler
 {
     if ([self mismatch:defaultText]) {
         
@@ -157,13 +157,17 @@
 - (void)websocket:(NSNotification *)sender
 {
     NSDictionary *dict = sender.object;
-    NSArray *requestIdList = dict[@"requestId"];
-    for (NSString *requestId in requestIdList) {
-        [WalletTools callbackWithrequestId:requestId webView:_webView data:nil callbackId:dict[@"callbackId"] code:OK];
+    NSString *requestId = dict[@"requestId"];
+    NSString *callbackId = dict[@"callbackId"];
+    
+    if (requestId.length > 0 && callbackId.length > 0) {
+         [WalletTools callbackWithrequestId:requestId webView:_webView data:nil callbackId:callbackId code:OK];
     }
+    //update status
+    [self requestStatus:nil completionHandler:nil webView:nil];
 }
 
-- (void)injectJS:(WKWebViewConfiguration *)config
+- (void)injectJSWithConfig:(WKWebViewConfiguration *)config
 {
     @weakify(self);
     [WalletDAppInjectJSHandle checkVersion:config

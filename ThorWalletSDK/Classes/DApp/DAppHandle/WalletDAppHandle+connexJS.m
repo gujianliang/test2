@@ -83,6 +83,25 @@
 completionHandler:(void (^)(NSString * __nullable result))completionHandler
          webView:(WKWebView *)webView
 {
+    if (self.strStatus.length > 0) {
+        NSDictionary *dictStatus = [NSJSONSerialization dictionaryWithJsonString:self.strStatus];
+        NSDictionary *resultDict = [WalletTools packageWithRequestId:callbackModel.requestId
+                                                                data:dictStatus
+                                                                code:OK
+                                                             message:@""];
+        completionHandler([resultDict yy_modelToJSONString]);
+        
+    }else{
+        // open websocket
+        [self openWebSocket];
+            [self requestStatus:callbackModel completionHandler:completionHandler webView:webView];
+    }
+}
+
+- (void)requestStatus:(WalletJSCallbackModel *)callbackModel
+    completionHandler:(void (^)(NSString * result))completionHandler
+              webView:(WKWebView *)webView
+{
     WalletDAppPeersApi *peersApi = [[WalletDAppPeersApi alloc]init];
     [peersApi loadDataAsyncWithSuccess:^(WalletBaseApi *finishApi) {
         
@@ -95,7 +114,7 @@ completionHandler:(void (^)(NSString * __nullable result))completionHandler
             BigNumber *bigBlockNum = [BigNumber bigNumberWithHexString:blockNum];
             NSDecimalNumber *decBestBlockNum = [NSDecimalNumber decimalNumberWithString:bigBestBlockNum.decimalString];
             NSDecimalNumber *decBlockNum = [NSDecimalNumber decimalNumberWithString:bigBlockNum.decimalString];
-
+            
             if ([decBestBlockNum compare:decBlockNum] == NSOrderedDescending) { //
                 blockNum = bestBlockNum;
             }
@@ -137,11 +156,15 @@ completionHandler:(void (^)(NSString * __nullable result))completionHandler
         
         [dictParam setValueIfNotNil:subDict forKey:@"head"];
         
-        NSDictionary *resultDict = [WalletTools packageWithRequestId:callbackModel.requestId
-                                                                data:dictParam
-                                                                code:OK
-                                                             message:@""];
-        completionHandler([resultDict yy_modelToJSONString]);
+        self.strStatus = [dictParam yy_modelToJSONString];
+        
+        if (completionHandler && callbackModel) {
+            NSDictionary *resultDict = [WalletTools packageWithRequestId:callbackModel.requestId
+                                                                    data:dictParam
+                                                                    code:OK
+                                                                 message:@""];
+            completionHandler([resultDict yy_modelToJSONString]);
+        }
         
     } failure:^(WalletBaseApi *finishApi, NSString *errMsg) {
         NSDictionary *resultDict = [WalletTools packageWithRequestId:callbackModel.requestId
@@ -470,10 +493,20 @@ completionHandler:(void (^)(NSString * __nullable result))completionHandler
     // Open web socket
     SocketRocketUtility *socket = [SocketRocketUtility instance];
     
-    socket.requestIdList = @[callbackModel.requestId];
+    socket.requestId = callbackModel.requestId;
     socket.callbackId = callbackModel.callbackId;
     [socket SRWebSocketOpenWithURLString:url];
     completionHandler(@"{}");
+}
+
+- (void)openWebSocket
+{
+    NSString *url = [[WalletUserDefaultManager getBlockUrl] stringByAppendingString:@"/subscriptions/block"];
+    
+    // Open web socket
+    SocketRocketUtility *socket = [SocketRocketUtility instance];
+    [socket SRWebSocketOpenWithURLString:url];
+//    completionHandler(@"{}");
 }
 
 // Certification signature

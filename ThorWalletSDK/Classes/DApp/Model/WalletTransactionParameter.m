@@ -70,12 +70,6 @@
         }
         clauseModel.data = data;
         
-        if (![self isRightClause:clauseModel errorMsg:&errorMsg]) {
-            if (callback) {
-                callback(errorMsg,NO);
-            }
-            return ;
-        }
     }
     
     NSString *gas = self.gas;
@@ -214,8 +208,13 @@
     
     *gasPriceCoef = [NSString stringWithFormat:@"%@",*gasPriceCoef];
     
-    if (![WalletTools checkDecimalStr:*gasPriceCoef]) {
-        *errorMsg = @"gasPriceCoef should be decimal string";
+    if ([WalletTools checkDecimalStr:*gasPriceCoef]) {
+        
+    }else if ([WalletTools checkHEXStr:*gasPriceCoef])
+    {
+        *gasPriceCoef = [BigNumber bigNumberWithHexString:*gasPriceCoef].decimalString;
+    }else{
+        *errorMsg = @"gasPriceCoef should be Decima string or hex string";
         return NO;
     }
     
@@ -246,48 +245,6 @@
     return YES;
 }
 
-- (BOOL)isRightClause:(ClauseModel *)clauseModel errorMsg:(NSString **)errorMsg
-{
-    if ([WalletTools isEmpty:clauseModel.to]
-        && [WalletTools isEmpty:clauseModel.data]) {
-        
-        *errorMsg = @"clause is invalid";
-        return NO;
-        
-    }else if (![WalletTools isEmpty:clauseModel.data]){
-        
-        // To has a value, need to judge the data is divisible by 64
-        return [self rightData:clauseModel.data errorMsg:&*errorMsg];
-        
-    }else if ([WalletTools isEmpty:clauseModel.value]) {
-            //to != nil data = nil value == nil
-           
-            *errorMsg = @"clause is invalid";
-            return NO;
-    }
-    return YES;
-}
-
-- (BOOL)rightData:(NSString *)data  errorMsg:(NSString **)errorMsg
-{
-    if (data.length >= 10) {
-        
-        NSInteger i = (data.length - 10) % 64;
-        if (i != 0) {
-            *errorMsg = @"clause is invalid";
-            return NO;
-        }else{
-            return YES;
-        }
-        
-    }else if ([data isEqualToString:@"0x"]) {
-        return YES;
-        
-    }else{
-        *errorMsg = @"clause is invalid";
-        return NO;
-    }
-}
 
 - (BOOL)checkTo:(NSString **)to errorMsg:(NSString **)errorMsg
 {
@@ -403,12 +360,15 @@
     }else{
         *gas = [NSString stringWithFormat:@"%@",*gas];
         
-        if (![WalletTools checkDecimalStr:*gas]) {
-            *errorMsg = @"gas should be decimal string";
-            return NO;
-            
-        }else{
+        if ([WalletTools checkDecimalStr:*gas]) {
+            return YES ;
+        }else if ([WalletTools checkHEXStr:*gas])
+        {
+            *gas = [BigNumber bigNumberWithHexString:*gas].decimalString;
             return YES;
+        }else{
+            *errorMsg = @"gas should be decimal string or hex string";
+            return NO;
         }
     }
     return YES;
