@@ -493,7 +493,7 @@ Eg:
 
 
 
-##  Support DApp development environment in Webview by calling class: WalletDAppHandle
+#  Support DApp development environment in Webview by calling class: WalletDAppHandle
 To support the Dapp function, WebView needs the following initialization before opening Dapp.
 Initialization is mainly JS injected into connex and web3.
 [connex reference.](https://github.com/vechain/connex/blob/master/docs/api.md/)
