@@ -94,7 +94,7 @@ completionHandler:(void (^)(NSString * __nullable result))completionHandler
     }else{
         // open websocket
         [self openWebSocket];
-            [self requestStatus:callbackModel completionHandler:completionHandler webView:webView];
+        [self requestStatus:callbackModel completionHandler:completionHandler webView:webView];
     }
 }
 

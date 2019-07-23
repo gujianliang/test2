@@ -37,9 +37,9 @@
 
 @implementation WalletDAppInjectJSHandle
 
-+ (void)checkVersion:(WKWebViewConfiguration *)config
-            callback:(void (^)(WalletVersionModel *versionModel))callback
++ (void)checkVersion:(void (^)(WalletVersionModel *versionModel))callback
 {
+    
     // Check sdk version
     WalletCheckVersionApi *checkApi = [[WalletCheckVersionApi alloc]initWithLanguage:[self getLanuage]];
     [checkApi loadDataAsyncWithSuccess:^(WalletBaseApi *finishApi) {
@@ -47,11 +47,7 @@
         NSDictionary *dataDict = finishApi.resultDict[@"data"];
        
        WalletVersionModel *versionModel = [WalletVersionModel yy_modelWithDictionary:dataDict];
-        
-        BOOL forceUpdate = [self analyzeVersion:versionModel];
-        if (!forceUpdate) {
-            [self inject:config];
-        }
+    
         callback(versionModel);
         
     } failure:^(WalletBaseApi *finishApi, NSString *errMsg) {
@@ -61,6 +57,9 @@
 
 + (BOOL)analyzeVersion:(WalletVersionModel *)versionModel
 {
+    if (versionModel == nil) {
+        return NO;
+    }
     NSString *update        = versionModel.update;
     NSString *latestVersion = versionModel.latestVersion;
     NSString *description   = versionModel.pdescription;

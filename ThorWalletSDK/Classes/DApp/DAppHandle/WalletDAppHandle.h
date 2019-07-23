@@ -98,7 +98,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface WalletDAppHandle : NSObject
 
 @property (nonatomic, strong) WKWebView *webView;
-@property (nonatomic, copy) NSString *strStatus;
+@property (nonatomic, copy) NSString *strStatus; //Save status data
 
 
 /**

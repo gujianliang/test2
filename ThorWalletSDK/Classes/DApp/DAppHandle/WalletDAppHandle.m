@@ -169,9 +169,10 @@
 
 - (void)injectJSWithConfig:(WKWebViewConfiguration *)config
 {
+    [WalletDAppInjectJSHandle inject:config];
+    
     @weakify(self);
-    [WalletDAppInjectJSHandle checkVersion:config
-                                  callback:^(WalletVersionModel * _Nonnull versionModel)
+    [WalletDAppInjectJSHandle checkVersion:^(WalletVersionModel * _Nonnull versionModel)
     {
         @strongify(self);
         self.versionModel = versionModel;
