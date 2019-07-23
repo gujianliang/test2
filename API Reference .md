@@ -493,7 +493,7 @@ Eg:
 
 
 
-##  Support DApp development environment in Webview by calling class: WalletDAppHandle
+#  Support DApp development environment in Webview by calling class: WalletDAppHandle
 To support the Dapp function, WebView needs the following initialization before opening Dapp.
 Initialization is mainly JS injected into connex and web3.
 [connex reference.](https://github.com/vechain/connex/blob/master/docs/api.md/)
@@ -822,5 +822,21 @@ Before the release of DApp, it is recommended that different versions of WebView
 
 ### Address : 20 bytes hex string and start with 0x.
 
+### Availabel DApp List
+```
+https://vechainstats.com
+https://oceanex.pro/reg/v190528
+https://connex.vexchange.io/swap
+https://bmac.vecha.in/generate
+https://bc66.github.io/lucky-airdrop/#/
+https://explore.veforge.com/
+https://laalaguer.github.io/vechain-token-transfer/
+https://doc.vechainworld.io/docs
+https://vechainstore.com/ide
+https://vepress.org/
+https://inspector.vecha.in/
+https://insight.vecha.in
+https://vechaininsider.com/
+```
 
 
