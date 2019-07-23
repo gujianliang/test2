@@ -97,6 +97,7 @@
     }
     
     self.searchBar.delegate = self;
+    self.searchBar.text = @"https://bc66.github.io/lucky-airdrop/#/";
     
     /* Set the VET and VTHO logo */
     [self.vetImageView setImage:[UIImage imageNamed:@"VET"]];
