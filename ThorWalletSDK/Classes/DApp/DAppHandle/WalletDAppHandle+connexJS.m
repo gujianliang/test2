@@ -506,7 +506,6 @@ completionHandler:(void (^)(NSString * __nullable result))completionHandler
     // Open web socket
     SocketRocketUtility *socket = [SocketRocketUtility instance];
     [socket SRWebSocketOpenWithURLString:url];
-//    completionHandler(@"{}");
 }
 
 // Certification signature

@@ -26,7 +26,6 @@
 #import "WalletBaseApi.h"
 #import "WalletModelFetcher.h"
 #import "WalletAccountCodeApi.h"
-#import "WalletApiManageMacro.h"
 #import "WalletBestBlockInfoApi.h"
 #import "WalletBlockApi.h"
 #import "WalletCheckVersionApi.h"

@@ -105,7 +105,7 @@
     NSString *originGas = [NSString stringWithFormat:@"%d",[self getGas:clauseModelList]];
     
     NSMutableDictionary *dictOpts = [NSMutableDictionary dictionary];
-    [dictOpts setValueIfNotNil:from forKey:@"opts"];
+    [dictOpts setValueIfNotNil:from.lowercaseString forKey:@"caller"];
     
     WalletDappSimulateMultiAccountApi *simulateApi = [[WalletDappSimulateMultiAccountApi alloc]initClause:clauseModelList opts:dictOpts revision:@""];
     [simulateApi loadDataAsyncWithSuccess:^(WalletBaseApi *finishApi) {

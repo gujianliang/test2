@@ -13,7 +13,6 @@
 
 #import "WalletTools.h"
 #import "YYModel.h"
-#import "WalletApiManageMacro.h"
 #import "WalletUserDefaultManager.h"
 #import "NSMutableDictionary+Helpers.h"
 #import "NSJSONSerialization+NilDataParameter.h"

@@ -52,7 +52,6 @@
 		2BD2005D75423E41A98319C84CEEA544 /* bignum.h in Headers */ = {isa = PBXBuildFile; fileRef = 157C7153E33F77591F4F7CF0927F31BF /* bignum.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2BE8C3875149F0983899A237DEC0D630 /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B495BAABCF08BBAAE0F62869529F2267 /* AFHTTPSessionManager.m */; };
 		2C3501C9A2D6EC9AF14366A00FC1EBB0 /* AFSecurityPolicy.m in Sources */ = {isa = PBXBuildFile; fileRef = FF84102EDC4E8F9BF312082A4793ADC0 /* AFSecurityPolicy.m */; };
-		2C931F324120AD5E8F048A66F4F7208D /* WalletApiManageMacro.h in Headers */ = {isa = PBXBuildFile; fileRef = 20F7F7FBE2BE3C74BBD0EFCD010BCCA7 /* WalletApiManageMacro.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2F11FB657D789ABF5D927E224992D9BB /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD871F48CE789D21E8CCF1742D89B291 /* CoreGraphics.framework */; };
 		2F8B779E024C78ED3704240F62A23E6B /* WalletTransantionsReceiptApi.h in Headers */ = {isa = PBXBuildFile; fileRef = 6BB9CED7EFE4D369FD896E9DADCAFBCF /* WalletTransantionsReceiptApi.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		302DF5D88AAACD0AF6BBDAA6A33F2721 /* rand.h in Headers */ = {isa = PBXBuildFile; fileRef = 71C4EA9D01EA468E83F40C741B87EB68 /* rand.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -365,7 +364,6 @@
 		1F5029A1DFFB1F9BF857D0CC3975BD5D /* WalletCheckVersionApi.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = WalletCheckVersionApi.m; sourceTree = "<group>"; };
 		2024BBB54FE9A7F84724BE194CB12549 /* Utilities.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = Utilities.h; sourceTree = "<group>"; };
 		20F080B374405C633E9492188D6EEB1F /* AFURLResponseSerialization.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = AFURLResponseSerialization.m; path = AFNetworking/AFURLResponseSerialization.m; sourceTree = "<group>"; };
-		20F7F7FBE2BE3C74BBD0EFCD010BCCA7 /* WalletApiManageMacro.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = WalletApiManageMacro.h; sourceTree = "<group>"; };
 		2266935DD3059CDA8DA34C5E439E966F /* blake2b-ref.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; path = "blake2b-ref.c"; sourceTree = "<group>"; };
 		24BFF40E220D4EAE6C10B8811F4C88E5 /* UIWebView+AFNetworking.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIWebView+AFNetworking.h"; path = "UIKit+AFNetworking/UIWebView+AFNetworking.h"; sourceTree = "<group>"; };
 		24FEB51E31210303CBB02D3206E14BC3 /* Address.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = Address.h; path = ThorWalletSDK/Classes/BasicWallet/Address.h; sourceTree = "<group>"; };
@@ -1010,7 +1008,6 @@
 			children = (
 				1B40B2EAD74267D1F25EC75279B58FA3 /* WalletAccountCodeApi.h */,
 				075D532CA1B63E901B8C4A718D4BEB20 /* WalletAccountCodeApi.m */,
-				20F7F7FBE2BE3C74BBD0EFCD010BCCA7 /* WalletApiManageMacro.h */,
 				0C11E28C5BA6BE247DA6A293D3FA611D /* WalletBestBlockInfoApi.h */,
 				424333FC80404DCDD98C413CB5F287B0 /* WalletBestBlockInfoApi.m */,
 				3197AA235353BCF0934851D0380DBEBE /* WalletBlockApi.h */,
@@ -1392,7 +1389,6 @@
 				870ABF4CB51714FEC572F1950C9C7C8C /* Utilities.h in Headers */,
 				2BA9CB68A9A43DBEC598416BA21A6DC6 /* WalletAccountCodeApi.h in Headers */,
 				02CC4A2C2FE2B0C8E582CA07077456BA /* WalletAccountModel.h in Headers */,
-				2C931F324120AD5E8F048A66F4F7208D /* WalletApiManageMacro.h in Headers */,
 				8FF6041A548C0AF00FA0BB7C60335B3F /* WalletBalanceModel.h in Headers */,
 				5D3AB54179C19F692121903BD1BE7025 /* WalletBaseApi.h in Headers */,
 				72C9ED1F03F59318625397CFC6D67493 /* WalletBaseModel.h in Headers */,
