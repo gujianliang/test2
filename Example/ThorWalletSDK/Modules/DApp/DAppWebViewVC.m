@@ -309,7 +309,7 @@
     NSString *address = [WalletUtils getAddressWithKeystore:currentWallet[@"keystore"]];
     
     //Callback to webview
-    callback(@[address]);
+    callback(@[address.lowercaseString]);
 }
 
 - (void)onCheckOwnAddress:(NSString *)address callback:(void(^)(BOOL result))callback

@@ -188,7 +188,7 @@ NSString * const kWebSocketdidReceiveMessageNote = @"kWebSocketdidReceiveMessage
         NSMutableDictionary *dict = [NSMutableDictionary dictionary];
         [dict setValueIfNotNil:_callbackId forKey:@"callbackId"];
         [dict setValueIfNotNil:_requestId forKey:@"requestId"];
-        NSLog(@"dddd");
+        
         [[NSNotificationCenter defaultCenter] postNotificationName:kWebSocketdidReceiveMessageNote object:dict];
     }
 }
