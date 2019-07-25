@@ -181,8 +181,7 @@
 
 - (void)deallocDApp
 {
-    [[NSNotificationCenter defaultCenter]removeObserver:self];
-    
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:kWebSocketdidReceiveMessageNote object:nil];
     // Close websocket
     [[SocketRocketUtility instance] SRWebSocketClose];
 }

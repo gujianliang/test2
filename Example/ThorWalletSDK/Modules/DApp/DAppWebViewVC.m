@@ -365,9 +365,11 @@ completionHandler:(void (^)(NSString *signer, NSData *signatureData))completionH
                    actionWithTitle:@"Confirm"
                           callback:^(NSString * input)
      {
-         [WalletMBProgressShower showCircleIn:self.view];
-
-        NSData *dataMessage = [message dataUsingEncoding:NSUTF8StringEncoding];
+        [WalletMBProgressShower showCircleIn:self.view];
+         
+        //Escape the signature data 
+        NSString *escapeString = [self escapeMessageString:message];
+        NSData *dataMessage = [escapeString dataUsingEncoding:NSUTF8StringEncoding];
          [WalletUtils signWithMessage:dataMessage
                              keystore:keystore
                              password:input
@@ -382,6 +384,21 @@ completionHandler:(void (^)(NSString *signer, NSData *signatureData))completionH
           }];
      }];
 }
+
+- (NSString *)escapeMessageString:(NSString *)inputStr
+{
+    inputStr = [inputStr stringByReplacingOccurrencesOfString:@"\n" withString:@"\\n"];
+    inputStr = [inputStr stringByReplacingOccurrencesOfString:@"\r" withString:@"\\r"];
+    inputStr = [inputStr stringByReplacingOccurrencesOfString:@"\a" withString:@"\\a"];
+    inputStr = [inputStr stringByReplacingOccurrencesOfString:@"\f" withString:@"\\f"];
+    inputStr = [inputStr stringByReplacingOccurrencesOfString:@"\t" withString:@"\\t"];
+    inputStr = [inputStr stringByReplacingOccurrencesOfString:@"\'" withString:@"\\'"];
+    inputStr = [inputStr stringByReplacingOccurrencesOfString:@"\?" withString:@"\\?"];
+    inputStr = [inputStr stringByReplacingOccurrencesOfString:@"\0" withString:@"\\0"];
+    
+    return inputStr;
+}
+
 
 /**
  * You must implement this method to free memory, otherwise there may be a memory overflow or leak.
