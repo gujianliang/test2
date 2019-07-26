@@ -25,7 +25,7 @@ Vechain wallet SDK provides a series of functional interface can help the iOS de
 
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'VeChain' => 'support@vechain.com' }
-  s.source           = { :git => '', :tag => s.version.to_s }
+  s.source           = { :git => 'https://github.com/vechain/wallet-iOS-sdk.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
   s.ios.deployment_target = '10.0'
